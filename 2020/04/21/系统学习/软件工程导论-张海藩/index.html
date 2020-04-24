@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.1 软件软件工程是计算机科学与技术专业的核心课程，是一门指导软件开发和维护的工程学科。通过课程的学习，使学生掌握系统的软件开发理论、技术和方法，使用正确的工程方法开发出成本低、可靠性好、能高效运行的软件，为今后从事软件开发和维护打下坚实的基础。 教材：软件工程导论(第5版) 张海藩 清华大学出版社参考教材  软件工程 实践者的研究方法(第七版) Roger. Pressman 软件工程- 理论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件工程导论 张海藩">
+<meta property="og:url" content="http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.1 软件软件工程是计算机科学与技术专业的核心课程，是一门指导软件开发和维护的工程学科。通过课程的学习，使学生掌握系统的软件开发理论、技术和方法，使用正确的工程方法开发出成本低、可靠性好、能高效运行的软件，为今后从事软件开发和维护打下坚实的基础。 教材：软件工程导论(第5版) 张海藩 清华大学出版社参考教材  软件工程 实践者的研究方法(第七版) Roger. Pressman 软件工程- 理论">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-21T12:20:17.000Z">
+<meta property="article:modified_time" content="2020-04-22T04:55:29.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="系统学习">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>软件工程导论 张海藩</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/04/22/spirit/%E4%B8%80%E4%B8%AA%E4%BA%BA%E4%BD%95%E4%BB%A5%E4%B8%8D%E5%8F%AF%E8%83%BD/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/CS-improvement/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&text=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&title=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&is_video=false&description=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=软件工程导论 张海藩&body=Check out this article: http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&title=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&title=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&title=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&title=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&name=软件工程导论 张海藩&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&t=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-软件"><span class="toc-number">1.</span> <span class="toc-text">1.1 软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-软件工程"><span class="toc-number">2.</span> <span class="toc-text">1.2 软件工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-软件生存周期"><span class="toc-number">3.</span> <span class="toc-text">1.3 软件生存周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4常用软件过程模型"><span class="toc-number">4.</span> <span class="toc-text">1.4常用软件过程模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1结构化分析概述"><span class="toc-number">5.</span> <span class="toc-text">2.1结构化分析概述</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        软件工程导论 张海藩
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Hexo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-04-21T12:20:17.000Z" itemprop="datePublished">2020-04-21</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/" rel="tag">系统学习</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="1-1-软件"><a href="#1-1-软件" class="headerlink" title="1.1 软件"></a>1.1 软件</h2><p>软件工程是计算机科学与技术专业的核心课程，是一门指导软件开发和维护的工程学科。<br>通过课程的学习，使学生掌握系统的软件开发理论、技术和方法，使用正确的工程方法开发出成本低、可靠性好、能高效运行的软件，为今后从事软件开发和维护打下坚实的基础。</p>
+<p>教材：软件工程导论(第5版) 张海藩 清华大学出版社<br>参考教材</p>
+<ol>
+<li>软件工程 实践者的研究方法(第七版) Roger. Pressman</li>
+<li>软件工程- 理论、方法与实践 孙家广 刘强 高等教育出版社 （对面向对象方面讲得比较简明扼要）</li>
+<li>UML与系统分析设计 张龙祥 人民邮电出版社 （国内写UML写得比较好的一本教材）</li>
+</ol>
+<p>软件的定义<br>1983年IEEE的软件定义：计算机程序、文档、运行程序必须的数据、方法、规则。方法和规则在文档中说明，在程序中实现。<br>简化软件定义：程序+文档+数据</p>
+<p>软件分类——基于软件功能的划分</p>
+<ol>
+<li>系统软件：与计算机硬件紧密配合使计算机各个部件与相关软件及数据协调、高效工作的软件。如操作系统、编译程序等</li>
+<li>支撑软件：协助用户开发软件的工具性软件。如：Rational Rose, Power Designer, 青鸟系统（北大）</li>
+<li>应用软件<ol>
+<li>商业处理系统</li>
+<li>工程与科学计算软件。如:CAD/CAM（计算机辅助设计/制造）仿真模拟、天气预报</li>
+<li>智能产品嵌入软件。驻留在智能产品内存;，控制产品工作软件。如家用电器、智能手机等。</li>
+<li>人工智能软件。利用非数值算法去解决复杂问题的软件。专家系统、模式识别软件、人工神经网络软件</li>
+<li>个人计算机软件。文字处理系统、电子表格、游戏娱乐软件</li>
+</ol>
+</li>
+</ol>
+<h2 id="1-2-软件工程"><a href="#1-2-软件工程" class="headerlink" title="1.2 软件工程"></a>1.2 软件工程</h2><p>软件发展的四个阶段</p>
+<ol>
+<li><p>程序设计阶段（20年代中-60年代中）<br>软件生产个体化：规模小，编写者和使用者同一个人<br>软件是设计者头脑中隐含过程：除程序清单，无文档材料保存</p>
+</li>
+<li><p>程序系统阶段（60年代中-70年代中）<br>产品软件：由专门软件开发组织开发<br>软件作坊：软件开发组织，沿用早期个体化软件开发方法<br>软件危机：软件维护工作耗费大量资源<br>软件工程：1968年，北大西洋公约组织计算机科学家讨论软件危机，提出了软件工程</p>
+</li>
+<li><p>软件工程阶段（70年代中-80年代中）<br>软件危机得到缓解（最主要的一个特征）：打破软件生产个体化特征；工程化的设计原则、方法和标准<br>新的挑战：微处理器和个人计算机，分布式处理系统，局域网、广域网，宽带数字通讯</p>
+</li>
+</ol>
+<p>软件架构发生变化</p>
+<ul>
+<li>集中主机</li>
+<li>客户机/服务器（两层） （客户机的负担太重，服务器只做简单的数据存取，负担很小）</li>
+<li>客户机/服务器（三层） （客户端 应用服务器 数据库服务器） MVC</li>
+<li>浏览器/服务器 (三层) （客户端 Web服务器 数据库服务器）</li>
+</ul>
+<ol start="4">
+<li>第四阶段（80年代中-现在）</li>
+</ol>
+<p>新技术：专家系统、人工智能、神经网络、并行计算、网格技术、高信度计算、云计算</p>
+<p>软件危机<br>定义：在计算机软件开发和维护过程中遇到的一系列严重问题<br>主要表现</p>
+<ol>
+<li>开发成本和进度估计不准：延迟交付、取消项目</li>
+<li>用户对已交付软件不满意：开发人员对用户信息交流不充分，产品不符合用户需求</li>
+<li>软件产品质量靠不住：软件产品保证技术（审查、复审、测试）未坚持不懈应用软件开发全过程</li>
+<li>软件可维护性差：开发时未考虑，很多错误难以改正</li>
+<li>软件没有适当文档资料：文档资料应在软件开发过程中产生，保证最新</li>
+</ol>
+<p>1993年IEEE的定义：把系统化、规范化、可度量的途径应用于软件开发、运行和维护过程中；研究其实现途径</p>
+<p>软件工程的内容</p>
+<ol>
+<li>软件工程技术<ol>
+<li>软件开发方法学</li>
+<li>软件开发过程</li>
+<li>软件工具和软件工程环境</li>
+</ol>
+</li>
+<li>软件工程管理<ol>
+<li>软件管理学</li>
+<li>软件经济学</li>
+<li>软件心理学</li>
+</ol>
+</li>
+</ol>
+<h2 id="1-3-软件生存周期"><a href="#1-3-软件生存周期" class="headerlink" title="1.3 软件生存周期"></a>1.3 软件生存周期</h2><p>软件生存周期定义：软件从产生、发展到成熟、直至衰亡为止<br>组成：软件定义、软件开发、软件维护</p>
+<p>国际《计算机软件开发规范》，分8个阶段：</p>
+<ol>
+<li>可行性研究与计划</li>
+<li>需求分析</li>
+<li>总体设计</li>
+<li>详细设计</li>
+<li>实现<ol>
+<li>编码</li>
+<li>单元测试</li>
+</ol>
+</li>
+<li>集成测试</li>
+<li>确认测试</li>
+<li>使用与维护</li>
+</ol>
+<p>可行性研究与计划<br>关键任务：解决问题是什么？有行得通的解决方法吗？粗略计划<br>问题定义报告：问题性质、工程目标、工程规模<br>可行性研究报告：经济、技术、社会（操作）可行性<br>项目开发计划：粗略</p>
+<p>需求分析<br>关键任务：目标系统必须做什么？<br>tip：可行性研究的需求分析是粗略、不准确的；需求分析是完整、准确、清晰、具体的。<br>需求规格说明书：目标系统需求（整个软件工程生存周期中最重要的文档，客户就是拿着这份文档来验收）</p>
+<p>总体设计<br>关键任务：怎样实现目标系统？（根据需求设计方案：分析推荐最佳方案；设计软件结构等）<br>总体设计说明书：记录总体设计结果</p>
+<p>详细设计<br>关键任务：该怎样具体实现系统？（设计每个模块的算法和数据结构）<br>详细设计说明书：用适当表达工具表达算法和数据结构</p>
+<p>实现（编码和单元测试）<br>关键任务：选择语言、工具翻译详细设计结果、测试模块<br>实现阶段文档：程序清单、单元测试报告</p>
+<p>集成测试<br>关键任务：将经过单元测试模块组装起来进行测试；通过测试使软件达到预定要求。<br>测试报告：测试计划、测试方案、测试结果</p>
+<p>确认测试<br>关键任务：由用户按需求规格说明书规定进行测试</p>
+<p>使用与维护<br>关键任务：通过必要维护活动使系统持久满足用户要求<br>维护类型：</p>
+<ol>
+<li>改正性维护：软件运行过程中发现错误，进行维护</li>
+<li>适应性维护：软件运行软硬件环境变化，进行的维护</li>
+<li>完善性维护：用户要求改进或扩充软件，进行的维护</li>
+<li>预防性维护：为将来的维护作准备</li>
+</ol>
+<p>实际从事软件开发工作时，软件规模、类型、开发环境及技术方法等因素会影响到阶段划分，个阶段的执行顺序，形成不同生存周期模型，又称 <strong>过程模型</strong> 。</p>
+<h2 id="1-4常用软件过程模型"><a href="#1-4常用软件过程模型" class="headerlink" title="1.4常用软件过程模型"></a>1.4常用软件过程模型</h2><ol>
+<li>瀑布模型</li>
+<li>快速原型模型</li>
+<li>增量模型</li>
+<li>螺旋模型</li>
+<li>喷泉模型</li>
+<li>Rational 统一过程</li>
+<li>微软公司软件开发过程</li>
+</ol>
+<p>瀑布模型（在瀑布模型出来之前，软件开发比较混乱）<br>需求分析——&gt;验证——&gt;规格说明——&gt;验证——&gt;设计——&gt;验证——&gt;编码——&gt;测试——&gt;综合测试——&gt;维护</p>
+<ul>
+<li>定义时期（需求分析、规格说明）</li>
+<li>开发时期（设计、编码）</li>
+<li>维护时期（综合测试、维护）<br>特点：</li>
+</ul>
+<ol>
+<li>阶段具有顺序性和依赖性（前一阶段结束后一阶段开始，前一阶段输出文档，后一阶段输入文档）</li>
+<li>推迟实现观点（瀑布模型在编码前设置系统分析、系统设计，推迟程序物理实现，保证前期工作扎实）</li>
+<li>质量保证观点（瀑布模型每阶段坚持两个重要做法：一是每阶段都必须完成完整、准确的文档。软件开发时人员间通信、运行时期维护的重要依据。二是每阶段结束前对文档评审）<br>传统瀑布模型过于理想化，但人在工作工程中不可能不犯错误，所以实际瀑布模型带反馈环。<br>优点：提高软件质量，降低维护成本，缓解软件危机。<br>缺点：模型缺乏灵活性，无法解决需求不明确问题。用户不经过实践完整准确的需求不切实际。</li>
+</ol>
+<p>快速原型模型：快速建立反映用户主要需求的原型系统，反复由用户评价修正需求，开发出最终产品。<br>快速原型——&gt;验证——&gt;规格说明——&gt;验证——&gt;设计——&gt;验证——&gt;编码——&gt;测试——&gt;综合测试——&gt;维护<br>它与瀑布模型的区别在于将瀑布模型的需求分析替换为快速原型<br>优点：</p>
+<ol>
+<li>确定需求上优于瀑布模型（通过原型与用户交互）</li>
+<li>提供学习手段，通过开发原型和演示模型对开发者和使用者了解系统都有积极作用<br>有的软件模型可以成为最终产品的一部分<br>缺点：快速建立的系统结构加连续修改可能导致产品质量低下，原型系统的内部结构可能不好。</li>
+</ol>
+<p>增量模型：又称渐增模型，开发软件时将软件产品作一系列增量构件设计、编码、集成和测试<br>区别于瀑布和快速原型模型：瀑布和快速原型模型是一次把满足所有需求的产品提交给用户。增量模型是分批向用户提交产品。<br>优点：</p>
+<ol>
+<li>较短时间向用户提交可完成有用工作产品</li>
+<li>用户有充裕时间学习适应产品</li>
+<li>软件结构必须开放，方便向现有产品加入新构件<br>缺点：做到第三个优点比较困难<br>前述增量模型在实现构件前完成总体的需求分析、规格说明和概要设计，相对来说风险较小。增量模型的风险更大；确定用户需求后，各构件集并行构建<br>风险更大的增量模型</li>
+</ol>
+<p>螺旋模型（1988年 B. Boehem提出，加入风险分析，常指导大型软件项目）<br>软件风险：超期、超预算、行业竞争等<br>笛卡尔坐标四象限表达四方面活动：</p>
+<ol>
+<li>指定计划：确定目标、选定方案、设定约束条件</li>
+<li>风险分析：评估方案，识别和消除风险</li>
+<li>实施工程：软件开发</li>
+<li>客户评估：评价开发工作，计划下一阶段工作<br>螺旋线自内向外每旋转一圈开发出更完善新版本<br>优点：大型软件开发项目有较好的风险控制<br>缺点：</li>
+<li>需要风险评估的经验</li>
+<li>契约开发通常需要事先指定过程模型和发布产品</li>
+<li>普及不如前述模型</li>
+</ol>
+<p>喷泉模型：面向对象生命周期模型，体现迭代和无缝特性<br>迭代：求精，系统某部分常被重复工作多次，相关功能在每次迭代中逐渐加入演进系统。<br>无缝：分析、设计、编码个阶段间不存在明显边界</p>
+<ol>
+<li>需求阶段</li>
+<li>面向对象分析阶段</li>
+<li>面向对象设计阶段</li>
+<li>编码阶段</li>
+<li>集成和测试阶段<br>…<br>优点：无缝，可同步开发，提高开发效率，节省开发时间，适应面向对象软件<br>缺点：可能随时附加各种信息、需求与材料，需严格管理文档，审核难得加大</li>
+</ol>
+<p>Rational统一过程：由Rational软件公司推出的一种软件过程，该过程强调以 <em>迭代</em> 和 <em>渐增</em> 方式开发软件。Rational统一过程是一个二维生命周期模型<br>阶段：初始、精华、构建、移交<br>工作流： 业务建模、需求、分析与设计、实现、测试、部署、配置与变更管理、项目管理、环境<br>RUP有 <strong>9个核心工作流</strong> ，包括6个核心过程工作流和3个核心支持工作流。<br>RUP有4个 <strong>连续阶段</strong>，每个阶段有明确目标，通过一次或多次 <strong>迭代</strong> 完成<br>优点：不断的版本发布成为一种团队日常工作的真正驱动力；将发现问题，制定方案和解决过程集成到下一次迭代；迭代开发，降低风险。更好地安排产品开发的辅助过程</p>
+<p>微软过程</p>
+<ol>
+<li>规划阶段 结束的标志：项目的目标得到认可</li>
+<li>设计阶段 结束的标志：软件设计完成</li>
+<li>开发阶段 结束的标志：代码开发完成</li>
+<li>稳定阶段 结束的标志：可发布版本准备就绪</li>
+<li>发布阶段 结束的标志：最终产品发布<br>5个阶段完成形成一个软件版本，5个阶段再完成一次形成下一个软件版本</li>
+</ol>
+<h2 id="2-1结构化分析概述"><a href="#2-1结构化分析概述" class="headerlink" title="2.1结构化分析概述"></a>2.1结构化分析概述</h2><ol>
+<li>需求分析重要性<br>对软件需求深入理解是开发成功的前提和关键<br>Frederick Brooks在1987年经典文章”No Silver Bullet”中阐述需求重要性：<br>开发软件系统最困难的部分就是准确说明开发什么，最困难的概念性工作是编写出详细需求，包括所有面向用户、面向机器和其他软件系统的接口。次工作一旦做错，将会给系统带来极大损害，并且以后对它修改也极为困难。</li>
+</ol>
+<ol start="2">
+<li>结构分析核心思想<br>面向数据流需求分析方法，20世纪70年代末E. Yourdon提出，应用广泛。<br>核心思想：</li>
+<li>分解化简问题</li>
+<li>物理和逻辑分开表示</li>
+<li>进行数据与逻辑抽象</li>
+</ol>
+<ol start="3">
+<li>结构化分析具体步骤<ol>
+<li>发现需求</li>
+<li>求精</li>
+<li>建模</li>
+<li>规格说明</li>
+<li>复审</li>
+</ol>
+</li>
+</ol>
+<p>发现需求方法：</p>
+<ol>
+<li>与用户交流，向用户提问题</li>
+<li>参观用户的工作流程，观察用户的操作</li>
+<li>向用户群体发调查问卷</li>
+<li>与同行、专家交谈，听取他们的意见</li>
+<li>分析已经存在的同类软件产品，提取需求</li>
+<li>从行业标准、规则中提取需求</li>
+<li>从Internet中搜查相关资料</li>
+</ol>
+<p>求精：对初步需求反复求精多次细化</p>
+<p>建模：建立模型，用图形符号和组织规则书面描述事物</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-软件"><span class="toc-number">1.</span> <span class="toc-text">1.1 软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-软件工程"><span class="toc-number">2.</span> <span class="toc-text">1.2 软件工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-软件生存周期"><span class="toc-number">3.</span> <span class="toc-text">1.3 软件生存周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4常用软件过程模型"><span class="toc-number">4.</span> <span class="toc-text">1.4常用软件过程模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1结构化分析概述"><span class="toc-number">5.</span> <span class="toc-text">2.1结构化分析概述</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&text=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&title=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&is_video=false&description=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=软件工程导论 张海藩&body=Check out this article: http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&title=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&title=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&title=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&title=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&name=软件工程导论 张海藩&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/04/21/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA-%E5%BC%A0%E6%B5%B7%E8%97%A9/&t=软件工程导论 张海藩" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

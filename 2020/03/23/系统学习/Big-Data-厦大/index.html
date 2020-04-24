@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="0.1课程机器配套在线资源介绍1.1 大数据时代1.2 大数据概念和影响1.3 大数据的应用1.4 大数据的关键技术1.5.1 云计算1.5.2 物联网2.1.1 Hadoop简介2.1.2 Hadoop不同版本2.2 Hadoop项目结构2.3.1 Hadoop安装之前的预备知识2.3.2 Hadoop的安装和使用详解2.4 Hadoop集群的部署和使用3.1 分布式文件系统HDFS简介全称Ha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Big Data 厦大">
+<meta property="og:url" content="http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="0.1课程机器配套在线资源介绍1.1 大数据时代1.2 大数据概念和影响1.3 大数据的应用1.4 大数据的关键技术1.5.1 云计算1.5.2 物联网2.1.1 Hadoop简介2.1.2 Hadoop不同版本2.2 Hadoop项目结构2.3.1 Hadoop安装之前的预备知识2.3.2 Hadoop的安装和使用详解2.4 Hadoop集群的部署和使用3.1 分布式文件系统HDFS简介全称Ha">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-23T02:40:39.000Z">
+<meta property="article:modified_time" content="2020-04-17T02:45:26.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="系统学习">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Big Data 厦大</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/04/09/XML-%E8%A7%A3%E6%9E%90%E4%B8%8E%E7%94%9F%E6%88%90/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/03/13/practice/Movie-MC-Log/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&text=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&title=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&is_video=false&description=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Big Data 厦大&body=Check out this article: http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&title=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&title=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&title=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&title=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&name=Big Data 厦大&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&t=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-1课程机器配套在线资源介绍"><span class="toc-number">1.</span> <span class="toc-text">0.1课程机器配套在线资源介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-大数据时代"><span class="toc-number">2.</span> <span class="toc-text">1.1 大数据时代</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-大数据概念和影响"><span class="toc-number">3.</span> <span class="toc-text">1.2 大数据概念和影响</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-大数据的应用"><span class="toc-number">4.</span> <span class="toc-text">1.3 大数据的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-大数据的关键技术"><span class="toc-number">5.</span> <span class="toc-text">1.4 大数据的关键技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-1-云计算"><span class="toc-number">6.</span> <span class="toc-text">1.5.1 云计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-2-物联网"><span class="toc-number">7.</span> <span class="toc-text">1.5.2 物联网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-1-Hadoop简介"><span class="toc-number">8.</span> <span class="toc-text">2.1.1 Hadoop简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-2-Hadoop不同版本"><span class="toc-number">9.</span> <span class="toc-text">2.1.2 Hadoop不同版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Hadoop项目结构"><span class="toc-number">10.</span> <span class="toc-text">2.2 Hadoop项目结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-1-Hadoop安装之前的预备知识"><span class="toc-number">11.</span> <span class="toc-text">2.3.1 Hadoop安装之前的预备知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-2-Hadoop的安装和使用详解"><span class="toc-number">12.</span> <span class="toc-text">2.3.2 Hadoop的安装和使用详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Hadoop集群的部署和使用"><span class="toc-number">13.</span> <span class="toc-text">2.4 Hadoop集群的部署和使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-分布式文件系统HDFS简介"><span class="toc-number">14.</span> <span class="toc-text">3.1 分布式文件系统HDFS简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-HDFS相关概念"><span class="toc-number">15.</span> <span class="toc-text">3.2 HDFS相关概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-HDFS体系结构"><span class="toc-number">16.</span> <span class="toc-text">3.3 HDFS体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-HDFS存储原理"><span class="toc-number">17.</span> <span class="toc-text">3.4 HDFS存储原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-1-HDFS读数据过程"><span class="toc-number">18.</span> <span class="toc-text">3.5.1 HDFS读数据过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-2-HDFS写数据过程"><span class="toc-number">19.</span> <span class="toc-text">3.5.2 HDFS写数据过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-HDFS编程实践"><span class="toc-number">20.</span> <span class="toc-text">3.6 HDFS编程实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-1分布式并行编程"><span class="toc-number">21.</span> <span class="toc-text">7.1.1分布式并行编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-2-MapReduce模型简介"><span class="toc-number">22.</span> <span class="toc-text">7.1.2 MapReduce模型简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-MapReduce的体系结构"><span class="toc-number">23.</span> <span class="toc-text">7.2 MapReduce的体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-MapReduce工作流程"><span class="toc-number">24.</span> <span class="toc-text">7.3 MapReduce工作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-Shuffle过程原理"><span class="toc-number">25.</span> <span class="toc-text">7.4 Shuffle过程原理</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Big Data 厦大
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Hexo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-03-23T02:40:39.000Z" itemprop="datePublished">2020-03-23</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/" rel="tag">系统学习</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="0-1课程机器配套在线资源介绍"><a href="#0-1课程机器配套在线资源介绍" class="headerlink" title="0.1课程机器配套在线资源介绍"></a>0.1课程机器配套在线资源介绍</h2><h2 id="1-1-大数据时代"><a href="#1-1-大数据时代" class="headerlink" title="1.1 大数据时代"></a>1.1 大数据时代</h2><h2 id="1-2-大数据概念和影响"><a href="#1-2-大数据概念和影响" class="headerlink" title="1.2 大数据概念和影响"></a>1.2 大数据概念和影响</h2><h2 id="1-3-大数据的应用"><a href="#1-3-大数据的应用" class="headerlink" title="1.3 大数据的应用"></a>1.3 大数据的应用</h2><h2 id="1-4-大数据的关键技术"><a href="#1-4-大数据的关键技术" class="headerlink" title="1.4 大数据的关键技术"></a>1.4 大数据的关键技术</h2><h2 id="1-5-1-云计算"><a href="#1-5-1-云计算" class="headerlink" title="1.5.1 云计算"></a>1.5.1 云计算</h2><h2 id="1-5-2-物联网"><a href="#1-5-2-物联网" class="headerlink" title="1.5.2 物联网"></a>1.5.2 物联网</h2><h2 id="2-1-1-Hadoop简介"><a href="#2-1-1-Hadoop简介" class="headerlink" title="2.1.1 Hadoop简介"></a>2.1.1 Hadoop简介</h2><h2 id="2-1-2-Hadoop不同版本"><a href="#2-1-2-Hadoop不同版本" class="headerlink" title="2.1.2 Hadoop不同版本"></a>2.1.2 Hadoop不同版本</h2><h2 id="2-2-Hadoop项目结构"><a href="#2-2-Hadoop项目结构" class="headerlink" title="2.2 Hadoop项目结构"></a>2.2 Hadoop项目结构</h2><h2 id="2-3-1-Hadoop安装之前的预备知识"><a href="#2-3-1-Hadoop安装之前的预备知识" class="headerlink" title="2.3.1 Hadoop安装之前的预备知识"></a>2.3.1 Hadoop安装之前的预备知识</h2><h2 id="2-3-2-Hadoop的安装和使用详解"><a href="#2-3-2-Hadoop的安装和使用详解" class="headerlink" title="2.3.2 Hadoop的安装和使用详解"></a>2.3.2 Hadoop的安装和使用详解</h2><h2 id="2-4-Hadoop集群的部署和使用"><a href="#2-4-Hadoop集群的部署和使用" class="headerlink" title="2.4 Hadoop集群的部署和使用"></a>2.4 Hadoop集群的部署和使用</h2><h2 id="3-1-分布式文件系统HDFS简介"><a href="#3-1-分布式文件系统HDFS简介" class="headerlink" title="3.1 分布式文件系统HDFS简介"></a>3.1 分布式文件系统HDFS简介</h2><p>全称Hadoop Distributed File System</p>
+<p>大数据的两大核心技术：分布式存储、分布式处理</p>
+<p>HDFS就是为了解决分布式存储的问题</p>
+<p>HDFS实现目标</p>
+<ul>
+<li>兼容廉价的硬件设备</li>
+<li>实现流数据读写（传统的文件系统通常是以块为单位）</li>
+<li>支持大数据集</li>
+<li>支持简单的文件模型</li>
+<li>强大的跨平台兼容性（Hadoop是用java开发，java有很好的跨平台特性）</li>
+</ul>
+<p>HDFS自身的局限性</p>
+<ul>
+<li>不适合低延迟数据访问（不能满足实时的处理需求）</li>
+<li>无法高效存储大量小文件</li>
+<li>不支持多用户写入及任意修改文件（只允许追加，不允许修改）</li>
+</ul>
+<h2 id="3-2-HDFS相关概念"><a href="#3-2-HDFS相关概念" class="headerlink" title="3.2 HDFS相关概念"></a>3.2 HDFS相关概念</h2><p>HDFS当中最核心的概念：块</p>
+<p>和普通的块的联系：为了分摊磁盘读写开销，也就是在大量数据间分摊磁盘寻址的开销</p>
+<p>区别：HDFS的一个块要比普通文件系统的块大很多（普通的块可能是几千个字节，HDFS的块大小64M或128M</p>
+<p>为什么要这样设计？</p>
+<ul>
+<li>支持面向大数据数据存储</li>
+<li>降低分布式节点的寻址开销</li>
+</ul>
+<p>缺点：如果块过大会导致MapReduce就一两个任务在执行完全牺牲了MapReduce的并行度，发挥不了分布式并行处理的效果</p>
+<p>HDFS两大组件：</p>
+<p>​    名称节点（主节点）：整个HDFS集群的管家，相当于是一个数据目录</p>
+<p>​    数据结点（DataNode）：存储实际的数据</p>
+<p>元数据</p>
+<p>​    文件是什么</p>
+<p>​    文件被分成多少块</p>
+<p>​    每个块和文件是怎么映射的</p>
+<p>​    每个块被存储在哪个服务器上面</p>
+<p>名称节点：</p>
+<p>​    FSImage: 保存系统文件树（文件的复制登记、修改和访问时间、访问权限、块大小以及组成文件的块）</p>
+<p>​    EditLog: 记录对数据进行的诸如创建、删除、重命名等操作</p>
+<p>注：之前说名称节点会保存块在哪个数据结点存储，但这些数据并不在FSImage中存储，而是单独在内存的一个区域维护的</p>
+<p>第二名称节点</p>
+<p>​    名称节点的冷备份</p>
+<p>​    对EditLog的处理</p>
+<p>名称节点 Primary Namenode</p>
+<p>第二名称节点 Secondary Namenode</p>
+<p>数据节点</p>
+<p>​    存</p>
+<p>​    取</p>
+<p>​    保存到Linux文件</p>
+<h2 id="3-3-HDFS体系结构"><a href="#3-3-HDFS体系结构" class="headerlink" title="3.3 HDFS体系结构"></a>3.3 HDFS体系结构</h2><p>HDFS命名空间：只有一个，它包含目录、文件、块</p>
+<p>​    /+ 目录名称         例如：/user/shares</p>
+<p>局限性：</p>
+<p>​    命名空间限制：名称节点是保存在内存中的，因此，名称节点能够容纳的对象（文件、块）的个数会受到空间大小限制</p>
+<p>​    性能的瓶颈：整个分布式文件的吞吐量，受限于单个名称节点的吞吐量</p>
+<p>​    隔离问题：由于集群中只有一个名称节点，只有一个命名空间，因此无法对不同应用程序进行隔离</p>
+<p>​    集群的可用性：一旦这个唯一的名称节点发生故障，会导致整个集群变得不可用</p>
+<p>热备份：一旦发生故障马上恢复</p>
+<p>冷备份：第一个发生故障后，必须停止一段时间，慢慢恢复</p>
+<h2 id="3-4-HDFS存储原理"><a href="#3-4-HDFS存储原理" class="headerlink" title="3.4 HDFS存储原理"></a>3.4 HDFS存储原理</h2><p>伪分布式：把名称节点和数据结点都放在同一台机子上</p>
+<p>冗余存储的好处：</p>
+<ul>
+<li>加快数据传输速度</li>
+<li>很容易检查数据错误</li>
+<li>保证数据可靠性</li>
+</ul>
+<p>数据读取的原则：就近读取</p>
+<p>​    HDFS提供了一个API可以确定一个数据节点所属的机架ID，客户端也可以调用API获取自己所属的机架ID</p>
+<p>​    当客户端读取数据时，从名称节点获得数据块不同副本的存放位置列表，列表中包含了副本所在的数据节点，可以调用API来确定客户端和这些数据结点所属的机架ID，当发现某个数据块副本对应的机架ID和客户端对应的机架ID相同时就优先选择该副本读取数据，如果没有发现，就随机选择一个副本读取数据</p>
+<p>数据的错误与恢复</p>
+<p>​    名称节点错误：冷备份到第二名称节点，当出现错误时会暂停服务一段时间，从第二名称节点上恢复过来</p>
+<p>​    数据节点出错：数据结点会定时向名称节点发送心跳信息高速名称节点我还活着，当名称节点没收到时就断定数据结点发生了故障</p>
+<p>​    数据本身出错：校验码</p>
+<p>HDFS和其他分布式文件管理系统最大的区别：HDFS可以调整冗余数据的位置</p>
+<h2 id="3-5-1-HDFS读数据过程"><a href="#3-5-1-HDFS读数据过程" class="headerlink" title="3.5.1 HDFS读数据过程"></a>3.5.1 HDFS读数据过程</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	Configuration conf = <span class="keyword">new</span> Configuration();</span><br><span class="line">  FileSystem fs = FileSystem.get(conf);</span><br><span class="line">  Path filename = <span class="keyword">new</span> Path(<span class="string">"hdfs://localhost:9000/user/hadoop/test.txt"</span>);</span><br><span class="line">  FSDataInputStream is = fs.open(filename);</span><br><span class="line">  BufferedReader d = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is));</span><br><span class="line">  String content = d.readLine();</span><br><span class="line">  System.out.println(content);</span><br><span class="line">&#125; <span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  d.close();</span><br><span class="line">  fs.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-5-2-HDFS写数据过程"><a href="#3-5-2-HDFS写数据过程" class="headerlink" title="3.5.2 HDFS写数据过程"></a>3.5.2 HDFS写数据过程</h2><h2 id="3-6-HDFS编程实践"><a href="#3-6-HDFS编程实践" class="headerlink" title="3.6 HDFS编程实践"></a>3.6 HDFS编程实践</h2><p>​    HDFS的基本编程方法：Shell命令、Java API    </p>
+<p>​    Hadoop（HDFS，MapReduce）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /user/<span class="built_in">local</span>/hadoop</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./bin/hdfs namenode -format <span class="comment">##格式化hadoop的hdfs文件系统</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./sbin/start-dfs.sh <span class="comment">##启动hadoop</span></span></span><br></pre></td></tr></table></figure>
+
+<p>Shell命令</p>
+<p>​    Hadoop</p>
+<p>​        hadoop fs：适用于不同的本地文件系统、适用于HDFS</p>
+<p>​        hadoop dfs：只能用于HDFS文件系统</p>
+<p>​        hdfs dfs：只能用于HDFS文件系统</p>
+<p>hadoop fs</p>
+<p>​    ls 显示指定文件的详细信息</p>
+<p>​    mkdir 创建相关文件夹</p>
+<p>​    cat 指定文件内容输出到标准输出</p>
+<p>将本地文件上传到HDFS文件系统中 </p>
+<p>​    hadoop fs -cp 本地文件 HDFS</p>
+<p>  <a href="http://localhost:50070" target="_blank" rel="noopener">http://localhost:50070</a></p>
+<p>利用Java API与HDFS进行交互</p>
+<p>​    实例：分布式文件系统HDFS上是否存在某个文件？</p>
+<p>​    准备工作：在Ubuntu系统中安装和配置Eclipse</p>
+<p>​    Hadoop为HDFS和Mapreduce提供了基础的支持，叫hadoop common，Hadoop有一个专门的common jar包，只要把common的jar包导入进来</p>
+<p>​    检测伪分布式文件系统HDFS上到底存不存在一个input.txt文件</p>
+<p>​    第一步：把配置文件放到当前Java工程目录下（需要把集群上的core-side-xml和hdfs-site.xml(这两个文件存在/hadoop/etc/hadoop目录下)放到当前工程项目下，即eclipse工作目录的bin文件夹下面)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  String filename = <span class="string">"hdfs://localhost:9000/user/hadoop/test.txt"</span>;</span><br><span class="line">  Configuration conf = <span class="keyword">new</span> Configuration();</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  FileSystem fs = FileSystem.get(conf);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span>(fs.exists(<span class="keyword">new</span> Path(filename))) &#123;</span><br><span class="line">    System.out.prinln(<span class="string">"文件存在"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        System.out.prinln(<span class="string">"文件不存在"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span>(Exception e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-1-1分布式并行编程"><a href="#7-1-1分布式并行编程" class="headerlink" title="7.1.1分布式并行编程"></a>7.1.1分布式并行编程</h2><p>MapReduce是一种分布式并行编程框架</p>
+<p>摩尔定律：CPU每隔18个月性能就可以翻一番 05年开始失效</p>
+<p>​    单位面积内能集成的晶体管的数量是有上限的</p>
+<p>数据处理能力提升的两条路线</p>
+<p>​    单核CPU到双核到四核到八核</p>
+<p>​    分布式并行编程（借助一个集群通过多台机器同时并行处理大规模数据集）</p>
+<p>相关的并行编程框架：</p>
+<p>​    MPI（消息传递接口，一种非常典型的并行编程框架）</p>
+<p>​    OpenCL</p>
+<p>​    CUDA</p>
+<p>并行编程模型和传统的并行编程框架的区别</p>
+<p>​    传统：共享式架构（容错性差）、刀片服务器（价格高、拓展性差）、编程难度高（做什么+怎么做）、实时的细粒度计算</p>
+<p>​    MapReduce：非共享式架构（容错性好）、扩展性好、编程难度低（做什么）、非实时的批处理和数据密集型的应用</p>
+<h2 id="7-1-2-MapReduce模型简介"><a href="#7-1-2-MapReduce模型简介" class="headerlink" title="7.1.2 MapReduce模型简介"></a>7.1.2 MapReduce模型简介</h2><p>MapReduce两个函数</p>
+<p>​    Map</p>
+<p>​    Reduce</p>
+<p>策略</p>
+<p>​    分而治之：被非常庞大的数据集，切分成非常多的独立的小分片，然后为每一个分配单独地启动一个map任务，最终通过多个map任务，并行地在多个机器上去处理</p>
+<p>理念</p>
+<p>​    计算向数据靠拢（将应用程序分发到数据所在的机器）而不是数据向计算靠拢（将数据拉到应用程序所在的机器）</p>
+<p>Master/slave架构</p>
+<p>​    一个Master服务器：作业跟踪器JobTracker(负责整个作业的调度和处理以及失败和恢复)</p>
+<p>​    若干个slave服务器：负责具体任务执行的组件TaskTracker（负责接收JobTracker给它发的作业处理指令，完成具体的任务处理）</p>
+<p>Map 键值对</p>
+<p>Reduce </p>
+<p>​    输入：键值对列表 </p>
+<p>​    输出：键值对</p>
+<h2 id="7-2-MapReduce的体系结构"><a href="#7-2-MapReduce的体系结构" class="headerlink" title="7.2 MapReduce的体系结构"></a>7.2 MapReduce的体系结构</h2><p>Client</p>
+<p>​    通过Client可以提交用户编写的应用程序，用户通过它将应用程序教导JobTracker端</p>
+<p>​    通过这些Client用户也可以通过它提供的一些接口去查看当前提交作业的运行状态</p>
+<p>JobTracker</p>
+<p>​    负责资源的监控和作业的调度</p>
+<p>​    监控底层的其它的TaskTracker以及当前运行的Job的健康状况</p>
+<p>​    一旦探测到失败的情况就把这个任务转移到其他节点继续执行，跟踪任务执行进度和资源使用量</p>
+<p>TaskScheduler</p>
+<p>TaskTracker</p>
+<p>​    执行具体的相关任务，一般接收JobTracker发送过来的命令</p>
+<p>​    把一些自己的资源使用情况，以及任务的运行进度通过心跳的方式发送给JobTracker</p>
+<p>slot</p>
+<p>​    map类型的slot</p>
+<p>​    reduce类型的slot</p>
+<p>Task</p>
+<p>​    map任务 map函数</p>
+<p>​    reduce任务 reduce函数</p>
+<h2 id="7-3-MapReduce工作流程"><a href="#7-3-MapReduce工作流程" class="headerlink" title="7.3 MapReduce工作流程"></a>7.3 MapReduce工作流程</h2><p>输入-&gt;Map任务-&gt;Reduce任务-&gt;输出</p>
+<p>Reduce任务的数量</p>
+<p>​    最优的Reduce任务个数取决于集群中可用的reduce任务槽(slot)的数目</p>
+<p>​    通常设置比reduce任务槽数目稍微小一些的Reduce任务个数（这样可以预留一些系统资源处理可能发生的错误）</p>
+<h2 id="7-4-Shuffle过程原理"><a href="#7-4-Shuffle过程原理" class="headerlink" title="7.4 Shuffle过程原理"></a>7.4 Shuffle过程原理</h2><p>map键值对先写入缓存-&gt;溢写(分区、排序、合并)-&gt;磁盘文件归并</p>
+<p>之后数据被Reduce任务取走-&gt;归并-&gt;reduce函数-&gt;输出</p>
+<p>shuffle过程</p>
+<ol>
+<li>map端shuffle<ol>
+<li>输入数据和执行Map任务</li>
+<li>写入缓存</li>
+<li>溢写（分区、排序、合并）   溢写比例0.8</li>
+<li>文件归并</li>
+</ol>
+</li>
+<li>reduce端shuffle</li>
+</ol>
+<p>​        </p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-1课程机器配套在线资源介绍"><span class="toc-number">1.</span> <span class="toc-text">0.1课程机器配套在线资源介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-大数据时代"><span class="toc-number">2.</span> <span class="toc-text">1.1 大数据时代</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-大数据概念和影响"><span class="toc-number">3.</span> <span class="toc-text">1.2 大数据概念和影响</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-大数据的应用"><span class="toc-number">4.</span> <span class="toc-text">1.3 大数据的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-大数据的关键技术"><span class="toc-number">5.</span> <span class="toc-text">1.4 大数据的关键技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-1-云计算"><span class="toc-number">6.</span> <span class="toc-text">1.5.1 云计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-2-物联网"><span class="toc-number">7.</span> <span class="toc-text">1.5.2 物联网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-1-Hadoop简介"><span class="toc-number">8.</span> <span class="toc-text">2.1.1 Hadoop简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-2-Hadoop不同版本"><span class="toc-number">9.</span> <span class="toc-text">2.1.2 Hadoop不同版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Hadoop项目结构"><span class="toc-number">10.</span> <span class="toc-text">2.2 Hadoop项目结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-1-Hadoop安装之前的预备知识"><span class="toc-number">11.</span> <span class="toc-text">2.3.1 Hadoop安装之前的预备知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-2-Hadoop的安装和使用详解"><span class="toc-number">12.</span> <span class="toc-text">2.3.2 Hadoop的安装和使用详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Hadoop集群的部署和使用"><span class="toc-number">13.</span> <span class="toc-text">2.4 Hadoop集群的部署和使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-分布式文件系统HDFS简介"><span class="toc-number">14.</span> <span class="toc-text">3.1 分布式文件系统HDFS简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-HDFS相关概念"><span class="toc-number">15.</span> <span class="toc-text">3.2 HDFS相关概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-HDFS体系结构"><span class="toc-number">16.</span> <span class="toc-text">3.3 HDFS体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-HDFS存储原理"><span class="toc-number">17.</span> <span class="toc-text">3.4 HDFS存储原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-1-HDFS读数据过程"><span class="toc-number">18.</span> <span class="toc-text">3.5.1 HDFS读数据过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-2-HDFS写数据过程"><span class="toc-number">19.</span> <span class="toc-text">3.5.2 HDFS写数据过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-HDFS编程实践"><span class="toc-number">20.</span> <span class="toc-text">3.6 HDFS编程实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-1分布式并行编程"><span class="toc-number">21.</span> <span class="toc-text">7.1.1分布式并行编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-2-MapReduce模型简介"><span class="toc-number">22.</span> <span class="toc-text">7.1.2 MapReduce模型简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-MapReduce的体系结构"><span class="toc-number">23.</span> <span class="toc-text">7.2 MapReduce的体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-MapReduce工作流程"><span class="toc-number">24.</span> <span class="toc-text">7.3 MapReduce工作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-Shuffle过程原理"><span class="toc-number">25.</span> <span class="toc-text">7.4 Shuffle过程原理</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&text=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&title=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&is_video=false&description=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Big Data 厦大&body=Check out this article: http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&title=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&title=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&title=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&title=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&name=Big Data 厦大&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/03/23/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/Big-Data-%E5%8E%A6%E5%A4%A7/&t=Big Data 厦大" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

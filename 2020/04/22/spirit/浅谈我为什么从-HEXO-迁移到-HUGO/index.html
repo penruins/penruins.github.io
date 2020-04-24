@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="现在主流的博客大多都是Hexo 加 Github Page，甚至说再绝对一点，常常点开一篇文章就是Hexo Next 主题的模板。这个其实很容易理解，因为hexo比较容易上手，并且有很稳定、功能齐全的主题，那么在这样一个强有力的竞争对手下，Hugo 又是如何生存下来，并且吸引到用户的呢？首先，第一点得提的就是Hugo 打出的标语 – “The world’s fastest framework f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈我为什么从 HEXO 迁移到 HUGO">
+<meta property="og:url" content="http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="现在主流的博客大多都是Hexo 加 Github Page，甚至说再绝对一点，常常点开一篇文章就是Hexo Next 主题的模板。这个其实很容易理解，因为hexo比较容易上手，并且有很稳定、功能齐全的主题，那么在这样一个强有力的竞争对手下，Hugo 又是如何生存下来，并且吸引到用户的呢？首先，第一点得提的就是Hugo 打出的标语 – “The world’s fastest framework f">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-22T04:46:43.000Z">
+<meta property="article:modified_time" content="2020-04-22T04:55:24.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Spirit">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>浅谈我为什么从 HEXO 迁移到 HUGO</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/04/22/Books/Social-Psychology/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/04/22/spirit/%E6%8F%90%E5%8D%87%E6%95%88%E7%8E%87%E4%B9%8B%E8%B7%AF%E4%B8%BA%E4%BD%95%E6%80%BB%E6%98%AF%E5%A4%B1%E8%B4%A5%EF%BC%9F%E8%BF%99%E6%98%AF%E6%88%91%E7%9A%84%E6%80%9D%E8%80%83%E4%B8%8E%E6%94%B9%E5%8F%98/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&text=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&title=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&is_video=false&description=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=浅谈我为什么从 HEXO 迁移到 HUGO&body=Check out this article: http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&title=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&title=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&title=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&title=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&name=浅谈我为什么从 HEXO 迁移到 HUGO&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&t=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">1.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        浅谈我为什么从 HEXO 迁移到 HUGO
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Hexo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-04-22T04:46:43.000Z" itemprop="datePublished">2020-04-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Spirit/" rel="tag">Spirit</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>现在主流的博客大多都是Hexo 加 Github Page，甚至说再绝对一点，常常点开一篇文章就是Hexo Next 主题的模板。这个其实很容易理解，因为hexo比较容易上手，并且有很稳定、功能齐全的主题，那么在这样一个强有力的竞争对手下，Hugo 又是如何生存下来，并且吸引到用户的呢？<br>首先，第一点得提的就是Hugo 打出的标语 – “The world’s fastest framework for building websites”。Hugo 依靠Go语言进行开发，号称世界上最快的构建网站工具，到底有多快？根据相关博主提供的数据，他200篇左右的博文用Hexo 需要10分钟去生成静态网页，而Hugo 只需要10秒。就我个人的体验来说，Hugo确实大大加快了网页生成的速度，平常增加一篇博文然后再生成渲染需要4秒左右，而Hugo基本上是1秒内完成。正是依赖于Hugo 快速生成的特点，调试方便成了Hugo的第二大特点。基本上我在源文件处修改的内容可以实时地显示在网页上，而不用再次敲代码生成再预览，这对于博主来说简直就是一个福音。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[1]<a href="https://sspai.com/post/59904" target="_blank" rel="noopener">浅谈我为什么从-HEXO-迁移到-HUGO</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">1.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&text=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&title=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&is_video=false&description=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=浅谈我为什么从 HEXO 迁移到 HUGO&body=Check out this article: http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&title=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&title=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&title=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&title=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&name=浅谈我为什么从 HEXO 迁移到 HUGO&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/04/22/spirit/%E6%B5%85%E8%B0%88%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E-HEXO-%E8%BF%81%E7%A7%BB%E5%88%B0-HUGO/&t=浅谈我为什么从 HEXO 迁移到 HUGO" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

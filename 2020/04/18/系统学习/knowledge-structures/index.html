@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="java软件开发工程师 Java基础：集合框架、线程、io流、jvm web基础：jsp, servlet, mvc 后端框架: spring, springmvc, mybatis, spring boot 数据库: sql基础 体系结构 优化基础 操作系统： linux常用命令 中间件安装和开发基本工具 web前端：html css es6 vue 高并发应用: spring cloud, m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="knowledge structures">
+<meta property="og:url" content="http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="java软件开发工程师 Java基础：集合框架、线程、io流、jvm web基础：jsp, servlet, mvc 后端框架: spring, springmvc, mybatis, spring boot 数据库: sql基础 体系结构 优化基础 操作系统： linux常用命令 中间件安装和开发基本工具 web前端：html css es6 vue 高并发应用: spring cloud, m">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-18T09:11:13.000Z">
+<meta property="article:modified_time" content="2020-04-18T09:13:53.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="系统学习">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>knowledge structures</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/04/18/practice/SSM-print-Movie-in-the-browser/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E5%B0%B1%E4%B8%9A%E6%8C%87%E5%AF%BC-HFUT/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&text=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&title=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&is_video=false&description=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=knowledge structures&body=Check out this article: http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&title=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&title=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&title=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&title=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&name=knowledge structures&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&t=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#java"><span class="toc-number">1.</span> <span class="toc-text">java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软件开发工程师"><span class="toc-number">2.</span> <span class="toc-text">软件开发工程师</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软件实施工程师"><span class="toc-number">3.</span> <span class="toc-text">软件实施工程师</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软件测试工程师"><span class="toc-number">4.</span> <span class="toc-text">软件测试工程师</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        knowledge structures
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Hexo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-04-18T09:11:13.000Z" itemprop="datePublished">2020-04-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/" rel="tag">系统学习</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><h2 id="软件开发工程师"><a href="#软件开发工程师" class="headerlink" title="软件开发工程师"></a>软件开发工程师</h2><ol>
+<li>Java基础：集合框架、线程、io流、jvm</li>
+<li>web基础：jsp, servlet, mvc</li>
+<li>后端框架: spring, springmvc, mybatis, spring boot</li>
+<li>数据库: sql基础 体系结构 优化基础</li>
+<li>操作系统： linux常用命令 中间件安装和开发基本工具</li>
+<li>web前端：html css es6 vue</li>
+<li>高并发应用: spring cloud, mq, redis</li>
+<li>算法: queue stack tree map sort search</li>
+<li>配置管理和构建: git svn maven</li>
+</ol>
+<h2 id="软件实施工程师"><a href="#软件实施工程师" class="headerlink" title="软件实施工程师"></a>软件实施工程师</h2><ol>
+<li>基础知识技能：操作系统（linux偏多），数据库类ORACLE, mysql(数据库操作，SQL语句编制)</li>
+<li>项目管理考核：考案例，关于问题场景，分析怎么做怎么处理。比如进度太迟了你怎么做。核心是利用项目管理的知识来解决</li>
+</ol>
+<h2 id="软件测试工程师"><a href="#软件测试工程师" class="headerlink" title="软件测试工程师"></a>软件测试工程师</h2><ol>
+<li>计算机基础：通用技术，cpu等等</li>
+<li>运行环境：网络，操作系统原理，中间件，数据库(mysql, oracle)知识点</li>
+<li>专业技术：功能测试 测试技术方法论，测试管理类的知识，软件工程：生命周期等</li>
+<li>测试工具：自动化工具等核心（测试思维）：案例分析，工作思维</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#java"><span class="toc-number">1.</span> <span class="toc-text">java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软件开发工程师"><span class="toc-number">2.</span> <span class="toc-text">软件开发工程师</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软件实施工程师"><span class="toc-number">3.</span> <span class="toc-text">软件实施工程师</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软件测试工程师"><span class="toc-number">4.</span> <span class="toc-text">软件测试工程师</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&text=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&title=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&is_video=false&description=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=knowledge structures&body=Check out this article: http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&title=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&title=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&title=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&title=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&name=knowledge structures&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/04/18/%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/knowledge-structures/&t=knowledge structures" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
