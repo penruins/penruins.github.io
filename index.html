@@ -65,21 +65,21 @@ nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
 <div style="float: left; margin-left: 15px; width: 800px">
     <div>
         <ol>
-            <li>centos 怎么查看隐藏的文件和目录? `l` 命令，`ll` 命令不会打印隐藏的文件和目录</li>
-            <li>centos 如何查询服务的状态? `systemctl status mysql`</li>
-            <li>文件目录权限的含义是啥 `dr-xr-xr-x.`
+            <li>centos 怎么查看隐藏的文件和目录? <code>l</code> 命令，<code>ll</code> 命令不会打印隐藏的文件和目录</li>
+            <li>centos 如何查询服务的状态? <code>systemctl status mysql</code></li>
+            <li>文件目录权限的含义是啥 <code>dr-xr-xr-x.</code>
                 <ul>
-                    <li>d:第一位表示文件类型。d是目录文件，l是链接文件，-是普通文件，p是管道</li>
-                    <li>r-x:第5-7位表示和这个文件属主所在同一个组的用户所具有的权限</li>
-                    <li>r-x:第8-10位表示其他用户所具有的权限</li>
+                    <li><code>d</code> : 第一位表示文件类型。d是目录文件，l是链接文件，-是普通文件，p是管道</li>
+                    <li><code>r-x</code> : 第5-7位表示和这个文件属主所在同一个组的用户所具有的权限</li>
+                    <li><code>r-x</code> : 第8-10位表示其他用户所具有的权限</li>
                 </ul>
             </li>
-            <li>vim 如何显示行号? `:set number`</li>
-            <li>vim 如何取消显示行号? `:set nonumber`</li>
-            <li>vim 如何显示相对行号? `:set relativenumber`</li>
-            <li>vim 如何取消显示相对行号? `:set norelativenumber`</li>
-            <li>vim 如何 wrap? `:set wrap`</li>
-            <li>vim 如何取消 wrap? `:set nowrap`</li>
+            <li>vim 如何显示行号? <code>:set number`</code></li>
+            <li>vim 如何取消显示行号? <code>`:set nonumber`</code></li>
+            <li>vim 如何显示相对行号? <code>`:set relativenumber`</code></li>
+            <li>vim 如何取消显示相对行号? <code>`:set norelativenumber`</code></li>
+            <li>vim 如何 wrap? <code>`:set wrap`</code></li>
+            <li>vim 如何取消 wrap? <code>`:set nowrap`</code></li>
             <li>如何移动目录? `mv xxx` 不用加 `-r` 或其他参数，也没有这些参数，直接执行命令</li>
             <li>如何查看内存使用情况? `free -g`</li>
             <li>如何查看磁盘使用情况? `df -h`</li>
@@ -97,6 +97,11 @@ nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
                 <ul>
                     <li>`HttpEntityRequestCallback`</li>
                     <li>`ResponseEntityResponseExtractor`</li>
+                </ul>
+            </li>
+            <li>docker desktop 下面展示的 `RAM` 是什么?
+                <ul>
+                    <li>`Random Access Memory` `随机存取存储器` 也叫主存，是与 CPU 直接交换数据的内部存储器。它可以随时读写（刷新时除外），而且速度很快，通常作为操作系统或其他正在运行中的程序的临时数据存储介质。RAM工作时可以随时从任何一个指定的地址写入（存入）或读出（取出）信息。它与ROM的最大区别是数据的易失性，即一旦断电所存储的数据将随之丢失。RAM在计算机和数字系统中用来暂时存储程序、数据和中间结果。</li>
                 </ul>
             </li>
         </ol>
