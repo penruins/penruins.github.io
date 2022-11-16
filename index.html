@@ -35,12 +35,12 @@
     <ul>
         <li>常用命令
             <ul>
-                <li>windows 杀死端口号 &emsp;<code>netstat -aon | findstr 8761; taskkill -f -pid 10568</code></li>
-                <li>vim bookmark &emsp;<code>m + a-z</code></li>
-                <li>vim trigger bookmark&emsp;<code>` + a-z</code></li>
-                <li>查看网络信息&emsp;<code>ipconfig</code></li>
-                <li>提交代码 并 push &emsp;<code>git add . ; git commit -m "message" ; git push</code></li>
-                <li>远程删除文件 &emsp;<code>git rm --cached first-spring.log* ; git commit -m "delete files" ; git
+                <li>windows 杀死端口号 &emsp;<code style="color: red">netstat -aon | findstr 8761; taskkill -f -pid 10568</code></li>
+                <li>vim bookmark &emsp;<code style="color: red">m + a-z</code></li>
+                <li>vim trigger bookmark&emsp;<code style="color: red">` + a-z</code></li>
+                <li>查看网络信息&emsp;<code style="color: red">ipconfig</code></li>
+                <li>提交代码 并 push &emsp;<code style="color: red">git add . ; git commit -m "message" ; git push</code></li>
+                <li>远程删除文件 &emsp;<code style="color: red">git rm --cached first-spring.log* ; git commit -m "delete files" ; git
                     push</code></li>
                 <li></li>
             </ul>
@@ -82,7 +82,7 @@ nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
 </code>
 </pre>
 
-    <div style="font-size: 10pt">
+    <div>
         <li><a href="https://github.com" target="_blank">github</a>
             <ul>
                 <li><a href="https://github.com/Tencent" target="_blank">Tencent</a>
@@ -184,8 +184,16 @@ nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
 <div style="float: left; margin-left: 15px; width: 800px">
     <div>
         <ol>
-            <li>centos 怎么查看隐藏的文件和目录? <code>l</code> 命令，<code>ll</code> 命令不会打印隐藏的文件和目录</li>
-            <li>centos 如何查询服务的状态? <code>systemctl status mysql</code></li>
+            <li>centos 怎么查看隐藏的文件和目录?
+                <ul>
+                    <li> <code>l</code> 命令，<code>ll</code> 命令不会打印隐藏的文件和目录</li>
+                </ul>
+            </li>
+            <li>centos 如何查询服务的状态?
+                <ul>
+                    <li> <code>systemctl status mysql</code></li>
+                </ul>
+            </li>
             <li>文件目录权限的含义是啥 <code>dr-xr-xr-x.</code>
                 <ul>
                     <li><code>d</code> : 第一位表示文件类型。d是目录文件，l是链接文件，-是普通文件，p是管道</li>
@@ -193,20 +201,60 @@ nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
                     <li><code>r-x</code> : 第8-10位表示其他用户所具有的权限</li>
                 </ul>
             </li>
-            <li>vim 如何显示行号? <code>:set number`</code></li>
-            <li>vim 如何取消显示行号? <code>`:set nonumber`</code></li>
-            <li>vim 如何显示相对行号? <code>`:set relativenumber`</code></li>
-            <li>vim 如何取消显示相对行号? <code>`:set norelativenumber`</code></li>
-            <li>vim 如何 wrap? <code>`:set wrap`</code></li>
-            <li>vim 如何取消 wrap? <code>`:set nowrap`</code></li>
-            <li>如何移动目录? `mv xxx` 不用加 `-r` 或其他参数，也没有这些参数，直接执行命令</li>
-            <li>如何查看内存使用情况? `free -g`</li>
-            <li>如何查看磁盘使用情况? `df -h`</li>
-            <li>如何查看防火墙的状态？ `systemctl status firewalld`</li>
+            <li>vim 如何显示行号?
+                <ul>
+                    <li> <code>:set number`</code></li>
+                </ul>
+            </li>
+            <li>vim 如何取消显示行号?
+                <ul>
+                    <li> <code>`:set nonumber`</code></li>
+                </ul>
+            </li>
+            <li>vim 如何显示相对行号?
+                <ul>
+                    <li> <code>`:set relativenumber`</code></li>
+                </ul>
+            </li>
+            <li>vim 如何取消显示相对行号?
+                <ul>
+                    <li> <code>`:set norelativenumber`</code></li>
+                </ul>
+            </li>
+            <li>vim 如何 wrap?
+                <ul>
+                    <li> <code>`:set wrap`</code></li>
+                </ul>
+            </li>
+            <li>vim 如何取消 wrap?
+                <ul>
+                    <li> <code>`:set nowrap`</code></li>
+                </ul>
+            </li>
+            <li>如何移动目录?
+                <ul>
+                    <li> `mv xxx` 不用加 `-r` 或其他参数，也没有这些参数，直接执行命令</li>
+                </ul>
+            </li>
+            <li>如何查看内存使用情况?
+                <ul>
+                    <li> `free -g`</li>
+                </ul>
+            </li>
+            <li>如何查看磁盘使用情况?
+                <ul>
+                    <li> `df -h`</li>
+                </ul>
+            </li>
+            <li>如何查看防火墙的状态？
+                <ul>
+                    <li> `systemctl status firewalld`</li>
+                </ul>
+            </li>
             <li>2022-11-08 `>` 和 `>>` 的区别是什么？
                 <ul>
-                    <li>`>` 重定向会覆盖 </li>
-                    <li>`>>` 追加 </li>
+                    <li style="color: gray">`>` 重定向会覆盖 </li>
+                    <li style="color: gray">`>>` 追加 </li>
                 </ul>
             </li>
             <li>Http Header 的 Accept 字段是干什么的？ Accept 属于 Http 请求头，描述客户端希望接收的响应 body，数据类型。就是希望服务器返回什么类型的数据。</li>
@@ -214,33 +262,33 @@ nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
             <li>什么是 AsyncRestTemplate? <a href="https://www.cnblogs.com/quiet-snowy-day/p/6343347.html">【Spring-web】AsyncRestTemplate源码学习</a></li>
             <li>restTemplate 在执行 `doExecute()` 方法前，需要准备两个对象，是哪两个？
                 <ul>
-                    <li>`HttpEntityRequestCallback`</li>
-                    <li>`ResponseEntityResponseExtractor`</li>
+                    <li style="color: gray">`HttpEntityRequestCallback`</li>
+                    <li style="color: gray">`ResponseEntityResponseExtractor`</li>
                 </ul>
             </li>
             <li>docker desktop 下面展示的 `RAM` 是什么?
                 <ul>
-                    <li>`Random Access Memory` `随机存取存储器` 也叫主存，是与 CPU 直接交换数据的内部存储器。它可以随时读写（刷新时除外），而且速度很快，通常作为操作系统或其他正在运行中的程序的临时数据存储介质。RAM工作时可以随时从任何一个指定的地址写入（存入）或读出（取出）信息。它与ROM的最大区别是数据的易失性，即一旦断电所存储的数据将随之丢失。RAM在计算机和数字系统中用来暂时存储程序、数据和中间结果。</li>
+                    <li style="color: gray">`Random Access Memory` `随机存取存储器` 也叫主存，是与 CPU 直接交换数据的内部存储器。它可以随时读写（刷新时除外），而且速度很快，通常作为操作系统或其他正在运行中的程序的临时数据存储介质。RAM工作时可以随时从任何一个指定的地址写入（存入）或读出（取出）信息。它与ROM的最大区别是数据的易失性，即一旦断电所存储的数据将随之丢失。RAM在计算机和数字系统中用来暂时存储程序、数据和中间结果。</li>
                 </ul>
             </li>
             <li>wqs `FileUtils.readFilesBySpring` 文件获取不到的原因? `FileNotFoundException`
                 <ul>
-                    <li>pom 的 resources 的通配符写错了</li>
+                    <li style="color: gray">pom 的 resources 的通配符写错了</li>
                 </ul>
             </li>
             <li> wqs 字体的文件能读取到，在 `resources` 下，为什么？
                 <ul>
-                    <li>她用的是绝对路径</li>
+                    <li style="color: gray">她用的是绝对路径</li>
                 </ul>
             </li>
             <li>
                 <ul>
-                    <li>wqs 用 `src/xx/xx/xx` 的问题是什么？</li>
+                    <li style="color: gray">wqs 用 `src/xx/xx/xx` 的问题是什么？</li>
                 </ul>
             </li>
             <li>
                 <ul>
-                    <li>打包完了之后就获取不到这些文件了</li>
+                    <li style="color: gray">打包完了之后就获取不到这些文件了</li>
                 </ul>
             </li>
         </ol>
