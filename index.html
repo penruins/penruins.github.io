@@ -6,7 +6,139 @@
 </head>
 <body>
 
-hello
+
+<div style="width: 800px; float:left">
+
+    <ul>
+        <li>常用命令
+            <ul>
+                <li>windows 杀死端口号 &emsp;<code>netstat -aon | findstr 8761; taskkill -f -pid 10568</code></li>
+                <li>vim bookmark &emsp;<code>m + a-z</code></li>
+                <li>vim trigger bookmark&emsp;<code>` + a-z</code></li>
+                <li>查看网络信息&emsp;<code>ipconfig</code></li>
+                <li>提交代码 并 push &emsp;<code>git add . ; git commit -m "message" ; git push</code></li>
+                <li>远程删除文件 &emsp;<code>git rm --cached first-spring.log* ; git commit -m "delete files" ; git
+                    push</code></li>
+                <li></li>
+            </ul>
+        </li>
+
+    </ul>
+
+    <pre>
+<code>
+set number
+set ignorecase
+
+let mapleader = " "
+
+nnoremap H 5h
+nnoremap J 5j
+nnoremap K 5k
+nnoremap L 5l
+vnoremap H 5h
+vnoremap J 5j
+vnoremap K 5k
+vnoremap L 5l
+
+nnoremap th :tabp&lt;CR&gt;
+nnoremap tl :tabn&lt;CR&gt;
+nnoremap sv :split&lt;CR&gt;
+nnoremap sh :vsplit&lt;CR&gt;
+nnoremap &lt;leader&gt;h &lt;c-w&gt;h
+nnoremap &lt;leader&gt;j &lt;c-w&gt;j
+nnoremap &lt;leader&gt;k &lt;c-w&gt;k
+nnoremap &lt;leader&gt;l &lt;c-w&gt;l
+
+nnoremap &lt;leader&gt;&lt;LEFT&gt; c-w&gt;H
+nnoremap &lt;leader&gt;&lt;RIGHT&gt; c-w&gt;L
+nnoremap &lt;leader&gt;&lt;UP&gt; c-w&gt;K
+nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
+
+
+</code>
+
+</pre>
+
+</div>
+
+<div style="float: left; margin-left: 15px; width: 800px">
+    <div>
+        <ol>
+            <li>centos 怎么查看隐藏的文件和目录? `l` 命令，`ll` 命令不会打印隐藏的文件和目录</li>
+            <li>centos 如何查询服务的状态? `systemctl status mysql`</li>
+            <li>文件目录权限的含义是啥 `dr-xr-xr-x.`
+                <ul>
+                    <li>d:第一位表示文件类型。d是目录文件，l是链接文件，-是普通文件，p是管道</li>
+                    <li>r-x:第5-7位表示和这个文件属主所在同一个组的用户所具有的权限</li>
+                    <li>r-x:第8-10位表示其他用户所具有的权限</li>
+                </ul>
+            </li>
+            <li>vim 如何显示行号? `:set number`</li>
+            <li>vim 如何取消显示行号? `:set nonumber`</li>
+            <li>vim 如何显示相对行号? `:set relativenumber`</li>
+            <li>vim 如何取消显示相对行号? `:set norelativenumber`</li>
+            <li>vim 如何 wrap? `:set wrap`</li>
+            <li>vim 如何取消 wrap? `:set nowrap`</li>
+            <li>如何移动目录? `mv xxx` 不用加 `-r` 或其他参数，也没有这些参数，直接执行命令</li>
+            <li>如何查看内存使用情况? `free -g`</li>
+            <li>如何查看磁盘使用情况? `df -h`</li>
+            <li>如何查看防火墙的状态？ `systemctl status firewalld`</li>
+            <li>2022-11-08 `>` 和 `>>` 的区别是什么？
+                <ul>
+                    <li>`>` 重定向会覆盖 </li>
+                    <li>`>>` 追加 </li>
+                </ul>
+            </li>
+            <li>Http Header 的 Accept 字段是干什么的？ Accept 属于 Http 请求头，描述客户端希望接收的响应 body，数据类型。就是希望服务器返回什么类型的数据。</li>
+            <li>如何查看网卡信息? </li>
+            <li>什么是 AsyncRestTemplate? <a href="https://www.cnblogs.com/quiet-snowy-day/p/6343347.html">【Spring-web】AsyncRestTemplate源码学习</a></li>
+            <li>restTemplate 在执行 `doExecute()` 方法前，需要准备两个对象，是哪两个？
+                <ul>
+                    <li>`HttpEntityRequestCallback`</li>
+                    <li>`ResponseEntityResponseExtractor`</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<!--
+<div style="float: left; margin-left: 15px; width: 500px">
+    <div>hello</div>
+
+</div>
+-->
+
+<div style="float: left; margin-left: 15px; width: 400px">
+    <div>“有人说像我们这样的人是理想主义者，总是想着一些不着边际的事情，但我要第一万次的说：是的我们就是这样的人”  -- Che Guevara</div>
+
+</div>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
