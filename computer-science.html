@@ -480,6 +480,12 @@ nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
         </ol>
     </div>
 
+
+    <div id="div1"></div>
+    <div id="div2"></div>
+
+
+
 </div>
 
 <!--
@@ -494,6 +500,13 @@ nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
     <div>“有人说像我们这样的人是理想主义者，总是想着一些不着边际的事情，但我要第一万次的说：是的我们就是这样的人”  -- Che Guevara</div>
 </div>
 -->
+
+<script>
+    console.log(window.innerHeight)
+    console.log(window.innerWidth)
+    document.getElementById("div1").innerHTML = 'window.innerHeight : ' + window.innerHeight
+    document.getElementById("div2").innerHTML = 'window.innerWidth : ' + window.innerWidth
+</script>
 
 </body>
 </html>
