@@ -1,15 +1,9 @@
 【2022华东师大校队选拔男子总决赛-哔哩哔哩】 https://b23.tv/1bKm7rr
 
 
-【Spring Security FULL COURSE-哔哩哔哩】 https://b23.tv/6vnqLgu
-
-【全网首发！最全面细致的Spring 6.0新特性详解-哔哩哔哩】 https://b23.tv/331vHV5
-
 【【PostgreSQL】硅谷 YouTube 百万粉丝大佬 2022 秋季 一个视频掌握 PostgreSQL 完整课程  附带课程源码（ 中英字幕）-哔哩哔哩】 https://b23.tv/RLaCVIa
 
 【吃着香闻着臭!2分钟看完榴莲120天生长过程!-哔哩哔哩】 https://b23.tv/TqagYCa
-
-【师兄与老师开战-哔哩哔哩】 https://b23.tv/Mnrf7fn
 
 【2022桐庐半程马拉松，潘红以1:14:08的成绩获得女子冠军-哔哩哔哩】 https://b23.tv/2IVsIZD
 
@@ -67,18 +61,6 @@ https://www.zhihu.com/question/341300807/answer/813808173?utm_medium=social&utm_
 gcc是怎么写出来的？ - pansz 的回答 - 知乎
 
 https://www.zhihu.com/question/280089090/answer/2718599486?utm_medium=social&utm_oi=40577768882176&utm_psn=1565836723191582720&utm_source=ZHShareTargetIDMore
-
-【北京大学肖臻老师《区块链技术与应用》公开课-哔哩哔哩】 https://b23.tv/y13xoZk
-
-
-【中国开源故事-哔哩哔哩】 https://b23.tv/P6Lt0V1
-
-
-
-【拥抱开源，拒绝忽悠【青心推荐】-哔哩哔哩】 https://b23.tv/nqiLAmZ
-
-【圆梦珠峰----抒写传奇！-哔哩哔哩】 https://b23.tv/u7JkaPR
-
 
 
 
