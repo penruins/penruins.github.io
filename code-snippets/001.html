@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>001</title>
+</head>
+<body>
+<h3>001</h3>
+<pre>
+List&lt;ActivityVO&gt; ride = activityRepository.findAll()
+        .stream()
+        .filter(e -> e.getType().equals("Ride"))
+        .sorted(Comparator.comparing(ActivityPO::getDistance).reversed())
+        .map(ActivityVO::new)
+        .collect(Collectors.toList());
+</pre>
+
+</body>
+</html>
