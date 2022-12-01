@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>computer science</title>
+    <style>
+        pre {
+            font-size: 15px;
+        }
+    </style>
 </head>
 <body>
 
@@ -86,6 +91,63 @@
     <div id="div1"></div>
     <div id="div2"></div>
     <h3>code snippet</h3>
+
+<h3>在没有total和总的分页的情况下，如何获取全量的数据</h3>
+<pre style="font-size:16px">
+@Override
+public void strava_store_activity() {
+    log.info("strava store activity start");
+    //Long count = 1L;
+    long perCount = 25;
+    long count = activityRepository.count() / perCount;
+    <span style="color: red">// list 初始化为空 list，下面的 while 就不用判空了</span>
+    List&lt;ActivityPO&gt; activitiesBeanList = null;
+    do {
+        <span style="color: red">// 如果分页获取到没有数据，要返回空的 list，而不要返回 null</span>
+        activitiesBeanList = getActivitiesBeanPOList(null, null, count, perCount);
+        <span style="color: red">// 不需要作非空判断</span>
+        if (activitiesBeanList != null && activitiesBeanList.size() &gt; 0) {
+            activityRepository.saveAll(activitiesBeanList);
+        }
+        count++;
+    <span style="color: red">// 不需要作非空判断</span>
+    } while (activitiesBeanList != null && activitiesBeanList.size() &gt; 0);
+    log.info("strava store activity end");
+}
+    </pre>
+    <hr>
+    <pre>
+@Override
+public List&lt;Activity&gt; getActivitiesBeanList(Long before, Long after, Long page, Long per_page) {
+    return Optional.ofNullable(getActivities(before, after, page, per_page))
+            .map(activity -> JSON.parseArray(activity, Activity.class))
+            <span style="color: red">// 不应该返回 null, 而要返回 new ArrayList<>()</span>
+            .orElse(null);
+}
+    </pre>
+    <hr>
+    <pre>
+@Override
+public List&lt;ActivityPO&gt; getActivitiesBeanPOList(Long before, Long after, Long page, Long per_page) {
+    return getActivitiesBeanList(before, after, page, per_page)
+        .stream()
+        <span style="color: red">// 可以使用语法糖</span>
+        <span style="color: red">.map(ActivityPO::new)</span>
+        <span style="color: red; text-decoration: line-through">.map(activity -&gt; new ActivityPO(activity)</span>)
+        .collect(Collectors.toList());
+}
+    </pre>
+
+    <hr>
+    <h3>jpa 分页 + 排序</h3>
+    <pre>
+@Override
+public Page&lt;ActivityPO&gt; get_activity_po(Integer pageNo, Integer pageSize) {
+    Sort.Order sort = new Sort.Order(Sort.Direction.DESC, "startDate");
+    Sort sort_ = Sort.by(sort);
+    return activityRepository.findAll(PageRequest.of(pageNo,pageSize, sort_));
+}
+    </pre>
 
 
 
