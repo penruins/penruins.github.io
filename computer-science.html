@@ -12,7 +12,7 @@
     <li>tar -zcvf xxxx.tar.gz # 压缩</li>
     <li>tar -zxvf xxx.tar.gz # 解压</li>
     <li>常用命令
-        <ul>
+        <ul style="margin: 1px">
             <li>windows 杀死端口号 &emsp;<code style="color: red">netstat -aon | findstr 8761; taskkill -f -pid 10568</code></li>
             <li>vim bookmark &emsp;<code style="color: red">m + a-z</code></li>
             <li>vim trigger bookmark&emsp;<code style="color: red">` + a-z</code></li>
@@ -25,330 +25,41 @@
     </li>
 
     <pre>
-<code>
-set number
-set ignorecase
-
-let mapleader = " "
-
-nnoremap H 5h
-nnoremap J 5j
-nnoremap K 5k
-nnoremap L 5l
-vnoremap H 5h
-vnoremap J 5j
-vnoremap K 5k
-vnoremap L 5l
-
-nnoremap th :tabp&lt;CR&gt;
-nnoremap tl :tabn&lt;CR&gt;
-nnoremap sv :split&lt;CR&gt;
-nnoremap sh :vsplit&lt;CR&gt;
-nnoremap &lt;leader&gt;h &lt;c-w&gt;h
-nnoremap &lt;leader&gt;j &lt;c-w&gt;j
-nnoremap &lt;leader&gt;k &lt;c-w&gt;k
-nnoremap &lt;leader&gt;l &lt;c-w&gt;l
-
-nnoremap &lt;leader&gt;&lt;LEFT&gt; c-w&gt;H
-nnoremap &lt;leader&gt;&lt;RIGHT&gt; c-w&gt;L
-nnoremap &lt;leader&gt;&lt;UP&gt; c-w&gt;K
-nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
-
-
-</code>
 </pre>
 
     <div>
-        <li><a href="https://github.com" target="_blank">github</a>
-            <ul>
-                <li><a href="https://github.com/Tencent" target="_blank">Tencent</a>
-                    <ul>
-                        <li><a href="https://github.com/Tencent/secguide" target="_blank">Tencent/secguide 代码安全指南</a>
-                            <ul>
-                                <li><a href="https://github.com/Tencent/secguide/blob/main/Java%E5%AE%89%E5%85%A8%E6%8C%87%E5%8D%97.md" target="_blank">Java安全指南</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="https://github.com/hikvision-research" target="_blank">Hikvision Research Institute</a>
-                    <ul>
-                        <li><a href="https://github.com/kickers18?tab=repositories" target="_blank">kickers18</a>
-                            <ul>
-                                <li><a href="https://github.com/kickers18/DeepLearning-500-questions" target="_blank">kickers18/DeepLearning-500-questions</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="https://github.com/gaogushenling/HackJava" target="_blank">深入理解Java代码审计</a></li>
-                <li><a href="https://github.com/gaogushenling/Java-Interview-Advanced-1" target="_blank">中华石杉--互联网Java进阶面试训练营</a></li>
-                <li><a href="https://github.com/gaogushenling/CS-Notes" target="_blank">cs notes</a></li>
-                <li><a href="https://github.com/gaogushenling/spring-in-action-v6-translate" target="_blank">Spring 实战 (第 6 版) 翻译项目</a></li>
-                <li><a href="https://github.com/gaogushenling/spring-in-action-v5-translate" target="_blank">Spring 实战(第 5 版) 翻译项目</a></li>
-                <li><a href="https://github.com/gaogushenling/awesome-fenix" target="_blank">讨论如何构建一套可靠的大型分布式系统</a></li>
-                <li><a href="https://github.com/gaogushenling/interviews" target="_blank">Everything you need to know to get the job.</a></li>
-                <li><a href="https://github.com/gaogushenling/source-code-hunter" target="_blank">互联网公司常用框架源码赏析</a></li>
-                <li><a href="https://github.com/gaogushenling/apachecn-algo-zh" target="_blank">ApacheCN 数据结构与算法译文集</a></li>
-                <li><a href="https://github.com/oldratlee/software-practice-thoughts/blob/master/lisp-practice/README.md" target="_blank">Lisp Practice</a></li>
-                <li><a href="https://github.com/oldratlee/software-practice-thoughts" target="_blank">软件实践文集</a></li>
-                <li><a href="https://github.com/doocs/source-code-hunter" target="_blank">互联网公司常用框架源码赏析</a></li>
-                <li><a href="https://github.com/papers-we-love/papers-we-love" target="_blank">papers-we-love/papers-we-love</a></li>
-                <li><a href="https://github.com/timqian/chinese-independent-blogs" target="_blank">中文独立博客列表</a></li>
-                <li><a href="https://github.com/weipeng2k/hot-wind/blob/master/book/java-dev-learn-c-01.md" target="_blank">C语言概述</a></li>
-                <li><a href="https://github.com/weipeng2k/hot-wind/blob/master/book/java-dev-learn-c.md" target="_blank">Java开发者看C</a></li>
-                <li><a href="https://github.com/weipeng2k/hot-wind" target="_blank">weipeng2k/hot-wind</a></li>
-                <li><a href="https://github.com/CarpenterLee/JCRecipes/blob/master/markdown/ArrayBlockingQueue.md" target="_blank">ArrayBlockingQueue</a></li>
-                <li><a href="https://github.com/CarpenterLee/JCRecipes" target="_blank">CarpenterLee/JCRecipes</a></li>
-                <li><a href="https://github.com/CarpenterLee/JavaLambdaInternals" target="_blank">CarpenterLee/JavaLambdaInternals</a></li>
-                <li><a href="https://github.com/awesome-selfhosted/awesome-selfhosted" target="_blank">Awesome-Selfhosted</a></li>
-                <li><a href="" target="_blank"></a></li>
-            </ul>
-        </li>
+        <li><a href="./computer-science/idea/idea-vim.html" target="_blank">idea vim</a>
+        &emsp;<a href="./computer-science/github.html" target="_blank">github</a>
+        &emsp;<a href="./computer-science/algorithm.html" target="_blank">algorithm</a></li>
         <li><a href="https://www.apachecn.org/#/" target="_blank">iBooker 布客</a></li>
-        <li><a href="./note/computer-science/computer-science.md" target="_blank">computer-science</a></li>
-        <li><a href="https://gitee.com/" target="_blank">gitee</a></li>
-        <li><a href="https://mvnrepository.com/" target="_blank">maven repository</a></li>
+        <li><a href="./note/computer-science/computer-science.md" target="_blank">computer-science</a>
+        &emsp;<a href="https://gitee.com/" target="_blank">gitee</a>
+        &emsp;<a href="https://mvnrepository.com/" target="_blank">maven repository</a></li>
         <li><a href="https://www.30secondsofcode.org/" target="_blank">30 seconds of code</a></li>
         <li><a href="https://www.javaweb.shop/" target="_blank">java 菜市场</a></li>
         <li><a href="https://tech.meitua.com/" target="_blank">美团技术团队</a>
-            <ul>
+            <ul style="margin: 1px">
                 <li><a href="https://tech.meituan.com/2022/10/13/dive-into-functional-programming-02.html" target="_blank">深入理解函数式编程（下）</a></li>
                 <li><a href="https://tech.meituan.com/2022/10/13/dive-into-functional-programming-01.html" target="_blank">深入理解函数式编程（上）</a></li>
             </ul>
         </li>
-        <li><a href="" target="_blank"></a></li>
-        <li>Algorithm
-            <ul>
-                <li><a href="./note/computer-science/algorithm.md" target="_blank">algorithm</a></li>
-                <li>Tree
-                    <ul>
-                        <li><a href="https://blog.csdn.net/zero_295813128/article/details/61202948" target="_blank">多叉树结合JavaScript树形控件实现无限级树形菜单（一种构建多级有序树形结构JSON（或XML）数据源的方法）</a></li>
-                        <li><a href="https://www.cnblogs.com/hrrsdtc/p/9494225.html" target="_blank">将数据转换成树型层级的Json格式的String</a></li>
-                        <li><a href="https://www.zhihu.com/question/470849389/answer/1986455668" target="_blank">灵魂一问：Java中对树只有TreeMap和TreeSet的实现。为什么没有现成直接的树的实现类？</a></li>
-                        <li><a href="https://www.cnblogs.com/dw3306/p/9880454.html" target="_blank">Java 递归实现树形菜单</a></li>
-                    </ul>
-                </li>
-                <li>随机数
-                    <ul>
-                        <li><a href="https://blog.csdn.net/tigerisland45/article/details/120547433" target="_blank">平方取中法随机数函数</a></li>
-                        <li><a href="https://zhuanlan.zhihu.com/p/273230064" target="_blank">随机数大家都会用，但是你知道生成随机数的算法吗？</a></li>
-                        <li><a href="https://zgpeace.blog.csdn.net/article/details/88944556" target="_blank">算法:Jump Game</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li>Java Basic
-            <ul>
-                <li>String
-                    <ul>
-                        <li><a href="https://blog.csdn.net/qq_40820235/article/details/108974907" target="_blank">Java中使用+号连接字符串和使用StringBuilder的append方法连接字符串的联系和区别</a></li>
-                        <li><a href="https://www.javanorth.cn/2022/07/15/java-truncate-string-20220718/" target="_blank">Java 截取字符串的几种操作 - 20220718</a></li>
-                    </ul>
-                </li>
-                <li>网络编程
-                    <ul>
-                        <li><a href="https://www.javanorth.cn/2022/09/18/java-find-client-ip/" target="_blank">查找连接到服务器的客户的IP地址</a></li>
-                    </ul>
-                </li>
-                <li>Exception
-                    <ul>
-                        <li><a href="https://zhuanlan.zhihu.com/p/88658881" target="_blank">Java 异常处理的 20 个最佳实践，你知道几个？</a></li>
-                    </ul>
-                </li>
-                <li>泛型
-                    <ul>
-                        <li><a href="https://juejin.cn/post/6844903917835419661" target="_blank">聊一聊-JAVA 泛型中的通配符 T，E，K，V，？</a></li>
-                    </ul>
-                </li>
-                <li>Date
-                    <ul>
-                        <li><a href="https://juejin.cn/post/7032918889428156453" target="_blank">都什么年代了你还在用 Date</a></li>
-                        <li><a href="https://juejin.cn/post/7032901688595841055" target="_blank">搞懂时区 、UTC、GMT、Unix 时间戳</a></li>
-                        <li><a href="https://blog.csdn.net/Javabaibai/article/details/112213051" target="_blank">DateTimeFormatter的用法</a></li>
-                    </ul>
-                </li>
-                <li>stream
-                    <ul>
-                        <li><a href="https://blog.csdn.net/qq_37221991/article/details/107605292" target="_blank">总结自己常用的JDK8写法（stream,function,optional）</a></li>
-                        <li><a href="https://mp.weixin.qq.com/s/O0sIOyE2rgTPyj54_QRx_g" target="_blank">学妹惊呼：使用Java8改造后的模板方法模式真的是yyds</a></li>
-                        <li><a href="https://www.jianshu.com/p/792089ff1f73" target="_blank">【Java8】以Supplier之名 打印Fibonacci数列</a></li>
-                        <li><a href="https://segmentfault.com/a/1190000020266327" target="_blank">Java8 的 Stream 流式操作之王者归来</a></li>
-                        <li><a href="https://segmentfault.com/a/1190000019855034?utm_source=sf-similar-article" target="_blank">「java8系列」流式编程Stream</a></li>
-                        <li><a href="https://www.javanorth.cn/2022/07/10/SpringBoot-Reactive-1-20220715/" target="_blank">从Functional到Stream, 再到Reactor,WebFlux-已发</a></li>
-                        <li><a href="" target="_blank"></a></li>
-                        <li><a href="" target="_blank"></a></li>
-                    </ul>
-                </li>
-                <li>正则表达式
-                    <ul>
-                        <li><a href="https://blog.csdn.net/qq_40820235/article/details/108979687" target="_blank">来谈一谈Java中的正则表达式</a></li>
-                        <li><a href="https://www.javanorth.cn/2022/08/30/validate-filename/" target="_blank">Java 如何验证文件名的有效性？</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li>spring
-            <ul>
-                <li><a href="https://zhuanlan.zhihu.com/p/481168378" target="_blank">非常哇塞的 SpringBoot性能优化长文！</a></li>
-                <li><a href="https://www.zhihu.com/question/48427693/answer/723146648" target="_blank">怎么回答面试官：你对Spring的理解？ - 知乎用户的回答 - 知乎</a></li>
-                <li><a href="./note/computer-science/spring/spring.md" target="_blank">spring</a></li>
-                <li><a href="https://springboot.io/" target="_blank">springboot.io</a></li>
-                <li><a href="https://liuyehcf.github.io/2018/02/13/Spring-IoC-%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" target="_blank">Spring-IoC-源码剖析</a></li>
-                <li><a href="https://blog.csdn.net/wo18237095579/article/details/81197245" target="_blank">Spring Boot 制作一个自己的 Starter</a></li>
-                <li><a href="https://liuyehcf.github.io/2018/08/26/Spring-Boot-%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" target="_blank">Spring-Boot-源码剖析</a></li>
-                <li><a href="https://blog.csdn.net/boling_cavalry/article/details/81587556" target="_blank">SpringBoot应用使用自定义的ApplicationContext实现类</a></li>
-                <li><a href="https://xinchen.blog.csdn.net/article/details/81474340" target="_blank">spring4.1.8扩展实战之一：自定义环境变量验证</a></li>
-                <li><a href="https://xinchen.blog.csdn.net/article/details/81697314" target="_blank">spring4.1.8扩展实战之三：广播与监听</a></li>
-                <li><a href="https://blog.csdn.net/penker_zhao/article/details/116451178" target="_blank">Java编程实现Spring boot重启和关闭（一）</a></li>
-                <li><a href="https://blog.csdn.net/qq_51785096/article/details/126769565?spm=1001.2014.3001.5502" target="_blank">奇葩需求第一弹：服务器启动时服务自启以及服务异常退出后自行启动</a></li>
-                <li><a href="https://mickjoust.blog.csdn.net/article/details/80227918" target="_blank">Spring Boot 实践折腾记（12）：支持数据缓存Cache</a></li>
-                <li><a href="https://mickjoust.blog.csdn.net/article/details/80241104" target="_blank">Spring Boot 实践折腾记（13）：使用WebFlux构建响应式「推送API 」</a></li>
-                <li><a href="https://mickjoust.blog.csdn.net/article/details/106261440" target="_blank">Spring Boot 2.x 实践记：Retry（annotion）</a></li>
-                <li><a href="https://codingchaozhang.blog.csdn.net/article/details/121556415" target="_blank">【Spring Boot 2.0学习之旅-10】SpringBoot整合定时任务和异步任务处理</a></li>
-                <li><a href="https://codingchaozhang.blog.csdn.net/article/details/1216" target="_blank">【Spring Boot 2.0学习之旅-12】搜索框架ElasticSearch介绍和整合SpringBoot</a></li>
-                <li><a href="https://codingchaozhang.blog.csdn.net/article/details/122543893" target="_blank">【Spring Boot 2.0学习之旅-15】SpringBoot2.0响应式编程</a></li>
-                <li><a href="http://www.ityouknow.com/springboot/2018/05/03/spring-boot-commandLineRunner.html" target="_blank">Spring Boot 2 (七)：Spring Boot 如何解决项目启动时初始化资源</a></li>
-                <li><a href="https://blog.csdn.net/u011066470/article/details/122844165" target="_blank">springboot的@PostConstruct注解</a></li>
-                <li>Spring Data JPA
-                    <ul>
-                        <li><a href="./note/computer-science/spring/spring-data-jpa.md" target="_blank">spring data jpa</a></li>
-                        <li><a href="https://www.cnblogs.com/wanbao/p/10287755.html" target="_blank">解决Not supported for DML operations问题</a></li>
-                    </ul>
-                </li>
-                <li>Spring Doc
-                    <ul>
-                        <li><a href="./note/computer-science/spring/spring-doc.md" target="_blank">spring doc</a></li>
-                        <li><a href="https://www.cnblogs.com/lixuelong/p/14392770.html" target="_blank">SpringBoot结合SpringDoc</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li>Linux
-            <ul>
-                <li><a href="https://juejin.cn/post/7118919471317647397" target="_blank">前后端都要懂的 Linux 中间件安装与常用命令指南</a></li>
-                <li><a href="https://www.bilibili.com/video/BV1S14y1h7un" target="_blank">天神下凡｜大神Linus的故事（1）</a></li>
-                <li><a href="https://www.bilibili.com/video/BV1CR4y1R7q3" target="_blank">平民英雄｜大神Linus的故事（2）</a></li>
-                <li><a href="https://www.bilibili.com/video/BV16V4y1g7Mq" target="_blank">桀骜不驯｜大神Linus的故事（3）</a></li>
-                <li><a href="https://www.bilibili.com/video/BV1G14y1W7A1" target="_blank">【PKU Linux】Rust沙龙 & 跨平台开发漫谈 & C++发展漫谈（2022A04）</a></li>
-                <li><a href="https://www.bilibili.com/video/BV1Pe4y117cR" target="_blank">【PKU Linux】国内开源现状和趋势，腾讯开源专家耿航老师主讲（2022A03）</a></li>
-                <li><a href="https://www.bilibili.com/video/BV188411a7yR" target="_blank">比啃书效果好多了！这绝对是我在网上看到的最全最详细的grep、sed、awk教程</a></li>
-                <li>the CW
-                    <ul>
-                        <li><a href="https://www.bilibili.com/video/BV1t4411N7jd" target="_blank">2019-06-09 我为什么不用QWERTY - 对比Dvorak，Colemak，Workman键盘布局 - Linux学习日记#4</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li>Java FX
-            <ul>
-                <li><a href="https://zhuanlan.zhihu.com/p/28540820" target="_blank">JavaFX的几个新特性，让Swing彻底过时</a></li>
-                <li><a href="https://github.com/mhrimaz/AwesomeJavaFX" target="_blank">mhrimaz/AwesomeJavaFX</a></li>
-                <li><a href="https://blog.csdn.net/qq_23452385/article/details/113092219" target="_blank">JavaFX: Stage顶部状态栏</a></li>
-                <li><a href="https://xhbruce.blog.csdn.net/article/details/124786301" target="_blank">JavaFX: MaterialFx导入使用</a></li>
-                <li><a href="https://xhbruce.blog.csdn.net/article/details/119846723" target="_blank">JavaFX:集成MarkDown</a></li>
-                <li><a href="https://www.zhihu.com/question/272448753/answer/665097598" target="_blank">如何正确高效地学习javaFx？ - 吴思挺的回答 - 知乎</a></li>
-                <li><a href="https://blog.csdn.net/weixin_42029241/article/details/117771745" target="_blank">JavaFX- GridPane（网格布局）</a></li>
-                <li><a href="https://blog.csdn.net/qq_26486347/article/details/96498811" target="_blank">JavaFX+Jfoenix 学习笔记（三）--TableView数据表格</a></li>
-                <li><a href="https://blog.csdn.net/qq_26486347/article/details/96714424" target="_blank">JavaFX+Jfoenix 学习笔记（八）--事件、监听、属性绑定</a></li>
-                <li>Aimls
-                    <ul>
-                        <li><a href="https://space.bilibili.com/5096022/channel/collectiondetail?sid=210809" target="_blank">JavaFX中文视频教程</a></li>
-                        <li><a href="" target="_blank"></a></li>
-                    </ul>
-
-                </li>
-            </ul>
-        </li>
-        <li>Redis
-            <ul>
-                <li><a href="./note/computer-science/cache/redis.md" target="_blank">redis</a></li>
-                <li><a href="https://www.runoob.com/docker/docker-install-redis.html" target="_blank">Docker 安装 Redis</a></li>
-                <li><a href="https://blog.csdn.net/hzlarm/article/details/99432240" target="_blank">Ubuntu安装Redis及使用</a></li>
-                <li><a href="https://blog.csdn.net/qq_24326765/article/details/81917137" target="_blank">Ubuntu安装Redis及测试</a></li>
-                <li><a href="https://blog.csdn.net/zhangaik/article/details/79279418" target="_blank">ubuntu Redis安装测试、设置用户名密码</a></li>
-                <li><a href="https://www.cnblogs.com/shenlailai/p/10583869.html" target="_blank">SpringBoot(十一): Spring Boot集成Redis</a></li>
-                <li><a href="https://blog.csdn.net/qq_17732903/article/details/124069443" target="_blank">史上最全的RedisTemplate操作redis常用方法的工具类ResdisUtils</a></li>
-                <li><a href="https://blog.csdn.net/yanxilou/article/details/110383903" target="_blank">RedisTemplate设置过期时间</a></li>
-                <li><a href="./note/typing.md" target="_blank">typing</a></li>
-            </ul>
-        </li>
-        <li>Spark
-            <ul>
-                <li><a href="https://blog.csdn.net/youbitch1/article/details/89925790" target="_blank">史上最简单的spark系列教程 | 完结</a></li>
-                <li><a href="https://blog.csdn.net/youbitch1/article/details/88355111" target="_blank">史上最简单的spark分布式计算教程第一章-快速运行你的第一个spark程序</a></li>
-                <li><a href="https://blog.csdn.net/youbitch1/article/details/88421965" target="_blank">史上最简单的spark教程第二章-快速开发部署你的第一个Java+spark程序</a></li>
-            </ul>
-        </li>
-        <li>Docker
-            <ul>
-                <li><a href="https://zhuanlan.zhihu.com/p/420301596" target="_blank">把SSH客户端放在网页上运行？这个开源项目教你部署实现</a></li>
-                <li><a href="https://zhuanlan.zhihu.com/p/371592044" target="_blank">吊炸天的 Docker 图形化工具 Portainer，必须推荐给你！</a></li>
-                <li><a href="https://www.zhihu.com/question/426345980/answer/1951686173" target="_blank">DockerHub里面有哪些好用的镜像? - beacher harry的回答 - 知乎</a></li>
-                <li><a href="https://zhuanlan.zhihu.com/p/529993768" target="_blank">实用工具的 Docker 镜像汇总</a></li>
-                <li><a href="https://zhuanlan.zhihu.com/p/33013599" target="_blank">把docker镜像当作桌面系统来用</a></li>
-            </ul>
-        </li>
-        <li>database
-            <ul>
-                <li><a href="./note/computer-science/database/sql/sql.md" target="_blank">sql</a></li>
-                <li><a href="https://www.runoob.com/sql/sql-union.html" target="_blank">SQL UNION 操作符</a></li>
-                <li><a href="./note/computer-science/database/sql/strava.sql" target="_blank">strava</a></li>
-                <li><a href="./note/computer-science/database/db.md" target="_blank">db</a></li>
-                <li><a href="https://cxhzt.blog.csdn.net/article/details/81193617" target="_blank">左连接 ，右连接，内连接和全外连接的4者区别</a></li>
-                <li><a href="https://zhuangxiaoyan.blog.csdn.net/article/details/122519820" target="_blank">分布式数据库设计——分布式数据库的基础概念</a></li>
-                <li><a href="https://blog.csdn.net/17/article/details/78758593" target="_blank">图解MySQL 内连接、外连接、左连接、右连接、全连接……太多了</a></li>
-                <li>index
-                    <ul>
-                        <li><a href="https://zhuanlan.zhihu.com/p/78982303" target="_blank">我以为我对Mysql索引很了解，直到我遇到了阿里的面试官</a></li>
-                        <li>postgresql
-                            <ul>
-                                <li><a href="./note/computer-science/database/postgresql.md" target="_blank">postgresql</a></li>
-                                <li><a href="https://www.runoob.com/postgresql/postgresql-functions.html" target="_blank">PostgreSQL 常用函数</a></li>
-                                <li>sql 优化
-                                    <ul>
-                                        <li><a href="http://www.jasongj.com/2015/03/15/count_distinct/" target="_blank">SQL优化（二） 快速计算Distinct Count</a></li>
-                                        <li><a href="http://www.jasongj.com/2015/12/13/SQL3_partition/" target="_blank">SQL优化（三） PostgreSQL Table Partitioning</a></li>
-                                        <li><a href="http://www.jasongj.com/2015/12/27/SQL4_%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B_Store%20Procedure/" target="_blank">SQL优化（四） PostgreSQL存储过程</a></li>
-                                        <li><a href="http://www.jasongj.com/sql/cte/" target="_blank">SQL优化（五） PostgreSQL （递归）CTE 通用表表达式</a></li>
-                                        <li><a href="http://www.jasongj.com/sql/mvcc/" target="_blank">SQL优化（六） MVCC PostgreSQL实现事务和多版本并发控制的精华</a></li>
-                                    </ul>
-                                </li>
-                                <li>pggg
-                                    <ul>
-                                        <li><a href="https://blog.csdn.net/weixin_41191813/article/details/118522836" target="_blank">PG系列4-PostgreSQL的数据类型</a></li>
-                                        <li><a href="https://blog.csdn.net/weixin_41191813/article/details/118523192" target="_blank">PG系列5-SQL高级特性1（with查询，批量插入，数据抽样...）</a></li>
-                                        <li><a href="https://blog.csdn.net/WHYbeHERE/article/details/125440856" target="_blank">SQL：With recursive 递归用法</a></li>
-                                        <li><a href="https://blog.csdn.net/weixin_41191813/article/details/118736212" target="_blank">PG系列5-SQL高级特性2——聚合函数和窗口函数</a></li>
-                                        <li><a href="https://blog.csdn.net/weixin_41191813/article/details/118606002" target="_blank">PG系列6-PostgreSQL的体系架构</a></li>
-                                    </ul>
-                                </li>
-                                <li>罗论明
-                                    <ul>
-                                        <li><a href="https://www.cnblogs.com/LuoYao666/p/15406459.html" target="_blank">postgresql中使用json</a></li>
-                                        <li><a href="https://www.cnblogs.com/LuoYao666/p/15414263.html" target="_blank">postgresql的体系结构</a></li>
-                                    </ul>
-                                </li>
-                                <li>分区
-                                    <ul>
-                                        <li><a href="https://blog.csdn.net/weixin_40068220/article/details/121442100" target="_blank">14.PG分区表-传统分区表</a></li>
-                                        <li><a href="https://blog.csdn.net/weixin_40068220/article/details/121518908" target="_blank">15.PG分区表-内置分区表</a></li>
-                                        <li><a href="https://www.cnblogs.com/LuoYao666/p/15425246.html" target="_blank">postgresql之内置分区表</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
+        <li><a href="./computer-science/java-basic.html" target="_blank">java basic</a>
+        &emsp;<a href="./computer-science/spring.html" target="_blank">spring</a>
+        &emsp;<a href="./computer-science/linux.html" target="_blank">linux</a>
+        &emsp;<a href="./computer-science/java-fx.html" target="_blank">java fx</a>
+        &emsp;<a href="./computer-science/redis.html" target="_blank">redis</a></li>
+        <li><a href="./computer-science/spark.html" target="_blank">spark</a>
+        &emsp;<a href="./computer-science/docker.html" target="_blank">docker</a>
+        &emsp;<a href="./computer-science/database.html" target="_blank">database</a></li>
         <li>厦门大学
-            <ul>
+            <ul style="margin: 1px">
                 <li><a href="https://www.bilibili.com/video/BV1Yd4y1k7U8" target="_blank">7. Spring的AOP -2022</a></li>
                 <li><a href="https://www.bilibili.com/video/BV13P411A7gB" target="_blank">8. Spring应用的测试 - 2022</a></li>
             </ul>
 
         </li>
         <li>Hacker News 周报
-            <ul>
+            <ul style="margin: 1px">
                 <li><a href="https://www.bilibili.com/video/BV1oY411Z7mU" target="_blank">2022-11-13 [Hacker News 周报] GitHub 下一代功能；Docker 支持 Webassembly；新式代码教学工具</a></li>
                 <li><a href="https://www.bilibili.com/video/BV1u14y157NA" target="_blank">2022-11-06 [Hacker News 周报] Grafana Labs 新产品；Vite 与 Turbopack 性能对比；Heroku 替代方案</a></li>
                 <li><a href="" target="_blank"></a></li>
@@ -374,6 +85,7 @@ nnoremap &lt;leader&gt;&lt;DOWN&gt; c-w&gt;J
 
     <div id="div1"></div>
     <div id="div2"></div>
+    <h3>code snippet</h3>
 
 
 
