@@ -62,10 +62,7 @@ https://www.zhihu.com/question/280089090/answer/2718599486?utm_medium=social&utm
 【8分钟，告诉你为什么世界杯是亿万人的圣杯！-哔哩哔哩】 https://b23.tv/IiucUyT
 
 
-【全文背诵----贺炜老师经典解说-哔哩哔哩】 https://b23.tv/cOgVOhq
-
-
-【"央视的解说一张口就是满分的作文！"-哔哩哔哩】 https://b23.tv/Vh1jXRY
+【"！"-哔哩哔哩】 
 
 
 
@@ -78,17 +75,7 @@ https://www.zhihu.com/question/280089090/answer/2718599486?utm_medium=social&utm
 【2022年国家队训练 王楚钦-哔哩哔哩】 https://b23.tv/H1LFTTg
 
 
-【【公路车】2022年度十佳车手 --乔纳斯·温格高-哔哩哔哩】 https://b23.tv/1W9vLr5
 
-
-【苏联计算机工业，是怎么把科技树点歪的？-哔哩哔哩】 https://b23.tv/oxamK53
-
-
-【为了让你两眼无光，他们都干了些啥-哔哩哔哩】 https://b23.tv/OutdvBg
-
-【谁是芯片代工之王？三星率先量产3纳米制程芯片，结果家被台积电偷了-哔哩哔哩】 https://b23.tv/kUL6gv0
-
-【？-哔哩哔哩】 
 
 
 
