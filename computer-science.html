@@ -46,10 +46,6 @@
         <li><a href="https://www.30secondsofcode.org/" target="_blank">30 seconds of code</a></li>
         <li><a href="https://www.javaweb.shop/" target="_blank">java 菜市场</a></li>
         <li><a href="https://tech.meitua.com/" target="_blank">美团技术团队</a>
-            <ul style="margin: 1px">
-                <li><a href="https://tech.meituan.com/2022/10/13/dive-into-functional-programming-02.html" target="_blank">深入理解函数式编程（下）</a></li>
-                <li><a href="https://tech.meituan.com/2022/10/13/dive-into-functional-programming-01.html" target="_blank">深入理解函数式编程（上）</a></li>
-            </ul>
         </li>
         <li>java
             <ul>
@@ -78,8 +74,6 @@
                 <li><a href="" target="_blank"></a></li>
             </ul>
         </li>
-        <li><a href="https://juejin.cn/post/6876977166051966984" target="_blank">作为前端，我对业务的一点理解</a></li>
-        <li><a href="https://juejin.cn/post/6844903951389851655" target="_blank">两万字长文-电商sku组合查询状态细究与实现</a></li>
         <li><a href="https://juejin.cn/post/6844904013247283214" target="_blank">前端UI设计稿对比工具 - chrome+webpack插件</a></li>
         <li>
             <ul>
@@ -91,107 +85,107 @@
 
 </div>
 
-<div style="float: left; margin-left: 15px; width: 800px">
-    <div>
-    </div>
+<!--<div style="float: left; margin-left: 15px; width: 800px">-->
+<!--    <div>-->
+<!--    </div>-->
 
 
-    <div id="div1"></div>
-    <div id="div2"></div>
-    <h3>code snippet</h3>
+<!--    <div id="div1"></div>-->
+<!--    <div id="div2"></div>-->
+<!--    <h3>code snippet</h3>-->
 
-<h3>在没有total和总的分页的情况下，如何获取全量的数据</h3>
-<pre style="font-size:16px">
-@Override
-public void strava_store_activity() {
-    log.info("strava store activity start");
-    //Long count = 1L;
-    long perCount = 25;
-    long count = activityRepository.count() / perCount;
-    <span style="color: red">// list 初始化为空 list，下面的 while 就不用判空了</span>
-    List&lt;ActivityPO&gt; activitiesBeanList = null;
-    do {
-        <span style="color: red">// 如果分页获取到没有数据，要返回空的 list，而不要返回 null</span>
-        activitiesBeanList = getActivitiesBeanPOList(null, null, count, perCount);
-        <span style="color: red">// 不需要作非空判断</span>
-        if (activitiesBeanList != null && activitiesBeanList.size() &gt; 0) {
-            activityRepository.saveAll(activitiesBeanList);
-        }
-        count++;
-    <span style="color: red">// 不需要作非空判断</span>
-    } while (activitiesBeanList != null && activitiesBeanList.size() &gt; 0);
-    log.info("strava store activity end");
-}
-    </pre>
-    <hr>
-    <pre>
-@Override
-public List&lt;Activity&gt; getActivitiesBeanList(Long before, Long after, Long page, Long per_page) {
-    return Optional.ofNullable(getActivities(before, after, page, per_page))
-            .map(activity -> JSON.parseArray(activity, Activity.class))
-            <span style="color: red">// 不应该返回 null, 而要返回 new ArrayList<>()</span>
-            .orElse(null);
-}
-    </pre>
-    <hr>
-    <pre>
-@Override
-public List&lt;ActivityPO&gt; getActivitiesBeanPOList(Long before, Long after, Long page, Long per_page) {
-    return getActivitiesBeanList(before, after, page, per_page)
-        .stream()
-        <span style="color: red">// 可以使用语法糖</span>
-        <span style="color: red">.map(ActivityPO::new)</span>
-        <span style="color: red; text-decoration: line-through">.map(activity -&gt; new ActivityPO(activity)</span>)
-        .collect(Collectors.toList());
-}
-    </pre>
+<!--<h3>在没有total和总的分页的情况下，如何获取全量的数据</h3>-->
+<!--<pre style="font-size:16px">-->
+<!--@Override-->
+<!--public void strava_store_activity() {-->
+<!--    log.info("strava store activity start");-->
+<!--    //Long count = 1L;-->
+<!--    long perCount = 25;-->
+<!--    long count = activityRepository.count() / perCount;-->
+<!--    <span style="color: red">// list 初始化为空 list，下面的 while 就不用判空了</span>-->
+<!--    List&lt;ActivityPO&gt; activitiesBeanList = null;-->
+<!--    do {-->
+<!--        <span style="color: red">// 如果分页获取到没有数据，要返回空的 list，而不要返回 null</span>-->
+<!--        activitiesBeanList = getActivitiesBeanPOList(null, null, count, perCount);-->
+<!--        <span style="color: red">// 不需要作非空判断</span>-->
+<!--        if (activitiesBeanList != null && activitiesBeanList.size() &gt; 0) {-->
+<!--            activityRepository.saveAll(activitiesBeanList);-->
+<!--        }-->
+<!--        count++;-->
+<!--    <span style="color: red">// 不需要作非空判断</span>-->
+<!--    } while (activitiesBeanList != null && activitiesBeanList.size() &gt; 0);-->
+<!--    log.info("strava store activity end");-->
+<!--}-->
+<!--    </pre>-->
+<!--    <hr>-->
+<!--    <pre>-->
+<!--@Override-->
+<!--public List&lt;Activity&gt; getActivitiesBeanList(Long before, Long after, Long page, Long per_page) {-->
+<!--    return Optional.ofNullable(getActivities(before, after, page, per_page))-->
+<!--            .map(activity -> JSON.parseArray(activity, Activity.class))-->
+<!--            <span style="color: red">// 不应该返回 null, 而要返回 new ArrayList<>()</span>-->
+<!--            .orElse(null);-->
+<!--}-->
+<!--    </pre>-->
+<!--    <hr>-->
+<!--    <pre>-->
+<!--@Override-->
+<!--public List&lt;ActivityPO&gt; getActivitiesBeanPOList(Long before, Long after, Long page, Long per_page) {-->
+<!--    return getActivitiesBeanList(before, after, page, per_page)-->
+<!--        .stream()-->
+<!--        <span style="color: red">// 可以使用语法糖</span>-->
+<!--        <span style="color: red">.map(ActivityPO::new)</span>-->
+<!--        <span style="color: red; text-decoration: line-through">.map(activity -&gt; new ActivityPO(activity)</span>)-->
+<!--        .collect(Collectors.toList());-->
+<!--}-->
+<!--    </pre>-->
 
-    <hr>
-    <h3>jpa 分页 + 排序</h3>
-    <pre>
-@Override
-public Page&lt;ActivityPO&gt; get_activity_po(Integer pageNo, Integer pageSize) {
-    Sort.Order sort = new Sort.Order(Sort.Direction.DESC, "startDate");
-    Sort sort_ = Sort.by(sort);
-    return activityRepository.findAll(PageRequest.of(pageNo,pageSize, sort_));
-}
-    </pre>
+<!--    <hr>-->
+<!--    <h3>jpa 分页 + 排序</h3>-->
+<!--    <pre>-->
+<!--@Override-->
+<!--public Page&lt;ActivityPO&gt; get_activity_po(Integer pageNo, Integer pageSize) {-->
+<!--    Sort.Order sort = new Sort.Order(Sort.Direction.DESC, "startDate");-->
+<!--    Sort sort_ = Sort.by(sort);-->
+<!--    return activityRepository.findAll(PageRequest.of(pageNo,pageSize, sort_));-->
+<!--}-->
+<!--    </pre>-->
 
-    <h3>浮点数的格式化</h3>
-    <pre>
-String.format("%.4f",currentSpeed)
-    </pre>
+<!--    <h3>浮点数的格式化</h3>-->
+<!--    <pre>-->
+<!--String.format("%.4f",currentSpeed)-->
+<!--    </pre>-->
 
-    <h3>用 span 包裹 String</h3>
-    <pre>
-public static String spanColor(String color) {
-    return "&lt;span style=\"color: {}\"&gt;".replace("{}", color);
-}
-    </pre>
-    <h3>解析 String 类型的日期，并转换为另外一种格式</h3>
-    <pre>
-public static String format(String date, String format, String format2) {
-    return LocalDateTime.parse(date, DateTimeFormatter.ofPattern(format))
-            .format(DateTimeFormatter.ofPattern(format2));
-}
-    </pre>
-    <h3>get请求拼接参数</h3>
-    <pre>
+<!--    <h3>用 span 包裹 String</h3>-->
+<!--    <pre>-->
+<!--public static String spanColor(String color) {-->
+<!--    return "&lt;span style=\"color: {}\"&gt;".replace("{}", color);-->
+<!--}-->
+<!--    </pre>-->
+<!--    <h3>解析 String 类型的日期，并转换为另外一种格式</h3>-->
+<!--    <pre>-->
+<!--public static String format(String date, String format, String format2) {-->
+<!--    return LocalDateTime.parse(date, DateTimeFormatter.ofPattern(format))-->
+<!--            .format(DateTimeFormatter.ofPattern(format2));-->
+<!--}-->
+<!--    </pre>-->
+<!--    <h3>get请求拼接参数</h3>-->
+<!--    <pre>-->
 
-public static &lt;T&gt; String urlWithParams(String url, Class clazz, T c) {
-    StringBuilder result = new StringBuilder(url).append("?");
-    Map&lt;String, String&gt; fieldMap = ClassUtils.field2Map(clazz, c);
-    fieldMap.forEach((k,v) -&gt; {
-        result.append(k).append("=").append(v).append("&");
-    });
-    return result.toString();
-}
+<!--public static &lt;T&gt; String urlWithParams(String url, Class clazz, T c) {-->
+<!--    StringBuilder result = new StringBuilder(url).append("?");-->
+<!--    Map&lt;String, String&gt; fieldMap = ClassUtils.field2Map(clazz, c);-->
+<!--    fieldMap.forEach((k,v) -&gt; {-->
+<!--        result.append(k).append("=").append(v).append("&");-->
+<!--    });-->
+<!--    return result.toString();-->
+<!--}-->
 
-    </pre>
+<!--    </pre>-->
 
 
 
-</div>
+<!--</div>-->
 
 <!--
 <div style="float: left; margin-left: 15px; width: 500px">
