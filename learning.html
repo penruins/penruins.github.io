@@ -22,8 +22,23 @@
     <ul>
         <li>计划
             <ul>
-                <li><span style="color: red">StravaHtmlController 新增 heartRate 的接口</span></li>
+                <li><span style="color: green">StravaHtmlController 新增 heartRate 的接口</span>
+                    <ul>
+                        <li><span style="color: green">/strava/html/activity/heartReate</span></li>
+                    </ul>
+                </li>
                 <li><span style="color: red">htmlHeartRateRank 方法不能使用 sort 方法，因为 heartRate 可能为 null，这个要怎么解决好一点</span></li>
+                <li><span style="color: red">提供统计接口，统计速度超过24km/h的骑行次数</span>
+                    <ul>
+                        <li><span style="color: red">/strava/html/activity/speed/sta</span></li>
+                    </ul>
+                </li>
+                <li><span style="color: red">输出的每一行，都应该用一个对象去封装才对, 现在拼装成字符串，不好去换颜色</span>
+                    <ul>
+                        <li><span style="color: green">创建 ActivityHtmlVO</span></li>
+                        <li><span style="color: red">先改一下 htmlHeartRateRank</span></li>
+                    </ul>
+                </li>
             </ul>
         </li>
         <li>完成
