@@ -23,15 +23,6 @@
     <ul>
         <li><a href="https://logi.im/script/achieving-access-to-files-and-resources-on-the-network-between-win10-and-wsl2.html" target="_blank">Win10 与 WSL2 间的网络和文件互访</a></li>
         <li><a href="https://blog.csdn.net/henryhu712/article/details/115060211" target="_blank">wsl 和 Windows 如何相互访问文件？</a></li>
-        <li><a href="https://sspai.com/post/47719#!" target="_blank">在 Windows 上用 WSL 开发的操作体验指北</a>
-						<ul>
-								<li><a href="https://dowww.spencerwoo.com/" title="">Dev on Windows with WSL</a>
-										<ul>
-												<li><a href="" title=""></a></li>
-										</ul>
-								</li>
-						</ul>
-				</li>
 				<li>docker
 						<ul>
 								<li><a href="https://www.runoob.com/docker/ubuntu-docker-install.html" target="_blank">Ubuntu Docker 安装</a></li>
@@ -64,7 +55,6 @@
 								<li><a href="https://zhuanlan.zhihu.com/p/425816842">GitUI: 用 Rust 编写的 Git 的快速命令行客户端 | Linux 中国</a></li>
 						</ul>
 				</li>
-        <li><a href="https://www.zhihu.com/question/393170756/answer/2646063797" target="_blank">为什么这么多人吹wsl？ - Hun Soul的回答 - 知乎</a></li>
     </ul>
 </li>
 <li>powertoys
@@ -74,11 +64,7 @@
 </li>
 <li>powershell
     <ul>
-        <li><a href="https://www.zhihu.com/question/21787232/answer/63780550" target="_blank">PowerShell 现在处于什么地位？有没有必要学？ - Tim Chen的回答 - 知乎</a></li>
-        <li><a href="https://www.zhihu.com/question/21787232/answer/63774856" target="_blank">PowerShell 现在处于什么地位？有没有必要学？ - 石涛的回答 - 知乎</a></li>
-        <li><a href="https://www.zhihu.com/question/21787232/answer/64802281" target="_blank">PowerShell 现在处于什么地位？有没有必要学？ - 大水怪出没请注意的回答 - 知乎</a></li>
         <li><a href="https://blog.csdn.net/csfchh/article/details/115336447" target="_blank">PowerShell脚本：快速入门</a></li>
-        <li><a href="https://www.aspirantzhang.com/learning/powershell-script-code.html" target="_blank">PowerShell脚本(.ps1) 实用代码</a></li>
         <li><a href="https://zhuanlan.zhihu.com/p/144233019" target="_blank">powershell系列教程</a></li>
         <li><a href="https://www.pstips.net/" target="_blank">ps tips</a>
             <ul>
@@ -97,20 +83,7 @@
                 </li>
             </ul>
         </li>
-        <li><a href="https://zhuanlan.zhihu.com/p/429002760" target="_blank">自定义供日常使用的PowerShell脚本模块</a></li>
-        <li><a href="https://zhuanlan.zhihu.com/p/618723708" target="_blank">PowerShell写排序算法</a></li>
     </ul>
-</li>
-<li>time
-		<ul>
-				<li><a href="https://zhuanlan.zhihu.com/p/364727871" target="_blank">windows系统时间同步及同步频率设置</a></li>
-				<li><a href="https://learn.microsoft.com/zh-cn/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings" 
-						target="_blank">Windows 时间服务工具和设置</a></li>
-				<li><a href="https://www.cnblogs.com/caishuaichao/p/15863918.html" 
-						target="_blank">时间同步命令w32tm常用方法</a></li>
-				<li><a href="https://blog.51cto.com/1163739403/1837685" 
-						target="_blank">w32tm命令解析</a></li>
-		</ul>
 </li>
 
 </body>
