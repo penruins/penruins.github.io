@@ -3,14 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <title>elasticsearch</title>
+    <style>
+        pre {
+            font-size: 15px;
+        }
+        ul {
+            margin: 1px;
+        }
+    </style>
 </head>
 <body>
 
+<li>Elasticsearch is a real-time, distributed storage, search, and analytics engine</li>
+<li>questions
+		<ul>
+				<li>elasticsearch 的数据结构是什么？</li>
+				<li>index 相当于数据库的 table</li>
+				<li>document 相当于数据库的一行记录</li>
+				<li>field 相当于数据库的 column 的概念</li>
+				<li>相当于数据库的 schema 的概念</li>
+				<li>DSL 相当于数据库的 sql</li>
+		</ul>
+</li>
 <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#_pull_the_elasticsearch_docker_image" 
 				target="_blank">Install Elasticsearch with Docker</a></li>
-<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_talking_to_elasticsearch.html" 
-				target="_blank">和 Elasticsearch 交互</a></li>
+<li>官方文档
+		<ul>
+				<li>你知道，为了搜索
+						<ul>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_talking_to_elasticsearch.html" 
+												target="_blank">和 Elasticsearch 交互</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_document_oriented.html" 
+												target="_blank">面向文档</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_finding_your_feet.html" 
+												target="_blank">适应新环境</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_indexing_employee_documents.html" 
+												target="_blank">索引员工文档</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_retrieving_a_document.html" 
+												target="_blank">检索文档</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_search_lite.html" 
+												target="_blank">轻量搜索</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_search_with_query_dsl.html" 
+												target="_blank">使用查询表达式搜索</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_more_complicated_searches.html" 
+												target="_blank">更复杂的搜索</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_full_text_search.html" 
+												target="_blank">全文搜索</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_phrase_search.html" 
+												target="_blank">短语搜索</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/highlighting-intro.html" 
+												target="_blank">高亮搜索</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_analytics.html" 
+												target="_blank">分析</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_tutorial_conclusion.html" 
+												target="_blank">教程结语</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_distributed_nature.html" 
+												target="_blank">分布式特性</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_next_steps.html" 
+												target="_blank">后续步骤</a></li>
+						</ul>
+				</li>
+				<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/distributed-cluster.html" target="_blank">集群内的原理</a>
+						<ul>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_an-empty-cluster.html" 
+												target="_blank">空集群</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/cluster-health.html" 
+												target="_blank">集群健康</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_add-an-index.html" 
+												target="_blank">添加索引</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_add_failover.html" 
+												target="_blank">添加故障转移</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_scale_horizontally.html" 
+												target="_blank">水平扩容</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_coping_with_failure.html" 
+												target="_blank">应对的故障</a></li>
+						</ul>
+				</li>
+				<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/data-in-data-out.html" target="_blank">数据输入和输出</a>
+						<ul>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/document.html" 
+												target="_blank">什么是文档？</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_Document_Metadata.html" 
+												target="_blank">文档元数据</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index-doc.html" 
+												target="_blank">索引文档</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/get-doc.html" 
+												target="_blank">取回一个文档</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/doc-exists.html" 
+												target="_blank">检查文档是否存在</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/update-doc.html" 
+												target="_blank">更新整个文档</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/create-doc.html" 
+												target="_blank">创建新文档</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/delete-doc.html" 
+												target="_blank">删除文档</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/version-control.html" 
+												target="_blank">处理冲突</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/optimistic-concurrency-control.html" 
+												target="_blank">乐观并发控制</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/partial-updates.html" 
+												target="_blank">文档的部分更新</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_Retrieving_Multiple_Documents.html" 
+												target="_blank">取回多个文档</a></li>
+								<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/bulk.html" 
+												target="_blank">代价较小的批量操作</a></li>
+								<li><a href="" 
+												target="_blank"></a></li>
+								<li><a href="" 
+												target="_blank"></a></li>
+								<li><a href="" 
+												target="_blank"></a></li>
+						</ul>
+				</li>
+		</ul>
+</li>
+<li><a href="https://zhuanlan.zhihu.com/p/159138736" target="_blank">Spring Boot 集成 Elasticsearch 实战 - 武培轩的文章 - 知乎</a>
+		<ul>
+				<li><a href="https://mp.weixin.qq.com/s/NrN2Vcj8Evpt8LCMPrUgPw" target="_blank">1 全文搜索引擎 Elasticsearch 入门：集群搭建</a></li>
+				<li><a href="https://mp.weixin.qq.com/s?__biz=MzU4Mjk0MjkxNA==&mid=2247484545&idx=1&sn=d40d74fb7c356d15ec999cc5e5bcb0ed&chksm=fdb1ed2ccac6643ab9cd7b246d6366e157278075dd3ba50b2286aee58a87d84f8d39e8508628&scene=178&cur_album_id=1343685605573738497#rd" 
+						target="_blank">2 手把手教你搭建 ELK 实时日志分析平台</a></li>
+				<li><a href="https://mp.weixin.qq.com/s?__biz=MzU4Mjk0MjkxNA==&mid=2247484551&idx=1&sn=db6081cb912d2a6fbc572db3308e823b&chksm=fdb1ed2acac6643c30704721166bec95e4dfcca61dd0deaec20706753f36e57f98485a562761&scene=178&cur_album_id=1343685605573738497#rd" 
+						target="_blank">3 一篇文章带你搞定 ElasticSearch 术语</a></li>
+				<li><a href="" 
+						target="_blank"></a></li>
+				<li><a href="" 
+						target="_blank"></a></li>
+				<li><a href="" 
+						target="_blank"></a></li>
+				<li><a href="" 
+						target="_blank"></a></li>
+				<li><a href="https://mp.weixin.qq.com/s/y7hm4-vzGd2X_ok3sp_6GQ" 
+						target="_blank">8 一文搞懂 Elasticsearch 之 Mapping</a></li>
+				<li><a href="" 
+						target="_blank"></a></li>
+				<li><a href="" 
+						target="_blank"></a></li>
+		</ul>
+</li>
 <li><a href="https://www.ruanyifeng.com/blog/2017/08/elasticsearch.html" target="_blank">全文搜索引擎 Elasticsearch 入门教程</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/358744225" target="_blank">从 0 到 1 学习 elasticsearch ，这一篇就够了！(建议收藏) - 大数据梦想家的文章 - 知乎</a>
+		<ul>
+				<li><a href="https://blog.csdn.net/shipfei_csdn/article/details/112953042" target="_blank">谷歌浏览器安装 elasticsearch-head 插件</a></li>
+		</ul>
+</li>
+<li><a href="https://www.zhihu.com/question/469207536/answer/2290001606" 
+				target="_blank">ElasticSearch在项目中具体怎么用？ - Java3y的回答 - 知乎</a></li>
+<li><a href="https://www.zhihu.com/question/469207536/answer/2550197723" 
+				target="_blank">ElasticSearch在项目中具体怎么用？ - Jackpop的回答 - 知乎</a></li>
 
 </body>
 </html>
