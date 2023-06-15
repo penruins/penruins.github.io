@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>python</title>
+    <style>
+        ul {
+            margin: 0px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
+<li><a href="https://www.python.org/">main page</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/453868553">
+		文档化 Python 代码完全指南（翻译）</a>
+		<ul>
+				<li><a href="https://realpython.com/documenting-python-code/">
+						Documenting Python Code: A Complete Guide</a></li>
+		</ul>
+</li>
 <li><a href="https://www.zhihu.com/question/37490497/answer/2037383389">
 		数据分析为什么常用Jupyter而不是直接使用Python脚本或Excel? - 平凡的回答</a>
 </li>
@@ -16,12 +30,189 @@
 		【Python爬虫实例学习篇】——4、超详细爬取bilibili视频</a>
 </li>
 
-<li><a href="">
-		</a>
+<li><a href="https://github.com/yutto-dev/bilili">bilili</a>
+		<ul>
+				<li><a href="https://bilili.nyakku.moe/guide/work-process.html">document</a>
+						<ul>
+								<li>依赖项目
+										<ul>
+												<li><a href="">FFmpeg 用于视频的合并</a></li>
+												<li><a href="">danmaku2ass 用于 xml 弹幕转换为 ass 弹幕</a></li>
+												<li><a href="">VuePress 本文档的生成器</a></li>
+												<li><a href="">vuepress-theme-vt 本文档主题</a></li>
+										</ul>
+								</li>
+								<li>参考项目
+										<ul>
+												<li><a href="https://github.com/1033020837/Bilibili">
+														Bilibili - 1033020837 早期探索时的参考项目</a></li>
+												<li><a href="https://github.com/blogwy/BilibiliVideoDownload">
+														BilibiliVideoDownload - blogwy 了解到更多清晰度等级（120、112 等）</a></li>
+												<li><a href="https://github.com/wolfbolin/BiliUtil">
+														BiliUtil 参考了 4k 清晰度获取时需要的额外参数以及打包 PyPI 的方式</a></li>
+										</ul>
+								</li>
+						</ul>
+				</li>
+		</ul>
 </li>
 
-<li><a href="">
-		</a>
+<li><a href="https://github.com/yutto-dev/yutto">yutto</a>
+		<ul>
+				<li>CONTRIBUTING.md</li>
+				<li>Dockerfile</li>
+				<li>LICENSE</li>
+				<li>README.md</li>
+				<li>justfile</li>
+				<li>poetry.lock</li>
+				<li>poetry.toml</li>
+				<li>pyproject.toml</li>
+				<li>setup.py</li>
+				<li>tests
+						<ul>
+								<li>__init__.py</li>
+								<li>conftest.py</li>
+								<li>test_api
+										<ul>
+												<li>__init__.py</li>
+												<li>test_bangumi.py</li>
+												<li>test_cheese.py</li>
+												<li>test_collection.py</li>
+												<li>test_danmaku.py</li>
+												<li>test_space.py</li>
+												<li>test_ugc_video.py</li>
+												<li>test_user_info.py</li>
+										</ul>
+								</li>
+								<li>test_e2e.py</li>
+								<li>test_processor
+										<ul>
+												<li>__init__.py</li>
+												<li>test_downloader.py</li>
+												<li>test_selector.py</li>
+										</ul>
+								</li>
+						</ul>
+				</li>
+				<li>yutto
+						<ul>
+								<li>__init__.py</li>
+								<li>__main__.py</li>
+								<li>__version__.py</li>
+								<li>_typing.py</li>
+								<li>api
+										<ul>
+												<li>__init__.py</li>
+												<li>bangumi.py</li>
+												<li>cheese.py</li>
+												<li>collection.py</li>
+												<li>danmaku.py</li>
+												<li>space.py
+														<ul>
+																<li>get_user_space_all_videos_avids
+																		<ul>
+																				<li>referece
+																						<ul>
+																								<li>user_all_ugc_videos.py UserAllUgcVideosExtractor extract</li>
+																						</ul>
+																				</li>
+																		</ul>
+																</li>
+														</ul>
+												</li>
+												<li>ugc_video.py</li>
+												<li>user_info.py</li>
+										</ul>
+								</li>
+								<li>bilibili_typing
+										<ul>
+												<li>__init__.py</li>
+												<li>codec.py</li>
+												<li>quality.py</li>
+										</ul>
+								</li>
+								<li>exceptions.py</li>
+								<li>extractor
+										<ul>
+												<li>__init__.py</li>
+												<li>_abc.py</li>
+												<li>bangumi.py</li>
+												<li>bangumi_batch.py</li>
+												<li>cheese.py</li>
+												<li>cheese_batch.py</li>
+												<li>collection.py</li>
+												<li>common.py</li>
+												<li>favourites.py</li>
+												<li>series.py</li>
+												<li>ugc_video.py</li>
+												<li>ugc_video_batch.py</li>
+												<li>user_all_favourites.py</li>
+												<li>user_all_ugc_videos.py</li>
+												<li>user_watch_later.py</li>
+										</ul>
+								</li>
+								<li>processor
+										<ul>
+												<li>__init__.py</li>
+												<li>downloader.py</li>
+												<li>parser.py</li>
+												<li>path_resolver.py</li>
+												<li>progressbar.py</li>
+												<li>selector.py</li>
+										</ul>
+								</li>
+								<li>utils
+										<ul>
+												<li>__init__.py</li>
+												<li>asynclib.py</li>
+												<li>console
+														<ul>
+																<li>__init__.py</li>
+																<li>attributes.py</li>
+																<li>colorful.py</li>
+																<li>formatter.py</li>
+																<li>logger.py</li>
+																<li>status_bar.py</li>
+														</ul>
+												</li>
+												<li>danmaku.py</li>
+												<li>fetcher.py</li>
+												<li>ffmpeg.py</li>
+												<li>file_buffer.py</li>
+												<li>filter.py</li>
+												<li>funcutils
+														<ul>
+																<li>__init__.py</li>
+																<li>aobject.py</li>
+																<li>as_sync.py</li>
+																<li>filter_none_value.py</li>
+																<li>singleton.py</li>
+																<li>xmerge.py</li>
+														</ul>
+												</li>
+												<li>metadata.py</li>
+												<li>priority.py</li>
+												<li>subtitle.py</li>
+												<li>time.py</li>
+										</ul>
+								</li>
+								<li>validator.py</li>
+						</ul>
+				</li>
+		</ul>
+</li>
+
+<li><a href="https://nyakku.moe/">一个小透明的透明世界</a>
+<li><a href="https://www.cnblogs.com/jsdy/p/12694908.html">Ubuntu 升级python3为更高版本【已实测】</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/403819436">如何在 Ubuntu 20.04 LTS 上安装 Python 3.9（翻译转载） - muzing的文章 - 知乎</a>
+		<ul>
+				<li><a href="https://python.tutorials24x7.com/blog/how-to-install-python-3-9-on-ubuntu-20-04-lts">
+						How To Install Python 3.9 On Ubuntu 20.04 LTS</a></li>
+		</ul>
+</li>
+<li><a href="https://blog.csdn.net/lhp171302512/article/details/128150685">源码安装python报错：No module named ‘zlib‘</a></li>
+<li><a href="https://www.cnblogs.com/galaxy-gao/p/5796488.html">解决python3缺少zlib的问题</a></li>
+
 </li>
 
 </body>
