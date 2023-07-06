@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>computer science</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script type="text/javascript" src="./jquery.js"></script>
+    <script type="text/javascript" src="./jquery_plantuml.js"></script>
     <style>
         pre {
             font-size: 15px;
@@ -17,7 +19,29 @@
 
 <div>
 
+		<img uml="
+		@startmindmap
+		* hikvision
+		** basic
+		*** database
+		**** postgresql
+		**** mysql
+		**** networking
+		**** compiler
+
+		left side
+
+		** pattern design
+		** java
+		*** java basic
+		*** spring
+		@endmindmap
+		">
+		
+		<!-- JQuery integration https://plantuml.com/zh/jquery-->
     <li><a href="./computer-science/computer-science-bookmark.html">bookmark</a>
+
+
     </li>
 		<li><a href="./computer-science-books.html">books</a></li>
 		<li><a href="./computer-science-basic.html">basic</a></li>
@@ -274,12 +298,14 @@
 </div>
 -->
 
+<!--
 <script>
     console.log(window.innerHeight)
     console.log(window.innerWidth)
     document.getElementById("div1").innerHTML = 'window.innerHeight : ' + window.innerHeight
     document.getElementById("div2").innerHTML = 'window.innerWidth : ' + window.innerWidth
 </script>
+-->
 
 </body>
 </html>
