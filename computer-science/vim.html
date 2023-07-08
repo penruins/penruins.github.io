@@ -1,150 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>vim</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        ul {
-            margin: 0px;
-        }
-    </style>
-</head>
-<body>
-<li>vim 实用技巧
-		<ul>
-				<li>第1章 vim解决问题的方式</li>
-				<li>第一部分 模式</li>
-				<li>第二部分 文件</li>
-				<li>第三部分 更快地移动及跳转</li>
-				<li>第四部分 寄存器</li>
-				<li>第五部分 模式</li>
-				<li>第六部分 工具</li>
-		</ul>
-</li>
-<li>byte of vim
-		<ul>
-				<li>1. Preface</li>
-				<li>2. Introduction</li>
-				<li>3. Installation</li>
-				<li>4. First Steps</li>
-				<li>5. Modes</li>
-				<li>6. Typing Skills</li>
-				<li>7. Moving Around</li>
-				<li>8. Help</li>
-				<li>9. Editing Basics</li>
-				<li>10. More Editing</li>
-				<li>11. Multiplicity</li>
-				<li>12. Personal Information Management</li>
-				<li>13. Scripting</li>
-				<li>14. Plugins</li>
-				<li>15. Programmers Editor</li>
-				<li>16. More</li>
-				<li>17. What Next</li>
-				<li>18. Feedback</li>
-				<li>19. Charityware</li>
-				<li>20. Colophon</li>
-				<li>21. Versions</li>
-		</ul>
-</li>
-<li><a href="https://www.vim.org/" target="_blank">home page</a></li>
-<li><a href="https://vimdoc.sourceforge.net/htmldoc/intro.html" target="_blank">Vim documentation: intro</a></li>
-<li><a href="https://vimawesome.com/" target="_blank">VimAwesome</a></li>
-<li><a href="https://vimtricks.com/" target="_blank">VimTricks</a>
-    <ul>
-        <li><a href="https://vimtricks.com/p/vim-calculator/" target="_blank">Vim Calculator</a></li>
-        <li><a href="https://vimtricks.com/p/50-useful-vim-commands/" target="_blank">50 Useful Vim Commands</a></li>
-    </ul>
-</li>
-<li><a href="https://github.com/wsdjeg/vim-galore-zh_cn" target="_blank">Vim 从入门到精通</a></li>
-<li>vim bookmark &emsp;<code style="color: red">m + a-z</code></li>
-<li>vim trigger bookmark&emsp;<code style="color: red">` + a-z</code></li>
-<li><a href="https://www.zhihu.com/question/271926659/answer/2875834932" 
-				target="_blank">使用不加任何插件的纯vim是种什么样的体验？ - 麦田里的守望者的回答</a></li>
-<li><a href="https://blog.csdn.net/liuhhaiffeng/article/details/52587914" target="_blank">让Vim查找字符忽略大小写</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/351086064" target="_blank">关于Vim Macro的一些进阶用法 - kidneyball的文章 - 知乎</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/45433187" target="_blank">Vim normal命令和重复操作 - vimtutor的文章 - 知乎</a></li>
-<li><a href="https://www.zhihu.com/question/46892579/answer/103998729" 
-				target="_blank">Vim 是否能提高编程效率？ - kidneyball的回答 - 知乎</a></li>
-<li><a href="https://www.zhihu.com/question/433183204/answer/1712185019" 
-				target="_blank">为什么看似简陋的vim在熟练的人手中如此的神乎其技？ - kidneyball的回答 - 知乎</a></li>
-<li><a href="https://www.bilibili.com/video/BV1rV4y137Gn" target="_blank">Vim 脚本教程 4.模式按键映射: Learn Vimscript The Hard Way</a></li>
-<li><a href="https://www.zhihu.com/question/433183204/answer/2462184264?utm_medium=social&utm_oi=40577768882176&utm_psn=1570212519288975360&utm_source=ZHShareTargetIDMore" 
-				target="_blank">为什么看似简陋的vim在熟练的人手中如此的神乎其技？ - Sinaean Dean 的回答</a></li>
-<li><a href="https://www.zhihu.com/question/547708456/answer/2645630850" target="_blank">为什么还有人用VIM？ - 韦易笑的回答</a></li>
-<li><a href="https://www.zhihu.com/question/19836903/answer/32458921" target="_blank">Vim 和 Emacs 分别适合哪些人群？优劣势的对比如何？相应的，有哪些值得推荐的入门教程呢？ - 顾宇飞的回答</a></li>
-<li><a href="https://www.zhihu.com/question/19836903/answer/2660434278" target="_blank">Vim 和 Emacs 分别适合哪些人群？优劣势的对比如何？相应的，有哪些值得推荐的入门教程呢？ - 半生痴狂的回答 - 知乎</a></li>
-<li><a href="https://www.zhihu.com/question/20151659/answer/122429098" target="_blank">到底 VIM 能配置到多强大的程度？ - 张晋涛的回答</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/145793963" target="_blank">7款优秀Vim插件帮你打造完美IDE - QvQ的文章</a></li>
-<li><a href="https://www.zhihu.com/question/305779588/answer/1549847593" target="_blank">为什么很多程序员爱用 Vim？ - 刘志军的回答</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/37988604" target="_blank">PacVim：一个学习 vim 命令的命令行游戏 - Linux中国的文章</a></li>
-<li>缩进
-		<ul>
-				<li><a href="https://zhuanlan.zhihu.com/p/363330420" target="_blank">vim中的缩进 Indentation</a></li>
-		</ul>
-</li>
-<li>search
-		<ul>
-				<li><a href="https://zhuanlan.zhihu.com/p/148280898" target="_blank">VIM学习笔记 正则表达式-(vimgrep/grep)</a></li>
-		</ul>
-</li>
-<li>diff
-		<ul>
-				<li><a href="https://zhuanlan.zhihu.com/p/63153559" target="_blank">VIM学习笔记 比较文件(diff)</a></li>
-		</ul>
-</li>
-<li>plugins
-		<ul>
-				<li><a href="https://github.com/tpope/vim-pathogen" target="_blank">tpope/vim-pathogen</a></li>
-				<li><a href="https://blog.csdn.net/jakpopc/article/details/125409332">10款超牛Vim插件，爱不释手了</a></li>
-				<li><a href="https://github.com/preservim/nerdtree">preservim/nerdtree</a></li>
-				<li><a href="https://blog.csdn.net/liao20081228/article/details/80347763">vim插件——rainbow</a>
+		<head>
+				<meta charset="UTF-8">
+				<title>vim</title>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<style>
+ul {
+		margin: 0px;
+}
+				</style>
+		</head>
+		<body>
+				<li>vim 实用技巧
 						<ul>
-								<li><a href="https://github.com/luochen1990/rainbow">luochen1990/rainbow</a></li>
-								<li><a href="https://www.vim.org/scripts/script.php?script_id=4176">vim main page recommand rainbow</a></li>
+								<li>第1章 vim解决问题的方式</li>
+								<li>第一部分 模式</li>
+								<li>第二部分 文件</li>
+								<li>第三部分 更快地移动及跳转</li>
+								<li>第四部分 寄存器</li>
+								<li>第五部分 模式</li>
+								<li>第六部分 工具</li>
 						</ul>
 				</li>
-				<li><a href="https://vimawesome.com/plugin/youcompleteme">youcompleteme</a></li>
-				<li><a href="https://github.com/tpope/vim-commentary">vim commentary</a></li>
-		</ul>
-</li>
-<li>autocomplete
-		<ul>
-				<li><a href="https://zhuanlan.zhihu.com/p/454514853">vim入门笔记（下）自动补全与第三方插件管理</a></li>
-				<li><a href="https://www.zhihu.com/question/47572493/answer/118860580" target="_blank">vim自动补全时自定义字典的制作过程和方法？ - 小爝的回答 - 知乎</a></li>
-				<li><a href="https://zhuanlan.zhihu.com/p/456842106" target="_blank">vim-dict (打造自己的IDE) vim 自定义字典 vimrc 配置</a></li>
-				<li><a href="https://zhuanlan.zhihu.com/p/349271041" target="_blank">Vim2021：超轻量级代码补全系统</a></li>
-				<li><a href="https://zhuanlan.zhihu.com/p/26156186" target="_blank">vim 补全功能的一些使用经验</a></li>
-				<li><a href="https://zhuanlan.zhihu.com/p/106309525" target="_blank">VIM学习笔记 自动补全详解(Auto-Completion Detail)</a></li>
-				<li><a href="https://zhuanlan.zhihu.com/p/104878849" target="_blank">VIM学习笔记 网页开发-输入网页标签(Input HTML Tags)</a></li>
+				<li>byte of vim
+						<ul>
+								<li>1. Preface</li>
+								<li>2. Introduction</li>
+								<li>3. Installation</li>
+								<li>4. First Steps</li>
+								<li>5. Modes</li>
+								<li>6. Typing Skills</li>
+								<li>7. Moving Around</li>
+								<li>8. Help</li>
+								<li>9. Editing Basics</li>
+								<li>10. More Editing</li>
+								<li>11. Multiplicity</li>
+								<li>12. Personal Information Management</li>
+								<li>13. Scripting</li>
+								<li>14. Plugins</li>
+								<li>15. Programmers Editor</li>
+								<li>16. More</li>
+								<li>17. What Next</li>
+								<li>18. Feedback</li>
+								<li>19. Charityware</li>
+								<li>20. Colophon</li>
+								<li>21. Versions</li>
+						</ul>
+				</li>
+				<li><a href="https://blog.csdn.net/hongzhen91/article/details/103292477">vim 自动格式化代码快捷键</a></li>
+				<li><a href="https://www.vim.org/" target="_blank">home page</a></li>
+				<li><a href="https://vimdoc.sourceforge.net/htmldoc/intro.html" target="_blank">Vim documentation: intro</a></li>
+				<li><a href="https://vimawesome.com/" target="_blank">VimAwesome</a></li>
+				<li><a href="https://vimtricks.com/" target="_blank">VimTricks</a>
+						<ul>
+								<li><a href="https://vimtricks.com/p/vim-calculator/" target="_blank">Vim Calculator</a></li>
+								<li><a href="https://vimtricks.com/p/50-useful-vim-commands/" target="_blank">50 Useful Vim Commands</a></li>
+						</ul>
+				</li>
+				<li><a href="https://github.com/wsdjeg/vim-galore-zh_cn" target="_blank">Vim 从入门到精通</a></li>
+				<li>vim bookmark &emsp;<code style="color: red">m + a-z</code></li>
+				<li>vim trigger bookmark&emsp;<code style="color: red">` + a-z</code></li>
+				<li><a href="https://www.zhihu.com/question/271926659/answer/2875834932" 
+							 target="_blank">使用不加任何插件的纯vim是种什么样的体验？ - 麦田里的守望者的回答</a></li>
+				<li><a href="https://blog.csdn.net/liuhhaiffeng/article/details/52587914" target="_blank">让Vim查找字符忽略大小写</a></li>
+				<li><a href="https://zhuanlan.zhihu.com/p/351086064" target="_blank">关于Vim Macro的一些进阶用法 - kidneyball的文章 - 知乎</a></li>
+				<li><a href="https://zhuanlan.zhihu.com/p/45433187" target="_blank">Vim normal命令和重复操作 - vimtutor的文章 - 知乎</a></li>
+				<li><a href="https://www.zhihu.com/question/46892579/answer/103998729" 
+							 target="_blank">Vim 是否能提高编程效率？ - kidneyball的回答 - 知乎</a></li>
+				<li><a href="https://www.zhihu.com/question/433183204/answer/1712185019" 
+							 target="_blank">为什么看似简陋的vim在熟练的人手中如此的神乎其技？ - kidneyball的回答 - 知乎</a></li>
+				<li><a href="https://www.bilibili.com/video/BV1rV4y137Gn" target="_blank">Vim 脚本教程 4.模式按键映射: Learn Vimscript The Hard Way</a></li>
+				<li><a href="https://www.zhihu.com/question/433183204/answer/2462184264?utm_medium=social&utm_oi=40577768882176&utm_psn=1570212519288975360&utm_source=ZHShareTargetIDMore" 
+							 target="_blank">为什么看似简陋的vim在熟练的人手中如此的神乎其技？ - Sinaean Dean 的回答</a></li>
+				<li><a href="https://www.zhihu.com/question/547708456/answer/2645630850" target="_blank">为什么还有人用VIM？ - 韦易笑的回答</a></li>
+				<li><a href="https://www.zhihu.com/question/19836903/answer/32458921" target="_blank">Vim 和 Emacs 分别适合哪些人群？优劣势的对比如何？相应的，有哪些值得推荐的入门教程呢？ - 顾宇飞的回答</a></li>
+				<li><a href="https://www.zhihu.com/question/19836903/answer/2660434278" target="_blank">Vim 和 Emacs 分别适合哪些人群？优劣势的对比如何？相应的，有哪些值得推荐的入门教程呢？ - 半生痴狂的回答 - 知乎</a></li>
+				<li><a href="https://www.zhihu.com/question/20151659/answer/122429098" target="_blank">到底 VIM 能配置到多强大的程度？ - 张晋涛的回答</a></li>
+				<li><a href="https://zhuanlan.zhihu.com/p/145793963" target="_blank">7款优秀Vim插件帮你打造完美IDE - QvQ的文章</a></li>
+				<li><a href="https://www.zhihu.com/question/305779588/answer/1549847593" target="_blank">为什么很多程序员爱用 Vim？ - 刘志军的回答</a></li>
+				<li><a href="https://zhuanlan.zhihu.com/p/37988604" target="_blank">PacVim：一个学习 vim 命令的命令行游戏 - Linux中国的文章</a></li>
+				<li>缩进
+						<ul>
+								<li><a href="https://zhuanlan.zhihu.com/p/363330420" target="_blank">vim中的缩进 Indentation</a></li>
+						</ul>
+				</li>
+				<li>search
+						<ul>
+								<li><a href="https://zhuanlan.zhihu.com/p/148280898" target="_blank">VIM学习笔记 正则表达式-(vimgrep/grep)</a></li>
+						</ul>
+				</li>
+				<li>diff
+						<ul>
+								<li><a href="https://zhuanlan.zhihu.com/p/63153559" target="_blank">VIM学习笔记 比较文件(diff)</a></li>
+						</ul>
+				</li>
+				<li>plugins
+						<ul>
+								<li><a href="https://github.com/tpope/vim-pathogen" target="_blank">tpope/vim-pathogen</a></li>
+								<li><a href="https://blog.csdn.net/jakpopc/article/details/125409332">10款超牛Vim插件，爱不释手了</a></li>
+								<li><a href="https://github.com/preservim/nerdtree">preservim/nerdtree</a></li>
+								<li><a href="https://blog.csdn.net/liao20081228/article/details/80347763">vim插件——rainbow</a>
+										<ul>
+												<li><a href="https://github.com/luochen1990/rainbow">luochen1990/rainbow</a></li>
+												<li><a href="https://www.vim.org/scripts/script.php?script_id=4176">vim main page recommand rainbow</a></li>
+										</ul>
+								</li>
+								<li><a href="https://vimawesome.com/plugin/youcompleteme">youcompleteme</a></li>
+								<li><a href="https://github.com/tpope/vim-commentary">vim commentary</a></li>
+						</ul>
+				</li>
+				<li>autocomplete
+						<ul>
+								<li><a href="https://zhuanlan.zhihu.com/p/454514853">vim入门笔记（下）自动补全与第三方插件管理</a></li>
+								<li><a href="https://www.zhihu.com/question/47572493/answer/118860580" target="_blank">vim自动补全时自定义字典的制作过程和方法？ - 小爝的回答 - 知乎</a></li>
+								<li><a href="https://zhuanlan.zhihu.com/p/456842106" target="_blank">vim-dict (打造自己的IDE) vim 自定义字典 vimrc 配置</a></li>
+								<li><a href="https://zhuanlan.zhihu.com/p/349271041" target="_blank">Vim2021：超轻量级代码补全系统</a></li>
+								<li><a href="https://zhuanlan.zhihu.com/p/26156186" target="_blank">vim 补全功能的一些使用经验</a></li>
+								<li><a href="https://zhuanlan.zhihu.com/p/106309525" target="_blank">VIM学习笔记 自动补全详解(Auto-Completion Detail)</a></li>
+								<li><a href="https://zhuanlan.zhihu.com/p/104878849" target="_blank">VIM学习笔记 网页开发-输入网页标签(Input HTML Tags)</a></li>
+								<li><a href="" target="_blank"></a></li>
+						</ul>
+				</li>
+				<li>questions
+						<ul>
+								<li><a href="https://blog.csdn.net/qq_20679687/article/details/107166322" target="_blank">vscodevim 卡顿问题</a></li>
+						</ul>
+				</li>
+				<li><a href="https://www.zhihu.com/question/25713969/answer/2459260301" target="_blank">真的会有人用 vim 开发大的项目吗？ - Xpecya的回答</a></li>
+				<li><a href="https://www.zhihu.com/question/578462882/answer/2848013365" target="_blank">可以用Vim写小说吗?有什么特别的体验? - pansz的回答</a></li>
+				<li><a href="https://www.zhihu.com/question/60296892/answer/2760651617" target="_blank">熟练 Vim 能为我带来什么？ - 海森饱的回答</a></li>
+				<li><a href="https://www.zhihu.com/question/360657218/answer/942511792" target="_blank">如何评价 vim 8.2？ - 陈斌的回答 - 知乎</a></li>
+				<li><a href="https://zhuanlan.zhihu.com/p/60049290" target="_blank">1700页数学笔记火了！全程敲代码，速度飞快易搜索，硬核小哥教你上手LaTeX+Vim - 量子位的文章 - 知乎</a></li>
+				<li><a href="https://zhuanlan.zhihu.com/p/368751677" target="_blank">手动更新VIM到最新版本</a>
+						<ul>
+								<li><a href="https://www.vim.org/git.php" target="_blank">mainpage install</a></li>
+								<li><a href="https://blog.csdn.net/qq_18423275/article/details/127588242" target="_blank">ubuntu下更新vim至最新版本</a></li>
+						</ul>
+				</li>
+				<li><a href="https://zhuanlan.zhihu.com/p/109122826" target="_blank">VIM学习笔记 学习资源(Learning Resources)</a></li>
+				<li><a href="https://zhuanlan.zhihu.com/p/37478384" target="_blank">VIM学习笔记-开篇/目录</a>
+						<ul>
+								<li><a href="https://zhuanlan.zhihu.com/p/24343264" title=""/>VIM学习笔记 在词间移动（Word Movement）</a></li>
+						</ul>
+				</li>
+				<li><a href="https://www.jianshu.com/p/76f9c30e14ca" target="_blank">【vim】vim 的backspace不能使用</a></li>
 				<li><a href="" target="_blank"></a></li>
-		</ul>
-</li>
-<li>questions
-    <ul>
-        <li><a href="https://blog.csdn.net/qq_20679687/article/details/107166322" target="_blank">vscodevim 卡顿问题</a></li>
-    </ul>
-</li>
-<li><a href="https://www.zhihu.com/question/25713969/answer/2459260301" target="_blank">真的会有人用 vim 开发大的项目吗？ - Xpecya的回答</a></li>
-<li><a href="https://www.zhihu.com/question/578462882/answer/2848013365" target="_blank">可以用Vim写小说吗?有什么特别的体验? - pansz的回答</a></li>
-<li><a href="https://www.zhihu.com/question/60296892/answer/2760651617" target="_blank">熟练 Vim 能为我带来什么？ - 海森饱的回答</a></li>
-<li><a href="https://www.zhihu.com/question/360657218/answer/942511792" target="_blank">如何评价 vim 8.2？ - 陈斌的回答 - 知乎</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/60049290" target="_blank">1700页数学笔记火了！全程敲代码，速度飞快易搜索，硬核小哥教你上手LaTeX+Vim - 量子位的文章 - 知乎</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/368751677" target="_blank">手动更新VIM到最新版本</a>
-		<ul>
-				<li><a href="https://www.vim.org/git.php" target="_blank">mainpage install</a></li>
-				<li><a href="https://blog.csdn.net/qq_18423275/article/details/127588242" target="_blank">ubuntu下更新vim至最新版本</a></li>
-		</ul>
-</li>
-<li><a href="https://zhuanlan.zhihu.com/p/109122826" target="_blank">VIM学习笔记 学习资源(Learning Resources)</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/37478384" target="_blank">VIM学习笔记-开篇/目录</a>
-		<ul>
-				<li><a href="https://zhuanlan.zhihu.com/p/24343264" title=""/>VIM学习笔记 在词间移动（Word Movement）</a></li>
-		</ul>
-</li>
-<li><a href="https://www.jianshu.com/p/76f9c30e14ca" target="_blank">【vim】vim 的backspace不能使用</a></li>
-<li><a href="" target="_blank"></a></li>
-<li><a href="" target="_blank"></a></li>
+				<li><a href="" target="_blank"></a></li>
 
-</body>
+		</body>
 </html>
