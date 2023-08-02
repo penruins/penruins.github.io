@@ -15,29 +15,6 @@
 		<li><a href="#mess">mess</a></li>
 		<li><a href="#long">long</a></li>
 
-
-		<li><a href="https://zhuanlan.zhihu.com/p/590260571">
-				MySQL LIMIT OFFSET分页“慢”查询优化</li>
-		<li><a href="https://www.51cto.com/article/718182.html">
-				LIMIT和OFFSET分页性能差！今天来介绍如何高性能分页</li>
-		<li><a href="https://www.zhihu.com/question/597204920/answer/3005470830">
-				每日一道面试题-Mybatis是如何进行分页的？分页插件的原理是什么？ - 终端研发部的回答 - 知乎</li>
-		<li><a href="https://blog.csdn.net/qq_43037478/article/details/116991083">
-				MyBatis-Plus分页插件Page原理分析</li>
-		<li><a href="https://zhuanlan.zhihu.com/p/550164886">
-				手撕MybatisPlus分页原理</li>
-		<li><a href="https://zhuanlan.zhihu.com/p/142765622">
-				PostgreSql Explain 功能的过人之处</li>
-		<li><a href="https://blog.csdn.net/weixin_51486343/article/details/113351092">
-				MySQL 数据库--索引（理论详解及实例演示）</a></li>
-		<li><a href="https://www.tutorialspoint.com/postgresql/index.htm">
-				PostgreSQL Tutorial</a></li>
-		<li><a href="https://github.com/Qian-Yu-2020/Leetcode-Problems">
-				Qian-Yu-2020/Leetcode-Problems</a></li>
-		<li><a href="https://github.com/dyng/ctrlsf.vim#quick-start">
-				dyng/ctrlsf.vim</a></li>
-		<li><a href="https://github.com/tpope/vim-commentary">
-				tpope/vim-commentary</a></li>
 		<li><a href="https://www.programiz.com/python-programming/if-elif-else">
 				Python if...else Statement</a></li>
 		<li><a href="https://bobbyhadz.com/blog/python-keyerror-0#:~:text=A%20KeyError%20exception%20is%20raised%20when%20assigning%20a,for%20keys%20that%20don%27t%20exist%20in%20the%20dictionary.">
