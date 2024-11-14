@@ -13,14 +13,14 @@
       <link>/zh/zh/post/computer-science/java/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/zh/zh/post/computer-science/java/</guid>
-      <description>&lt;h1 id=&#34;java&#34;&gt;&#xA;  java&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#java&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;学习资料&#34;&gt;&#xA;  学习资料&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e5%ad%a6%e4%b9%a0%e8%b5%84%e6%96%99&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cyc2018.xyz&#34;&gt;CS-Notes面试笔记&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;basic&#34;&gt;&#xA;  basic&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#basic&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;h2 id=&#34;concurrent&#34;&gt;&#xA;  concurrent&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#concurrent&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;</description>
+      <description>&lt;h1 id=&#34;java&#34;&gt;&#xA;  java&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#java&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;学习资料&#34;&gt;&#xA;  学习资料&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e5%ad%a6%e4%b9%a0%e8%b5%84%e6%96%99&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cyc2018.xyz&#34;&gt;CS-Notes面试笔记&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://cloud.macrozheng.com/foreword/mall_swarm_video.html&#34;&gt;mall-swarm视频教程&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;basic&#34;&gt;&#xA;  basic&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#basic&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;h2 id=&#34;concurrent&#34;&gt;&#xA;  concurrent&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#concurrent&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;</description>
     </item>
     <item>
       <title>推荐</title>
       <link>/zh/zh/post/computer-science/computer-science-recommend/</link>
       <pubDate>Thu, 14 Nov 2024 08:59:49 +0800</pubDate>
       <guid>/zh/zh/post/computer-science/computer-science-recommend/</guid>
-      <description>&lt;h1 id=&#34;推荐&#34;&gt;&#xA;  推荐&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e6%8e%a8%e8%8d%90&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com&#34;&gt;github&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/alex-shpak/hugo-book&#34;&gt;alex-shpak/hugo-book&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;这个博客就是用这个项目搭建的&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://news.ycombinator.com&#34;&gt;hacker news&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;有很多关于计算机相关的文章，每天都会更新&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;资源下载相关&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/pingf/annie&#34;&gt;pingf/annie&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;可以用来下载B站视频&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/yt-dlp/yt-dlp&#34;&gt;yt-dlp/yt-dlp&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;下载 youtube 视频&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/yutto-dev/bilili&#34;&gt;yutto-dev/bilili&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;下载 bilibili 视频(项目已经归档不再维护,目前还能用，可以使用yutto)&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/yutto-dev/yutto&#34;&gt;yutto-dev/yutto&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;blog&#34;&gt;&#xA;  blog&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#blog&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.ruanyifeng.com/blog/&#34;&gt;阮一峰的网络日志&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.yinwang.org&#34;&gt;王垠&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+      <description>&lt;h1 id=&#34;推荐&#34;&gt;&#xA;  推荐&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e6%8e%a8%e8%8d%90&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com&#34;&gt;github&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/alex-shpak/hugo-book&#34;&gt;alex-shpak/hugo-book&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;这个博客就是用这个项目搭建的&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://news.ycombinator.com&#34;&gt;hacker news&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;有很多关于计算机相关的文章，每天都会更新&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;资源下载相关&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/pingf/annie&#34;&gt;pingf/annie&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;可以用来下载B站视频&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/yt-dlp/yt-dlp&#34;&gt;yt-dlp/yt-dlp&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;下载 youtube 视频&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/yutto-dev/bilili&#34;&gt;yutto-dev/bilili&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;下载 bilibili 视频(项目已经归档不再维护,目前还能用，可以使用yutto)&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/yutto-dev/yutto&#34;&gt;yutto-dev/yutto&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;blog&#34;&gt;&#xA;  blog&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#blog&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.ruanyifeng.com/blog/&#34;&gt;阮一峰的网络日志&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://www.yinwang.org&#34;&gt;王垠&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;large-language-modelllm&#34;&gt;&#xA;  Large Language Model(LLM)&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#large-language-modelllm&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://tongyi.aliyun.com/qianwen/&#34;&gt;通义千问&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>学习记录</title>
@@ -30,6 +30,13 @@
       <description>&lt;h1 id=&#34;学习记录&#34;&gt;&#xA;  学习记录&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e5%ad%a6%e4%b9%a0%e8%ae%b0%e5%bd%95&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;2024-11-14&#34;&gt;&#xA;  2024-11-14&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#2024-11-14&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;文章推荐&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://challahscript.com/what_i_wish_someone_told_me_about_postgres&#34;&gt;What I Wish Someone Told Me About Postgres&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;介绍了 postgresql 相关的一些知识点，可以看一看&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.wired.com/story/the-wired-guide-to-protecting-yourself-from-government-surveillance/&#34;&gt;The WIRED Guide to Protecting Yourself From Government Surveillance&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://arstechnica.com/ai/2024/11/how-a-stubborn-computer-scientist-accidentally-launched-the-deep-learning-boom/&#34;&gt;How a stubborn computer scientist accidentally launched the deep learning boom&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;可以了解到 辛顿、黄仁勋、李飞飞 的工作是如何推动神经网络的发展的&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
+      <title>ios</title>
+      <link>/zh/zh/post/computer-science/ios/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/zh/post/computer-science/ios/</guid>
+      <description>&lt;h1 id=&#34;ios&#34;&gt;&#xA;  ios&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#ios&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
+    </item>
+    <item>
       <title>job</title>
       <link>/zh/zh/post/computer-science/job/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -37,25 +44,18 @@
       <description>&lt;h1 id=&#34;job&#34;&gt;&#xA;  job&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#job&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.0x08.org/posts/resume-for-graduates&#34;&gt;应届生的简历&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
-      <title></title>
-      <link>/zh/zh/post/computer-science/ios/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/zh/zh/post/computer-science/ios/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title></title>
+      <title>mac</title>
       <link>/zh/zh/post/computer-science/mac/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/zh/zh/post/computer-science/mac/</guid>
-      <description></description>
+      <description>&lt;h1 id=&#34;mac&#34;&gt;&#xA;  mac&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#mac&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
     </item>
     <item>
-      <title></title>
+      <title>raspberry pi</title>
       <link>/zh/zh/post/computer-science/raspberrypi/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/zh/zh/post/computer-science/raspberrypi/</guid>
-      <description></description>
+      <description>&lt;h1 id=&#34;raspberry-pi&#34;&gt;&#xA;  raspberry pi&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#raspberry-pi&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
     </item>
   </channel>
 </rss>
