@@ -6,13 +6,54 @@
 <meta name="description" content="
   raspberry pi
   #
+
+
+  clash
+  #
+
+
+reference
+
+为什么全局代理后， CMD 依然 Ping 不通 Google？
+树莓派 Clash 透明代理(TProxy)
+在 Raspberry Pi 上运行 Clash 作为透明代理
+解决 Clash Meta 中TUN模式无法上网的问题：正确配置DNS设置
+解决 树莓派ping: baidu.com: 域名解析暂时失败
+树莓派安装clash，实现科学上网
+
+在 Raspberry Pi 上运行 Clash 作为透明代理
+http://yacd.haishan.me
+
+
+
+
+
+
+  yt-dlp
+  #
+
+使用这个工具，可以下载 youtube 视频
+
+后台下载命令
+
+nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp;
+
+
+实时查看后台下载进度 tail -f nohup.log
+停止下载
+
+查询后台进程号 ps -aux | grep yt-dlp
+杀死进程 kill -9 {{进程号}}
+
+
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/raspberrypi/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="raspberry pi">
-  <meta property="og:description" content="raspberry pi #">
+  <meta property="og:description" content="raspberry pi # clash # reference 为什么全局代理后， CMD 依然 Ping 不通 Google？ 树莓派 Clash 透明代理(TProxy) 在 Raspberry Pi 上运行 Clash 作为透明代理 解决 Clash Meta 中TUN模式无法上网的问题：正确配置DNS设置 解决 树莓派ping: baidu.com: 域名解析暂时失败 树莓派安装clash，实现科学上网 在 Raspberry Pi 上运行 Clash 作为透明代理 http://yacd.haishan.me yt-dlp # 使用这个工具，可以下载 youtube 视频
+后台下载命令 nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp; 实时查看后台下载进度 tail -f nohup.log 停止下载 查询后台进程号 ps -aux | grep yt-dlp 杀死进程 kill -9 {{进程号}}">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -22,7 +63,7 @@
 <link rel="canonical" href="/zh/zh/post/computer-science/raspberrypi/">
 <link rel="stylesheet" href="/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.2933cc2649014842731fca120481b3d45211df49be8f0c0fb0ff9f91b73e3764.js" ></script>
+  <script defer src="/zh.search.min.e48bc985fc5aaeecff03d86871f320ab9fc87ef9f56e9b310dfdaab527d26f2e.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -380,7 +421,12 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#clash">clash</a></li>
+    <li><a href="#yt-dlp">yt-dlp</a></li>
+  </ul>
+</nav>
 
 
 
@@ -395,6 +441,46 @@ https://github.com/alex-shpak/hugo-book
   raspberry pi
   <a class="anchor" href="#raspberry-pi">#</a>
 </h1>
+<h2 id="clash">
+  clash
+  <a class="anchor" href="#clash">#</a>
+</h2>
+<ul>
+<li>reference
+<ul>
+<li><a href="https://www.v2ex.com/t/877527">为什么全局代理后， CMD 依然 Ping 不通 Google？</a></li>
+<li><a href="https://mritd.com/2022/02/06/clash-tproxy/">树莓派 Clash 透明代理(TProxy)</a></li>
+<li><a href="https://cherysunzhang.com/2020/05/deploy-clash-as-transparent-proxy-on-raspberry-pi/">在 Raspberry Pi 上运行 Clash 作为透明代理</a></li>
+<li><a href="https://atlassc.net/2023/07/01/fixing-tun-mode-in-clash-the-essential-dns-configuration-guide">解决 Clash Meta 中TUN模式无法上网的问题：正确配置DNS设置</a></li>
+<li><a href="https://blog.csdn.net/frdevolcqzyxynjds/article/details/120123906">解决 树莓派ping: baidu.com: 域名解析暂时失败</a></li>
+<li><a href="https://blog.panda74.fun/blog/practice/raspi/clash">树莓派安装clash，实现科学上网</a>
+<ul>
+<li><a href="https://cherysunzhang.com/2020/05/deploy-clash-as-transparent-proxy-on-raspberry-pi/">在 Raspberry Pi 上运行 Clash 作为透明代理</a></li>
+<li><a href="http://yacd.haishan.me">http://yacd.haishan.me</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="yt-dlp">
+  yt-dlp
+  <a class="anchor" href="#yt-dlp">#</a>
+</h2>
+<p>使用这个工具，可以下载 youtube 视频</p>
+<ul>
+<li>后台下载命令
+<ul>
+<li><code>nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp;</code></li>
+</ul>
+</li>
+<li>实时查看后台下载进度 <code>tail -f nohup.log</code></li>
+<li>停止下载
+<ul>
+<li>查询后台进程号 <code>ps -aux | grep yt-dlp</code></li>
+<li>杀死进程 <code>kill -9 {{进程号}}</code></li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -434,7 +520,12 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#clash">clash</a></li>
+    <li><a href="#yt-dlp">yt-dlp</a></li>
+  </ul>
+</nav>
 
 
  
