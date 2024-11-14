@@ -1,31 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>/post/about-me/</loc>
-  </url><url>
-    <loc>/post/recommand/</loc>
-    <lastmod>2024-11-14T08:59:49+08:00</lastmod>
-  </url><url>
-    <loc>/post/learning-log/</loc>
-    <lastmod>2024-11-14T08:59:49+08:00</lastmod>
-  </url><url>
-    <loc>/post/movies-log/</loc>
-    <lastmod>2024-11-14T08:59:49+08:00</lastmod>
-  </url><url>
-    <loc>/post/english-learning/</loc>
-  </url><url>
-    <loc>/post/goal/</loc>
-    <lastmod>2024-11-14T08:59:49+08:00</lastmod>
-  </url><url>
-    <loc>/</loc>
-    <lastmod>2024-11-14T08:59:49+08:00</lastmod>
-  </url><url>
-    <loc>/post/</loc>
-    <lastmod>2024-11-14T08:59:49+08:00</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
-  </url><url>
-    <loc>/tags/</loc>
-  </url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <sitemap>
+    <loc>/zh/sitemap.xml</loc>
+    
+      <lastmod>2024-11-14T08:59:49+08:00</lastmod>
+    
+  </sitemap>
+  
+  <sitemap>
+    <loc>/cn/sitemap.xml</loc>
+    
+  </sitemap>
+  
+  <sitemap>
+    <loc>/en/sitemap.xml</loc>
+    
+  </sitemap>
+  
+</sitemapindex>
