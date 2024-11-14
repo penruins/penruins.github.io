@@ -2,36 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/zh/post/about-me/</loc>
+    <loc>/zh/post/others/about-me/</loc>
   </url><url>
-    <loc>/zh/zh/post/about-me/</loc>
+    <loc>/zh/zh/post/others/about-me/</loc>
   </url><url>
-    <loc>/zh/post/recommand/</loc>
+    <loc>/zh/post/computer-science/java/</loc>
+  </url><url>
+    <loc>/zh/zh/post/computer-science/java/</loc>
+  </url><url>
+    <loc>/zh/post/computer-science/computer-science-recommand/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
   </url><url>
-    <loc>/zh/zh/post/recommand/</loc>
+    <loc>/zh/zh/post/computer-science/computer-science-recommand/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
   </url><url>
-    <loc>/zh/post/movies-log/</loc>
+    <loc>/zh/post/life/movies-log/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
   </url><url>
-    <loc>/zh/zh/post/movies-log/</loc>
+    <loc>/zh/zh/post/life/movies-log/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
   </url><url>
-    <loc>/zh/post/learning-log/</loc>
+    <loc>/zh/post/computer-science/computer-science-learning-log/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
   </url><url>
-    <loc>/zh/zh/post/learning-log/</loc>
+    <loc>/zh/zh/post/computer-science/computer-science-learning-log/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
   </url><url>
-    <loc>/zh/post/english-learning/</loc>
+    <loc>/zh/post/others/english-learning/</loc>
   </url><url>
-    <loc>/zh/zh/post/english-learning/</loc>
+    <loc>/zh/zh/post/others/english-learning/</loc>
   </url><url>
-    <loc>/zh/post/goal/</loc>
+    <loc>/zh/post/life/goal/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
   </url><url>
-    <loc>/zh/zh/post/goal/</loc>
+    <loc>/zh/zh/post/life/goal/</loc>
+    <lastmod>2024-11-14T08:59:49+08:00</lastmod>
+  </url><url>
+    <loc>/zh/post/computer-science/</loc>
+    <lastmod>2024-11-14T08:59:49+08:00</lastmod>
+  </url><url>
+    <loc>/zh/zh/post/computer-science/</loc>
+    <lastmod>2024-11-14T08:59:49+08:00</lastmod>
+  </url><url>
+    <loc>/zh/post/life/</loc>
+    <lastmod>2024-11-14T08:59:49+08:00</lastmod>
+  </url><url>
+    <loc>/zh/zh/post/life/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
   </url><url>
     <loc>/zh/zh/</loc>
@@ -57,6 +73,10 @@
   </url><url>
     <loc>/zh/post/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
+  </url><url>
+    <loc>/zh/post/others/</loc>
+  </url><url>
+    <loc>/zh/zh/post/others/</loc>
   </url><url>
     <loc>/zh/categories/</loc>
     <xhtml:link
