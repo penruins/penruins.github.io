@@ -4,29 +4,23 @@
     <title>Docs on My New Hugo Site</title>
     <link>/docs/</link>
     <description>Recent content in Docs on My New Hugo Site</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Nov 2024 08:59:49 +0800</lastBuildDate><atom:link href="/docs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Nov 2024 08:59:49 +0800</lastBuildDate>
+    <atom:link href="/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Home</title>
       <link>/docs/home/</link>
       <pubDate>Thu, 14 Nov 2024 08:59:49 +0800</pubDate>
-      
       <guid>/docs/home/</guid>
-      <description>home you don&amp;rsquo;t give up, then there&amp;rsquo;s no limitation.
-cccc
-ddddd
-kkkk</description>
+      <description>&lt;h1 id=&#34;home&#34;&gt;home&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;you don&amp;rsquo;t give up, then there&amp;rsquo;s no limitation.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;cccc&lt;/p&gt;&#xA;&lt;p&gt;ddddd&lt;/p&gt;&#xA;&lt;p&gt;kkkk&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hello World</title>
       <link>/docs/hello-world/</link>
       <pubDate>Thu, 14 Nov 2024 08:57:55 +0800</pubDate>
-      
       <guid>/docs/hello-world/</guid>
-      <description>hello world you don&amp;rsquo;t give up, then there&amp;rsquo;s no limitation.</description>
+      <description>&lt;h1 id=&#34;hello-world&#34;&gt;hello world&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;you don&amp;rsquo;t give up, then there&amp;rsquo;s no limitation.&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
-    
   </channel>
 </rss>
