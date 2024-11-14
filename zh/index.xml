@@ -24,16 +24,16 @@
     </item>
     <item>
       <title>java</title>
-      <link>/zh/post/computer-science/java/</link>
+      <link>/zh/post/java/java/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/zh/post/computer-science/java/</guid>
+      <guid>/zh/post/java/java/</guid>
       <description>&lt;h1 id=&#34;java&#34;&gt;&#xA;  java&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#java&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;学习资料&#34;&gt;&#xA;  学习资料&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e5%ad%a6%e4%b9%a0%e8%b5%84%e6%96%99&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cyc2018.xyz&#34;&gt;CS-Notes面试笔记&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://cloud.macrozheng.com/foreword/mall_swarm_video.html&#34;&gt;mall-swarm视频教程&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;basic&#34;&gt;&#xA;  basic&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#basic&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;h2 id=&#34;concurrent&#34;&gt;&#xA;  concurrent&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#concurrent&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;</description>
     </item>
     <item>
       <title>java</title>
-      <link>/zh/zh/post/computer-science/java/</link>
+      <link>/zh/zh/post/java/java/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/zh/zh/post/computer-science/java/</guid>
+      <guid>/zh/zh/post/java/java/</guid>
       <description>&lt;h1 id=&#34;java&#34;&gt;&#xA;  java&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#java&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;学习资料&#34;&gt;&#xA;  学习资料&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e5%ad%a6%e4%b9%a0%e8%b5%84%e6%96%99&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cyc2018.xyz&#34;&gt;CS-Notes面试笔记&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://cloud.macrozheng.com/foreword/mall_swarm_video.html&#34;&gt;mall-swarm视频教程&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;basic&#34;&gt;&#xA;  basic&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#basic&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;h2 id=&#34;concurrent&#34;&gt;&#xA;  concurrent&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#concurrent&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;</description>
     </item>
     <item>
@@ -93,6 +93,20 @@
       <description>&lt;h1 id=&#34;cycling&#34;&gt;&#xA;  cycling&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#cycling&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.procyclingstats.com/index.php&#34;&gt;pro cycling stats&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;自行车职业赛数据及积分排行查询&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
+      <title>database</title>
+      <link>/zh/post/computer-science/database/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/post/computer-science/database/</guid>
+      <description>&lt;h1 id=&#34;database&#34;&gt;&#xA;  database&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#database&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>database</title>
+      <link>/zh/zh/post/computer-science/database/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/zh/post/computer-science/database/</guid>
+      <description>&lt;h1 id=&#34;database&#34;&gt;&#xA;  database&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#database&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
+    </item>
+    <item>
       <title>English Learning</title>
       <link>/zh/post/others/english-learning/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -135,6 +149,20 @@
       <description>&lt;h1 id=&#34;job&#34;&gt;&#xA;  job&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#job&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.0x08.org/posts/resume-for-graduates&#34;&gt;应届生的简历&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
+      <title>jvm</title>
+      <link>/zh/post/java/jvm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/post/java/jvm/</guid>
+      <description>&lt;h1 id=&#34;jvm&#34;&gt;&#xA;  jvm&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#jvm&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>jvm</title>
+      <link>/zh/zh/post/java/jvm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/zh/post/java/jvm/</guid>
+      <description>&lt;h1 id=&#34;jvm&#34;&gt;&#xA;  jvm&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#jvm&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
+    </item>
+    <item>
       <title>life recommand</title>
       <link>/zh/post/life/life-recommend/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -147,6 +175,20 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/zh/zh/post/life/life-recommend/</guid>
       <description>&lt;h1 id=&#34;life-recommend&#34;&gt;&#xA;  life recommend&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#life-recommend&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://sspai.com&#34;&gt;sspai&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;数码相关内容，还有一些偏硬核的科普，技术文章&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>linux</title>
+      <link>/zh/post/computer-science/linux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/post/computer-science/linux/</guid>
+      <description>&lt;h1 id=&#34;linux&#34;&gt;&#xA;  linux&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#linux&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>linux</title>
+      <link>/zh/zh/post/computer-science/linux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/zh/post/computer-science/linux/</guid>
+      <description>&lt;h1 id=&#34;linux&#34;&gt;&#xA;  linux&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#linux&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
     </item>
     <item>
       <title>mac</title>

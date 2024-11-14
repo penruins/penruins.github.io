@@ -6,9 +6,9 @@
   </url><url>
     <loc>/zh/zh/post/others/about-me/</loc>
   </url><url>
-    <loc>/zh/post/computer-science/java/</loc>
+    <loc>/zh/post/java/java/</loc>
   </url><url>
-    <loc>/zh/zh/post/computer-science/java/</loc>
+    <loc>/zh/zh/post/java/java/</loc>
   </url><url>
     <loc>/zh/post/computer-science/computer-science-recommend/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
@@ -32,6 +32,10 @@
   </url><url>
     <loc>/zh/zh/post/life/cycling/</loc>
   </url><url>
+    <loc>/zh/post/computer-science/database/</loc>
+  </url><url>
+    <loc>/zh/zh/post/computer-science/database/</loc>
+  </url><url>
     <loc>/zh/post/others/english-learning/</loc>
   </url><url>
     <loc>/zh/zh/post/others/english-learning/</loc>
@@ -44,9 +48,17 @@
   </url><url>
     <loc>/zh/zh/post/computer-science/job/</loc>
   </url><url>
+    <loc>/zh/post/java/jvm/</loc>
+  </url><url>
+    <loc>/zh/zh/post/java/jvm/</loc>
+  </url><url>
     <loc>/zh/post/life/life-recommend/</loc>
   </url><url>
     <loc>/zh/zh/post/life/life-recommend/</loc>
+  </url><url>
+    <loc>/zh/post/computer-science/linux/</loc>
+  </url><url>
+    <loc>/zh/zh/post/computer-science/linux/</loc>
   </url><url>
     <loc>/zh/post/computer-science/mac/</loc>
   </url><url>
@@ -97,6 +109,10 @@
   </url><url>
     <loc>/zh/post/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
+  </url><url>
+    <loc>/zh/post/java/</loc>
+  </url><url>
+    <loc>/zh/zh/post/java/</loc>
   </url><url>
     <loc>/zh/post/others/</loc>
   </url><url>
