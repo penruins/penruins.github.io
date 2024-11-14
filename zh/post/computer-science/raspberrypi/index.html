@@ -39,7 +39,7 @@ http://yacd.haishan.me
 nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp;
 
 
-实时查看后台下载进度 tail -f nohup.log
+实时查看后台下载进度 tail -f nohup.out
 停止下载
 
 查询后台进程号 ps -aux | grep yt-dlp
@@ -61,7 +61,7 @@ nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp;
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="raspberry pi">
   <meta property="og:description" content="raspberry pi # clash # reference 为什么全局代理后， CMD 依然 Ping 不通 Google？ 树莓派 Clash 透明代理(TProxy) 在 Raspberry Pi 上运行 Clash 作为透明代理 解决 Clash Meta 中TUN模式无法上网的问题：正确配置DNS设置 解决 树莓派ping: baidu.com: 域名解析暂时失败 树莓派安装clash，实现科学上网 在 Raspberry Pi 上运行 Clash 作为透明代理 http://yacd.haishan.me yt-dlp # 使用这个工具，可以下载 youtube 视频
-后台下载命令 nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp; 实时查看后台下载进度 tail -f nohup.log 停止下载 查询后台进程号 ps -aux | grep yt-dlp 杀死进程 kill -9 {{进程号}} 定时任务 # 查看当前的定时任务 crontab -l 编辑定时任务 crontab -e">
+后台下载命令 nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp; 实时查看后台下载进度 tail -f nohup.out 停止下载 查询后台进程号 ps -aux | grep yt-dlp 杀死进程 kill -9 {{进程号}} 定时任务 # 查看当前的定时任务 crontab -l 编辑定时任务 crontab -e">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -71,7 +71,7 @@ nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp;
 <link rel="canonical" href="/zh/post/computer-science/raspberrypi/">
 <link rel="stylesheet" href="/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.08ef7d5b40616db04848c0bb46b460b6c5c20c9099bb1ac082d5d9bfb82a525b.js" ></script>
+  <script defer src="/zh.search.min.a954163f6058b144adb5af32bef6cea636fb8be7e35c51195aef204f6b59a5ed.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -565,7 +565,7 @@ https://github.com/alex-shpak/hugo-book
 <li><code>nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp;</code></li>
 </ul>
 </li>
-<li>实时查看后台下载进度 <code>tail -f nohup.log</code></li>
+<li>实时查看后台下载进度 <code>tail -f nohup.out</code></li>
 <li>停止下载
 <ul>
 <li>查询后台进程号 <code>ps -aux | grep yt-dlp</code></li>
