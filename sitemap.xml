@@ -20,5 +20,7 @@
     <loc>/categories/</loc>
   </url><url>
     <loc>/tags/</loc>
+  </url><url>
+    <loc>/docs/movies/</loc>
   </url>
 </urlset>
