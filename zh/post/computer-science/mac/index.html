@@ -94,13 +94,26 @@ Hidden space 隐藏空间
 取消挂载 diskutil unmount xxxxx
 
 
+transmit 文件传输工具
+
+
+  questions
+  #
+
+
+2024-11-15 指纹识别及录入问题
+
+M1 macbookPro 指纹不是识别及其慢就是识别不了，没有反应
+电脑插电会有影响，不插电指纹功能是正常的
+
+
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/mac/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="mac">
-  <meta property="og:description" content="mac # brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf ffmpeg # 安装 brew install ffmpeg yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx">
+  <meta property="og:description" content="mac # brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf ffmpeg # 安装 brew install ffmpeg yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx transmit 文件传输工具 questions # 2024-11-15 指纹识别及录入问题 M1 macbookPro 指纹不是识别及其慢就是识别不了，没有反应 电脑插电会有影响，不插电指纹功能是正常的">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -110,7 +123,7 @@ Hidden space 隐藏空间
 <link rel="canonical" href="/zh/post/computer-science/mac/">
 <link rel="stylesheet" href="/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.a954163f6058b144adb5af32bef6cea636fb8be7e35c51195aef204f6b59a5ed.js" ></script>
+  <script defer src="/zh.search.min.f226173120ae782a26feb2d695f2603e10581ea68a2fff018c8bc27b93e6f5a5.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -560,6 +573,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#player">player</a></li>
     <li><a href="#disk">disk</a></li>
+    <li><a href="#questions">questions</a></li>
   </ul>
 </nav>
 
@@ -663,6 +677,19 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
 <li>取消挂载 <code>diskutil unmount xxxxx</code></li>
 </ul>
 </li>
+<li>transmit 文件传输工具</li>
+</ul>
+<h2 id="questions">
+  questions
+  <a class="anchor" href="#questions">#</a>
+</h2>
+<ul>
+<li>2024-11-15 指纹识别及录入问题
+<ul>
+<li><a href="https://discussionschinese.apple.com/thread/252333633?sortBy=rank">M1 macbookPro 指纹不是识别及其慢就是识别不了，没有反应</a></li>
+<li>电脑插电会有影响，不插电指纹功能是正常的</li>
+</ul>
+</li>
 </ul>
 </article>
  
@@ -712,6 +739,7 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#player">player</a></li>
     <li><a href="#disk">disk</a></li>
+    <li><a href="#questions">questions</a></li>
   </ul>
 </nav>
 
