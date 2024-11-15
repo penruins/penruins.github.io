@@ -55,6 +55,18 @@ nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp;
 
 
 
+  tomcat
+  #
+
+
+树莓派安装Tomcat
+
+wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36.tar.gz
+tar zxvf apache-tomcat-9.0.36.tar.gz
+
+cd ~/apache-tomcat-9.0.36/bin
+sudo ./startup.sh
+
   定时任务
   #
 
@@ -69,7 +81,15 @@ nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp;
 
 如何从外网登录访问树莓派Raspberry Pi
 
+holer
 Wisdom
+wisdom-projects/holer
+
+方式一：使用公开的holer映射或者开通holer服务，通过holer客户端软件经holer服务器实现公网访问
+方式二：使用holer服务端软件搭建holer服务，通过holer客户端软件经自己服务器实现公网访问，
+
+
+Holer端口映射软件使用教程
 
 
 ">
@@ -79,7 +99,7 @@ Wisdom
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="raspberry pi">
   <meta property="og:description" content="raspberry pi # reference # 树莓派文档 clash # reference 为什么全局代理后， CMD 依然 Ping 不通 Google？ 树莓派 Clash 透明代理(TProxy) 在 Raspberry Pi 上运行 Clash 作为透明代理 解决 Clash Meta 中TUN模式无法上网的问题：正确配置DNS设置 解决 树莓派ping: baidu.com: 域名解析暂时失败 树莓派安装clash，实现科学上网 在 Raspberry Pi 上运行 Clash 作为透明代理 http://yacd.haishan.me yt-dlp # 使用这个工具，可以下载 youtube 视频
-后台下载命令 nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp; 实时查看后台下载进度 tail -f nohup.out 停止下载 查询后台进程号 ps -aux | grep yt-dlp 杀死进程 kill -9 {{进程号}} 定时任务 # 查看当前的定时任务 crontab -l 编辑定时任务 crontab -e 外网登录 # 如何从外网登录访问树莓派Raspberry Pi Wisdom">
+后台下载命令 nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp; 实时查看后台下载进度 tail -f nohup.out 停止下载 查询后台进程号 ps -aux | grep yt-dlp 杀死进程 kill -9 {{进程号}} tomcat # 树莓派安装Tomcat wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36.tar.gz tar zxvf apache-tomcat-9.0.36.tar.gz cd ~/apache-tomcat-9.0.36/bin sudo ./startup.sh 定时任务 # 查看当前的定时任务 crontab -l 编辑定时任务 crontab -e 外网登录 # 如何从外网登录访问树莓派Raspberry Pi holer Wisdom wisdom-projects/holer 方式一：使用公开的holer映射或者开通holer服务，通过holer客户端软件经holer服务器实现公网访问 方式二：使用holer服务端软件搭建holer服务，通过holer客户端软件经自己服务器实现公网访问， Holer端口映射软件使用教程">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -89,7 +109,7 @@ Wisdom
 <link rel="canonical" href="/zh/zh/post/computer-science/raspberrypi/">
 <link rel="stylesheet" href="/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.3a9d8b883b81c5f4c00fbfe81124500f0bc60089ad1147fd312197993a620bd6.js" ></script>
+  <script defer src="/zh.search.min.bf88618cb9577a2c363495c82466f51f4667920f0f29733189a0c81824971d45.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -535,6 +555,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#reference">reference</a></li>
     <li><a href="#clash">clash</a></li>
     <li><a href="#yt-dlp">yt-dlp</a></li>
+    <li><a href="#tomcat">tomcat</a></li>
     <li><a href="#定时任务">定时任务</a></li>
     <li><a href="#外网登录">外网登录</a></li>
   </ul>
@@ -600,7 +621,19 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h2 id="定时任务">
+<h2 id="tomcat">
+  tomcat
+  <a class="anchor" href="#tomcat">#</a>
+</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/aeolian/p/15306739.html">树莓派安装Tomcat</a></li>
+</ul>
+<pre tabindex="0"><code>wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36.tar.gz
+tar zxvf apache-tomcat-9.0.36.tar.gz
+
+cd ~/apache-tomcat-9.0.36/bin
+sudo ./startup.sh
+</code></pre><h2 id="定时任务">
   定时任务
   <a class="anchor" href="#%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1">#</a>
 </h2>
@@ -615,7 +648,15 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><a href="https://developer.aliyun.com/article/673396#:~:text=%e5%9c%a8ssh%e5%ae%a2%e6%88%b7%e7%ab%af%e4%b8%8a%e8%be%93%e5%85%a5%20%e4%b8%bb%e6%9c%ba%e5%90%8d%ef%bc%9a%20holer.org%20%e7%ab%af%e5%8f%a3%e5%8f%b7%ef%bc%9a%2065014%20%e6%88%96%e8%80%85%e7%9b%b4%e6%8e%a5%e6%89%a7%e8%a1%8c%e5%91%bd%e4%bb%a4%ef%bc%9a,ssh%20root%40holer.org%20-p%2065014%20%e8%bf%99%e6%a0%b7%e5%b0%b1%e5%8f%af%e4%bb%a5%e4%bb%8e%e5%85%ac%e7%bd%91%e7%99%bb%e5%bd%95%e8%ae%bf%e9%97%ae%e6%a0%91%e8%8e%93%e6%b4%be%20Raspberry%20Pi%e7%b3%bb%e7%bb%9f%e4%ba%86%E3%80%82">如何从外网登录访问树莓派Raspberry Pi</a>
 <ul>
+<li>holer</li>
 <li><a href="http://wdom.net/?spm=a2c6h.12873639.article-detail.8.34313bf6f5zLfQ">Wisdom</a></li>
+<li><a href="https://github.com/wisdom-projects/holer">wisdom-projects/holer</a>
+<ul>
+<li>方式一：使用公开的holer映射或者开通holer服务，通过holer客户端软件经holer服务器实现公网访问</li>
+<li>方式二：使用holer服务端软件搭建holer服务，通过holer客户端软件经自己服务器实现公网访问，</li>
+</ul>
+</li>
+<li><a href="http://blog.wdom.net/article/28#directory020017775808006130">Holer端口映射软件使用教程</a></li>
 </ul>
 </li>
 </ul>
@@ -663,6 +704,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#reference">reference</a></li>
     <li><a href="#clash">clash</a></li>
     <li><a href="#yt-dlp">yt-dlp</a></li>
+    <li><a href="#tomcat">tomcat</a></li>
     <li><a href="#定时任务">定时任务</a></li>
     <li><a href="#外网登录">外网登录</a></li>
   </ul>
