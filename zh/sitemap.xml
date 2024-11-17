@@ -60,10 +60,6 @@
   </url><url>
     <loc>/zh/zh/post/life/life-recommend/</loc>
   </url><url>
-    <loc>/zh/post/computer-science/linux/</loc>
-  </url><url>
-    <loc>/zh/zh/post/computer-science/linux/</loc>
-  </url><url>
     <loc>/zh/post/computer-science/mac/</loc>
   </url><url>
     <loc>/zh/zh/post/computer-science/mac/</loc>
@@ -144,6 +140,10 @@
                 hreflang="zh-CN"
                 href="/zh/categories/"
                 />
+  </url><url>
+    <loc>/zh/post/computer-science/linux/</loc>
+  </url><url>
+    <loc>/zh/zh/post/computer-science/linux/</loc>
   </url><url>
     <loc>/zh/tags/</loc>
     <xhtml:link
