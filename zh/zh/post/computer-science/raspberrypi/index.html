@@ -67,39 +67,17 @@ tar zxvf apache-tomcat-9.0.36.tar.gz
 cd ~/apache-tomcat-9.0.36/bin
 sudo ./startup.sh
 
-  定时任务
+  dd
   #
 
-
-查看当前的定时任务 crontab -l
-编辑定时任务 crontab -e
-
-
-  外网登录
-  #
-
-
-如何从外网登录访问树莓派Raspberry Pi
-
-holer
-Wisdom
-wisdom-projects/holer
-
-方式一：使用公开的holer映射或者开通holer服务，通过holer客户端软件经holer服务器实现公网访问
-方式二：使用holer服务端软件搭建holer服务，通过holer客户端软件经自己服务器实现公网访问，
-
-
-Holer端口映射软件使用教程
-
-
-">
+dd 命令是一个非常强大的工具，可以用来复制和转换文件。通过创建一个临时文件并测量其读写速度，可以测试存储介质的性能。">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/raspberrypi/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="raspberry pi">
   <meta property="og:description" content="raspberry pi # reference # 树莓派文档 clash # reference 为什么全局代理后， CMD 依然 Ping 不通 Google？ 树莓派 Clash 透明代理(TProxy) 在 Raspberry Pi 上运行 Clash 作为透明代理 解决 Clash Meta 中TUN模式无法上网的问题：正确配置DNS设置 解决 树莓派ping: baidu.com: 域名解析暂时失败 树莓派安装clash，实现科学上网 在 Raspberry Pi 上运行 Clash 作为透明代理 http://yacd.haishan.me yt-dlp # 使用这个工具，可以下载 youtube 视频
-后台下载命令 nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp; 实时查看后台下载进度 tail -f nohup.out 停止下载 查询后台进程号 ps -aux | grep yt-dlp 杀死进程 kill -9 {{进程号}} tomcat # 树莓派安装Tomcat wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36.tar.gz tar zxvf apache-tomcat-9.0.36.tar.gz cd ~/apache-tomcat-9.0.36/bin sudo ./startup.sh 定时任务 # 查看当前的定时任务 crontab -l 编辑定时任务 crontab -e 外网登录 # 如何从外网登录访问树莓派Raspberry Pi holer Wisdom wisdom-projects/holer 方式一：使用公开的holer映射或者开通holer服务，通过holer客户端软件经holer服务器实现公网访问 方式二：使用holer服务端软件搭建holer服务，通过holer客户端软件经自己服务器实现公网访问， Holer端口映射软件使用教程">
+后台下载命令 nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp; 实时查看后台下载进度 tail -f nohup.out 停止下载 查询后台进程号 ps -aux | grep yt-dlp 杀死进程 kill -9 {{进程号}} tomcat # 树莓派安装Tomcat wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36.tar.gz tar zxvf apache-tomcat-9.0.36.tar.gz cd ~/apache-tomcat-9.0.36/bin sudo ./startup.sh dd # dd 命令是一个非常强大的工具，可以用来复制和转换文件。通过创建一个临时文件并测量其读写速度，可以测试存储介质的性能。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -109,7 +87,7 @@ Holer端口映射软件使用教程
 <link rel="canonical" href="/zh/zh/post/computer-science/raspberrypi/">
 <link rel="stylesheet" href="/book.min.434035e7885c7f5d12818bd9f111cf1a0925c6fb78382667381c3d5eda3fb4f1.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.8996dddc0cccfdfa8966789286d1ea1fc233f2758a4dee45c0af011d74addf14.js" ></script>
+  <script defer src="/zh.search.min.f900e92203c7735540f7da5169c1c920d59d8e107844ece2cb6c6b9b89c2e0af.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -556,6 +534,8 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#clash">clash</a></li>
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#tomcat">tomcat</a></li>
+    <li><a href="#dd">dd</a></li>
+    <li><a href="#iwlist">iwlist</a></li>
     <li><a href="#定时任务">定时任务</a></li>
     <li><a href="#外网登录">外网登录</a></li>
   </ul>
@@ -633,6 +613,64 @@ tar zxvf apache-tomcat-9.0.36.tar.gz
 
 cd ~/apache-tomcat-9.0.36/bin
 sudo ./startup.sh
+</code></pre><h2 id="dd">
+  dd
+  <a class="anchor" href="#dd">#</a>
+</h2>
+<p><code>dd</code> 命令是一个非常强大的工具，可以用来复制和转换文件。通过创建一个临时文件并测量其读写速度，可以测试存储介质的性能。</p>
+<ol>
+<li>
+<p><strong>打开终端</strong>：您可以通过SSH连接到您的树莓派，或者直接在树莓派上打开终端。</p>
+</li>
+<li>
+<p><strong>测试写入速度</strong>：</p>
+<ul>
+<li>创建一个 1GB 的临时文件，并测量写入速度：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>testfile bs<span style="color:#f92672">=</span>1M count<span style="color:#f92672">=</span><span style="color:#ae81ff">1024</span> conv<span style="color:#f92672">=</span>fdatasync
+</span></span></code></pre></div></li>
+<li>解释：
+<ul>
+<li><code>if=/dev/zero</code>：从 <code>/dev/zero</code> 读取数据（这是一个无限的零流）。</li>
+<li><code>of=testfile</code>：将数据写入名为 <code>testfile</code> 的文件。</li>
+<li><code>bs=1M</code>：每次读写 1MB 的数据块。</li>
+<li><code>count=1024</code>：写入 1024 个 1MB 的数据块，总共 1GB。</li>
+<li><code>conv=fdatasync</code>：确保所有数据都写入磁盘后再结束命令。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>测试读取速度</strong>：</p>
+<ul>
+<li>读取刚刚创建的文件，并测量读取速度：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>testfile of<span style="color:#f92672">=</span>/dev/null bs<span style="color:#f92672">=</span>1M
+</span></span></code></pre></div></li>
+<li>解释：
+<ul>
+<li><code>if=testfile</code>：从 <code>testfile</code> 文件读取数据。</li>
+<li><code>of=/dev/null</code>：将数据写入 <code>/dev/null</code>（丢弃数据）。</li>
+<li><code>bs=1M</code>：每次读取 1MB 的数据块。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>删除测试文件</strong>：</p>
+<ul>
+<li>测试完成后，删除 <code>testfile</code> 以释放空间：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo rm testfile
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<h2 id="iwlist">
+  iwlist
+  <a class="anchor" href="#iwlist">#</a>
+</h2>
+<pre tabindex="0"><code>
+sudo iwlist wlan0 scan
+
+sudo iwlist wlan0 scan | grep SSID
 </code></pre><h2 id="定时任务">
   定时任务
   <a class="anchor" href="#%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1">#</a>
@@ -705,6 +743,8 @@ sudo ./startup.sh
     <li><a href="#clash">clash</a></li>
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#tomcat">tomcat</a></li>
+    <li><a href="#dd">dd</a></li>
+    <li><a href="#iwlist">iwlist</a></li>
     <li><a href="#定时任务">定时任务</a></li>
     <li><a href="#外网登录">外网登录</a></li>
   </ul>
