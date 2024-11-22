@@ -114,9 +114,9 @@ transmit 文件传输工具
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/mac/">
-<link rel="stylesheet" href="/book.min.0b76b738e8913b5057987ecb9bc7e63185f9dfbb194a90f6cfb331c879ba7a02.css" >
+<link rel="stylesheet" href="/book.min.7694be40bd8862294d55753bc9c412847f9966f339f20fd7c02fcd932c11406f.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.df44c9d3a1d882bf3ce143835d380ab1fd268961f3913a72a4f372d1f260be8b.js" ></script>
+  <script defer src="/zh.search.min.a830c7d7585fdb997211f4e6a3f09859efb236d6e94499dbf921800dac074754.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -573,6 +573,24 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#停止和卸载服务">停止和卸载服务</a></li>
       </ul>
     </li>
+    <li><a href="#怎么查看-launchctl-服务的状态">怎么查看 launchctl 服务的状态</a>
+      <ul>
+        <li><a href="#1-查看所有已加载的服务">1. 查看所有已加载的服务</a></li>
+        <li><a href="#2-查看特定服务的状态">2. 查看特定服务的状态</a></li>
+        <li><a href="#3-查看服务的详细信息">3. 查看服务的详细信息</a></li>
+        <li><a href="#4-检查服务日志">4. 检查服务日志</a></li>
+        <li><a href="#示例">示例</a></li>
+      </ul>
+    </li>
+    <li><a href="#怎么查看-launchctl-中一个服务的内存使用情况">怎么查看 launchctl 中一个服务的内存使用情况</a>
+      <ul>
+        <li><a href="#1-使用-top-命令">1. 使用 <code>top</code> 命令</a></li>
+        <li><a href="#2-使用-ps-命令">2. 使用 <code>ps</code> 命令</a></li>
+        <li><a href="#3-使用-activity-monitor">3. 使用 <code>activity monitor</code></a></li>
+        <li><a href="#4-使用-memory_pressure-命令">4. 使用 <code>memory_pressure</code> 命令</a></li>
+        <li><a href="#示例-1">示例</a></li>
+      </ul>
+    </li>
     <li><a href="#questions">questions</a></li>
   </ul>
 </nav>
@@ -777,6 +795,150 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
 </span></span></code></pre></div></li>
 </ul>
 <p>以上步骤完成后，你的 Java 应用程序就会作为一个 macOS 服务运行了。如果有任何问题，可以检查指定的日志文件以获取更多信息。</p>
+<h2 id="怎么查看-launchctl-服务的状态">
+  怎么查看 launchctl 服务的状态
+  <a class="anchor" href="#%e6%80%8e%e4%b9%88%e6%9f%a5%e7%9c%8b-launchctl-%e6%9c%8d%e5%8a%a1%e7%9a%84%e7%8a%b6%e6%80%81">#</a>
+</h2>
+<p>在 macOS 中，你可以使用 <code>launchctl</code> 命令来查看服务的状态。以下是几种常见的方法来检查 <code>launchctl</code> 服务的状态：</p>
+<h3 id="1-查看所有已加载的服务">
+  1. 查看所有已加载的服务
+  <a class="anchor" href="#1-%e6%9f%a5%e7%9c%8b%e6%89%80%e6%9c%89%e5%b7%b2%e5%8a%a0%e8%bd%bd%e7%9a%84%e6%9c%8d%e5%8a%a1">#</a>
+</h3>
+<p>使用 <code>list</code> 子命令可以列出所有已加载的 <code>launchd</code> 服务及其状态：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl list
+</span></span></code></pre></div><p>这将显示一个列表，其中包括服务的标签（Label）、进程 ID（PID）以及退出状态（LastExitStatus）。</p>
+<h3 id="2-查看特定服务的状态">
+  2. 查看特定服务的状态
+  <a class="anchor" href="#2-%e6%9f%a5%e7%9c%8b%e7%89%b9%e5%ae%9a%e6%9c%8d%e5%8a%a1%e7%9a%84%e7%8a%b6%e6%80%81">#</a>
+</h3>
+<p>如果你只想查看某个特定服务的状态，可以使用服务的标签（Label）来过滤输出。例如，如果你的服务标签是 <code>com.yourdomain.yourapp</code>，可以使用以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl list com.yourdomain.yourapp
+</span></span></code></pre></div><h3 id="3-查看服务的详细信息">
+  3. 查看服务的详细信息
+  <a class="anchor" href="#3-%e6%9f%a5%e7%9c%8b%e6%9c%8d%e5%8a%a1%e7%9a%84%e8%af%a6%e7%bb%86%e4%bf%a1%e6%81%af">#</a>
+</h3>
+<p>如果你想查看更详细的信息，可以使用 <code>print</code> 子命令。例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl print system/com.yourdomain.yourapp
+</span></span></code></pre></div><p>这将显示关于该服务的详细信息，包括其配置、状态、环境变量等。</p>
+<h3 id="4-检查服务日志">
+  4. 检查服务日志
+  <a class="anchor" href="#4-%e6%a3%80%e6%9f%a5%e6%9c%8d%e5%8a%a1%e6%97%a5%e5%bf%97">#</a>
+</h3>
+<p>如果服务有日志输出，可以使用 <code>log</code> 命令来查看日志。例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo log show --predicate <span style="color:#e6db74">&#39;process == &#34;yourapp&#34;&#39;</span> --info --debug --last 1h
+</span></span></code></pre></div><p>这将显示过去一小时内与 <code>yourapp</code> 进程相关的所有日志信息。</p>
+<h3 id="示例">
+  示例
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b">#</a>
+</h3>
+<p>假设你有一个服务标签为 <code>com.example.myapp</code> 的服务，你可以按以下步骤检查其状态：</p>
+<ol>
+<li>
+<p><strong>查看所有已加载的服务</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl list
+</span></span></code></pre></div></li>
+<li>
+<p><strong>查看特定服务的状态</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl list com.example.myapp
+</span></span></code></pre></div></li>
+<li>
+<p><strong>查看服务的详细信息</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl print system/com.example.myapp
+</span></span></code></pre></div></li>
+<li>
+<p><strong>查看服务日志</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo log show --predicate <span style="color:#e6db74">&#39;process == &#34;myapp&#34;&#39;</span> --info --debug --last 1h
+</span></span></code></pre></div></li>
+</ol>
+<p>通过这些命令，你可以轻松地检查和管理 <code>launchctl</code> 服务的状态。</p>
+<h2 id="怎么查看-launchctl-中一个服务的内存使用情况">
+  怎么查看 launchctl 中一个服务的内存使用情况
+  <a class="anchor" href="#%e6%80%8e%e4%b9%88%e6%9f%a5%e7%9c%8b-launchctl-%e4%b8%ad%e4%b8%80%e4%b8%aa%e6%9c%8d%e5%8a%a1%e7%9a%84%e5%86%85%e5%ad%98%e4%bd%bf%e7%94%a8%e6%83%85%e5%86%b5">#</a>
+</h2>
+<p>在 macOS 中，你可以使用多种方法来查看 <code>launchctl</code> 服务的内存使用情况。以下是几种常见的方法：</p>
+<h3 id="1-使用-top-命令">
+  1. 使用 <code>top</code> 命令
+  <a class="anchor" href="#1-%e4%bd%bf%e7%94%a8-top-%e5%91%bd%e4%bb%a4">#</a>
+</h3>
+<p><code>top</code> 命令是一个实时系统监视工具，可以显示系统的整体状态，包括 CPU 和内存使用情况。你可以通过 <code>top</code> 命令来查找特定服务的进程 ID（PID），然后查看其内存使用情况。</p>
+<ol>
+<li>
+<p><strong>打开 <code>top</code> 并查找进程</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>top
+</span></span></code></pre></div></li>
+<li>
+<p><strong>在 <code>top</code> 界面中查找你的服务</strong>：</p>
+<ul>
+<li>按 <code>P</code> 可以按 CPU 使用率排序。</li>
+<li>按 <code>M</code> 可以按内存使用率排序。</li>
+<li>查找你的服务进程，通常可以通过进程名称或部分名称来识别。</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-使用-ps-命令">
+  2. 使用 <code>ps</code> 命令
+  <a class="anchor" href="#2-%e4%bd%bf%e7%94%a8-ps-%e5%91%bd%e4%bb%a4">#</a>
+</h3>
+<p><code>ps</code> 命令可以显示当前系统中运行的进程信息。你可以结合 <code>grep</code> 命令来查找特定服务的进程信息。</p>
+<ol>
+<li>
+<p><strong>查找服务的 PID</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ps aux | grep com.yourdomain.yourapp
+</span></span></code></pre></div><p>这将显示与 <code>com.yourdomain.yourapp</code> 相关的所有进程信息。找到你的服务进程的 PID。</p>
+</li>
+<li>
+<p><strong>查看特定进程的内存使用情况</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ps -p &lt;PID&gt; -o %mem,%cpu,rss
+</span></span></code></pre></div><p>其中 <code>&lt;PID&gt;</code> 是你在上一步中找到的进程 ID。<code>%mem</code> 显示内存使用百分比，<code>%cpu</code> 显示 CPU 使用百分比，<code>rss</code> 显示常驻集大小（Resident Set Size，即进程占用的实际物理内存）。</p>
+</li>
+</ol>
+<h3 id="3-使用-activity-monitor">
+  3. 使用 <code>activity monitor</code>
+  <a class="anchor" href="#3-%e4%bd%bf%e7%94%a8-activity-monitor">#</a>
+</h3>
+<p>macOS 自带的“活动监视器”应用程序也可以用来查看进程的内存使用情况。</p>
+<ol>
+<li>
+<p><strong>打开“活动监视器”</strong>：</p>
+<ul>
+<li>你可以通过 Spotlight 搜索（按 <code>Cmd + Space</code>，然后输入“活动监视器”）来打开它。</li>
+</ul>
+</li>
+<li>
+<p><strong>切换到“内存”标签页</strong>：</p>
+<ul>
+<li>在“活动监视器”中，选择“内存”标签页，这里会显示所有进程的内存使用情况。</li>
+</ul>
+</li>
+<li>
+<p><strong>查找你的服务</strong>：</p>
+<ul>
+<li>在进程列表中查找你的服务名称，查看其内存使用情况。</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-使用-memory_pressure-命令">
+  4. 使用 <code>memory_pressure</code> 命令
+  <a class="anchor" href="#4-%e4%bd%bf%e7%94%a8-memory_pressure-%e5%91%bd%e4%bb%a4">#</a>
+</h3>
+<p><code>memory_pressure</code> 命令可以显示系统的内存压力情况，虽然它不能直接显示单个进程的内存使用情况，但可以帮助你了解系统整体的内存状况。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>memory_pressure
+</span></span></code></pre></div><h3 id="示例-1">
+  示例
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b-1">#</a>
+</h3>
+<p>假设你的服务标签是 <code>com.example.myapp</code>，你可以按以下步骤查看其内存使用情况：</p>
+<ol>
+<li>
+<p><strong>查找服务的 PID</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ps aux | grep com.example.myapp
+</span></span></code></pre></div></li>
+<li>
+<p><strong>假设找到的 PID 是 12345，查看该进程的内存使用情况</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ps -p <span style="color:#ae81ff">12345</span> -o %mem,%cpu,rss
+</span></span></code></pre></div></li>
+</ol>
+<p>通过这些方法，你可以轻松地查看 <code>launchctl</code> 服务的内存使用情况。</p>
 <h2 id="questions">
   questions
   <a class="anchor" href="#questions">#</a>
@@ -842,6 +1004,24 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
         <li><a href="#准备工作">准备工作</a></li>
         <li><a href="#创建-launchdaemon-配置文件">创建 LaunchDaemon 配置文件</a></li>
         <li><a href="#停止和卸载服务">停止和卸载服务</a></li>
+      </ul>
+    </li>
+    <li><a href="#怎么查看-launchctl-服务的状态">怎么查看 launchctl 服务的状态</a>
+      <ul>
+        <li><a href="#1-查看所有已加载的服务">1. 查看所有已加载的服务</a></li>
+        <li><a href="#2-查看特定服务的状态">2. 查看特定服务的状态</a></li>
+        <li><a href="#3-查看服务的详细信息">3. 查看服务的详细信息</a></li>
+        <li><a href="#4-检查服务日志">4. 检查服务日志</a></li>
+        <li><a href="#示例">示例</a></li>
+      </ul>
+    </li>
+    <li><a href="#怎么查看-launchctl-中一个服务的内存使用情况">怎么查看 launchctl 中一个服务的内存使用情况</a>
+      <ul>
+        <li><a href="#1-使用-top-命令">1. 使用 <code>top</code> 命令</a></li>
+        <li><a href="#2-使用-ps-命令">2. 使用 <code>ps</code> 命令</a></li>
+        <li><a href="#3-使用-activity-monitor">3. 使用 <code>activity monitor</code></a></li>
+        <li><a href="#4-使用-memory_pressure-命令">4. 使用 <code>memory_pressure</code> 命令</a></li>
+        <li><a href="#示例-1">示例</a></li>
       </ul>
     </li>
     <li><a href="#questions">questions</a></li>
