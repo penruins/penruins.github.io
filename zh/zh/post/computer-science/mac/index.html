@@ -97,23 +97,16 @@ Hidden space 隐藏空间
 transmit 文件传输工具
 
 
-  questions
+  把一个java程序配置为一个服务
   #
 
-
-2024-11-15 指纹识别及录入问题
-
-M1 macbookPro 指纹不是识别及其慢就是识别不了，没有反应
-电脑插电会有影响，不插电指纹功能是正常的
-
-
-">
+在 macOS 中将 Java 程序配置为服务，可以通过创建一个 LaunchDaemon 或 LaunchAgent 来实现。这里我们以创建一个 LaunchDaemon 为例来说明如何操作。">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/mac/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="mac">
-  <meta property="og:description" content="mac # brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf ffmpeg # 安装 brew install ffmpeg yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx transmit 文件传输工具 questions # 2024-11-15 指纹识别及录入问题 M1 macbookPro 指纹不是识别及其慢就是识别不了，没有反应 电脑插电会有影响，不插电指纹功能是正常的">
+  <meta property="og:description" content="mac # brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf ffmpeg # 安装 brew install ffmpeg yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx transmit 文件传输工具 把一个java程序配置为一个服务 # 在 macOS 中将 Java 程序配置为服务，可以通过创建一个 LaunchDaemon 或 LaunchAgent 来实现。这里我们以创建一个 LaunchDaemon 为例来说明如何操作。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -123,7 +116,7 @@ M1 macbookPro 指纹不是识别及其慢就是识别不了，没有反应
 <link rel="canonical" href="/zh/zh/post/computer-science/mac/">
 <link rel="stylesheet" href="/book.min.0b76b738e8913b5057987ecb9bc7e63185f9dfbb194a90f6cfb331c879ba7a02.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.be371249ed0b8e404cf19db0a6c9602766f4c13169bea263b62ef452e84b56a7.js" ></script>
+  <script defer src="/zh.search.min.df44c9d3a1d882bf3ce143835d380ab1fd268961f3913a72a4f372d1f260be8b.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -573,6 +566,13 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#player">player</a></li>
     <li><a href="#disk">disk</a></li>
+    <li><a href="#把一个java程序配置为一个服务">把一个java程序配置为一个服务</a>
+      <ul>
+        <li><a href="#准备工作">准备工作</a></li>
+        <li><a href="#创建-launchdaemon-配置文件">创建 LaunchDaemon 配置文件</a></li>
+        <li><a href="#停止和卸载服务">停止和卸载服务</a></li>
+      </ul>
+    </li>
     <li><a href="#questions">questions</a></li>
   </ul>
 </nav>
@@ -679,6 +679,104 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
 </li>
 <li>transmit 文件传输工具</li>
 </ul>
+<h2 id="把一个java程序配置为一个服务">
+  把一个java程序配置为一个服务
+  <a class="anchor" href="#%e6%8a%8a%e4%b8%80%e4%b8%aajava%e7%a8%8b%e5%ba%8f%e9%85%8d%e7%bd%ae%e4%b8%ba%e4%b8%80%e4%b8%aa%e6%9c%8d%e5%8a%a1">#</a>
+</h2>
+<p>在 macOS 中将 Java 程序配置为服务，可以通过创建一个 LaunchDaemon 或 LaunchAgent 来实现。这里我们以创建一个 LaunchDaemon 为例来说明如何操作。</p>
+<h3 id="准备工作">
+  准备工作
+  <a class="anchor" href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c">#</a>
+</h3>
+<ol>
+<li>
+<p><strong>确保你的 Java 程序可以无交互地运行</strong>：</p>
+<ul>
+<li>你的 Java 应用应该能够从命令行启动，并且不需要用户界面或用户输入。</li>
+</ul>
+</li>
+<li>
+<p><strong>编写启动脚本</strong>（可选）：</p>
+<ul>
+<li>如果你的 Java 程序需要复杂的启动参数或者环境变量设置，建议先编写一个 Shell 脚本来处理这些细节。例如，你可以创建一个名为 <code>start-myapp.sh</code> 的脚本文件，内容如下：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cd /path/to/your/app
+</span></span><span style="display:flex;"><span>export JAVA_OPTS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-Xms512m -Xmx1024m&#34;</span>
+</span></span><span style="display:flex;"><span>exec java $JAVA_OPTS -jar your-application.jar
+</span></span></code></pre></div></li>
+<li>记得给这个脚本执行权限：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>chmod +x start-myapp.sh
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<h3 id="创建-launchdaemon-配置文件">
+  创建 LaunchDaemon 配置文件
+  <a class="anchor" href="#%e5%88%9b%e5%bb%ba-launchdaemon-%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">#</a>
+</h3>
+<ol>
+<li>
+<p><strong>创建配置文件</strong>：</p>
+<ul>
+<li>在 <code>/Library/LaunchDaemons/</code> 目录下创建一个新的 <code>.plist</code> 文件。文件名应该包含反向域名格式的唯一标识符，例如 <code>com.yourdomain.yourapp.plist</code>。</li>
+<li>使用文本编辑器创建并编辑这个文件，内容如下：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;plist</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dict&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>Label<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>com.yourdomain.yourapp<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>ProgramArguments<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;array&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;string&gt;</span>/path/to/start-myapp.sh<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/array&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>RunAtLoad<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;true/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>KeepAlive<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;true/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>StandardOutPath<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>/path/to/yourapp.log<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>StandardErrorPath<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>/path/to/yourapp.err<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dict&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/plist&gt;</span>
+</span></span></code></pre></div></li>
+<li>解释：
+<ul>
+<li><code>Label</code> 是服务的唯一标识符。</li>
+<li><code>ProgramArguments</code> 指定了启动程序的命令及其参数。</li>
+<li><code>RunAtLoad</code> 设置为 <code>true</code> 表示系统启动时自动启动该服务。</li>
+<li><code>KeepAlive</code> 设置为 <code>true</code> 表示如果服务停止，则系统会自动重启它。</li>
+<li><code>StandardOutPath</code> 和 <code>StandardErrorPath</code> 分别指定了标准输出和错误输出的日志文件路径。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>加载服务</strong>：</p>
+<ul>
+<li>将配置文件保存后，使用以下命令加载服务：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl load /Library/LaunchDaemons/com.yourdomain.yourapp.plist
+</span></span></code></pre></div></li>
+<li>启动服务：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl start com.yourdomain.yourapp
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<h3 id="停止和卸载服务">
+  停止和卸载服务
+  <a class="anchor" href="#%e5%81%9c%e6%ad%a2%e5%92%8c%e5%8d%b8%e8%bd%bd%e6%9c%8d%e5%8a%a1">#</a>
+</h3>
+<ul>
+<li><strong>停止服务</strong>：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl stop com.yourdomain.yourapp
+</span></span></code></pre></div></li>
+<li><strong>卸载服务</strong>：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl unload /Library/LaunchDaemons/com.yourdomain.yourapp.plist
+</span></span></code></pre></div></li>
+</ul>
+<p>以上步骤完成后，你的 Java 应用程序就会作为一个 macOS 服务运行了。如果有任何问题，可以检查指定的日志文件以获取更多信息。</p>
 <h2 id="questions">
   questions
   <a class="anchor" href="#questions">#</a>
@@ -739,6 +837,13 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#player">player</a></li>
     <li><a href="#disk">disk</a></li>
+    <li><a href="#把一个java程序配置为一个服务">把一个java程序配置为一个服务</a>
+      <ul>
+        <li><a href="#准备工作">准备工作</a></li>
+        <li><a href="#创建-launchdaemon-配置文件">创建 LaunchDaemon 配置文件</a></li>
+        <li><a href="#停止和卸载服务">停止和卸载服务</a></li>
+      </ul>
+    </li>
     <li><a href="#questions">questions</a></li>
   </ul>
 </nav>
