@@ -51,6 +51,13 @@ mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf
 安装 brew install ffmpeg
 
 
+  postgresql
+  #
+
+
+Homebrew 安装 postgresql
+
+
   yt-dlp
   #
 
@@ -106,7 +113,7 @@ transmit 文件传输工具
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/mac/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="mac">
-  <meta property="og:description" content="mac # brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf ffmpeg # 安装 brew install ffmpeg yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx transmit 文件传输工具 把一个java程序配置为一个服务 # 在 macOS 中将 Java 程序配置为服务，可以通过创建一个 LaunchDaemon 或 LaunchAgent 来实现。这里我们以创建一个 LaunchDaemon 为例来说明如何操作。">
+  <meta property="og:description" content="mac # brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf ffmpeg # 安装 brew install ffmpeg postgresql # Homebrew 安装 postgresql yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx transmit 文件传输工具 把一个java程序配置为一个服务 # 在 macOS 中将 Java 程序配置为服务，可以通过创建一个 LaunchDaemon 或 LaunchAgent 来实现。这里我们以创建一个 LaunchDaemon 为例来说明如何操作。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -116,7 +123,7 @@ transmit 文件传输工具
 <link rel="canonical" href="/zh/post/computer-science/mac/">
 <link rel="stylesheet" href="/book.min.7694be40bd8862294d55753bc9c412847f9966f339f20fd7c02fcd932c11406f.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.0d34fe63ca28ed5df202edb153bb0d3d3141d13d0dc7ed375fac3e74512e1d06.js" ></script>
+  <script defer src="/zh.search.min.df4c3da2f244e88cfa43ed739f60c966cf3e6bc152f0bf3dbaa86f3176ccd16f.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -563,6 +570,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#mysql">mysql</a></li>
     <li><a href="#mongodb">mongodb</a></li>
     <li><a href="#ffmpeg">ffmpeg</a></li>
+    <li><a href="#postgresql">postgresql</a></li>
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#player">player</a></li>
     <li><a href="#disk">disk</a></li>
@@ -628,6 +636,13 @@ https://github.com/alex-shpak/hugo-book
 </h2>
 <ul>
 <li>安装 <code>brew install ffmpeg</code></li>
+</ul>
+<h2 id="postgresql">
+  postgresql
+  <a class="anchor" href="#postgresql">#</a>
+</h2>
+<ul>
+<li><a href="https://wiki.postgresql.org/wiki/Homebrew">Homebrew 安装 postgresql</a></li>
 </ul>
 <h2 id="yt-dlp">
   yt-dlp
@@ -947,6 +962,7 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
     <li><a href="#mysql">mysql</a></li>
     <li><a href="#mongodb">mongodb</a></li>
     <li><a href="#ffmpeg">ffmpeg</a></li>
+    <li><a href="#postgresql">postgresql</a></li>
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#player">player</a></li>
     <li><a href="#disk">disk</a></li>
