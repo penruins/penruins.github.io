@@ -157,10 +157,10 @@
 <h3>2024-11-20</h3>
 <li><a href="https://lite.cnn.com/2024/11/20/us/china-international-students-us-decline-hnk-dst/index.html">
     Indian international students in the US outnumber Chinese for the first time in 15 years</a>
-    <div class="tooltip">
-        <span class="tooltiptext">在美国的印度国际学生人数 15 年来首次超过中国学生人数</span>
-        Translate
-    </div>
+    <span id="contentDiv" data-content="在美国的印度国际学生人数 15 年来首次超过中国学生人数"
+          onclick="toggleContent(this)">
+        translate
+    </span>
 </li>
 <li><a href="https://lite.cnn.com/2024/11/20/uk/cambridge-word-of-year-2024-scli-intl-gbr/index.html">
     Cambridge Dictionary’s word of the year 2024 is all about thinking positive</a>
@@ -230,20 +230,32 @@
     //     });
     // });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        // 获取所有带有 .tooltip 类的元素
-        var tooltips = document.querySelectorAll('.tooltip');
-
-        // 为每个 tooltip 元素添加点击事件监听器
-        tooltips.forEach(function (tooltip) {
-            tooltip.addEventListener('click', function () {
-                // 获取当前 tooltip 下的 .tooltiptext 元素
-                var tooltiptext = this.querySelector('.tooltiptext');
-                // 切换 'show' 类来控制气泡的显示
-                tooltiptext.classList.toggle('show');
-            });
-        });
-    });
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     // 获取所有带有 .tooltip 类的元素
+    //     var tooltips = document.querySelectorAll('.tooltip');
+    //
+    //     // 为每个 tooltip 元素添加点击事件监听器
+    //     tooltips.forEach(function (tooltip) {
+    //         tooltip.addEventListener('click', function () {
+    //             // 获取当前 tooltip 下的 .tooltiptext 元素
+    //             var tooltiptext = this.querySelector('.tooltiptext');
+    //             // 切换 'show' 类来控制气泡的显示
+    //             tooltiptext.classList.toggle('show');
+    //         });
+    //     });
+    // });
+    function toggleContent(element) {
+        // 获取data-content属性中的内容
+        var content = element.getAttribute('data-content');
+        // 检查元素是否已经包含了内容
+        if (element.innerText === content) {
+            // 如果元素内容与data-content相同，则清空元素内容
+            element.innerText = 'translate';
+        } else {
+            // 否则，设置元素内容为data-content中的内容
+            element.innerText = content;
+        }
+    }
 
 </script>
 
