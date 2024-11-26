@@ -158,18 +158,22 @@
 <li><a href="https://lite.cnn.com/2024/11/20/us/china-international-students-us-decline-hnk-dst/index.html">
     Indian international students in the US outnumber Chinese for the first time in 15 years</a>
     <div class="tooltip">
-        <span class="tooltiptext" id="myTooltip">在美国的印度国际学生人数 15 年来首次超过中国学生人数</span>
+        <span class="tooltiptext">在美国的印度国际学生人数 15 年来首次超过中国学生人数</span>
         Translate
     </div>
 </li>
 <li><a href="https://lite.cnn.com/2024/11/20/uk/cambridge-word-of-year-2024-scli-intl-gbr/index.html">
     Cambridge Dictionary’s word of the year 2024 is all about thinking positive</a>
+    <div class="tooltip">
+        <span class="tooltiptext">剑桥词典 2024 年度词汇的主题是积极思考</span>
+        Translate
+    </div>
     <ul>
-        <li>剑桥词典 2024 年度词汇的主题是积极思考</li>
         <li>Cambridge Dictionary has put it out to the universe, naming “manifest” as its word of the year for 2024.
-            <ul>
-                <li>剑桥词典 （Cambridge Dictionary） 已将其推向宇宙，将 “manifest” 命名为 2024 年的年度词汇。</li>
-            </ul>
+            <div class="tooltip">
+                <span class="tooltiptext">剑桥词典 （Cambridge Dictionary） 已将其推向宇宙，将 “manifest” 命名为 2024 年的年度词汇。</span>
+                Translate
+            </div>
         </li>
     </ul>
 </li>
@@ -213,16 +217,31 @@
 </body>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var tooltip = document.querySelector('.tooltip');
-        var tooltiptext = document.getElementById('myTooltip');
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     var tooltip = document.querySelector('.tooltip');
+    //     var tooltiptext = document.getElementById('myTooltip');
+    //
+    //     tooltip.addEventListener('click', function () {
+    //         if (tooltiptext.style.visibility === 'hidden') {
+    //             tooltiptext.style.visibility = 'visible';
+    //         } else {
+    //             tooltiptext.style.visibility = 'hidden';
+    //         }
+    //     });
+    // });
 
-        tooltip.addEventListener('click', function () {
-            if (tooltiptext.style.visibility === 'hidden') {
-                tooltiptext.style.visibility = 'visible';
-            } else {
-                tooltiptext.style.visibility = 'hidden';
-            }
+    document.addEventListener('DOMContentLoaded', function () {
+        // 获取所有带有 .tooltip 类的元素
+        var tooltips = document.querySelectorAll('.tooltip');
+
+        // 为每个 tooltip 元素添加点击事件监听器
+        tooltips.forEach(function (tooltip) {
+            tooltip.addEventListener('click', function () {
+                // 获取当前 tooltip 下的 .tooltiptext 元素
+                var tooltiptext = this.querySelector('.tooltiptext');
+                // 切换 'show' 类来控制气泡的显示
+                tooltiptext.classList.toggle('show');
+            });
         });
     });
 
