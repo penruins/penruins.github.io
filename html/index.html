@@ -31,7 +31,54 @@
                 color: #84b2ff;
             }
         }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        /* 默认情况下隐藏气泡 */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+
+            /* 定位气泡 */
+            position: absolute;
+            z-index: 1;
+            bottom: 100%; /* 气泡位于元素上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            margin-left: 0px; /* 使用margin自动调整水平居中 */
+
+            /* 添加小三角形 */
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #555 transparent transparent transparent;
+            }
+        }
+
+        /* 当鼠标悬停在工具提示上时显示气泡 */
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
     </style>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="element-ui/index.css">
+    <!-- 引入组件库 -->
+    <script src="element-ui/index.js"></script>
 
 </head>
 <body>
@@ -102,13 +149,18 @@
         <li><a href=""></a></li>
     </ul>
 </li>
+<!--<span class="tooltip">-->
+<!--  <span class="tooltiptext" id="myTooltip">这是气泡中的文字</span>-->
+<!--  点击我查看提示-->
+<!--</span>-->
 <h2>News</h2>
 <h3>2024-11-20</h3>
 <li><a href="https://lite.cnn.com/2024/11/20/us/china-international-students-us-decline-hnk-dst/index.html">
     Indian international students in the US outnumber Chinese for the first time in 15 years</a>
-    <ul>
-        <li>在美国的印度国际学生人数 15 年来首次超过中国学生人数</li>
-    </ul>
+    <div class="tooltip">
+        <span class="tooltiptext" id="myTooltip">在美国的印度国际学生人数 15 年来首次超过中国学生人数</span>
+        Translate
+    </div>
 </li>
 <li><a href="https://lite.cnn.com/2024/11/20/uk/cambridge-word-of-year-2024-scli-intl-gbr/index.html">
     Cambridge Dictionary’s word of the year 2024 is all about thinking positive</a>
@@ -159,6 +211,23 @@
 </li>
 
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltip = document.querySelector('.tooltip');
+        var tooltiptext = document.getElementById('myTooltip');
+
+        tooltip.addEventListener('click', function () {
+            if (tooltiptext.style.visibility === 'hidden') {
+                tooltiptext.style.visibility = 'visible';
+            } else {
+                tooltiptext.style.visibility = 'hidden';
+            }
+        });
+    });
+
+</script>
+
 </html>
 
 
