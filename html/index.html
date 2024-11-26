@@ -41,7 +41,7 @@
         /* 默认情况下隐藏气泡 */
         .tooltip .tooltiptext {
             visibility: hidden;
-            width: 120px;
+            width: 500px;
             background-color: #555;
             color: #fff;
             text-align: center;
@@ -51,22 +51,22 @@
             /* 定位气泡 */
             position: absolute;
             z-index: 1;
-            bottom: 100%; /* 气泡位于元素上方 */
+            top: 120%; /* 气泡位于元素上方 */
             left: 50%;
             transform: translateX(-50%);
             margin-left: 0px; /* 使用margin自动调整水平居中 */
 
             /* 添加小三角形 */
 
-            &::after {
+            &::before {
                 content: '';
                 position: absolute;
-                top: 100%;
+                bottom: 100%;
                 left: 50%;
                 margin-left: -5px;
                 border-width: 5px;
                 border-style: solid;
-                border-color: #555 transparent transparent transparent;
+                border-color: transparent transparent #555 transparent;
             }
         }
 
