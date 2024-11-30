@@ -30,6 +30,13 @@
       <description>&lt;h1 id=&#34;database&#34;&gt;&#xA;  database&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#database&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
     </item>
     <item>
+      <title>github</title>
+      <link>/zh/post/computer-science/github/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/post/computer-science/github/</guid>
+      <description>&lt;h1 id=&#34;github&#34;&gt;&#xA;  github&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#github&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
+    </item>
+    <item>
       <title>ios</title>
       <link>/zh/post/computer-science/ios/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -62,7 +69,7 @@
       <link>/zh/post/computer-science/vue/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/zh/post/computer-science/vue/</guid>
-      <description>&lt;h1 id=&#34;vue&#34;&gt;&#xA;  vue&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#vue&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
+      <description>&lt;h1 id=&#34;vue&#34;&gt;&#xA;  vue&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#vue&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://vuejs.org/&#34;&gt;vuejs.org&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://cn.vuejs.org/guide/quick-start&#34;&gt;文档&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.runoob.com/vue2/vue-tutorial.html&#34;&gt;vue2 教程&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Vue 2.0 在 2023 年 12 月 31 日停止更新&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.runoob.com/vue3/vue3-tutorial.html&#34;&gt;vue3 教程&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;快速上手&#34;&gt;&#xA;  快速上手&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e5%bf%ab%e9%80%9f%e4%b8%8a%e6%89%8b&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;安装 &lt;code&gt;node.js&lt;/code&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;使用 brew 安装 &lt;code&gt;brew install node&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;reference&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://tutorials.tinkink.net/zh-hans/mac/install-nodejs.html&#34;&gt;如何在 macOS 上安装 Node.js&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>Algorithm</title>
