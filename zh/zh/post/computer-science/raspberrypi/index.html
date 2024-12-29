@@ -87,7 +87,7 @@ dd 命令是一个非常强大的工具，可以用来复制和转换文件。�
 <link rel="canonical" href="/zh/zh/post/computer-science/raspberrypi/">
 <link rel="stylesheet" href="/book.min.7694be40bd8862294d55753bc9c412847f9966f339f20fd7c02fcd932c11406f.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.cd0963f0c1df0135d4d5139f1956608242998da98f0b9ee995e273d487120529.js" ></script>
+  <script defer src="/zh.search.min.dc1589a664dd3c6f307e114610ab480b41073b65d5b6cff9e3033d34abeab408.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -594,6 +594,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#cpolar">cpolar</a></li>
       </ul>
     </li>
+    <li><a href="#zsh-corrupt-history-file-homemezsh_history">zsh: corrupt history file /home/me/.zsh_history</a></li>
   </ul>
 </nav>
 
@@ -767,7 +768,18 @@ sudo iwlist wlan0 scan | grep SSID
 <li><a href="https://www.cpolar.com/blog/cpolar-quick-start-tutorial-raspberry-pi-series">Cpolar快速入门教程：树莓派系列</a></li>
 <li>后台管理页面 <code>http://localhost:9200</code></li>
 </ul>
-</article>
+<h2 id="zsh-corrupt-history-file-homemezsh_history">
+  zsh: corrupt history file /home/me/.zsh_history
+  <a class="anchor" href="#zsh-corrupt-history-file-homemezsh_history">#</a>
+</h2>
+<ul>
+<li><a href="https://blog.csdn.net/henryhu712/article/details/123836534">怎样修复zsh历史记录错误：zsh: corrupt history file /home/me/.zsh_history</a></li>
+</ul>
+<pre tabindex="0"><code>cd ~
+mv .zsh_history .zsh_history_bad
+strings -eS .zsh_history_bad &gt; .zsh_history
+fc -R .zsh_history
+</code></pre></article>
  
       
 
@@ -820,6 +832,7 @@ sudo iwlist wlan0 scan | grep SSID
         <li><a href="#cpolar">cpolar</a></li>
       </ul>
     </li>
+    <li><a href="#zsh-corrupt-history-file-homemezsh_history">zsh: corrupt history file /home/me/.zsh_history</a></li>
   </ul>
 </nav>
 
