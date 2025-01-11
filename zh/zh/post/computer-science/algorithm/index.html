@@ -6,13 +6,84 @@
 <meta name="description" content="
   Algorithm
   #
+
+
+  面试经典150题
+  #
+
+
+面试经典150题
+
+
+  数组/字符串
+  #
+
+
+  移除元素
+  #
+
+
+ 2025-01-11 击败3.36%
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        Arrays.sort(nums);
+        int flagIndex = -1;
+        int count = 0;
+        for (int i = 0 ; i &lt; nums.length ; i&#43;&#43; ) {
+            if (nums[i] == val &amp;&amp; count == 0) {
+                flagIndex = i;
+                count&#43;&#43;;
+            } else if (nums[i] == val) {
+                count&#43;&#43;;
+            }
+        }
+        if (flagIndex != -1 &amp;&amp; count != 0) {
+            for (int i = flagIndex; i &lt; flagIndex &#43; count ; i&#43;&#43; ) {
+                nums[i] = nums[nums.length - (i - flagIndex) - 1];
+            }
+        }
+        return nums.length - count;
+    }
+}
+
+  一维动态规划
+  #
+
+
+  爬楼梯
+  #
+
+
+ 2025-01-11 击败100%
+
+class Solution {
+
+    public int climbStairs(int n) {
+        if (n == 0)
+            return 0;
+        if (n == 1)
+            return 1;
+        if (n == 2)
+            return 2;
+        int[] dp = new int[n &#43; 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i &lt;= n; i&#43;&#43;) {
+            dp[i] = dp[i - 1] &#43; dp[i - 2];
+        }
+        return dp[n];
+    }
+
+}
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/algorithm/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Algorithm">
-  <meta property="og:description" content="Algorithm #">
+  <meta property="og:description" content="Algorithm # 面试经典150题 # 面试经典150题 数组/字符串 # 移除元素 # 2025-01-11 击败3.36% class Solution { public int removeElement(int[] nums, int val) { Arrays.sort(nums); int flagIndex = -1; int count = 0; for (int i = 0 ; i &lt; nums.length ; i&#43;&#43; ) { if (nums[i] == val &amp;&amp; count == 0) { flagIndex = i; count&#43;&#43;; } else if (nums[i] == val) { count&#43;&#43;; } } if (flagIndex != -1 &amp;&amp; count != 0) { for (int i = flagIndex; i &lt; flagIndex &#43; count ; i&#43;&#43; ) { nums[i] = nums[nums.length - (i - flagIndex) - 1]; } } return nums.length - count; } } 一维动态规划 # 爬楼梯 # 2025-01-11 击败100% class Solution { public int climbStairs(int n) { if (n == 0) return 0; if (n == 1) return 1; if (n == 2) return 2; int[] dp = new int[n &#43; 1]; dp[0] = 0; dp[1] = 1; dp[2] = 2; for (int i = 3; i &lt;= n; i&#43;&#43;) { dp[i] = dp[i - 1] &#43; dp[i - 2]; } return dp[n]; } }">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -24,7 +95,7 @@
 <link rel="canonical" href="/zh/zh/post/computer-science/algorithm/">
 <link rel="stylesheet" href="/book.min.7694be40bd8862294d55753bc9c412847f9966f339f20fd7c02fcd932c11406f.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.81c7a37051a673d2b7ce2331ab90841e9d7f0eaade5b34c68f0d75a5a94bebd0.js" ></script>
+  <script defer src="/zh.search.min.24193f286f54bc569edec9446716ae5724dd22de5e117cdb7e42de4438e734d8.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -543,7 +614,24 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#面试经典150题">面试经典150题</a>
+      <ul>
+        <li><a href="#数组字符串">数组/字符串</a>
+          <ul>
+            <li><a href="#移除元素">移除元素</a></li>
+          </ul>
+        </li>
+        <li><a href="#一维动态规划">一维动态规划</a>
+          <ul>
+            <li><a href="#爬楼梯">爬楼梯</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -558,7 +646,77 @@ https://github.com/alex-shpak/hugo-book
   Algorithm
   <a class="anchor" href="#algorithm">#</a>
 </h1>
-</article>
+<h2 id="面试经典150题">
+  面试经典150题
+  <a class="anchor" href="#%e9%9d%a2%e8%af%95%e7%bb%8f%e5%85%b8150%e9%a2%98">#</a>
+</h2>
+<ul>
+<li><a href="https://leetcode.cn/studyplan/top-interview-150/">面试经典150题</a></li>
+</ul>
+<h3 id="数组字符串">
+  数组/字符串
+  <a class="anchor" href="#%e6%95%b0%e7%bb%84%e5%ad%97%e7%ac%a6%e4%b8%b2">#</a>
+</h3>
+<h4 id="移除元素">
+  移除元素
+  <a class="anchor" href="#%e7%a7%bb%e9%99%a4%e5%85%83%e7%b4%a0">#</a>
+</h4>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 2025-01-11 击败3.36%</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">removeElement</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums, <span style="color:#66d9ef">int</span> val) {
+</span></span><span style="display:flex;"><span>        Arrays.<span style="color:#a6e22e">sort</span>(nums);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> flagIndex <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> count <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0 ; i <span style="color:#f92672">&lt;</span> nums.<span style="color:#a6e22e">length</span> ; i<span style="color:#f92672">++</span> ) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> val <span style="color:#f92672">&amp;&amp;</span> count <span style="color:#f92672">==</span> 0) {
+</span></span><span style="display:flex;"><span>                flagIndex <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>                count<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> val) {
+</span></span><span style="display:flex;"><span>                count<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (flagIndex <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">&amp;&amp;</span> count <span style="color:#f92672">!=</span> 0) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> flagIndex; i <span style="color:#f92672">&lt;</span> flagIndex <span style="color:#f92672">+</span> count ; i<span style="color:#f92672">++</span> ) {
+</span></span><span style="display:flex;"><span>                nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> nums<span style="color:#f92672">[</span>nums.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> (i <span style="color:#f92672">-</span> flagIndex) <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> nums.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> count;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="一维动态规划">
+  一维动态规划
+  <a class="anchor" href="#%e4%b8%80%e7%bb%b4%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92">#</a>
+</h3>
+<h4 id="爬楼梯">
+  爬楼梯
+  <a class="anchor" href="#%e7%88%ac%e6%a5%bc%e6%a2%af">#</a>
+</h4>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 2025-01-11 击败100%</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">climbStairs</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> 0)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> 0;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> 1)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> 1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> 2)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> 2;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> dp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>n <span style="color:#f92672">+</span> 1<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        dp<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        dp<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>        dp<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 2;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 3; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            dp<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> dp<span style="color:#f92672">[</span>i <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> dp<span style="color:#f92672">[</span>i <span style="color:#f92672">-</span> 2<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp<span style="color:#f92672">[</span>n<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></article>
  
       
 
@@ -597,7 +755,24 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#面试经典150题">面试经典150题</a>
+      <ul>
+        <li><a href="#数组字符串">数组/字符串</a>
+          <ul>
+            <li><a href="#移除元素">移除元素</a></li>
+          </ul>
+        </li>
+        <li><a href="#一维动态规划">一维动态规划</a>
+          <ul>
+            <li><a href="#爬楼梯">爬楼梯</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
  
