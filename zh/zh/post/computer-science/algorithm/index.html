@@ -8,6 +8,9 @@
   #
 
 
+代码随想录
+
+
   面试经典150题
   #
 
@@ -30,7 +33,7 @@ class Solution {
         Arrays.sort(nums);
         int flagIndex = -1;
         int count = 0;
-        for (int i = 0 ; i &lt; nums.length ; i&#43;&#43; ) {
+        for (int i = 0; i &lt; nums.length; i&#43;&#43;) {
             if (nums[i] == val &amp;&amp; count == 0) {
                 flagIndex = i;
                 count&#43;&#43;;
@@ -39,7 +42,7 @@ class Solution {
             }
         }
         if (flagIndex != -1 &amp;&amp; count != 0) {
-            for (int i = flagIndex; i &lt; flagIndex &#43; count ; i&#43;&#43; ) {
+            for (int i = flagIndex; i &lt; flagIndex &#43; count; i&#43;&#43;) {
                 nums[i] = nums[nums.length - (i - flagIndex) - 1];
             }
         }
@@ -83,7 +86,7 @@ class Solution {
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/algorithm/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Algorithm">
-  <meta property="og:description" content="Algorithm # 面试经典150题 # 面试经典150题 数组/字符串 # 移除元素 # 2025-01-11 击败3.36% class Solution { public int removeElement(int[] nums, int val) { Arrays.sort(nums); int flagIndex = -1; int count = 0; for (int i = 0 ; i &lt; nums.length ; i&#43;&#43; ) { if (nums[i] == val &amp;&amp; count == 0) { flagIndex = i; count&#43;&#43;; } else if (nums[i] == val) { count&#43;&#43;; } } if (flagIndex != -1 &amp;&amp; count != 0) { for (int i = flagIndex; i &lt; flagIndex &#43; count ; i&#43;&#43; ) { nums[i] = nums[nums.length - (i - flagIndex) - 1]; } } return nums.length - count; } } 一维动态规划 # 爬楼梯 # 2025-01-11 击败100% class Solution { public int climbStairs(int n) { if (n == 0) return 0; if (n == 1) return 1; if (n == 2) return 2; int[] dp = new int[n &#43; 1]; dp[0] = 0; dp[1] = 1; dp[2] = 2; for (int i = 3; i &lt;= n; i&#43;&#43;) { dp[i] = dp[i - 1] &#43; dp[i - 2]; } return dp[n]; } }">
+  <meta property="og:description" content="Algorithm # 代码随想录 面试经典150题 # 面试经典150题 数组/字符串 # 移除元素 # 2025-01-11 击败3.36% class Solution { public int removeElement(int[] nums, int val) { Arrays.sort(nums); int flagIndex = -1; int count = 0; for (int i = 0; i &lt; nums.length; i&#43;&#43;) { if (nums[i] == val &amp;&amp; count == 0) { flagIndex = i; count&#43;&#43;; } else if (nums[i] == val) { count&#43;&#43;; } } if (flagIndex != -1 &amp;&amp; count != 0) { for (int i = flagIndex; i &lt; flagIndex &#43; count; i&#43;&#43;) { nums[i] = nums[nums.length - (i - flagIndex) - 1]; } } return nums.length - count; } } 一维动态规划 # 爬楼梯 # 2025-01-11 击败100% class Solution { public int climbStairs(int n) { if (n == 0) return 0; if (n == 1) return 1; if (n == 2) return 2; int[] dp = new int[n &#43; 1]; dp[0] = 0; dp[1] = 1; dp[2] = 2; for (int i = 3; i &lt;= n; i&#43;&#43;) { dp[i] = dp[i - 1] &#43; dp[i - 2]; } return dp[n]; } }">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -95,7 +98,7 @@ class Solution {
 <link rel="canonical" href="/zh/zh/post/computer-science/algorithm/">
 <link rel="stylesheet" href="/book.min.7694be40bd8862294d55753bc9c412847f9966f339f20fd7c02fcd932c11406f.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.7e35d3742cd28626f6b4c28e5dab006cd49655fb8133ed644085ae41a37c3df4.js" ></script>
+  <script defer src="/zh.search.min.a078be109519beaba7af25820799566dfdfd417b6c22074f23da90d8f0862753.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -698,6 +701,9 @@ https://github.com/alex-shpak/hugo-book
   Algorithm
   <a class="anchor" href="#algorithm">#</a>
 </h1>
+<ul>
+<li><a href="https://www.programmercarl.com/">代码随想录</a></li>
+</ul>
 <h2 id="面试经典150题">
   面试经典150题
   <a class="anchor" href="#%e9%9d%a2%e8%af%95%e7%bb%8f%e5%85%b8150%e9%a2%98">#</a>
@@ -721,7 +727,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        Arrays.<span style="color:#a6e22e">sort</span>(nums);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> flagIndex <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1;
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> count <span style="color:#f92672">=</span> 0;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0 ; i <span style="color:#f92672">&lt;</span> nums.<span style="color:#a6e22e">length</span> ; i<span style="color:#f92672">++</span> ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> nums.<span style="color:#a6e22e">length</span>; i<span style="color:#f92672">++</span>) {
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> val <span style="color:#f92672">&amp;&amp;</span> count <span style="color:#f92672">==</span> 0) {
 </span></span><span style="display:flex;"><span>                flagIndex <span style="color:#f92672">=</span> i;
 </span></span><span style="display:flex;"><span>                count<span style="color:#f92672">++</span>;
@@ -730,7 +736,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (flagIndex <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">&amp;&amp;</span> count <span style="color:#f92672">!=</span> 0) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> flagIndex; i <span style="color:#f92672">&lt;</span> flagIndex <span style="color:#f92672">+</span> count ; i<span style="color:#f92672">++</span> ) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> flagIndex; i <span style="color:#f92672">&lt;</span> flagIndex <span style="color:#f92672">+</span> count; i<span style="color:#f92672">++</span>) {
 </span></span><span style="display:flex;"><span>                nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> nums<span style="color:#f92672">[</span>nums.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> (i <span style="color:#f92672">-</span> flagIndex) <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span>;
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
