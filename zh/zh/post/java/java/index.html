@@ -20,15 +20,51 @@ mall-swarm视频教程
   #
 
 
-  concurrent
+  java array 转 list
   #
-">
+
+在Java中，你可以使用Arrays.asList()方法将数组转换为列表。这是一个简单的方法来创建一个固定大小的List。如果你需要一个能够改变大小的List，你需要使用new ArrayList&lt;&gt;(Arrays.asList(array))来创建一个新的ArrayList实例。
+以下是两种情况的代码示例：
+
+  创建一个固定大小的列表
+  #
+
+import java.util.Arrays;
+import java.util.List;
+
+public class ArrayToListExample {
+    public static void main(String[] args) {
+        String[] array = {&#34;a&#34;, &#34;b&#34;, &#34;c&#34;};
+        List&lt;String&gt; list = Arrays.asList(array);
+        System.out.println(list); // 输出: [a, b, c]
+    }
+}
+
+  创建一个可变大小的列表
+  #
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class ArrayToArrayListExample {
+    public static void main(String[] args) {
+        String[] array = {&#34;a&#34;, &#34;b&#34;, &#34;c&#34;};
+        List&lt;String&gt; arrayList = new ArrayList&lt;&gt;(Arrays.asList(array));
+        // 现在可以添加或删除元素了
+        arrayList.add(&#34;d&#34;);
+        System.out.println(arrayList); // 输出: [a, b, c, d]
+    }
+}
+请注意，当你使用Arrays.asList()时，它返回的是一个受数组支持的固定大小的列表。这意味着你不能添加或移除元素（除非你将其转换为像ArrayList这样的可调整大小的列表），但是你可以修改已经存在的元素。如果你尝试对固定大小的列表执行添加或移除操作，将会抛出UnsupportedOperationException异常。">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/java/java/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="java">
-  <meta property="og:description" content="java # 学习资料 # CS-Notes面试笔记 mall-swarm视频教程 basic # concurrent #">
+  <meta property="og:description" content="java # 学习资料 # CS-Notes面试笔记 mall-swarm视频教程 basic # java array 转 list # 在Java中，你可以使用Arrays.asList()方法将数组转换为列表。这是一个简单的方法来创建一个固定大小的List。如果你需要一个能够改变大小的List，你需要使用new ArrayList&lt;&gt;(Arrays.asList(array))来创建一个新的ArrayList实例。
+以下是两种情况的代码示例：
+创建一个固定大小的列表 # import java.util.Arrays; import java.util.List; public class ArrayToListExample { public static void main(String[] args) { String[] array = {&#34;a&#34;, &#34;b&#34;, &#34;c&#34;}; List&lt;String&gt; list = Arrays.asList(array); System.out.println(list); // 输出: [a, b, c] } } 创建一个可变大小的列表 # import java.util.ArrayList; import java.util.Arrays; import java.util.List; public class ArrayToArrayListExample { public static void main(String[] args) { String[] array = {&#34;a&#34;, &#34;b&#34;, &#34;c&#34;}; List&lt;String&gt; arrayList = new ArrayList&lt;&gt;(Arrays.asList(array)); // 现在可以添加或删除元素了 arrayList.add(&#34;d&#34;); System.out.println(arrayList); // 输出: [a, b, c, d] } } 请注意，当你使用Arrays.asList()时，它返回的是一个受数组支持的固定大小的列表。这意味着你不能添加或移除元素（除非你将其转换为像ArrayList这样的可调整大小的列表），但是你可以修改已经存在的元素。如果你尝试对固定大小的列表执行添加或移除操作，将会抛出UnsupportedOperationException异常。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -38,7 +74,7 @@ mall-swarm视频教程
 <link rel="canonical" href="/zh/zh/post/java/java/">
 <link rel="stylesheet" href="/book.min.7694be40bd8862294d55753bc9c412847f9966f339f20fd7c02fcd932c11406f.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.165566f89da7fa56220a8f159c9321aceaf8428a4ce4f9ac1e2a16495dce7206.js" ></script>
+  <script defer src="/zh.search.min.ff446e18723ed44ec944c7550b0847bec333fff2e1a2b62924faa171b9d28f7e.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -612,7 +648,16 @@ https://github.com/alex-shpak/hugo-book
 <nav id="TableOfContents">
   <ul>
     <li><a href="#学习资料">学习资料</a></li>
-    <li><a href="#basic">basic</a></li>
+    <li><a href="#basic">basic</a>
+      <ul>
+        <li><a href="#java-array-转-list">java array 转 list</a>
+          <ul>
+            <li><a href="#创建一个固定大小的列表">创建一个固定大小的列表</a></li>
+            <li><a href="#创建一个可变大小的列表">创建一个可变大小的列表</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
     <li><a href="#concurrent">concurrent</a></li>
   </ul>
 </nav>
@@ -642,6 +687,44 @@ https://github.com/alex-shpak/hugo-book
   basic
   <a class="anchor" href="#basic">#</a>
 </h2>
+<h3 id="java-array-转-list">
+  java array 转 list
+  <a class="anchor" href="#java-array-%e8%bd%ac-list">#</a>
+</h3>
+<p>在Java中，你可以使用<code>Arrays.asList()</code>方法将数组转换为列表。这是一个简单的方法来创建一个固定大小的<code>List</code>。如果你需要一个能够改变大小的<code>List</code>，你需要使用<code>new ArrayList&lt;&gt;(Arrays.asList(array))</code>来创建一个新的<code>ArrayList</code>实例。</p>
+<p>以下是两种情况的代码示例：</p>
+<h4 id="创建一个固定大小的列表">
+  创建一个固定大小的列表
+  <a class="anchor" href="#%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aa%e5%9b%ba%e5%ae%9a%e5%a4%a7%e5%b0%8f%e7%9a%84%e5%88%97%e8%a1%a8">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Arrays;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ArrayToListExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> array <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>, <span style="color:#e6db74">&#34;c&#34;</span>};
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> list <span style="color:#f92672">=</span> Arrays.<span style="color:#a6e22e">asList</span>(array);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(list); <span style="color:#75715e">// 输出: [a, b, c]</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="创建一个可变大小的列表">
+  创建一个可变大小的列表
+  <a class="anchor" href="#%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aa%e5%8f%af%e5%8f%98%e5%a4%a7%e5%b0%8f%e7%9a%84%e5%88%97%e8%a1%a8">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.ArrayList;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Arrays;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ArrayToArrayListExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> array <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>, <span style="color:#e6db74">&#34;c&#34;</span>};
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> arrayList <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>(Arrays.<span style="color:#a6e22e">asList</span>(array));
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 现在可以添加或删除元素了</span>
+</span></span><span style="display:flex;"><span>        arrayList.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;d&#34;</span>);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(arrayList); <span style="color:#75715e">// 输出: [a, b, c, d]</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>请注意，当你使用<code>Arrays.asList()</code>时，它返回的是一个受数组支持的固定大小的列表。这意味着你不能添加或移除元素（除非你将其转换为像<code>ArrayList</code>这样的可调整大小的列表），但是你可以修改已经存在的元素。如果你尝试对固定大小的列表执行添加或移除操作，将会抛出<code>UnsupportedOperationException</code>异常。</p>
 <h2 id="concurrent">
   concurrent
   <a class="anchor" href="#concurrent">#</a>
@@ -688,7 +771,16 @@ https://github.com/alex-shpak/hugo-book
 <nav id="TableOfContents">
   <ul>
     <li><a href="#学习资料">学习资料</a></li>
-    <li><a href="#basic">basic</a></li>
+    <li><a href="#basic">basic</a>
+      <ul>
+        <li><a href="#java-array-转-list">java array 转 list</a>
+          <ul>
+            <li><a href="#创建一个固定大小的列表">创建一个固定大小的列表</a></li>
+            <li><a href="#创建一个可变大小的列表">创建一个可变大小的列表</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
     <li><a href="#concurrent">concurrent</a></li>
   </ul>
 </nav>
