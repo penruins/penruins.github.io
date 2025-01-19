@@ -106,6 +106,10 @@
     <loc>/zh/zh/post/life/goal/</loc>
     <lastmod>2024-11-14T08:59:49+08:00</lastmod>
   </url><url>
+    <loc>/zh/post/books/</loc>
+  </url><url>
+    <loc>/zh/zh/post/books/</loc>
+  </url><url>
     <loc>/zh/post/life/accumulation/</loc>
   </url><url>
     <loc>/zh/zh/post/life/accumulation/</loc>
@@ -201,5 +205,9 @@
                 hreflang="zh-CN"
                 href="/zh/tags/"
                 />
+  </url><url>
+    <loc>/zh/post/books/%E7%BE%8E%E5%9B%BD%E5%9B%B0%E5%B1%80/</loc>
+  </url><url>
+    <loc>/zh/zh/post/books/%E7%BE%8E%E5%9B%BD%E5%9B%B0%E5%B1%80/</loc>
   </url>
 </urlset>
