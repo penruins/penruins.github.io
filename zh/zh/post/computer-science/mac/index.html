@@ -123,7 +123,7 @@ transmit 文件传输工具
 <link rel="canonical" href="/zh/zh/post/computer-science/mac/">
 <link rel="stylesheet" href="/book.min.7694be40bd8862294d55753bc9c412847f9966f339f20fd7c02fcd932c11406f.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.fa55a17a0666816ff740e3e5da82787d7f6728647b0e261bef610bd99af3949c.js" ></script>
+  <script defer src="/zh.search.min.60feaca7a2258cbc8180eaa0519232827eebdf2c7d2d87cb8693c66831379f76.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -764,6 +764,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#把一个java程序配置为一个服务">把一个java程序配置为一个服务</a></li>
     <li><a href="#怎么查看-launchctl-服务的状态">怎么查看 launchctl 服务的状态</a></li>
     <li><a href="#怎么查看-launchctl-中一个服务的内存使用情况">怎么查看 launchctl 中一个服务的内存使用情况</a></li>
+    <li><a href="#mac-上抓取应用的https的包">mac 上抓取应用的https的包</a></li>
     <li><a href="#questions">questions</a></li>
   </ul>
 </nav>
@@ -1092,6 +1093,57 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
 </span></span></code></pre></div></li>
 </ol>
 <p>通过这些方法，你可以轻松地查看 <code>launchctl</code> 服务的内存使用情况。</p>
+<h2 id="mac-上抓取应用的https的包">
+  mac 上抓取应用的https的包
+  <a class="anchor" href="#mac-%e4%b8%8a%e6%8a%93%e5%8f%96%e5%ba%94%e7%94%a8%e7%9a%84https%e7%9a%84%e5%8c%85">#</a>
+</h2>
+<p>在Mac上抓取应用的HTTPS流量，你需要使用网络分析工具，如Wireshark、Charles Proxy或MITMproxy。由于HTTPS加密了数据传输，直接抓包无法查看具体内容，因此通常需要设置一个代理服务器来进行中间人攻击（Man-in-the-Middle, MITM）来解密和检查HTTPS流量。</p>
+<p>以下是使用Charles Proxy作为例子来说明如何进行HTTPS流量的抓取：</p>
+<ol>
+<li>
+<p><strong>安装Charles Proxy</strong>:</p>
+<ul>
+<li>下载并安装Charles Proxy应用程序到你的Mac电脑上。</li>
+</ul>
+</li>
+<li>
+<p><strong>配置Charles SSL代理</strong>:</p>
+<ul>
+<li>打开Charles，前往<code>Proxy</code> -&gt; <code>SSL Proxying Settings</code>。</li>
+<li>在<code>SSL Proxying</code>标签中点击<code>Enable SSL Proxying</code>。</li>
+<li>添加你想要监控的应用程序使用的域名端口对，例如对于大多数Web流量是443端口。</li>
+</ul>
+</li>
+<li>
+<p><strong>安装Charles的SSL证书</strong>:</p>
+<ul>
+<li>为了让Charles能够解密HTTPS流量，你需要信任它的SSL证书。</li>
+<li>在Charles中前往<code>Help</code> -&gt; <code>SSL Proxying</code> -&gt; <code>Install Charles Root Certificate</code>。</li>
+<li>按照提示完成证书安装，并确保系统信任此证书。</li>
+</ul>
+</li>
+<li>
+<p><strong>配置设备或应用以使用Charles代理</strong>:</p>
+<ul>
+<li>如果你想抓取的是Mac本地应用的流量，你需要配置该应用使用Charles作为HTTP/HTTPS代理。</li>
+<li>对于某些应用程序，这可能需要更改系统的网络设置，或者在应用内部设置代理服务器地址为<code>localhost</code>或<code>127.0.0.1</code>，端口号通常是8888（默认的Charles监听端口）。</li>
+<li>如果是移动设备上的应用，你需要设置设备的Wi-Fi连接使用手动HTTP代理指向运行Charles的Mac的局域网IP地址和端口。</li>
+</ul>
+</li>
+<li>
+<p><strong>开始抓包</strong>:</p>
+<ul>
+<li>现在你可以启动目标应用程序并开始与它交互，所有的HTTPS流量应该会通过Charles被截获，并且如果你正确设置了SSL代理，你应该能看到解密后的流量。</li>
+</ul>
+</li>
+<li>
+<p><strong>过滤和分析流量</strong>:</p>
+<ul>
+<li>使用Charles提供的过滤器和搜索功能来定位你感兴趣的特定请求和响应。</li>
+</ul>
+</li>
+</ol>
+<p>请注意，抓取和解密HTTPS流量可能涉及到隐私问题以及违反服务条款的风险。务必确保你有合法的权利去监视和分析这些流量。如果你是在测试自己的应用，确保遵循公司的政策和法律要求。如果你试图分析第三方应用的流量，请确保你有权这样做。</p>
 <h2 id="questions">
   questions
   <a class="anchor" href="#questions">#</a>
@@ -1156,6 +1208,7 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
     <li><a href="#把一个java程序配置为一个服务">把一个java程序配置为一个服务</a></li>
     <li><a href="#怎么查看-launchctl-服务的状态">怎么查看 launchctl 服务的状态</a></li>
     <li><a href="#怎么查看-launchctl-中一个服务的内存使用情况">怎么查看 launchctl 中一个服务的内存使用情况</a></li>
+    <li><a href="#mac-上抓取应用的https的包">mac 上抓取应用的https的包</a></li>
     <li><a href="#questions">questions</a></li>
   </ul>
 </nav>
