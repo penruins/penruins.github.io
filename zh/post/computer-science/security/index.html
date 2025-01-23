@@ -8,15 +8,18 @@
   #
 
 
-  中间人攻击
+  man-in-the-middle attack 中间人攻击
   #
-">
+
+SSL Pinning is a technique we use on the client side to avoid a man-in-the-middle attack by validating the server certificates. The developers embed (or pin) a list of trustful certificates in the client application during development and use them to compare against the server certificates during runtime.
+If there is a mismatch between the server and the local copy of certificates, the connection will be disrupted, and no further user data will be sent to that server. This enforcement ensures that user devices communicate only with dedicated, trustful servers.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/security/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="security">
-  <meta property="og:description" content="security # 中间人攻击 #">
+  <meta property="og:description" content="security # man-in-the-middle attack 中间人攻击 # SSL Pinning is a technique we use on the client side to avoid a man-in-the-middle attack by validating the server certificates. The developers embed (or pin) a list of trustful certificates in the client application during development and use them to compare against the server certificates during runtime.
+If there is a mismatch between the server and the local copy of certificates, the connection will be disrupted, and no further user data will be sent to that server. This enforcement ensures that user devices communicate only with dedicated, trustful servers.">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -26,7 +29,7 @@
 <link rel="canonical" href="/zh/post/computer-science/security/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.021fdb1dd5aab411a7c708a42a3baae202153d39645f7a388854950146b79798.js" ></script>
+  <script defer src="/zh.search.min.f8580bd00ba7c008004df99754f0b32baf9b30c51e625bf320efa99a99903bd7.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -672,7 +675,11 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#中间人攻击">中间人攻击</a></li>
+    <li><a href="#man-in-the-middle-attack-中间人攻击">man-in-the-middle attack 中间人攻击</a>
+      <ul>
+        <li><a href="#ssl-pinning">SSL pinning</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -689,10 +696,25 @@ https://github.com/alex-shpak/hugo-book
   security
   <a class="anchor" href="#security">#</a>
 </h1>
-<h2 id="中间人攻击">
-  中间人攻击
-  <a class="anchor" href="#%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb">#</a>
+<h2 id="man-in-the-middle-attack-中间人攻击">
+  man-in-the-middle attack 中间人攻击
+  <a class="anchor" href="#man-in-the-middle-attack-%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb">#</a>
 </h2>
+<p>SSL Pinning is a technique we use on the client side to avoid a man-in-the-middle attack by validating the server certificates. The developers embed (or pin) a list of trustful certificates in the client application during development and use them to compare against the server certificates during runtime.</p>
+<p>If there is a mismatch between the server and the local copy of certificates, the connection will be disrupted, and no further user data will be sent to that server. This enforcement ensures that user devices communicate only with dedicated, trustful servers.</p>
+<p>SSL Pinning prevents a man-in-the-middle attack, which means an attacker can not intercept the traffic and modify the data. If an attacker can not intercept the traffic, the application automatically prevents many server-side vulnerabilities. Because an attacker can not perform API-level test cases, implementing SSL is very important.</p>
+<h3 id="ssl-pinning">
+  SSL pinning
+  <a class="anchor" href="#ssl-pinning">#</a>
+</h3>
+<ul>
+<li>reference
+<ul>
+<li><a href="https://stackoverflow.com/questions/52862256/charles-proxy-for-mobile-apps-that-use-ssl-pinning">Charles Proxy for Mobile apps that use SSL Pinning</a></li>
+<li><a href="https://www.appknox.com/blog/bypass-ssl-pinning-in-ios-app">8 Ways to Bypass SSL Pinning in iOS</a></li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -734,7 +756,11 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#中间人攻击">中间人攻击</a></li>
+    <li><a href="#man-in-the-middle-attack-中间人攻击">man-in-the-middle attack 中间人攻击</a>
+      <ul>
+        <li><a href="#ssl-pinning">SSL pinning</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

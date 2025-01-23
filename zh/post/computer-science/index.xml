@@ -76,7 +76,7 @@
       <link>/zh/post/computer-science/security/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/zh/post/computer-science/security/</guid>
-      <description>&lt;h1 id=&#34;security&#34;&gt;&#xA;  security&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#security&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;中间人攻击&#34;&gt;&#xA;  中间人攻击&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;</description>
+      <description>&lt;h1 id=&#34;security&#34;&gt;&#xA;  security&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#security&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;man-in-the-middle-attack-中间人攻击&#34;&gt;&#xA;  man-in-the-middle attack 中间人攻击&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#man-in-the-middle-attack-%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;SSL Pinning is a technique we use on the client side to avoid a man-in-the-middle attack by validating the server certificates. The developers embed (or pin) a list of trustful certificates in the client application during development and use them to compare against the server certificates during runtime.&lt;/p&gt;&#xA;&lt;p&gt;If there is a mismatch between the server and the local copy of certificates, the connection will be disrupted, and no further user data will be sent to that server. This enforcement ensures that user devices communicate only with dedicated, trustful servers.&lt;/p&gt;</description>
     </item>
     <item>
       <title>vue</title>
