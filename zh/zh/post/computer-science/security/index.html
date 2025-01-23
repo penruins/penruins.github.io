@@ -4,75 +4,26 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  vue
+  security
   #
 
 
-vuejs.org
-
-文档
-
-
-vue2 教程
-
-Vue 2.0 在 2023 年 12 月 31 日停止更新
-
-
-vue3 教程
-
-
-  快速上手
+  中间人攻击
   #
-
-
-安装 node.js
-
-使用 brew 安装 brew install node
-检查 node 是否安装成功
-
-node -v
-npm -v
-
-
-创建 vue 项目 npm create vue@latest
-cd my-vue-project
-修改镜像源
-
-reference
-
-npm、yarn、pnpm 最新国内镜像源设置和常见问题解决
-
-
-
-
-npm install
-npm run dev
-
-Local http://localhost:5173
-Vue DevTools http://localhost:5173/__devtools__/
-
-
-reference
-
-如何在 macOS 上安装 Node.js
-
-
-
-
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/vue/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/security/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="vue">
-  <meta property="og:description" content="vue # vuejs.org 文档 vue2 教程 Vue 2.0 在 2023 年 12 月 31 日停止更新 vue3 教程 快速上手 # 安装 node.js 使用 brew 安装 brew install node 检查 node 是否安装成功 node -v npm -v 创建 vue 项目 npm create vue@latest cd my-vue-project 修改镜像源 reference npm、yarn、pnpm 最新国内镜像源设置和常见问题解决 npm install npm run dev Local http://localhost:5173 Vue DevTools http://localhost:5173/__devtools__/ reference 如何在 macOS 上安装 Node.js">
+  <meta property="og:title" content="security">
+  <meta property="og:description" content="security # 中间人攻击 #">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-<title>vue | Penruins</title>
+    <meta property="article:section" content="zh">
+<title>security | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/zh/post/computer-science/vue/">
+<link rel="canonical" href="/zh/zh/post/computer-science/security/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/zh.search.min.60e3fe2f144f1b8809ad62b1b0e09940909fb92c4804d374684677b43613aa90.js" ></script>
@@ -529,7 +480,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/zh/post/computer-science/vue/" class="active">vue</a>
+    <a href="/zh/post/computer-science/vue/" class="">vue</a>
   
 
         </li>
@@ -702,7 +653,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>vue</h3>
+  <h3>security</h3>
 
   <label for="toc-control">
     
@@ -718,7 +669,7 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#快速上手">快速上手</a></li>
+    <li><a href="#中间人攻击">中间人攻击</a></li>
   </ul>
 </nav>
 
@@ -731,63 +682,14 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="vue">
-  vue
-  <a class="anchor" href="#vue">#</a>
+  <article class="markdown book-article"><h1 id="security">
+  security
+  <a class="anchor" href="#security">#</a>
 </h1>
-<ul>
-<li><a href="https://vuejs.org/">vuejs.org</a>
-<ul>
-<li><a href="https://cn.vuejs.org/guide/quick-start">文档</a></li>
-</ul>
-</li>
-<li><a href="https://www.runoob.com/vue2/vue-tutorial.html">vue2 教程</a>
-<ul>
-<li>Vue 2.0 在 2023 年 12 月 31 日停止更新</li>
-</ul>
-</li>
-<li><a href="https://www.runoob.com/vue3/vue3-tutorial.html">vue3 教程</a></li>
-</ul>
-<h2 id="快速上手">
-  快速上手
-  <a class="anchor" href="#%e5%bf%ab%e9%80%9f%e4%b8%8a%e6%89%8b">#</a>
+<h2 id="中间人攻击">
+  中间人攻击
+  <a class="anchor" href="#%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb">#</a>
 </h2>
-<ul>
-<li>安装 <code>node.js</code>
-<ul>
-<li>使用 brew 安装 <code>brew install node</code></li>
-<li>检查 node 是否安装成功
-<ul>
-<li><code>node -v</code></li>
-<li><code>npm -v</code></li>
-</ul>
-</li>
-<li>创建 vue 项目 <code>npm create vue@latest</code></li>
-<li><code>cd my-vue-project</code></li>
-<li>修改镜像源
-<ul>
-<li>reference
-<ul>
-<li><a href="https://www.cnblogs.com/shenhuanjie/p/18428209/npm-yarn-pnpm-latest-domestic-mirror-portion-source-setting-and-common-problems-solve-zyb4mp">npm、yarn、pnpm 最新国内镜像源设置和常见问题解决</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>npm install</code></li>
-<li><code>npm run dev</code>
-<ul>
-<li>Local <code>http://localhost:5173</code></li>
-<li>Vue DevTools <code>http://localhost:5173/__devtools__/</code></li>
-</ul>
-</li>
-<li>reference
-<ul>
-<li><a href="https://tutorials.tinkink.net/zh-hans/mac/install-nodejs.html">如何在 macOS 上安装 Node.js</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 </article>
  
       
@@ -829,7 +731,7 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#快速上手">快速上手</a></li>
+    <li><a href="#中间人攻击">中间人攻击</a></li>
   </ul>
 </nav>
 
