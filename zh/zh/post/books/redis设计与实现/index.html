@@ -5,13 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
 Redis使用对象来表示数据库中的键和值，每次当我们在Redis的数据库中新创建一个键值对时，我们至少会创建两个对象，一个对象用作键值对的键（键对象），另一个对象用作键值对的值（值对象）
+对象的类型
+
+字符串对象
+列表对象
+哈希对象
+集合对象
+有序集合对象
+
+
+对于Redis数据库保存的键值对来说，键总是一个字符串对象，而值则可以是字符串对象、列表对象、哈希对象、集合对象或者有序集合对象的其中一种
+
+当我们称呼一个数据库键为“字符串键”时，我们指的是“这个数据库键所对应的值为字符串对象”
+当我们称呼一个键为“列表键”时，我们指的是“这个数据库键所对应的值为列表对象”
+
+
+TYPE命令的实现方式也与此类似，当我们对一个数据库键执行TYPE命令时，命令返回的结果为数据库键对应的值对象的类型，而不是键对象的类型
+
+因为键的类型始终为字符串
+
+
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/books/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Redis设计与实现">
-  <meta property="og:description" content="Redis使用对象来表示数据库中的键和值，每次当我们在Redis的数据库中新创建一个键值对时，我们至少会创建两个对象，一个对象用作键值对的键（键对象），另一个对象用作键值对的值（值对象）">
+  <meta property="og:description" content="Redis使用对象来表示数据库中的键和值，每次当我们在Redis的数据库中新创建一个键值对时，我们至少会创建两个对象，一个对象用作键值对的键（键对象），另一个对象用作键值对的值（值对象） 对象的类型 字符串对象 列表对象 哈希对象 集合对象 有序集合对象 对于Redis数据库保存的键值对来说，键总是一个字符串对象，而值则可以是字符串对象、列表对象、哈希对象、集合对象或者有序集合对象的其中一种 当我们称呼一个数据库键为“字符串键”时，我们指的是“这个数据库键所对应的值为字符串对象” 当我们称呼一个键为“列表键”时，我们指的是“这个数据库键所对应的值为列表对象” TYPE命令的实现方式也与此类似，当我们对一个数据库键执行TYPE命令时，命令返回的结果为数据库键对应的值对象的类型，而不是键对象的类型 因为键的类型始终为字符串">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -21,7 +41,7 @@ Redis使用对象来表示数据库中的键和值，每次当我们在Redis的�
 <link rel="canonical" href="/zh/zh/post/books/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.bb7df97f356d6b3e496e7d067a1e77f8f494cfdd1954cd8e77d3450bba8fa86b.js" ></script>
+  <script defer src="/zh.search.min.1f6a8e3cdca32db545fa921145beeef80cdf433a806c4266ca3fb9240595843a.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -717,6 +737,26 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown book-article"><ul>
 <li>Redis使用对象来表示数据库中的键和值，每次当我们在Redis的数据库中新创建一个键值对时，我们至少会创建两个对象，一个对象用作键值对的键（键对象），另一个对象用作键值对的值（值对象）</li>
+<li>对象的类型
+<ul>
+<li>字符串对象</li>
+<li>列表对象</li>
+<li>哈希对象</li>
+<li>集合对象</li>
+<li>有序集合对象</li>
+</ul>
+</li>
+<li>对于Redis数据库保存的键值对来说，键总是一个字符串对象，而值则可以是字符串对象、列表对象、哈希对象、集合对象或者有序集合对象的其中一种
+<ul>
+<li>当我们称呼一个数据库键为“字符串键”时，我们指的是“这个数据库键所对应的值为字符串对象”</li>
+<li>当我们称呼一个键为“列表键”时，我们指的是“这个数据库键所对应的值为列表对象”</li>
+</ul>
+</li>
+<li>TYPE命令的实现方式也与此类似，当我们对一个数据库键执行TYPE命令时，命令返回的结果为数据库键对应的值对象的类型，而不是键对象的类型
+<ul>
+<li>因为键的类型始终为字符串</li>
+</ul>
+</li>
 </ul>
 </article>
  
