@@ -20,18 +20,29 @@ MyBatis 默认使用 JDBC 的事务管理，通过 java.sql.Connection 实现。
 
 示例代码：
 SqlSession sqlSession = sqlSessionFactory.openSession();
-try {
-    // 执行数据库操作
-    sqlSession.insert(&#34;insertUser&#34;, user);
-    sqlSession.update(&#34;updateUser&#34;, user);
-    // 提交事务
-    sqlSession.commit();
-} catch (Exception e) {
-    // 回滚事务
-    sqlSession.rollback();
-} finally {
-    // 关闭 SqlSession
-    sqlSession.close();
+try{
+        // 执行数据库操作
+        sqlSession.
+
+insert(&#34;insertUser&#34;,user);
+    sqlSession.
+
+update(&#34;updateUser&#34;,user);
+// 提交事务
+    sqlSession.
+
+commit();
+}catch(
+Exception e){
+        // 回滚事务
+        sqlSession.
+
+rollback();
+}finally{
+        // 关闭 SqlSession
+        sqlSession.
+
+close();
 }
 
   2. 集成 Spring 事务管理
@@ -46,18 +57,18 @@ MyBatis 通常与 Spring 集成，利用 Spring 的事务管理功能。Spring �
   <meta property="og:description" content="mybatis是怎么进行事务管理的 2025-02-08 # MyBatis 通过集成外部事务管理器（如 Spring 或 Java EE 容器）或使用内置的 JDBC 事务管理机制来管理事务。以下是 MyBatis 事务管理的主要方式：
 1. 使用 JDBC 事务管理 # MyBatis 默认使用 JDBC 的事务管理，通过 java.sql.Connection 实现。具体步骤如下：
 开启事务：调用 Connection.setAutoCommit(false) 关闭自动提交。 提交事务：调用 Connection.commit() 提交事务。 回滚事务：调用 Connection.rollback() 回滚事务。 示例代码：
-SqlSession sqlSession = sqlSessionFactory.openSession(); try { // 执行数据库操作 sqlSession.insert(&#34;insertUser&#34;, user); sqlSession.update(&#34;updateUser&#34;, user); // 提交事务 sqlSession.commit(); } catch (Exception e) { // 回滚事务 sqlSession.rollback(); } finally { // 关闭 SqlSession sqlSession.close(); } 2. 集成 Spring 事务管理 # MyBatis 通常与 Spring 集成，利用 Spring 的事务管理功能。Spring 提供了声明式和编程式事务管理。">
+SqlSession sqlSession = sqlSessionFactory.openSession(); try{ // 执行数据库操作 sqlSession. insert(&#34;insertUser&#34;,user); sqlSession. update(&#34;updateUser&#34;,user); // 提交事务 sqlSession. commit(); }catch( Exception e){ // 回滚事务 sqlSession. rollback(); }finally{ // 关闭 SqlSession sqlSession. close(); } 2. 集成 Spring 事务管理 # MyBatis 通常与 Spring 集成，利用 Spring 的事务管理功能。Spring 提供了声明式和编程式事务管理。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
-    <meta property="article:modified_time" content="2025-02-08T21:12:17+08:00">
+    <meta property="article:modified_time" content="2025-02-08T21:15:42+08:00">
 <title>Mybatis | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/computer-science/java/mybatis/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.f801cdb2da7f95a138a583fa95bdcd228ae3d5dfa8146320246d13fb6bf68f9b.js" ></script>
+  <script defer src="/zh.search.min.83755f51dfd9f3ad62b50edda02aa62725611ac77b329dcca31569f21af58347.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -842,6 +853,29 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#5-总结">5. <strong>总结</strong></a></li>
       </ul>
     </li>
+    <li><a href="#什么是乐观锁悲观锁-2025-02-08">什么是乐观锁、悲观锁 2025-02-08</a>
+      <ul>
+        <li><a href="#1-悲观锁pessimistic-locking">1. <strong>悲观锁（Pessimistic Locking）</strong></a>
+          <ul>
+            <li><a href="#实现方式">实现方式</a></li>
+            <li><a href="#特点">特点</a></li>
+            <li><a href="#适用场景">适用场景</a></li>
+            <li><a href="#示例">示例</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-乐观锁optimistic-locking">2. <strong>乐观锁（Optimistic Locking）</strong></a>
+          <ul>
+            <li><a href="#实现方式-1">实现方式</a></li>
+            <li><a href="#特点-1">特点</a></li>
+            <li><a href="#适用场景-1">适用场景</a></li>
+            <li><a href="#示例-1">示例</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-对比总结">3. <strong>对比总结</strong></a></li>
+        <li><a href="#4-如何选择">4. <strong>如何选择</strong></a></li>
+        <li><a href="#5-实际应用中的注意事项">5. <strong>实际应用中的注意事项</strong></a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -871,18 +905,29 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <p>示例代码：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>SqlSession sqlSession <span style="color:#f92672">=</span> sqlSessionFactory.<span style="color:#a6e22e">openSession</span>();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 执行数据库操作</span>
-</span></span><span style="display:flex;"><span>    sqlSession.<span style="color:#a6e22e">insert</span>(<span style="color:#e6db74">&#34;insertUser&#34;</span>, user);
-</span></span><span style="display:flex;"><span>    sqlSession.<span style="color:#a6e22e">update</span>(<span style="color:#e6db74">&#34;updateUser&#34;</span>, user);
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 提交事务</span>
-</span></span><span style="display:flex;"><span>    sqlSession.<span style="color:#a6e22e">commit</span>();
-</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (Exception e) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 回滚事务</span>
-</span></span><span style="display:flex;"><span>    sqlSession.<span style="color:#a6e22e">rollback</span>();
-</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">finally</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 关闭 SqlSession</span>
-</span></span><span style="display:flex;"><span>    sqlSession.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 执行数据库操作</span>
+</span></span><span style="display:flex;"><span>        sqlSession.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">insert</span>(<span style="color:#e6db74">&#34;insertUser&#34;</span>,user);
+</span></span><span style="display:flex;"><span>    sqlSession.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">update</span>(<span style="color:#e6db74">&#34;updateUser&#34;</span>,user);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 提交事务</span>
+</span></span><span style="display:flex;"><span>    sqlSession.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">commit</span>();
+</span></span><span style="display:flex;"><span>}<span style="color:#66d9ef">catch</span>(
+</span></span><span style="display:flex;"><span>Exception e){
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 回滚事务</span>
+</span></span><span style="display:flex;"><span>        sqlSession.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">rollback</span>();
+</span></span><span style="display:flex;"><span>}<span style="color:#66d9ef">finally</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 关闭 SqlSession</span>
+</span></span><span style="display:flex;"><span>        sqlSession.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">close</span>();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="2-集成-spring-事务管理">
   2. 集成 Spring 事务管理
@@ -895,7 +940,8 @@ https://github.com/alex-shpak/hugo-book
 </h4>
 <p>通过 <code>@Transactional</code> 注解或 XML 配置实现事务管理。</p>
 <p>示例代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
@@ -913,7 +959,8 @@ https://github.com/alex-shpak/hugo-book
 </h4>
 <p>通过 <code>TransactionTemplate</code> 或 <code>PlatformTransactionManager</code> 手动管理事务。</p>
 <p>示例代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
@@ -985,7 +1032,8 @@ https://github.com/alex-shpak/hugo-book
 <li>如果没有事务，即使抛出异常，已经插入的数据也会被提交到数据库。</li>
 </ul>
 <p>示例代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
@@ -1009,7 +1057,8 @@ https://github.com/alex-shpak/hugo-book
 </h4>
 <p>在方法上添加 <code>@Transactional</code> 注解，Spring 会为该方法开启事务。</p>
 <p>示例代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
@@ -1038,6 +1087,176 @@ https://github.com/alex-shpak/hugo-book
 <li><strong>验证事务</strong>：通过抛出异常的方式验证事务是否生效。</li>
 </ul>
 <p>如果你希望方法中的操作具有事务性，务必使用 <code>@Transactional</code> 注解。</p>
+<h2 id="什么是乐观锁悲观锁-2025-02-08">
+  什么是乐观锁、悲观锁 2025-02-08
+  <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af%e4%b9%90%e8%a7%82%e9%94%81%e6%82%b2%e8%a7%82%e9%94%81-2025-02-08">#</a>
+</h2>
+<p>乐观锁和悲观锁是并发控制中常用的两种策略，用于解决多个事务或线程同时访问和修改同一数据时可能引发的数据不一致问题。它们的核心区别在于对并发冲突的处理方式。</p>
+<hr>
+<h3 id="1-悲观锁pessimistic-locking">
+  1. <strong>悲观锁（Pessimistic Locking）</strong>
+  <a class="anchor" href="#1-%e6%82%b2%e8%a7%82%e9%94%81pessimistic-locking">#</a>
+</h3>
+<p>悲观锁假设并发冲突很可能发生，因此在访问数据时直接加锁，确保其他事务或线程无法修改数据，直到当前操作完成。</p>
+<h4 id="实现方式">
+  实现方式
+  <a class="anchor" href="#%e5%ae%9e%e7%8e%b0%e6%96%b9%e5%bc%8f">#</a>
+</h4>
+<ul>
+<li>在数据库中，通常通过 <code>SELECT ... FOR UPDATE</code> 或 <code>SELECT ... LOCK IN SHARE MODE</code> 实现。</li>
+<li>在代码中，可以通过 <code>synchronized</code> 关键字或 <code>ReentrantLock</code> 实现。</li>
+</ul>
+<h4 id="特点">
+  特点
+  <a class="anchor" href="#%e7%89%b9%e7%82%b9">#</a>
+</h4>
+<ul>
+<li><strong>优点</strong>：保证数据强一致性，适合写操作多的场景。</li>
+<li><strong>缺点</strong>：加锁会降低并发性能，可能导致死锁。</li>
+</ul>
+<h4 id="适用场景">
+  适用场景
+  <a class="anchor" href="#%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h4>
+<ul>
+<li>写操作频繁，且并发冲突概率高的场景。</li>
+<li>例如：银行转账、库存扣减等。</li>
+</ul>
+<h4 id="示例">
+  示例
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 数据库中使用悲观锁
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">BEGIN</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> account
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>; <span style="color:#75715e">-- 加锁
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">UPDATE</span> account
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> balance <span style="color:#f92672">=</span> balance <span style="color:#f92672">-</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">COMMIT</span>;
+</span></span></code></pre></div><hr>
+<h3 id="2-乐观锁optimistic-locking">
+  2. <strong>乐观锁（Optimistic Locking）</strong>
+  <a class="anchor" href="#2-%e4%b9%90%e8%a7%82%e9%94%81optimistic-locking">#</a>
+</h3>
+<p>乐观锁假设并发冲突很少发生，因此在访问数据时不会加锁，而是在提交时检查数据是否被其他事务修改过。如果发现冲突，则回滚或重试。</p>
+<h4 id="实现方式-1">
+  实现方式
+  <a class="anchor" href="#%e5%ae%9e%e7%8e%b0%e6%96%b9%e5%bc%8f-1">#</a>
+</h4>
+<ul>
+<li>通常通过版本号（Version）或时间戳（Timestamp）实现。</li>
+<li>在数据库中，可以为表添加一个 <code>version</code> 字段，每次更新时检查版本号是否一致。</li>
+</ul>
+<h4 id="特点-1">
+  特点
+  <a class="anchor" href="#%e7%89%b9%e7%82%b9-1">#</a>
+</h4>
+<ul>
+<li><strong>优点</strong>：不加锁，提高并发性能，适合读操作多的场景。</li>
+<li><strong>缺点</strong>：冲突时需要回滚或重试，可能增加业务逻辑复杂度。</li>
+</ul>
+<h4 id="适用场景-1">
+  适用场景
+  <a class="anchor" href="#%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af-1">#</a>
+</h4>
+<ul>
+<li>读操作频繁，写操作较少的场景。</li>
+<li>例如：电商库存、评论系统等。</li>
+</ul>
+<h4 id="示例-1">
+  示例
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b-1">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 数据库中使用乐观锁
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 表结构
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> product
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>    id      INT <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    name    VARCHAR(<span style="color:#ae81ff">50</span>),
+</span></span><span style="display:flex;"><span>    stock   INT,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">version</span> INT <span style="color:#75715e">-- 版本号字段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 更新操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">UPDATE</span> product
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SET</span> stock   <span style="color:#f92672">=</span> stock <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">version</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">version</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">AND</span> <span style="color:#66d9ef">version</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>; <span style="color:#75715e">-- 检查版本号
+</span></span></span></code></pre></div><p>在代码中，可以通过以下方式实现乐观锁：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">updateProduct</span>(Product product) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> rows <span style="color:#f92672">=</span> productMapper.<span style="color:#a6e22e">updateProduct</span>(
+</span></span><span style="display:flex;"><span>            product.<span style="color:#a6e22e">getId</span>(),
+</span></span><span style="display:flex;"><span>            product.<span style="color:#a6e22e">getStock</span>(),
+</span></span><span style="display:flex;"><span>            product.<span style="color:#a6e22e">getVersion</span>()
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (rows <span style="color:#f92672">==</span> 0) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> OptimisticLockException(<span style="color:#e6db74">&#34;数据已被修改，请重试&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="3-对比总结">
+  3. <strong>对比总结</strong>
+  <a class="anchor" href="#3-%e5%af%b9%e6%af%94%e6%80%bb%e7%bb%93">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>悲观锁</th>
+          <th>乐观锁</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>加锁时机</strong></td>
+          <td>访问数据时立即加锁</td>
+          <td>提交时检查冲突</td>
+      </tr>
+      <tr>
+          <td><strong>性能</strong></td>
+          <td>低（加锁影响并发）</td>
+          <td>高（不加锁，冲突时回滚）</td>
+      </tr>
+      <tr>
+          <td><strong>适用场景</strong></td>
+          <td>写操作多，冲突概率高</td>
+          <td>读操作多，冲突概率低</td>
+      </tr>
+      <tr>
+          <td><strong>实现复杂度</strong></td>
+          <td>简单</td>
+          <td>较复杂（需处理冲突）</td>
+      </tr>
+      <tr>
+          <td><strong>数据一致性</strong></td>
+          <td>强一致性</td>
+          <td>最终一致性</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="4-如何选择">
+  4. <strong>如何选择</strong>
+  <a class="anchor" href="#4-%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9">#</a>
+</h3>
+<ul>
+<li>如果业务场景中写操作频繁，且对数据一致性要求高，选择<strong>悲观锁</strong>。</li>
+<li>如果业务场景中读操作频繁，且冲突概率低，选择<strong>乐观锁</strong>。</li>
+</ul>
+<hr>
+<h3 id="5-实际应用中的注意事项">
+  5. <strong>实际应用中的注意事项</strong>
+  <a class="anchor" href="#5-%e5%ae%9e%e9%99%85%e5%ba%94%e7%94%a8%e4%b8%ad%e7%9a%84%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a>
+</h3>
+<ul>
+<li><strong>悲观锁</strong>：注意死锁问题，避免长时间持有锁。</li>
+<li><strong>乐观锁</strong>：需要设计重试机制，处理冲突时的回滚或重试逻辑。</li>
+</ul>
+<p>通过合理选择锁机制，可以在保证数据一致性的同时，最大化系统的并发性能。</p>
 </article>
  
       
@@ -1047,7 +1266,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/062c52cd71dd7c0be694b4ba2a3219b911ee41fb" title='最后修改者 penruins | 二月 8, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/cbe2c28ef8f13b9e69cd2a6e665616f09862f5c6" title='最后修改者 penruins | 二月 8, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>二月 8, 2025</span>
     </a>
@@ -1110,6 +1329,29 @@ https://github.com/alex-shpak/hugo-book
           </ul>
         </li>
         <li><a href="#5-总结">5. <strong>总结</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#什么是乐观锁悲观锁-2025-02-08">什么是乐观锁、悲观锁 2025-02-08</a>
+      <ul>
+        <li><a href="#1-悲观锁pessimistic-locking">1. <strong>悲观锁（Pessimistic Locking）</strong></a>
+          <ul>
+            <li><a href="#实现方式">实现方式</a></li>
+            <li><a href="#特点">特点</a></li>
+            <li><a href="#适用场景">适用场景</a></li>
+            <li><a href="#示例">示例</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-乐观锁optimistic-locking">2. <strong>乐观锁（Optimistic Locking）</strong></a>
+          <ul>
+            <li><a href="#实现方式-1">实现方式</a></li>
+            <li><a href="#特点-1">特点</a></li>
+            <li><a href="#适用场景-1">适用场景</a></li>
+            <li><a href="#示例-1">示例</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-对比总结">3. <strong>对比总结</strong></a></li>
+        <li><a href="#4-如何选择">4. <strong>如何选择</strong></a></li>
+        <li><a href="#5-实际应用中的注意事项">5. <strong>实际应用中的注意事项</strong></a></li>
       </ul>
     </li>
   </ul>
