@@ -83,10 +83,6 @@ Zookeeper有一个Leader，而且在这个Leader无法使用的时候通过Paxos
 Ribbon作为一款客户端负载均衡框架，默认的负载策略是轮询，同时也提供了很多其他的策略，能够让用户根据自身的业务需求进行选择。
 
 
-  第5章　声明式REST客户端Feign
-  #
-
-
   第6章　Hystrix服务容错处理
   #
 
@@ -99,7 +95,7 @@ Hystrix是Netflix针对微服务分布式系统采用的熔断保护中间件，
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/books/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Spring Cloud微服务：入门、实战与进阶">
-  <meta property="og:description" content="1.3 什么是Spring Cloud # Eureka 服务注册中心，用于服务管理 Ribbon 基于客户端的负载均衡组件 Hystrix 容错框架，能够防止服务的雪崩效应 Feign Web服务客户端，能够简化HTTP接口的调用 Zuul API网关，提供路由转发、请求过滤等功能 Config 分布式配置管理 Sleuth 服务跟踪 Stream 构建消息驱动的微服务应用程序的框架 Bus 消息代理的集群消息总线。 第3章　Eureka注册中心 # Spring Cloud Eureka是一个基于REST的服务，并且提供了基于Java的客户端组件，能够非常方便地将服务注册到Spring Cloud Eureka中进行统一管理。 服务治理是微服务架构中必不可少的一部分，阿里开源的Dubbo框架就是针对服务治理的。服务治理必须要有一个注册中心，除了用Eureka作为注册中心外，我们还可以使用Consul、Etcd、Zookeeper等来作为服务的注册中心。 用过Dubbo的读者应该清楚，Dubbo中也有几种注册中心，比如基于Zookeeper、基于Redis等，不过用得最多的还是Zookeeper方式。至于使用哪种方式都是可以的，注册中心无非就是管理所有服务的信息和状态。 程序也是一样，当你需要调用某一个服务的时候，你会先去Eureka中去拉取服务列表，查看你调用的服务在不在其中，在的话就拿到服务地址、端口等信息，然后调用。 为什么Eureka比Zookeeper更适合作为注册中心呢？ 主要是因为Eureka是基于AP原则构建的，而ZooKeeper是基于CP原则构建的。在分布式系统领域有个著名的CAP定理，即C为数据一致性；A为服务可用性；P为服务对网络分区故障的容错性。这三个特性在任何分布式系统中都不能同时满足，最多同时满足两个。 Zookeeper有一个Leader，而且在这个Leader无法使用的时候通过Paxos(ZAB)算法选举出一个新的Leader。这个Leader的任务就是保证写数据的时候只向这个Leader写入，Leader会同步信息到其他节点。通过这个操作就可以保证数据的一致性。 总而言之，想要保证AP就要用Eureka，想要保证CP就要用Zookeeper。Dubbo中大部分都是基于Zookeeper作为注册中心的。Spring Cloud中当然首选Eureka。 第4章　客户端负载均衡Ribbon # 目前主流的负载方案分为两种：一种是集中式负载均衡，在消费者和服务提供方中间使用独立的代理方式进行负载，有硬件的（比如F5），也有软件的（比如Nginx）。另一种则是客户端自己做负载均衡，根据自己的请求情况做负载，Ribbon就属于客户端自己做负载。 Ribbon作为一款客户端负载均衡框架，默认的负载策略是轮询，同时也提供了很多其他的策略，能够让用户根据自身的业务需求进行选择。 第5章　声明式REST客户端Feign # 第6章　Hystrix服务容错处理 # 在微服务架构中存在多个可直接调用的服务，这些服务若在调用时出现故障会导致连锁效应，也就是可能会让整个系统变得不可用，这种情况我们称之为服务雪崩效应。 Hystrix是Netflix针对微服务分布式系统采用的熔断保护中间件，相当于电路中的保险丝。">
+  <meta property="og:description" content="1.3 什么是Spring Cloud # Eureka 服务注册中心，用于服务管理 Ribbon 基于客户端的负载均衡组件 Hystrix 容错框架，能够防止服务的雪崩效应 Feign Web服务客户端，能够简化HTTP接口的调用 Zuul API网关，提供路由转发、请求过滤等功能 Config 分布式配置管理 Sleuth 服务跟踪 Stream 构建消息驱动的微服务应用程序的框架 Bus 消息代理的集群消息总线。 第3章　Eureka注册中心 # Spring Cloud Eureka是一个基于REST的服务，并且提供了基于Java的客户端组件，能够非常方便地将服务注册到Spring Cloud Eureka中进行统一管理。 服务治理是微服务架构中必不可少的一部分，阿里开源的Dubbo框架就是针对服务治理的。服务治理必须要有一个注册中心，除了用Eureka作为注册中心外，我们还可以使用Consul、Etcd、Zookeeper等来作为服务的注册中心。 用过Dubbo的读者应该清楚，Dubbo中也有几种注册中心，比如基于Zookeeper、基于Redis等，不过用得最多的还是Zookeeper方式。至于使用哪种方式都是可以的，注册中心无非就是管理所有服务的信息和状态。 程序也是一样，当你需要调用某一个服务的时候，你会先去Eureka中去拉取服务列表，查看你调用的服务在不在其中，在的话就拿到服务地址、端口等信息，然后调用。 为什么Eureka比Zookeeper更适合作为注册中心呢？ 主要是因为Eureka是基于AP原则构建的，而ZooKeeper是基于CP原则构建的。在分布式系统领域有个著名的CAP定理，即C为数据一致性；A为服务可用性；P为服务对网络分区故障的容错性。这三个特性在任何分布式系统中都不能同时满足，最多同时满足两个。 Zookeeper有一个Leader，而且在这个Leader无法使用的时候通过Paxos(ZAB)算法选举出一个新的Leader。这个Leader的任务就是保证写数据的时候只向这个Leader写入，Leader会同步信息到其他节点。通过这个操作就可以保证数据的一致性。 总而言之，想要保证AP就要用Eureka，想要保证CP就要用Zookeeper。Dubbo中大部分都是基于Zookeeper作为注册中心的。Spring Cloud中当然首选Eureka。 第4章　客户端负载均衡Ribbon # 目前主流的负载方案分为两种：一种是集中式负载均衡，在消费者和服务提供方中间使用独立的代理方式进行负载，有硬件的（比如F5），也有软件的（比如Nginx）。另一种则是客户端自己做负载均衡，根据自己的请求情况做负载，Ribbon就属于客户端自己做负载。 Ribbon作为一款客户端负载均衡框架，默认的负载策略是轮询，同时也提供了很多其他的策略，能够让用户根据自身的业务需求进行选择。 第6章　Hystrix服务容错处理 # 在微服务架构中存在多个可直接调用的服务，这些服务若在调用时出现故障会导致连锁效应，也就是可能会让整个系统变得不可用，这种情况我们称之为服务雪崩效应。 Hystrix是Netflix针对微服务分布式系统采用的熔断保护中间件，相当于电路中的保险丝。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -109,7 +105,7 @@ Hystrix是Netflix针对微服务分布式系统采用的熔断保护中间件，
 <link rel="canonical" href="/zh/zh/post/books/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.113305e38d77456144eaae18cb3b9805cb0c2f6734fb193f6975003012f74314.js" ></script>
+  <script defer src="/zh.search.min.de3fbf0fe3d416bd07dce761dcb2acda74d285a557a03fcd00f6580ffe9b431c.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -827,7 +823,6 @@ https://github.com/alex-shpak/hugo-book
     </li>
     <li><a href="#第3章eureka注册中心">第3章　Eureka注册中心</a></li>
     <li><a href="#第4章客户端负载均衡ribbon">第4章　客户端负载均衡Ribbon</a></li>
-    <li><a href="#第5章声明式rest客户端feign">第5章　声明式REST客户端Feign</a></li>
     <li><a href="#第6章hystrix服务容错处理">第6章　Hystrix服务容错处理</a></li>
   </ul>
 </nav>
@@ -917,20 +912,16 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#%e7%ac%ac4%e7%ab%a0%e5%ae%a2%e6%88%b7%e7%ab%af%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1ribbon">#</a>
 </h2>
 <ul>
-<li>目前主流的负载方案分为两种：一种是集中式负载均衡，在消费者和服务提供方中间使用独立的代理方式进行负载，有硬件的（比如F5），也有软件的（比如Nginx）。另一种则是客户端自己做负载均衡，根据自己的请求情况做负载，Ribbon就属于客户端自己做负载。</li>
-<li>Ribbon作为一款客户端负载均衡框架，默认的负载策略是轮询，同时也提供了很多其他的策略，能够让用户根据自身的业务需求进行选择。</li>
+<li>目前主流的负载方案分为两种：一种是<strong>集中式负载均衡</strong>，在消费者和服务提供方中间使用独立的代理方式进行负载，有硬件的（比如F5），也有软件的（比如Nginx）。另一种则是客户端自己做负载均衡，根据自己的请求情况做负载，<strong>Ribbon就属于客户端自己做负载</strong>。</li>
+<li>Ribbon作为一款客户端负载均衡框架，<strong>默认的负载策略是轮询</strong>，同时也提供了很多其他的策略，能够让用户根据自身的业务需求进行选择。</li>
 </ul>
-<h2 id="第5章声明式rest客户端feign">
-  第5章　声明式REST客户端Feign
-  <a class="anchor" href="#%e7%ac%ac5%e7%ab%a0%e5%a3%b0%e6%98%8e%e5%bc%8frest%e5%ae%a2%e6%88%b7%e7%ab%affeign">#</a>
-</h2>
 <h2 id="第6章hystrix服务容错处理">
   第6章　Hystrix服务容错处理
   <a class="anchor" href="#%e7%ac%ac6%e7%ab%a0hystrix%e6%9c%8d%e5%8a%a1%e5%ae%b9%e9%94%99%e5%a4%84%e7%90%86">#</a>
 </h2>
 <ul>
-<li>在微服务架构中存在多个可直接调用的服务，这些服务若在调用时出现故障会导致连锁效应，也就是可能会让整个系统变得不可用，这种情况我们称之为服务雪崩效应。</li>
-<li>Hystrix是Netflix针对微服务分布式系统采用的熔断保护中间件，相当于电路中的保险丝。</li>
+<li>在微服务架构中存在多个可直接调用的服务，这些服务若在调用时出现故障会导致连锁效应，也就是可能会让整个系统变得不可用，这种情况我们称之为<strong>服务雪崩效应</strong>。</li>
+<li>Hystrix是Netflix针对微服务分布式系统采用的<strong>熔断保护中间件</strong>，相当于电路中的保险丝。</li>
 </ul>
 </article>
  
@@ -980,7 +971,6 @@ https://github.com/alex-shpak/hugo-book
     </li>
     <li><a href="#第3章eureka注册中心">第3章　Eureka注册中心</a></li>
     <li><a href="#第4章客户端负载均衡ribbon">第4章　客户端负载均衡Ribbon</a></li>
-    <li><a href="#第5章声明式rest客户端feign">第5章　声明式REST客户端Feign</a></li>
     <li><a href="#第6章hystrix服务容错处理">第6章　Hystrix服务容错处理</a></li>
   </ul>
 </nav>
