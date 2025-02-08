@@ -150,7 +150,7 @@ Java中的堆是JVM所管理的最大的一块内存空间，主要用于存放�
 <link rel="canonical" href="/zh/post/books/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.00aada04ee7901e9e05c3fa7f9b266e13eef17bf718f09869230192d6822d877.js" ></script>
+  <script defer src="/zh.search.min.a9b89f9b912b25d9347bfa04f56933c5a6936925d355aa169281b0b08030ae24.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -855,6 +855,12 @@ https://github.com/alex-shpak/hugo-book
       </ul>
     </li>
     <li><a href="#第3章-elasticsearch集群部署">第3章 Elasticsearch集群部署</a></li>
+    <li><a href="#第4章-elasticsearch索引">第4章 Elasticsearch索引</a>
+      <ul>
+        <li><a href="#41-索引的定义">4.1 索引的定义</a></li>
+        <li><a href="#43-索引别名">4.3 索引别名</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -1141,6 +1147,64 @@ https://github.com/alex-shpak/hugo-book
 <p>在Elasticsearch系统中，为了保证数据安全，不同节点间的通信和数据传输通常采用HTTPS的加密协议。这样的设计能有效防止数据在传输过程中被窃取或篡改。同样，Elasticsearch与Kibana之间的互动也使用了HTTPS，以确保数据在交互过程中的安全性。</p>
 </li>
 </ul>
+<h2 id="第4章-elasticsearch索引">
+  第4章 Elasticsearch索引
+  <a class="anchor" href="#%e7%ac%ac4%e7%ab%a0-elasticsearch%e7%b4%a2%e5%bc%95">#</a>
+</h2>
+<h3 id="41-索引的定义">
+  4.1 索引的定义
+  <a class="anchor" href="#41-%e7%b4%a2%e5%bc%95%e7%9a%84%e5%ae%9a%e4%b9%89">#</a>
+</h3>
+<ul>
+<li>
+<p>索引是具有相同结构的文档的集合，由唯一索引名称标定。</p>
+</li>
+<li>
+<p>实战场景1：将采集的不同业务类型的数据存储到不同的索引。</p>
+<ul>
+<li>微博业务对应的索引weibo_index</li>
+<li>新闻业务对应的索引news_index</li>
+<li>博客业务对应的索引blog_index</li>
+<li>以上3个索引包含的字段个数、字段名称、字段类型可能不完全一致。</li>
+</ul>
+</li>
+<li>
+<p>实战场景2：按日期切分存储日志索引</p>
+<ul>
+<li>2025年1月的日志对应logs_202501</li>
+<li>2025年3月的日志对应logs_202503</li>
+</ul>
+</li>
+<li>
+<p>索引设置</p>
+<ul>
+<li><strong>静态设置(static index settings)</strong>，只允许在创建索引时或者针对已关闭的索引进行设置。
+<ul>
+<li>设置<strong>主分片大小</strong>的参数是index.number_of_shards，只在创建索引时生效，不支持动态修改。默认主分片大小为1，且每个索引的分片数量上限默认为1024。此限制是一个安全限制，可防止索引分片数过多导致集群不稳定。</li>
+</ul>
+</li>
+<li><strong>动态设置(dynamic index settings)</strong>，可以借助更新设置(update settings)的方式进行动态更新，更新后立即生效。
+<ul>
+<li>设置<strong>副本数</strong>参数为index.number_of_replicas，可以动态修改。</li>
+<li>设置<strong>刷新频率</strong>参数为index.refresh_interval，可以动态修改。默认刷新频率参数值为1s，即每秒刷新一次。这1s决定了Elasticsearch是近实时的搜索引擎，而非准实时搜索引擎。如果业务层面对实时性的要求不高，可以考虑将该值调大。因为如果采用1s，则每秒都会生成一个新的分段，会影响写入性能。</li>
+<li>max_result_window是Elasticsearch中的一个设置参数，用于控制<strong>搜索结果的最大窗口的大小</strong>。默认情况下，max_result_window的值为10000。这意味着在分页搜索时最多可以返回10000条数据。如果每页可显示10条数据，那么最多可以翻到1000页。
+<ul>
+<li>增大max_result_window的值可能会对Elasticsearch集群的性能产生影响，尤其是在处理大量数据时。因此，在根据实际需求调整此参数时，要权衡性能和查询范围之间的关系。如果需要遍历大量数据，则建议使用scroll API或search_after参数，以更高效地进行处理。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="43-索引别名">
+  4.3 索引别名
+  <a class="anchor" href="#43-%e7%b4%a2%e5%bc%95%e5%88%ab%e5%90%8d">#</a>
+</h3>
+<ul>
+<li>场景1：面对PB级别的增量数据，对外提供服务的是基于日期切分的n个不同索引，每次检索都要指定数十个甚至数百个索引，非常麻烦。</li>
+<li>场景2：线上提供服务的某个索引设计不合理，比如某字段分词定义不准确，那么如何保证对外提供服务不停止，也就是在不更改业务代码的前提下更换索引？</li>
+</ul>
 </article>
  
       
@@ -1189,6 +1253,12 @@ https://github.com/alex-shpak/hugo-book
       </ul>
     </li>
     <li><a href="#第3章-elasticsearch集群部署">第3章 Elasticsearch集群部署</a></li>
+    <li><a href="#第4章-elasticsearch索引">第4章 Elasticsearch索引</a>
+      <ul>
+        <li><a href="#41-索引的定义">4.1 索引的定义</a></li>
+        <li><a href="#43-索引别名">4.3 索引别名</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
