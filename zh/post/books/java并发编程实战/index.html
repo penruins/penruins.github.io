@@ -1661,26 +1661,26 @@ https://github.com/alex-shpak/hugo-book
 <li>开发线程安全的类比开发非线程安全的类要更加谨慎和细致</li>
 <li>每个Java应用程序都会使用线程
 <ul>
-<li>当JVM启动时，它将为JVM的内部任务（例如，垃圾收集、终结操作等）创建后台线程，并创建一个主线程来运行main方法。</li>
-<li>AWT（Abstract Window Toolkit，抽象窗口工具库）和Swing的用户界面框架将创建线程来管理用户界面事件。</li>
-<li>Timer将创建线程来执行延迟任务。</li>
+<li>当JVM启动时，它将为JVM的内部任务（例如，<strong>垃圾收集</strong>、<strong>终结操作</strong>等）创建后台线程，并创建一个<strong>主线程</strong>来运行main方法。</li>
+<li>AWT（Abstract Window Toolkit，抽象窗口工具库）和Swing的用户界面框架将创建线程来管理<strong>用户界面事件</strong>。</li>
+<li>Timer将创建线程来<strong>执行延迟任务</strong>。</li>
 <li>一些组件框架，例如Servlet和RMI，都会创建线程池并调用这些线程中的方法。</li>
 </ul>
 </li>
-<li>当某个框架在应用程序中引入并发性时，通常不可能将并发性仅局限于框架代码，因为框架本身会回调（Callback）应用程序的代码，而这些代码将访问应用程序的状态。</li>
-<li>对线程安全性的需求也不能局限于被调用的代码，而是要延伸到需要访问这些代码所访问的程序状态的所有代码路径。因此，对线程安全性的需求将在程序中蔓延开来。</li>
+<li>当某个框架在应用程序中引入并发性时，<strong>通常不可能将并发性仅局限于框架代码</strong>，因为框架本身会回调（Callback）应用程序的代码，而这些代码将访问应用程序的状态。</li>
+<li><strong>对线程安全性的需求也不能局限于被调用的代码，而是要延伸到需要访问这些代码所访问的程序状态的所有代码路径</strong>。因此，对线程安全性的需求将在程序中蔓延开来。</li>
 </ul>
 <h2 id="第2章-线程安全性">
   第2章 线程安全性
   <a class="anchor" href="#%e7%ac%ac2%e7%ab%a0-%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e6%80%a7">#</a>
 </h2>
 <ul>
-<li>要编写线程安全的代码，其核心在于要对状态访问操作进行管理，特别是对共享的（Shared）和可变的（Mutable）状态的访问。</li>
+<li>要编写线程安全的代码，其核心在于要<strong>对状态访问操作进行管理</strong>，特别是对<strong>共享的（Shared）和可变的（Mutable）状态</strong>的访问。</li>
 <li>“共享”意味着变量可以由多个线程同时访问，而“可变”则意味着变量的值在其生命周期内可以发生变化。</li>
 <li>一个对象是否需要是线程安全的，取决于它是否被多个线程访问</li>
 <li>当多个线程访问某个状态变量并且其中有一个线程执行写入操作时，必须采用同步机制来协同这些线程对变量的访问。
 <ul>
-<li>Java中的主要同步机制是关键字synchronized，它提供了一种独占的加锁方式，但“同步”这个术语还包括volatile类型的变量，显式锁（Explicit Lock）以及原子变量。</li>
+<li>Java中的主要同步机制是关键字<strong>synchronized</strong>，它提供了一种独占的加锁方式，但“同步”这个术语还包括<strong>volatile类型的变量</strong>，<strong>显式锁（Explicit Lock）<strong>以及</strong>原子变量</strong>。</li>
 </ul>
 </li>
 </ul>
