@@ -13,7 +13,7 @@
 许多知名企业的商业智能系统，如睿思BI、百度数据可视化Sugar BI、永洪BI等，都借助Elasticsearch的高效、实时的数据分析和可视化能力，帮助企业更好地理解市场趋势、优化决策过程。
 ClickHouse
 
-ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储数据库，专为OLAP（在线分析处理）场景设计。ClickHouse具有高速查询分析的能力，支持实时添加数据和修改结构，并且能够实现高度数据压缩比，从而有效节省存储空间。此外，ClickHouse支持SQL查询，易于使用和集成。
+ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储数据库，专为**OLAP（在线分析处理）**场景设计。ClickHouse具有高速查询分析的能力，支持实时添加数据和修改结构，并且能够实现高度数据压缩比，从而有效节省存储空间。此外，ClickHouse支持SQL查询，易于使用和集成。
 
 
 ">
@@ -22,7 +22,7 @@ ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储�
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/books/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="一本书讲透 ElasticSearch：原理、进阶与工程实践">
-  <meta property="og:description" content="第1章 Elastic Stack全景 # 首先，Elasticsearch支持各类应用、网站等的全文搜索，包括淘宝、京东等电商平台的搜索，360手机助手、豌豆荚等应用市场平台的搜索，以及腾讯文档、石墨文档等平台的全文检索服务。 许多知名企业，如58集团、唯品会、日志易、国投瑞银等，都使用Elasticsearch来快速分析和处理大量的日志数据，从而对业务运行状况进行实时的监控和故障排查。 许多知名企业的商业智能系统，如睿思BI、百度数据可视化Sugar BI、永洪BI等，都借助Elasticsearch的高效、实时的数据分析和可视化能力，帮助企业更好地理解市场趋势、优化决策过程。 ClickHouse ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储数据库，专为OLAP（在线分析处理）场景设计。ClickHouse具有高速查询分析的能力，支持实时添加数据和修改结构，并且能够实现高度数据压缩比，从而有效节省存储空间。此外，ClickHouse支持SQL查询，易于使用和集成。">
+  <meta property="og:description" content="第1章 Elastic Stack全景 # 首先，Elasticsearch支持各类应用、网站等的全文搜索，包括淘宝、京东等电商平台的搜索，360手机助手、豌豆荚等应用市场平台的搜索，以及腾讯文档、石墨文档等平台的全文检索服务。 许多知名企业，如58集团、唯品会、日志易、国投瑞银等，都使用Elasticsearch来快速分析和处理大量的日志数据，从而对业务运行状况进行实时的监控和故障排查。 许多知名企业的商业智能系统，如睿思BI、百度数据可视化Sugar BI、永洪BI等，都借助Elasticsearch的高效、实时的数据分析和可视化能力，帮助企业更好地理解市场趋势、优化决策过程。 ClickHouse ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储数据库，专为**OLAP（在线分析处理）**场景设计。ClickHouse具有高速查询分析的能力，支持实时添加数据和修改结构，并且能够实现高度数据压缩比，从而有效节省存储空间。此外，ClickHouse支持SQL查询，易于使用和集成。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -32,7 +32,7 @@ ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储�
 <link rel="canonical" href="/zh/zh/post/books/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.5efa5ca5340d370063377e71108d3bb7a262073b7746dea89f178bd716097b5d.js" ></script>
+  <script defer src="/zh.search.min.e9775bab498caa93a84a64e379abc50bc2f5e934327d0bfdd8781e6b78de9542.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -748,12 +748,12 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#%e7%ac%ac1%e7%ab%a0-elastic-stack%e5%85%a8%e6%99%af">#</a>
 </h2>
 <ul>
-<li>首先，Elasticsearch支持各类应用、网站等的全文搜索，包括淘宝、京东等电商平台的搜索，360手机助手、豌豆荚等应用市场平台的搜索，以及腾讯文档、石墨文档等平台的全文检索服务。</li>
-<li>许多知名企业，如58集团、唯品会、日志易、国投瑞银等，都使用Elasticsearch来快速分析和处理大量的日志数据，从而对业务运行状况进行实时的监控和故障排查。</li>
-<li>许多知名企业的商业智能系统，如睿思BI、百度数据可视化Sugar BI、永洪BI等，都借助Elasticsearch的高效、实时的数据分析和可视化能力，帮助企业更好地理解市场趋势、优化决策过程。</li>
+<li>首先，Elasticsearch支持各类应用、网站等的全文搜索，包括淘宝、京东等电商平台的搜索，360手机助手、豌豆荚等应用市场平台的搜索，以及腾讯文档、石墨文档等平台的<strong>全文检索服务</strong>。</li>
+<li>许多知名企业，如58集团、唯品会、日志易、国投瑞银等，都使用Elasticsearch来<strong>快速分析和处理大量的日志数据</strong>，从而对业务运行状况进行实时的监控和故障排查。</li>
+<li>许多知名企业的商业智能系统，如睿思BI、百度数据可视化Sugar BI、永洪BI等，都借助Elasticsearch的<strong>高效、实时的数据分析和可视化能力</strong>，帮助企业更好地理解市场趋势、优化决策过程。</li>
 <li>ClickHouse
 <ul>
-<li>ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储数据库，专为OLAP（在线分析处理）场景设计。ClickHouse具有高速查询分析的能力，支持实时添加数据和修改结构，并且能够实现高度数据压缩比，从而有效节省存储空间。此外，ClickHouse支持SQL查询，易于使用和集成。</li>
+<li>ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的<strong>列式存储数据库</strong>，专为**OLAP（在线分析处理）**场景设计。ClickHouse具有高速查询分析的能力，支持实时添加数据和修改结构，并且能够实现高度数据压缩比，从而有效节省存储空间。此外，ClickHouse支持SQL查询，易于使用和集成。</li>
 </ul>
 </li>
 </ul>
