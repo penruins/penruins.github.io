@@ -6,24 +6,38 @@
 <meta name="description" content="
   database
   #
+
+
+  sql
+  #
+
+
+  175 组合两个表
+  #
+
+
+175. 组合两个表
+
+select FirstName, LastName, City, State 
+    from Person left join on Person.PersonId = Address.PersonId;
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/database/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="database">
-  <meta property="og:description" content="database #">
+  <meta property="og:description" content="database # sql # 175 组合两个表 # 175. 组合两个表 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId;">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-02-08T21:15:42+08:00">
+    <meta property="article:modified_time" content="2025-02-08T21:23:42+08:00">
 <title>database | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/database/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.83755f51dfd9f3ad62b50edda02aa62725611ac77b329dcca31569f21af58347.js" ></script>
+  <script defer src="/zh.search.min.a3b283c4877b839d9eea184b67e965b6a3921f146096ed7785b4710478c6da90.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -779,7 +793,15 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#sql">sql</a>
+      <ul>
+        <li><a href="#175-组合两个表">175 组合两个表</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -794,7 +816,20 @@ https://github.com/alex-shpak/hugo-book
   database
   <a class="anchor" href="#database">#</a>
 </h1>
-</article>
+<h2 id="sql">
+  sql
+  <a class="anchor" href="#sql">#</a>
+</h2>
+<h3 id="175-组合两个表">
+  175 组合两个表
+  <a class="anchor" href="#175-%e7%bb%84%e5%90%88%e4%b8%a4%e4%b8%aa%e8%a1%a8">#</a>
+</h3>
+<ul>
+<li><a href="https://leetcode.cn/problems/combine-two-tables/">175. 组合两个表</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> FirstName, LastName, City, <span style="color:#66d9ef">State</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">from</span> Person <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> <span style="color:#66d9ef">on</span> Person.PersonId <span style="color:#f92672">=</span> Address.PersonId;
+</span></span></code></pre></div></article>
  
       
 
@@ -803,7 +838,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/cbe2c28ef8f13b9e69cd2a6e665616f09862f5c6" title='最后修改者 penruins | 二月 8, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/824a623efe30ac0f89c0189b298a237943ee04e3" title='最后修改者 penruins | 二月 8, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>二月 8, 2025</span>
     </a>
@@ -839,7 +874,15 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#sql">sql</a>
+      <ul>
+        <li><a href="#175-组合两个表">175 组合两个表</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
  
