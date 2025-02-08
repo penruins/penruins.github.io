@@ -6,7 +6,7 @@
     <description>Recent content on Penruins</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 08 Feb 2025 00:50:06 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 08 Feb 2025 15:59:59 +0800</lastBuildDate>
     <atom:link href="/zh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>about me</title>
@@ -427,6 +427,20 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/zh/zh/post/computer-science/linux/</guid>
       <description>&lt;h1 id=&#34;linux&#34;&gt;&#xA;  linux&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#linux&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;resources&#34;&gt;&#xA;  resources&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#resources&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/index.html&#34;&gt;鸟哥的Linux私房菜：基础学习篇 第四版&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;tail&#34;&gt;&#xA;  tail&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#tail&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;tail -f xxxx&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    <item>
+      <title>Redis设计与实现</title>
+      <link>/zh/post/books/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/post/books/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;Redis使用对象来表示数据库中的键和值，每次当我们在Redis的数据库中新创建一个键值对时，我们至少会创建两个对象，一个对象用作键值对的键（键对象），另一个对象用作键值对的值（值对象）&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Redis设计与实现</title>
+      <link>/zh/zh/post/books/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/zh/post/books/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;Redis使用对象来表示数据库中的键和值，每次当我们在Redis的数据库中新创建一个键值对时，我们至少会创建两个对象，一个对象用作键值对的键（键对象），另一个对象用作键值对的值（值对象）&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>宏观经济学 第三版</title>
