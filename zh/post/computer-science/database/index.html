@@ -18,7 +18,7 @@
 
 175. 组合两个表
 
-select FirstName, LastName, City, `State`
+select FirstName, LastName, City, State
 from Person
          left join on Person.PersonId = Address.PersonId;
 
@@ -44,19 +44,19 @@ SELECT (SELECT DISTINCT Salary
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/database/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="database">
-  <meta property="og:description" content="database # sql # 175 组合两个表 # 175. 组合两个表 select FirstName, LastName, City, `State` from Person left join on Person.PersonId = Address.PersonId; 176 第二高的薪水 # 176. 第二高的薪水 select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1 然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。
+  <meta property="og:description" content="database # sql # 175 组合两个表 # 175. 组合两个表 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId; 176 第二高的薪水 # 176. 第二高的薪水 select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1 然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。
 SELECT (SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT 1 OFFSET 1) AS SecondHighestSalary ;">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-02-08T21:29:37+08:00">
+    <meta property="article:modified_time" content="2025-02-08T21:32:02+08:00">
 <title>database | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/database/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.444a4d3c7c4f45e8a48541ff1c8786ca905b5fe19e4c7cb40351da9b79431cd3.js" ></script>
+  <script defer src="/zh.search.min.dc4ecd30c9f7251d7c0e413f7cc188f2389fdcb6763264175fc3912959a1bd9d.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -847,7 +847,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><a href="https://leetcode.cn/problems/combine-two-tables/">175. 组合两个表</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> FirstName, LastName, City, <span style="color:#f92672">`</span><span style="color:#66d9ef">State</span><span style="color:#f92672">`</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> FirstName, LastName, City, <span style="color:#66d9ef">State</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Person
 </span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> <span style="color:#66d9ef">on</span> Person.PersonId <span style="color:#f92672">=</span> Address.PersonId;
 </span></span></code></pre></div><h3 id="176-第二高的薪水">
@@ -876,7 +876,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/e0dea9ea9df03424ca07deef828bdd58f52b67ba" title='最后修改者 penruins | 二月 8, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/f1029c7d469dc246a34507845a056381ffaba3b5" title='最后修改者 penruins | 二月 8, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>二月 8, 2025</span>
     </a>
