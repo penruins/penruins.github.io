@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  什么是偏导数 2025-02-08
+  #
+
+偏导数是多元函数对其中一个自变量的导数，用于衡量函数在该自变量方向上的变化率。具体来说，对于函数 ( f(x_1, x_2, \dots, x_n) )，其关于 ( x_i ) 的偏导数记作 ( \frac{\partial f}{\partial x_i} )，表示在其他变量保持不变时，函数 ( f ) 随 ( x_i ) 的变化率。
+
+  定义
+  #
+
+设 ( f(x_1, x_2, \dots, x_n) ) 是一个多元函数，( x_i ) 是其中一个自变量。( f ) 关于 ( x_i ) 的偏导数定义为：
+[
+\frac{\partial f}{\partial x_i} = \lim_{h \to 0} \frac{f(x_1, \dots, x_i &#43; h, \dots, x_n) - f(x_1, \dots, x_i, \dots, x_n)}{h}
+]">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/others/mathematics/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="Penruins">
+  <meta property="og:description" content="什么是偏导数 2025-02-08 # 偏导数是多元函数对其中一个自变量的导数，用于衡量函数在该自变量方向上的变化率。具体来说，对于函数 ( f(x_1, x_2, \dots, x_n) )，其关于 ( x_i ) 的偏导数记作 ( \frac{\partial f}{\partial x_i} )，表示在其他变量保持不变时，函数 ( f ) 随 ( x_i ) 的变化率。
+定义 # 设 ( f(x_1, x_2, \dots, x_n) ) 是一个多元函数，( x_i ) 是其中一个自变量。( f ) 关于 ( x_i ) 的偏导数定义为：
+[ \frac{\partial f}{\partial x_i} = \lim_{h \to 0} \frac{f(x_1, \dots, x_i &#43; h, \dots, x_n) - f(x_1, \dots, x_i, \dots, x_n)}{h} ]">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-02-08T22:48:35+08:00">
+<title>Mathematics | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/zh/post/others/mathematics/">
+<link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/zh.search.min.cf9a9adc1f0a3ad6fe822b62ae886117947d9898e6ecdee5a299308b9788151c.js" ></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/zh/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        中文
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="/cn/">
+          
+        </a>
+      </li>
+      
+      <li>
+        <a href="/en/">
+          English
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Life</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/movies-log/" class="">观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/bilibili/" class="">bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/books/" class="">books</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/cycling/" class="">cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/hiking/" class="">hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/life-recommend/" class="">life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/learning-others-log/" class="">other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/podcast/" class="">podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/politics/" class="">politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/goal/" class="">goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/accumulation/" class="">accumulation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/coffee/" class="">coffee</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Computer Science</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-855531983528655844a29f37632e7e30" class="toggle"  />
+    <label for="section-855531983528655844a29f37632e7e30" class="flex justify-between">
+      <a role="button" class="">Java</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/java/" class="">java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/mybatis/" class="">Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/jvm/" class="">jvm</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/computer-science-recommend/" class="">推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/computer-science-learning-log/" class="">学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/" class="">database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/echarts/" class="">echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/github/" class="">github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/ios/" class="">ios</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/job/" class="">job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/mac/" class="">mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/raspberrypi/" class="">raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/security/" class="">security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/vue/" class="">vue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/algorithm/" class="">Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/linux/" class="">linux</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Others</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/others/about-me/" class="">about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/others/english-learning/" class="">English Learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/others/mathematics/" class="active">Mathematics</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Books</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-70696d57febbe00561bcceac2d174d7c" class="toggle"  />
+    <label for="section-70696d57febbe00561bcceac2d174d7c" class="flex justify-between">
+      <a role="button" class="">Computer Science</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/java%E5%AE%9E%E6%88%98/" class="">Java实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/%E7%BE%8E%E5%9B%BD%E5%9B%B0%E5%B1%80/" class="">美国困局</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/%E7%94%A8%E5%9C%B0%E5%9B%BE%E7%9C%8B%E6%87%82%E4%B8%96%E7%95%8C%E6%A0%BC%E5%B1%80/" class="">用地图看懂世界格局</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Mathematics</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是偏导数-2025-02-08">什么是偏导数 2025-02-08</a>
+      <ul>
+        <li><a href="#定义">定义</a></li>
+        <li><a href="#几何意义">几何意义</a></li>
+        <li><a href="#计算方法">计算方法</a></li>
+        <li><a href="#应用">应用</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="什么是偏导数-2025-02-08">
+  什么是偏导数 2025-02-08
+  <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af%e5%81%8f%e5%af%bc%e6%95%b0-2025-02-08">#</a>
+</h2>
+<p>偏导数是多元函数对其中一个自变量的导数，用于衡量函数在该自变量方向上的变化率。具体来说，对于函数 ( f(x_1, x_2, \dots, x_n) )，其关于 ( x_i ) 的偏导数记作 ( \frac{\partial f}{\partial x_i} )，表示在其他变量保持不变时，函数 ( f ) 随 ( x_i ) 的变化率。</p>
+<h3 id="定义">
+  定义
+  <a class="anchor" href="#%e5%ae%9a%e4%b9%89">#</a>
+</h3>
+<p>设 ( f(x_1, x_2, \dots, x_n) ) 是一个多元函数，( x_i ) 是其中一个自变量。( f ) 关于 ( x_i ) 的偏导数定义为：</p>
+<p>[
+\frac{\partial f}{\partial x_i} = \lim_{h \to 0} \frac{f(x_1, \dots, x_i + h, \dots, x_n) - f(x_1, \dots, x_i, \dots, x_n)}{h}
+]</p>
+<h3 id="几何意义">
+  几何意义
+  <a class="anchor" href="#%e5%87%a0%e4%bd%95%e6%84%8f%e4%b9%89">#</a>
+</h3>
+<p>偏导数 ( \frac{\partial f}{\partial x_i} ) 表示函数 ( f ) 在 ( x_i ) 方向上的切线斜率。</p>
+<h3 id="计算方法">
+  计算方法
+  <a class="anchor" href="#%e8%ae%a1%e7%ae%97%e6%96%b9%e6%b3%95">#</a>
+</h3>
+<p>计算偏导数时，将其他变量视为常数，仅对目标变量求导。例如，对于 ( f(x, y) = x^2 y + y^3 )，关于 ( x ) 的偏导数为：</p>
+<p>[
+\frac{\partial f}{\partial x} = 2xy
+]</p>
+<p>关于 ( y ) 的偏导数为：</p>
+<p>[
+\frac{\partial f}{\partial y} = x^2 + 3y^2
+]</p>
+<h3 id="应用">
+  应用
+  <a class="anchor" href="#%e5%ba%94%e7%94%a8">#</a>
+</h3>
+<p>偏导数在优化、物理、经济学等领域有广泛应用，如梯度计算、求解极值点等。</p>
+<h3 id="总结">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a>
+</h3>
+<p>偏导数是多元函数对某一自变量的导数，反映函数在该方向上的变化率，计算时将其他变量视为常数。</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/02790234f174364cededf0b1490eee05eb4d429c" title='最后修改者 penruins | 二月 8, 2025' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="" />
+      <span>二月 8, 2025</span>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是偏导数-2025-02-08">什么是偏导数 2025-02-08</a>
+      <ul>
+        <li><a href="#定义">定义</a></li>
+        <li><a href="#几何意义">几何意义</a></li>
+        <li><a href="#计算方法">计算方法</a></li>
+        <li><a href="#应用">应用</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
