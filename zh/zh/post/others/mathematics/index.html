@@ -3,38 +3,23 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="
-  什么是偏导数 2025-02-08
-  #
-
-偏导数是多元函数对其中一个自变量的导数，用于衡量函数在该自变量方向上的变化率。具体来说，对于函数 ( f(x_1, x_2, \dots, x_n) )，其关于 ( x_i ) 的偏导数记作 ( \frac{\partial f}{\partial x_i} )，表示在其他变量保持不变时，函数 ( f ) 随 ( x_i ) 的变化率。
-
-  定义
-  #
-
-设 ( f(x_1, x_2, \dots, x_n) ) 是一个多元函数，( x_i ) 是其中一个自变量。( f ) 关于 ( x_i ) 的偏导数定义为：
-[
-\frac{\partial f}{\partial x_i} = \lim_{h \to 0} \frac{f(x_1, \dots, x_i &#43; h, \dots, x_n) - f(x_1, \dots, x_i, \dots, x_n)}{h}
-]">
+<meta name="description" content="">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/others/mathematics/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="什么是偏导数 2025-02-08 # 偏导数是多元函数对其中一个自变量的导数，用于衡量函数在该自变量方向上的变化率。具体来说，对于函数 ( f(x_1, x_2, \dots, x_n) )，其关于 ( x_i ) 的偏导数记作 ( \frac{\partial f}{\partial x_i} )，表示在其他变量保持不变时，函数 ( f ) 随 ( x_i ) 的变化率。
-定义 # 设 ( f(x_1, x_2, \dots, x_n) ) 是一个多元函数，( x_i ) 是其中一个自变量。( f ) 关于 ( x_i ) 的偏导数定义为：
-[ \frac{\partial f}{\partial x_i} = \lim_{h \to 0} \frac{f(x_1, \dots, x_i &#43; h, \dots, x_n) - f(x_1, \dots, x_i, \dots, x_n)}{h} ]">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
-    <meta property="article:modified_time" content="2025-02-08T23:03:32+08:00">
+    <meta property="article:modified_time" content="2025-02-08T23:50:19+08:00">
 <title>Mathematics | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/others/mathematics/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.a08b49bb391bcd34e91764667811cab2b8ff94cf82d6a3d50ca5209775bb2cdf.js" ></script>
+  <script defer src="/zh.search.min.59affaf645534a969a430351566646f9ef1a5403acb542bbfafc676c99e5c783.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -581,17 +566,6 @@ https://github.com/alex-shpak/hugo-book
       
     
       
-        <li>
-          
-  
-  
-
-  
-    <a href="/zh/post/others/mathematics/" class="">Mathematics</a>
-  
-
-        </li>
-      
     
   </ul>
 
@@ -816,19 +790,7 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#什么是偏导数-2025-02-08">什么是偏导数 2025-02-08</a>
-      <ul>
-        <li><a href="#定义">定义</a></li>
-        <li><a href="#几何意义">几何意义</a></li>
-        <li><a href="#计算方法">计算方法</a></li>
-        <li><a href="#应用">应用</a></li>
-        <li><a href="#总结">总结</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
 
@@ -839,61 +801,7 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h2 id="什么是偏导数-2025-02-08">
-  什么是偏导数 2025-02-08
-  <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af%e5%81%8f%e5%af%bc%e6%95%b0-2025-02-08">#</a>
-</h2>
-<p>偏导数是多元函数对其中一个自变量的导数，用于衡量函数在该自变量方向上的变化率。具体来说，对于函数 ( f(x_1, x_2, \dots, x_n) )，其关于 ( x_i ) 的偏导数记作 ( \frac{\partial f}{\partial x_i} )，表示在其他变量保持不变时，函数 ( f ) 随 ( x_i ) 的变化率。</p>
-<h3 id="定义">
-  定义
-  <a class="anchor" href="#%e5%ae%9a%e4%b9%89">#</a>
-</h3>
-<p>设 ( f(x_1, x_2, \dots, x_n) ) 是一个多元函数，( x_i ) 是其中一个自变量。( f ) 关于 ( x_i ) 的偏导数定义为：</p>
-<p>[
-\frac{\partial f}{\partial x_i} = \lim_{h \to 0} \frac{f(x_1, \dots, x_i + h, \dots, x_n) - f(x_1, \dots, x_i, \dots, x_n)}{h}
-]</p>
-<h3 id="几何意义">
-  几何意义
-  <a class="anchor" href="#%e5%87%a0%e4%bd%95%e6%84%8f%e4%b9%89">#</a>
-</h3>
-<p>偏导数 ( \frac{\partial f}{\partial x_i} ) 表示函数 ( f ) 在 ( x_i ) 方向上的切线斜率。</p>
-<h3 id="计算方法">
-  计算方法
-  <a class="anchor" href="#%e8%ae%a1%e7%ae%97%e6%96%b9%e6%b3%95">#</a>
-</h3>
-<p>计算偏导数时，将其他变量视为常数，仅对目标变量求导。例如，对于 ( f(x, y) = x^2 y + y^3 )，关于 ( x ) 的偏导数为：</p>
-<p>[
-\frac{\partial f}{\partial x} = 2xy
-]</p>
-<p>关于 ( y ) 的偏导数为：</p>
-
-<link rel="stylesheet" href="/katex/katex.min.css" />
-<script defer src="/katex/katex.min.js"></script>
-<script defer src="/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script><span>
-  \[
-\[
-\frac{\partial f}{\partial y} = x^2 + 3y^2
-\]
-\]
-</span>
-
-<h3 id="应用">
-  应用
-  <a class="anchor" href="#%e5%ba%94%e7%94%a8">#</a>
-</h3>
-<p>偏导数在优化、物理、经济学等领域有广泛应用，如梯度计算、求解极值点等。</p>
-<h3 id="总结">
-  总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a>
-</h3>
-<p>偏导数是多元函数对某一自变量的导数，反映函数在该方向上的变化率，计算时将其他变量视为常数。</p>
-<span>
-  \[
-f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
-\]
-</span>
-
-</article>
+  <article class="markdown book-article"></article>
  
       
 
@@ -902,7 +810,7 @@ f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/c181c15c77b2fd5a30cd8aa0283a6f4eef50a9d7" title='最后修改者 penruins | 二月 8, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/dd8735a31ca99f85be2631aced944f7d9d396ba8" title='最后修改者 penruins | 二月 8, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>二月 8, 2025</span>
     </a>
@@ -924,10 +832,6 @@ f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
 
       
   
-  <div class="book-comments">
-
-</div>
-  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
@@ -938,19 +842,7 @@ f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#什么是偏导数-2025-02-08">什么是偏导数 2025-02-08</a>
-      <ul>
-        <li><a href="#定义">定义</a></li>
-        <li><a href="#几何意义">几何意义</a></li>
-        <li><a href="#计算方法">计算方法</a></li>
-        <li><a href="#应用">应用</a></li>
-        <li><a href="#总结">总结</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
  
