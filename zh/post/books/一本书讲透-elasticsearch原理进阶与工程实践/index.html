@@ -16,13 +16,39 @@ ClickHouse
 ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储数据库，专为**OLAP（在线分析处理）**场景设计。ClickHouse具有高速查询分析的能力，支持实时添加数据和修改结构，并且能够实现高度数据压缩比，从而有效节省存储空间。此外，ClickHouse支持SQL查询，易于使用和集成。
 
 
+
+
+  第2章 Elasticsearch基础知识
+  #
+
+
+倒排索引
+
+一本C语言图书末页的索引结构。这种结构揭示了核心关键词与页码之间的对应关系。这种关系模式可以视为倒排索引的实际例证。在此结构中，我们可以根据关键词快速找到包含这个关键词的内容的页码。这与倒排索引在接收关键词输入后能够迅速定位包含该关键词的文档的性质是一致的。借由这种类比，我们可以更为直观地理解倒排索引在数据查询中的关键作用。
+
+
+数据索引化
+
+数据索引化指的是数据在写入搜索引擎（本书中主要指Elasticsearch）的过程中，扫描文档中的每一个词项，结合分词器和词典对必要的词项建立倒排索引，同时指明该词项在文章中出现的次数和位置。
+
+
+全文检索的前提是待检索的数据已经索引化，当用户查询时能根据建立的倒排索引进行查找。
+全文检索的特点如下
+
+只处理文本，不处理语义。
+结果列表有相关度排序。
+支持高亮显示结果数据。
+原始的文本被切分为单个单词、短语或特殊标记后进行存储。
+给定词与它的变体（如近义词）会被折叠为一个词，如electrification和ectric、mice和mouse、“土豆”和“马铃薯”、“西红柿”和“番茄”等，每组词均被视为同一个词。
+
+
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/books/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="一本书讲透 ElasticSearch：原理、进阶与工程实践">
-  <meta property="og:description" content="第1章 Elastic Stack全景 # 首先，Elasticsearch支持各类应用、网站等的全文搜索，包括淘宝、京东等电商平台的搜索，360手机助手、豌豆荚等应用市场平台的搜索，以及腾讯文档、石墨文档等平台的全文检索服务。 许多知名企业，如58集团、唯品会、日志易、国投瑞银等，都使用Elasticsearch来快速分析和处理大量的日志数据，从而对业务运行状况进行实时的监控和故障排查。 许多知名企业的商业智能系统，如睿思BI、百度数据可视化Sugar BI、永洪BI等，都借助Elasticsearch的高效、实时的数据分析和可视化能力，帮助企业更好地理解市场趋势、优化决策过程。 ClickHouse ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储数据库，专为**OLAP（在线分析处理）**场景设计。ClickHouse具有高速查询分析的能力，支持实时添加数据和修改结构，并且能够实现高度数据压缩比，从而有效节省存储空间。此外，ClickHouse支持SQL查询，易于使用和集成。">
+  <meta property="og:description" content="第1章 Elastic Stack全景 # 首先，Elasticsearch支持各类应用、网站等的全文搜索，包括淘宝、京东等电商平台的搜索，360手机助手、豌豆荚等应用市场平台的搜索，以及腾讯文档、石墨文档等平台的全文检索服务。 许多知名企业，如58集团、唯品会、日志易、国投瑞银等，都使用Elasticsearch来快速分析和处理大量的日志数据，从而对业务运行状况进行实时的监控和故障排查。 许多知名企业的商业智能系统，如睿思BI、百度数据可视化Sugar BI、永洪BI等，都借助Elasticsearch的高效、实时的数据分析和可视化能力，帮助企业更好地理解市场趋势、优化决策过程。 ClickHouse ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储数据库，专为**OLAP（在线分析处理）**场景设计。ClickHouse具有高速查询分析的能力，支持实时添加数据和修改结构，并且能够实现高度数据压缩比，从而有效节省存储空间。此外，ClickHouse支持SQL查询，易于使用和集成。 第2章 Elasticsearch基础知识 # 倒排索引 一本C语言图书末页的索引结构。这种结构揭示了核心关键词与页码之间的对应关系。这种关系模式可以视为倒排索引的实际例证。在此结构中，我们可以根据关键词快速找到包含这个关键词的内容的页码。这与倒排索引在接收关键词输入后能够迅速定位包含该关键词的文档的性质是一致的。借由这种类比，我们可以更为直观地理解倒排索引在数据查询中的关键作用。 数据索引化 数据索引化指的是数据在写入搜索引擎（本书中主要指Elasticsearch）的过程中，扫描文档中的每一个词项，结合分词器和词典对必要的词项建立倒排索引，同时指明该词项在文章中出现的次数和位置。 全文检索的前提是待检索的数据已经索引化，当用户查询时能根据建立的倒排索引进行查找。 全文检索的特点如下 只处理文本，不处理语义。 结果列表有相关度排序。 支持高亮显示结果数据。 原始的文本被切分为单个单词、短语或特殊标记后进行存储。 给定词与它的变体（如近义词）会被折叠为一个词，如electrification和ectric、mice和mouse、“土豆”和“马铃薯”、“西红柿”和“番茄”等，每组词均被视为同一个词。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -32,7 +58,7 @@ ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的列式存储�
 <link rel="canonical" href="/zh/post/books/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.e9775bab498caa93a84a64e379abc50bc2f5e934327d0bfdd8781e6b78de9542.js" ></script>
+  <script defer src="/zh.search.min.67dbf475b56b8b77cd88668ddf362c2c29b23ed985ff42213c701d04a2bae863.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -731,6 +757,7 @@ https://github.com/alex-shpak/hugo-book
 <nav id="TableOfContents">
   <ul>
     <li><a href="#第1章-elastic-stack全景">第1章 Elastic Stack全景</a></li>
+    <li><a href="#第2章-elasticsearch基础知识">第2章 Elasticsearch基础知识</a></li>
   </ul>
 </nav>
 
@@ -754,6 +781,32 @@ https://github.com/alex-shpak/hugo-book
 <li>ClickHouse
 <ul>
 <li>ClickHouse是一款由俄罗斯搜索引擎Yandex开发并开源的<strong>列式存储数据库</strong>，专为**OLAP（在线分析处理）**场景设计。ClickHouse具有高速查询分析的能力，支持实时添加数据和修改结构，并且能够实现高度数据压缩比，从而有效节省存储空间。此外，ClickHouse支持SQL查询，易于使用和集成。</li>
+</ul>
+</li>
+</ul>
+<h2 id="第2章-elasticsearch基础知识">
+  第2章 Elasticsearch基础知识
+  <a class="anchor" href="#%e7%ac%ac2%e7%ab%a0-elasticsearch%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86">#</a>
+</h2>
+<ul>
+<li>倒排索引
+<ul>
+<li>一本C语言图书末页的索引结构。这种结构揭示了核心关键词与页码之间的对应关系。这种关系模式可以视为倒排索引的实际例证。在此结构中，我们可以<strong>根据关键词快速找到包含这个关键词的内容的页码</strong>。这与倒排索引在接收关键词输入后能够迅速定位包含该关键词的文档的性质是一致的。借由这种类比，我们可以更为直观地理解倒排索引在数据查询中的关键作用。</li>
+</ul>
+</li>
+<li>数据索引化
+<ul>
+<li>数据索引化指的是数据在写入搜索引擎（本书中主要指Elasticsearch）的过程中，<strong>扫描文档中的每一个词项，结合分词器和词典对必要的词项建立倒排索引</strong>，同时指明该词项在文章中出现的<strong>次数</strong>和<strong>位置</strong>。</li>
+</ul>
+</li>
+<li>全文检索的前提是待检索的数据已经索引化，当用户查询时能根据建立的倒排索引进行查找。</li>
+<li>全文检索的特点如下
+<ul>
+<li>只处理文本，不处理语义。</li>
+<li>结果列表有相关度排序。</li>
+<li>支持高亮显示结果数据。</li>
+<li>原始的文本被切分为单个单词、短语或特殊标记后进行存储。</li>
+<li>给定词与它的<strong>变体</strong>（如近义词）会被折叠为一个词，如electrification和ectric、mice和mouse、“土豆”和“马铃薯”、“西红柿”和“番茄”等，每组词均被视为同一个词。</li>
 </ul>
 </li>
 </ul>
@@ -799,6 +852,7 @@ https://github.com/alex-shpak/hugo-book
 <nav id="TableOfContents">
   <ul>
     <li><a href="#第1章-elastic-stack全景">第1章 Elastic Stack全景</a></li>
+    <li><a href="#第2章-elasticsearch基础知识">第2章 Elasticsearch基础知识</a></li>
   </ul>
 </nav>
 
