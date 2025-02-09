@@ -369,7 +369,7 @@ HMAC（Hash-based Message Authentication Code）算法使用Hash算法作为加�
 <link rel="canonical" href="/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAhttps%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.e8dd147cef5e275ec792ec5e2029cb32173b8ebcfeba3776d7773e15e974e249.js" ></script>
+  <script defer src="/zh.search.min.1c6767b968561260eecd006d4324b8a7221950238cc8e9f3b2499b6f39908091.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1271,7 +1271,11 @@ https://github.com/alex-shpak/hugo-book
         </li>
         <li><a href="#33-https总结">3.3 HTTPS总结</a>
           <ul>
-            <li><a href="#331-握手">3.3.1 握手</a></li>
+            <li><a href="#331-握手">3.3.1 握手</a>
+              <ul>
+                <li><a href="#使用charles来解密https请求内容的原理是什么">使用Charles来解密https请求内容的原理是什么？</a></li>
+              </ul>
+            </li>
             <li><a href="#332-加密">3.3.2 加密</a></li>
           </ul>
         </li>
@@ -2358,11 +2362,63 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#331-%e6%8f%a1%e6%89%8b">#</a>
 </h4>
 <ul>
-<li>1 认证</li>
+<li>1 认证
+<ul>
+<li>客户端在进行密钥交换之前，必须认证服务器的身份，否则就会存在中间人攻击，而服务器实体并不能自己证明自己，所以需要通过CA机构来进行认证，认证的技术解决方案就是签名的数字证书。证书中会说明CA机构采用的数字签名算法，客户端获取到证书后，会采用相应的签名算法进行验证，一旦验证通过，则表示客户端成功认证了服务器端的身份。</li>
+</ul>
+</li>
 <li>2 密码套件协商</li>
 <li>3 密钥协商</li>
 <li>4 握手消息完整性校验</li>
 </ul>
+<h5 id="使用charles来解密https请求内容的原理是什么">
+  使用Charles来解密https请求内容的原理是什么？
+  <a class="anchor" href="#%e4%bd%bf%e7%94%a8charles%e6%9d%a5%e8%a7%a3%e5%af%86https%e8%af%b7%e6%b1%82%e5%86%85%e5%ae%b9%e7%9a%84%e5%8e%9f%e7%90%86%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h5>
+<p>使用Charles等代理工具解密HTTPS请求内容的基本原理涉及到中间人（Man-in-the-Middle, MITM）技术的应用。以下是详细步骤和原理说明：</p>
+<p>基本原理</p>
+<ol>
+<li>
+<p><strong>安装Charles的根证书</strong>：</p>
+<ul>
+<li>为了能够解密HTTPS流量，用户首先需要在设备或浏览器中安装Charles提供的自签名根证书。</li>
+<li>这个证书使得Charles可以作为受信任的CA（证书颁发机构），从而生成用于与目标网站通信的伪造证书。</li>
+</ul>
+</li>
+<li>
+<p><strong>拦截HTTPS连接</strong>：</p>
+<ul>
+<li>当客户端尝试建立一个HTTPS连接时，Charles作为代理服务器会拦截这个请求。</li>
+<li>Charles代替原始服务器向客户端发送自己签发的伪造证书（基于之前安装的根证书），而不是服务器的真实证书。</li>
+</ul>
+</li>
+<li>
+<p><strong>客户端验证伪造证书</strong>：</p>
+<ul>
+<li>客户端收到伪造证书后，会根据已安装的信任证书列表进行验证。</li>
+<li>因为用户已经安装了Charles的根证书，所以客户端认为这个伪造证书是有效的，并继续建立加密连接。</li>
+</ul>
+</li>
+<li>
+<p><strong>双向解密与重新加密</strong>：</p>
+<ul>
+<li>Charles能够解密从客户端发来的加密请求，因为它拥有对应的私钥（用于伪造证书的那一对公私钥）。</li>
+<li>解密后的明文信息被显示给用户查看。</li>
+<li>然后，Charles使用目标服务器的真实证书与服务器建立另一个独立的HTTPS连接，并将请求转发给服务器。</li>
+<li>对于响应数据，Charles同样先从服务器接收加密响应，解密，展示给用户，再用伪造证书加密返回给客户端。</li>
+</ul>
+</li>
+</ol>
+<p>注意事项</p>
+<ul>
+<li>
+<p><strong>安全性风险</strong>：虽然这种方法对于调试和开发非常有用，但它也存在显著的安全隐患。如果恶意软件利用类似的技术，它可以窃听用户的敏感信息。因此，在公共网络或不受信任的环境中不应该随意安装未知来源的根证书。</p>
+</li>
+<li>
+<p><strong>透明度和同意</strong>：实际操作中，使用这类工具通常要求明确告知用户并获得其同意，尤其是在涉及处理个人敏感信息时。</p>
+</li>
+</ul>
+<p>通过这种方式，Charles能够在不破坏原有HTTPS加密机制的前提下，实现对HTTPS流量的监控和分析。这对于开发者来说是一个强大的工具，可以帮助他们调试应用程序、检查API调用以及确保网络安全配置正确无误。然而，使用此类工具时应谨慎考虑隐私和安全问题。</p>
 <h4 id="332-加密">
   3.3.2 加密
   <a class="anchor" href="#332-%e5%8a%a0%e5%af%86">#</a>
@@ -2540,7 +2596,11 @@ https://github.com/alex-shpak/hugo-book
         </li>
         <li><a href="#33-https总结">3.3 HTTPS总结</a>
           <ul>
-            <li><a href="#331-握手">3.3.1 握手</a></li>
+            <li><a href="#331-握手">3.3.1 握手</a>
+              <ul>
+                <li><a href="#使用charles来解密https请求内容的原理是什么">使用Charles来解密https请求内容的原理是什么？</a></li>
+              </ul>
+            </li>
             <li><a href="#332-加密">3.3.2 加密</a></li>
           </ul>
         </li>
