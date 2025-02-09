@@ -224,7 +224,7 @@ ChaCha20-Poly1305
 <link rel="canonical" href="/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAhttps%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.97b9a1d287d49e9fecb846b064893ccab705a8f0c69cedff9fc5de3d7e468419.js" ></script>
+  <script defer src="/zh.search.min.ce5cd90a034e098050dcc12f0b3bb3e9c13b710f767c0878d198ca5ab956297c.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1042,7 +1042,16 @@ https://github.com/alex-shpak/hugo-book
     </li>
     <li><a href="#第3章-宏观理解tls">第3章 宏观理解TLS</a>
       <ul>
-        <li><a href="#32-tlsssl协议背后的算法">3.2 TLS/SSL协议背后的算法</a></li>
+        <li><a href="#32-tlsssl协议背后的算法">3.2 TLS/SSL协议背后的算法</a>
+          <ul>
+            <li><a href="#321-加密算法和mac算法">3.2.1 加密算法和MAC算法</a></li>
+            <li><a href="#322-密钥协商算法">3.2.2 密钥协商算法</a></li>
+            <li><a href="#323-前向安全性">3.2.3 前向安全性</a></li>
+            <li><a href="#324-密钥衍生算法">3.2.4 密钥衍生算法</a></li>
+            <li><a href="#325-中间人攻击">3.2.5 中间人攻击</a></li>
+            <li><a href="#326-pki">3.2.6 PKI</a></li>
+          </ul>
+        </li>
         <li><a href="#34-实施https网站的必备条件">3.4 实施HTTPS网站的必备条件</a></li>
         <li><a href="#35-从用户的角度看https">3.5 从用户的角度看HTTPS</a></li>
       </ul>
@@ -1688,6 +1697,39 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
+<h4 id="321-加密算法和mac算法">
+  3.2.1 加密算法和MAC算法
+  <a class="anchor" href="#321-%e5%8a%a0%e5%af%86%e7%ae%97%e6%b3%95%e5%92%8cmac%e7%ae%97%e6%b3%95">#</a>
+</h4>
+<ul>
+<li>为了对数据进行加密，可以采用对称加密算法或者公开密钥加密算法，有加密算法必定就有MAC算法，两者是一个整体</li>
+<li>使用公开密钥加密算法的缺点就是运算慢，尤其是HTTP传输的数据都非常大，所以在大部分Web应用中很少使用公开密钥算法进行加密解密运算。唯一的可行方案就是对称加密算法，比如AES、DES算法。在Web应用中使用比较多的MAC算法是HMAC算法，比如HMAC-SHA-1、HMAC-SHA256算法。</li>
+<li>协商
+<ul>
+<li>本章处处可见协商两个字，所以会重点描述协商的概念，在TLS/SSL协议中，协商的另外一个关键名词就是密码套件（CipherSuite），协商的结果就是双方都认可的密码套件，密码套件决定了本次连接采用哪一种<strong>加密算法</strong>、<strong>密钥协商算法</strong>、<strong>HMAC算法</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="322-密钥协商算法">
+  3.2.2 密钥协商算法
+  <a class="anchor" href="#322-%e5%af%86%e9%92%a5%e5%8d%8f%e5%95%86%e7%ae%97%e6%b3%95">#</a>
+</h4>
+<h4 id="323-前向安全性">
+  3.2.3 前向安全性
+  <a class="anchor" href="#323-%e5%89%8d%e5%90%91%e5%ae%89%e5%85%a8%e6%80%a7">#</a>
+</h4>
+<h4 id="324-密钥衍生算法">
+  3.2.4 密钥衍生算法
+  <a class="anchor" href="#324-%e5%af%86%e9%92%a5%e8%a1%8d%e7%94%9f%e7%ae%97%e6%b3%95">#</a>
+</h4>
+<h4 id="325-中间人攻击">
+  3.2.5 中间人攻击
+  <a class="anchor" href="#325-%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb">#</a>
+</h4>
+<h4 id="326-pki">
+  3.2.6 PKI
+  <a class="anchor" href="#326-pki">#</a>
+</h4>
 <h3 id="34-实施https网站的必备条件">
   3.4 实施HTTPS网站的必备条件
   <a class="anchor" href="#34-%e5%ae%9e%e6%96%bdhttps%e7%bd%91%e7%ab%99%e7%9a%84%e5%bf%85%e5%a4%87%e6%9d%a1%e4%bb%b6">#</a>
@@ -1777,7 +1819,16 @@ https://github.com/alex-shpak/hugo-book
     </li>
     <li><a href="#第3章-宏观理解tls">第3章 宏观理解TLS</a>
       <ul>
-        <li><a href="#32-tlsssl协议背后的算法">3.2 TLS/SSL协议背后的算法</a></li>
+        <li><a href="#32-tlsssl协议背后的算法">3.2 TLS/SSL协议背后的算法</a>
+          <ul>
+            <li><a href="#321-加密算法和mac算法">3.2.1 加密算法和MAC算法</a></li>
+            <li><a href="#322-密钥协商算法">3.2.2 密钥协商算法</a></li>
+            <li><a href="#323-前向安全性">3.2.3 前向安全性</a></li>
+            <li><a href="#324-密钥衍生算法">3.2.4 密钥衍生算法</a></li>
+            <li><a href="#325-中间人攻击">3.2.5 中间人攻击</a></li>
+            <li><a href="#326-pki">3.2.6 PKI</a></li>
+          </ul>
+        </li>
         <li><a href="#34-实施https网站的必备条件">3.4 实施HTTPS网站的必备条件</a></li>
         <li><a href="#35-从用户的角度看https">3.5 从用户的角度看HTTPS</a></li>
       </ul>
