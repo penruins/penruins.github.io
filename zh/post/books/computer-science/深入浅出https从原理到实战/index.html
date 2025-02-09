@@ -369,7 +369,7 @@ HMAC（Hash-based Message Authentication Code）算法使用Hash算法作为加�
 <link rel="canonical" href="/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAhttps%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.befa76df4eb212a615cbba8bb6251779c387a839f66f2f00353e73e515cfe846.js" ></script>
+  <script defer src="/zh.search.min.85853c769cb8893be8c60514427b9a4a1bab462dc7d0823efec0e92574a8f51f.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -2449,6 +2449,112 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
+<blockquote>
+<p>Finished消息：客户端和服务器各自发送“Finished”消息，这些消息包含整个握手过程的一个哈希值（通常是基于之前所有握手消息的摘要），并用新协商的密钥进行加密。这一步骤用于最终验证握手过程的完整性和一致性。
+完整性校验：通过比较收到的“Finished”消息中的哈希值与本地计算出的握手消息摘要是否一致，双方可以确认对方确实参与了相同的握手流程，且没有发生任何篡改。</p></blockquote>
+<h6 id="finished-消息包含的哈希值是怎么计算的以及是怎么比较的">
+  Finished 消息包含的哈希值是怎么计算的，以及是怎么比较的
+  <a class="anchor" href="#finished-%e6%b6%88%e6%81%af%e5%8c%85%e5%90%ab%e7%9a%84%e5%93%88%e5%b8%8c%e5%80%bc%e6%98%af%e6%80%8e%e4%b9%88%e8%ae%a1%e7%ae%97%e7%9a%84%e4%bb%a5%e5%8f%8a%e6%98%af%e6%80%8e%e4%b9%88%e6%af%94%e8%be%83%e7%9a%84">#</a>
+</h6>
+<p>在SSL/TLS握手过程中，&ldquo;Finished&quot;消息中的哈希值是通过特定的计算方法生成的，并且用于确保握手过程的完整性和一致性。以下是详细的步骤和机制说明：</p>
+<p>计算 &ldquo;Finished&rdquo; 消息中的哈希值</p>
+<ol>
+<li>
+<p><strong>握手上下文（Handshake Context）</strong>：</p>
+<ul>
+<li>在整个握手过程中，客户端和服务器会交换一系列的消息，如Client Hello、Server Hello、Certificate、Server Key Exchange、Client Key Exchange等。</li>
+<li>这些消息的内容会被收集起来形成一个握手上下文（handshake context），通常是一个字节流，包含了所有已发送和接收的手握消息。</li>
+</ul>
+</li>
+<li>
+<p><strong>PRF（伪随机函数）或HKDF</strong>：</p>
+<ul>
+<li>SSL/TLS使用伪随机函数（PRF）或基于哈希的消息认证码（HMAC）来生成密钥材料和其他安全参数。</li>
+<li>在TLS 1.2及之前版本中，PRF被用来生成“Finished”消息中的验证数据（verify_data）。</li>
+<li>在TLS 1.3中，使用了更现代的HKDF（Key Derivation Function）来进行类似的计算。</li>
+</ul>
+</li>
+<li>
+<p><strong>计算哈希值</strong>：</p>
+<ul>
+<li><strong>TLS 1.2及之前版本</strong>：
+<ul>
+<li>PRF根据以下公式计算出“Finished”消息中的verify_data：
+<pre tabindex="0"><code>verify_data = PRF(master_secret, &#34;client finished&#34;, Hash(handshake_messages)) [for client]
+verify_data = PRF(master_secret, &#34;server finished&#34;, Hash(handshake_messages)) [for server]
+</code></pre></li>
+<li>其中：
+<ul>
+<li><code>master_secret</code> 是通过密钥交换算法生成的主密钥。</li>
+<li><code>&quot;client finished&quot;</code> 或 <code>&quot;server finished&quot;</code> 是标签字符串，用于区分客户端和服务器的计算。</li>
+<li><code>Hash(handshake_messages)</code> 是对所有握手消息进行哈希运算的结果（通常是SHA-256或其他协商的哈希算法）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>TLS 1.3</strong>：
+<ul>
+<li>使用HKDF提取和扩展函数来生成verify_data：
+<pre tabindex="0"><code>verify_data = HKDF-Expand-Label(transcript_hash, &#34;finished&#34;, &#34;&#34;, length)
+</code></pre></li>
+<li>其中：
+<ul>
+<li><code>transcript_hash</code> 是所有握手消息的哈希摘要。</li>
+<li><code>&quot;finished&quot;</code> 是标签字符串。</li>
+<li><code>length</code> 是所需输出的长度。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>发送和比较 &ldquo;Finished&rdquo; 消息</p>
+<ol>
+<li>
+<p><strong>客户端发送 &ldquo;Finished&rdquo; 消息</strong>：</p>
+<ul>
+<li>客户端根据上述方法计算出自己的verify_data，并将其作为“Finished”消息的一部分加密后发送给服务器。</li>
+</ul>
+</li>
+<li>
+<p><strong>服务器发送 &ldquo;Finished&rdquo; 消息</strong>：</p>
+<ul>
+<li>服务器同样按照相同的方法计算出自己的verify_data，并将其作为“Finished”消息的一部分加密后发送给客户端。</li>
+</ul>
+</li>
+<li>
+<p><strong>比较哈希值</strong>：</p>
+<ul>
+<li>
+<p><strong>客户端验证服务器的 “Finished” 消息</strong>：</p>
+<ul>
+<li>客户端收到服务器的“Finished”消息后，解密并从中提取出verify_data。</li>
+<li>然后，客户端使用相同的PRF或HKDF算法，基于自己记录的所有握手消息重新计算预期的verify_data。</li>
+<li>如果计算结果与接收到的verify_data匹配，则认为握手过程未被篡改，服务器的身份是可信的。</li>
+</ul>
+</li>
+<li>
+<p><strong>服务器验证客户端的 “Finished” 消息</strong>：</p>
+<ul>
+<li>同样地，服务器也会对接收到的客户端“Finished”消息进行验证，确保客户端参与了相同的握手流程，并且没有发生任何篡改。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>示例</p>
+<p>假设在一个TLS 1.2握手过程中：</p>
+<ul>
+<li>握手消息包括：Client Hello、Server Hello、Certificate、Server Key Exchange、Client Key Exchange、Change Cipher Spec。</li>
+<li>客户端和服务器各自计算出 <code>Hash(handshake_messages)</code>。</li>
+<li>使用PRF和 <code>master_secret</code> 计算出各自的verify_data：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>Client Finished: PRF(master_secret, &#34;client finished&#34;, Hash(handshake_messages))
+</span></span><span style="display:flex;"><span>Server Finished: PRF(master_secret, &#34;server finished&#34;, Hash(handshake_messages))
+</span></span></code></pre></div></li>
+<li>双方将这些verify_data作为“Finished”消息的一部分发送给对方，并在接收到对方的“Finished”消息时重新计算verify_data进行比较。</li>
+</ul>
+<p>通过这种方式，&ldquo;Finished&quot;消息不仅确认了双方已经成功完成了密钥交换，还验证了整个握手过程的完整性和一致性，从而有效防止了中间人攻击和其他形式的数据篡改。</p>
 <hr>
 <h5 id="使用charles来解密https请求内容的原理是什么">
   使用Charles来解密https请求内容的原理是什么？
