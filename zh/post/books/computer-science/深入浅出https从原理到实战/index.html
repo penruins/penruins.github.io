@@ -369,7 +369,7 @@ HMAC（Hash-based Message Authentication Code）算法使用Hash算法作为加�
 <link rel="canonical" href="/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAhttps%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.cd946a583e11d5a89ecc81a37f97a0c3d6b18dc917c481c983c3dd94b0ba1a39.js" ></script>
+  <script defer src="/zh.search.min.8fee6559dcb8ee8dcd531aea7ef28cfb68c54e2b5432284e16e5a048c8668a85.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1280,8 +1280,20 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#332-加密">3.3.2 加密</a></li>
           </ul>
         </li>
-        <li><a href="#34-实施https网站的必备条件">3.4 实施HTTPS网站的必备条件</a></li>
-        <li><a href="#35-从用户的角度看https">3.5 从用户的角度看HTTPS</a></li>
+        <li><a href="#34-实施https网站的必备条件">3.4 实施HTTPS网站的必备条件</a>
+          <ul>
+            <li><a href="#341-证书和密钥对">3.4.1 证书和密钥对</a></li>
+            <li><a href="#342-部署和配置https网站">3.4.2 部署和配置HTTPS网站</a></li>
+            <li><a href="#343-全站https策略">3.4.3 全站HTTPS策略</a></li>
+          </ul>
+        </li>
+        <li><a href="#35-从用户的角度看https">3.5 从用户的角度看HTTPS</a>
+          <ul>
+            <li><a href="#351-绿色小锁图标">3.5.1 绿色小锁图标</a></li>
+            <li><a href="#352-tlsssl握手失败">3.5.2 TLS/SSL握手失败</a></li>
+            <li><a href="#353-混合内容">3.5.3 混合内容</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#第4章-选择https的必要性和疑惑">第4章 选择HTTPS的必要性和疑惑</a></li>
@@ -2368,9 +2380,64 @@ https://github.com/alex-shpak/hugo-book
 <li>客户端在进行密钥交换之前，必须认证服务器的身份，否则就会存在中间人攻击，而服务器实体并不能自己证明自己，所以需要通过CA机构来进行认证，认证的技术解决方案就是签名的数字证书。证书中会说明CA机构采用的数字签名算法，客户端获取到证书后，会采用相应的签名算法进行验证，一旦验证通过，则表示客户端成功认证了服务器端的身份。</li>
 </ul>
 </li>
-<li>2 密码套件协商</li>
-<li>3 密钥协商</li>
-<li>4 握手消息完整性校验</li>
+<li>2 密码套件协商
+<ul>
+<li>密码套件是一系列密码学算法的组合，主要包括多个密码学算法
+<ul>
+<li>身份验证算法</li>
+<li>密码协商算法</li>
+<li>加密算法或者加密模式</li>
+<li>HMAC算法的加密基元</li>
+<li>PRF算法的加密基元，需要注意的是，不同的TLS/SSL协议版本、密码套件，PRF算法最终使用的加密基元和HMAC算法使用的加密基元是不一样的</li>
+</ul>
+</li>
+<li><code>TLS_密钥协商_身份验证_WITH_加密算法_HMAC或PRF算法</code></li>
+<li>密码套件的例子
+<ul>
+<li><code>TLS_DH_RSA_WITH_AES_CBC_128_SHA</code>
+<ul>
+<li>RSA：身份验证算法，这个称呼具备一定的干扰性，本例中的RSA表示证书中包含的服务器公钥是RSA公钥，对于不同的密钥协商算法，RSA公钥的作用也不一样。读者可能会问，为何没有涉及身份验证，身份验证对应的数字签名算法由证书指定，客户端获取到证书的时候，证书会说明该证书由何种数字签名算法签名，验证证书签名的公钥和服务器的公钥没有任何关系。</li>
+<li>DH：表示密钥协商算法，用来协商出预备主密钥（PremasterSecret），那么客户端如何获取DH参数呢？服务器会发送DH参数和服务器DH公钥。</li>
+<li>AES_CBC_128，表示加密算法，用于保证机密性，在本例中使用的是AES对称加密算法、加密模式是CBC模式、密钥长度是128比特。</li>
+<li>SHA：表示HMAC算法，用于保证完整性，在本例中是HMAC_SHA1算法。</li>
+<li>PRF算法：PRF算法采用的加密基元不一定是SHA1算法，由TLS/SSL协议版本和协商出的密码套件决定。</li>
+</ul>
+</li>
+<li><code>TLS_RSA_WITH_AES_CBC_128_SHA</code></li>
+</ul>
+</li>
+<li>理解密码套件的几个关键点
+<ul>
+<li>密码套件是密码学算法的组合，但并不是随便组合的，每一种密码套件都由IANA指定和分配。</li>
+<li>不同的TLS/SSL版本，密码套件的解释有细微的差别，比如在TLS v1.0版本中，PRF具体使用的算法是硬编码的（不依赖于密码套件），是HMAC-MD5和HMAC-SHA1算法的组合，而在TLS v1.2版本中，PRF默认采用的是HMAC-SHA256算法。</li>
+<li>不同的TLS/SSL版本，有不同的密码套件组合，主要是从安全性和性能的角度考虑，版本越高，包含的密码套件安全性就更高，也会废弃一些相对不安全的密码套件。</li>
+<li>密码套件在服务器端是可以配置的，比如Nginx服务器可以通过指令配置密码套件，可以去除一些不安全的密码套件。</li>
+<li>客户端和服务器端选择密码套件的基本原则就是优先级，从安全角度看应该由服务器决定协商出的最终密码套件。</li>
+<li>密码套件仅仅是一个配置，不代表服务器就支持该套件，比如服务器可以配置TLS_ECDHE_WITH_ECDSA_AES_128_GCM_SHA256套件，但是服务器上并没有ECDSA密钥对，那么最终不能协商出该密码套件。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3 密钥协商
+<ul>
+<li>如果使用RSA密钥协商算法，那么服务器的密钥对非常重要，服务器的公钥不仅仅要进行身份验证，还要进行密钥协商，一旦私钥泄露，就失去了前向安全性。</li>
+<li>如果使用静态DH算法，服务器证书中会包含固定的DH参数和DH公钥，也会失去前向安全性，所以现在密码套件很少支持DH算法，CA机构在签发证书的时候也不会包含DH参数和DH公钥。</li>
+<li>为了保持前向安全性，目前使用最多的密钥协商算法就是DHE算法和ECDHE算法，这两个算法和服务器的密钥对关系不大，也就是说密钥的协商不取决于服务器的密钥对，所以服务器的私钥即使泄露，也不会造成太大的安全风险。</li>
+</ul>
+</li>
+<li>4 握手消息完整性校验
+<ul>
+<li>握手过程中传递的消息全部是明文传输的，任何攻击者都能截获，握手消息存在被篡改的可能性</li>
+<li>读者会说不是有身份验证了吗，怎么还存在中间人攻击？确实是这样，证书校验能够确保服务器的真实身份，但密钥协商是身份校验之后的过程，攻击者无法攻击身份校验过程，但可以在后续的握手过程中篡改消息</li>
+<li>下面简单描述TLS/SSL协议如何对消息进行加密和完整性保护
+<ul>
+<li>客户端将发送和接收到的所有握手消息组合在一起，然后计算出摘要数据，握手层使用密钥块对摘要数据进行加密和完整性保护，然后发送给服务器。</li>
+<li>服务器接收到验证消息后，使用加密块解密出摘要数据。</li>
+<li>紧接着服务器自行计算发送和接收的所有握手消息，再计算出消息的摘要数据，如果摘要数据和解密出的摘要数据相同，代表客户端发送的消息没有被篡改。</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h5 id="使用charles来解密https请求内容的原理是什么">
@@ -2474,10 +2541,34 @@ https://github.com/alex-shpak/hugo-book
   3.4 实施HTTPS网站的必备条件
   <a class="anchor" href="#34-%e5%ae%9e%e6%96%bdhttps%e7%bd%91%e7%ab%99%e7%9a%84%e5%bf%85%e5%a4%87%e6%9d%a1%e4%bb%b6">#</a>
 </h3>
+<h4 id="341-证书和密钥对">
+  3.4.1 证书和密钥对
+  <a class="anchor" href="#341-%e8%af%81%e4%b9%a6%e5%92%8c%e5%af%86%e9%92%a5%e5%af%b9">#</a>
+</h4>
+<h4 id="342-部署和配置https网站">
+  3.4.2 部署和配置HTTPS网站
+  <a class="anchor" href="#342-%e9%83%a8%e7%bd%b2%e5%92%8c%e9%85%8d%e7%bd%aehttps%e7%bd%91%e7%ab%99">#</a>
+</h4>
+<h4 id="343-全站https策略">
+  3.4.3 全站HTTPS策略
+  <a class="anchor" href="#343-%e5%85%a8%e7%ab%99https%e7%ad%96%e7%95%a5">#</a>
+</h4>
 <h3 id="35-从用户的角度看https">
   3.5 从用户的角度看HTTPS
   <a class="anchor" href="#35-%e4%bb%8e%e7%94%a8%e6%88%b7%e7%9a%84%e8%a7%92%e5%ba%a6%e7%9c%8bhttps">#</a>
 </h3>
+<h4 id="351-绿色小锁图标">
+  3.5.1 绿色小锁图标
+  <a class="anchor" href="#351-%e7%bb%bf%e8%89%b2%e5%b0%8f%e9%94%81%e5%9b%be%e6%a0%87">#</a>
+</h4>
+<h4 id="352-tlsssl握手失败">
+  3.5.2 TLS/SSL握手失败
+  <a class="anchor" href="#352-tlsssl%e6%8f%a1%e6%89%8b%e5%a4%b1%e8%b4%a5">#</a>
+</h4>
+<h4 id="353-混合内容">
+  3.5.3 混合内容
+  <a class="anchor" href="#353-%e6%b7%b7%e5%90%88%e5%86%85%e5%ae%b9">#</a>
+</h4>
 <h2 id="第4章-选择https的必要性和疑惑">
   第4章 选择HTTPS的必要性和疑惑
   <a class="anchor" href="#%e7%ac%ac4%e7%ab%a0-%e9%80%89%e6%8b%a9https%e7%9a%84%e5%bf%85%e8%a6%81%e6%80%a7%e5%92%8c%e7%96%91%e6%83%91">#</a>
@@ -2652,8 +2743,20 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#332-加密">3.3.2 加密</a></li>
           </ul>
         </li>
-        <li><a href="#34-实施https网站的必备条件">3.4 实施HTTPS网站的必备条件</a></li>
-        <li><a href="#35-从用户的角度看https">3.5 从用户的角度看HTTPS</a></li>
+        <li><a href="#34-实施https网站的必备条件">3.4 实施HTTPS网站的必备条件</a>
+          <ul>
+            <li><a href="#341-证书和密钥对">3.4.1 证书和密钥对</a></li>
+            <li><a href="#342-部署和配置https网站">3.4.2 部署和配置HTTPS网站</a></li>
+            <li><a href="#343-全站https策略">3.4.3 全站HTTPS策略</a></li>
+          </ul>
+        </li>
+        <li><a href="#35-从用户的角度看https">3.5 从用户的角度看HTTPS</a>
+          <ul>
+            <li><a href="#351-绿色小锁图标">3.5.1 绿色小锁图标</a></li>
+            <li><a href="#352-tlsssl握手失败">3.5.2 TLS/SSL握手失败</a></li>
+            <li><a href="#353-混合内容">3.5.3 混合内容</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#第4章-选择https的必要性和疑惑">第4章 选择HTTPS的必要性和疑惑</a></li>
