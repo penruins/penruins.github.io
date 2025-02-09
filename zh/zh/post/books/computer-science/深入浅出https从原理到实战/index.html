@@ -369,7 +369,7 @@ HMAC（Hash-based Message Authentication Code）算法使用Hash算法作为加�
 <link rel="canonical" href="/zh/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAhttps%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.5b2047d9a13b51d6c6ea577a5d42ed45472dcf4753b7573d5d3efa9514326591.js" ></script>
+  <script defer src="/zh.search.min.e0b4852a81ae26cf2286a5a50ee2d9b562176d63e29b855164cfc839da69a5ec.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1255,7 +1255,11 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#321-加密算法和mac算法">3.2.1 加密算法和MAC算法</a></li>
             <li><a href="#322-密钥协商算法">3.2.2 密钥协商算法</a></li>
             <li><a href="#323-前向安全性">3.2.3 前向安全性</a></li>
-            <li><a href="#324-密钥衍生算法">3.2.4 密钥衍生算法</a></li>
+            <li><a href="#324-密钥衍生算法">3.2.4 密钥衍生算法</a>
+              <ul>
+                <li><a href="#密钥衍生算法在https是怎么应用的">密钥衍生算法在HTTPS是怎么应用的？</a></li>
+              </ul>
+            </li>
             <li><a href="#325-中间人攻击">3.2.5 中间人攻击</a></li>
             <li><a href="#326-pki">3.2.6 PKI</a></li>
           </ul>
@@ -2242,6 +2246,26 @@ https://github.com/alex-shpak/hugo-book
 </h4>
 <blockquote>
 <p>**密钥衍生算法（Key Derivation Function, KDF）**是一种用于从初始密钥（如密码或主密钥）生成一个或多个密钥的密码学算法。它的主要目的是增强密钥的安全性，并生成适合特定用途的密钥（如加密密钥、认证密钥等）。</p></blockquote>
+<h5 id="密钥衍生算法在https是怎么应用的">
+  密钥衍生算法在HTTPS是怎么应用的？
+  <a class="anchor" href="#%e5%af%86%e9%92%a5%e8%a1%8d%e7%94%9f%e7%ae%97%e6%b3%95%e5%9c%a8https%e6%98%af%e6%80%8e%e4%b9%88%e5%ba%94%e7%94%a8%e7%9a%84">#</a>
+</h5>
+<p>密钥衍生算法在HTTPS中的应用主要体现在安全地生成会话密钥，确保客户端与服务器之间的通信安全。具体来说，这个过程通常涉及以下几个步骤：</p>
+<ol>
+<li>
+<p><strong>握手协议</strong>：当客户端（如浏览器）尝试与服务器建立HTTPS连接时，首先会通过SSL/TLS握手协议开始通信。在这个过程中，双方会交换一些必要的信息用于生成对称密钥。</p>
+</li>
+<li>
+<p><strong>密钥交换算法</strong>：为了安全地协商出一个共享的秘密（即预主密钥），客户端和服务器可能会使用诸如RSA、Diffie-Hellman等密钥交换算法。例如，在基于RSA的密钥交换中，客户端生成一个随机的预主密钥并用服务器的公钥加密后发送给服务器；而在Diffie-Hellman方法中，则是通过数学运算来安全地生成共享秘密。</p>
+</li>
+<li>
+<p><strong>密钥衍生函数（KDF）</strong>：一旦预主密钥确定下来，就会使用密钥衍生函数（如HKDF或PBKDF2）从预主密钥生成实际使用的对称密钥。这些函数接受输入（如预主密钥、客户端和服务器随机数等）并通过一系列操作生成最终用于加密通信的密钥。这一步骤增强了安全性，因为它增加了攻击者预测密钥的难度。</p>
+</li>
+<li>
+<p><strong>数据加密</strong>：使用上述过程中生成的对称密钥，客户端和服务器就可以采用对称加密算法（如AES）来加密和解密它们之间传输的数据，保证了数据的保密性和完整性。</p>
+</li>
+</ol>
+<p>总之，密钥衍生算法在HTTPS中的作用至关重要，它不仅保障了密钥的安全生成，还提高了整个通信过程的安全性，防止潜在的信息泄露和中间人攻击。</p>
 <h4 id="325-中间人攻击">
   3.2.5 中间人攻击
   <a class="anchor" href="#325-%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb">#</a>
@@ -2411,7 +2435,11 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#321-加密算法和mac算法">3.2.1 加密算法和MAC算法</a></li>
             <li><a href="#322-密钥协商算法">3.2.2 密钥协商算法</a></li>
             <li><a href="#323-前向安全性">3.2.3 前向安全性</a></li>
-            <li><a href="#324-密钥衍生算法">3.2.4 密钥衍生算法</a></li>
+            <li><a href="#324-密钥衍生算法">3.2.4 密钥衍生算法</a>
+              <ul>
+                <li><a href="#密钥衍生算法在https是怎么应用的">密钥衍生算法在HTTPS是怎么应用的？</a></li>
+              </ul>
+            </li>
             <li><a href="#325-中间人攻击">3.2.5 中间人攻击</a></li>
             <li><a href="#326-pki">3.2.6 PKI</a></li>
           </ul>
