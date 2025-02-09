@@ -369,7 +369,7 @@ HMAC（Hash-based Message Authentication Code）算法使用Hash算法作为加�
 <link rel="canonical" href="/zh/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAhttps%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.d1c1d10f7a9301fb7066dfacae87eb2500549eb64fc9c60ffb4d7be7980518ef.js" ></script>
+  <script defer src="/zh.search.min.7d118b7a6969b96059d25da87d551c079e3e2b9690f91a48ee3d15d7defa01b0.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -2201,14 +2201,41 @@ https://github.com/alex-shpak/hugo-book
 <li>服务器解密预备主密钥，假如能够正确解密，则说明客户端和服务器端共同协商出一个预备主密钥。</li>
 </ul>
 </li>
-<li>DH算法</li>
+<li>DH算法
+<ul>
+<li>流程
+<ul>
+<li>客户端向服务器端发起连接请求</li>
+<li>服务器端生成一个RSA密钥对，并将公钥发送给客户端</li>
+<li>服务器端生成DH参数和服务器DH密钥对，用RSA私钥签名DH参数和服务器DH公钥，最后将签名值、DH参数、服务器DH公钥发送给客户端</li>
+<li>客户端通过服务器RSA的公钥验证签名，获取到DH参数和服务器DH公钥</li>
+<li>客户端通过DH参数生成客户端的DH密钥对，并将客户端DH公钥发送给服务器端</li>
+<li>客户端通过客户端DH私钥和服务器端DH公钥计算出预备主密钥</li>
+<li>服务器端接收到客户端的DH公钥，结合服务器的DH私钥计算出预备主密钥。</li>
+<li>最终客户端和服务器端计算出的预备主密钥能够保持一致。</li>
 </ul>
 </li>
+<li>分类
+<ul>
+<li>静态DH算法</li>
+<li>临时DH算法(EDH算法)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在HTTPS中，服务器在发送DH参数和服务器DH公钥之前会对这两个值进行签名运算，确保传递的值没有被篡改和伪造，也可以看出HTTPS就是使用多种算法确保安全性</li>
+<li>在HTTPS中，使用DH密钥协商算法需要客户端和服务器端经过多次通信才能协商出预备主密钥，而RSA密钥协商算法只要很少的步骤就能协商出。</li>
 </ul>
 <h4 id="323-前向安全性">
   3.2.3 前向安全性
   <a class="anchor" href="#323-%e5%89%8d%e5%90%91%e5%ae%89%e5%85%a8%e6%80%a7">#</a>
 </h4>
+<ul>
+<li>前向安全性（Perfect Forward Secrecy）是TLS/SSL协议中很重要的一个话题，必须充分理解。RSA密钥协商算法和静态DH算法都不能确保前向安全</li>
+<li>对于动态DH算法来说，客户端每次连接的时候，DH密钥对都是重新生成的，即使在某次连接中泄露了，也仅仅会导致本次连接中的加密数据被破解，安全风险相对较小。</li>
+</ul>
 <h4 id="324-密钥衍生算法">
   3.2.4 密钥衍生算法
   <a class="anchor" href="#324-%e5%af%86%e9%92%a5%e8%a1%8d%e7%94%9f%e7%ae%97%e6%b3%95">#</a>
