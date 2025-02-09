@@ -224,7 +224,7 @@ ChaCha20-Poly1305
 <link rel="canonical" href="/zh/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAhttps%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.fc632b8fd9db9b5dc398eaa86d12e99244aba221286c728b4e4f1c6d3c74db05.js" ></script>
+  <script defer src="/zh.search.min.97b9a1d287d49e9fecb846b064893ccab705a8f0c69cedff9fc5de3d7e468419.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1029,11 +1029,15 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#发送方什么时候非接收方提供密钥的">发送方什么时候非接收方提供密钥的？</a></li>
           </ul>
         </li>
-        <li><a href="#26-公开密钥算法">2.6 公开密钥算法</a></li>
+        <li><a href="#26-公开密钥算法非对称加密">2.6 公开密钥算法(非对称加密)</a></li>
         <li><a href="#27-密钥">2.7 密钥</a></li>
         <li><a href="#28-密钥协商算法">2.8 密钥协商算法</a></li>
         <li><a href="#29-椭圆曲线密码学">2.9 椭圆曲线密码学</a></li>
-        <li><a href="#210-数字签名">2.10 数字签名</a></li>
+        <li><a href="#210-数字签名">2.10 数字签名</a>
+          <ul>
+            <li><a href="#防篡改和防伪造的区别是什么">防篡改和防伪造的区别是什么</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#第3章-宏观理解tls">第3章 宏观理解TLS</a>
@@ -1499,12 +1503,12 @@ https://github.com/alex-shpak/hugo-book
 <hr>
 <p><strong>总结</strong></p>
 <p>发送方和接收方之间的密钥共享通常在通信开始之前或通信开始时通过安全渠道完成。具体方式包括预先共享密钥、密钥协商协议、公钥加密技术或密钥派生。密钥的安全性直接决定了MAC的有效性，因此密钥管理是消息验证码系统的关键环节。</p>
-<h3 id="26-公开密钥算法">
-  2.6 公开密钥算法
-  <a class="anchor" href="#26-%e5%85%ac%e5%bc%80%e5%af%86%e9%92%a5%e7%ae%97%e6%b3%95">#</a>
+<h3 id="26-公开密钥算法非对称加密">
+  2.6 公开密钥算法(非对称加密)
+  <a class="anchor" href="#26-%e5%85%ac%e5%bc%80%e5%af%86%e9%92%a5%e7%ae%97%e6%b3%95%e9%9d%9e%e5%af%b9%e7%a7%b0%e5%8a%a0%e5%af%86">#</a>
 </h3>
 <ul>
-<li>相比对称加密算法来说，公开密钥算法尤其是RSA算法运算非常缓慢，一般情况下，需要加密的明文数据都非常大，如果使用公开密钥算法进行加密，运算性能会惨不忍睹。公开密钥算法在密码学中一般进行密钥协商或者数字签名，因为这两者运算的数据相对较小。</li>
+<li>相比对称加密算法来说，公开密钥算法尤其是RSA算法运算非常缓慢，一般情况下，需要加密的明文数据都非常大，如果使用公开密钥算法进行加密，运算性能会惨不忍睹。<strong>公开密钥算法在密码学中一般进行密钥协商或者数字签名，因为这两者运算的数据相对较小。</strong></li>
 <li>公开密钥算法最重要和最广泛使用的算法就是RSA算法，该算法是Ron Rivest、Adi Shamir、Leonard Adleman三个人创建的，以三个人名字的首字母命名。</li>
 <li>和对称密钥算法一样，公开密钥算法也有使用标准，公开密钥算法的标准称为PKCS（Public Key Cryptography Standards），这个标准由很多的子标准组成，指导使用者正确地使用公开密钥算法。</li>
 <li>RSA加密算法的应用场景
@@ -1529,8 +1533,8 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#28-%e5%af%86%e9%92%a5%e5%8d%8f%e5%95%86%e7%ae%97%e6%b3%95">#</a>
 </h3>
 <ul>
-<li>RSA密钥协商算法</li>
-<li>DH密钥协商算法
+<li><strong>RSA密钥协商算法</strong></li>
+<li><strong>DH密钥协商算法</strong>
 <ul>
 <li>Diffie-Hellman算法，简称DH算法，是Whitfield Diffie和Martin Hellman在1976年公布的一个公开密钥算法，它的历史比RSA公开密钥算法更悠久。</li>
 <li>使用RSA密钥协商算法传输会话密钥的时候，会话密钥完全由客户端控制，并没有服务器的参与，所以叫作密钥传输。</li>
@@ -1543,26 +1547,123 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#29-%e6%a4%ad%e5%9c%86%e6%9b%b2%e7%ba%bf%e5%af%86%e7%a0%81%e5%ad%a6">#</a>
 </h3>
 <ul>
-<li>
-<p>为了保证DH的密钥对不被破解，提升安全性的主要手段就是增加密钥对的长度，但是长度越长，性能越低。公开密钥算法是一个O(n)操作，n就是密钥对的长度，n越小，操作越快。为了解决性能问题，需要了解下椭圆曲线密码学（Elliptic Curve Cryptography），简称为ECC。</p>
-</li>
-<li>
-<p>ECC是新一代的公开密钥算法，主要的优点就是安全性，极短的密钥能够提供很大的安全性。比如224比特的ECC密钥和2048比特的RSA密钥可以达到同样的安全水平，由于ECC密钥具有很短的长度，运算速度非常快。ECC基于非常复杂的算法，到目前位置，对于ECC进行逆操作还是很难的，数学上被证明是不可破解的，ECC算法的优势就是性能和安全性非常高。</p>
-</li>
-<li>
-<p>在具体应用的时候，ECC可以结合其他公开密钥算法形成更快、更安全的公开密钥算法，比如结合DH密钥协商算法组成ECDH密钥协商算法，结合数字签名DSA算法组成ECDSA数字签名算法。</p>
-</li>
+<li>为了保证DH的密钥对不被破解，提升安全性的主要手段就是增加密钥对的长度，但是长度越长，性能越低。公开密钥算法是一个O(n)操作，n就是密钥对的长度，n越小，操作越快。为了解决性能问题，需要了解下椭圆曲线密码学（Elliptic Curve Cryptography），简称为ECC。</li>
+<li>ECC是新一代的公开密钥算法，主要的优点就是安全性，极短的密钥能够提供很大的安全性。比如224比特的ECC密钥和2048比特的RSA密钥可以达到同样的安全水平，由于ECC密钥具有很短的长度，运算速度非常快。ECC基于非常复杂的算法，到目前位置，对于ECC进行逆操作还是很难的，数学上被证明是不可破解的，ECC算法的优势就是性能和安全性非常高。</li>
+<li>在具体应用的时候，ECC可以结合其他公开密钥算法形成更快、更安全的公开密钥算法，比如结合DH密钥协商算法组成ECDH密钥协商算法，结合数字签名DSA算法组成ECDSA数字签名算法。</li>
 </ul>
 <h3 id="210-数字签名">
   2.10 数字签名
   <a class="anchor" href="#210-%e6%95%b0%e5%ad%97%e7%ad%be%e5%90%8d">#</a>
 </h3>
 <ul>
-<li>RSA数字签名算法
+<li>数字签名的用途
 <ul>
-<li>RSA算法的用途非常广泛，可以进行数字签名。和RSA加密算法相似，不同的是，RSA加密算法是公钥加密，私钥解密；RSA签名算法是私钥签名，公钥验证签名。</li>
+<li>身份验证</li>
+<li>私钥只有密钥对的生成者持有，如果不考虑密钥泄露的问题，私钥拥有者使用密钥（注意不是加密操作）签署一条消息，然后发送给任意的接收方，接收方只要拥有私钥对应的公钥，就能成功反解签署消息，由于只有私钥持有者才能“签署”消息，不能抵赖说这条签署消息不是他发送的，这就是数字签名技术的全部。</li>
 </ul>
 </li>
+<li>RSA数字签名算法
+<ul>
+<li>RSA算法的用途非常广泛，可以进行数字签名。和RSA加密算法相似，不同的是，RSA加密算法是<strong>公钥加密，私钥解密</strong>；RSA签名算法是<strong>私钥签名，公钥验证签名</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="防篡改和防伪造的区别是什么">
+  防篡改和防伪造的区别是什么
+  <a class="anchor" href="#%e9%98%b2%e7%af%a1%e6%94%b9%e5%92%8c%e9%98%b2%e4%bc%aa%e9%80%a0%e7%9a%84%e5%8c%ba%e5%88%ab%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h4>
+<p><strong>防篡改</strong>和<strong>防伪造</strong>是信息安全中的两个重要概念，虽然它们都涉及数据的完整性和真实性，但它们的关注点和应用场景有所不同。以下是它们的区别：</p>
+<hr>
+<p><strong>1. 防篡改（Tamper Resistance）</strong></p>
+<ul>
+<li><strong>定义</strong>：防止数据在传输或存储过程中被未经授权的修改。</li>
+<li><strong>关注点</strong>：确保数据的<strong>完整性</strong>，即数据未被篡改。</li>
+<li><strong>实现方式</strong>：
+<ul>
+<li>使用哈希算法（如SHA-256）生成数据的哈希值，接收方通过比较哈希值验证数据是否被篡改。</li>
+<li>使用消息验证码（MAC）或数字签名，结合密钥确保数据的完整性。</li>
+</ul>
+</li>
+<li><strong>应用场景</strong>：
+<ul>
+<li>文件传输：确保文件在传输过程中未被修改。</li>
+<li>软件更新：确保下载的软件包未被篡改。</li>
+<li>数据库记录：确保存储的数据未被恶意修改。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>2. 防伪造（Forgery Resistance）</strong></p>
+<ul>
+<li><strong>定义</strong>：防止攻击者伪造数据或身份，冒充合法用户或系统。</li>
+<li><strong>关注点</strong>：确保数据的<strong>真实性</strong>，即数据来源可信。</li>
+<li><strong>实现方式</strong>：
+<ul>
+<li>使用数字签名，发送方用私钥对数据签名，接收方用公钥验证签名，确保数据来自可信来源。</li>
+<li>使用公钥基础设施（PKI）和数字证书，验证用户或系统的身份。</li>
+</ul>
+</li>
+<li><strong>应用场景</strong>：
+<ul>
+<li>身份认证：防止攻击者冒充合法用户登录系统。</li>
+<li>电子合同：确保合同签署者的身份真实。</li>
+<li>区块链交易：确保交易发起者的身份真实。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>对比总结</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>特性</strong></th>
+          <th><strong>防篡改</strong></th>
+          <th><strong>防伪造</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>目标</strong></td>
+          <td>确保数据未被修改</td>
+          <td>确保数据来源可信</td>
+      </tr>
+      <tr>
+          <td><strong>关注点</strong></td>
+          <td>数据完整性</td>
+          <td>数据真实性</td>
+      </tr>
+      <tr>
+          <td><strong>实现技术</strong></td>
+          <td>哈希算法、MAC</td>
+          <td>数字签名、PKI</td>
+      </tr>
+      <tr>
+          <td><strong>典型应用</strong></td>
+          <td>文件传输、软件更新</td>
+          <td>身份认证、电子合同</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><strong>示例</strong></p>
+<ol>
+<li><strong>防篡改</strong>：
+<ul>
+<li>发送方发送文件并附带哈希值，接收方计算哈希值并比对，确保文件未被篡改。</li>
+</ul>
+</li>
+<li><strong>防伪造</strong>：
+<ul>
+<li>发送方用私钥对文件签名，接收方用发送方的公钥验证签名，确保文件来自可信来源。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>总结</strong></p>
+<ul>
+<li><strong>防篡改</strong>关注的是数据是否被修改，确保数据的完整性。</li>
+<li><strong>防伪造</strong>关注的是数据是否来自可信来源，确保数据的真实性。
+两者通常结合使用，以同时保障数据的完整性和真实性。例如，数字签名既可以防篡改（验证数据完整性），也可以防伪造（验证数据来源）。</li>
 </ul>
 <h2 id="第3章-宏观理解tls">
   第3章 宏观理解TLS
@@ -1570,7 +1671,7 @@ https://github.com/alex-shpak/hugo-book
 </h2>
 <ul>
 <li>解决HTTP三大问题的通用解决方案就是TLS协议</li>
-<li>读者可能听说过TLS（Transport Layer Security）协议，也可能听说过SSL（Secure Sockets Layer）协议，在理解的时候可以认为两者是一样的，TLS协议是SSL协议的升级版，本书使用TLS/SSL协议代表TLS协议或者SSL协议。</li>
+<li>读者可能听说过**TLS（Transport Layer Security）<strong>协议，也可能听说过</strong>SSL（Secure Sockets Layer）**协议，在理解的时候可以认为两者是一样的，TLS协议是SSL协议的升级版，本书使用TLS/SSL协议代表TLS协议或者SSL协议。</li>
 <li>TLS/SSL协议位于应用层协议和TCP之间，构建在TCP之上，由TCP协议保证数据传输的可靠性，任何数据到达TCP之前，都经过TLS/SSL协议处理。</li>
 <li>对于应用层协议来说，它无须过多改变，引入TLS/SSL协议即可保证数据机密性和完整性。任何应用层协议（HTTP、SMTP、FTP、其他自定义应用层协议）都可以结合TLS/SSL协议。</li>
 <li>TLS/SSL协议一般构建在TCP之上，也可以构建在UDP之上，称为DTLS（Datagram Transport Layer Security）协议，DTLS协议在Web中使用得比较少。</li>
@@ -1663,11 +1764,15 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#发送方什么时候非接收方提供密钥的">发送方什么时候非接收方提供密钥的？</a></li>
           </ul>
         </li>
-        <li><a href="#26-公开密钥算法">2.6 公开密钥算法</a></li>
+        <li><a href="#26-公开密钥算法非对称加密">2.6 公开密钥算法(非对称加密)</a></li>
         <li><a href="#27-密钥">2.7 密钥</a></li>
         <li><a href="#28-密钥协商算法">2.8 密钥协商算法</a></li>
         <li><a href="#29-椭圆曲线密码学">2.9 椭圆曲线密码学</a></li>
-        <li><a href="#210-数字签名">2.10 数字签名</a></li>
+        <li><a href="#210-数字签名">2.10 数字签名</a>
+          <ul>
+            <li><a href="#防篡改和防伪造的区别是什么">防篡改和防伪造的区别是什么</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#第3章-宏观理解tls">第3章 宏观理解TLS</a>
