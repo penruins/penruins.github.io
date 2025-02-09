@@ -369,7 +369,7 @@ HMAC（Hash-based Message Authentication Code）算法使用Hash算法作为加�
 <link rel="canonical" href="/zh/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAhttps%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.8bd4b04b5d13184a95a2d0fd7d812d68986a07f42c7c1146a7b8e6163b81f1a7.js" ></script>
+  <script defer src="/zh.search.min.e8dd147cef5e275ec792ec5e2029cb32173b8ebcfeba3776d7773e15e974e249.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1261,11 +1261,20 @@ https://github.com/alex-shpak/hugo-book
                 <li><a href="#在https中会使用密钥衍生算法生成哪些密钥能具体列举出来吗">在HTTPS中，会使用密钥衍生算法生成哪些密钥，能具体列举出来吗？</a></li>
               </ul>
             </li>
-            <li><a href="#325-中间人攻击">3.2.5 中间人攻击</a></li>
+            <li><a href="#325-中间人攻击">3.2.5 中间人攻击</a>
+              <ul>
+                <li><a href="#客户端和服务器之间只传递预主密钥密钥块是两边分别计算出来的是这样吗">客户端和服务器之间只传递预主密钥，密钥块是两边分别计算出来的，是这样吗</a></li>
+              </ul>
+            </li>
             <li><a href="#326-pki">3.2.6 PKI</a></li>
           </ul>
         </li>
-        <li><a href="#33-https总结">3.3 HTTPS总结</a></li>
+        <li><a href="#33-https总结">3.3 HTTPS总结</a>
+          <ul>
+            <li><a href="#331-握手">3.3.1 握手</a></li>
+            <li><a href="#332-加密">3.3.2 加密</a></li>
+          </ul>
+        </li>
         <li><a href="#34-实施https网站的必备条件">3.4 实施HTTPS网站的必备条件</a></li>
         <li><a href="#35-从用户的角度看https">3.5 从用户的角度看HTTPS</a></li>
       </ul>
@@ -2297,14 +2306,67 @@ https://github.com/alex-shpak/hugo-book
   3.2.5 中间人攻击
   <a class="anchor" href="#325-%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb">#</a>
 </h4>
+<ul>
+<li>所谓中间人攻击就是服务器传递给客户端的公钥可能被攻击者替换，这样安全性就荡然无存了。
+<ul>
+<li>客户端向服务器端发起连接请求，期望获取服务器的RSA公钥，攻击者劫持了这个请求。</li>
+<li>攻击者自己生成一对RSA密钥对，然后将攻击者的RSA公钥发送给客户端。</li>
+<li>攻击者然后再向服务器端发送请求，服务器生成RSA密钥对，将RSA公钥发送给客户端，实际上是发送给攻击者。</li>
+<li>客户端通过攻击者的公钥加密密钥块并发送给服务器，实际上是发送给攻击者。</li>
+<li>攻击者用自己的RSA私钥解密了密钥块A，然后自己生成一个密钥块B，用服务器的RSA公钥加密后发送给服务器端。</li>
+<li>服务器端接收到请求后，用自己的RSA私钥解密出攻击者的密钥块B。</li>
+<li>客户端使用攻击者的密钥块A，采用AES算法加密数据并发送给服务器端，实际上是发送给攻击者。</li>
+<li>攻击者使用自己的密钥块A、采用AES算法解密出明文，客户端相当于泄露了隐私，攻击者使用密钥块B，采用AES算法加密明文后发送给服务器。</li>
+<li>服务器使用密钥块B，采用AES算法加密数据并发送给攻击者。</li>
+<li>攻击者使用密钥块B，采用AES算法解密出明文数据，此时客户端和服务器端的加密数据被成功破解。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>在SSL/TLS协议（HTTPS的安全基础）中，&ldquo;密钥块&rdquo;（Key Block）是一个概念，它指的是通过密钥衍生函数（KDF）从预主密钥生成的一系列加密材料的集合。这个密钥块包含了用于保护客户端和服务器之间通信所需的所有密钥和参数。</p></blockquote>
+<h5 id="客户端和服务器之间只传递预主密钥密钥块是两边分别计算出来的是这样吗">
+  客户端和服务器之间只传递预主密钥，密钥块是两边分别计算出来的，是这样吗
+  <a class="anchor" href="#%e5%ae%a2%e6%88%b7%e7%ab%af%e5%92%8c%e6%9c%8d%e5%8a%a1%e5%99%a8%e4%b9%8b%e9%97%b4%e5%8f%aa%e4%bc%a0%e9%80%92%e9%a2%84%e4%b8%bb%e5%af%86%e9%92%a5%e5%af%86%e9%92%a5%e5%9d%97%e6%98%af%e4%b8%a4%e8%be%b9%e5%88%86%e5%88%ab%e8%ae%a1%e7%ae%97%e5%87%ba%e6%9d%a5%e7%9a%84%e6%98%af%e8%bf%99%e6%a0%b7%e5%90%97">#</a>
+</h5>
+<p>是的，您的理解基本正确。在SSL/TLS协议中，客户端和服务器之间并不会直接传递完整的密钥块，而是通过交换信息来安全地生成一个预主密钥（Pre-Master Secret），然后各自独立地使用这个预主密钥以及双方在握手初期交换的随机数（Client Random和Server Random）来计算出最终的密钥材料，即所谓的密钥块（Key Block）。具体过程如下：</p>
+<ol>
+<li>
+<p><strong>密钥交换</strong>：根据所采用的具体密钥交换算法（如RSA、Diffie-Hellman等），客户端和服务器会进行一系列的操作来安全地确定一个预主密钥。例如，在基于RSA的密钥交换中，客户端生成一个预主密钥并用服务器的公钥加密后发送给服务器；而在Diffie-Hellman方法中，则是通过数学运算来安全地生成共享的秘密。</p>
+</li>
+<li>
+<p><strong>生成密钥块</strong>：一旦预主密钥确定下来，客户端和服务器都会使用相同的密钥衍生函数（KDF），比如TLS 1.2中的伪随机函数（PRF）或TLS 1.3中的HKDF，结合预主密钥和之前交换的随机数值，分别独立计算出所需的密钥材料。这包括了客户端写密钥、服务器写密钥、客户端写MAC密钥、服务器写MAC密钥（在TLS 1.2及之前版本中）、初始化向量（IV）或nonce等。</p>
+</li>
+<li>
+<p><strong>独立计算的优势</strong>：这种方式不仅减少了通信负担，还增强了安全性。因为预主密钥本身并不直接用于加密通信，而是用于派生出实际使用的对称密钥和其他安全参数。即使攻击者能够拦截到所有公开交换的信息，他们也无法轻易推算出最终的密钥材料，除非他们能破解密钥交换算法或者预测KDF的结果。</p>
+</li>
+</ol>
+<p>因此，客户端和服务器确实只交换必要的信息以确定预主密钥，并且之后各自独立计算出密钥块，这种机制确保了通信的安全性和效率。</p>
 <h4 id="326-pki">
   3.2.6 PKI
   <a class="anchor" href="#326-pki">#</a>
 </h4>
+<ul>
+<li>和身份证一样，CA机构会签发一张证书（可以理解为就是一张身份证），证书中包含了一些关键信息，比如服务器的主机、服务器的公钥</li>
+<li>CA机构也拥有一个密钥对，比如RSA密钥对（与服务器的RSA密钥对没有任何关系），它用私钥对证书进行数字签名，将签名的证书发送给服务器。浏览器再连接服务器，服务器发送证书给浏览器，浏览器拥有CA机构的公钥（内嵌在浏览器中），然后校验证书的签名，一旦校验成功，就代表这个证书是可信的CA机构签发的。</li>
+</ul>
 <h3 id="33-https总结">
   3.3 HTTPS总结
   <a class="anchor" href="#33-https%e6%80%bb%e7%bb%93">#</a>
 </h3>
+<h4 id="331-握手">
+  3.3.1 握手
+  <a class="anchor" href="#331-%e6%8f%a1%e6%89%8b">#</a>
+</h4>
+<ul>
+<li>1 认证</li>
+<li>2 密码套件协商</li>
+<li>3 密钥协商</li>
+<li>4 握手消息完整性校验</li>
+</ul>
+<h4 id="332-加密">
+  3.3.2 加密
+  <a class="anchor" href="#332-%e5%8a%a0%e5%af%86">#</a>
+</h4>
 <h3 id="34-实施https网站的必备条件">
   3.4 实施HTTPS网站的必备条件
   <a class="anchor" href="#34-%e5%ae%9e%e6%96%bdhttps%e7%bd%91%e7%ab%99%e7%9a%84%e5%bf%85%e5%a4%87%e6%9d%a1%e4%bb%b6">#</a>
@@ -2468,11 +2530,20 @@ https://github.com/alex-shpak/hugo-book
                 <li><a href="#在https中会使用密钥衍生算法生成哪些密钥能具体列举出来吗">在HTTPS中，会使用密钥衍生算法生成哪些密钥，能具体列举出来吗？</a></li>
               </ul>
             </li>
-            <li><a href="#325-中间人攻击">3.2.5 中间人攻击</a></li>
+            <li><a href="#325-中间人攻击">3.2.5 中间人攻击</a>
+              <ul>
+                <li><a href="#客户端和服务器之间只传递预主密钥密钥块是两边分别计算出来的是这样吗">客户端和服务器之间只传递预主密钥，密钥块是两边分别计算出来的，是这样吗</a></li>
+              </ul>
+            </li>
             <li><a href="#326-pki">3.2.6 PKI</a></li>
           </ul>
         </li>
-        <li><a href="#33-https总结">3.3 HTTPS总结</a></li>
+        <li><a href="#33-https总结">3.3 HTTPS总结</a>
+          <ul>
+            <li><a href="#331-握手">3.3.1 握手</a></li>
+            <li><a href="#332-加密">3.3.2 加密</a></li>
+          </ul>
+        </li>
         <li><a href="#34-实施https网站的必备条件">3.4 实施HTTPS网站的必备条件</a></li>
         <li><a href="#35-从用户的角度看https">3.5 从用户的角度看HTTPS</a></li>
       </ul>
