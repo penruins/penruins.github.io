@@ -369,7 +369,7 @@ HMAC（Hash-based Message Authentication Code）算法使用Hash算法作为加�
 <link rel="canonical" href="/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAhttps%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.8fee6559dcb8ee8dcd531aea7ef28cfb68c54e2b5432284e16e5a048c8668a85.js" ></script>
+  <script defer src="/zh.search.min.befa76df4eb212a615cbba8bb6251779c387a839f66f2f00353e73e515cfe846.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1273,6 +1273,10 @@ https://github.com/alex-shpak/hugo-book
           <ul>
             <li><a href="#331-握手">3.3.1 握手</a>
               <ul>
+                <li><a href="#1-认证">1 认证</a></li>
+                <li><a href="#2-密码套件协商">2 密码套件协商</a></li>
+                <li><a href="#3-密钥协商">3 密钥协商</a></li>
+                <li><a href="#4-握手消息完整性校验">4 握手消息完整性校验</a></li>
                 <li><a href="#使用charles来解密https请求内容的原理是什么">使用Charles来解密https请求内容的原理是什么？</a></li>
                 <li><a href="#在使用charles进行https抓包的时候有些接口会连接失败这是什么原因">在使用charles进行https抓包的时候，有些接口会连接失败，这是什么原因</a></li>
               </ul>
@@ -2374,13 +2378,17 @@ https://github.com/alex-shpak/hugo-book
   3.3.1 握手
   <a class="anchor" href="#331-%e6%8f%a1%e6%89%8b">#</a>
 </h4>
-<ul>
-<li>1 认证
+<h5 id="1-认证">
+  1 认证
+  <a class="anchor" href="#1-%e8%ae%a4%e8%af%81">#</a>
+</h5>
 <ul>
 <li>客户端在进行密钥交换之前，必须认证服务器的身份，否则就会存在中间人攻击，而服务器实体并不能自己证明自己，所以需要通过CA机构来进行认证，认证的技术解决方案就是签名的数字证书。证书中会说明CA机构采用的数字签名算法，客户端获取到证书后，会采用相应的签名算法进行验证，一旦验证通过，则表示客户端成功认证了服务器端的身份。</li>
 </ul>
-</li>
-<li>2 密码套件协商
+<h5 id="2-密码套件协商">
+  2 密码套件协商
+  <a class="anchor" href="#2-%e5%af%86%e7%a0%81%e5%a5%97%e4%bb%b6%e5%8d%8f%e5%95%86">#</a>
+</h5>
 <ul>
 <li>密码套件是一系列密码学算法的组合，主要包括多个密码学算法
 <ul>
@@ -2417,15 +2425,19 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-</li>
-<li>3 密钥协商
+<h5 id="3-密钥协商">
+  3 密钥协商
+  <a class="anchor" href="#3-%e5%af%86%e9%92%a5%e5%8d%8f%e5%95%86">#</a>
+</h5>
 <ul>
 <li>如果使用RSA密钥协商算法，那么服务器的密钥对非常重要，服务器的公钥不仅仅要进行身份验证，还要进行密钥协商，一旦私钥泄露，就失去了前向安全性。</li>
 <li>如果使用静态DH算法，服务器证书中会包含固定的DH参数和DH公钥，也会失去前向安全性，所以现在密码套件很少支持DH算法，CA机构在签发证书的时候也不会包含DH参数和DH公钥。</li>
 <li>为了保持前向安全性，目前使用最多的密钥协商算法就是DHE算法和ECDHE算法，这两个算法和服务器的密钥对关系不大，也就是说密钥的协商不取决于服务器的密钥对，所以服务器的私钥即使泄露，也不会造成太大的安全风险。</li>
 </ul>
-</li>
-<li>4 握手消息完整性校验
+<h5 id="4-握手消息完整性校验">
+  4 握手消息完整性校验
+  <a class="anchor" href="#4-%e6%8f%a1%e6%89%8b%e6%b6%88%e6%81%af%e5%ae%8c%e6%95%b4%e6%80%a7%e6%a0%a1%e9%aa%8c">#</a>
+</h5>
 <ul>
 <li>握手过程中传递的消息全部是明文传输的，任何攻击者都能截获，握手消息存在被篡改的可能性</li>
 <li>读者会说不是有身份验证了吗，怎么还存在中间人攻击？确实是这样，证书校验能够确保服务器的真实身份，但密钥协商是身份校验之后的过程，攻击者无法攻击身份校验过程，但可以在后续的握手过程中篡改消息</li>
@@ -2434,8 +2446,6 @@ https://github.com/alex-shpak/hugo-book
 <li>客户端将发送和接收到的所有握手消息组合在一起，然后计算出摘要数据，握手层使用密钥块对摘要数据进行加密和完整性保护，然后发送给服务器。</li>
 <li>服务器接收到验证消息后，使用加密块解密出摘要数据。</li>
 <li>紧接着服务器自行计算发送和接收的所有握手消息，再计算出消息的摘要数据，如果摘要数据和解密出的摘要数据相同，代表客户端发送的消息没有被篡改。</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -2736,6 +2746,10 @@ https://github.com/alex-shpak/hugo-book
           <ul>
             <li><a href="#331-握手">3.3.1 握手</a>
               <ul>
+                <li><a href="#1-认证">1 认证</a></li>
+                <li><a href="#2-密码套件协商">2 密码套件协商</a></li>
+                <li><a href="#3-密钥协商">3 密钥协商</a></li>
+                <li><a href="#4-握手消息完整性校验">4 握手消息完整性校验</a></li>
                 <li><a href="#使用charles来解密https请求内容的原理是什么">使用Charles来解密https请求内容的原理是什么？</a></li>
                 <li><a href="#在使用charles进行https抓包的时候有些接口会连接失败这是什么原因">在使用charles进行https抓包的时候，有些接口会连接失败，这是什么原因</a></li>
               </ul>
