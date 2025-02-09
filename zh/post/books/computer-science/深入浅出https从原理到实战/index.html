@@ -224,7 +224,7 @@ ChaCha20-Poly1305
 <link rel="canonical" href="/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAhttps%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E6%88%98/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.31e8a5e2bcc0640b812a1b8e4dd243404ade1d998625dea01914121437f3eda2.js" ></script>
+  <script defer src="/zh.search.min.fc632b8fd9db9b5dc398eaa86d12e99244aba221286c728b4e4f1c6d3c74db05.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1025,7 +1025,8 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#25-消息验证码">2.5 消息验证码</a>
           <ul>
             <li><a href="#hash算法可以作为消息验证码吗">hash算法可以作为消息验证码吗？</a></li>
-            <li><a href="#接收方怎么验证消息验证码">接收方怎么验证消息验证码</a></li>
+            <li><a href="#接收方怎么验证消息验证码">接收方怎么验证消息验证码？</a></li>
+            <li><a href="#发送方什么时候非接收方提供密钥的">发送方什么时候非接收方提供密钥的？</a></li>
           </ul>
         </li>
         <li><a href="#26-公开密钥算法">2.6 公开密钥算法</a></li>
@@ -1285,7 +1286,7 @@ https://github.com/alex-shpak/hugo-book
 <p>总结</p>
 <p>哈希算法可以作为MAC的基础，但单独使用无法提供完整的安全性。HMAC等结合密钥的方法才能确保消息的完整性和真实性。</p>
 <h4 id="接收方怎么验证消息验证码">
-  接收方怎么验证消息验证码
+  接收方怎么验证消息验证码？
   <a class="anchor" href="#%e6%8e%a5%e6%94%b6%e6%96%b9%e6%80%8e%e4%b9%88%e9%aa%8c%e8%af%81%e6%b6%88%e6%81%af%e9%aa%8c%e8%af%81%e7%a0%81">#</a>
 </h4>
 <p>接收方验证消息验证码（MAC）的过程需要确保消息的完整性和真实性。以下是验证步骤的详细说明：</p>
@@ -1384,6 +1385,120 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div><hr>
 <p><strong>总结</strong></p>
 <p>接收方通过重新计算MAC并与接收到的MAC值进行比较来验证消息的完整性和真实性。这一过程依赖于共享密钥的安全性以及哈希算法的强度。</p>
+<h4 id="发送方什么时候非接收方提供密钥的">
+  发送方什么时候非接收方提供密钥的？
+  <a class="anchor" href="#%e5%8f%91%e9%80%81%e6%96%b9%e4%bb%80%e4%b9%88%e6%97%b6%e5%80%99%e9%9d%9e%e6%8e%a5%e6%94%b6%e6%96%b9%e6%8f%90%e4%be%9b%e5%af%86%e9%92%a5%e7%9a%84">#</a>
+</h4>
+<p>发送方和接收方之间的<strong>密钥共享</strong>是消息验证码（MAC）安全性的核心。密钥必须在通信开始之前通过<strong>安全渠道</strong>共享，且不能被第三方获取。以下是密钥共享的常见方式和时机：</p>
+<hr>
+<p><strong>1. 预先共享密钥（Pre-shared Key, PSK）</strong></p>
+<ul>
+<li><strong>时机</strong>：在通信开始之前，发送方和接收方通过安全的线下或线上渠道共享密钥。</li>
+<li><strong>方式</strong>：
+<ul>
+<li>线下交换：面对面交换密钥（如写在纸上或通过硬件设备）。</li>
+<li>安全通信协议：通过安全的通信协议（如TLS/SSL）在线交换密钥。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：
+<ul>
+<li>小规模系统或固定设备之间的通信（如物联网设备）。</li>
+<li>需要长期使用的密钥。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>2. 密钥协商协议</strong></p>
+<ul>
+<li><strong>时机</strong>：在通信开始时，通过密钥协商协议动态生成共享密钥。</li>
+<li><strong>方式</strong>：
+<ul>
+<li>使用<strong>Diffie-Hellman密钥交换</strong>等协议，在不安全的信道中安全地生成共享密钥。</li>
+<li>结合公钥加密（如RSA）确保密钥交换的安全性。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：
+<ul>
+<li>需要动态生成密钥的场景（如即时通信、HTTPS）。</li>
+<li>大规模分布式系统。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>3. 基于公钥基础设施（PKI）的密钥分发</strong></p>
+<ul>
+<li><strong>时机</strong>：在通信开始时，通过公钥加密技术分发密钥。</li>
+<li><strong>方式</strong>：
+<ul>
+<li>发送方使用接收方的公钥加密密钥，接收方使用自己的私钥解密。</li>
+<li>结合数字证书验证公钥的真实性。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：
+<ul>
+<li>需要高安全性的场景（如银行交易、政府通信）。</li>
+<li>大规模系统中身份验证和密钥分发。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>4. 密钥派生</strong></p>
+<ul>
+<li><strong>时机</strong>：在通信过程中，通过主密钥派生出会话密钥。</li>
+<li><strong>方式</strong>：
+<ul>
+<li>使用密钥派生函数（如HKDF）从主密钥派生出新的密钥。</li>
+<li>主密钥可以通过预先共享或密钥协商获得。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：
+<ul>
+<li>需要频繁更换密钥的场景（如实时通信）。</li>
+<li>增强密钥安全性。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>密钥共享的安全性要求</strong></p>
+<ol>
+<li><strong>保密性</strong>：
+<ul>
+<li>密钥在传输和存储过程中必须保密，不能被第三方获取。</li>
+</ul>
+</li>
+<li><strong>完整性</strong>：
+<ul>
+<li>密钥在传输过程中不能被篡改。</li>
+</ul>
+</li>
+<li><strong>真实性</strong>：
+<ul>
+<li>密钥必须来自可信的发送方。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>示例场景</strong></p>
+<ol>
+<li><strong>HTTPS通信</strong>：
+<ul>
+<li>客户端和服务器通过TLS握手协议协商对称密钥，用于后续的MAC计算和加密。</li>
+</ul>
+</li>
+<li><strong>物联网设备</strong>：
+<ul>
+<li>设备在出厂时预置共享密钥，用于设备与服务器之间的通信。</li>
+</ul>
+</li>
+<li><strong>即时通信</strong>：
+<ul>
+<li>使用Diffie-Hellman密钥交换生成会话密钥，用于消息的MAC验证和加密。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>总结</strong></p>
+<p>发送方和接收方之间的密钥共享通常在通信开始之前或通信开始时通过安全渠道完成。具体方式包括预先共享密钥、密钥协商协议、公钥加密技术或密钥派生。密钥的安全性直接决定了MAC的有效性，因此密钥管理是消息验证码系统的关键环节。</p>
 <h3 id="26-公开密钥算法">
   2.6 公开密钥算法
   <a class="anchor" href="#26-%e5%85%ac%e5%bc%80%e5%af%86%e9%92%a5%e7%ae%97%e6%b3%95">#</a>
@@ -1544,7 +1659,8 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#25-消息验证码">2.5 消息验证码</a>
           <ul>
             <li><a href="#hash算法可以作为消息验证码吗">hash算法可以作为消息验证码吗？</a></li>
-            <li><a href="#接收方怎么验证消息验证码">接收方怎么验证消息验证码</a></li>
+            <li><a href="#接收方怎么验证消息验证码">接收方怎么验证消息验证码？</a></li>
+            <li><a href="#发送方什么时候非接收方提供密钥的">发送方什么时候非接收方提供密钥的？</a></li>
           </ul>
         </li>
         <li><a href="#26-公开密钥算法">2.6 公开密钥算法</a></li>
