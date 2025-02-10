@@ -92,9 +92,19 @@ class Solution {
   #
 
 
+  合并两个有序数组
+  #
+
+
  合并两个有序数组
 
  2025-01-12
+
+
+
+
+  移除元素
+  #
 
 
  移除元素
@@ -704,19 +714,19 @@ Tips
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/algorithm/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Algorithm">
-  <meta property="og:description" content="Algorithm # 代码随想录 面试经典150题 # 面试经典150题 数组/字符串 # 移除元素 # 2025-01-11 击败3.36% class Solution { public int removeElement(int[] nums, int val) { Arrays.sort(nums); int flagIndex = -1; int count = 0; for (int i = 0; i &lt; nums.length; i&#43;&#43;) { if (nums[i] == val &amp;&amp; count == 0) { flagIndex = i; count&#43;&#43;; } else if (nums[i] == val) { count&#43;&#43;; } } if (flagIndex != -1 &amp;&amp; count != 0) { for (int i = flagIndex; i &lt; flagIndex &#43; count; i&#43;&#43;) { nums[i] = nums[nums.length - (i - flagIndex) - 1]; } } return nums.length - count; } } 一维动态规划 # 爬楼梯 # 2025-01-11 击败100% class Solution { public int climbStairs(int n) { if (n == 0) return 0; if (n == 1) return 1; if (n == 2) return 2; int[] dp = new int[n &#43; 1]; dp[0] = 0; dp[1] = 1; dp[2] = 2; for (int i = 3; i &lt;= n; i&#43;&#43;) { dp[i] = dp[i - 1] &#43; dp[i - 2]; } return dp[n]; } } 面试经典150题 # 面试经典150题 数组/字符串 # 合并两个有序数组 2025-01-12 移除元素 2025-01-11 删除有序数组中的重复项 2025-01-11 没有做出来，看的官方题解 2025-01-11 做完删除有序数组中的重复项 II之后再尝试重新解题完成 删除有序数组中的重复项 II 2025-01-11 多数元素 2025-01-12 轮转数组 2025-01-18 进阶 尽可能想出更多的解决方案，至少有 三种 不同的方法可以解决这个问题。 你可以使用空间复杂度为 O(1) 的 原地 算法解决这个问题吗？ 买卖股票的最佳时机 2025-01-11 看官方题解做出来的 2025-01-17 review 买卖股票的最佳时机 II 官方题解 理解 2025-01-17 方法一：动态规划 方法二：贪心 跳跃游戏 2025-01-17 官方题解理解 贪心 2025-01-18 跳跃游戏 II 2025-01-18 算法超时了 理解官方题解 2025-01-18 方法一：反向查找出发位置 Solution45.jump2 2025-01-18 方法二：正向查找可达到的最大位置 Solution45.jump3 H 指数 2025-01-18 Tips An easy approach is to sort the array first. What are the possible values of h-index? A faster approach is to use extra space. O(1) 时间插入、删除和获取随机元素 除自身以外数组的乘积 加油站 分发糖果 接雨水 罗马数字转整数 2025-01-12 整数转罗马数字 最后一个单词的长度 2025-01-12 最长公共前缀 2025-01-12 反转字符串中的单词 2025-01-18 进阶 如果字符串在你使用的编程语言中是一种可变数据类型，请尝试使用 O(1) 额外空间复杂度的 原地 解法。 Z 字形变换 找出字符串中第一个匹配项的下标 2025-01-12 文本左右对齐 双指针 # 验证回文串 2025-01-13 判断子序列 2025-01-13 两数之和 II - 输入有序数组 2025-01-13 运行有时候会超过时间限制 盛最多水的容器 三数之和 滑动窗口 # 长度最小的子数组 2025-01-22 无重复字符的最长子串 2025-01-22 串联所有单词的子串 2025-01-22 最小覆盖子串 矩阵 # 有效的数独 2025-01-18 螺旋矩阵 2025-01-18 旋转图像 理解官方题解 2025-01-18 方法一：使用辅助数组 2025-01-18 方法二：原地旋转 有数学公式的推导，需要自己推导一次 2025-01-18 方法三：用翻转代替旋转 有数学公式的推导，需要自己推导一次 矩阵置零 2025-01-18 生命游戏 2025-01-18 进阶 你可以使用原地算法解决本题吗？请注意，面板上所有格子需要同时被更新：你不能先更新某些格子，然后使用它们的更新后的值再更新其他格子。 本题中，我们使用二维数组来表示面板。原则上，面板是无限的，但当活细胞侵占了面板边界时会造成问题。你将如何解决这些问题？ ✅ 哈希表 # 赎金信 2025-01-13 同构字符串 2025-01-13 单词规律 2025-01-13 有效的字母异位词 2025-01-13 字母异位词分组 2025-01-16 第一遍算法超时，看了官方题解思路后实现通过 两数之和 2025-01-13 快乐数 2025-01-13 存在重复元素 II 2025-01-13 最长连续序列 2025-01-16 看了官方题解后完成 区间 # 栈 # 有效的括号 2025-01-22 简化路径 2025-01-22 最小栈 2025-01-22 理解官方题解 文字描述后完成 2025-01-22 理解官方题解 逆波兰表达式求值 2025-01-22 基本计算器 链表 # 环形链表 2025-01-20 理解官方题解 2025-01-20 方法一：哈希表 方法二：快慢指针 两数相加 2025-01-20 合并两个有序链表 2025-01-20 随机链表的复制 2025-01-20 反转链表 II 2025-01-20 K 个一组翻转链表 删除链表的倒数第 N 个结点 2025-01-20 进阶 2025-01-20 你能尝试使用一趟扫描实现吗？ 删除排序链表中的重复元素 II 2025-01-21 旋转链表 2025-01-20 分隔链表 2025-01-21 LRU 缓存 2025-01-22 理解官方题解 二叉树 # 二叉树的最大深度 2025-01-15 相同的树 2025-01-15 翻转二叉树 2025-01-15 对称二叉树 没做出来，看的官方题解 从前序与中序遍历序列构造二叉树 从中序与后序遍历序列构造二叉树 填充每个节点的下一个右侧节点指针 II 二叉树展开为链表 路径总和 求根节点到叶节点数字之和 二叉树中的最大路径和 二叉搜索树迭代器 完全二叉树的节点个数 二叉树的最近公共祖先 二叉树层次遍历 # 二叉搜索树 # 图 # 图的广度优先搜索 # 字典树 # ✅ 回溯 # 电话号码的字母组合 2025-01-15 组合 2025-01-15 全排列 2025-01-15 组合总和 2025-01-15 N 皇后 II 2025-01-15 括号生成 2025-01-15 单词搜索 2025-01-15 分治 # kadane算法 # 二分查找 # 堆 # 位运算 # 二进制求和 2025-01-16 颠倒二进制位 2025-01-16 没做出来, 参考这篇文章LeetCode 190. 颠倒二进制位 （位运算 分治） 2025-01-17 复习了一遍 2025-01-17 新增了中间值打印的代码在算法中 位1的个数 2025-01-17 只出现一次的数字 2025-01-17 只出现一次的数字 II 2025-01-17 理解了官方题解 方法2 数字范围按位与 2025-01-17 理解了官方题解 方法2 数学 # 回文数 2025-01-17 不将整数转为字符串来解决这个问题 加一 2025-01-17 阶乘后的零 2025-01-17 x 的平方根 2025-01-17 Pow(x, n) 2025-01-17 超时了 2025-01-17 看懂了官方题解 直线上最多的点数 2025-01-17 看了官方题解，但还是不太理解 一维动态规划 # 爬楼梯 2025-01-11 通过 多维动态规划 #">
+  <meta property="og:description" content="Algorithm # 代码随想录 面试经典150题 # 面试经典150题 数组/字符串 # 移除元素 # 2025-01-11 击败3.36% class Solution { public int removeElement(int[] nums, int val) { Arrays.sort(nums); int flagIndex = -1; int count = 0; for (int i = 0; i &lt; nums.length; i&#43;&#43;) { if (nums[i] == val &amp;&amp; count == 0) { flagIndex = i; count&#43;&#43;; } else if (nums[i] == val) { count&#43;&#43;; } } if (flagIndex != -1 &amp;&amp; count != 0) { for (int i = flagIndex; i &lt; flagIndex &#43; count; i&#43;&#43;) { nums[i] = nums[nums.length - (i - flagIndex) - 1]; } } return nums.length - count; } } 一维动态规划 # 爬楼梯 # 2025-01-11 击败100% class Solution { public int climbStairs(int n) { if (n == 0) return 0; if (n == 1) return 1; if (n == 2) return 2; int[] dp = new int[n &#43; 1]; dp[0] = 0; dp[1] = 1; dp[2] = 2; for (int i = 3; i &lt;= n; i&#43;&#43;) { dp[i] = dp[i - 1] &#43; dp[i - 2]; } return dp[n]; } } 面试经典150题 # 面试经典150题 数组/字符串 # 合并两个有序数组 # 合并两个有序数组 2025-01-12 移除元素 # 移除元素 2025-01-11 删除有序数组中的重复项 2025-01-11 没有做出来，看的官方题解 2025-01-11 做完删除有序数组中的重复项 II之后再尝试重新解题完成 删除有序数组中的重复项 II 2025-01-11 多数元素 2025-01-12 轮转数组 2025-01-18 进阶 尽可能想出更多的解决方案，至少有 三种 不同的方法可以解决这个问题。 你可以使用空间复杂度为 O(1) 的 原地 算法解决这个问题吗？ 买卖股票的最佳时机 2025-01-11 看官方题解做出来的 2025-01-17 review 买卖股票的最佳时机 II 官方题解 理解 2025-01-17 方法一：动态规划 方法二：贪心 跳跃游戏 2025-01-17 官方题解理解 贪心 2025-01-18 跳跃游戏 II 2025-01-18 算法超时了 理解官方题解 2025-01-18 方法一：反向查找出发位置 Solution45.jump2 2025-01-18 方法二：正向查找可达到的最大位置 Solution45.jump3 H 指数 2025-01-18 Tips An easy approach is to sort the array first. What are the possible values of h-index? A faster approach is to use extra space. O(1) 时间插入、删除和获取随机元素 除自身以外数组的乘积 加油站 分发糖果 接雨水 罗马数字转整数 2025-01-12 整数转罗马数字 最后一个单词的长度 2025-01-12 最长公共前缀 2025-01-12 反转字符串中的单词 2025-01-18 进阶 如果字符串在你使用的编程语言中是一种可变数据类型，请尝试使用 O(1) 额外空间复杂度的 原地 解法。 Z 字形变换 找出字符串中第一个匹配项的下标 2025-01-12 文本左右对齐 双指针 # 验证回文串 2025-01-13 判断子序列 2025-01-13 两数之和 II - 输入有序数组 2025-01-13 运行有时候会超过时间限制 盛最多水的容器 三数之和 滑动窗口 # 长度最小的子数组 2025-01-22 无重复字符的最长子串 2025-01-22 串联所有单词的子串 2025-01-22 最小覆盖子串 矩阵 # 有效的数独 2025-01-18 螺旋矩阵 2025-01-18 旋转图像 理解官方题解 2025-01-18 方法一：使用辅助数组 2025-01-18 方法二：原地旋转 有数学公式的推导，需要自己推导一次 2025-01-18 方法三：用翻转代替旋转 有数学公式的推导，需要自己推导一次 矩阵置零 2025-01-18 生命游戏 2025-01-18 进阶 你可以使用原地算法解决本题吗？请注意，面板上所有格子需要同时被更新：你不能先更新某些格子，然后使用它们的更新后的值再更新其他格子。 本题中，我们使用二维数组来表示面板。原则上，面板是无限的，但当活细胞侵占了面板边界时会造成问题。你将如何解决这些问题？ ✅ 哈希表 # 赎金信 2025-01-13 同构字符串 2025-01-13 单词规律 2025-01-13 有效的字母异位词 2025-01-13 字母异位词分组 2025-01-16 第一遍算法超时，看了官方题解思路后实现通过 两数之和 2025-01-13 快乐数 2025-01-13 存在重复元素 II 2025-01-13 最长连续序列 2025-01-16 看了官方题解后完成 区间 # 栈 # 有效的括号 2025-01-22 简化路径 2025-01-22 最小栈 2025-01-22 理解官方题解 文字描述后完成 2025-01-22 理解官方题解 逆波兰表达式求值 2025-01-22 基本计算器 链表 # 环形链表 2025-01-20 理解官方题解 2025-01-20 方法一：哈希表 方法二：快慢指针 两数相加 2025-01-20 合并两个有序链表 2025-01-20 随机链表的复制 2025-01-20 反转链表 II 2025-01-20 K 个一组翻转链表 删除链表的倒数第 N 个结点 2025-01-20 进阶 2025-01-20 你能尝试使用一趟扫描实现吗？ 删除排序链表中的重复元素 II 2025-01-21 旋转链表 2025-01-20 分隔链表 2025-01-21 LRU 缓存 2025-01-22 理解官方题解 二叉树 # 二叉树的最大深度 2025-01-15 相同的树 2025-01-15 翻转二叉树 2025-01-15 对称二叉树 没做出来，看的官方题解 从前序与中序遍历序列构造二叉树 从中序与后序遍历序列构造二叉树 填充每个节点的下一个右侧节点指针 II 二叉树展开为链表 路径总和 求根节点到叶节点数字之和 二叉树中的最大路径和 二叉搜索树迭代器 完全二叉树的节点个数 二叉树的最近公共祖先 二叉树层次遍历 # 二叉搜索树 # 图 # 图的广度优先搜索 # 字典树 # ✅ 回溯 # 电话号码的字母组合 2025-01-15 组合 2025-01-15 全排列 2025-01-15 组合总和 2025-01-15 N 皇后 II 2025-01-15 括号生成 2025-01-15 单词搜索 2025-01-15 分治 # kadane算法 # 二分查找 # 堆 # 位运算 # 二进制求和 2025-01-16 颠倒二进制位 2025-01-16 没做出来, 参考这篇文章LeetCode 190. 颠倒二进制位 （位运算 分治） 2025-01-17 复习了一遍 2025-01-17 新增了中间值打印的代码在算法中 位1的个数 2025-01-17 只出现一次的数字 2025-01-17 只出现一次的数字 II 2025-01-17 理解了官方题解 方法2 数字范围按位与 2025-01-17 理解了官方题解 方法2 数学 # 回文数 2025-01-17 不将整数转为字符串来解决这个问题 加一 2025-01-17 阶乘后的零 2025-01-17 x 的平方根 2025-01-17 Pow(x, n) 2025-01-17 超时了 2025-01-17 看懂了官方题解 直线上最多的点数 2025-01-17 看了官方题解，但还是不太理解 一维动态规划 # 爬楼梯 2025-01-11 通过 多维动态规划 #">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
     <meta property="article:published_time" content="2024-11-14T08:59:49+08:00">
-    <meta property="article:modified_time" content="2025-02-10T20:40:14+08:00">
+    <meta property="article:modified_time" content="2025-02-10T20:40:50+08:00">
 <title>Algorithm | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/computer-science/algorithm/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.da312dfb506875ad03b65ef803c570e9bfd7c930d0b426f36471046ee6917d34.js" ></script>
+  <script defer src="/zh.search.min.72d439441ede22f021941f0316e13549716920697f962048b150565b7228a25c.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1544,7 +1554,12 @@ https://github.com/alex-shpak/hugo-book
     </li>
     <li><a href="#面试经典150题-1">面试经典150题</a>
       <ul>
-        <li><a href="#数组字符串-1">数组/字符串</a></li>
+        <li><a href="#数组字符串-1">数组/字符串</a>
+          <ul>
+            <li><a href="#合并两个有序数组">合并两个有序数组</a></li>
+            <li><a href="#移除元素-1">移除元素</a></li>
+          </ul>
+        </li>
         <li><a href="#双指针">双指针</a></li>
         <li><a href="#滑动窗口">滑动窗口</a></li>
         <li><a href="#矩阵">矩阵</a></li>
@@ -1669,12 +1684,22 @@ https://github.com/alex-shpak/hugo-book
   数组/字符串
   <a class="anchor" href="#%e6%95%b0%e7%bb%84%e5%ad%97%e7%ac%a6%e4%b8%b2-1">#</a>
 </h3>
+<h4 id="合并两个有序数组">
+  合并两个有序数组
+  <a class="anchor" href="#%e5%90%88%e5%b9%b6%e4%b8%a4%e4%b8%aa%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84">#</a>
+</h4>
 <ul>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://leetcode.cn/problems/merge-sorted-array/description/?envType=study-plan-v2&amp;envId=top-interview-150">合并两个有序数组</a>
 <ul>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://github.com/penruins/algorithm-practice/blob/main/algorithm-practice-code/src/main/java/com/penruins/leetcode/Solution88.java">2025-01-12</a></li>
 </ul>
 </li>
+</ul>
+<h4 id="移除元素-1">
+  移除元素
+  <a class="anchor" href="#%e7%a7%bb%e9%99%a4%e5%85%83%e7%b4%a0-1">#</a>
+</h4>
+<ul>
 <li><input checked="" disabled="" type="checkbox"> <a href="https://leetcode.cn/problems/remove-element/submissions/592471220/?envType=study-plan-v2&amp;envId=top-interview-150">移除元素</a>
 <ul>
 <li><input checked="" disabled="" type="checkbox"> 2025-01-11</li>
@@ -2286,7 +2311,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/15bac37692aa01fc6b5eec447e9d63da0d097055" title='最后修改者 penruins | 二月 10, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/78f12498e0fc1b138696b44cb1376bb332af3558" title='最后修改者 penruins | 二月 10, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>二月 10, 2025</span>
     </a>
@@ -2340,7 +2365,12 @@ https://github.com/alex-shpak/hugo-book
     </li>
     <li><a href="#面试经典150题-1">面试经典150题</a>
       <ul>
-        <li><a href="#数组字符串-1">数组/字符串</a></li>
+        <li><a href="#数组字符串-1">数组/字符串</a>
+          <ul>
+            <li><a href="#合并两个有序数组">合并两个有序数组</a></li>
+            <li><a href="#移除元素-1">移除元素</a></li>
+          </ul>
+        </li>
         <li><a href="#双指针">双指针</a></li>
         <li><a href="#滑动窗口">滑动窗口</a></li>
         <li><a href="#矩阵">矩阵</a></li>
