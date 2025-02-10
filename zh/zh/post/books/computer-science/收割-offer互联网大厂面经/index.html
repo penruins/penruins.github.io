@@ -126,7 +126,7 @@ Synchronized和ReentrantLock都是可重入锁。
 <link rel="canonical" href="/zh/zh/post/books/computer-science/%E6%94%B6%E5%89%B2-offer%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E5%8E%82%E9%9D%A2%E7%BB%8F/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.8b6a2ad89fce5e0011e03007e9f7713ad0c5c7974acd404f0819a123c7e74028.js" ></script>
+  <script defer src="/zh.search.min.ac7cb492d47d67e1c404a734054f1902d138109803e2e968b4b66378c1a05a35.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1007,10 +1007,10 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#135-redis与memcache的区别">1.3.5 Redis与Memcache的区别</a></li>
             <li><a href="#136-redis主从复制原理之sync与psync">1.3.6 Redis主从复制原理之SYNC与PSYNC</a></li>
             <li><a href="#137-过期删除策略">1.3.7 过期删除策略</a></li>
-            <li><a href="#138-redis哈希槽-113">1.3.8 Redis哈希槽 113</a></li>
-            <li><a href="#139-redis-gossip协议-114">1.3.9 Redis Gossip协议 114</a></li>
-            <li><a href="#1310-重定向moved与ask-115">1.3.10 重定向moved与ask 115</a></li>
-            <li><a href="#1311-pipeline有什么好处-116">1.3.11 Pipeline有什么好处 116</a></li>
+            <li><a href="#138-redis哈希槽">1.3.8 Redis哈希槽</a></li>
+            <li><a href="#139-redis-gossip协议">1.3.9 Redis Gossip协议</a></li>
+            <li><a href="#1310-重定向moved与ask">1.3.10 重定向moved与ask</a></li>
+            <li><a href="#1311-pipeline有什么好处">1.3.11 Pipeline有什么好处</a></li>
           </ul>
         </li>
         <li><a href="#14-rocketmq">1.4 RocketMQ</a>
@@ -1101,13 +1101,50 @@ https://github.com/alex-shpak/hugo-book
     </li>
     <li><a href="#第2章-算法题目">第2章 算法题目</a>
       <ul>
-        <li><a href="#21-递归">2.1 递归</a></li>
-        <li><a href="#22-双指针">2.2 双指针</a></li>
-        <li><a href="#23-滑动窗口-184">2.3 滑动窗口 184</a></li>
-        <li><a href="#24-二分搜索-185">2.4 二分搜索 185</a></li>
-        <li><a href="#25-动态规划-186">2.5 动态规划 186</a></li>
-        <li><a href="#26-回溯-188">2.6 回溯 188</a></li>
-        <li><a href="#27-广度深度优先搜索-192">2.7 广度/深度优先搜索 192</a></li>
+        <li><a href="#21-递归">2.1 递归</a>
+          <ul>
+            <li><a href="#211-算法解释">2.1.1 算法解释</a></li>
+            <li><a href="#212-经典题目爬楼梯">2.1.2 经典题目—爬楼梯</a></li>
+          </ul>
+        </li>
+        <li><a href="#22-双指针">2.2 双指针</a>
+          <ul>
+            <li><a href="#221-算法解释">2.2.1 算法解释</a></li>
+            <li><a href="#222-经典题目寻找链表的中间节点快慢指针">2.2.2 经典题目—寻找链表的中间节点（快慢指针）</a></li>
+            <li><a href="#223-经典题目有序数组两数之和对撞指针">2.2.3 经典题目—有序数组两数之和（对撞指针）</a></li>
+          </ul>
+        </li>
+        <li><a href="#23-滑动窗口">2.3 滑动窗口</a>
+          <ul>
+            <li><a href="#231-算法解释">2.3.1 算法解释</a></li>
+            <li><a href="#232-经典题目长度为k的连续子数组的最大和">2.3.2 经典题目—长度为k的连续子数组的最大和</a></li>
+          </ul>
+        </li>
+        <li><a href="#24-二分搜索">2.4 二分搜索</a>
+          <ul>
+            <li><a href="#241-算法解释">2.4.1 算法解释</a></li>
+            <li><a href="#242-经典题目n的算术平方根">2.4.2 经典题目——n的算术平方根</a></li>
+          </ul>
+        </li>
+        <li><a href="#25-动态规划">2.5 动态规划</a>
+          <ul>
+            <li><a href="#251-算法解释">2.5.1 算法解释</a></li>
+            <li><a href="#252-经典题目最小路径和">2.5.2 经典题目—最小路径和</a></li>
+          </ul>
+        </li>
+        <li><a href="#26-回溯">2.6 回溯</a>
+          <ul>
+            <li><a href="#261-算法解释">2.6.1 算法解释</a></li>
+            <li><a href="#262-经典题目n皇后问题">2.6.2 经典题目—n皇后问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#27-广度深度优先搜索">2.7 广度/深度优先搜索</a>
+          <ul>
+            <li><a href="#271-算法解释">2.7.1 算法解释</a></li>
+            <li><a href="#272-经典题目深度优先搜索岛屿数量">2.7.2 经典题目—深度优先搜索岛屿数量</a></li>
+            <li><a href="#273-经典题目广度优先搜索层序遍历">2.7.3 经典题目—广度优先搜索层序遍历</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#第3章-设计题">第3章 设计题</a>
@@ -1845,21 +1882,21 @@ https://github.com/alex-shpak/hugo-book
 <li>(3)定期删除策略。该策略是定时删除和惰性删除方案的折中，每隔一段时间执行一次删除过期key的操作，删除哪些数据库的哪些过期键由算法决定。我们通过限制执行的时长和频率来减少对CPU的影响，同时定期主动删除过期键又有效地减少了内存浪费。</li>
 <li>Redis使用的是惰性删除和定期删除策略。</li>
 </ul>
-<h4 id="138-redis哈希槽-113">
-  1.3.8 Redis哈希槽 113
-  <a class="anchor" href="#138-redis%e5%93%88%e5%b8%8c%e6%a7%bd-113">#</a>
+<h4 id="138-redis哈希槽">
+  1.3.8 Redis哈希槽
+  <a class="anchor" href="#138-redis%e5%93%88%e5%b8%8c%e6%a7%bd">#</a>
 </h4>
-<h4 id="139-redis-gossip协议-114">
-  1.3.9 Redis Gossip协议 114
-  <a class="anchor" href="#139-redis-gossip%e5%8d%8f%e8%ae%ae-114">#</a>
+<h4 id="139-redis-gossip协议">
+  1.3.9 Redis Gossip协议
+  <a class="anchor" href="#139-redis-gossip%e5%8d%8f%e8%ae%ae">#</a>
 </h4>
-<h4 id="1310-重定向moved与ask-115">
-  1.3.10 重定向moved与ask 115
-  <a class="anchor" href="#1310-%e9%87%8d%e5%ae%9a%e5%90%91moved%e4%b8%8eask-115">#</a>
+<h4 id="1310-重定向moved与ask">
+  1.3.10 重定向moved与ask
+  <a class="anchor" href="#1310-%e9%87%8d%e5%ae%9a%e5%90%91moved%e4%b8%8eask">#</a>
 </h4>
-<h4 id="1311-pipeline有什么好处-116">
-  1.3.11 Pipeline有什么好处 116
-  <a class="anchor" href="#1311-pipeline%e6%9c%89%e4%bb%80%e4%b9%88%e5%a5%bd%e5%a4%84-116">#</a>
+<h4 id="1311-pipeline有什么好处">
+  1.3.11 Pipeline有什么好处
+  <a class="anchor" href="#1311-pipeline%e6%9c%89%e4%bb%80%e4%b9%88%e5%a5%bd%e5%a4%84">#</a>
 </h4>
 <h3 id="14-rocketmq">
   1.4 RocketMQ
@@ -2181,6 +2218,12 @@ https://github.com/alex-shpak/hugo-book
   1.7.5 Spring三级缓存解决Bean循环依赖
   <a class="anchor" href="#175-spring%e4%b8%89%e7%ba%a7%e7%bc%93%e5%ad%98%e8%a7%a3%e5%86%b3bean%e5%be%aa%e7%8e%af%e4%be%9d%e8%b5%96">#</a>
 </h4>
+<ul>
+<li>Spring Bean循环依赖是指两个以上的Bean互相持有对方而形成循环。比如A依赖B，B依赖A</li>
+<li>singletonObjects：一级缓存，存储经历了完整生命周期的Bean对象</li>
+<li>earlySingletonObjects：二级缓存，存储提前暴露出来的Bean对象，其生命周期未结束，属性未完全填充</li>
+<li>singletonFactories：三级缓存，存储生成Bean的工厂</li>
+</ul>
 <h4 id="176-spring事务实现">
   1.7.6 Spring事务实现
   <a class="anchor" href="#176-spring%e4%ba%8b%e5%8a%a1%e5%ae%9e%e7%8e%b0">#</a>
@@ -2193,6 +2236,9 @@ https://github.com/alex-shpak/hugo-book
   1.7.8 Spring中BeanFactory和ApplicationContext的区别
   <a class="anchor" href="#178-spring%e4%b8%adbeanfactory%e5%92%8capplicationcontext%e7%9a%84%e5%8c%ba%e5%88%ab">#</a>
 </h4>
+<ul>
+<li>ApplicationContext配置的Bean是预先加载的，浪费内存。BeanFactory延迟加载，配置的Bean只有在使用时（调用getBean()）才对该Bean进行实例化，优点是节约内存，缺点是速度比较慢</li>
+</ul>
 <h3 id="18-zookeeper">
   1.8 ZooKeeper
   <a class="anchor" href="#18-zookeeper">#</a>
@@ -2342,46 +2388,94 @@ ZooKeeper的过半策略保证了数据强一致性，当Leader节点因为网�
   2.1 递归
   <a class="anchor" href="#21-%e9%80%92%e5%bd%92">#</a>
 </h3>
-<p>2.1.1 算法解释 180
-2.1.2 经典题目—爬楼梯 181</p>
+<h4 id="211-算法解释">
+  2.1.1 算法解释
+  <a class="anchor" href="#211-%e7%ae%97%e6%b3%95%e8%a7%a3%e9%87%8a">#</a>
+</h4>
+<h4 id="212-经典题目爬楼梯">
+  2.1.2 经典题目—爬楼梯
+  <a class="anchor" href="#212-%e7%bb%8f%e5%85%b8%e9%a2%98%e7%9b%ae%e7%88%ac%e6%a5%bc%e6%a2%af">#</a>
+</h4>
 <h3 id="22-双指针">
   2.2 双指针
   <a class="anchor" href="#22-%e5%8f%8c%e6%8c%87%e9%92%88">#</a>
 </h3>
-<p>2.2.1 算法解释 182
-2.2.2 经典题目—寻找链表的中间节点（快慢指针） 182
-2.2.3 经典题目—有序数组两数之和（对撞指针） 183</p>
-<h3 id="23-滑动窗口-184">
-  2.3 滑动窗口 184
-  <a class="anchor" href="#23-%e6%bb%91%e5%8a%a8%e7%aa%97%e5%8f%a3-184">#</a>
+<h4 id="221-算法解释">
+  2.2.1 算法解释
+  <a class="anchor" href="#221-%e7%ae%97%e6%b3%95%e8%a7%a3%e9%87%8a">#</a>
+</h4>
+<h4 id="222-经典题目寻找链表的中间节点快慢指针">
+  2.2.2 经典题目—寻找链表的中间节点（快慢指针）
+  <a class="anchor" href="#222-%e7%bb%8f%e5%85%b8%e9%a2%98%e7%9b%ae%e5%af%bb%e6%89%be%e9%93%be%e8%a1%a8%e7%9a%84%e4%b8%ad%e9%97%b4%e8%8a%82%e7%82%b9%e5%bf%ab%e6%85%a2%e6%8c%87%e9%92%88">#</a>
+</h4>
+<h4 id="223-经典题目有序数组两数之和对撞指针">
+  2.2.3 经典题目—有序数组两数之和（对撞指针）
+  <a class="anchor" href="#223-%e7%bb%8f%e5%85%b8%e9%a2%98%e7%9b%ae%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84%e4%b8%a4%e6%95%b0%e4%b9%8b%e5%92%8c%e5%af%b9%e6%92%9e%e6%8c%87%e9%92%88">#</a>
+</h4>
+<h3 id="23-滑动窗口">
+  2.3 滑动窗口
+  <a class="anchor" href="#23-%e6%bb%91%e5%8a%a8%e7%aa%97%e5%8f%a3">#</a>
 </h3>
-<p>2.3.1 算法解释 184
-2.3.2 经典题目—长度为k的连续子数组的最大和 184</p>
-<h3 id="24-二分搜索-185">
-  2.4 二分搜索 185
-  <a class="anchor" href="#24-%e4%ba%8c%e5%88%86%e6%90%9c%e7%b4%a2-185">#</a>
+<h4 id="231-算法解释">
+  2.3.1 算法解释
+  <a class="anchor" href="#231-%e7%ae%97%e6%b3%95%e8%a7%a3%e9%87%8a">#</a>
+</h4>
+<h4 id="232-经典题目长度为k的连续子数组的最大和">
+  2.3.2 经典题目—长度为k的连续子数组的最大和
+  <a class="anchor" href="#232-%e7%bb%8f%e5%85%b8%e9%a2%98%e7%9b%ae%e9%95%bf%e5%ba%a6%e4%b8%bak%e7%9a%84%e8%bf%9e%e7%bb%ad%e5%ad%90%e6%95%b0%e7%bb%84%e7%9a%84%e6%9c%80%e5%a4%a7%e5%92%8c">#</a>
+</h4>
+<h3 id="24-二分搜索">
+  2.4 二分搜索
+  <a class="anchor" href="#24-%e4%ba%8c%e5%88%86%e6%90%9c%e7%b4%a2">#</a>
 </h3>
-<p>2.4.1 算法解释 185
-2.4.2 经典题目——n的算术平方根 185</p>
-<h3 id="25-动态规划-186">
-  2.5 动态规划 186
-  <a class="anchor" href="#25-%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92-186">#</a>
+<h4 id="241-算法解释">
+  2.4.1 算法解释
+  <a class="anchor" href="#241-%e7%ae%97%e6%b3%95%e8%a7%a3%e9%87%8a">#</a>
+</h4>
+<h4 id="242-经典题目n的算术平方根">
+  2.4.2 经典题目——n的算术平方根
+  <a class="anchor" href="#242-%e7%bb%8f%e5%85%b8%e9%a2%98%e7%9b%aen%e7%9a%84%e7%ae%97%e6%9c%af%e5%b9%b3%e6%96%b9%e6%a0%b9">#</a>
+</h4>
+<h3 id="25-动态规划">
+  2.5 动态规划
+  <a class="anchor" href="#25-%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92">#</a>
 </h3>
-<p>2.5.1 算法解释 186
-2.5.2 经典题目—最小路径和 186</p>
-<h3 id="26-回溯-188">
-  2.6 回溯 188
-  <a class="anchor" href="#26-%e5%9b%9e%e6%ba%af-188">#</a>
+<h4 id="251-算法解释">
+  2.5.1 算法解释
+  <a class="anchor" href="#251-%e7%ae%97%e6%b3%95%e8%a7%a3%e9%87%8a">#</a>
+</h4>
+<h4 id="252-经典题目最小路径和">
+  2.5.2 经典题目—最小路径和
+  <a class="anchor" href="#252-%e7%bb%8f%e5%85%b8%e9%a2%98%e7%9b%ae%e6%9c%80%e5%b0%8f%e8%b7%af%e5%be%84%e5%92%8c">#</a>
+</h4>
+<h3 id="26-回溯">
+  2.6 回溯
+  <a class="anchor" href="#26-%e5%9b%9e%e6%ba%af">#</a>
 </h3>
-<p>2.6.1 算法解释 188
-2.6.2 经典题目—n皇后问题 188</p>
-<h3 id="27-广度深度优先搜索-192">
-  2.7 广度/深度优先搜索 192
-  <a class="anchor" href="#27-%e5%b9%bf%e5%ba%a6%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2-192">#</a>
+<h4 id="261-算法解释">
+  2.6.1 算法解释
+  <a class="anchor" href="#261-%e7%ae%97%e6%b3%95%e8%a7%a3%e9%87%8a">#</a>
+</h4>
+<h4 id="262-经典题目n皇后问题">
+  2.6.2 经典题目—n皇后问题
+  <a class="anchor" href="#262-%e7%bb%8f%e5%85%b8%e9%a2%98%e7%9b%aen%e7%9a%87%e5%90%8e%e9%97%ae%e9%a2%98">#</a>
+</h4>
+<h3 id="27-广度深度优先搜索">
+  2.7 广度/深度优先搜索
+  <a class="anchor" href="#27-%e5%b9%bf%e5%ba%a6%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2">#</a>
 </h3>
-<p>2.7.1 算法解释 192
-2.7.2 经典题目—深度优先搜索岛屿数量 193
-2.7.3 经典题目—广度优先搜索层序遍历 194</p>
+<h4 id="271-算法解释">
+  2.7.1 算法解释
+  <a class="anchor" href="#271-%e7%ae%97%e6%b3%95%e8%a7%a3%e9%87%8a">#</a>
+</h4>
+<h4 id="272-经典题目深度优先搜索岛屿数量">
+  2.7.2 经典题目—深度优先搜索岛屿数量
+  <a class="anchor" href="#272-%e7%bb%8f%e5%85%b8%e9%a2%98%e7%9b%ae%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%e5%b2%9b%e5%b1%bf%e6%95%b0%e9%87%8f">#</a>
+</h4>
+<h4 id="273-经典题目广度优先搜索层序遍历">
+  2.7.3 经典题目—广度优先搜索层序遍历
+  <a class="anchor" href="#273-%e7%bb%8f%e5%85%b8%e9%a2%98%e7%9b%ae%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2%e5%b1%82%e5%ba%8f%e9%81%8d%e5%8e%86">#</a>
+</h4>
 <h2 id="第3章-设计题">
   第3章 设计题
   <a class="anchor" href="#%e7%ac%ac3%e7%ab%a0-%e8%ae%be%e8%ae%a1%e9%a2%98">#</a>
@@ -2698,10 +2792,10 @@ ZooKeeper的过半策略保证了数据强一致性，当Leader节点因为网�
             <li><a href="#135-redis与memcache的区别">1.3.5 Redis与Memcache的区别</a></li>
             <li><a href="#136-redis主从复制原理之sync与psync">1.3.6 Redis主从复制原理之SYNC与PSYNC</a></li>
             <li><a href="#137-过期删除策略">1.3.7 过期删除策略</a></li>
-            <li><a href="#138-redis哈希槽-113">1.3.8 Redis哈希槽 113</a></li>
-            <li><a href="#139-redis-gossip协议-114">1.3.9 Redis Gossip协议 114</a></li>
-            <li><a href="#1310-重定向moved与ask-115">1.3.10 重定向moved与ask 115</a></li>
-            <li><a href="#1311-pipeline有什么好处-116">1.3.11 Pipeline有什么好处 116</a></li>
+            <li><a href="#138-redis哈希槽">1.3.8 Redis哈希槽</a></li>
+            <li><a href="#139-redis-gossip协议">1.3.9 Redis Gossip协议</a></li>
+            <li><a href="#1310-重定向moved与ask">1.3.10 重定向moved与ask</a></li>
+            <li><a href="#1311-pipeline有什么好处">1.3.11 Pipeline有什么好处</a></li>
           </ul>
         </li>
         <li><a href="#14-rocketmq">1.4 RocketMQ</a>
@@ -2792,13 +2886,50 @@ ZooKeeper的过半策略保证了数据强一致性，当Leader节点因为网�
     </li>
     <li><a href="#第2章-算法题目">第2章 算法题目</a>
       <ul>
-        <li><a href="#21-递归">2.1 递归</a></li>
-        <li><a href="#22-双指针">2.2 双指针</a></li>
-        <li><a href="#23-滑动窗口-184">2.3 滑动窗口 184</a></li>
-        <li><a href="#24-二分搜索-185">2.4 二分搜索 185</a></li>
-        <li><a href="#25-动态规划-186">2.5 动态规划 186</a></li>
-        <li><a href="#26-回溯-188">2.6 回溯 188</a></li>
-        <li><a href="#27-广度深度优先搜索-192">2.7 广度/深度优先搜索 192</a></li>
+        <li><a href="#21-递归">2.1 递归</a>
+          <ul>
+            <li><a href="#211-算法解释">2.1.1 算法解释</a></li>
+            <li><a href="#212-经典题目爬楼梯">2.1.2 经典题目—爬楼梯</a></li>
+          </ul>
+        </li>
+        <li><a href="#22-双指针">2.2 双指针</a>
+          <ul>
+            <li><a href="#221-算法解释">2.2.1 算法解释</a></li>
+            <li><a href="#222-经典题目寻找链表的中间节点快慢指针">2.2.2 经典题目—寻找链表的中间节点（快慢指针）</a></li>
+            <li><a href="#223-经典题目有序数组两数之和对撞指针">2.2.3 经典题目—有序数组两数之和（对撞指针）</a></li>
+          </ul>
+        </li>
+        <li><a href="#23-滑动窗口">2.3 滑动窗口</a>
+          <ul>
+            <li><a href="#231-算法解释">2.3.1 算法解释</a></li>
+            <li><a href="#232-经典题目长度为k的连续子数组的最大和">2.3.2 经典题目—长度为k的连续子数组的最大和</a></li>
+          </ul>
+        </li>
+        <li><a href="#24-二分搜索">2.4 二分搜索</a>
+          <ul>
+            <li><a href="#241-算法解释">2.4.1 算法解释</a></li>
+            <li><a href="#242-经典题目n的算术平方根">2.4.2 经典题目——n的算术平方根</a></li>
+          </ul>
+        </li>
+        <li><a href="#25-动态规划">2.5 动态规划</a>
+          <ul>
+            <li><a href="#251-算法解释">2.5.1 算法解释</a></li>
+            <li><a href="#252-经典题目最小路径和">2.5.2 经典题目—最小路径和</a></li>
+          </ul>
+        </li>
+        <li><a href="#26-回溯">2.6 回溯</a>
+          <ul>
+            <li><a href="#261-算法解释">2.6.1 算法解释</a></li>
+            <li><a href="#262-经典题目n皇后问题">2.6.2 经典题目—n皇后问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#27-广度深度优先搜索">2.7 广度/深度优先搜索</a>
+          <ul>
+            <li><a href="#271-算法解释">2.7.1 算法解释</a></li>
+            <li><a href="#272-经典题目深度优先搜索岛屿数量">2.7.2 经典题目—深度优先搜索岛屿数量</a></li>
+            <li><a href="#273-经典题目广度优先搜索层序遍历">2.7.3 经典题目—广度优先搜索层序遍历</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#第3章-设计题">第3章 设计题</a>
