@@ -148,6 +148,34 @@ public class Solution88 {
 
 
 
+public class Solution26 {
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length &lt;= 1) return nums.length;
+        int slow = 1;
+        int fast = 1;
+        while (slow &lt;= fast &amp;&amp; fast &lt; nums.length) {
+            if (nums[fast] != nums[fast-1]) {
+                nums[slow] = nums[fast];
+                slow&#43;&#43;;
+            }
+            fast&#43;&#43;;
+        }
+        return slow;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {0,0,1,1,1,2,2,3,3,4};
+        for (int num : nums) {
+            System.out.print(num &#43; &#34; &#34;);
+        }
+        System.out.println();
+        System.out.println(removeDuplicates(nums));
+        for (int num : nums) {
+            System.out.print(num &#43; &#34; &#34;);
+        }
+
+    }
+}
 
   删除有序数组中的重复项 II
   #
@@ -159,6 +187,47 @@ public class Solution88 {
 
 
 
+public class Solution80 {
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length &lt;= 2) return nums.length;
+        int slow = -1;
+        int fast = 1;
+        int count = 1;
+        while (slow &lt;= fast &amp;&amp; fast &lt; nums.length) {
+            if (nums[fast] == nums[fast - 1]) {
+                count&#43;&#43;;
+                if (count &gt; 2 &amp;&amp; slow == -1) {
+                    slow = fast;
+                } else if (count &lt;= 2 &amp;&amp; slow != -1) {
+                    nums[slow] = nums[fast];
+                    slow&#43;&#43;;
+                }
+            } else if (nums[fast] != nums[fast - 1]) {
+                if ( slow != -1 ) {
+                    nums[slow] = nums[fast];
+                    slow&#43;&#43;;
+                }
+                count = 1;
+            }
+            fast&#43;&#43;;
+        }
+        return slow == -1 ? nums.length : slow;
+    }
+
+    public static void main(String[] args) {
+        //int[] nums = {0,0,1,1,1,1,2,3,3};
+        //int[] nums = {1,2,2};
+        int[] nums = {1,1,1,2,2,2,3,3};
+        for (int num : nums) {
+            System.out.print(num &#43; &#34; &#34;);
+        }
+        System.out.println();
+        System.out.println(removeDuplicates(nums));
+        for (int num : nums) {
+            System.out.print(num &#43; &#34; &#34;);
+        }
+    }
+}
 
   多数元素
   #
@@ -267,19 +336,19 @@ public class Solution88 {
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/algorithm/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Algorithm">
-  <meta property="og:description" content="Algorithm # 代码随想录 面试经典150题 # 面试经典150题 数组/字符串 # 移除元素 # 2025-01-11 击败3.36% class Solution { public int removeElement(int[] nums, int val) { Arrays.sort(nums); int flagIndex = -1; int count = 0; for (int i = 0; i &lt; nums.length; i&#43;&#43;) { if (nums[i] == val &amp;&amp; count == 0) { flagIndex = i; count&#43;&#43;; } else if (nums[i] == val) { count&#43;&#43;; } } if (flagIndex != -1 &amp;&amp; count != 0) { for (int i = flagIndex; i &lt; flagIndex &#43; count; i&#43;&#43;) { nums[i] = nums[nums.length - (i - flagIndex) - 1]; } } return nums.length - count; } } 一维动态规划 # 爬楼梯 # 2025-01-11 击败100% class Solution { public int climbStairs(int n) { if (n == 0) return 0; if (n == 1) return 1; if (n == 2) return 2; int[] dp = new int[n &#43; 1]; dp[0] = 0; dp[1] = 1; dp[2] = 2; for (int i = 3; i &lt;= n; i&#43;&#43;) { dp[i] = dp[i - 1] &#43; dp[i - 2]; } return dp[n]; } } 面试经典150题 # 面试经典150题 数组/字符串 # 合并两个有序数组 # public class Solution88 { public static void merge(int[] nums1, int m, int[] nums2, int n) { if (n == 0) return; int nIndex = 0; for (int i = m; i &lt; m &#43; n; i&#43;&#43;) { nums1[i] = nums2[nIndex&#43;&#43;]; } Arrays.sort(nums1); } public static void main(String[] args) { int[] nums1 = {1, 2, 3, 0, 0, 0}; int m = 3; int[] nums2 = {2, 5, 6}; int n = 3; merge(nums1, m, nums2, n); for (int i : nums1) { System.out.print(i &#43; &#34; &#34;); } } } 合并两个有序数组 2025-01-12 移除元素 # 移除元素 2025-01-11 删除有序数组中的重复项 # 删除有序数组中的重复项 2025-01-11 没有做出来，看的官方题解 2025-01-11 做完删除有序数组中的重复项 II之后再尝试重新解题完成 删除有序数组中的重复项 II # 删除有序数组中的重复项 II 2025-01-11 多数元素 # 多数元素 2025-01-12 轮转数组 # 轮转数组 2025-01-18 进阶 尽可能想出更多的解决方案，至少有 三种 不同的方法可以解决这个问题。 你可以使用空间复杂度为 O(1) 的 原地 算法解决这个问题吗？ 买卖股票的最佳时机 # 买卖股票的最佳时机 2025-01-11 看官方题解做出来的 2025-01-17 review 买卖股票的最佳时机 II # 买卖股票的最佳时机 II 官方题解 理解 2025-01-17 方法一：动态规划 方法二：贪心 跳跃游戏 # 跳跃游戏 2025-01-17 官方题解理解 贪心 2025-01-18 跳跃游戏 II # 跳跃游戏 II 2025-01-18 算法超时了 理解官方题解 2025-01-18 方法一：反向查找出发位置 Solution45.jump2 2025-01-18 方法二：正向查找可达到的最大位置 Solution45.jump3 H 指数 # H 指数">
+  <meta property="og:description" content="Algorithm # 代码随想录 面试经典150题 # 面试经典150题 数组/字符串 # 移除元素 # 2025-01-11 击败3.36% class Solution { public int removeElement(int[] nums, int val) { Arrays.sort(nums); int flagIndex = -1; int count = 0; for (int i = 0; i &lt; nums.length; i&#43;&#43;) { if (nums[i] == val &amp;&amp; count == 0) { flagIndex = i; count&#43;&#43;; } else if (nums[i] == val) { count&#43;&#43;; } } if (flagIndex != -1 &amp;&amp; count != 0) { for (int i = flagIndex; i &lt; flagIndex &#43; count; i&#43;&#43;) { nums[i] = nums[nums.length - (i - flagIndex) - 1]; } } return nums.length - count; } } 一维动态规划 # 爬楼梯 # 2025-01-11 击败100% class Solution { public int climbStairs(int n) { if (n == 0) return 0; if (n == 1) return 1; if (n == 2) return 2; int[] dp = new int[n &#43; 1]; dp[0] = 0; dp[1] = 1; dp[2] = 2; for (int i = 3; i &lt;= n; i&#43;&#43;) { dp[i] = dp[i - 1] &#43; dp[i - 2]; } return dp[n]; } } 面试经典150题 # 面试经典150题 数组/字符串 # 合并两个有序数组 # public class Solution88 { public static void merge(int[] nums1, int m, int[] nums2, int n) { if (n == 0) return; int nIndex = 0; for (int i = m; i &lt; m &#43; n; i&#43;&#43;) { nums1[i] = nums2[nIndex&#43;&#43;]; } Arrays.sort(nums1); } public static void main(String[] args) { int[] nums1 = {1, 2, 3, 0, 0, 0}; int m = 3; int[] nums2 = {2, 5, 6}; int n = 3; merge(nums1, m, nums2, n); for (int i : nums1) { System.out.print(i &#43; &#34; &#34;); } } } 合并两个有序数组 2025-01-12 移除元素 # 移除元素 2025-01-11 删除有序数组中的重复项 # 删除有序数组中的重复项 2025-01-11 没有做出来，看的官方题解 2025-01-11 做完删除有序数组中的重复项 II之后再尝试重新解题完成 public class Solution26 { public static int removeDuplicates(int[] nums) { if (nums.length &lt;= 1) return nums.length; int slow = 1; int fast = 1; while (slow &lt;= fast &amp;&amp; fast &lt; nums.length) { if (nums[fast] != nums[fast-1]) { nums[slow] = nums[fast]; slow&#43;&#43;; } fast&#43;&#43;; } return slow; } public static void main(String[] args) { int[] nums = {0,0,1,1,1,2,2,3,3,4}; for (int num : nums) { System.out.print(num &#43; &#34; &#34;); } System.out.println(); System.out.println(removeDuplicates(nums)); for (int num : nums) { System.out.print(num &#43; &#34; &#34;); } } } 删除有序数组中的重复项 II # 删除有序数组中的重复项 II 2025-01-11 public class Solution80 { public static int removeDuplicates(int[] nums) { if (nums.length &lt;= 2) return nums.length; int slow = -1; int fast = 1; int count = 1; while (slow &lt;= fast &amp;&amp; fast &lt; nums.length) { if (nums[fast] == nums[fast - 1]) { count&#43;&#43;; if (count &gt; 2 &amp;&amp; slow == -1) { slow = fast; } else if (count &lt;= 2 &amp;&amp; slow != -1) { nums[slow] = nums[fast]; slow&#43;&#43;; } } else if (nums[fast] != nums[fast - 1]) { if ( slow != -1 ) { nums[slow] = nums[fast]; slow&#43;&#43;; } count = 1; } fast&#43;&#43;; } return slow == -1 ? nums.length : slow; } public static void main(String[] args) { //int[] nums = {0,0,1,1,1,1,2,3,3}; //int[] nums = {1,2,2}; int[] nums = {1,1,1,2,2,2,3,3}; for (int num : nums) { System.out.print(num &#43; &#34; &#34;); } System.out.println(); System.out.println(removeDuplicates(nums)); for (int num : nums) { System.out.print(num &#43; &#34; &#34;); } } } 多数元素 # 多数元素 2025-01-12 轮转数组 # 轮转数组 2025-01-18 进阶 尽可能想出更多的解决方案，至少有 三种 不同的方法可以解决这个问题。 你可以使用空间复杂度为 O(1) 的 原地 算法解决这个问题吗？ 买卖股票的最佳时机 # 买卖股票的最佳时机 2025-01-11 看官方题解做出来的 2025-01-17 review 买卖股票的最佳时机 II # 买卖股票的最佳时机 II 官方题解 理解 2025-01-17 方法一：动态规划 方法二：贪心 跳跃游戏 # 跳跃游戏 2025-01-17 官方题解理解 贪心 2025-01-18 跳跃游戏 II # 跳跃游戏 II 2025-01-18 算法超时了 理解官方题解 2025-01-18 方法一：反向查找出发位置 Solution45.jump2 2025-01-18 方法二：正向查找可达到的最大位置 Solution45.jump3 H 指数 # H 指数">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
     <meta property="article:published_time" content="2024-11-14T08:59:49+08:00">
-    <meta property="article:modified_time" content="2025-02-10T20:46:40+08:00">
+    <meta property="article:modified_time" content="2025-02-10T20:48:06+08:00">
 <title>Algorithm | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/computer-science/algorithm/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.2e1688a6cf05edf744d314fba61a06e2dc89f8f121ad08e1b9cd9e223b05ae2b.js" ></script>
+  <script defer src="/zh.search.min.eb47be62dcaab3f60e236e2c5239dfba0726961a2d8a7615767d93abc547a81f.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1303,7 +1372,35 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h4 id="删除有序数组中的重复项-ii">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution26</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">removeDuplicates</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nums.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;=</span> 1) <span style="color:#66d9ef">return</span> nums.<span style="color:#a6e22e">length</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> slow <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> fast <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (slow <span style="color:#f92672">&lt;=</span> fast <span style="color:#f92672">&amp;&amp;</span> fast <span style="color:#f92672">&lt;</span> nums.<span style="color:#a6e22e">length</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nums<span style="color:#f92672">[</span>fast<span style="color:#f92672">]</span> <span style="color:#f92672">!=</span> nums<span style="color:#f92672">[</span>fast<span style="color:#f92672">-</span>1<span style="color:#f92672">]</span>) {
+</span></span><span style="display:flex;"><span>                nums<span style="color:#f92672">[</span>slow<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> nums<span style="color:#f92672">[</span>fast<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>                slow<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            fast<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> slow;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums <span style="color:#f92672">=</span> {0,0,1,1,1,2,2,3,3,4};
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> num : nums) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(num <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>();
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(removeDuplicates(nums));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> num : nums) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(num <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="删除有序数组中的重复项-ii">
   删除有序数组中的重复项 II
   <a class="anchor" href="#%e5%88%a0%e9%99%a4%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84%e4%b8%ad%e7%9a%84%e9%87%8d%e5%a4%8d%e9%a1%b9-ii">#</a>
 </h4>
@@ -1314,7 +1411,48 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h4 id="多数元素">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution80</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">removeDuplicates</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nums.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;=</span> 2) <span style="color:#66d9ef">return</span> nums.<span style="color:#a6e22e">length</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> slow <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> fast <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> count <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (slow <span style="color:#f92672">&lt;=</span> fast <span style="color:#f92672">&amp;&amp;</span> fast <span style="color:#f92672">&lt;</span> nums.<span style="color:#a6e22e">length</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nums<span style="color:#f92672">[</span>fast<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> nums<span style="color:#f92672">[</span>fast <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span>) {
+</span></span><span style="display:flex;"><span>                count<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (count <span style="color:#f92672">&gt;</span> 2 <span style="color:#f92672">&amp;&amp;</span> slow <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1) {
+</span></span><span style="display:flex;"><span>                    slow <span style="color:#f92672">=</span> fast;
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (count <span style="color:#f92672">&lt;=</span> 2 <span style="color:#f92672">&amp;&amp;</span> slow <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1) {
+</span></span><span style="display:flex;"><span>                    nums<span style="color:#f92672">[</span>slow<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> nums<span style="color:#f92672">[</span>fast<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>                    slow<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (nums<span style="color:#f92672">[</span>fast<span style="color:#f92672">]</span> <span style="color:#f92672">!=</span> nums<span style="color:#f92672">[</span>fast <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> ( slow <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1 ) {
+</span></span><span style="display:flex;"><span>                    nums<span style="color:#f92672">[</span>slow<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> nums<span style="color:#f92672">[</span>fast<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>                    slow<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                count <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            fast<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> slow <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">?</span> nums.<span style="color:#a6e22e">length</span> : slow;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//int[] nums = {0,0,1,1,1,1,2,3,3};</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//int[] nums = {1,2,2};</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums <span style="color:#f92672">=</span> {1,1,1,2,2,2,3,3};
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> num : nums) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(num <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>();
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(removeDuplicates(nums));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> num : nums) {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">print</span>(num <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="多数元素">
   多数元素
   <a class="anchor" href="#%e5%a4%9a%e6%95%b0%e5%85%83%e7%b4%a0">#</a>
 </h4>
@@ -1972,7 +2110,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/44520594105ef2e83e97179263ec0fd0c5e25b05" title='最后修改者 penruins | 二月 10, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/704f8829c53e38ce401dfd68bb7e3372755030c9" title='最后修改者 penruins | 二月 10, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>二月 10, 2025</span>
     </a>
