@@ -126,7 +126,7 @@ Synchronized和ReentrantLock都是可重入锁。
 <link rel="canonical" href="/zh/post/books/computer-science/%E6%94%B6%E5%89%B2-offer%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E5%8E%82%E9%9D%A2%E7%BB%8F/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.3cb91431f86d20f37d13c6cee3f484ace02cb6621e638e41585e5f54d184dd07.js" ></script>
+  <script defer src="/zh.search.min.0f2ae857a1e607257cfd2f7176904b9d487bacde24b623dddc58527190b675fc.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1930,6 +1930,10 @@ https://github.com/alex-shpak/hugo-book
   1.5.1 进程与线程的区别
   <a class="anchor" href="#151-%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b%e7%9a%84%e5%8c%ba%e5%88%ab">#</a>
 </h4>
+<ul>
+<li>进程是系统进行资源调度和分配的基本单位，用于实现操作系统的并发。线程是CPU调度和分配的基本单位，用来实现进程内部的并发。</li>
+<li>一个程序至少有一个进程，一个进程至少有一个线程，线程依赖于进程而存在；进程在执行过程中拥有独立的内存单元，而多个线程共享进程的资源。</li>
+</ul>
 <h4 id="152-为什么页内存大小是4kb">
   1.5.2 为什么页内存大小是4KB
   <a class="anchor" href="#152-%e4%b8%ba%e4%bb%80%e4%b9%88%e9%a1%b5%e5%86%85%e5%ad%98%e5%a4%a7%e5%b0%8f%e6%98%af4kb">#</a>
