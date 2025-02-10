@@ -126,7 +126,7 @@ Synchronized和ReentrantLock都是可重入锁。
 <link rel="canonical" href="/zh/zh/post/books/computer-science/%E6%94%B6%E5%89%B2-offer%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E5%8E%82%E9%9D%A2%E7%BB%8F/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.c248eb328daafb97586c8eea5b86a8a73c8a283b1b61388d81033adf26e50c4d.js" ></script>
+  <script defer src="/zh.search.min.f6c078ee7979d3b704c2ecb038e03af46ea4c72efa99001b9f45d523ba483e73.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1981,10 +1981,32 @@ https://github.com/alex-shpak/hugo-book
   1.5.7 死锁及其产生的条件
   <a class="anchor" href="#157-%e6%ad%bb%e9%94%81%e5%8f%8a%e5%85%b6%e4%ba%a7%e7%94%9f%e7%9a%84%e6%9d%a1%e4%bb%b6">#</a>
 </h4>
+<ul>
+<li>1 死锁
+<ul>
+<li>所谓死锁是指两个或两个以上的进程在执行过程中，由于竞争资源造成的一种阻塞的现象，在未改变这种状态之前进程都不能向前推进，就说这一组进程产生了死锁。通俗地讲，就是两个或多个进程无限期地阻塞、相互等待的一种状态。</li>
+</ul>
+</li>
+<li>2 死锁产生的4个必要条件
+<ul>
+<li>互斥：在一段时间内某资源仅被一个进程占用。</li>
+<li>占有并等待：一个进程必须占有至少一个资源，并等待另一个资源，而该资源被其他进程占有。</li>
+<li>非抢占：进程已获得的资源在未使用完之前不能被强行剥夺。</li>
+<li>循环等待：若干进程之间形成一种头尾相接的环形等待资源关系。</li>
+</ul>
+</li>
+</ul>
 <h4 id="158-线程状态转换">
   1.5.8 线程状态转换
   <a class="anchor" href="#158-%e7%ba%bf%e7%a8%8b%e7%8a%b6%e6%80%81%e8%bd%ac%e6%8d%a2">#</a>
 </h4>
+<ul>
+<li>就绪状态(runnable)</li>
+<li>运行状态(running)</li>
+<li>阻塞状态(blocked)</li>
+<li>等待状态(waiting)</li>
+<li>终止状态(terminated)</li>
+</ul>
 <h4 id="159-进程调度策略">
   1.5.9 进程调度策略
   <a class="anchor" href="#159-%e8%bf%9b%e7%a8%8b%e8%b0%83%e5%ba%a6%e7%ad%96%e7%95%a5">#</a>
