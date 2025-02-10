@@ -126,7 +126,7 @@ Synchronized和ReentrantLock都是可重入锁。
 <link rel="canonical" href="/zh/post/books/computer-science/%E6%94%B6%E5%89%B2-offer%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E5%8E%82%E9%9D%A2%E7%BB%8F/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.0f2ae857a1e607257cfd2f7176904b9d487bacde24b623dddc58527190b675fc.js" ></script>
+  <script defer src="/zh.search.min.c248eb328daafb97586c8eea5b86a8a73c8a283b1b61388d81033adf26e50c4d.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1938,18 +1938,41 @@ https://github.com/alex-shpak/hugo-book
   1.5.2 为什么页内存大小是4KB
   <a class="anchor" href="#152-%e4%b8%ba%e4%bb%80%e4%b9%88%e9%a1%b5%e5%86%85%e5%ad%98%e5%a4%a7%e5%b0%8f%e6%98%af4kb">#</a>
 </h4>
+<ul>
+<li>(1)过小的页面会导致较多的页表项，从而增加寻址时的查找时间和额外开销。</li>
+<li>(2)过大的页面会浪费内存空间，产生内存碎片，降低内存的利用率。</li>
+</ul>
 <h4 id="153-进程间的通信方式">
   1.5.3 进程间的通信方式
   <a class="anchor" href="#153-%e8%bf%9b%e7%a8%8b%e9%97%b4%e7%9a%84%e9%80%9a%e4%bf%a1%e6%96%b9%e5%bc%8f">#</a>
 </h4>
+<ul>
+<li>管道及命名管道</li>
+<li>信号</li>
+<li>消息队列</li>
+<li>共享内存</li>
+<li>信号量</li>
+<li>套接字</li>
+</ul>
 <h4 id="154-页面置换算法">
   1.5.4 页面置换算法
   <a class="anchor" href="#154-%e9%a1%b5%e9%9d%a2%e7%bd%ae%e6%8d%a2%e7%ae%97%e6%b3%95">#</a>
 </h4>
+<ul>
+<li>1 先进先出(FIFO)页面置换算法</li>
+<li>2 最近最久未使用(LRU)置换算法</li>
+<li>3 CLOCK置换算法</li>
+<li>4 最佳置换算法(OPT)</li>
+</ul>
 <h4 id="155-虚拟内存">
   1.5.5 虚拟内存
   <a class="anchor" href="#155-%e8%99%9a%e6%8b%9f%e5%86%85%e5%ad%98">#</a>
 </h4>
+<ul>
+<li>如果CPU直接操作内存的物理地址，那么在空间没有隔离的情况下，同时运行多个程序可能会出现非预期内的结果。比如，程序A在地址XXXX的位置进行写入操作，会擦除程序B存放在相同位置上的数据。因此，同时运行多个程序，地址空间不隔离会有程序崩溃的风险。为了解决这个问题，出现了虚拟内存的概念。所谓虚拟内存，是指为每个进程分配独立的虚拟地址，它们互不干涉，虚拟地址由操作系统负责映射到物理内存。常见的虚拟内存管理方式有分段和分页。</li>
+<li>1 内存分段</li>
+<li>2 内存分页</li>
+</ul>
 <h4 id="156-为什么多级页表可以节省内存">
   1.5.6 为什么多级页表可以节省内存
   <a class="anchor" href="#156-%e4%b8%ba%e4%bb%80%e4%b9%88%e5%a4%9a%e7%ba%a7%e9%a1%b5%e8%a1%a8%e5%8f%af%e4%bb%a5%e8%8a%82%e7%9c%81%e5%86%85%e5%ad%98">#</a>
