@@ -50,14 +50,14 @@ import java.util.LinkedList; import java.util.List; public class Main { public s
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
     <meta property="article:published_time" content="2024-11-14T08:59:49+08:00">
-    <meta property="article:modified_time" content="2025-02-10T23:10:40+08:00">
+    <meta property="article:modified_time" content="2025-02-10T23:17:07+08:00">
 <title>Algorithm | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/computer-science/algorithm/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.097c1aa470da8cb4e346f23ecf4222a9a7dfca063456875e8074d67ad211a033.js" ></script>
+  <script defer src="/zh.search.min.67e9ed428991cb4452dfe802bc6df8a5105a545be5bac50a18a1b42feb026533.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -874,6 +874,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#如果我要创建一个列表并且需要一直在列表的开头插入元素我要怎么实现代码保证效率">如果我要创建一个列表，并且需要一直在列表的开头插入元素，我要怎么实现代码保证效率</a></li>
         <li><a href="#linkedlist-在任意位置插入和删除节点时间复杂度都是o1吗">LinkedList 在任意位置插入和删除节点，时间复杂度都是O(1)吗？</a></li>
         <li><a href="#如果我要不断往list的末尾添加元素是使用linkedlist还是arraylist">如果我要不断往list的末尾添加元素，是使用LinkedList还是ArrayList？</a></li>
+        <li><a href="#如果我想要构造一个字符串我会不断往字符串头部添加字符我该怎么编码保证效率">如果我想要构造一个字符串，我会不断往字符串头部添加字符，我该怎么编码保证效率</a></li>
       </ul>
     </li>
     <li><a href="#面试经典150题">面试经典150题</a>
@@ -1279,6 +1280,138 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 <li>只有在需要频繁在<strong>列表头部或中间插入/删除元素</strong>时，才考虑使用 <code>LinkedList</code>。</li>
+</ul>
+<p>希望这个解答对你有帮助！如果还有其他问题，欢迎随时提问！</p>
+<h3 id="如果我想要构造一个字符串我会不断往字符串头部添加字符我该怎么编码保证效率">
+  如果我想要构造一个字符串，我会不断往字符串头部添加字符，我该怎么编码保证效率
+  <a class="anchor" href="#%e5%a6%82%e6%9e%9c%e6%88%91%e6%83%b3%e8%a6%81%e6%9e%84%e9%80%a0%e4%b8%80%e4%b8%aa%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%88%91%e4%bc%9a%e4%b8%8d%e6%96%ad%e5%be%80%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%a4%b4%e9%83%a8%e6%b7%bb%e5%8a%a0%e5%ad%97%e7%ac%a6%e6%88%91%e8%af%a5%e6%80%8e%e4%b9%88%e7%bc%96%e7%a0%81%e4%bf%9d%e8%af%81%e6%95%88%e7%8e%87">#</a>
+</h3>
+<p>如果你需要不断往字符串的<strong>头部添加字符</strong>，直接使用 Java 的 <code>String</code> 或 <code>StringBuilder</code> 会导致性能问题，因为它们的底层实现不适合频繁在头部插入操作。以下是原因和高效解决方案：</p>
+<hr>
+<ol>
+<li><strong>为什么 <code>String</code> 和 <code>StringBuilder</code> 不适合？</strong></li>
+</ol>
+<ul>
+<li><strong><code>String</code></strong>：
+<ul>
+<li><code>String</code> 是不可变的，每次修改都会创建一个新的字符串对象，频繁在头部插入字符会导致大量对象创建和复制，性能极差。</li>
+</ul>
+</li>
+<li><strong><code>StringBuilder</code></strong>：
+<ul>
+<li><code>StringBuilder</code> 是可变的，适合在<strong>尾部</strong>添加字符（时间复杂度 O(1)），但在<strong>头部</strong>插入字符的时间复杂度是 O(n)，因为需要移动所有现有字符。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ol start="2">
+<li><strong>高效解决方案</strong></li>
+</ol>
+<p>为了高效地在字符串头部添加字符，可以使用以下数据结构：</p>
+<p><strong>方案 1：使用 <code>LinkedList&lt;Character&gt;</code></strong></p>
+<ul>
+<li><code>LinkedList</code> 在头部插入元素的时间复杂度是 O(1)，非常适合频繁在头部添加字符的场景。</li>
+<li>插入完成后，可以将 <code>LinkedList</code> 转换为字符串。</li>
+</ul>
+<p><strong>方案 2：使用 <code>Deque&lt;Character&gt;</code>（双端队列）</strong></p>
+<ul>
+<li><code>Deque</code> 是基于双向链表实现的，支持在头部和尾部高效插入和删除元素。</li>
+<li>插入完成后，可以将 <code>Deque</code> 转换为字符串。</li>
+</ul>
+<hr>
+<ol start="3">
+<li><strong>代码实现</strong></li>
+</ol>
+<p><strong>方案 1：使用 <code>LinkedList&lt;Character&gt;</code></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.LinkedList;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 创建一个 LinkedList 来存储字符</span>
+</span></span><span style="display:flex;"><span>        LinkedList<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">&gt;</span> list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 不断往头部添加字符</span>
+</span></span><span style="display:flex;"><span>        list.<span style="color:#a6e22e">addFirst</span>(<span style="color:#e6db74">&#39;a&#39;</span>);  <span style="color:#75715e">// 添加字符 &#39;a&#39;</span>
+</span></span><span style="display:flex;"><span>        list.<span style="color:#a6e22e">addFirst</span>(<span style="color:#e6db74">&#39;b&#39;</span>);  <span style="color:#75715e">// 添加字符 &#39;b&#39;</span>
+</span></span><span style="display:flex;"><span>        list.<span style="color:#a6e22e">addFirst</span>(<span style="color:#e6db74">&#39;c&#39;</span>);  <span style="color:#75715e">// 添加字符 &#39;c&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 将 LinkedList 转换为字符串</span>
+</span></span><span style="display:flex;"><span>        StringBuilder sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> c : list) {
+</span></span><span style="display:flex;"><span>            sb.<span style="color:#a6e22e">append</span>(c);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        String result <span style="color:#f92672">=</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(result);  <span style="color:#75715e">// 输出: cba</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>方案 2：使用 <code>Deque&lt;Character&gt;</code></strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Deque;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.LinkedList;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 创建一个 Deque 来存储字符</span>
+</span></span><span style="display:flex;"><span>        Deque<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">&gt;</span> deque <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 不断往头部添加字符</span>
+</span></span><span style="display:flex;"><span>        deque.<span style="color:#a6e22e">addFirst</span>(<span style="color:#e6db74">&#39;a&#39;</span>);  <span style="color:#75715e">// 添加字符 &#39;a&#39;</span>
+</span></span><span style="display:flex;"><span>        deque.<span style="color:#a6e22e">addFirst</span>(<span style="color:#e6db74">&#39;b&#39;</span>);  <span style="color:#75715e">// 添加字符 &#39;b&#39;</span>
+</span></span><span style="display:flex;"><span>        deque.<span style="color:#a6e22e">addFirst</span>(<span style="color:#e6db74">&#39;c&#39;</span>);  <span style="color:#75715e">// 添加字符 &#39;c&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 将 Deque 转换为字符串</span>
+</span></span><span style="display:flex;"><span>        StringBuilder sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">char</span> c : deque) {
+</span></span><span style="display:flex;"><span>            sb.<span style="color:#a6e22e">append</span>(c);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        String result <span style="color:#f92672">=</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(result);  <span style="color:#75715e">// 输出: cba</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<ol start="4">
+<li><strong>性能分析</strong></li>
+</ol>
+<ul>
+<li><strong>时间复杂度</strong>：
+<ul>
+<li>在头部插入字符的时间复杂度是 <strong>O(1)</strong>。</li>
+<li>转换为字符串的时间复杂度是 O(n)，其中 n 是字符的数量。</li>
+</ul>
+</li>
+<li><strong>空间复杂度</strong>：
+<ul>
+<li>使用 <code>LinkedList</code> 或 <code>Deque</code> 会额外存储每个字符的节点信息（前驱和后继指针），空间开销略高于 <code>StringBuilder</code>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ol start="5">
+<li><strong>为什么不直接使用 <code>StringBuilder</code>？</strong></li>
+</ol>
+<ul>
+<li><code>StringBuilder</code> 在头部插入字符的时间复杂度是 O(n)，因为需要移动所有现有字符。</li>
+<li>示例：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>StringBuilder sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>sb.<span style="color:#a6e22e">insert</span>(0, <span style="color:#e6db74">&#39;a&#39;</span>);  <span style="color:#75715e">// O(n)</span>
+</span></span><span style="display:flex;"><span>sb.<span style="color:#a6e22e">insert</span>(0, <span style="color:#e6db74">&#39;b&#39;</span>);  <span style="color:#75715e">// O(n)</span>
+</span></span><span style="display:flex;"><span>sb.<span style="color:#a6e22e">insert</span>(0, <span style="color:#e6db74">&#39;c&#39;</span>);  <span style="color:#75715e">// O(n)</span>
+</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(sb.<span style="color:#a6e22e">toString</span>());  <span style="color:#75715e">// 输出: cba</span>
+</span></span></code></pre></div>这种方法在频繁插入时性能较差。</li>
+</ul>
+<hr>
+<ol start="6">
+<li><strong>总结</strong></li>
+</ol>
+<ul>
+<li>如果需要<strong>不断往字符串头部添加字符</strong>，推荐使用 <strong><code>LinkedList&lt;Character&gt;</code> 或 <code>Deque&lt;Character&gt;</code></strong>。
+<ul>
+<li>它们在头部插入字符的时间复杂度是 O(1)，性能最优。</li>
+<li>插入完成后，可以将其转换为字符串。</li>
+</ul>
+</li>
+<li>如果插入操作较少，或者主要在尾部添加字符，可以使用 <code>StringBuilder</code>。</li>
 </ul>
 <p>希望这个解答对你有帮助！如果还有其他问题，欢迎随时提问！</p>
 <h2 id="面试经典150题">
@@ -3039,7 +3172,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/2599f20387dca275658d11da78a1c47f9c99dab2" title='最后修改者 penruins | 二月 10, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d29734a93cf628506afefb015ec8dfc0f1995b5" title='最后修改者 penruins | 二月 10, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>二月 10, 2025</span>
     </a>
@@ -3082,6 +3215,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#如果我要创建一个列表并且需要一直在列表的开头插入元素我要怎么实现代码保证效率">如果我要创建一个列表，并且需要一直在列表的开头插入元素，我要怎么实现代码保证效率</a></li>
         <li><a href="#linkedlist-在任意位置插入和删除节点时间复杂度都是o1吗">LinkedList 在任意位置插入和删除节点，时间复杂度都是O(1)吗？</a></li>
         <li><a href="#如果我要不断往list的末尾添加元素是使用linkedlist还是arraylist">如果我要不断往list的末尾添加元素，是使用LinkedList还是ArrayList？</a></li>
+        <li><a href="#如果我想要构造一个字符串我会不断往字符串头部添加字符我该怎么编码保证效率">如果我想要构造一个字符串，我会不断往字符串头部添加字符，我该怎么编码保证效率</a></li>
       </ul>
     </li>
     <li><a href="#面试经典150题">面试经典150题</a>
