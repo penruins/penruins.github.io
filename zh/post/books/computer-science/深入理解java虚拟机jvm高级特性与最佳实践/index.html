@@ -44,7 +44,7 @@ Java与C&#43;&#43;之间有一堵由内存动态分配和垃圾收集技术所�
 <link rel="canonical" href="/zh/post/books/computer-science/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E8%99%9A%E6%8B%9F%E6%9C%BAjvm%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.7b702bb29ab9c555c15a03eba582a345c6f198b491947c4f2af2457ecc9998e0.js" ></script>
+  <script defer src="/zh.search.min.d6783a87034dec05abaff917f340568fbbaa22131f36e7ffcbc0ffb8276dd509.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -934,16 +934,16 @@ https://github.com/alex-shpak/hugo-book
         </li>
       </ul>
     </li>
-    <li><a href="#第4章虚拟机性能监控故障处理工具-138">第4章　虚拟机性能监控、故障处理工具 138</a></li>
-    <li><a href="#第5章调优案例分析与实战-181">第5章　调优案例分析与实战 181</a></li>
-    <li><a href="#第6章类文件结构-212">第6章　类文件结构 212</a></li>
-    <li><a href="#第7章虚拟机类加载机制-262">第7章　虚拟机类加载机制 262</a></li>
-    <li><a href="#第8章虚拟机字节码执行引擎-293">第8章　虚拟机字节码执行引擎 293</a></li>
-    <li><a href="#第9章类加载及执行子系统的案例与实战-335">第9章　类加载及执行子系统的案例与实战 335</a></li>
-    <li><a href="#第10章前端编译与优化-358">第10章　前端编译与优化 358</a></li>
-    <li><a href="#第11章后端编译与优化-388">第11章　后端编译与优化 388</a></li>
-    <li><a href="#第12章java内存模型与线程-438">第12章　Java内存模型与线程 438</a></li>
-    <li><a href="#第13章线程安全与锁优化-466">第13章　线程安全与锁优化 466</a></li>
+    <li><a href="#第4章虚拟机性能监控故障处理工具">第4章　虚拟机性能监控、故障处理工具</a></li>
+    <li><a href="#第5章调优案例分析与实战">第5章　调优案例分析与实战</a></li>
+    <li><a href="#第6章类文件结构">第6章　类文件结构</a></li>
+    <li><a href="#第7章虚拟机类加载机制">第7章　虚拟机类加载机制</a></li>
+    <li><a href="#第8章虚拟机字节码执行引擎">第8章　虚拟机字节码执行引擎</a></li>
+    <li><a href="#第9章类加载及执行子系统的案例与实战">第9章　类加载及执行子系统的案例与实战</a></li>
+    <li><a href="#第10章前端编译与优化">第10章　前端编译与优化</a></li>
+    <li><a href="#第11章后端编译与优化">第11章　后端编译与优化</a></li>
+    <li><a href="#第12章java内存模型与线程">第12章　Java内存模型与线程</a></li>
+    <li><a href="#第13章线程安全与锁优化">第13章　线程安全与锁优化</a></li>
   </ul>
 </nav>
 
@@ -1309,6 +1309,9 @@ https://github.com/alex-shpak/hugo-book
   3.4.2　安全点
   <a class="anchor" href="#342%e5%ae%89%e5%85%a8%e7%82%b9">#</a>
 </h4>
+<ul>
+<li>有了安全点的设定，也就决定了用户程序执行时并非在代码指令流的任意位置都能够停顿下来开始垃圾收集，而是强制要求必须执行到达安全点后才能够暂停。</li>
+</ul>
 <h4 id="343安全区域">
   3.4.3　安全区域
   <a class="anchor" href="#343%e5%ae%89%e5%85%a8%e5%8c%ba%e5%9f%9f">#</a>
@@ -1317,6 +1320,10 @@ https://github.com/alex-shpak/hugo-book
   3.4.4　记忆集与卡表
   <a class="anchor" href="#344%e8%ae%b0%e5%bf%86%e9%9b%86%e4%b8%8e%e5%8d%a1%e8%a1%a8">#</a>
 </h4>
+<ul>
+<li>讲解分代收集理论的时候，提到了为解决对象跨代引用所带来的问题，垃圾收集器在新生代中建立了名为记忆集(Remembered Set)的数据结构，用以避免把整个老年代加进GC Roots扫描范围。</li>
+<li>记忆集是一种用于记录从非收集区域指向收集区域的指针集合的抽象数据结构。</li>
+</ul>
 <h4 id="345写屏障">
   3.4.5　写屏障
   <a class="anchor" href="#345%e5%86%99%e5%b1%8f%e9%9a%9c">#</a>
@@ -1325,8 +1332,8 @@ https://github.com/alex-shpak/hugo-book
   3.4.6　并发的可达性分析
   <a class="anchor" href="#346%e5%b9%b6%e5%8f%91%e7%9a%84%e5%8f%af%e8%be%be%e6%80%a7%e5%88%86%e6%9e%90">#</a>
 </h4>
-<p>3.5　经典垃圾收集器 89
-3.5.1　Serial收集器 90
+<p>3.5　经典垃圾收集器
+3.5.1　Serial收集器
 3.5.2　ParNew收集器 92
 3.5.3　Parallel Scavenge收集器 93
 3.5.4　Serial Old收集器 94
@@ -1348,9 +1355,9 @@ https://github.com/alex-shpak/hugo-book
 3.8.4　动态对象年龄判定 134
 3.8.5　空间分配担保 135
 3.9　本章小结 137</p>
-<h2 id="第4章虚拟机性能监控故障处理工具-138">
-  第4章　虚拟机性能监控、故障处理工具 138
-  <a class="anchor" href="#%e7%ac%ac4%e7%ab%a0%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%80%a7%e8%83%bd%e7%9b%91%e6%8e%a7%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86%e5%b7%a5%e5%85%b7-138">#</a>
+<h2 id="第4章虚拟机性能监控故障处理工具">
+  第4章　虚拟机性能监控、故障处理工具
+  <a class="anchor" href="#%e7%ac%ac4%e7%ab%a0%e8%99%9a%e6%8b%9f%e6%9c%ba%e6%80%a7%e8%83%bd%e7%9b%91%e6%8e%a7%e6%95%85%e9%9a%9c%e5%a4%84%e7%90%86%e5%b7%a5%e5%85%b7">#</a>
 </h2>
 <p>4.1　概述 138
 4.2　基础故障处理工具 138
@@ -1368,9 +1375,9 @@ https://github.com/alex-shpak/hugo-book
 4.3.4　Java Mission Control：可持续在线的监控工具 171
 4.4　HotSpot虚拟机插件及工具 175
 4.5　本章小结 180</p>
-<h2 id="第5章调优案例分析与实战-181">
-  第5章　调优案例分析与实战 181
-  <a class="anchor" href="#%e7%ac%ac5%e7%ab%a0%e8%b0%83%e4%bc%98%e6%a1%88%e4%be%8b%e5%88%86%e6%9e%90%e4%b8%8e%e5%ae%9e%e6%88%98-181">#</a>
+<h2 id="第5章调优案例分析与实战">
+  第5章　调优案例分析与实战
+  <a class="anchor" href="#%e7%ac%ac5%e7%ab%a0%e8%b0%83%e4%bc%98%e6%a1%88%e4%be%8b%e5%88%86%e6%9e%90%e4%b8%8e%e5%ae%9e%e6%88%98">#</a>
 </h2>
 <p>5.1　概述 181
 5.2　案例分析 181
@@ -1390,9 +1397,9 @@ https://github.com/alex-shpak/hugo-book
 5.3.5　选择收集器降低延迟 206
 5.4　本章小结 209
 第三部分　虚拟机执行子系统</p>
-<h2 id="第6章类文件结构-212">
-  第6章　类文件结构 212
-  <a class="anchor" href="#%e7%ac%ac6%e7%ab%a0%e7%b1%bb%e6%96%87%e4%bb%b6%e7%bb%93%e6%9e%84-212">#</a>
+<h2 id="第6章类文件结构">
+  第6章　类文件结构
+  <a class="anchor" href="#%e7%ac%ac6%e7%ab%a0%e7%b1%bb%e6%96%87%e4%bb%b6%e7%bb%93%e6%9e%84">#</a>
 </h2>
 <p>6.1　概述 212
 6.2　无关性的基石 212
@@ -1418,9 +1425,9 @@ https://github.com/alex-shpak/hugo-book
 6.5　公有设计，私有实现 259
 6.6　Class文件结构的发展 260
 6.7　本章小结 261</p>
-<h2 id="第7章虚拟机类加载机制-262">
-  第7章　虚拟机类加载机制 262
-  <a class="anchor" href="#%e7%ac%ac7%e7%ab%a0%e8%99%9a%e6%8b%9f%e6%9c%ba%e7%b1%bb%e5%8a%a0%e8%bd%bd%e6%9c%ba%e5%88%b6-262">#</a>
+<h2 id="第7章虚拟机类加载机制">
+  第7章　虚拟机类加载机制
+  <a class="anchor" href="#%e7%ac%ac7%e7%ab%a0%e8%99%9a%e6%8b%9f%e6%9c%ba%e7%b1%bb%e5%8a%a0%e8%bd%bd%e6%9c%ba%e5%88%b6">#</a>
 </h2>
 <p>7.1　概述 262
 7.2　类加载的时机 263
@@ -1438,9 +1445,9 @@ https://github.com/alex-shpak/hugo-book
 7.5.1　模块的兼容性 288
 7.5.2　模块化下的类加载器 290
 7.6　本章小结 292</p>
-<h2 id="第8章虚拟机字节码执行引擎-293">
-  第8章　虚拟机字节码执行引擎 293
-  <a class="anchor" href="#%e7%ac%ac8%e7%ab%a0%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ad%97%e8%8a%82%e7%a0%81%e6%89%a7%e8%a1%8c%e5%bc%95%e6%93%8e-293">#</a>
+<h2 id="第8章虚拟机字节码执行引擎">
+  第8章　虚拟机字节码执行引擎
+  <a class="anchor" href="#%e7%ac%ac8%e7%ab%a0%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ad%97%e8%8a%82%e7%a0%81%e6%89%a7%e8%a1%8c%e5%bc%95%e6%93%8e">#</a>
 </h2>
 <p>8.1　概述 293
 8.2　运行时栈帧结构 294
@@ -1463,9 +1470,9 @@ https://github.com/alex-shpak/hugo-book
 8.5.2　基于栈的指令集与基于寄存器的指令集 328
 8.5.3　基于栈的解释器执行过程 329
 8.6　本章小结 334</p>
-<h2 id="第9章类加载及执行子系统的案例与实战-335">
-  第9章　类加载及执行子系统的案例与实战 335
-  <a class="anchor" href="#%e7%ac%ac9%e7%ab%a0%e7%b1%bb%e5%8a%a0%e8%bd%bd%e5%8f%8a%e6%89%a7%e8%a1%8c%e5%ad%90%e7%b3%bb%e7%bb%9f%e7%9a%84%e6%a1%88%e4%be%8b%e4%b8%8e%e5%ae%9e%e6%88%98-335">#</a>
+<h2 id="第9章类加载及执行子系统的案例与实战">
+  第9章　类加载及执行子系统的案例与实战
+  <a class="anchor" href="#%e7%ac%ac9%e7%ab%a0%e7%b1%bb%e5%8a%a0%e8%bd%bd%e5%8f%8a%e6%89%a7%e8%a1%8c%e5%ad%90%e7%b3%bb%e7%bb%9f%e7%9a%84%e6%a1%88%e4%be%8b%e4%b8%8e%e5%ae%9e%e6%88%98">#</a>
 </h2>
 <p>9.1　概述 335
 9.2　案例分析 335
@@ -1479,9 +1486,9 @@ https://github.com/alex-shpak/hugo-book
 9.3.3　实现 350
 9.3.4　验证 355
 9.4　本章小结 356</p>
-<h2 id="第10章前端编译与优化-358">
-  第10章　前端编译与优化 358
-  <a class="anchor" href="#%e7%ac%ac10%e7%ab%a0%e5%89%8d%e7%ab%af%e7%bc%96%e8%af%91%e4%b8%8e%e4%bc%98%e5%8c%96-358">#</a>
+<h2 id="第10章前端编译与优化">
+  第10章　前端编译与优化
+  <a class="anchor" href="#%e7%ac%ac10%e7%ab%a0%e5%89%8d%e7%ab%af%e7%bc%96%e8%af%91%e4%b8%8e%e4%bc%98%e5%8c%96">#</a>
 </h2>
 <p>10.1　概述 358
 10.2　Javac编译器 359
@@ -1499,9 +1506,9 @@ https://github.com/alex-shpak/hugo-book
 10.4.3　运行与测试 385
 10.4.4　其他应用案例 386
 10.5　本章小结 386</p>
-<h2 id="第11章后端编译与优化-388">
-  第11章　后端编译与优化 388
-  <a class="anchor" href="#%e7%ac%ac11%e7%ab%a0%e5%90%8e%e7%ab%af%e7%bc%96%e8%af%91%e4%b8%8e%e4%bc%98%e5%8c%96-388">#</a>
+<h2 id="第11章后端编译与优化">
+  第11章　后端编译与优化
+  <a class="anchor" href="#%e7%ac%ac11%e7%ab%a0%e5%90%8e%e7%ab%af%e7%bc%96%e8%af%91%e4%b8%8e%e4%bc%98%e5%8c%96">#</a>
 </h2>
 <p>11.1　概述 388
 11.2　即时编译器 389
@@ -1524,11 +1531,10 @@ https://github.com/alex-shpak/hugo-book
 11.5.3　JVMCI编译器接口 426
 11.5.4　代码中间表示 429
 11.5.5　代码优化与生成 432
-11.6　本章小结 436
-第五部分　高效并发</p>
-<h2 id="第12章java内存模型与线程-438">
-  第12章　Java内存模型与线程 438
-  <a class="anchor" href="#%e7%ac%ac12%e7%ab%a0java%e5%86%85%e5%ad%98%e6%a8%a1%e5%9e%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b-438">#</a>
+11.6　本章小结 436</p>
+<h2 id="第12章java内存模型与线程">
+  第12章　Java内存模型与线程
+  <a class="anchor" href="#%e7%ac%ac12%e7%ab%a0java%e5%86%85%e5%ad%98%e6%a8%a1%e5%9e%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b">#</a>
 </h2>
 <p>12.1　概述 438
 12.2　硬件的效率与一致性 439
@@ -1548,9 +1554,9 @@ https://github.com/alex-shpak/hugo-book
 12.5.2　协程的复苏 462
 12.5.3　Java的解决方案 464
 12.6　本章小结 465</p>
-<h2 id="第13章线程安全与锁优化-466">
-  第13章　线程安全与锁优化 466
-  <a class="anchor" href="#%e7%ac%ac13%e7%ab%a0%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e4%b8%8e%e9%94%81%e4%bc%98%e5%8c%96-466">#</a>
+<h2 id="第13章线程安全与锁优化">
+  第13章　线程安全与锁优化
+  <a class="anchor" href="#%e7%ac%ac13%e7%ab%a0%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e4%b8%8e%e9%94%81%e4%bc%98%e5%8c%96">#</a>
 </h2>
 <p>13.1　概述 466
 13.2　线程安全 466
@@ -1674,16 +1680,16 @@ https://github.com/alex-shpak/hugo-book
         </li>
       </ul>
     </li>
-    <li><a href="#第4章虚拟机性能监控故障处理工具-138">第4章　虚拟机性能监控、故障处理工具 138</a></li>
-    <li><a href="#第5章调优案例分析与实战-181">第5章　调优案例分析与实战 181</a></li>
-    <li><a href="#第6章类文件结构-212">第6章　类文件结构 212</a></li>
-    <li><a href="#第7章虚拟机类加载机制-262">第7章　虚拟机类加载机制 262</a></li>
-    <li><a href="#第8章虚拟机字节码执行引擎-293">第8章　虚拟机字节码执行引擎 293</a></li>
-    <li><a href="#第9章类加载及执行子系统的案例与实战-335">第9章　类加载及执行子系统的案例与实战 335</a></li>
-    <li><a href="#第10章前端编译与优化-358">第10章　前端编译与优化 358</a></li>
-    <li><a href="#第11章后端编译与优化-388">第11章　后端编译与优化 388</a></li>
-    <li><a href="#第12章java内存模型与线程-438">第12章　Java内存模型与线程 438</a></li>
-    <li><a href="#第13章线程安全与锁优化-466">第13章　线程安全与锁优化 466</a></li>
+    <li><a href="#第4章虚拟机性能监控故障处理工具">第4章　虚拟机性能监控、故障处理工具</a></li>
+    <li><a href="#第5章调优案例分析与实战">第5章　调优案例分析与实战</a></li>
+    <li><a href="#第6章类文件结构">第6章　类文件结构</a></li>
+    <li><a href="#第7章虚拟机类加载机制">第7章　虚拟机类加载机制</a></li>
+    <li><a href="#第8章虚拟机字节码执行引擎">第8章　虚拟机字节码执行引擎</a></li>
+    <li><a href="#第9章类加载及执行子系统的案例与实战">第9章　类加载及执行子系统的案例与实战</a></li>
+    <li><a href="#第10章前端编译与优化">第10章　前端编译与优化</a></li>
+    <li><a href="#第11章后端编译与优化">第11章　后端编译与优化</a></li>
+    <li><a href="#第12章java内存模型与线程">第12章　Java内存模型与线程</a></li>
+    <li><a href="#第13章线程安全与锁优化">第13章　线程安全与锁优化</a></li>
   </ul>
 </nav>
 
