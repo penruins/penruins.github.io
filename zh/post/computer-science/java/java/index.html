@@ -8,74 +8,104 @@
   #
 
 
-  学习资料
+  响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么
+  #
+
+响应式编程和虚拟线程虽然都能提高程序的并发量，但它们的实现方式、适用场景以及开发体验存在显著差异。以下是两者的主要区别：
+
+
+  1. 实现原理
   #
 
 
-CS-Notes面试笔记
-mall-swarm视频教程
+响应式编程：
+响应式编程基于异步数据流和事件驱动模型，使用发布/订阅模式（如 Flux 和 Mono）来处理异步任务。它通过非阻塞 I/O 和回调机制，确保线程在等待 I/O 操作时不会阻塞，而是继续处理其他任务。响应式编程的核心是“非阻塞”和“事件驱动”12。
+虚拟线程：
+虚拟线程是 JVM 管理的轻量级线程，底层仍然依赖于操作系统的平台线程（内核线程），但虚拟线程的创建和切换开销远低于传统线程。当虚拟线程遇到阻塞操作时，JVM 会将其挂起并切换到其他虚拟线程，从而避免线程资源的浪费37。
 
 
-  basic
+
+  2. 编程模型
   #
 
 
-  java array 转 list
+响应式编程：
+响应式编程采用声明式编程范式，代码通常由一系列操作符（如 map、flatMap）组成，形成数据流的转换管道。这种模型需要开发者熟悉函数式编程和响应式 API，代码可读性较差，调试难度较高14。
+虚拟线程：
+虚拟线程保留了传统的阻塞式编程模型，开发者可以像使用平台线程一样编写代码，无需改变编程习惯。虚拟线程的引入使得高并发编程更加简单和直观37。
+
+
+
+  3. 适用场景
   #
 
-在Java中，你可以使用Arrays.asList()方法将数组转换为列表。这是一个简单的方法来创建一个固定大小的List。如果你需要一个能够改变大小的List，你需要使用new ArrayList&lt;&gt;(Arrays.asList(array))来创建一个新的ArrayList实例。
-以下是两种情况的代码示例：
 
-  创建一个固定大小的列表
+响应式编程：
+适用于 I/O 密集型任务，如网络请求、数据库操作等。它通过非阻塞 I/O 和事件驱动机制，最大化线程的利用率。但在 CPU 密集型任务中，响应式编程的性能提升有限，甚至可能适得其反24。
+虚拟线程：
+同样适用于 I/O 密集型任务，能够显著提高并发性能。虚拟线程的优势在于其轻量化和低开销，适合处理大量并发请求。但对于 CPU 密集型任务，虚拟线程的性能提升有限，因为虚拟线程的调度仍然依赖于平台线程37。
+
+
+
+  4. 开发体验
   #
 
-import java.util.Arrays;
-import java.util.List;
 
-public class ArrayToListExample {
-    public static void main(String[] args) {
-        String[] array = {&#34;a&#34;, &#34;b&#34;, &#34;c&#34;};
-        List&lt;String&gt; list = Arrays.asList(array);
-        System.out.println(list); // 输出: [a, b, c]
-    }
-}
+响应式编程：
+响应式编程的代码通常难以理解和调试，尤其是回调嵌套和复杂的操作符链。开发者需要具备函数式编程和响应式编程的知识，学习成本较高。
+虚拟线程：
+虚拟线程的使用与传统的线程编程类似，开发者无需学习新的编程范式，代码更直观且易于维护。虚拟线程的引入降低了高并发编程的门槛。
 
-  创建一个可变大小的列表
+
+
+  5. 性能优化
   #
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-public class ArrayToArrayListExample {
-    public static void main(String[] args) {
-        String[] array = {&#34;a&#34;, &#34;b&#34;, &#34;c&#34;};
-        List&lt;String&gt; arrayList = new ArrayList&lt;&gt;(Arrays.asList(array));
-        // 现在可以添加或删除元素了
-        arrayList.add(&#34;d&#34;);
-        System.out.println(arrayList); // 输出: [a, b, c, d]
-    }
-}
-请注意，当你使用Arrays.asList()时，它返回的是一个受数组支持的固定大小的列表。这意味着你不能添加或移除元素（除非你将其转换为像ArrayList这样的可调整大小的列表），但是你可以修改已经存在的元素。如果你尝试对固定大小的列表执行添加或移除操作，将会抛出UnsupportedOperationException异常。">
+响应式编程：
+通过减少线程阻塞和上下文切换，响应式编程能够提高 CPU 和内存的利用率。但它依赖于开发者正确使用非阻塞 API 和操作符。
+虚拟线程：
+虚拟线程通过轻量化的线程管理和高效的调度机制，减少了线程创建和上下文切换的开销。虚拟线程的性能优化由 JVM 自动完成，开发者无需额外干预。
+
+
+
+  总结
+  #
+
+
+响应式编程和虚拟线程的目标都是提高程序的并发性能，但它们的实现方式和适用场景不同。
+响应式编程适合需要高度优化的 I/O 密集型任务，但代码复杂且学习成本高。
+虚拟线程提供了一种更简单、直观的方式来实现高并发，特别适合需要快速开发和维护的场景
+
+如果需要更深入的技术细节，可以参考相关文档或实践案例。">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/java/java/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="java">
-  <meta property="og:description" content="java # 学习资料 # CS-Notes面试笔记 mall-swarm视频教程 basic # java array 转 list # 在Java中，你可以使用Arrays.asList()方法将数组转换为列表。这是一个简单的方法来创建一个固定大小的List。如果你需要一个能够改变大小的List，你需要使用new ArrayList&lt;&gt;(Arrays.asList(array))来创建一个新的ArrayList实例。
-以下是两种情况的代码示例：
-创建一个固定大小的列表 # import java.util.Arrays; import java.util.List; public class ArrayToListExample { public static void main(String[] args) { String[] array = {&#34;a&#34;, &#34;b&#34;, &#34;c&#34;}; List&lt;String&gt; list = Arrays.asList(array); System.out.println(list); // 输出: [a, b, c] } } 创建一个可变大小的列表 # import java.util.ArrayList; import java.util.Arrays; import java.util.List; public class ArrayToArrayListExample { public static void main(String[] args) { String[] array = {&#34;a&#34;, &#34;b&#34;, &#34;c&#34;}; List&lt;String&gt; arrayList = new ArrayList&lt;&gt;(Arrays.asList(array)); // 现在可以添加或删除元素了 arrayList.add(&#34;d&#34;); System.out.println(arrayList); // 输出: [a, b, c, d] } } 请注意，当你使用Arrays.asList()时，它返回的是一个受数组支持的固定大小的列表。这意味着你不能添加或移除元素（除非你将其转换为像ArrayList这样的可调整大小的列表），但是你可以修改已经存在的元素。如果你尝试对固定大小的列表执行添加或移除操作，将会抛出UnsupportedOperationException异常。">
+  <meta property="og:description" content="java # 响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么 # 响应式编程和虚拟线程虽然都能提高程序的并发量，但它们的实现方式、适用场景以及开发体验存在显著差异。以下是两者的主要区别：
+1. 实现原理 # 响应式编程：
+响应式编程基于异步数据流和事件驱动模型，使用发布/订阅模式（如 Flux 和 Mono）来处理异步任务。它通过非阻塞 I/O 和回调机制，确保线程在等待 I/O 操作时不会阻塞，而是继续处理其他任务。响应式编程的核心是“非阻塞”和“事件驱动”12。 虚拟线程：
+虚拟线程是 JVM 管理的轻量级线程，底层仍然依赖于操作系统的平台线程（内核线程），但虚拟线程的创建和切换开销远低于传统线程。当虚拟线程遇到阻塞操作时，JVM 会将其挂起并切换到其他虚拟线程，从而避免线程资源的浪费37。 2. 编程模型 # 响应式编程：
+响应式编程采用声明式编程范式，代码通常由一系列操作符（如 map、flatMap）组成，形成数据流的转换管道。这种模型需要开发者熟悉函数式编程和响应式 API，代码可读性较差，调试难度较高14。 虚拟线程：
+虚拟线程保留了传统的阻塞式编程模型，开发者可以像使用平台线程一样编写代码，无需改变编程习惯。虚拟线程的引入使得高并发编程更加简单和直观37。 3. 适用场景 # 响应式编程：
+适用于 I/O 密集型任务，如网络请求、数据库操作等。它通过非阻塞 I/O 和事件驱动机制，最大化线程的利用率。但在 CPU 密集型任务中，响应式编程的性能提升有限，甚至可能适得其反24。 虚拟线程：
+同样适用于 I/O 密集型任务，能够显著提高并发性能。虚拟线程的优势在于其轻量化和低开销，适合处理大量并发请求。但对于 CPU 密集型任务，虚拟线程的性能提升有限，因为虚拟线程的调度仍然依赖于平台线程37。 4. 开发体验 # 响应式编程：
+响应式编程的代码通常难以理解和调试，尤其是回调嵌套和复杂的操作符链。开发者需要具备函数式编程和响应式编程的知识，学习成本较高。 虚拟线程：
+虚拟线程的使用与传统的线程编程类似，开发者无需学习新的编程范式，代码更直观且易于维护。虚拟线程的引入降低了高并发编程的门槛。 5. 性能优化 # 响应式编程：
+通过减少线程阻塞和上下文切换，响应式编程能够提高 CPU 和内存的利用率。但它依赖于开发者正确使用非阻塞 API 和操作符。 虚拟线程：
+虚拟线程通过轻量化的线程管理和高效的调度机制，减少了线程创建和上下文切换的开销。虚拟线程的性能优化由 JVM 自动完成，开发者无需额外干预。 总结 # 响应式编程和虚拟线程的目标都是提高程序的并发性能，但它们的实现方式和适用场景不同。 响应式编程适合需要高度优化的 I/O 密集型任务，但代码复杂且学习成本高。 虚拟线程提供了一种更简单、直观的方式来实现高并发，特别适合需要快速开发和维护的场景 如果需要更深入的技术细节，可以参考相关文档或实践案例。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-02-25T17:09:40+08:00">
+    <meta property="article:modified_time" content="2025-02-25T17:58:23+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/java/java/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.b024b8b5f1eb0b398dc7384e30a417aa6f281019f6e7cd13a3ee960d9298eab0.js" ></script>
+  <script defer src="/zh.search.min.f841a0a8a8121d3cf083495c539e57314ec6c7718974d18e3e615a509d99dbff.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -783,6 +813,102 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么</a>
+      <ul>
+        <li><a href="#1-实现原理">1. <strong>实现原理</strong></a></li>
+        <li><a href="#2-编程模型">2. <strong>编程模型</strong></a></li>
+        <li><a href="#3-适用场景">3. <strong>适用场景</strong></a></li>
+        <li><a href="#4-开发体验">4. <strong>开发体验</strong></a></li>
+        <li><a href="#5-性能优化">5. <strong>性能优化</strong></a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#虚拟线程在jvm中的内存模型是怎样的">虚拟线程在jvm中的内存模型是怎样的</a>
+      <ul>
+        <li><a href="#1-虚拟线程的内存结构">1. <strong>虚拟线程的内存结构</strong></a></li>
+        <li><a href="#2-虚拟线程与jvm内存模型的关系">2. <strong>虚拟线程与JVM内存模型的关系</strong></a></li>
+        <li><a href="#3-虚拟线程的调度与内存使用">3. <strong>虚拟线程的调度与内存使用</strong></a></li>
+        <li><a href="#4-虚拟线程与垃圾回收">4. <strong>虚拟线程与垃圾回收</strong></a></li>
+        <li><a href="#5-虚拟线程的适用场景">5. <strong>虚拟线程的适用场景</strong></a></li>
+        <li><a href="#总结-1">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#虚拟线程会增加jvm的性能消耗吗">虚拟线程会增加jvm的性能消耗吗</a>
+      <ul>
+        <li><a href="#1-虚拟线程的资源消耗">1. <strong>虚拟线程的资源消耗</strong></a></li>
+        <li><a href="#2-性能优势">2. <strong>性能优势</strong></a></li>
+        <li><a href="#3-cpu密集型任务的限制">3. <strong>CPU密集型任务的限制</strong></a></li>
+        <li><a href="#4-jvm的性能消耗">4. <strong>JVM的性能消耗</strong></a></li>
+        <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
+        <li><a href="#总结-2">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#在-springboot-项目中虚拟线程可以怎么使用">在 springboot 项目中虚拟线程可以怎么使用</a>
+      <ul>
+        <li><a href="#1-启用虚拟线程处理-http-请求">1. <strong>启用虚拟线程处理 HTTP 请求</strong></a>
+          <ul>
+            <li><a href="#配置代码">配置代码：</a></li>
+            <li><a href="#说明">说明：</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-使用虚拟线程执行异步任务">2. <strong>使用虚拟线程执行异步任务</strong></a>
+          <ul>
+            <li><a href="#配置代码-1">配置代码：</a></li>
+            <li><a href="#使用示例">使用示例：</a></li>
+            <li><a href="#说明-1">说明：</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-使用虚拟线程执行定时任务">3. <strong>使用虚拟线程执行定时任务</strong></a>
+          <ul>
+            <li><a href="#配置代码-2">配置代码：</a></li>
+            <li><a href="#使用示例-1">使用示例：</a></li>
+            <li><a href="#说明-2">说明：</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-使用虚拟线程执行自定义任务">4. <strong>使用虚拟线程执行自定义任务</strong></a>
+          <ul>
+            <li><a href="#示例代码">示例代码：</a></li>
+            <li><a href="#说明-3">说明：</a></li>
+          </ul>
+        </li>
+        <li><a href="#5-虚拟线程的最佳实践">5. <strong>虚拟线程的最佳实践</strong></a></li>
+        <li><a href="#6-环境要求">6. <strong>环境要求</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#虚拟线程的mn模型具体是如何工作的">虚拟线程的M:N模型具体是如何工作的？</a>
+      <ul>
+        <li><a href="#1-基本概念">1. <strong>基本概念</strong></a></li>
+        <li><a href="#2-mn-模型的核心思想">2. <strong>M:N 模型的核心思想</strong></a></li>
+        <li><a href="#3-具体工作流程">3. <strong>具体工作流程</strong></a></li>
+        <li><a href="#4-mn-模型的优势">4. <strong>M:N 模型的优势</strong></a></li>
+        <li><a href="#5-mn-模型的实现细节">5. <strong>M:N 模型的实现细节</strong></a></li>
+        <li><a href="#6-示例">6. <strong>示例</strong></a></li>
+        <li><a href="#7-与传统线程模型的对比">7. <strong>与传统线程模型的对比</strong></a></li>
+        <li><a href="#总结-3">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#java虚拟线程和传统线程有什么区别">Java虚拟线程和传统线程有什么区别</a>
+      <ul>
+        <li><a href="#1-实现方式">1. <strong>实现方式</strong></a></li>
+        <li><a href="#2-线程模型">2. <strong>线程模型</strong></a></li>
+        <li><a href="#3-性能">3. <strong>性能</strong></a></li>
+        <li><a href="#4-适用场景">4. <strong>适用场景</strong></a></li>
+        <li><a href="#5-编程模型">5. <strong>编程模型</strong></a></li>
+        <li><a href="#6-资源占用">6. <strong>资源占用</strong></a></li>
+        <li><a href="#7-兼容性">7. <strong>兼容性</strong></a></li>
+        <li><a href="#8-示例对比">8. <strong>示例对比</strong></a></li>
+        <li><a href="#总结-4">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#可以生成一个java使用虚拟线程的例子吗">可以生成一个java使用虚拟线程的例子吗</a>
+      <ul>
+        <li><a href="#示例代码-1">示例代码</a></li>
+        <li><a href="#代码说明">代码说明</a></li>
+        <li><a href="#运行说明">运行说明</a></li>
+        <li><a href="#运行命令">运行命令</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
+      </ul>
+    </li>
     <li><a href="#学习资料">学习资料</a></li>
     <li><a href="#basic">basic</a>
       <ul>
@@ -802,6 +928,44 @@ https://github.com/alex-shpak/hugo-book
       </ul>
     </li>
     <li><a href="#concurrent">concurrent</a></li>
+    <li><a href="#每一个java的版本的主要更新">每一个java的版本的主要更新</a>
+      <ul>
+        <li><a href="#java-10-1996">Java 1.0 (1996)</a></li>
+        <li><a href="#java-11-1997">Java 1.1 (1997)</a></li>
+        <li><a href="#java-12-1998">Java 1.2 (1998)</a></li>
+        <li><a href="#java-13-2000">Java 1.3 (2000)</a></li>
+        <li><a href="#java-14-2002">Java 1.4 (2002)</a></li>
+        <li><a href="#java-5-2004">Java 5 (2004)</a></li>
+        <li><a href="#java-6-2006">Java 6 (2006)</a></li>
+        <li><a href="#java-7-2011">Java 7 (2011)</a></li>
+        <li><a href="#java-8-2014">Java 8 (2014)</a></li>
+        <li><a href="#java-9-2017">Java 9 (2017)</a></li>
+        <li><a href="#java-10-2018">Java 10 (2018)</a></li>
+        <li><a href="#java-11-2018">Java 11 (2018)</a></li>
+        <li><a href="#java-12-2019">Java 12 (2019)</a></li>
+        <li><a href="#java-13-2019">Java 13 (2019)</a></li>
+        <li><a href="#java-14-2020">Java 14 (2020)</a></li>
+        <li><a href="#java-15-2020">Java 15 (2020)</a></li>
+        <li><a href="#java-16-2021">Java 16 (2021)</a></li>
+        <li><a href="#java-17-2021">Java 17 (2021)</a></li>
+        <li><a href="#java-18-2022">Java 18 (2022)</a></li>
+        <li><a href="#java-19-2022">Java 19 (2022)</a></li>
+        <li><a href="#java-20-2023">Java 20 (2023)</a></li>
+        <li><a href="#java-21-2023">Java 21 (2023)</a></li>
+        <li><a href="#总结-5">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识</a>
+      <ul>
+        <li><a href="#1-java最新版本特性">1. <strong>Java最新版本特性</strong></a></li>
+        <li><a href="#2-微服务与云原生技术">2. <strong>微服务与云原生技术</strong></a></li>
+        <li><a href="#3-数据库与缓存技术">3. <strong>数据库与缓存技术</strong></a></li>
+        <li><a href="#4-性能优化与jvm调优">4. <strong>性能优化与JVM调优</strong></a></li>
+        <li><a href="#5-前沿技术与趋势">5. <strong>前沿技术与趋势</strong></a></li>
+        <li><a href="#6-实践与项目结合">6. <strong>实践与项目结合</strong></a></li>
+        <li><a href="#7-面试中的表达技巧">7. <strong>面试中的表达技巧</strong></a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -818,6 +982,835 @@ https://github.com/alex-shpak/hugo-book
   java
   <a class="anchor" href="#java">#</a>
 </h1>
+<h2 id="响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">
+  响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么
+  <a class="anchor" href="#%e5%93%8d%e5%ba%94%e5%bc%8f%e7%bc%96%e7%a8%8b%e5%92%8c%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e9%83%bd%e8%83%bd%e6%8f%90%e9%ab%98%e7%a8%8b%e5%ba%8f%e7%9a%84%e5%b9%b6%e5%8f%91%e9%87%8f%e5%ae%83%e4%bb%ac%e7%9a%84%e5%b7%ae%e5%bc%82%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h2>
+<p>响应式编程和虚拟线程虽然都能提高程序的并发量，但它们的实现方式、适用场景以及开发体验存在显著差异。以下是两者的主要区别：</p>
+<hr>
+<h3 id="1-实现原理">
+  1. <strong>实现原理</strong>
+  <a class="anchor" href="#1-%e5%ae%9e%e7%8e%b0%e5%8e%9f%e7%90%86">#</a>
+</h3>
+<ul>
+<li><strong>响应式编程</strong>：<br>
+响应式编程基于异步数据流和事件驱动模型，使用发布/订阅模式（如 <code>Flux</code> 和 <code>Mono</code>）来处理异步任务。它通过非阻塞 I/O 和回调机制，确保线程在等待 I/O 操作时不会阻塞，而是继续处理其他任务。响应式编程的核心是“<strong>非阻塞</strong>”和“<strong>事件驱动</strong>”<a href="@ref">1</a><a href="@ref">2</a>。</li>
+<li><strong>虚拟线程</strong>：<br>
+虚拟线程是 JVM 管理的轻量级线程，底层仍然依赖于操作系统的平台线程（内核线程），但虚拟线程的创建和切换开销远低于传统线程。当虚拟线程遇到阻塞操作时，JVM 会将其挂起并切换到其他虚拟线程，从而避免线程资源的浪费<a href="@ref">3</a><a href="@ref">7</a>。</li>
+</ul>
+<hr>
+<h3 id="2-编程模型">
+  2. <strong>编程模型</strong>
+  <a class="anchor" href="#2-%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%9e%8b">#</a>
+</h3>
+<ul>
+<li><strong>响应式编程</strong>：<br>
+响应式编程采用声明式编程范式，代码通常由一系列操作符（如 <code>map</code>、<code>flatMap</code>）组成，形成数据流的转换管道。这种模型需要开发者熟悉函数式编程和响应式 API，代码可读性较差，调试难度较高<a href="@ref">1</a><a href="@ref">4</a>。</li>
+<li><strong>虚拟线程</strong>：<br>
+虚拟线程保留了传统的阻塞式编程模型，开发者可以像使用平台线程一样编写代码，无需改变编程习惯。虚拟线程的引入使得高并发编程更加简单和直观<a href="@ref">3</a><a href="@ref">7</a>。</li>
+</ul>
+<hr>
+<h3 id="3-适用场景">
+  3. <strong>适用场景</strong>
+  <a class="anchor" href="#3-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h3>
+<ul>
+<li><strong>响应式编程</strong>：<br>
+适用于 I/O 密集型任务，如网络请求、数据库操作等。它通过非阻塞 I/O 和事件驱动机制，最大化线程的利用率。但在 CPU 密集型任务中，响应式编程的性能提升有限，甚至可能适得其反<a href="@ref">2</a><a href="@ref">4</a>。</li>
+<li><strong>虚拟线程</strong>：<br>
+同样适用于 I/O 密集型任务，能够显著提高并发性能。虚拟线程的优势在于其轻量化和低开销，适合处理大量并发请求。但对于 CPU 密集型任务，虚拟线程的性能提升有限，因为虚拟线程的调度仍然依赖于平台线程<a href="@ref">3</a><a href="@ref">7</a>。</li>
+</ul>
+<hr>
+<h3 id="4-开发体验">
+  4. <strong>开发体验</strong>
+  <a class="anchor" href="#4-%e5%bc%80%e5%8f%91%e4%bd%93%e9%aa%8c">#</a>
+</h3>
+<ul>
+<li><strong>响应式编程</strong>：<br>
+响应式编程的代码通常难以理解和调试，尤其是回调嵌套和复杂的操作符链。开发者需要具备函数式编程和响应式编程的知识，学习成本较高。</li>
+<li><strong>虚拟线程</strong>：<br>
+虚拟线程的使用与传统的线程编程类似，开发者无需学习新的编程范式，代码更直观且易于维护。虚拟线程的引入降低了高并发编程的门槛。</li>
+</ul>
+<hr>
+<h3 id="5-性能优化">
+  5. <strong>性能优化</strong>
+  <a class="anchor" href="#5-%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96">#</a>
+</h3>
+<ul>
+<li><strong>响应式编程</strong>：<br>
+通过减少线程阻塞和上下文切换，响应式编程能够提高 CPU 和内存的利用率。但它依赖于开发者正确使用非阻塞 API 和操作符。</li>
+<li><strong>虚拟线程</strong>：<br>
+虚拟线程通过轻量化的线程管理和高效的调度机制，减少了线程创建和上下文切换的开销。虚拟线程的性能优化由 JVM 自动完成，开发者无需额外干预。</li>
+</ul>
+<hr>
+<h3 id="总结">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a>
+</h3>
+<ul>
+<li><strong>响应式编程</strong>和<strong>虚拟线程</strong>的目标都是提高程序的并发性能，但它们的实现方式和适用场景不同。</li>
+<li>响应式编程适合需要高度优化的 I/O 密集型任务，但代码复杂且学习成本高。</li>
+<li>虚拟线程提供了一种更简单、直观的方式来实现高并发，特别适合需要快速开发和维护的场景</li>
+</ul>
+<p>如果需要更深入的技术细节，可以参考相关文档或实践案例。</p>
+<h2 id="虚拟线程在jvm中的内存模型是怎样的">
+  虚拟线程在jvm中的内存模型是怎样的
+  <a class="anchor" href="#%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e5%9c%a8jvm%e4%b8%ad%e7%9a%84%e5%86%85%e5%ad%98%e6%a8%a1%e5%9e%8b%e6%98%af%e6%80%8e%e6%a0%b7%e7%9a%84">#</a>
+</h2>
+<p>虚拟线程（Virtual Threads）是Java 19引入并在Java 21中正式发布的一项新特性，旨在提高I/O密集型任务的性能。虚拟线程的内存模型与传统平台线程（Platform Threads）有所不同，主要体现在以下几个方面：</p>
+<h3 id="1-虚拟线程的内存结构">
+  1. <strong>虚拟线程的内存结构</strong>
+  <a class="anchor" href="#1-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e5%86%85%e5%ad%98%e7%bb%93%e6%9e%84">#</a>
+</h3>
+<p>虚拟线程由JVM管理，而不是操作系统，因此它们的内存占用远小于平台线程。每个虚拟线程通常只占用几KB的内存，而平台线程则需要1MB左右的内存<a href="@ref">4</a>。虚拟线程的轻量化设计使得JVM能够轻松支持数百万个虚拟线程，而不会显著增加内存负担。</p>
+<h3 id="2-虚拟线程与jvm内存模型的关系">
+  2. <strong>虚拟线程与JVM内存模型的关系</strong>
+  <a class="anchor" href="#2-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e4%b8%8ejvm%e5%86%85%e5%ad%98%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%85%b3%e7%b3%bb">#</a>
+</h3>
+<p>虚拟线程仍然依赖于JVM的内存模型，包括程序计数器、虚拟机栈、本地方法栈、堆和方法区等<a href="@ref">1</a><a href="@ref">2</a>。具体来说：</p>
+<ul>
+<li><strong>程序计数器</strong>：每个虚拟线程都有自己的程序计数器，用于记录当前执行的字节码指令位置。</li>
+<li><strong>虚拟机栈</strong>：虚拟线程的栈帧存储在JVM的栈内存中，但由于虚拟线程的轻量化设计，栈帧的创建和销毁开销较小。</li>
+<li><strong>堆</strong>：虚拟线程创建的对象实例仍然存储在堆中，与平台线程共享堆内存<a href="@ref">2</a><a href="@ref">6</a>。</li>
+</ul>
+<h3 id="3-虚拟线程的调度与内存使用">
+  3. <strong>虚拟线程的调度与内存使用</strong>
+  <a class="anchor" href="#3-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e8%b0%83%e5%ba%a6%e4%b8%8e%e5%86%85%e5%ad%98%e4%bd%bf%e7%94%a8">#</a>
+</h3>
+<p>虚拟线程的调度由JVM负责，而不是操作系统。当虚拟线程遇到I/O阻塞时，JVM会将其挂起并切换到其他虚拟线程，从而避免CPU资源的浪费。这种机制减少了线程上下文切换的开销，并提高了内存的利用率<a href="@ref">4</a><a href="@ref">5</a>。</p>
+<h3 id="4-虚拟线程与垃圾回收">
+  4. <strong>虚拟线程与垃圾回收</strong>
+  <a class="anchor" href="#4-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e4%b8%8e%e5%9e%83%e5%9c%be%e5%9b%9e%e6%94%b6">#</a>
+</h3>
+<p>虚拟线程创建的对象实例仍然受到JVM垃圾回收机制的管理。虚拟线程的轻量化设计不会增加垃圾回收的负担，反而通过减少线程阻塞和上下文切换，提高了垃圾回收的效率<a href="@ref">5</a><a href="@ref">6</a>。</p>
+<h3 id="5-虚拟线程的适用场景">
+  5. <strong>虚拟线程的适用场景</strong>
+  <a class="anchor" href="#5-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h3>
+<p>虚拟线程特别适用于高并发、I/O密集型任务，例如网络请求、文件读写等。在这些场景下，虚拟线程可以显著减少线程阻塞带来的性能损失，从而提高整体吞吐量<a href="@ref">4</a><a href="@ref">5</a>。</p>
+<h3 id="总结-1">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-1">#</a>
+</h3>
+<p>虚拟线程在JVM中的内存模型与传统平台线程类似，但由于其轻量化设计和由JVM管理的特性，虚拟线程的内存占用和调度开销显著降低。虚拟线程的内存模型仍然依赖于JVM的程序计数器、虚拟机栈、堆等结构，但其高效的调度机制和轻量化的内存占用使其在处理高并发任务时表现出色<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">4</a>。</p>
+<h2 id="虚拟线程会增加jvm的性能消耗吗">
+  虚拟线程会增加jvm的性能消耗吗
+  <a class="anchor" href="#%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e4%bc%9a%e5%a2%9e%e5%8a%a0jvm%e7%9a%84%e6%80%a7%e8%83%bd%e6%b6%88%e8%80%97%e5%90%97">#</a>
+</h2>
+<p>虚拟线程在JVM中的性能消耗相对较低，尤其是在处理I/O密集型任务时，它们通过提高CPU利用率来优化性能。以下是具体分析：</p>
+<h3 id="1-虚拟线程的资源消耗">
+  1. <strong>虚拟线程的资源消耗</strong>
+  <a class="anchor" href="#1-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e8%b5%84%e6%ba%90%e6%b6%88%e8%80%97">#</a>
+</h3>
+<p>虚拟线程由JVM管理，而不是操作系统，因此它们的创建和切换开销远低于传统的平台线程。每个虚拟线程仅占用几KB的内存，而平台线程通常需要1MB左右的内存<a href="@ref">5</a>。这种轻量化设计使得JVM能够轻松支持数百万个虚拟线程，而不会显著增加内存负担<a href="@ref">6</a>。</p>
+<h3 id="2-性能优势">
+  2. <strong>性能优势</strong>
+  <a class="anchor" href="#2-%e6%80%a7%e8%83%bd%e4%bc%98%e5%8a%bf">#</a>
+</h3>
+<p>虚拟线程的主要优势在于处理I/O密集型任务时的高效性。当虚拟线程遇到I/O阻塞时，JVM会将其挂起并切换到其他虚拟线程，从而避免CPU资源的浪费。这种机制显著提高了CPU的利用率，尤其是在高并发场景下<a href="@ref">1</a><a href="@ref">2</a>。</p>
+<h3 id="3-cpu密集型任务的限制">
+  3. <strong>CPU密集型任务的限制</strong>
+  <a class="anchor" href="#3-cpu%e5%af%86%e9%9b%86%e5%9e%8b%e4%bb%bb%e5%8a%a1%e7%9a%84%e9%99%90%e5%88%b6">#</a>
+</h3>
+<p>对于CPU密集型任务，虚拟线程的性能与平台线程相当，因为它们并没有增加实际的CPU资源。虚拟线程的优势主要体现在I/O阻塞时的任务切换上，而不是计算能力的提升<a href="@ref">1</a><a href="@ref">5</a>。</p>
+<h3 id="4-jvm的性能消耗">
+  4. <strong>JVM的性能消耗</strong>
+  <a class="anchor" href="#4-jvm%e7%9a%84%e6%80%a7%e8%83%bd%e6%b6%88%e8%80%97">#</a>
+</h3>
+<p>虚拟线程的管理由JVM负责，虽然这会增加一定的调度开销，但由于虚拟线程的轻量化设计，这种开销通常可以忽略不计。尤其是在高并发场景下，虚拟线程的资源消耗远低于平台线程<a href="@ref">5</a><a href="@ref">6</a>。</p>
+<h3 id="5-适用场景">
+  5. <strong>适用场景</strong>
+  <a class="anchor" href="#5-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h3>
+<p>虚拟线程特别适用于高并发、I/O密集型任务，例如网络请求、文件读写等。在这些场景下，虚拟线程可以显著减少线程阻塞带来的性能损失，从而提高整体吞吐量<a href="@ref">2</a><a href="@ref">5</a>。</p>
+<h3 id="总结-2">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-2">#</a>
+</h3>
+<p>虚拟线程不会显著增加JVM的性能消耗，反而通过优化任务调度和减少线程阻塞来提高性能。然而，对于CPU密集型任务，虚拟线程的性能提升有限<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">6</a>。</p>
+<h2 id="在-springboot-项目中虚拟线程可以怎么使用">
+  在 springboot 项目中虚拟线程可以怎么使用
+  <a class="anchor" href="#%e5%9c%a8-springboot-%e9%a1%b9%e7%9b%ae%e4%b8%ad%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e5%8f%af%e4%bb%a5%e6%80%8e%e4%b9%88%e4%bd%bf%e7%94%a8">#</a>
+</h2>
+<p>在 Spring Boot 项目中使用虚拟线程可以显著提升应用的并发性能，尤其是在 I/O 密集型场景中。以下是几种常见的虚拟线程使用方式及其配置方法：</p>
+<hr>
+<h3 id="1-启用虚拟线程处理-http-请求">
+  1. <strong>启用虚拟线程处理 HTTP 请求</strong>
+  <a class="anchor" href="#1-%e5%90%af%e7%94%a8%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e5%a4%84%e7%90%86-http-%e8%af%b7%e6%b1%82">#</a>
+</h3>
+<p>Spring Boot 默认使用 Tomcat 作为 Web 容器，通常使用平台线程处理请求。可以通过配置将 Tomcat 的线程池替换为虚拟线程池。</p>
+<h4 id="配置代码">
+  配置代码：
+  <a class="anchor" href="#%e9%85%8d%e7%bd%ae%e4%bb%a3%e7%a0%81">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.coyote.ProtocolHandler;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.boot.web.embedded.tomcat.TomcatProtocolHandlerCustomizer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Bean;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Configuration;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TomcatConfig</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> TomcatProtocolHandlerCustomizer<span style="color:#f92672">&lt;?&gt;</span> protocolHandlerVirtualThreadExecutorCustomizer() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> protocolHandler <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>            protocolHandler.<span style="color:#a6e22e">setExecutor</span>(Executors.<span style="color:#a6e22e">newVirtualThreadPerTaskExecutor</span>());
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="说明">
+  说明：
+  <a class="anchor" href="#%e8%af%b4%e6%98%8e">#</a>
+</h4>
+<ul>
+<li>该配置将 Tomcat 的线程池替换为虚拟线程池，所有 HTTP 请求将在虚拟线程中处理</li>
+</ul>
+<hr>
+<h3 id="2-使用虚拟线程执行异步任务">
+  2. <strong>使用虚拟线程执行异步任务</strong>
+  <a class="anchor" href="#2-%e4%bd%bf%e7%94%a8%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e6%89%a7%e8%a1%8c%e5%bc%82%e6%ad%a5%e4%bb%bb%e5%8a%a1">#</a>
+</h3>
+<p>Spring Boot 中的 <code>@Async</code> 注解通常用于异步执行任务。可以通过配置将异步任务的线程池替换为虚拟线程池。</p>
+<h4 id="配置代码-1">
+  配置代码：
+  <a class="anchor" href="#%e9%85%8d%e7%bd%ae%e4%bb%a3%e7%a0%81-1">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Bean;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Configuration;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.core.task.TaskExecutor;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.annotation.EnableAsync;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.concurrent.TaskExecutorAdapter;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableAsync</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AsyncConfig</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> TaskExecutor <span style="color:#a6e22e">asyncTaskExecutor</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> TaskExecutorAdapter(Executors.<span style="color:#a6e22e">newVirtualThreadPerTaskExecutor</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="使用示例">
+  使用示例：
+  <a class="anchor" href="#%e4%bd%bf%e7%94%a8%e7%a4%ba%e4%be%8b">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AsyncService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Async</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doSomething</span>() <span style="color:#66d9ef">throws</span> InterruptedException {
+</span></span><span style="display:flex;"><span>        Thread.<span style="color:#a6e22e">sleep</span>(1000); <span style="color:#75715e">// 模拟耗时操作</span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;任务完成&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="说明-1">
+  说明：
+  <a class="anchor" href="#%e8%af%b4%e6%98%8e-1">#</a>
+</h4>
+<ul>
+<li>通过 <code>@Async</code> 注解执行的任务将在虚拟线程中运行</li>
+</ul>
+<hr>
+<h3 id="3-使用虚拟线程执行定时任务">
+  3. <strong>使用虚拟线程执行定时任务</strong>
+  <a class="anchor" href="#3-%e4%bd%bf%e7%94%a8%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e6%89%a7%e8%a1%8c%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1">#</a>
+</h3>
+<p>Spring Boot 中的 <code>@Scheduled</code> 注解用于定时任务。可以通过配置将定时任务的线程池替换为虚拟线程池。</p>
+<h4 id="配置代码-2">
+  配置代码：
+  <a class="anchor" href="#%e9%85%8d%e7%bd%ae%e4%bb%a3%e7%a0%81-2">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Bean;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Configuration;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.TaskScheduler;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.annotation.EnableScheduling;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableScheduling</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SchedulingConfig</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> TaskScheduler <span style="color:#a6e22e">taskScheduler</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ConcurrentTaskScheduler(Executors.<span style="color:#a6e22e">newScheduledThreadPool</span>(0, Thread.<span style="color:#a6e22e">ofVirtual</span>().<span style="color:#a6e22e">factory</span>()));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="使用示例-1">
+  使用示例：
+  <a class="anchor" href="#%e4%bd%bf%e7%94%a8%e7%a4%ba%e4%be%8b-1">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduledService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Scheduled</span>(fixedRate <span style="color:#f92672">=</span> 1000)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">runTask</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;定时任务执行&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="说明-2">
+  说明：
+  <a class="anchor" href="#%e8%af%b4%e6%98%8e-2">#</a>
+</h4>
+<ul>
+<li>定时任务将在虚拟线程中执行<a href="@ref">5</a>。</li>
+</ul>
+<hr>
+<h3 id="4-使用虚拟线程执行自定义任务">
+  4. <strong>使用虚拟线程执行自定义任务</strong>
+  <a class="anchor" href="#4-%e4%bd%bf%e7%94%a8%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e6%89%a7%e8%a1%8c%e8%87%aa%e5%ae%9a%e4%b9%89%e4%bb%bb%e5%8a%a1">#</a>
+</h3>
+<p>可以通过 <code>Executors.newVirtualThreadPerTaskExecutor()</code> 创建一个虚拟线程池，用于执行自定义任务。</p>
+<h4 id="示例代码">
+  示例代码：
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.ExecutorService;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomTaskExecutor</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        ExecutorService executor <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newVirtualThreadPerTaskExecutor</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> 1000; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            executor.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;任务执行&#34;</span>);
+</span></span><span style="display:flex;"><span>            });
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        executor.<span style="color:#a6e22e">shutdown</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="说明-3">
+  说明：
+  <a class="anchor" href="#%e8%af%b4%e6%98%8e-3">#</a>
+</h4>
+<ul>
+<li>该方式适合在非 Spring 管理的环境中使用虚拟线程<a href="@ref">1</a><a href="@ref">5</a>。</li>
+</ul>
+<hr>
+<h3 id="5-虚拟线程的最佳实践">
+  5. <strong>虚拟线程的最佳实践</strong>
+  <a class="anchor" href="#5-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e6%9c%80%e4%bd%b3%e5%ae%9e%e8%b7%b5">#</a>
+</h3>
+<ul>
+<li><strong>避免池化虚拟线程</strong>：虚拟线程的创建和销毁成本极低，无需池化<a href="@ref">1</a>。</li>
+<li><strong>适合 I/O 密集型任务</strong>：虚拟线程在 I/O 阻塞时自动挂起，适合网络请求、数据库操作等场景<a href="@ref">2</a>。</li>
+<li><strong>逐步迁移</strong>：可以在现有项目中逐步启用虚拟线程，无需一次性替换所有线程<a href="@ref">3</a>。</li>
+</ul>
+<hr>
+<h3 id="6-环境要求">
+  6. <strong>环境要求</strong>
+  <a class="anchor" href="#6-%e7%8e%af%e5%a2%83%e8%a6%81%e6%b1%82">#</a>
+</h3>
+<ul>
+<li><strong>JDK 版本</strong>：Java 19+（预览功能），Java 21+（正式功能）。</li>
+<li><strong>Spring Boot 版本</strong>：Spring Boot 3.2+ 开始支持虚拟线程<a href="@ref">2</a><a href="@ref">5</a>。</li>
+</ul>
+<hr>
+<p>通过以上方式，可以在 Spring Boot 项目中充分利用虚拟线程提升并发性能，同时保持代码简洁。</p>
+<h2 id="虚拟线程的mn模型具体是如何工作的">
+  虚拟线程的M:N模型具体是如何工作的？
+  <a class="anchor" href="#%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84mn%e6%a8%a1%e5%9e%8b%e5%85%b7%e4%bd%93%e6%98%af%e5%a6%82%e4%bd%95%e5%b7%a5%e4%bd%9c%e7%9a%84">#</a>
+</h2>
+<p>虚拟线程的 <strong>M:N 模型</strong> 是一种线程调度机制，它将 <strong>M 个虚拟线程</strong> 映射到 <strong>N 个操作系统线程</strong> 上执行。这种模型的目的是在保持轻量级线程的同时，充分利用操作系统的线程资源。以下是 M:N 模型的具体工作原理：</p>
+<hr>
+<h3 id="1-基本概念">
+  1. <strong>基本概念</strong>
+  <a class="anchor" href="#1-%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5">#</a>
+</h3>
+<ul>
+<li><strong>虚拟线程（Virtual Threads）</strong>：
+<ul>
+<li>由 JVM 管理的轻量级线程。</li>
+<li>内存占用小，创建和销毁成本低。</li>
+<li>数量可以非常多（数百万个）。</li>
+</ul>
+</li>
+<li><strong>操作系统线程（Platform Threads）</strong>：
+<ul>
+<li>由操作系统管理的线程。</li>
+<li>内存占用大（默认 1MB 栈空间），创建和销毁成本高。</li>
+<li>数量有限（通常数千个）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-mn-模型的核心思想">
+  2. <strong>M:N 模型的核心思想</strong>
+  <a class="anchor" href="#2-mn-%e6%a8%a1%e5%9e%8b%e7%9a%84%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3">#</a>
+</h3>
+<ul>
+<li>将大量虚拟线程（M）映射到少量操作系统线程（N）上执行。</li>
+<li>虚拟线程在执行任务时，由 JVM 调度到可用的操作系统线程上运行。</li>
+<li>当虚拟线程遇到阻塞操作（如 I/O）时，JVM 会将其挂起，并释放操作系统线程去执行其他虚拟线程。</li>
+</ul>
+<hr>
+<h3 id="3-具体工作流程">
+  3. <strong>具体工作流程</strong>
+  <a class="anchor" href="#3-%e5%85%b7%e4%bd%93%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b">#</a>
+</h3>
+<ol>
+<li><strong>虚拟线程创建</strong>：
+<ul>
+<li>当创建一个虚拟线程时，JVM 会为其分配一个轻量级的上下文（如栈、程序计数器等）。</li>
+<li>虚拟线程不会直接绑定到操作系统线程，而是由 JVM 管理。</li>
+</ul>
+</li>
+<li><strong>任务调度</strong>：
+<ul>
+<li>当虚拟线程需要执行任务时，JVM 会将其调度到一个可用的操作系统线程上运行。</li>
+<li>操作系统线程是实际执行任务的载体。</li>
+</ul>
+</li>
+<li><strong>阻塞操作处理</strong>：
+<ul>
+<li>如果虚拟线程执行了阻塞操作（如 I/O 或等待锁），JVM 会将其挂起。</li>
+<li>挂起后，操作系统线程会被释放，并可以执行其他虚拟线程。</li>
+</ul>
+</li>
+<li><strong>任务恢复</strong>：
+<ul>
+<li>当阻塞操作完成后，JVM 会重新调度该虚拟线程到某个操作系统线程上继续执行。</li>
+</ul>
+</li>
+<li><strong>线程切换</strong>：
+<ul>
+<li>虚拟线程的切换由 JVM 管理，不需要操作系统介入。</li>
+<li>切换开销极小，因为虚拟线程的上下文是轻量级的。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="4-mn-模型的优势">
+  4. <strong>M:N 模型的优势</strong>
+  <a class="anchor" href="#4-mn-%e6%a8%a1%e5%9e%8b%e7%9a%84%e4%bc%98%e5%8a%bf">#</a>
+</h3>
+<ul>
+<li><strong>高并发</strong>：
+<ul>
+<li>可以轻松创建数百万个虚拟线程，适合高并发场景。</li>
+</ul>
+</li>
+<li><strong>资源高效利用</strong>：
+<ul>
+<li>少量操作系统线程可以服务大量虚拟线程，避免线程资源浪费。</li>
+</ul>
+</li>
+<li><strong>简化编程</strong>：
+<ul>
+<li>开发者可以使用同步编程模型，同时获得异步性能。</li>
+</ul>
+</li>
+<li><strong>低延迟</strong>：
+<ul>
+<li>虚拟线程的切换开销极小，任务可以快速恢复执行。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-mn-模型的实现细节">
+  5. <strong>M:N 模型的实现细节</strong>
+  <a class="anchor" href="#5-mn-%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%ae%9e%e7%8e%b0%e7%bb%86%e8%8a%82">#</a>
+</h3>
+<ul>
+<li><strong>调度器（Scheduler）</strong>：
+<ul>
+<li>JVM 内置了一个调度器，负责将虚拟线程分配到操作系统线程上执行。</li>
+<li>调度器会根据任务的状态（如运行、阻塞、就绪）动态管理虚拟线程。</li>
+</ul>
+</li>
+<li><strong>栈管理</strong>：
+<ul>
+<li>虚拟线程的栈是动态分配的，可以根据需要扩展或收缩。</li>
+<li>挂起时，栈状态会被保存；恢复时，栈状态会被恢复。</li>
+</ul>
+</li>
+<li><strong>阻塞操作感知</strong>：
+<ul>
+<li>JVM 会识别虚拟线程的阻塞操作（如 I/O、锁等待），并自动挂起和恢复线程。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="6-示例">
+  6. <strong>示例</strong>
+  <a class="anchor" href="#6-%e7%a4%ba%e4%be%8b">#</a>
+</h3>
+<p>以下是一个简单的示例，展示了虚拟线程的 M:N 模型：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.ExecutorService;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VirtualThreadExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 创建一个虚拟线程调度器（M:N 模型）</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (ExecutorService executor <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newVirtualThreadPerTaskExecutor</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 提交 1000 个任务</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> 1000; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> taskId <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>                executor.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>                    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;任务 &#34;</span> <span style="color:#f92672">+</span> taskId <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; 开始运行...&#34;</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                        Thread.<span style="color:#a6e22e">sleep</span>(1000); <span style="color:#75715e">// 模拟 I/O 阻塞操作</span>
+</span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>                        e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;任务 &#34;</span> <span style="color:#f92672">+</span> taskId <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; 结束运行。&#34;</span>);
+</span></span><span style="display:flex;"><span>                });
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在这个例子中：</p>
+<ul>
+<li>1000 个虚拟线程被创建并提交到虚拟线程调度器。</li>
+<li>这些虚拟线程会被映射到少量的操作系统线程上执行。</li>
+<li>当虚拟线程执行 <code>Thread.sleep</code> 时，JVM 会将其挂起，并释放操作系统线程去执行其他虚拟线程。</li>
+</ul>
+<hr>
+<h3 id="7-与传统线程模型的对比">
+  7. <strong>与传统线程模型的对比</strong>
+  <a class="anchor" href="#7-%e4%b8%8e%e4%bc%a0%e7%bb%9f%e7%ba%bf%e7%a8%8b%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%af%b9%e6%af%94">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>特性</strong></th>
+          <th><strong>传统线程（1:1 模型）</strong></th>
+          <th><strong>虚拟线程（M:N 模型）</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>线程数量</td>
+          <td>受操作系统限制（通常数千个）</td>
+          <td>可轻松创建数百万个</td>
+      </tr>
+      <tr>
+          <td>内存占用</td>
+          <td>高（默认 1MB 栈空间）</td>
+          <td>低（动态分配栈空间）</td>
+      </tr>
+      <tr>
+          <td>线程切换</td>
+          <td>操作系统介入，开销大</td>
+          <td>JVM 管理，开销小</td>
+      </tr>
+      <tr>
+          <td>阻塞操作处理</td>
+          <td>操作系统线程被占用</td>
+          <td>虚拟线程挂起，操作系统线程释放</td>
+      </tr>
+      <tr>
+          <td>适用场景</td>
+          <td>CPU 密集型任务</td>
+          <td>I/O 密集型任务</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="总结-3">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-3">#</a>
+</h3>
+<p>M:N 模型通过将大量轻量级虚拟线程映射到少量操作系统线程上，实现了高并发、低资源占用的线程管理。这种模型特别适合现代高并发、I/O 密集型的应用场景，同时简化了开发者的编程复杂度。</p>
+<h2 id="java虚拟线程和传统线程有什么区别">
+  Java虚拟线程和传统线程有什么区别
+  <a class="anchor" href="#java%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e5%92%8c%e4%bc%a0%e7%bb%9f%e7%ba%bf%e7%a8%8b%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab">#</a>
+</h2>
+<p>Java 虚拟线程（Virtual Threads）与传统线程（Platform Threads）在实现、性能和适用场景上有显著区别。以下是两者的主要对比：</p>
+<hr>
+<h3 id="1-实现方式">
+  1. <strong>实现方式</strong>
+  <a class="anchor" href="#1-%e5%ae%9e%e7%8e%b0%e6%96%b9%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li><strong>传统线程</strong>：
+<ul>
+<li>直接映射到操作系统的线程（内核线程）。</li>
+<li>每个线程都需要分配一个固定的栈空间（默认 1MB）。</li>
+<li>创建和销毁成本较高，线程数量受操作系统限制。</li>
+</ul>
+</li>
+<li><strong>虚拟线程</strong>：
+<ul>
+<li>由 JVM 管理，不直接映射到操作系统线程。</li>
+<li>虚拟线程的栈空间是动态分配的，内存占用更小。</li>
+<li>创建和销毁成本极低，可以轻松创建数百万个虚拟线程。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-线程模型">
+  2. <strong>线程模型</strong>
+  <a class="anchor" href="#2-%e7%ba%bf%e7%a8%8b%e6%a8%a1%e5%9e%8b">#</a>
+</h3>
+<ul>
+<li><strong>传统线程</strong>：
+<ul>
+<li>采用 &ldquo;1:1&rdquo; 模型，即一个 Java 线程对应一个操作系统线程。</li>
+<li>线程在执行 I/O 或阻塞操作时会一直占用操作系统线程。</li>
+</ul>
+</li>
+<li><strong>虚拟线程</strong>：
+<ul>
+<li>采用 &ldquo;M:N&rdquo; 模型，即多个虚拟线程映射到少数操作系统线程。</li>
+<li>虚拟线程在执行 I/O 或阻塞操作时会被挂起，释放操作系统线程去执行其他虚拟线程。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-性能">
+  3. <strong>性能</strong>
+  <a class="anchor" href="#3-%e6%80%a7%e8%83%bd">#</a>
+</h3>
+<ul>
+<li><strong>传统线程</strong>：
+<ul>
+<li>线程数量有限，无法高效处理大量并发任务。</li>
+<li>线程切换需要操作系统介入，开销较大。</li>
+</ul>
+</li>
+<li><strong>虚拟线程</strong>：
+<ul>
+<li>可以轻松创建大量线程，适合高并发场景。</li>
+<li>线程切换由 JVM 管理，开销极小。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-适用场景">
+  4. <strong>适用场景</strong>
+  <a class="anchor" href="#4-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h3>
+<ul>
+<li><strong>传统线程</strong>：
+<ul>
+<li>适合 CPU 密集型任务，如计算密集型操作。</li>
+<li>需要直接控制操作系统线程的场景。</li>
+</ul>
+</li>
+<li><strong>虚拟线程</strong>：
+<ul>
+<li>适合 I/O 密集型任务，如网络请求、文件读写等。</li>
+<li>需要处理大量并发任务的场景，如微服务、Web 服务器等。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-编程模型">
+  5. <strong>编程模型</strong>
+  <a class="anchor" href="#5-%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%9e%8b">#</a>
+</h3>
+<ul>
+<li><strong>传统线程</strong>：
+<ul>
+<li>需要手动管理线程池，避免创建过多线程。</li>
+<li>代码复杂度较高，尤其是在处理异步任务时。</li>
+</ul>
+</li>
+<li><strong>虚拟线程</strong>：
+<ul>
+<li>无需手动管理线程池，可以按需创建虚拟线程。</li>
+<li>代码更简洁，支持同步编程模型，同时具备异步性能。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="6-资源占用">
+  6. <strong>资源占用</strong>
+  <a class="anchor" href="#6-%e8%b5%84%e6%ba%90%e5%8d%a0%e7%94%a8">#</a>
+</h3>
+<ul>
+<li><strong>传统线程</strong>：
+<ul>
+<li>每个线程占用固定的栈空间（默认 1MB），内存消耗较大。</li>
+<li>线程数量受操作系统限制（通常数千个）。</li>
+</ul>
+</li>
+<li><strong>虚拟线程</strong>：
+<ul>
+<li>栈空间动态分配，内存占用更小。</li>
+<li>可以轻松创建数百万个虚拟线程。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="7-兼容性">
+  7. <strong>兼容性</strong>
+  <a class="anchor" href="#7-%e5%85%bc%e5%ae%b9%e6%80%a7">#</a>
+</h3>
+<ul>
+<li><strong>传统线程</strong>：
+<ul>
+<li>所有 Java 版本都支持。</li>
+</ul>
+</li>
+<li><strong>虚拟线程</strong>：
+<ul>
+<li>从 Java 19 开始引入，默认是预览功能，需在运行时添加 <code>--enable-preview</code> 参数。</li>
+<li>在 Java 21 中成为正式功能。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="8-示例对比">
+  8. <strong>示例对比</strong>
+  <a class="anchor" href="#8-%e7%a4%ba%e4%be%8b%e5%af%b9%e6%af%94">#</a>
+</h3>
+<ul>
+<li><strong>传统线程</strong>：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ExecutorService executor <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newFixedThreadPool</span>(10);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> 1000; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    executor.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;传统线程执行任务&#34;</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>executor.<span style="color:#a6e22e">shutdown</span>();
+</span></span></code></pre></div></li>
+<li><strong>虚拟线程</strong>：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> (ExecutorService executor <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newVirtualThreadPerTaskExecutor</span>()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> 1000; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        executor.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;虚拟线程执行任务&#34;</span>);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="总结-4">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-4">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>特性</strong></th>
+          <th><strong>传统线程</strong></th>
+          <th><strong>虚拟线程</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>实现方式</td>
+          <td>1:1 映射到操作系统线程</td>
+          <td>M:N 映射到操作系统线程</td>
+      </tr>
+      <tr>
+          <td>内存占用</td>
+          <td>高（默认 1MB 栈空间）</td>
+          <td>低（动态分配栈空间）</td>
+      </tr>
+      <tr>
+          <td>创建成本</td>
+          <td>高</td>
+          <td>极低</td>
+      </tr>
+      <tr>
+          <td>线程切换</td>
+          <td>操作系统介入，开销大</td>
+          <td>JVM 管理，开销小</td>
+      </tr>
+      <tr>
+          <td>适用场景</td>
+          <td>CPU 密集型任务</td>
+          <td>I/O 密集型任务</td>
+      </tr>
+      <tr>
+          <td>线程数量</td>
+          <td>受操作系统限制（通常数千个）</td>
+          <td>可轻松创建数百万个</td>
+      </tr>
+      <tr>
+          <td>编程复杂度</td>
+          <td>高（需手动管理线程池）</td>
+          <td>低（按需创建，无需池化）</td>
+      </tr>
+  </tbody>
+</table>
+<p>虚拟线程是 Java 在并发编程领域的一次重大改进，特别适合现代高并发、I/O 密集型的应用场景。</p>
+<h2 id="可以生成一个java使用虚拟线程的例子吗">
+  可以生成一个java使用虚拟线程的例子吗
+  <a class="anchor" href="#%e5%8f%af%e4%bb%a5%e7%94%9f%e6%88%90%e4%b8%80%e4%b8%aajava%e4%bd%bf%e7%94%a8%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e4%be%8b%e5%ad%90%e5%90%97">#</a>
+</h2>
+<p>以下是一个使用 Java 虚拟线程的示例代码，展示了如何创建和运行虚拟线程：</p>
+<h3 id="示例代码-1">
+  示例代码
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-1">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.ExecutorService;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VirtualThreadExample</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 方法 1: 直接创建并运行虚拟线程</span>
+</span></span><span style="display:flex;"><span>        Thread.<span style="color:#a6e22e">startVirtualThread</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;虚拟线程 1 开始运行...&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                Thread.<span style="color:#a6e22e">sleep</span>(1000); <span style="color:#75715e">// 模拟耗时操作</span>
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>                e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;虚拟线程 1 结束运行。&#34;</span>);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 方法 2: 创建虚拟线程但不自动运行，手动调用 start()</span>
+</span></span><span style="display:flex;"><span>        Thread virtualThread <span style="color:#f92672">=</span> Thread.<span style="color:#a6e22e">ofVirtual</span>().<span style="color:#a6e22e">unstarted</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;虚拟线程 2 开始运行...&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                Thread.<span style="color:#a6e22e">sleep</span>(1000); <span style="color:#75715e">// 模拟耗时操作</span>
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>                e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;虚拟线程 2 结束运行。&#34;</span>);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>        virtualThread.<span style="color:#a6e22e">start</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 方法 3: 使用 ExecutorService 调度虚拟线程</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> (ExecutorService executor <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newVirtualThreadPerTaskExecutor</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 3; i <span style="color:#f92672">&lt;=</span> 5; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> threadId <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>                executor.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>                    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;虚拟线程 &#34;</span> <span style="color:#f92672">+</span> threadId <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; 开始运行...&#34;</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                        Thread.<span style="color:#a6e22e">sleep</span>(1000); <span style="color:#75715e">// 模拟耗时操作</span>
+</span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>                        e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;虚拟线程 &#34;</span> <span style="color:#f92672">+</span> threadId <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; 结束运行。&#34;</span>);
+</span></span><span style="display:flex;"><span>                });
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="代码说明">
+  代码说明
+  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e">#</a>
+</h3>
+<ol>
+<li><strong>方法 1</strong>: 使用 <code>Thread.startVirtualThread()</code> 直接创建并运行虚拟线程。这种方式适合简单的任务。</li>
+<li><strong>方法 2</strong>: 使用 <code>Thread.ofVirtual().unstarted()</code> 创建虚拟线程，但不自动运行，需要手动调用 <code>start()</code> 启动。</li>
+<li><strong>方法 3</strong>: 使用 <code>Executors.newVirtualThreadPerTaskExecutor()</code> 创建一个虚拟线程池，适合需要管理多个虚拟线程的场景。</li>
+</ol>
+<h3 id="运行说明">
+  运行说明
+  <a class="anchor" href="#%e8%bf%90%e8%a1%8c%e8%af%b4%e6%98%8e">#</a>
+</h3>
+<ul>
+<li>虚拟线程在 Java 19 中引入，但默认是预览功能，需在运行代码时添加 <code>--enable-preview</code> 参数。</li>
+<li>虚拟线程适用于 I/O 密集型任务，如网络请求、文件读写等，能够在等待 I/O 时自动挂起并切换到其他虚拟线程，提升资源利用率<a href="@ref">1</a>。</li>
+</ul>
+<h3 id="运行命令">
+  运行命令
+  <a class="anchor" href="#%e8%bf%90%e8%a1%8c%e5%91%bd%e4%bb%a4">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>java --source <span style="color:#ae81ff">19</span> --enable-preview VirtualThreadExample.java
+</span></span></code></pre></div><h3 id="注意事项">
+  注意事项
+  <a class="anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a>
+</h3>
+<ul>
+<li>虚拟线程不应池化，因为其创建和销毁成本极低，适合按需创建<a href="@ref">1</a>。</li>
+<li>虚拟线程的 I/O 操作会自动挂起并切换，而普通线程的 I/O 操作仍会阻塞<a href="@ref">1</a>。</li>
+</ul>
+<p>以上示例展示了虚拟线程的基本用法，适用于 Java 19 及以上版本。</p>
 <h2 id="学习资料">
   学习资料
   <a class="anchor" href="#%e5%ad%a6%e4%b9%a0%e8%b5%84%e6%96%99">#</a>
@@ -924,6 +1917,294 @@ https://github.com/alex-shpak/hugo-book
   concurrent
   <a class="anchor" href="#concurrent">#</a>
 </h2>
+<h2 id="每一个java的版本的主要更新">
+  每一个java的版本的主要更新
+  <a class="anchor" href="#%e6%af%8f%e4%b8%80%e4%b8%aajava%e7%9a%84%e7%89%88%e6%9c%ac%e7%9a%84%e4%b8%bb%e8%a6%81%e6%9b%b4%e6%96%b0">#</a>
+</h2>
+<p>以下是Java主要版本的主要更新内容：</p>
+<h3 id="java-10-1996">
+  Java 1.0 (1996)
+  <a class="anchor" href="#java-10-1996">#</a>
+</h3>
+<ul>
+<li><strong>初始版本</strong>：包含核心API和基础功能，如AWT、线程、IO等。</li>
+</ul>
+<h3 id="java-11-1997">
+  Java 1.1 (1997)
+  <a class="anchor" href="#java-11-1997">#</a>
+</h3>
+<ul>
+<li><strong>JDBC</strong>：支持数据库连接。</li>
+<li><strong>RMI</strong>：支持远程方法调用。</li>
+<li><strong>内部类</strong>：引入内部类。</li>
+<li><strong>JavaBeans</strong>：引入组件模型。</li>
+</ul>
+<h3 id="java-12-1998">
+  Java 1.2 (1998)
+  <a class="anchor" href="#java-12-1998">#</a>
+</h3>
+<ul>
+<li><strong>集合框架</strong>：引入集合框架（如List、Set、Map）。</li>
+<li><strong>Swing</strong>：引入新的GUI库。</li>
+<li><strong>JIT编译器</strong>：引入即时编译器提升性能。</li>
+</ul>
+<h3 id="java-13-2000">
+  Java 1.3 (2000)
+  <a class="anchor" href="#java-13-2000">#</a>
+</h3>
+<ul>
+<li><strong>HotSpot JVM</strong>：引入HotSpot虚拟机。</li>
+<li><strong>JNDI</strong>：支持命名和目录服务。</li>
+</ul>
+<h3 id="java-14-2002">
+  Java 1.4 (2002)
+  <a class="anchor" href="#java-14-2002">#</a>
+</h3>
+<ul>
+<li><strong>正则表达式</strong>：引入正则表达式支持。</li>
+<li><strong>NIO</strong>：引入非阻塞IO。</li>
+<li><strong>日志API</strong>：引入日志功能。</li>
+</ul>
+<h3 id="java-5-2004">
+  Java 5 (2004)
+  <a class="anchor" href="#java-5-2004">#</a>
+</h3>
+<ul>
+<li><strong>泛型</strong>：引入泛型支持。</li>
+<li><strong>注解</strong>：引入注解功能。</li>
+<li><strong>自动装箱/拆箱</strong>：支持基本类型与包装类的自动转换。</li>
+<li><strong>枚举</strong>：引入枚举类型。</li>
+<li><strong>并发工具</strong>：引入<code>java.util.concurrent</code>包。</li>
+</ul>
+<h3 id="java-6-2006">
+  Java 6 (2006)
+  <a class="anchor" href="#java-6-2006">#</a>
+</h3>
+<ul>
+<li><strong>脚本引擎</strong>：支持脚本语言（如JavaScript）。</li>
+<li><strong>JDBC 4.0</strong>：增强数据库连接功能。</li>
+<li><strong>JAX-WS</strong>：支持Web服务。</li>
+</ul>
+<h3 id="java-7-2011">
+  Java 7 (2011)
+  <a class="anchor" href="#java-7-2011">#</a>
+</h3>
+<ul>
+<li><strong>try-with-resources</strong>：自动资源管理。</li>
+<li><strong>NIO.2</strong>：增强文件IO操作。</li>
+<li><strong>钻石操作符</strong>：简化泛型实例化。</li>
+<li><strong>多异常捕获</strong>：支持一次捕获多个异常。</li>
+</ul>
+<h3 id="java-8-2014">
+  Java 8 (2014)
+  <a class="anchor" href="#java-8-2014">#</a>
+</h3>
+<ul>
+<li><strong>Lambda表达式</strong>：引入函数式编程。</li>
+<li><strong>Stream API</strong>：支持流式数据处理。</li>
+<li><strong>默认方法</strong>：接口支持默认方法。</li>
+<li><strong>新的日期时间API</strong>：引入<code>java.time</code>包。</li>
+</ul>
+<h3 id="java-9-2017">
+  Java 9 (2017)
+  <a class="anchor" href="#java-9-2017">#</a>
+</h3>
+<ul>
+<li><strong>模块系统</strong>：引入模块化系统（Jigsaw）。</li>
+<li><strong>JShell</strong>：引入交互式编程工具。</li>
+<li><strong>集合工厂方法</strong>：简化集合创建。</li>
+</ul>
+<h3 id="java-10-2018">
+  Java 10 (2018)
+  <a class="anchor" href="#java-10-2018">#</a>
+</h3>
+<ul>
+<li><strong>局部变量类型推断</strong>：引入<code>var</code>关键字。</li>
+<li><strong>G1垃圾回收器</strong>：并行全堆回收。</li>
+</ul>
+<h3 id="java-11-2018">
+  Java 11 (2018)
+  <a class="anchor" href="#java-11-2018">#</a>
+</h3>
+<ul>
+<li><strong>HTTP Client API</strong>：标准化HTTP客户端。</li>
+<li><strong>局部变量语法扩展</strong>：支持Lambda表达式中的<code>var</code>。</li>
+<li><strong>移除模块</strong>：移除Java EE和CORBA模块。</li>
+</ul>
+<h3 id="java-12-2019">
+  Java 12 (2019)
+  <a class="anchor" href="#java-12-2019">#</a>
+</h3>
+<ul>
+<li><strong>Switch表达式</strong>：增强<code>switch</code>语句。</li>
+<li><strong>JVM常量API</strong>：引入常量API。</li>
+</ul>
+<h3 id="java-13-2019">
+  Java 13 (2019)
+  <a class="anchor" href="#java-13-2019">#</a>
+</h3>
+<ul>
+<li><strong>文本块</strong>：支持多行字符串。</li>
+<li><strong>动态CDS归档</strong>：优化类数据共享。</li>
+</ul>
+<h3 id="java-14-2020">
+  Java 14 (2020)
+  <a class="anchor" href="#java-14-2020">#</a>
+</h3>
+<ul>
+<li><strong>Records</strong>：引入记录类。</li>
+<li><strong>Pattern Matching for instanceof</strong>：增强<code>instanceof</code>操作符。</li>
+</ul>
+<h3 id="java-15-2020">
+  Java 15 (2020)
+  <a class="anchor" href="#java-15-2020">#</a>
+</h3>
+<ul>
+<li><strong>Sealed Classes</strong>：引入密封类。</li>
+<li><strong>文本块</strong>：正式支持多行字符串。</li>
+</ul>
+<h3 id="java-16-2021">
+  Java 16 (2021)
+  <a class="anchor" href="#java-16-2021">#</a>
+</h3>
+<ul>
+<li><strong>Records</strong>：正式支持记录类。</li>
+<li><strong>Pattern Matching for instanceof</strong>：正式支持模式匹配。</li>
+</ul>
+<h3 id="java-17-2021">
+  Java 17 (2021)
+  <a class="anchor" href="#java-17-2021">#</a>
+</h3>
+<ul>
+<li><strong>Sealed Classes</strong>：正式支持密封类。</li>
+<li><strong>移除RMI激活系统</strong>：移除过时功能。</li>
+</ul>
+<h3 id="java-18-2022">
+  Java 18 (2022)
+  <a class="anchor" href="#java-18-2022">#</a>
+</h3>
+<ul>
+<li><strong>简单Web服务器</strong>：引入简单HTTP服务器。</li>
+<li><strong>UTF-8默认字符集</strong>：默认使用UTF-8编码。</li>
+</ul>
+<h3 id="java-19-2022">
+  Java 19 (2022)
+  <a class="anchor" href="#java-19-2022">#</a>
+</h3>
+<ul>
+<li><strong>虚拟线程</strong>：引入虚拟线程（预览）。</li>
+<li><strong>结构化并发</strong>：简化多线程编程（孵化器）。</li>
+</ul>
+<h3 id="java-20-2023">
+  Java 20 (2023)
+  <a class="anchor" href="#java-20-2023">#</a>
+</h3>
+<ul>
+<li><strong>Scoped Values</strong>：引入作用域值（预览）。</li>
+<li><strong>Record Patterns</strong>：引入记录模式（预览）。</li>
+</ul>
+<h3 id="java-21-2023">
+  Java 21 (2023)
+  <a class="anchor" href="#java-21-2023">#</a>
+</h3>
+<ul>
+<li><strong>虚拟线程</strong>：正式支持虚拟线程。</li>
+<li><strong>字符串模板</strong>：引入字符串模板（预览）。</li>
+</ul>
+<h3 id="总结-5">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-5">#</a>
+</h3>
+<p>Java每个版本都带来了新特性和改进，从基础功能到高级特性，不断提升开发效率和性能。</p>
+<h2 id="面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">
+  面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识
+  <a class="anchor" href="#%e9%9d%a2%e8%af%95java%e7%9a%84%e6%97%b6%e5%80%99%e5%8f%af%e8%83%bd%e4%bc%9a%e9%97%ae%e5%88%b0%e6%9c%89%e6%b2%a1%e6%9c%89%e4%ba%86%e8%a7%a3%e6%9c%80%e6%96%b0%e7%9a%84%e6%8a%80%e6%9c%af%e8%bf%99%e4%b8%aa%e6%88%91%e8%af%a5%e6%80%8e%e4%b9%88%e5%87%86%e5%a4%87%e6%8f%90%e5%89%8d%e4%ba%86%e8%a7%a3%e5%93%aa%e4%ba%9b%e7%9f%a5%e8%af%86">#</a>
+</h2>
+<p>在Java面试中，面试官可能会询问你对最新技术的了解，尤其是Java的最新版本和相关生态技术的发展。为了应对这类问题，你可以从以下几个方面进行准备：</p>
+<hr>
+<h3 id="1-java最新版本特性">
+  1. <strong>Java最新版本特性</strong>
+  <a class="anchor" href="#1-java%e6%9c%80%e6%96%b0%e7%89%88%e6%9c%ac%e7%89%b9%e6%80%a7">#</a>
+</h3>
+<p>Java的每个版本都会引入新特性，了解这些特性不仅能展现你的技术敏锐度，还能体现你对语言发展的关注。以下是Java 17及之后版本的重要特性：</p>
+<ul>
+<li><strong>Java 17 (LTS)</strong>：
+<ul>
+<li><strong>密封类（Sealed Classes）</strong>：限制类的继承，增强代码的安全性。</li>
+<li><strong>模式匹配（Pattern Matching）</strong>：简化<code>instanceof</code>的使用，减少冗余代码。</li>
+<li><strong>文本块（Text Blocks）</strong>：简化多行字符串的处理。</li>
+</ul>
+</li>
+<li><strong>Java 21</strong>：
+<ul>
+<li><strong>虚拟线程（Virtual Threads）</strong>：轻量级线程，显著提升并发性能。</li>
+<li><strong>结构化并发（Structured Concurrency）</strong>：简化多线程编程，提升代码可维护性。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-微服务与云原生技术">
+  2. <strong>微服务与云原生技术</strong>
+  <a class="anchor" href="#2-%e5%be%ae%e6%9c%8d%e5%8a%a1%e4%b8%8e%e4%ba%91%e5%8e%9f%e7%94%9f%e6%8a%80%e6%9c%af">#</a>
+</h3>
+<p>微服务和云原生是当前Java开发的热门方向，面试官可能会问到相关技术栈：</p>
+<ul>
+<li><strong>Spring Cloud</strong>：了解服务发现（Eureka）、配置中心（Spring Cloud Config）、负载均衡（Ribbon）等。</li>
+<li><strong>Docker与Kubernetes</strong>：掌握容器化部署和编排工具的使用场景。</li>
+<li><strong>服务网格（Service Mesh）</strong>：了解Istio或Linkerd在微服务中的作用。</li>
+</ul>
+<hr>
+<h3 id="3-数据库与缓存技术">
+  3. <strong>数据库与缓存技术</strong>
+  <a class="anchor" href="#3-%e6%95%b0%e6%8d%ae%e5%ba%93%e4%b8%8e%e7%bc%93%e5%ad%98%e6%8a%80%e6%9c%af">#</a>
+</h3>
+<p>数据库和缓存是Java开发中的核心组件，面试官可能会问到最新趋势：</p>
+<ul>
+<li><strong>NoSQL数据库</strong>：了解MongoDB、Cassandra等非关系型数据库的使用场景。</li>
+<li><strong>Redis</strong>：掌握Redis在缓存、分布式锁、消息队列中的应用。</li>
+<li><strong>NewSQL</strong>：了解TiDB、CockroachDB等分布式数据库的特点。</li>
+</ul>
+<hr>
+<h3 id="4-性能优化与jvm调优">
+  4. <strong>性能优化与JVM调优</strong>
+  <a class="anchor" href="#4-%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96%e4%b8%8ejvm%e8%b0%83%e4%bc%98">#</a>
+</h3>
+<p>JVM调优是Java开发中的高级技能，面试官可能会问到相关实践：</p>
+<ul>
+<li><strong>垃圾回收器</strong>：了解G1、ZGC、Shenandoah等新型垃圾回收器的特点。</li>
+<li><strong>性能监控工具</strong>：掌握JProfiler、VisualVM等工具的使用。</li>
+<li><strong>内存模型</strong>：理解JVM内存分区（堆、栈、方法区）及优化策略。</li>
+</ul>
+<hr>
+<h3 id="5-前沿技术与趋势">
+  5. <strong>前沿技术与趋势</strong>
+  <a class="anchor" href="#5-%e5%89%8d%e6%b2%bf%e6%8a%80%e6%9c%af%e4%b8%8e%e8%b6%8b%e5%8a%bf">#</a>
+</h3>
+<ul>
+<li><strong>响应式编程</strong>：了解Spring WebFlux和Project Reactor的使用场景。</li>
+<li><strong>AI与大数据</strong>：了解Java在机器学习（如DL4J）和大数据处理（如Apache Flink）中的应用。</li>
+<li><strong>低代码/无代码平台</strong>：了解Java在低代码开发中的角色。</li>
+</ul>
+<hr>
+<h3 id="6-实践与项目结合">
+  6. <strong>实践与项目结合</strong>
+  <a class="anchor" href="#6-%e5%ae%9e%e8%b7%b5%e4%b8%8e%e9%a1%b9%e7%9b%ae%e7%bb%93%e5%90%88">#</a>
+</h3>
+<ul>
+<li><strong>项目中的应用</strong>：如果你在实际项目中使用过上述技术，可以结合项目经验进行说明。例如，如何在项目中利用虚拟线程提升并发性能，或如何使用Redis优化缓存策略。</li>
+<li><strong>学习资源</strong>：关注技术博客、官方文档、GitHub开源项目，保持对最新技术的敏感度。</li>
+</ul>
+<hr>
+<h3 id="7-面试中的表达技巧">
+  7. <strong>面试中的表达技巧</strong>
+  <a class="anchor" href="#7-%e9%9d%a2%e8%af%95%e4%b8%ad%e7%9a%84%e8%a1%a8%e8%be%be%e6%8a%80%e5%b7%a7">#</a>
+</h3>
+<ul>
+<li><strong>结构化回答</strong>：使用STAR法则（情境、任务、行动、结果）描述你对新技术的理解和应用。</li>
+<li><strong>展现学习能力</strong>：如果对某些技术不熟悉，可以表达出学习的意愿和计划。</li>
+</ul>
+<hr>
+<p>通过以上准备，你可以在面试中展现出对最新技术的深刻理解和实际应用能力，从而提升竞争力。如果需要更详细的学习资源或具体技术点的深入解析，可以参考相关文档或技术社区。</p>
 </article>
  
       
@@ -933,7 +2214,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/5f516cea3e2930ea58cfe95b6c264ae0af405d03" title='最后修改者 penruins | 二月 25, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/fbc0d0a33f5923ab3fdd673861fca7b059876315" title='最后修改者 penruins | 二月 25, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>二月 25, 2025</span>
     </a>
@@ -971,6 +2252,102 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么</a>
+      <ul>
+        <li><a href="#1-实现原理">1. <strong>实现原理</strong></a></li>
+        <li><a href="#2-编程模型">2. <strong>编程模型</strong></a></li>
+        <li><a href="#3-适用场景">3. <strong>适用场景</strong></a></li>
+        <li><a href="#4-开发体验">4. <strong>开发体验</strong></a></li>
+        <li><a href="#5-性能优化">5. <strong>性能优化</strong></a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#虚拟线程在jvm中的内存模型是怎样的">虚拟线程在jvm中的内存模型是怎样的</a>
+      <ul>
+        <li><a href="#1-虚拟线程的内存结构">1. <strong>虚拟线程的内存结构</strong></a></li>
+        <li><a href="#2-虚拟线程与jvm内存模型的关系">2. <strong>虚拟线程与JVM内存模型的关系</strong></a></li>
+        <li><a href="#3-虚拟线程的调度与内存使用">3. <strong>虚拟线程的调度与内存使用</strong></a></li>
+        <li><a href="#4-虚拟线程与垃圾回收">4. <strong>虚拟线程与垃圾回收</strong></a></li>
+        <li><a href="#5-虚拟线程的适用场景">5. <strong>虚拟线程的适用场景</strong></a></li>
+        <li><a href="#总结-1">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#虚拟线程会增加jvm的性能消耗吗">虚拟线程会增加jvm的性能消耗吗</a>
+      <ul>
+        <li><a href="#1-虚拟线程的资源消耗">1. <strong>虚拟线程的资源消耗</strong></a></li>
+        <li><a href="#2-性能优势">2. <strong>性能优势</strong></a></li>
+        <li><a href="#3-cpu密集型任务的限制">3. <strong>CPU密集型任务的限制</strong></a></li>
+        <li><a href="#4-jvm的性能消耗">4. <strong>JVM的性能消耗</strong></a></li>
+        <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
+        <li><a href="#总结-2">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#在-springboot-项目中虚拟线程可以怎么使用">在 springboot 项目中虚拟线程可以怎么使用</a>
+      <ul>
+        <li><a href="#1-启用虚拟线程处理-http-请求">1. <strong>启用虚拟线程处理 HTTP 请求</strong></a>
+          <ul>
+            <li><a href="#配置代码">配置代码：</a></li>
+            <li><a href="#说明">说明：</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-使用虚拟线程执行异步任务">2. <strong>使用虚拟线程执行异步任务</strong></a>
+          <ul>
+            <li><a href="#配置代码-1">配置代码：</a></li>
+            <li><a href="#使用示例">使用示例：</a></li>
+            <li><a href="#说明-1">说明：</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-使用虚拟线程执行定时任务">3. <strong>使用虚拟线程执行定时任务</strong></a>
+          <ul>
+            <li><a href="#配置代码-2">配置代码：</a></li>
+            <li><a href="#使用示例-1">使用示例：</a></li>
+            <li><a href="#说明-2">说明：</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-使用虚拟线程执行自定义任务">4. <strong>使用虚拟线程执行自定义任务</strong></a>
+          <ul>
+            <li><a href="#示例代码">示例代码：</a></li>
+            <li><a href="#说明-3">说明：</a></li>
+          </ul>
+        </li>
+        <li><a href="#5-虚拟线程的最佳实践">5. <strong>虚拟线程的最佳实践</strong></a></li>
+        <li><a href="#6-环境要求">6. <strong>环境要求</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#虚拟线程的mn模型具体是如何工作的">虚拟线程的M:N模型具体是如何工作的？</a>
+      <ul>
+        <li><a href="#1-基本概念">1. <strong>基本概念</strong></a></li>
+        <li><a href="#2-mn-模型的核心思想">2. <strong>M:N 模型的核心思想</strong></a></li>
+        <li><a href="#3-具体工作流程">3. <strong>具体工作流程</strong></a></li>
+        <li><a href="#4-mn-模型的优势">4. <strong>M:N 模型的优势</strong></a></li>
+        <li><a href="#5-mn-模型的实现细节">5. <strong>M:N 模型的实现细节</strong></a></li>
+        <li><a href="#6-示例">6. <strong>示例</strong></a></li>
+        <li><a href="#7-与传统线程模型的对比">7. <strong>与传统线程模型的对比</strong></a></li>
+        <li><a href="#总结-3">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#java虚拟线程和传统线程有什么区别">Java虚拟线程和传统线程有什么区别</a>
+      <ul>
+        <li><a href="#1-实现方式">1. <strong>实现方式</strong></a></li>
+        <li><a href="#2-线程模型">2. <strong>线程模型</strong></a></li>
+        <li><a href="#3-性能">3. <strong>性能</strong></a></li>
+        <li><a href="#4-适用场景">4. <strong>适用场景</strong></a></li>
+        <li><a href="#5-编程模型">5. <strong>编程模型</strong></a></li>
+        <li><a href="#6-资源占用">6. <strong>资源占用</strong></a></li>
+        <li><a href="#7-兼容性">7. <strong>兼容性</strong></a></li>
+        <li><a href="#8-示例对比">8. <strong>示例对比</strong></a></li>
+        <li><a href="#总结-4">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#可以生成一个java使用虚拟线程的例子吗">可以生成一个java使用虚拟线程的例子吗</a>
+      <ul>
+        <li><a href="#示例代码-1">示例代码</a></li>
+        <li><a href="#代码说明">代码说明</a></li>
+        <li><a href="#运行说明">运行说明</a></li>
+        <li><a href="#运行命令">运行命令</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
+      </ul>
+    </li>
     <li><a href="#学习资料">学习资料</a></li>
     <li><a href="#basic">basic</a>
       <ul>
@@ -990,6 +2367,44 @@ https://github.com/alex-shpak/hugo-book
       </ul>
     </li>
     <li><a href="#concurrent">concurrent</a></li>
+    <li><a href="#每一个java的版本的主要更新">每一个java的版本的主要更新</a>
+      <ul>
+        <li><a href="#java-10-1996">Java 1.0 (1996)</a></li>
+        <li><a href="#java-11-1997">Java 1.1 (1997)</a></li>
+        <li><a href="#java-12-1998">Java 1.2 (1998)</a></li>
+        <li><a href="#java-13-2000">Java 1.3 (2000)</a></li>
+        <li><a href="#java-14-2002">Java 1.4 (2002)</a></li>
+        <li><a href="#java-5-2004">Java 5 (2004)</a></li>
+        <li><a href="#java-6-2006">Java 6 (2006)</a></li>
+        <li><a href="#java-7-2011">Java 7 (2011)</a></li>
+        <li><a href="#java-8-2014">Java 8 (2014)</a></li>
+        <li><a href="#java-9-2017">Java 9 (2017)</a></li>
+        <li><a href="#java-10-2018">Java 10 (2018)</a></li>
+        <li><a href="#java-11-2018">Java 11 (2018)</a></li>
+        <li><a href="#java-12-2019">Java 12 (2019)</a></li>
+        <li><a href="#java-13-2019">Java 13 (2019)</a></li>
+        <li><a href="#java-14-2020">Java 14 (2020)</a></li>
+        <li><a href="#java-15-2020">Java 15 (2020)</a></li>
+        <li><a href="#java-16-2021">Java 16 (2021)</a></li>
+        <li><a href="#java-17-2021">Java 17 (2021)</a></li>
+        <li><a href="#java-18-2022">Java 18 (2022)</a></li>
+        <li><a href="#java-19-2022">Java 19 (2022)</a></li>
+        <li><a href="#java-20-2023">Java 20 (2023)</a></li>
+        <li><a href="#java-21-2023">Java 21 (2023)</a></li>
+        <li><a href="#总结-5">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识</a>
+      <ul>
+        <li><a href="#1-java最新版本特性">1. <strong>Java最新版本特性</strong></a></li>
+        <li><a href="#2-微服务与云原生技术">2. <strong>微服务与云原生技术</strong></a></li>
+        <li><a href="#3-数据库与缓存技术">3. <strong>数据库与缓存技术</strong></a></li>
+        <li><a href="#4-性能优化与jvm调优">4. <strong>性能优化与JVM调优</strong></a></li>
+        <li><a href="#5-前沿技术与趋势">5. <strong>前沿技术与趋势</strong></a></li>
+        <li><a href="#6-实践与项目结合">6. <strong>实践与项目结合</strong></a></li>
+        <li><a href="#7-面试中的表达技巧">7. <strong>面试中的表达技巧</strong></a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
