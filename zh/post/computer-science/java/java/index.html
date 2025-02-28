@@ -98,14 +98,14 @@
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-02-28T12:40:06+08:00">
+    <meta property="article:modified_time" content="2025-02-28T18:00:57+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/java/java/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.6d22c3f8c37aa93c71b8b2a608f9206cf67adad56640085f145550b91c089776.js" ></script>
+  <script defer src="/zh.search.min.b35fa6285336b5370a403216e49c9aabb7b05df493059ea1765923e61fe325db.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -964,6 +964,23 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#5-前沿技术与趋势">5. <strong>前沿技术与趋势</strong></a></li>
         <li><a href="#6-实践与项目结合">6. <strong>实践与项目结合</strong></a></li>
         <li><a href="#7-面试中的表达技巧">7. <strong>面试中的表达技巧</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？</a>
+      <ul>
+        <li><a href="#一红黑树的特性优势">一、<strong>红黑树的特性优势</strong></a></li>
+        <li><a href="#二与其他树结构的对比">二、<strong>与其他树结构的对比</strong></a>
+          <ul>
+            <li><a href="#1-与-avl-树的对比">1. <strong>与 AVL 树的对比</strong></a></li>
+            <li><a href="#2-与普通二叉搜索树的对比">2. <strong>与普通二叉搜索树的对比</strong></a></li>
+            <li><a href="#3-与-b-树b-树的对比">3. <strong>与 B 树/B+ 树的对比</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#三hashmap-的特定需求">三、<strong>HashMap 的特定需求</strong></a></li>
+        <li><a href="#四总结">四、<strong>总结</strong></a></li>
       </ul>
     </li>
   </ul>
@@ -2205,6 +2222,117 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 <hr>
 <p>通过以上准备，你可以在面试中展现出对最新技术的深刻理解和实际应用能力，从而提升竞争力。如果需要更详细的学习资源或具体技术点的深入解析，可以参考相关文档或技术社区。</p>
+<h1 id="hashmap">
+  HashMap
+  <a class="anchor" href="#hashmap">#</a>
+</h1>
+<h2 id="为什么hashmap要使用红黑树而不使用其他的树结构">
+  为什么HashMap要使用红黑树而不使用其他的树结构？
+  <a class="anchor" href="#%e4%b8%ba%e4%bb%80%e4%b9%88hashmap%e8%a6%81%e4%bd%bf%e7%94%a8%e7%ba%a2%e9%bb%91%e6%a0%91%e8%80%8c%e4%b8%8d%e4%bd%bf%e7%94%a8%e5%85%b6%e4%bb%96%e7%9a%84%e6%a0%91%e7%bb%93%e6%9e%84">#</a>
+</h2>
+<pre tabindex="0"><code class="language-ys_think" data-lang="ys_think">
+&lt;icon&gt;https://wy-static.wenxiaobai.com/bot-capability/prod/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83.png&lt;/icon&gt;
+
+&lt;start&gt;思考中...&lt;/start&gt;
+
+嗯，用户问为什么HashMap用红黑树而不是其他树结构。我得仔细看看搜索结果里的内容。首先，记得之前学过的，红黑树是自平衡二叉搜索树，而HashMap在链表过长时转成红黑树是为了提高查询效率。那为什么要选红黑树而不是比如AVL树或者其他树呢？
+
+搜索结果里，网页1提到红黑树的平均查找长度是log(n)，链表是n/2，当长度超过8的时候，转换成树更有必要。同时，网页6和网页8也讨论了红黑树和AVL树的区别。网页6说红黑树在插入和删除时效率更高，因为旋转次数少。而AVL树虽然查询更快，但维护平衡的成本高，每次调整可能需要更多旋转。
+
+网页8提到红黑树的平衡性不如AVL严格，但这样换来的是更高效的插入和删除操作。对于HashMap这种需要频繁插入和删除的场景，红黑树的性能更好。另外，红黑树在调整时最多三次旋转就能恢复平衡，而AVL可能需要O(log n)次，这在多线程或高并发情况下更有优势。
+
+还有网页4和网页7也提到，红黑树在解决哈希冲突时，能提供O(log n)的时间复杂度，而链表是O(n)。当链表长度增加到一定阈值时，转换为树结构能有效提升性能。而选择红黑树而不是其他树结构，比如B树或者二叉搜索树，可能是因为红黑树在内存中操作更高效，不需要像B树那样处理大量子节点，适合内存中的数据结构。
+
+另外，网页9和网页10提到HashMap在JDK8之后使用红黑树的条件是链表长度超过8且数组容量达到64。这说明红黑树的使用是有严格条件的，而红黑树的结构特性刚好满足这种需要部分平衡的场景，既保证了查询效率，又减少了维护平衡的开销。
+
+所以总结下来，HashMap选择红黑树主要是因为它在插入、删除和查询之间找到了一个平衡点，适合频繁修改的场景。而其他树结构如AVL树可能在查询上更快，但维护成本高；二叉堆或B树可能结构不适合HashMap的需求。红黑树的这些特性使得它在HashMap中表现更优。
+
+&lt;end&gt;已深度思考（用时14秒）&lt;/end&gt;
+</code></pre><p>在 Java 的 HashMap 中，当哈希冲突导致链表长度超过阈值（默认为 8）时，链表会转换为红黑树以优化性能。选择红黑树而非其他树结构（如 AVL 树、普通二叉搜索树等）是经过多方面权衡后的结果，主要原因如下：</p>
+<hr>
+<h3 id="一红黑树的特性优势">
+  一、<strong>红黑树的特性优势</strong>
+  <a class="anchor" href="#%e4%b8%80%e7%ba%a2%e9%bb%91%e6%a0%91%e7%9a%84%e7%89%b9%e6%80%a7%e4%bc%98%e5%8a%bf">#</a>
+</h3>
+<p>红黑树是一种<strong>自平衡二叉搜索树</strong>，其核心优势在于<strong>平衡性与操作效率的折中</strong>。以下是其关键特性：</p>
+<ol>
+<li>
+<p><strong>近似平衡</strong><br>
+红黑树通过约束条件（如红色节点不能连续、从根到叶子的黑节点数相同）保证最长路径不超过最短路径的两倍<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">9</a>。这种“非严格平衡”使得维护成本低于 AVL 树，同时仍能保证对数级时间复杂度（O(log n)）的查找效率。</p>
+</li>
+<li>
+<p><strong>高效的增删操作</strong></p>
+<ul>
+<li><strong>插入/删除性能</strong>：红黑树在调整平衡时最多需要<strong>3次旋转</strong>即可完成，而 AVL 树可能需要多次旋转甚至 O(log n) 次调整<a href="@ref">6</a><a href="@ref">8</a>。例如，删除节点时，AVL 需维护从删除节点到根的路径平衡，而红黑树只需局部调整<a href="@ref">8</a>。</li>
+<li><strong>时间复杂度</strong>：红黑树的插入、删除和查找均为 O(log n)，且实际性能稳定，适合频繁修改的场景<a href="@ref">7</a><a href="@ref">12</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>内存占用优化</strong><br>
+红黑树仅需存储颜色标记（1 bit），而 AVL 树需存储平衡因子（通常为整型），内存开销更小<a href="@ref">8</a>。</p>
+</li>
+</ol>
+<hr>
+<h3 id="二与其他树结构的对比">
+  二、<strong>与其他树结构的对比</strong>
+  <a class="anchor" href="#%e4%ba%8c%e4%b8%8e%e5%85%b6%e4%bb%96%e6%a0%91%e7%bb%93%e6%9e%84%e7%9a%84%e5%af%b9%e6%af%94">#</a>
+</h3>
+<h4 id="1-与-avl-树的对比">
+  1. <strong>与 AVL 树的对比</strong>
+  <a class="anchor" href="#1-%e4%b8%8e-avl-%e6%a0%91%e7%9a%84%e5%af%b9%e6%af%94">#</a>
+</h4>
+<ul>
+<li><strong>平衡性</strong>：AVL 树追求严格平衡（左右子树高度差≤1），查询效率略高于红黑树，但插入/删除时维护平衡的代价更高<a href="@ref">6</a><a href="@ref">8</a>。</li>
+<li><strong>适用场景</strong>：AVL 树适合<strong>读多写少</strong>的场景（如数据库索引），而 HashMap 需要频繁插入和删除节点，红黑树的综合性能更优<a href="@ref">8</a><a href="@ref">12</a>。</li>
+</ul>
+<h4 id="2-与普通二叉搜索树的对比">
+  2. <strong>与普通二叉搜索树的对比</strong>
+  <a class="anchor" href="#2-%e4%b8%8e%e6%99%ae%e9%80%9a%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84%e5%af%b9%e6%af%94">#</a>
+</h4>
+<ul>
+<li><strong>退化问题</strong>：普通二叉搜索树在极端情况下（如数据有序插入）会退化为链表，时间复杂度退化为 O(n)，而红黑树通过自平衡机制避免此问题<a href="@ref">5</a><a href="@ref">9</a>。</li>
+</ul>
+<h4 id="3-与-b-树b-树的对比">
+  3. <strong>与 B 树/B+ 树的对比</strong>
+  <a class="anchor" href="#3-%e4%b8%8e-b-%e6%a0%91b-%e6%a0%91%e7%9a%84%e5%af%b9%e6%af%94">#</a>
+</h4>
+<ul>
+<li><strong>内存与磁盘优化</strong>：B 树适用于磁盘存储（减少 I/O 次数），而红黑树作为内存数据结构，更适合 HashMap 的哈希桶管理<a href="@ref">8</a>。</li>
+</ul>
+<hr>
+<h3 id="三hashmap-的特定需求">
+  三、<strong>HashMap 的特定需求</strong>
+  <a class="anchor" href="#%e4%b8%89hashmap-%e7%9a%84%e7%89%b9%e5%ae%9a%e9%9c%80%e6%b1%82">#</a>
+</h3>
+<ol>
+<li>
+<p><strong>哈希冲突的局部性</strong><br>
+HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小（默认阈值 8），红黑树的局部调整特性更契合这种场景<a href="@ref">3</a><a href="@ref">7</a><a href="@ref">10</a>。</p>
+</li>
+<li>
+<p><strong>性能与成本的权衡</strong></p>
+<ul>
+<li><strong>树化阈值选择</strong>：链表长度超过 8 才转换为红黑树，因为此时链表的平均查找长度为 4，而红黑树为 3，性能提升显著<a href="@ref">1</a><a href="@ref">3</a>。</li>
+<li><strong>树退化阈值</strong>：当节点数降至 6 时还原为链表，避免频繁树化与退化（中间差值 7 作为缓冲）<a href="@ref">1</a><a href="@ref">10</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>工程实践验证</strong><br>
+红黑树的实现复杂度适中，且经过大量工程验证（如 Linux 内核、Java 集合框架），其稳定性和效率已被广泛认可<a href="@ref">6</a><a href="@ref">8</a>。</p>
+</li>
+</ol>
+<hr>
+<h3 id="四总结">
+  四、<strong>总结</strong>
+  <a class="anchor" href="#%e5%9b%9b%e6%80%bb%e7%bb%93">#</a>
+</h3>
+<p>HashMap 选择红黑树的核心原因在于：</p>
+<ol>
+<li><strong>平衡效率与维护成本</strong>：在近似平衡的基础上，以更低的代价实现高效的增删操作。</li>
+<li><strong>适应哈希冲突场景</strong>：适合局部、小规模的数据结构管理需求。</li>
+<li><strong>工程实践优势</strong>：经过长期验证，性能稳定且实现成熟。</li>
+</ol>
+<p>相比之下，其他树结构或过于追求平衡（如 AVL 树），或缺乏自适应性（如普通二叉搜索树），无法在 HashMap 的特定场景中达到最优性能<a href="@ref">1</a><a href="@ref">6</a><a href="@ref">8</a>。</p>
 </article>
  
       
@@ -2214,7 +2342,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/c7db6b1b3c64a73abb0f403782af8ce0d9b5d98d" title='最后修改者 penruins | 二月 28, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/7b988af42b80fe418d5096067b86b4cbd08ab2f5" title='最后修改者 penruins | 二月 28, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>二月 28, 2025</span>
     </a>
@@ -2403,6 +2531,23 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#5-前沿技术与趋势">5. <strong>前沿技术与趋势</strong></a></li>
         <li><a href="#6-实践与项目结合">6. <strong>实践与项目结合</strong></a></li>
         <li><a href="#7-面试中的表达技巧">7. <strong>面试中的表达技巧</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？</a>
+      <ul>
+        <li><a href="#一红黑树的特性优势">一、<strong>红黑树的特性优势</strong></a></li>
+        <li><a href="#二与其他树结构的对比">二、<strong>与其他树结构的对比</strong></a>
+          <ul>
+            <li><a href="#1-与-avl-树的对比">1. <strong>与 AVL 树的对比</strong></a></li>
+            <li><a href="#2-与普通二叉搜索树的对比">2. <strong>与普通二叉搜索树的对比</strong></a></li>
+            <li><a href="#3-与-b-树b-树的对比">3. <strong>与 B 树/B+ 树的对比</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#三hashmap-的特定需求">三、<strong>HashMap 的特定需求</strong></a></li>
+        <li><a href="#四总结">四、<strong>总结</strong></a></li>
       </ul>
     </li>
   </ul>
