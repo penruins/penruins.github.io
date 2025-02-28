@@ -4,108 +4,74 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  java
+  String
   #
 
 
-  响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么
+  StringBuffer 是怎么保证线程安全的？
   #
 
-响应式编程和虚拟线程虽然都能提高程序的并发量，但它们的实现方式、适用场景以及开发体验存在显著差异。以下是两者的主要区别：
+StringBuffer 是通过 同步机制 来保证线程安全的。具体来说，它的所有关键方法（如 append()、insert()、delete()、reverse() 等）都使用了 synchronized 关键字进行修饰，确保同一时间只有一个线程可以执行这些方法127。
 
-
-  1. 实现原理
+  1. 同步方法
   #
 
+StringBuffer 的方法在设计时都加了 synchronized 关键字，例如：
+public synchronized StringBuffer append(String str) {
+    // 方法实现
+}
+这种机制确保了在多线程环境下，只有一个线程可以访问和修改 StringBuffer 的内容，避免了竞态条件（Race Condition）和数据不一致的问题12。
 
-响应式编程：
-响应式编程基于异步数据流和事件驱动模型，使用发布/订阅模式（如 Flux 和 Mono）来处理异步任务。它通过非阻塞 I/O 和回调机制，确保线程在等待 I/O 操作时不会阻塞，而是继续处理其他任务。响应式编程的核心是“非阻塞”和“事件驱动”12。
-虚拟线程：
-虚拟线程是 JVM 管理的轻量级线程，底层仍然依赖于操作系统的平台线程（内核线程），但虚拟线程的创建和切换开销远低于传统线程。当虚拟线程遇到阻塞操作时，JVM 会将其挂起并切换到其他虚拟线程，从而避免线程资源的浪费37。
-
-
-
-  2. 编程模型
+  2. 锁机制
   #
 
+StringBuffer 内部使用了一个锁对象（即 this 锁），当一个线程调用 StringBuffer 的同步方法时，会获取这个锁，其他线程必须等待锁释放后才能继续执行。这种锁机制保证了线程间的同步17。
 
-响应式编程：
-响应式编程采用声明式编程范式，代码通常由一系列操作符（如 map、flatMap）组成，形成数据流的转换管道。这种模型需要开发者熟悉函数式编程和响应式 API，代码可读性较差，调试难度较高14。
-虚拟线程：
-虚拟线程保留了传统的阻塞式编程模型，开发者可以像使用平台线程一样编写代码，无需改变编程习惯。虚拟线程的引入使得高并发编程更加简单和直观37。
+  3. 性能影响
+  #
 
+虽然 StringBuffer 的同步机制确保了线程安全，但也带来了性能开销。因为在多线程环境下，每次只能有一个线程操作 StringBuffer，其他线程会被阻塞。因此，在单线程环境下，推荐使用性能更高的 StringBuilder，它没有同步机制158。
 
-
-  3. 适用场景
+  4. 适用场景
   #
 
 
-响应式编程：
-适用于 I/O 密集型任务，如网络请求、数据库操作等。它通过非阻塞 I/O 和事件驱动机制，最大化线程的利用率。但在 CPU 密集型任务中，响应式编程的性能提升有限，甚至可能适得其反24。
-虚拟线程：
-同样适用于 I/O 密集型任务，能够显著提高并发性能。虚拟线程的优势在于其轻量化和低开销，适合处理大量并发请求。但对于 CPU 密集型任务，虚拟线程的性能提升有限，因为虚拟线程的调度仍然依赖于平台线程37。
-
-
-
-  4. 开发体验
-  #
-
-
-响应式编程：
-响应式编程的代码通常难以理解和调试，尤其是回调嵌套和复杂的操作符链。开发者需要具备函数式编程和响应式编程的知识，学习成本较高。
-虚拟线程：
-虚拟线程的使用与传统的线程编程类似，开发者无需学习新的编程范式，代码更直观且易于维护。虚拟线程的引入降低了高并发编程的门槛。
-
-
-
-  5. 性能优化
-  #
-
-
-响应式编程：
-通过减少线程阻塞和上下文切换，响应式编程能够提高 CPU 和内存的利用率。但它依赖于开发者正确使用非阻塞 API 和操作符。
-虚拟线程：
-虚拟线程通过轻量化的线程管理和高效的调度机制，减少了线程创建和上下文切换的开销。虚拟线程的性能优化由 JVM 自动完成，开发者无需额外干预。
-
+多线程环境：如果需要在多线程环境下对字符串进行操作，StringBuffer 是合适的选择，因为它确保了线程安全29。
+单线程环境：在单线程环境下，建议使用 StringBuilder，因为它没有同步开销，性能更高18。
 
 
   总结
   #
 
+StringBuffer 通过 synchronized 关键字实现的同步机制，确保了多线程环境下的线程安全性。虽然这种机制带来了性能开销，但在需要线程安全的场景下，它是一个可靠的选择127。
 
-响应式编程和虚拟线程的目标都是提高程序的并发性能，但它们的实现方式和适用场景不同。
-响应式编程适合需要高度优化的 I/O 密集型任务，但代码复杂且学习成本高。
-虚拟线程提供了一种更简单、直观的方式来实现高并发，特别适合需要快速开发和维护的场景
+  StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的
+  #
 
-如果需要更深入的技术细节，可以参考相关文档或实践案例。">
+StringBuffer 和 StringBuilder 在底层都是使用 字符数组（char[]） 来保存字符串数据的。具体来说，它们继承了 AbstractStringBuilder 类，而 AbstractStringBuilder 类中定义了一个 char[] value 数组，用于存储字符序列134。">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/java/java/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="java">
-  <meta property="og:description" content="java # 响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么 # 响应式编程和虚拟线程虽然都能提高程序的并发量，但它们的实现方式、适用场景以及开发体验存在显著差异。以下是两者的主要区别：
-1. 实现原理 # 响应式编程：
-响应式编程基于异步数据流和事件驱动模型，使用发布/订阅模式（如 Flux 和 Mono）来处理异步任务。它通过非阻塞 I/O 和回调机制，确保线程在等待 I/O 操作时不会阻塞，而是继续处理其他任务。响应式编程的核心是“非阻塞”和“事件驱动”12。 虚拟线程：
-虚拟线程是 JVM 管理的轻量级线程，底层仍然依赖于操作系统的平台线程（内核线程），但虚拟线程的创建和切换开销远低于传统线程。当虚拟线程遇到阻塞操作时，JVM 会将其挂起并切换到其他虚拟线程，从而避免线程资源的浪费37。 2. 编程模型 # 响应式编程：
-响应式编程采用声明式编程范式，代码通常由一系列操作符（如 map、flatMap）组成，形成数据流的转换管道。这种模型需要开发者熟悉函数式编程和响应式 API，代码可读性较差，调试难度较高14。 虚拟线程：
-虚拟线程保留了传统的阻塞式编程模型，开发者可以像使用平台线程一样编写代码，无需改变编程习惯。虚拟线程的引入使得高并发编程更加简单和直观37。 3. 适用场景 # 响应式编程：
-适用于 I/O 密集型任务，如网络请求、数据库操作等。它通过非阻塞 I/O 和事件驱动机制，最大化线程的利用率。但在 CPU 密集型任务中，响应式编程的性能提升有限，甚至可能适得其反24。 虚拟线程：
-同样适用于 I/O 密集型任务，能够显著提高并发性能。虚拟线程的优势在于其轻量化和低开销，适合处理大量并发请求。但对于 CPU 密集型任务，虚拟线程的性能提升有限，因为虚拟线程的调度仍然依赖于平台线程37。 4. 开发体验 # 响应式编程：
-响应式编程的代码通常难以理解和调试，尤其是回调嵌套和复杂的操作符链。开发者需要具备函数式编程和响应式编程的知识，学习成本较高。 虚拟线程：
-虚拟线程的使用与传统的线程编程类似，开发者无需学习新的编程范式，代码更直观且易于维护。虚拟线程的引入降低了高并发编程的门槛。 5. 性能优化 # 响应式编程：
-通过减少线程阻塞和上下文切换，响应式编程能够提高 CPU 和内存的利用率。但它依赖于开发者正确使用非阻塞 API 和操作符。 虚拟线程：
-虚拟线程通过轻量化的线程管理和高效的调度机制，减少了线程创建和上下文切换的开销。虚拟线程的性能优化由 JVM 自动完成，开发者无需额外干预。 总结 # 响应式编程和虚拟线程的目标都是提高程序的并发性能，但它们的实现方式和适用场景不同。 响应式编程适合需要高度优化的 I/O 密集型任务，但代码复杂且学习成本高。 虚拟线程提供了一种更简单、直观的方式来实现高并发，特别适合需要快速开发和维护的场景 如果需要更深入的技术细节，可以参考相关文档或实践案例。">
+  <meta property="og:description" content="String # StringBuffer 是怎么保证线程安全的？ # StringBuffer 是通过 同步机制 来保证线程安全的。具体来说，它的所有关键方法（如 append()、insert()、delete()、reverse() 等）都使用了 synchronized 关键字进行修饰，确保同一时间只有一个线程可以执行这些方法127。
+1. 同步方法 # StringBuffer 的方法在设计时都加了 synchronized 关键字，例如：
+public synchronized StringBuffer append(String str) { // 方法实现 } 这种机制确保了在多线程环境下，只有一个线程可以访问和修改 StringBuffer 的内容，避免了竞态条件（Race Condition）和数据不一致的问题12。
+2. 锁机制 # StringBuffer 内部使用了一个锁对象（即 this 锁），当一个线程调用 StringBuffer 的同步方法时，会获取这个锁，其他线程必须等待锁释放后才能继续执行。这种锁机制保证了线程间的同步17。
+3. 性能影响 # 虽然 StringBuffer 的同步机制确保了线程安全，但也带来了性能开销。因为在多线程环境下，每次只能有一个线程操作 StringBuffer，其他线程会被阻塞。因此，在单线程环境下，推荐使用性能更高的 StringBuilder，它没有同步机制158。
+4. 适用场景 # 多线程环境：如果需要在多线程环境下对字符串进行操作，StringBuffer 是合适的选择，因为它确保了线程安全29。 单线程环境：在单线程环境下，建议使用 StringBuilder，因为它没有同步开销，性能更高18。 总结 # StringBuffer 通过 synchronized 关键字实现的同步机制，确保了多线程环境下的线程安全性。虽然这种机制带来了性能开销，但在需要线程安全的场景下，它是一个可靠的选择127。
+StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的 # StringBuffer 和 StringBuilder 在底层都是使用 字符数组（char[]） 来保存字符串数据的。具体来说，它们继承了 AbstractStringBuilder 类，而 AbstractStringBuilder 类中定义了一个 char[] value 数组，用于存储字符序列134。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-02-28T18:30:07+08:00">
+    <meta property="article:modified_time" content="2025-02-28T20:54:59+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/java/java/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.b35fa6285336b5370a403216e49c9aabb7b05df493059ea1765923e61fe325db.js" ></script>
+  <script defer src="/zh.search.min.03b5914a8211708ecd2bcde6e552ee7b48d1eb157cbcf10067da99431d5a109d.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -813,6 +779,27 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？</a>
+      <ul>
+        <li><a href="#1-同步方法">1. <strong>同步方法</strong></a></li>
+        <li><a href="#2-锁机制">2. <strong>锁机制</strong></a></li>
+        <li><a href="#3-性能影响">3. <strong>性能影响</strong></a></li>
+        <li><a href="#4-适用场景">4. <strong>适用场景</strong></a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的</a>
+      <ul>
+        <li><a href="#1-底层数据结构">1. <strong>底层数据结构</strong></a></li>
+        <li><a href="#2-初始容量">2. <strong>初始容量</strong></a></li>
+        <li><a href="#3-扩容机制">3. <strong>扩容机制</strong></a></li>
+        <li><a href="#4-示例代码">4. <strong>示例代码</strong></a></li>
+        <li><a href="#5-总结">5. <strong>总结</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
     <li><a href="#响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么</a>
       <ul>
         <li><a href="#1-实现原理">1. <strong>实现原理</strong></a></li>
@@ -820,7 +807,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-适用场景">3. <strong>适用场景</strong></a></li>
         <li><a href="#4-开发体验">4. <strong>开发体验</strong></a></li>
         <li><a href="#5-性能优化">5. <strong>性能优化</strong></a></li>
-        <li><a href="#总结">总结</a></li>
+        <li><a href="#总结-1">总结</a></li>
       </ul>
     </li>
     <li><a href="#虚拟线程在jvm中的内存模型是怎样的">虚拟线程在jvm中的内存模型是怎样的</a>
@@ -830,7 +817,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-虚拟线程的调度与内存使用">3. <strong>虚拟线程的调度与内存使用</strong></a></li>
         <li><a href="#4-虚拟线程与垃圾回收">4. <strong>虚拟线程与垃圾回收</strong></a></li>
         <li><a href="#5-虚拟线程的适用场景">5. <strong>虚拟线程的适用场景</strong></a></li>
-        <li><a href="#总结-1">总结</a></li>
+        <li><a href="#总结-2">总结</a></li>
       </ul>
     </li>
     <li><a href="#虚拟线程会增加jvm的性能消耗吗">虚拟线程会增加jvm的性能消耗吗</a>
@@ -840,7 +827,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-cpu密集型任务的限制">3. <strong>CPU密集型任务的限制</strong></a></li>
         <li><a href="#4-jvm的性能消耗">4. <strong>JVM的性能消耗</strong></a></li>
         <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
-        <li><a href="#总结-2">总结</a></li>
+        <li><a href="#总结-3">总结</a></li>
       </ul>
     </li>
     <li><a href="#在-springboot-项目中虚拟线程可以怎么使用">在 springboot 项目中虚拟线程可以怎么使用</a>
@@ -884,7 +871,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#5-mn-模型的实现细节">5. <strong>M:N 模型的实现细节</strong></a></li>
         <li><a href="#6-示例">6. <strong>示例</strong></a></li>
         <li><a href="#7-与传统线程模型的对比">7. <strong>与传统线程模型的对比</strong></a></li>
-        <li><a href="#总结-3">总结</a></li>
+        <li><a href="#总结-4">总结</a></li>
       </ul>
     </li>
     <li><a href="#java虚拟线程和传统线程有什么区别">Java虚拟线程和传统线程有什么区别</a>
@@ -892,12 +879,12 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#1-实现方式">1. <strong>实现方式</strong></a></li>
         <li><a href="#2-线程模型">2. <strong>线程模型</strong></a></li>
         <li><a href="#3-性能">3. <strong>性能</strong></a></li>
-        <li><a href="#4-适用场景">4. <strong>适用场景</strong></a></li>
+        <li><a href="#4-适用场景-1">4. <strong>适用场景</strong></a></li>
         <li><a href="#5-编程模型">5. <strong>编程模型</strong></a></li>
         <li><a href="#6-资源占用">6. <strong>资源占用</strong></a></li>
         <li><a href="#7-兼容性">7. <strong>兼容性</strong></a></li>
         <li><a href="#8-示例对比">8. <strong>示例对比</strong></a></li>
-        <li><a href="#总结-4">总结</a></li>
+        <li><a href="#总结-5">总结</a></li>
       </ul>
     </li>
     <li><a href="#可以生成一个java使用虚拟线程的例子吗">可以生成一个java使用虚拟线程的例子吗</a>
@@ -952,7 +939,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#java-19-2022">Java 19 (2022)</a></li>
         <li><a href="#java-20-2023">Java 20 (2023)</a></li>
         <li><a href="#java-21-2023">Java 21 (2023)</a></li>
-        <li><a href="#总结-5">总结</a></li>
+        <li><a href="#总结-6">总结</a></li>
       </ul>
     </li>
     <li><a href="#面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识</a>
@@ -995,7 +982,96 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="java">
+  <article class="markdown book-article"><h1 id="string">
+  String
+  <a class="anchor" href="#string">#</a>
+</h1>
+<h2 id="stringbuffer-是怎么保证线程安全的">
+  StringBuffer 是怎么保证线程安全的？
+  <a class="anchor" href="#stringbuffer-%e6%98%af%e6%80%8e%e4%b9%88%e4%bf%9d%e8%af%81%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e7%9a%84">#</a>
+</h2>
+<p><code>StringBuffer</code> 是通过 <strong>同步机制</strong> 来保证线程安全的。具体来说，它的所有关键方法（如 <code>append()</code>、<code>insert()</code>、<code>delete()</code>、<code>reverse()</code> 等）都使用了 <code>synchronized</code> 关键字进行修饰，确保同一时间只有一个线程可以执行这些方法<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">7</a>。</p>
+<h3 id="1-同步方法">
+  1. <strong>同步方法</strong>
+  <a class="anchor" href="#1-%e5%90%8c%e6%ad%a5%e6%96%b9%e6%b3%95">#</a>
+</h3>
+<p><code>StringBuffer</code> 的方法在设计时都加了 <code>synchronized</code> 关键字，例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> StringBuffer <span style="color:#a6e22e">append</span>(String str) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 方法实现</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这种机制确保了在多线程环境下，只有一个线程可以访问和修改 <code>StringBuffer</code> 的内容，避免了竞态条件（Race Condition）和数据不一致的问题<a href="@ref">1</a><a href="@ref">2</a>。</p>
+<h3 id="2-锁机制">
+  2. <strong>锁机制</strong>
+  <a class="anchor" href="#2-%e9%94%81%e6%9c%ba%e5%88%b6">#</a>
+</h3>
+<p><code>StringBuffer</code> 内部使用了一个锁对象（即 <code>this</code> 锁），当一个线程调用 <code>StringBuffer</code> 的同步方法时，会获取这个锁，其他线程必须等待锁释放后才能继续执行。这种锁机制保证了线程间的同步<a href="@ref">1</a><a href="@ref">7</a>。</p>
+<h3 id="3-性能影响">
+  3. <strong>性能影响</strong>
+  <a class="anchor" href="#3-%e6%80%a7%e8%83%bd%e5%bd%b1%e5%93%8d">#</a>
+</h3>
+<p>虽然 <code>StringBuffer</code> 的同步机制确保了线程安全，但也带来了性能开销。因为在多线程环境下，每次只能有一个线程操作 <code>StringBuffer</code>，其他线程会被阻塞。因此，在单线程环境下，推荐使用性能更高的 <code>StringBuilder</code>，它没有同步机制<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">8</a>。</p>
+<h3 id="4-适用场景">
+  4. <strong>适用场景</strong>
+  <a class="anchor" href="#4-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h3>
+<ul>
+<li><strong>多线程环境</strong>：如果需要在多线程环境下对字符串进行操作，<code>StringBuffer</code> 是合适的选择，因为它确保了线程安全<a href="@ref">2</a><a href="@ref">9</a>。</li>
+<li><strong>单线程环境</strong>：在单线程环境下，建议使用 <code>StringBuilder</code>，因为它没有同步开销，性能更高<a href="@ref">1</a><a href="@ref">8</a>。</li>
+</ul>
+<h3 id="总结">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a>
+</h3>
+<p><code>StringBuffer</code> 通过 <code>synchronized</code> 关键字实现的同步机制，确保了多线程环境下的线程安全性。虽然这种机制带来了性能开销，但在需要线程安全的场景下，它是一个可靠的选择<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">7</a>。</p>
+<h2 id="stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">
+  StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的
+  <a class="anchor" href="#stringbuffer-%e5%92%8c-stringbuilder-%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%9c%a8%e5%ba%95%e5%b1%82%e6%98%af%e4%bb%a5%e4%bb%80%e4%b9%88%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e4%bf%9d%e5%ad%98%e7%9a%84">#</a>
+</h2>
+<p><code>StringBuffer</code> 和 <code>StringBuilder</code> 在底层都是使用 <strong>字符数组（<code>char[]</code>）</strong> 来保存字符串数据的。具体来说，它们继承了 <code>AbstractStringBuilder</code> 类，而 <code>AbstractStringBuilder</code> 类中定义了一个 <code>char[] value</code> 数组，用于存储字符序列<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</p>
+<h3 id="1-底层数据结构">
+  1. <strong>底层数据结构</strong>
+  <a class="anchor" href="#1-%e5%ba%95%e5%b1%82%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84">#</a>
+</h3>
+<ul>
+<li><code>StringBuffer</code> 和 <code>StringBuilder</code> 的底层数据结构是一个动态的 <code>char[]</code> 数组，数组名为 <code>value</code>。</li>
+<li><code>value</code> 数组的长度会根据字符串的长度动态扩容，以适应字符串的修改操作<a href="@ref">3</a><a href="@ref">4</a>。</li>
+</ul>
+<h3 id="2-初始容量">
+  2. <strong>初始容量</strong>
+  <a class="anchor" href="#2-%e5%88%9d%e5%a7%8b%e5%ae%b9%e9%87%8f">#</a>
+</h3>
+<ul>
+<li>如果使用无参构造函数创建 <code>StringBuffer</code> 或 <code>StringBuilder</code>，默认的初始容量为 <strong>16</strong>。</li>
+<li>如果使用带参构造函数（如 <code>new StringBuilder(&quot;abc&quot;)</code>），初始容量为 <strong>字符串长度 + 16</strong><a href="@ref">3</a><a href="@ref">4</a>。</li>
+</ul>
+<h3 id="3-扩容机制">
+  3. <strong>扩容机制</strong>
+  <a class="anchor" href="#3-%e6%89%a9%e5%ae%b9%e6%9c%ba%e5%88%b6">#</a>
+</h3>
+<ul>
+<li>当 <code>value</code> 数组的容量不足以容纳新的字符时，会触发扩容操作。</li>
+<li>扩容的规则是：<strong>新容量 = 原容量 * 2 + 2</strong>。如果仍然不足，则直接扩容到所需的最小容量<a href="@ref">3</a><a href="@ref">4</a>。</li>
+</ul>
+<h3 id="4-示例代码">
+  4. <strong>示例代码</strong>
+  <a class="anchor" href="#4-%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#</a>
+</h3>
+<p>以下是 <code>AbstractStringBuilder</code> 类中定义 <code>value</code> 数组的部分源码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AbstractStringBuilder</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> value; <span style="color:#75715e">// 用于存储字符序列的数组</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> count;    <span style="color:#75715e">// 当前字符数</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="5-总结">
+  5. <strong>总结</strong>
+  <a class="anchor" href="#5-%e6%80%bb%e7%bb%93">#</a>
+</h3>
+<p><code>StringBuffer</code> 和 <code>StringBuilder</code> 的底层数据结构是 <code>char[]</code> 数组，通过动态扩容机制支持字符串的修改操作。两者的主要区别在于线程安全性：</p>
+<ul>
+<li><code>StringBuffer</code> 是线程安全的，所有方法都加了 <code>synchronized</code> 修饰。</li>
+<li><code>StringBuilder</code> 是线程不安全的，但性能更高<a href="@ref">5</a><a href="@ref">6</a><a href="@ref">7</a>。</li>
+</ul>
+<p>如果需要在多线程环境下操作字符串，建议使用 <code>StringBuffer</code>；在单线程环境下，建议使用 <code>StringBuilder</code> 以获得更好的性能<a href="@ref">5</a><a href="@ref">6</a><a href="@ref">7</a>。</p>
+<h1 id="java">
   java
   <a class="anchor" href="#java">#</a>
 </h1>
@@ -1060,9 +1136,9 @@ https://github.com/alex-shpak/hugo-book
 虚拟线程通过轻量化的线程管理和高效的调度机制，减少了线程创建和上下文切换的开销。虚拟线程的性能优化由 JVM 自动完成，开发者无需额外干预。</li>
 </ul>
 <hr>
-<h3 id="总结">
+<h3 id="总结-1">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-1">#</a>
 </h3>
 <ul>
 <li><strong>响应式编程</strong>和<strong>虚拟线程</strong>的目标都是提高程序的并发性能，但它们的实现方式和适用场景不同。</li>
@@ -1105,9 +1181,9 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#5-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
 </h3>
 <p>虚拟线程特别适用于高并发、I/O密集型任务，例如网络请求、文件读写等。在这些场景下，虚拟线程可以显著减少线程阻塞带来的性能损失，从而提高整体吞吐量<a href="@ref">4</a><a href="@ref">5</a>。</p>
-<h3 id="总结-1">
+<h3 id="总结-2">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-1">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-2">#</a>
 </h3>
 <p>虚拟线程在JVM中的内存模型与传统平台线程类似，但由于其轻量化设计和由JVM管理的特性，虚拟线程的内存占用和调度开销显著降低。虚拟线程的内存模型仍然依赖于JVM的程序计数器、虚拟机栈、堆等结构，但其高效的调度机制和轻量化的内存占用使其在处理高并发任务时表现出色<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">4</a>。</p>
 <h2 id="虚拟线程会增加jvm的性能消耗吗">
@@ -1140,9 +1216,9 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#5-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
 </h3>
 <p>虚拟线程特别适用于高并发、I/O密集型任务，例如网络请求、文件读写等。在这些场景下，虚拟线程可以显著减少线程阻塞带来的性能损失，从而提高整体吞吐量<a href="@ref">2</a><a href="@ref">5</a>。</p>
-<h3 id="总结-2">
+<h3 id="总结-3">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-2">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-3">#</a>
 </h3>
 <p>虚拟线程不会显著增加JVM的性能消耗，反而通过优化任务调度和减少线程阻塞来提高性能。然而，对于CPU密集型任务，虚拟线程的性能提升有限<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">6</a>。</p>
 <h2 id="在-springboot-项目中虚拟线程可以怎么使用">
@@ -1521,9 +1597,9 @@ https://github.com/alex-shpak/hugo-book
   </tbody>
 </table>
 <hr>
-<h3 id="总结-3">
+<h3 id="总结-4">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-3">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-4">#</a>
 </h3>
 <p>M:N 模型通过将大量轻量级虚拟线程映射到少量操作系统线程上，实现了高并发、低资源占用的线程管理。这种模型特别适合现代高并发、I/O 密集型的应用场景，同时简化了开发者的编程复杂度。</p>
 <h2 id="java虚拟线程和传统线程有什么区别">
@@ -1591,9 +1667,9 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ul>
 <hr>
-<h3 id="4-适用场景">
+<h3 id="4-适用场景-1">
   4. <strong>适用场景</strong>
-  <a class="anchor" href="#4-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+  <a class="anchor" href="#4-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af-1">#</a>
 </h3>
 <ul>
 <li><strong>传统线程</strong>：
@@ -1691,9 +1767,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div></li>
 </ul>
 <hr>
-<h3 id="总结-4">
+<h3 id="总结-5">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-4">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-5">#</a>
 </h3>
 <table>
   <thead>
@@ -2128,9 +2204,9 @@ https://github.com/alex-shpak/hugo-book
 <li><strong>虚拟线程</strong>：正式支持虚拟线程。</li>
 <li><strong>字符串模板</strong>：引入字符串模板（预览）。</li>
 </ul>
-<h3 id="总结-5">
+<h3 id="总结-6">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-5">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-6">#</a>
 </h3>
 <p>Java每个版本都带来了新特性和改进，从基础功能到高级特性，不断提升开发效率和性能。</p>
 <h2 id="面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">
@@ -2342,7 +2418,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/2caf01ced460fb9dc8b85c1492e11a78df60ff91" title='最后修改者 penruins | 二月 28, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/b1838a4a81f095dc987f1009536385c05624fbf7" title='最后修改者 penruins | 二月 28, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>二月 28, 2025</span>
     </a>
@@ -2380,6 +2456,27 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？</a>
+      <ul>
+        <li><a href="#1-同步方法">1. <strong>同步方法</strong></a></li>
+        <li><a href="#2-锁机制">2. <strong>锁机制</strong></a></li>
+        <li><a href="#3-性能影响">3. <strong>性能影响</strong></a></li>
+        <li><a href="#4-适用场景">4. <strong>适用场景</strong></a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的</a>
+      <ul>
+        <li><a href="#1-底层数据结构">1. <strong>底层数据结构</strong></a></li>
+        <li><a href="#2-初始容量">2. <strong>初始容量</strong></a></li>
+        <li><a href="#3-扩容机制">3. <strong>扩容机制</strong></a></li>
+        <li><a href="#4-示例代码">4. <strong>示例代码</strong></a></li>
+        <li><a href="#5-总结">5. <strong>总结</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
     <li><a href="#响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么</a>
       <ul>
         <li><a href="#1-实现原理">1. <strong>实现原理</strong></a></li>
@@ -2387,7 +2484,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-适用场景">3. <strong>适用场景</strong></a></li>
         <li><a href="#4-开发体验">4. <strong>开发体验</strong></a></li>
         <li><a href="#5-性能优化">5. <strong>性能优化</strong></a></li>
-        <li><a href="#总结">总结</a></li>
+        <li><a href="#总结-1">总结</a></li>
       </ul>
     </li>
     <li><a href="#虚拟线程在jvm中的内存模型是怎样的">虚拟线程在jvm中的内存模型是怎样的</a>
@@ -2397,7 +2494,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-虚拟线程的调度与内存使用">3. <strong>虚拟线程的调度与内存使用</strong></a></li>
         <li><a href="#4-虚拟线程与垃圾回收">4. <strong>虚拟线程与垃圾回收</strong></a></li>
         <li><a href="#5-虚拟线程的适用场景">5. <strong>虚拟线程的适用场景</strong></a></li>
-        <li><a href="#总结-1">总结</a></li>
+        <li><a href="#总结-2">总结</a></li>
       </ul>
     </li>
     <li><a href="#虚拟线程会增加jvm的性能消耗吗">虚拟线程会增加jvm的性能消耗吗</a>
@@ -2407,7 +2504,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-cpu密集型任务的限制">3. <strong>CPU密集型任务的限制</strong></a></li>
         <li><a href="#4-jvm的性能消耗">4. <strong>JVM的性能消耗</strong></a></li>
         <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
-        <li><a href="#总结-2">总结</a></li>
+        <li><a href="#总结-3">总结</a></li>
       </ul>
     </li>
     <li><a href="#在-springboot-项目中虚拟线程可以怎么使用">在 springboot 项目中虚拟线程可以怎么使用</a>
@@ -2451,7 +2548,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#5-mn-模型的实现细节">5. <strong>M:N 模型的实现细节</strong></a></li>
         <li><a href="#6-示例">6. <strong>示例</strong></a></li>
         <li><a href="#7-与传统线程模型的对比">7. <strong>与传统线程模型的对比</strong></a></li>
-        <li><a href="#总结-3">总结</a></li>
+        <li><a href="#总结-4">总结</a></li>
       </ul>
     </li>
     <li><a href="#java虚拟线程和传统线程有什么区别">Java虚拟线程和传统线程有什么区别</a>
@@ -2459,12 +2556,12 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#1-实现方式">1. <strong>实现方式</strong></a></li>
         <li><a href="#2-线程模型">2. <strong>线程模型</strong></a></li>
         <li><a href="#3-性能">3. <strong>性能</strong></a></li>
-        <li><a href="#4-适用场景">4. <strong>适用场景</strong></a></li>
+        <li><a href="#4-适用场景-1">4. <strong>适用场景</strong></a></li>
         <li><a href="#5-编程模型">5. <strong>编程模型</strong></a></li>
         <li><a href="#6-资源占用">6. <strong>资源占用</strong></a></li>
         <li><a href="#7-兼容性">7. <strong>兼容性</strong></a></li>
         <li><a href="#8-示例对比">8. <strong>示例对比</strong></a></li>
-        <li><a href="#总结-4">总结</a></li>
+        <li><a href="#总结-5">总结</a></li>
       </ul>
     </li>
     <li><a href="#可以生成一个java使用虚拟线程的例子吗">可以生成一个java使用虚拟线程的例子吗</a>
@@ -2519,7 +2616,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#java-19-2022">Java 19 (2022)</a></li>
         <li><a href="#java-20-2023">Java 20 (2023)</a></li>
         <li><a href="#java-21-2023">Java 21 (2023)</a></li>
-        <li><a href="#总结-5">总结</a></li>
+        <li><a href="#总结-6">总结</a></li>
       </ul>
     </li>
     <li><a href="#面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识</a>
