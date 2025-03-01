@@ -61,14 +61,14 @@ SqlSession sqlSession = sqlSessionFactory.openSession(); try{ // 执行数据库
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
-    <meta property="article:modified_time" content="2025-03-01T23:50:12+08:00">
+    <meta property="article:modified_time" content="2025-03-02T02:38:16+08:00">
 <title>Mybatis | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/computer-science/java/mybatis/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.03b5914a8211708ecd2bcde6e552ee7b48d1eb157cbcf10067da99431d5a109d.js" ></script>
+  <script defer src="/zh.search.min.9361b66cf6ed8135e216b135fa1c85e2f2839b09a15e8d45013dc144be8e6841.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -826,6 +826,20 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#5-实际应用中的注意事项">5. <strong>实际应用中的注意事项</strong></a></li>
       </ul>
     </li>
+    <li><a href="#mybatis-框架使用了哪些设计模式">mybatis 框架使用了哪些设计模式</a>
+      <ul>
+        <li><a href="#1-builder模式">1. <strong>Builder模式</strong></a></li>
+        <li><a href="#2-工厂模式">2. <strong>工厂模式</strong></a></li>
+        <li><a href="#3-单例模式">3. <strong>单例模式</strong></a></li>
+        <li><a href="#4-代理模式">4. <strong>代理模式</strong></a></li>
+        <li><a href="#5-装饰器模式">5. <strong>装饰器模式</strong></a></li>
+        <li><a href="#6-模板方法模式">6. <strong>模板方法模式</strong></a></li>
+        <li><a href="#7-适配器模式">7. <strong>适配器模式</strong></a></li>
+        <li><a href="#8-组合模式">8. <strong>组合模式</strong></a></li>
+        <li><a href="#9-迭代器模式">9. <strong>迭代器模式</strong></a></li>
+        <li><a href="#总结-1">总结</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -1207,6 +1221,88 @@ https://github.com/alex-shpak/hugo-book
 <li><strong>乐观锁</strong>：需要设计重试机制，处理冲突时的回滚或重试逻辑。</li>
 </ul>
 <p>通过合理选择锁机制，可以在保证数据一致性的同时，最大化系统的并发性能。</p>
+<h2 id="mybatis-框架使用了哪些设计模式">
+  mybatis 框架使用了哪些设计模式
+  <a class="anchor" href="#mybatis-%e6%a1%86%e6%9e%b6%e4%bd%bf%e7%94%a8%e4%ba%86%e5%93%aa%e4%ba%9b%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f">#</a>
+</h2>
+<p>MyBatis 框架在其设计和实现中使用了多种设计模式，以下是主要的设计模式及其应用场景：</p>
+<h3 id="1-builder模式">
+  1. <strong>Builder模式</strong>
+  <a class="anchor" href="#1-builder%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li><strong>应用场景</strong>：MyBatis 在初始化过程中，使用 <code>SqlSessionFactoryBuilder</code> 构建 <code>SqlSessionFactory</code>，并通过 <code>XMLConfigBuilder</code>、<code>XMLMapperBuilder</code> 等类解析配置文件，构建核心对象 <code>Configuration</code>。这些 Builder 类负责将复杂的配置解析和对象构建过程分离<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">4</a>。</li>
+<li><strong>示例</strong>：<code>SqlSessionFactoryBuilder</code> 根据不同的输入参数构建 <code>SqlSessionFactory</code> 对象<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="2-工厂模式">
+  2. <strong>工厂模式</strong>
+  <a class="anchor" href="#2-%e5%b7%a5%e5%8e%82%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li><strong>应用场景</strong>：MyBatis 使用工厂模式创建核心对象，如 <code>SqlSessionFactory</code> 负责创建 <code>SqlSession</code>，<code>MapperProxyFactory</code> 负责创建 Mapper 接口的代理对象<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">4</a>。</li>
+<li><strong>示例</strong>：<code>SqlSessionFactory</code> 的 <code>openSession()</code> 方法根据不同的参数创建 <code>SqlSession</code> 对象<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="3-单例模式">
+  3. <strong>单例模式</strong>
+  <a class="anchor" href="#3-%e5%8d%95%e4%be%8b%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li><strong>应用场景</strong>：MyBatis 中的 <code>ErrorContext</code> 和 <code>LogFactory</code> 使用了单例模式，确保全局唯一实例。<code>ErrorContext</code> 用于记录线程执行环境的错误信息，<code>LogFactory</code> 用于获取日志对象<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">4</a>。</li>
+<li><strong>示例</strong>：<code>LogFactory</code> 提供了一个全局的日志工厂，用于获取配置好的日志对象<a href="@ref">2</a><a href="@ref">4</a>。</li>
+</ul>
+<h3 id="4-代理模式">
+  4. <strong>代理模式</strong>
+  <a class="anchor" href="#4-%e4%bb%a3%e7%90%86%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li><strong>应用场景</strong>：MyBatis 的核心功能之一是通过动态代理实现 Mapper 接口与 SQL 语句的绑定。<code>MapperProxy</code> 是 Mapper 接口的代理类，负责将接口方法调用转换为 SQL 执行<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">4</a>。</li>
+<li><strong>示例</strong>：<code>MapperProxy</code> 使用 JDK 动态代理为 Mapper 接口创建代理对象<a href="@ref">1</a><a href="@ref">4</a>。</li>
+</ul>
+<h3 id="5-装饰器模式">
+  5. <strong>装饰器模式</strong>
+  <a class="anchor" href="#5-%e8%a3%85%e9%a5%b0%e5%99%a8%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li><strong>应用场景</strong>：MyBatis 的缓存模块使用了装饰器模式，通过 <code>BlockingCache</code>、<code>FifoCache</code>、<code>LruCache</code> 等装饰类为缓存添加不同的功能，如阻塞、日志、同步等<a href="@ref">3</a><a href="@ref">4</a>。</li>
+<li><strong>示例</strong>：<code>LruCache</code> 装饰 <code>PerpetualCache</code>，实现最近最少使用缓存策略<a href="@ref">3</a><a href="@ref">4</a>。</li>
+</ul>
+<h3 id="6-模板方法模式">
+  6. <strong>模板方法模式</strong>
+  <a class="anchor" href="#6-%e6%a8%a1%e6%9d%bf%e6%96%b9%e6%b3%95%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li><strong>应用场景</strong>：MyBatis 的 <code>BaseExecutor</code> 和 <code>BaseTypeHandler</code> 使用了模板方法模式，定义了操作的骨架，具体实现由子类完成。例如，<code>BaseExecutor</code> 实现了 SQL 执行的通用逻辑，子类如 <code>SimpleExecutor</code> 负责具体实现<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</li>
+<li><strong>示例</strong>：<code>BaseTypeHandler</code> 定义了类型处理的模板方法，子类如 <code>IntegerTypeHandler</code> 负责具体实现<a href="@ref">3</a><a href="@ref">4</a>。</li>
+</ul>
+<h3 id="7-适配器模式">
+  7. <strong>适配器模式</strong>
+  <a class="anchor" href="#7-%e9%80%82%e9%85%8d%e5%99%a8%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li><strong>应用场景</strong>：MyBatis 的日志模块使用适配器模式，将不同的日志框架（如 Log4j、JDK Logging）适配到统一的 <code>Log</code> 接口<a href="@ref">1</a><a href="@ref">4</a>。</li>
+<li><strong>示例</strong>：<code>Log</code> 接口适配了多种日志框架的实现<a href="@ref">1</a><a href="@ref">4</a>。</li>
+</ul>
+<h3 id="8-组合模式">
+  8. <strong>组合模式</strong>
+  <a class="anchor" href="#8-%e7%bb%84%e5%90%88%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li><strong>应用场景</strong>：MyBatis 的 <code>SqlNode</code> 及其子类（如 <code>ChooseSqlNode</code>）使用了组合模式，将多个 SQL 节点组合成复杂的 SQL 语句<a href="@ref">1</a>。</li>
+<li><strong>示例</strong>：<code>SqlNode</code> 及其子类共同构建动态 SQL 语句<a href="@ref">1</a>。</li>
+</ul>
+<h3 id="9-迭代器模式">
+  9. <strong>迭代器模式</strong>
+  <a class="anchor" href="#9-%e8%bf%ad%e4%bb%a3%e5%99%a8%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li><strong>应用场景</strong>：MyBatis 的 <code>PropertyTokenizer</code> 使用了迭代器模式，用于解析属性表达式的迭代<a href="@ref">1</a>。</li>
+<li><strong>示例</strong>：<code>PropertyTokenizer</code> 迭代解析属性表达式<a href="@ref">1</a>。</li>
+</ul>
+<h3 id="总结-1">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-1">#</a>
+</h3>
+<p>MyBatis 通过灵活运用多种设计模式，实现了配置解析、对象创建、SQL 执行、缓存管理等核心功能。这些设计模式不仅提高了代码的复用性和可维护性，还使得框架更加灵活和可扩展。</p>
 </article>
  
       
@@ -1216,7 +1312,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/eb8b6c2b6c6c448ed50474a82705cf50dc9e1eed" title='最后修改者 penruins | 三月 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/e1606bfa1ef2ac7b457bf4c4887397e065d556ff" title='最后修改者 penruins | 三月 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>三月 1, 2025</span>
     </a>
@@ -1302,6 +1398,20 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-对比总结">3. <strong>对比总结</strong></a></li>
         <li><a href="#4-如何选择">4. <strong>如何选择</strong></a></li>
         <li><a href="#5-实际应用中的注意事项">5. <strong>实际应用中的注意事项</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#mybatis-框架使用了哪些设计模式">mybatis 框架使用了哪些设计模式</a>
+      <ul>
+        <li><a href="#1-builder模式">1. <strong>Builder模式</strong></a></li>
+        <li><a href="#2-工厂模式">2. <strong>工厂模式</strong></a></li>
+        <li><a href="#3-单例模式">3. <strong>单例模式</strong></a></li>
+        <li><a href="#4-代理模式">4. <strong>代理模式</strong></a></li>
+        <li><a href="#5-装饰器模式">5. <strong>装饰器模式</strong></a></li>
+        <li><a href="#6-模板方法模式">6. <strong>模板方法模式</strong></a></li>
+        <li><a href="#7-适配器模式">7. <strong>适配器模式</strong></a></li>
+        <li><a href="#8-组合模式">8. <strong>组合模式</strong></a></li>
+        <li><a href="#9-迭代器模式">9. <strong>迭代器模式</strong></a></li>
+        <li><a href="#总结-1">总结</a></li>
       </ul>
     </li>
   </ul>
