@@ -64,14 +64,14 @@ StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存�
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
-    <meta property="article:modified_time" content="2025-03-02T23:10:10+08:00">
+    <meta property="article:modified_time" content="2025-03-03T00:20:10+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/computer-science/java/java/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.4946cd39effd184e508172a63bb32fab0055e36ac787a6629588b74aa095d3bd.js" ></script>
+  <script defer src="/zh.search.min.4a01b3f64ed2e8777db87fb26c6bfd8c153bab3f8fb2c683e32b6963edfd39ec.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -973,6 +973,18 @@ https://github.com/alex-shpak/hugo-book
   </ul>
 
   <ul>
+    <li><a href="#selectpoll和epoll的区别">select、poll和epoll的区别</a>
+      <ul>
+        <li><a href="#1-select">1. <strong>select</strong></a></li>
+        <li><a href="#2-poll">2. <strong>poll</strong></a></li>
+        <li><a href="#3-epoll">3. <strong>epoll</strong></a></li>
+        <li><a href="#对比总结">对比总结</a></li>
+        <li><a href="#总结-7">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
     <li><a href="#我有这样一个开发场景服务端需要和多个客户端进行tcp连接服务端会发送指令给客户端客户端会返回指令执行结果客户端会定时返回心跳报文上报状态客户端会不定时上报事件报文我该怎么实现上述功能">我有这样一个开发场景，服务端需要和多个客户端进行tcp连接，服务端会发送指令给客户端，客户端会返回指令执行结果；客户端会定时返回心跳报文上报状态；客户端会不定时上报事件报文。我该怎么实现上述功能？</a>
       <ul>
         <li><a href="#1-服务端设计">1. 服务端设计</a>
@@ -1035,7 +1047,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#2-数据传输中的关闭">2. <strong>数据传输中的关闭</strong></a></li>
         <li><a href="#3-异常情况">3. <strong>异常情况</strong></a></li>
         <li><a href="#4-最佳实践">4. <strong>最佳实践</strong></a></li>
-        <li><a href="#总结-7">总结</a></li>
+        <li><a href="#总结-8">总结</a></li>
       </ul>
     </li>
     <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
@@ -1096,7 +1108,41 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-线程创建和销毁的开销">3. <strong>线程创建和销毁的开销</strong></a></li>
         <li><a href="#4-线程池的优化">4. <strong>线程池的优化</strong></a></li>
         <li><a href="#5-如何减少线程内存开销">5. <strong>如何减少线程内存开销</strong></a></li>
-        <li><a href="#总结-8">总结</a></li>
+        <li><a href="#总结-9">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#java中的selector使用的是select还是epoll">java中的selector使用的是select还是epoll</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#java-selector-的原理">java selector 的原理</a>
+      <ul>
+        <li><a href="#1-selector-的核心功能">1. <strong>Selector 的核心功能</strong></a></li>
+        <li><a href="#2-selector-的工作流程">2. <strong>Selector 的工作流程</strong></a></li>
+        <li><a href="#3-selector-的底层实现">3. <strong>Selector 的底层实现</strong></a></li>
+        <li><a href="#4-selector-的优点">4. <strong>Selector 的优点</strong></a></li>
+        <li><a href="#5-selector-的注意事项">5. <strong>Selector 的注意事项</strong></a></li>
+        <li><a href="#6-与-selectpollepoll-的关系">6. <strong>与 select/poll/epoll 的关系</strong></a></li>
+        <li><a href="#7-示例代码">7. <strong>示例代码</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#selector中事件是由谁产生的">selector中事件是由谁产生的？</a>
+      <ul>
+        <li><a href="#1-事件的产生">1. <strong>事件的产生</strong></a></li>
+        <li><a href="#2-事件的检测">2. <strong>事件的检测</strong></a></li>
+        <li><a href="#3-事件的触发机制">3. <strong>事件的触发机制</strong></a></li>
+        <li><a href="#4-示例">4. <strong>示例</strong></a></li>
+        <li><a href="#总结-10">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#java的selector的使用过程中概念总结一下">java的selector的使用过程中概念总结一下</a>
+      <ul>
+        <li><a href="#1-selector-的作用">1. <strong>Selector 的作用</strong></a></li>
+        <li><a href="#2-核心概念">2. <strong>核心概念</strong></a></li>
+        <li><a href="#3-selector-的使用步骤">3. <strong>Selector 的使用步骤</strong></a></li>
+        <li><a href="#4-selector-的优势">4. <strong>Selector 的优势</strong></a></li>
+        <li><a href="#5-注意事项-1">5. <strong>注意事项</strong></a></li>
+        <li><a href="#6-与底层机制的关系">6. <strong>与底层机制的关系</strong></a></li>
       </ul>
     </li>
   </ul>
@@ -1369,6 +1415,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.boot.web.embedded.tomcat.TomcatProtocolHandlerCustomizer;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Bean;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Configuration;
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
@@ -1402,6 +1449,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.core.task.TaskExecutor;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.annotation.EnableAsync;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.concurrent.TaskExecutorAdapter;
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
@@ -1416,7 +1464,8 @@ https://github.com/alex-shpak/hugo-book
   使用示例：
   <a class="anchor" href="#%e4%bd%bf%e7%94%a8%e7%a4%ba%e4%be%8b">#</a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AsyncService</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Async</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doSomething</span>() <span style="color:#66d9ef">throws</span> InterruptedException {
@@ -1446,6 +1495,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.TaskScheduler;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.annotation.EnableScheduling;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Executors;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
@@ -1460,7 +1510,8 @@ https://github.com/alex-shpak/hugo-book
   使用示例：
   <a class="anchor" href="#%e4%bd%bf%e7%94%a8%e7%a4%ba%e4%be%8b-1">#</a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduledService</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Scheduled</span>(fixedRate <span style="color:#f92672">=</span> 1000)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">runTask</span>() {
@@ -2538,6 +2589,173 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>工程实践优势</strong>：经过长期验证，性能稳定且实现成熟。</li>
 </ol>
 <p>相比之下，其他树结构或过于追求平衡（如 AVL 树），或缺乏自适应性（如普通二叉搜索树），无法在 HashMap 的特定场景中达到最优性能<a href="@ref">1</a><a href="@ref">6</a><a href="@ref">8</a>。</p>
+<h1 id="io模型">
+  I/O模型
+  <a class="anchor" href="#io%e6%a8%a1%e5%9e%8b">#</a>
+</h1>
+<h2 id="selectpoll和epoll的区别">
+  select、poll和epoll的区别
+  <a class="anchor" href="#selectpoll%e5%92%8cepoll%e7%9a%84%e5%8c%ba%e5%88%ab">#</a>
+</h2>
+<p><code>select</code>、<code>poll</code> 和 <code>epoll</code> 都是用于实现 I/O 多路复用的机制，允许单个进程或线程同时监控多个文件描述符（如套接字），并在其中任何一个就绪时通知程序进行读写操作。尽管它们的功能相似，但在实现方式、性能和适用场景上有显著区别。以下是它们的详细对比：</p>
+<hr>
+<h3 id="1-select">
+  1. <strong>select</strong>
+  <a class="anchor" href="#1-select">#</a>
+</h3>
+<ul>
+<li><strong>定义</strong>：<code>select</code> 是最早的 I/O 多路复用机制，通过一个系统调用监控多个文件描述符的状态。</li>
+<li><strong>特点</strong>：
+<ul>
+<li>使用 <code>fd_set</code> 数据结构来存储文件描述符集合。</li>
+<li>每次调用 <code>select</code> 时，需要将 <code>fd_set</code> 从用户态拷贝到内核态，并在内核中遍历所有文件描述符。</li>
+<li>支持的文件描述符数量有限，默认是 1024 个。</li>
+<li>超时精度较低，使用的是 <code>struct timeval</code> 结构。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：
+<ul>
+<li>跨平台支持较好，几乎在所有操作系统上都可用。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>文件描述符数量受限。</li>
+<li>每次调用都需要重新设置 <code>fd_set</code>，且需要从用户态拷贝到内核态，开销较大。</li>
+<li>内核需要遍历所有文件描述符，效率较低<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-poll">
+  2. <strong>poll</strong>
+  <a class="anchor" href="#2-poll">#</a>
+</h3>
+<ul>
+<li><strong>定义</strong>：<code>poll</code> 是对 <code>select</code> 的改进，使用 <code>pollfd</code> 结构来管理文件描述符集合。</li>
+<li><strong>特点</strong>：
+<ul>
+<li>使用 <code>pollfd</code> 数组存储文件描述符及其关注的事件。</li>
+<li>没有文件描述符数量的限制（基于链表实现）。</li>
+<li>每次调用 <code>poll</code> 时，需要将 <code>pollfd</code> 数组从用户态拷贝到内核态，并在内核中遍历所有文件描述符。</li>
+<li>超时精度较高，使用的是毫秒级超时。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：
+<ul>
+<li>文件描述符数量不受限制。</li>
+<li>事件类型更丰富（如 <code>POLLIN</code>、<code>POLLOUT</code> 等）。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>每次调用需要拷贝 <code>pollfd</code> 数组，开销较大。</li>
+<li>内核仍需遍历所有文件描述符，效率较低<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-epoll">
+  3. <strong>epoll</strong>
+  <a class="anchor" href="#3-epoll">#</a>
+</h3>
+<ul>
+<li><strong>定义</strong>：<code>epoll</code> 是 Linux 特有的高效 I/O 多路复用机制，专为处理大量文件描述符设计。</li>
+<li><strong>特点</strong>：
+<ul>
+<li>使用事件驱动模型，通过 <code>epoll_create</code>、<code>epoll_ctl</code> 和 <code>epoll_wait</code> 三个函数实现。</li>
+<li>文件描述符只需在 <code>epoll_ctl</code> 时拷贝一次到内核，后续调用 <code>epoll_wait</code> 时无需重复拷贝。</li>
+<li>内核通过回调机制通知就绪的文件描述符，无需遍历所有文件描述符。</li>
+<li>支持水平触发（LT）和边缘触发（ET）模式：
+<ul>
+<li><strong>水平触发（LT）</strong>：只要文件描述符就绪，就会持续通知。</li>
+<li><strong>边缘触发（ET）</strong>：仅在状态变化时通知一次，需一次性处理所有数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>优点</strong>：
+<ul>
+<li>文件描述符数量不受限制。</li>
+<li>性能高效，尤其适合高并发场景。</li>
+<li>事件通知机制更灵活。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>仅支持 Linux 系统，跨平台性差<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="对比总结">
+  对比总结
+  <a class="anchor" href="#%e5%af%b9%e6%af%94%e6%80%bb%e7%bb%93">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>select</th>
+          <th>poll</th>
+          <th>epoll</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>文件描述符数量</td>
+          <td>有限（默认 1024）</td>
+          <td>无限制</td>
+          <td>无限制</td>
+      </tr>
+      <tr>
+          <td>数据结构</td>
+          <td><code>fd_set</code></td>
+          <td><code>pollfd</code> 数组</td>
+          <td>事件表（红黑树 + 就绪链表）</td>
+      </tr>
+      <tr>
+          <td>拷贝开销</td>
+          <td>每次调用需拷贝 <code>fd_set</code></td>
+          <td>每次调用需拷贝 <code>pollfd</code> 数组</td>
+          <td>仅 <code>epoll_ctl</code> 时拷贝一次</td>
+      </tr>
+      <tr>
+          <td>内核遍历方式</td>
+          <td>遍历所有文件描述符</td>
+          <td>遍历所有文件描述符</td>
+          <td>回调机制，无需遍历</td>
+      </tr>
+      <tr>
+          <td>事件通知机制</td>
+          <td>水平触发</td>
+          <td>水平触发</td>
+          <td>支持水平触发和边缘触发</td>
+      </tr>
+      <tr>
+          <td>适用场景</td>
+          <td>低并发、跨平台场景</td>
+          <td>中低并发场景</td>
+          <td>高并发场景（如 Web 服务器）</td>
+      </tr>
+      <tr>
+          <td>跨平台性</td>
+          <td>跨平台支持</td>
+          <td>跨平台支持</td>
+          <td>仅支持 Linux</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="总结-7">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-7">#</a>
+</h3>
+<ul>
+<li><strong><code>select</code></strong>：适合低并发场景，跨平台支持好，但性能较差。</li>
+<li><strong><code>poll</code></strong>：解决了 <code>select</code> 的文件描述符数量限制问题，但仍存在性能瓶颈。</li>
+<li><strong><code>epoll</code></strong>：性能最优，适合高并发场景，但仅支持 Linux 系统<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
+</ul>
 <h1 id="socket">
   socket
   <a class="anchor" href="#socket">#</a>
@@ -3409,9 +3627,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li>使用 <code>SocketChannel.shutdownOutput</code> 先关闭输出流，确保对方知道本方不再发送数据，然后再调用 <code>close</code><a href="@ref">5</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-7">
+<h3 id="总结-8">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-7">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-8">#</a>
 </h3>
 <p><code>SocketChannel.close</code> 方法会按照 TCP 协议的正常流程关闭连接，<strong>不会</strong>导致数据传输时意外断开。但在网络故障或进程崩溃等异常情况下，可能会导致连接异常关闭。因此，建议在关闭连接前确保数据传输完成，并遵循 TCP 关闭的最佳实践<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</p>
 <h2 id="我还需要实现对特定连接发送命令报文">
@@ -4321,11 +4539,332 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>使用线程池</strong>：通过线程池管理线程，避免频繁创建和销毁线程。</li>
 <li><strong>优化任务设计</strong>：将任务拆分为更小的可并行单元，充分利用线程池的并发能力<a href="@ref">2</a><a href="@ref">3</a>。</li>
 </ul>
-<h3 id="总结-8">
+<h3 id="总结-9">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-8">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-9">#</a>
 </h3>
 <p>在Java中，每个线程默认会占用1MB的线程栈内存（实际可能为80KB到200KB），加上其他内存开销，创建大量线程可能会导致内存耗尽。通过使用线程池和优化线程栈大小，可以有效减少内存开销，提升系统性能<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</p>
+<h2 id="java中的selector使用的是select还是epoll">
+  java中的selector使用的是select还是epoll
+  <a class="anchor" href="#java%e4%b8%ad%e7%9a%84selector%e4%bd%bf%e7%94%a8%e7%9a%84%e6%98%afselect%e8%bf%98%e6%98%afepoll">#</a>
+</h2>
+<p>在Java中，<code>Selector</code>的实现依赖于底层操作系统的支持，具体使用的是<code>select</code>还是<code>epoll</code>取决于操作系统和JDK的实现。</p>
+<p>在Linux系统中，Java NIO的<code>Selector</code>通常使用的是<code>epoll</code>模型。这是因为<code>epoll</code>在处理大量连接时性能优于<code>select</code>，尤其是在高并发场景下。<code>epoll</code>基于事件驱动，能够高效地管理大量文件描述符，而不会像<code>select</code>那样随着文件描述符数量的增加而性能下降<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">6</a>。</p>
+<p>具体来说，Java的<code>Selector</code>是通过<code>SelectorProvider</code>来创建的。在Linux系统中，<code>SelectorProvider</code>会返回一个<code>EPollSelectorProvider</code>，这意味着<code>Selector</code>的底层实现是基于<code>epoll</code>的。而在Windows系统中，<code>Selector</code>的实现则是基于<code>select</code>的，因为Windows不支持<code>epoll</code><a href="@ref">6</a>。</p>
+<p>总结：</p>
+<ul>
+<li><strong>Linux系统</strong>：Java的<code>Selector</code>使用的是<code>epoll</code>模型，性能更优<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">6</a>。</li>
+<li><strong>Windows系统</strong>：Java的<code>Selector</code>使用的是<code>select</code>模型<a href="@ref">6</a>。</li>
+</ul>
+<p>因此，Java中的<code>Selector</code>具体使用<code>select</code>还是<code>epoll</code>取决于操作系统和JDK的实现。</p>
+<h1 id="selector">
+  selector
+  <a class="anchor" href="#selector">#</a>
+</h1>
+<h2 id="java-selector-的原理">
+  java selector 的原理
+  <a class="anchor" href="#java-selector-%e7%9a%84%e5%8e%9f%e7%90%86">#</a>
+</h2>
+<p>Java 中的 <code>Selector</code> 是 Java NIO（非阻塞 I/O）的核心组件之一，用于实现 I/O 多路复用。它的主要作用是通过单个线程管理多个 <code>Channel</code>，监控这些 <code>Channel</code> 上的 I/O 事件（如读、写、连接等），从而提高系统的并发性能。以下是 <code>Selector</code> 的工作原理和关键点：</p>
+<hr>
+<h3 id="1-selector-的核心功能">
+  1. <strong>Selector 的核心功能</strong>
+  <a class="anchor" href="#1-selector-%e7%9a%84%e6%a0%b8%e5%bf%83%e5%8a%9f%e8%83%bd">#</a>
+</h3>
+<p><code>Selector</code> 允许单个线程同时监控多个 <code>Channel</code> 的 I/O 事件。通过注册 <code>Channel</code> 到 <code>Selector</code> 并指定感兴趣的事件（如 <code>OP_READ</code>、<code>OP_WRITE</code>、<code>OP_ACCEPT</code> 等），程序可以在事件就绪时进行处理，而不需要为每个 <code>Channel</code> 创建单独的线程<a href="@ref">1</a>。</p>
+<hr>
+<h3 id="2-selector-的工作流程">
+  2. <strong>Selector 的工作流程</strong>
+  <a class="anchor" href="#2-selector-%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b">#</a>
+</h3>
+<ol>
+<li>
+<p><strong>创建 Selector</strong><br>
+通过 <code>Selector.open()</code> 方法创建一个 <code>Selector</code> 实例。底层会根据操作系统的不同选择适当的实现（如 Linux 使用 <code>epoll</code>，Windows 使用 <code>select</code>）<a href="@ref">2</a><a href="@ref">6</a>。</p>
+</li>
+<li>
+<p><strong>注册 Channel</strong><br>
+将 <code>Channel</code> 注册到 <code>Selector</code>，并指定感兴趣的事件。例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>channel.<span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>); <span style="color:#75715e">// 必须设置为非阻塞模式</span>
+</span></span><span style="display:flex;"><span>SelectionKey key <span style="color:#f92672">=</span> channel.<span style="color:#a6e22e">register</span>(selector, SelectionKey.<span style="color:#a6e22e">OP_READ</span>);
+</span></span></code></pre></div><p>注册后会返回一个 <code>SelectionKey</code>，用于跟踪 <code>Channel</code> 和事件的状态<a href="@ref">1</a>。</p>
+</li>
+<li>
+<p><strong>事件监听</strong><br>
+调用 <code>Selector.select()</code> 方法，该方法会阻塞，直到至少有一个 <code>Channel</code> 的事件就绪。返回后，可以通过 <code>selectedKeys()</code> 获取就绪的 <code>SelectionKey</code> 集合<a href="@ref">1</a><a href="@ref">2</a>。</p>
+</li>
+<li>
+<p><strong>事件处理</strong><br>
+遍历 <code>selectedKeys()</code>，根据事件类型（如 <code>OP_READ</code>、<code>OP_WRITE</code>）进行相应的 I/O 操作。处理完成后，需要手动移除 <code>SelectionKey</code>，否则下次 <code>select()</code> 会重复处理<a href="@ref">1</a>。</p>
+</li>
+<li>
+<p><strong>关闭资源</strong><br>
+当 <code>Selector</code> 或 <code>Channel</code> 不再使用时，需要调用 <code>close()</code> 方法释放资源<a href="@ref">1</a>。</p>
+</li>
+</ol>
+<hr>
+<h3 id="3-selector-的底层实现">
+  3. <strong>Selector 的底层实现</strong>
+  <a class="anchor" href="#3-selector-%e7%9a%84%e5%ba%95%e5%b1%82%e5%ae%9e%e7%8e%b0">#</a>
+</h3>
+<ul>
+<li>
+<p><strong>Linux 系统</strong>：<code>Selector</code> 的底层通常使用 <code>epoll</code> 实现。<code>epoll</code> 基于事件驱动，通过红黑树管理文件描述符，并通过就绪队列高效地返回就绪事件<a href="@ref">3</a><a href="@ref">6</a>。</p>
+<ul>
+<li><strong>红黑树</strong>：存储所有被监控的文件描述符（<code>fd</code>）。</li>
+<li><strong>就绪队列</strong>：存放已就绪的事件。</li>
+<li><strong>性能优势</strong>：<code>epoll</code> 避免了 <code>select</code> 和 <code>poll</code> 的线性扫描问题，时间复杂度为 O(1)，适合高并发场景<a href="@ref">3</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>Windows 系统</strong>：<code>Selector</code> 的底层使用 <code>select</code> 实现，性能相对较低<a href="@ref">6</a>。</p>
+</li>
+</ul>
+<hr>
+<h3 id="4-selector-的优点">
+  4. <strong>Selector 的优点</strong>
+  <a class="anchor" href="#4-selector-%e7%9a%84%e4%bc%98%e7%82%b9">#</a>
+</h3>
+<ul>
+<li><strong>单线程管理多 Channel</strong>：减少了线程切换的开销，适合处理大量低流量的连接<a href="@ref">1</a><a href="@ref">4</a>。</li>
+<li><strong>高效的事件通知</strong>：通过事件驱动机制，避免轮询带来的性能损耗<a href="@ref">3</a>。</li>
+<li><strong>资源占用少</strong>：相比于为每个 <code>Channel</code> 创建线程，<code>Selector</code> 的资源消耗更小<a href="@ref">4</a>。</li>
+</ul>
+<hr>
+<h3 id="5-selector-的注意事项">
+  5. <strong>Selector 的注意事项</strong>
+  <a class="anchor" href="#5-selector-%e7%9a%84%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a>
+</h3>
+<ul>
+<li><strong>非阻塞模式</strong>：注册到 <code>Selector</code> 的 <code>Channel</code> 必须设置为非阻塞模式<a href="@ref">1</a>。</li>
+<li><strong>事件处理</strong>：处理完事件后，需要手动移除 <code>SelectionKey</code>，否则会导致重复处理<a href="@ref">1</a>。</li>
+<li><strong>线程安全</strong>：<code>Selector</code> 本身是线程安全的，但 <code>selectedKeys()</code> 返回的集合不是，多线程访问时需要同步<a href="@ref">1</a>。</li>
+</ul>
+<hr>
+<h3 id="6-与-selectpollepoll-的关系">
+  6. <strong>与 select/poll/epoll 的关系</strong>
+  <a class="anchor" href="#6-%e4%b8%8e-selectpollepoll-%e7%9a%84%e5%85%b3%e7%b3%bb">#</a>
+</h3>
+<ul>
+<li><strong>select</strong>：线性扫描所有文件描述符，性能较差，适合低并发场景<a href="@ref">6</a>。</li>
+<li><strong>poll</strong>：与 <code>select</code> 类似，但没有文件描述符数量限制<a href="@ref">6</a>。</li>
+<li><strong>epoll</strong>：基于事件驱动，性能最优，适合高并发场景，是 Linux 下 <code>Selector</code> 的默认实现<a href="@ref">3</a><a href="@ref">6</a>。</li>
+</ul>
+<hr>
+<h3 id="7-示例代码">
+  7. <strong>示例代码</strong>
+  <a class="anchor" href="#7-%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Selector selector <span style="color:#f92672">=</span> Selector.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>ServerSocketChannel serverChannel <span style="color:#f92672">=</span> ServerSocketChannel.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>serverChannel.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">new</span> InetSocketAddress(8080));
+</span></span><span style="display:flex;"><span>serverChannel.<span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>serverChannel.<span style="color:#a6e22e">register</span>(selector, SelectionKey.<span style="color:#a6e22e">OP_ACCEPT</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
+</span></span><span style="display:flex;"><span>    selector.<span style="color:#a6e22e">select</span>();
+</span></span><span style="display:flex;"><span>    Set<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> selectedKeys <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">selectedKeys</span>();
+</span></span><span style="display:flex;"><span>    Iterator<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> iter <span style="color:#f92672">=</span> selectedKeys.<span style="color:#a6e22e">iterator</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (iter.<span style="color:#a6e22e">hasNext</span>()) {
+</span></span><span style="display:flex;"><span>        SelectionKey key <span style="color:#f92672">=</span> iter.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">isAcceptable</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 处理连接事件</span>
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">isReadable</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 处理读事件</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        iter.<span style="color:#a6e22e">remove</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<p>通过上述机制，<code>Selector</code> 能够高效地管理多个 <code>Channel</code>，提升 I/O 操作的性能，特别适合高并发的网络应用<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">6</a>。</p>
+<h2 id="selector中事件是由谁产生的">
+  selector中事件是由谁产生的？
+  <a class="anchor" href="#selector%e4%b8%ad%e4%ba%8b%e4%bb%b6%e6%98%af%e7%94%b1%e8%b0%81%e4%ba%a7%e7%94%9f%e7%9a%84">#</a>
+</h2>
+<p>在 Java 的 <code>Selector</code> 机制中，事件是由 <strong>注册到 <code>Selector</code> 的 <code>Channel</code></strong> 产生的。具体来说，当 <code>Channel</code> 上发生了与注册事件相关的 I/O 操作时，<code>Selector</code> 会检测到这些事件并将其标记为就绪状态。以下是详细说明：</p>
+<hr>
+<h3 id="1-事件的产生">
+  1. <strong>事件的产生</strong>
+  <a class="anchor" href="#1-%e4%ba%8b%e4%bb%b6%e7%9a%84%e4%ba%a7%e7%94%9f">#</a>
+</h3>
+<ul>
+<li><strong><code>Channel</code> 是事件的来源</strong><br>
+每个 <code>Channel</code>（如 <code>SocketChannel</code>、<code>ServerSocketChannel</code>）都可以注册到 <code>Selector</code>，并指定感兴趣的事件类型（如 <code>OP_READ</code>、<code>OP_WRITE</code>、<code>OP_ACCEPT</code>、<code>OP_CONNECT</code>）。当 <code>Channel</code> 上发生了这些事件时，<code>Selector</code> 会将其标记为就绪状态。</li>
+<li><strong>事件类型</strong>
+<ul>
+<li><code>OP_ACCEPT</code>：由 <code>ServerSocketChannel</code> 产生，表示有新的客户端连接请求。</li>
+<li><code>OP_CONNECT</code>：由 <code>SocketChannel</code> 产生，表示客户端已成功连接到服务器。</li>
+<li><code>OP_READ</code>：由 <code>SocketChannel</code> 产生，表示通道中有数据可读。</li>
+<li><code>OP_WRITE</code>：由 <code>SocketChannel</code> 产生，表示通道已准备好写入数据。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-事件的检测">
+  2. <strong>事件的检测</strong>
+  <a class="anchor" href="#2-%e4%ba%8b%e4%bb%b6%e7%9a%84%e6%a3%80%e6%b5%8b">#</a>
+</h3>
+<ul>
+<li><strong><code>Selector</code> 负责检测事件</strong><br>
+<code>Selector</code> 通过调用 <code>select()</code> 方法，检测所有注册的 <code>Channel</code> 是否有就绪的事件。如果有，<code>select()</code> 会返回就绪事件的数量，并将这些事件存储在 <code>selectedKeys()</code> 集合中。</li>
+<li><strong>事件的处理</strong><br>
+程序通过遍历 <code>selectedKeys()</code> 集合，获取每个 <code>SelectionKey</code>（包含了事件和对应的 <code>Channel</code>），并根据事件类型进行相应的处理。</li>
+</ul>
+<hr>
+<h3 id="3-事件的触发机制">
+  3. <strong>事件的触发机制</strong>
+  <a class="anchor" href="#3-%e4%ba%8b%e4%bb%b6%e7%9a%84%e8%a7%a6%e5%8f%91%e6%9c%ba%e5%88%b6">#</a>
+</h3>
+<ul>
+<li><strong>底层操作系统通知</strong><br>
+<code>Selector</code> 的底层实现依赖于操作系统的 I/O 多路复用机制（如 Linux 的 <code>epoll</code> 或 Windows 的 <code>select</code>）。当 <code>Channel</code> 上的 I/O 操作就绪时，操作系统会通知 <code>Selector</code>，<code>Selector</code> 再将事件传递给应用程序。</li>
+<li><strong>非阻塞模式</strong><br>
+注册到 <code>Selector</code> 的 <code>Channel</code> 必须设置为非阻塞模式，否则无法正常工作。非阻塞模式确保了 <code>Channel</code> 在 I/O 操作未就绪时不会阻塞，而是由 <code>Selector</code> 统一管理。</li>
+</ul>
+<hr>
+<h3 id="4-示例">
+  4. <strong>示例</strong>
+  <a class="anchor" href="#4-%e7%a4%ba%e4%be%8b">#</a>
+</h3>
+<p>以下代码展示了 <code>Selector</code> 如何检测和处理事件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Selector selector <span style="color:#f92672">=</span> Selector.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>ServerSocketChannel serverChannel <span style="color:#f92672">=</span> ServerSocketChannel.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>serverChannel.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">new</span> InetSocketAddress(8080));
+</span></span><span style="display:flex;"><span>serverChannel.<span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>serverChannel.<span style="color:#a6e22e">register</span>(selector, SelectionKey.<span style="color:#a6e22e">OP_ACCEPT</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
+</span></span><span style="display:flex;"><span>    selector.<span style="color:#a6e22e">select</span>(); <span style="color:#75715e">// 检测事件</span>
+</span></span><span style="display:flex;"><span>    Set<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> selectedKeys <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">selectedKeys</span>();
+</span></span><span style="display:flex;"><span>    Iterator<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> iter <span style="color:#f92672">=</span> selectedKeys.<span style="color:#a6e22e">iterator</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (iter.<span style="color:#a6e22e">hasNext</span>()) {
+</span></span><span style="display:flex;"><span>        SelectionKey key <span style="color:#f92672">=</span> iter.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">isAcceptable</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 处理连接事件</span>
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">isReadable</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 处理读事件</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        iter.<span style="color:#a6e22e">remove</span>(); <span style="color:#75715e">// 移除已处理的事件</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="总结-10">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-10">#</a>
+</h3>
+<p><code>Selector</code> 中的事件是由 <strong>注册到 <code>Selector</code> 的 <code>Channel</code></strong> 产生的，<code>Selector</code> 负责检测这些事件并将其传递给应用程序进行处理。底层操作系统的 I/O 多路复用机制（如 <code>epoll</code> 或 <code>select</code>）是事件通知的关键<a href="@ref">1</a><a href="@ref">4</a>。</p>
+<h2 id="java的selector的使用过程中概念总结一下">
+  java的selector的使用过程中概念总结一下
+  <a class="anchor" href="#java%e7%9a%84selector%e7%9a%84%e4%bd%bf%e7%94%a8%e8%bf%87%e7%a8%8b%e4%b8%ad%e6%a6%82%e5%bf%b5%e6%80%bb%e7%bb%93%e4%b8%80%e4%b8%8b">#</a>
+</h2>
+<p>在 Java NIO 中，<code>Selector</code> 是一个关键组件，用于实现非阻塞 I/O 操作，允许单个线程管理多个 <code>Channel</code>，从而提高并发性能。以下是 <code>Selector</code> 的核心概念和使用方法的总结：</p>
+<hr>
+<h3 id="1-selector-的作用">
+  1. <strong>Selector 的作用</strong>
+  <a class="anchor" href="#1-selector-%e7%9a%84%e4%bd%9c%e7%94%a8">#</a>
+</h3>
+<ul>
+<li><strong>多路复用</strong>：<code>Selector</code> 可以监控多个 <code>Channel</code> 的 I/O 事件（如读、写、连接、接受等），并通过单个线程处理这些事件，减少线程数量，降低系统资源消耗。</li>
+<li><strong>非阻塞模式</strong>：<code>Selector</code> 只能与非阻塞的 <code>Channel</code> 一起使用，避免线程阻塞，提高效率<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+<hr>
+<h3 id="2-核心概念">
+  2. <strong>核心概念</strong>
+  <a class="anchor" href="#2-%e6%a0%b8%e5%bf%83%e6%a6%82%e5%bf%b5">#</a>
+</h3>
+<ul>
+<li><strong>Channel</strong>：表示一个 I/O 操作的通道，如 <code>SocketChannel</code>（用于客户端）和 <code>ServerSocketChannel</code>（用于服务器端）。必须设置为非阻塞模式才能与 <code>Selector</code> 一起使用<a href="@ref">1</a><a href="@ref">3</a>。</li>
+<li><strong>SelectionKey</strong>：当 <code>Channel</code> 注册到 <code>Selector</code> 时，会返回一个 <code>SelectionKey</code>，它包含了以下信息：
+<ul>
+<li><strong>Interest Set</strong>：表示 <code>Channel</code> 感兴趣的事件（如 <code>OP_READ</code>、<code>OP_WRITE</code> 等）。</li>
+<li><strong>Ready Set</strong>：表示 <code>Channel</code> 已就绪的事件。</li>
+<li><strong>Channel</strong> 和 <strong>Selector</strong>：与 <code>SelectionKey</code> 关联的 <code>Channel</code> 和 <code>Selector</code>。</li>
+<li><strong>附加对象</strong>：可以通过 <code>attach()</code> 方法将任意对象附加到 <code>SelectionKey</code>，用于存储与 <code>Channel</code> 相关的额外信息<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-selector-的使用步骤">
+  3. <strong>Selector 的使用步骤</strong>
+  <a class="anchor" href="#3-selector-%e7%9a%84%e4%bd%bf%e7%94%a8%e6%ad%a5%e9%aa%a4">#</a>
+</h3>
+<ol>
+<li>
+<p><strong>创建 Selector</strong><br>
+通过 <code>Selector.open()</code> 方法创建一个 <code>Selector</code> 实例<a href="@ref">1</a><a href="@ref">3</a>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Selector selector <span style="color:#f92672">=</span> Selector.<span style="color:#a6e22e">open</span>();
+</span></span></code></pre></div></li>
+<li>
+<p><strong>注册 Channel</strong><br>
+将 <code>Channel</code> 注册到 <code>Selector</code>，并指定感兴趣的事件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>channel.<span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>); <span style="color:#75715e">// 必须设置为非阻塞模式</span>
+</span></span><span style="display:flex;"><span>SelectionKey key <span style="color:#f92672">=</span> channel.<span style="color:#a6e22e">register</span>(selector, SelectionKey.<span style="color:#a6e22e">OP_READ</span>);
+</span></span></code></pre></div><p>支持的事件类型包括：</p>
+<ul>
+<li><code>OP_ACCEPT</code>：接受连接（仅用于 <code>ServerSocketChannel</code>）。</li>
+<li><code>OP_CONNECT</code>：连接完成。</li>
+<li><code>OP_READ</code>：数据可读。</li>
+<li><code>OP_WRITE</code>：数据可写<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>事件监听</strong><br>
+调用 <code>Selector.select()</code> 方法，该方法会阻塞，直到至少有一个 <code>Channel</code> 的事件就绪。返回后，可以通过 <code>selectedKeys()</code> 获取就绪的 <code>SelectionKey</code> 集合<a href="@ref">1</a><a href="@ref">3</a>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> readyChannels <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">select</span>();
+</span></span><span style="display:flex;"><span>Set<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> selectedKeys <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">selectedKeys</span>();
+</span></span></code></pre></div></li>
+<li>
+<p><strong>事件处理</strong><br>
+遍历 <code>selectedKeys()</code>，根据事件类型进行相应的 I/O 操作，处理完成后需手动移除 <code>SelectionKey</code>，避免重复处理<a href="@ref">1</a><a href="@ref">3</a>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Iterator<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> iterator <span style="color:#f92672">=</span> selectedKeys.<span style="color:#a6e22e">iterator</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (iterator.<span style="color:#a6e22e">hasNext</span>()) {
+</span></span><span style="display:flex;"><span>    SelectionKey key <span style="color:#f92672">=</span> iterator.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">isAcceptable</span>()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 处理连接事件</span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">isReadable</span>()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 处理读事件</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    iterator.<span style="color:#a6e22e">remove</span>(); <span style="color:#75715e">// 移除已处理的 key</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>关闭资源</strong><br>
+当不再需要 <code>Selector</code> 或 <code>Channel</code> 时，调用 <code>close()</code> 方法释放资源<a href="@ref">3</a><a href="@ref">4</a>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>selector.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>channel.<span style="color:#a6e22e">close</span>();
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h3 id="4-selector-的优势">
+  4. <strong>Selector 的优势</strong>
+  <a class="anchor" href="#4-selector-%e7%9a%84%e4%bc%98%e5%8a%bf">#</a>
+</h3>
+<ul>
+<li><strong>减少线程数量</strong>：通过单线程管理多个 <code>Channel</code>，减少线程切换的开销。</li>
+<li><strong>高效的事件驱动</strong>：基于事件通知机制，避免轮询带来的性能损耗。</li>
+<li><strong>适用于高并发场景</strong>：如 Web 服务器、聊天服务器等<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</li>
+</ul>
+<hr>
+<h3 id="5-注意事项-1">
+  5. <strong>注意事项</strong>
+  <a class="anchor" href="#5-%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9-1">#</a>
+</h3>
+<ul>
+<li><strong>非阻塞模式</strong>：注册到 <code>Selector</code> 的 <code>Channel</code> 必须设置为非阻塞模式。</li>
+<li><strong>线程安全</strong>：<code>Selector</code> 本身是线程安全的，但 <code>selectedKeys()</code> 返回的集合不是，多线程访问时需要同步。</li>
+<li><strong>资源管理</strong>：确保在不使用时关闭 <code>Selector</code> 和 <code>Channel</code>，避免资源泄漏<a href="@ref">3</a><a href="@ref">4</a>。</li>
+</ul>
+<hr>
+<h3 id="6-与底层机制的关系">
+  6. <strong>与底层机制的关系</strong>
+  <a class="anchor" href="#6-%e4%b8%8e%e5%ba%95%e5%b1%82%e6%9c%ba%e5%88%b6%e7%9a%84%e5%85%b3%e7%b3%bb">#</a>
+</h3>
+<ul>
+<li><strong>Linux 系统</strong>：<code>Selector</code> 的底层通常使用 <code>epoll</code>，性能最优。</li>
+<li><strong>Windows 系统</strong>：<code>Selector</code> 的底层使用 <code>select</code>，性能相对较低<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+<hr>
+<p>通过以上机制，<code>Selector</code> 能够高效地管理多个 <code>Channel</code>，提升 I/O 操作的性能，特别适合高并发的网络应用<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</p>
 </article>
  
       
@@ -4335,7 +4874,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0462046cc86b8779204f63ccb02c989103b35bb6" title='最后修改者 penruins | 三月 2, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/f38a3288d2bc3b2b4de9d72180af5eca892da701" title='最后修改者 penruins | 三月 2, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>三月 2, 2025</span>
     </a>
@@ -4567,6 +5106,18 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   </ul>
 
   <ul>
+    <li><a href="#selectpoll和epoll的区别">select、poll和epoll的区别</a>
+      <ul>
+        <li><a href="#1-select">1. <strong>select</strong></a></li>
+        <li><a href="#2-poll">2. <strong>poll</strong></a></li>
+        <li><a href="#3-epoll">3. <strong>epoll</strong></a></li>
+        <li><a href="#对比总结">对比总结</a></li>
+        <li><a href="#总结-7">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
     <li><a href="#我有这样一个开发场景服务端需要和多个客户端进行tcp连接服务端会发送指令给客户端客户端会返回指令执行结果客户端会定时返回心跳报文上报状态客户端会不定时上报事件报文我该怎么实现上述功能">我有这样一个开发场景，服务端需要和多个客户端进行tcp连接，服务端会发送指令给客户端，客户端会返回指令执行结果；客户端会定时返回心跳报文上报状态；客户端会不定时上报事件报文。我该怎么实现上述功能？</a>
       <ul>
         <li><a href="#1-服务端设计">1. 服务端设计</a>
@@ -4629,7 +5180,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#2-数据传输中的关闭">2. <strong>数据传输中的关闭</strong></a></li>
         <li><a href="#3-异常情况">3. <strong>异常情况</strong></a></li>
         <li><a href="#4-最佳实践">4. <strong>最佳实践</strong></a></li>
-        <li><a href="#总结-7">总结</a></li>
+        <li><a href="#总结-8">总结</a></li>
       </ul>
     </li>
     <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
@@ -4690,7 +5241,41 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-线程创建和销毁的开销">3. <strong>线程创建和销毁的开销</strong></a></li>
         <li><a href="#4-线程池的优化">4. <strong>线程池的优化</strong></a></li>
         <li><a href="#5-如何减少线程内存开销">5. <strong>如何减少线程内存开销</strong></a></li>
-        <li><a href="#总结-8">总结</a></li>
+        <li><a href="#总结-9">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#java中的selector使用的是select还是epoll">java中的selector使用的是select还是epoll</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#java-selector-的原理">java selector 的原理</a>
+      <ul>
+        <li><a href="#1-selector-的核心功能">1. <strong>Selector 的核心功能</strong></a></li>
+        <li><a href="#2-selector-的工作流程">2. <strong>Selector 的工作流程</strong></a></li>
+        <li><a href="#3-selector-的底层实现">3. <strong>Selector 的底层实现</strong></a></li>
+        <li><a href="#4-selector-的优点">4. <strong>Selector 的优点</strong></a></li>
+        <li><a href="#5-selector-的注意事项">5. <strong>Selector 的注意事项</strong></a></li>
+        <li><a href="#6-与-selectpollepoll-的关系">6. <strong>与 select/poll/epoll 的关系</strong></a></li>
+        <li><a href="#7-示例代码">7. <strong>示例代码</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#selector中事件是由谁产生的">selector中事件是由谁产生的？</a>
+      <ul>
+        <li><a href="#1-事件的产生">1. <strong>事件的产生</strong></a></li>
+        <li><a href="#2-事件的检测">2. <strong>事件的检测</strong></a></li>
+        <li><a href="#3-事件的触发机制">3. <strong>事件的触发机制</strong></a></li>
+        <li><a href="#4-示例">4. <strong>示例</strong></a></li>
+        <li><a href="#总结-10">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#java的selector的使用过程中概念总结一下">java的selector的使用过程中概念总结一下</a>
+      <ul>
+        <li><a href="#1-selector-的作用">1. <strong>Selector 的作用</strong></a></li>
+        <li><a href="#2-核心概念">2. <strong>核心概念</strong></a></li>
+        <li><a href="#3-selector-的使用步骤">3. <strong>Selector 的使用步骤</strong></a></li>
+        <li><a href="#4-selector-的优势">4. <strong>Selector 的优势</strong></a></li>
+        <li><a href="#5-注意事项-1">5. <strong>注意事项</strong></a></li>
+        <li><a href="#6-与底层机制的关系">6. <strong>与底层机制的关系</strong></a></li>
       </ul>
     </li>
   </ul>
