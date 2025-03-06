@@ -64,14 +64,14 @@ StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存�
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
-    <meta property="article:modified_time" content="2025-03-06T12:40:11+08:00">
+    <meta property="article:modified_time" content="2025-03-06T15:08:29+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/computer-science/java/java/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.7b1e94176e50e9e2e92f846a69133682029d58ee8580a3530da61783c41d97e1.js" ></script>
+  <script defer src="/zh.search.min.df2acd6427edf6f19d612aa0f41ebf76283afaf1a9c30bbe50480a34aec6aa11.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1048,6 +1048,30 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#总结-12">总结</a></li>
       </ul>
     </li>
+    <li><a href="#提供一个java异步io的例子">提供一个java异步I/O的例子</a>
+      <ul>
+        <li><a href="#示例代码异步文件读取">示例代码：异步文件读取</a></li>
+        <li><a href="#代码说明-1">代码说明</a></li>
+        <li><a href="#异步-io-的优势">异步 I/O 的优势</a></li>
+        <li><a href="#参考">参考</a></li>
+      </ul>
+    </li>
+    <li><a href="#在java中非阻塞io就是io多路复用吗">在java中非阻塞IO就是IO多路复用吗</a>
+      <ul>
+        <li><a href="#1-非阻塞-ionon-blocking-io">1. <strong>非阻塞 I/O（Non-blocking I/O）</strong></a></li>
+        <li><a href="#2-io-多路复用io-multiplexing">2. <strong>I/O 多路复用（I/O Multiplexing）</strong></a></li>
+        <li><a href="#3-非阻塞-io-与-io-多路复用的关系">3. <strong>非阻塞 I/O 与 I/O 多路复用的关系</strong></a></li>
+        <li><a href="#4-总结-1">4. <strong>总结</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#在java中selector算非阻塞还是多路复用">在java中selector算非阻塞还是多路复用</a>
+      <ul>
+        <li><a href="#1-selector">1. <strong><code>Selector</code> 是非阻塞 I/O 的实现</strong></a></li>
+        <li><a href="#2-selector">2. <strong><code>Selector</code> 是 I/O 多路复用的核心</strong></a></li>
+        <li><a href="#3-selector">3. <strong><code>Selector</code> 的工作原理</strong></a></li>
+        <li><a href="#4-总结-2">4. <strong>总结</strong></a></li>
+      </ul>
+    </li>
   </ul>
 
   <ul>
@@ -1084,7 +1108,7 @@ https://github.com/alex-shpak/hugo-book
       <ul>
         <li><a href="#服务端代码示例">服务端代码示例</a></li>
         <li><a href="#客户端代码示例">客户端代码示例</a></li>
-        <li><a href="#代码说明-1">代码说明</a></li>
+        <li><a href="#代码说明-2">代码说明</a></li>
         <li><a href="#运行方式">运行方式</a></li>
         <li><a href="#扩展建议">扩展建议</a></li>
       </ul>
@@ -1092,9 +1116,9 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#我有一个服务端需要连接多个服务端进行tcp连接给我一个java的代码示例">我有一个服务端，需要连接多个服务端进行tcp连接，给我一个java的代码示例</a>
       <ul>
         <li><a href="#代码示例">代码示例</a></li>
-        <li><a href="#代码说明-2">代码说明</a></li>
+        <li><a href="#代码说明-3">代码说明</a></li>
         <li><a href="#运行方式-1">运行方式</a></li>
-        <li><a href="#参考">参考</a></li>
+        <li><a href="#参考-1">参考</a></li>
         <li><a href="#扩展建议-1">扩展建议</a></li>
       </ul>
     </li>
@@ -1102,7 +1126,7 @@ https://github.com/alex-shpak/hugo-book
       <ul>
         <li><a href="#设计思路">设计思路</a></li>
         <li><a href="#代码实现">代码实现</a></li>
-        <li><a href="#代码说明-3">代码说明</a></li>
+        <li><a href="#代码说明-4">代码说明</a></li>
         <li><a href="#运行方式-2">运行方式</a></li>
         <li><a href="#扩展建议-2">扩展建议</a></li>
       </ul>
@@ -1119,7 +1143,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
       <ul>
         <li><a href="#代码实现-1">代码实现</a></li>
-        <li><a href="#代码说明-4">代码说明</a></li>
+        <li><a href="#代码说明-5">代码说明</a></li>
         <li><a href="#运行方式-3">运行方式</a></li>
         <li><a href="#扩展建议-3">扩展建议</a></li>
       </ul>
@@ -1128,7 +1152,7 @@ https://github.com/alex-shpak/hugo-book
       <ul>
         <li><a href="#设计思路-1">设计思路</a></li>
         <li><a href="#代码实现-2">代码实现</a></li>
-        <li><a href="#代码说明-5">代码说明</a></li>
+        <li><a href="#代码说明-6">代码说明</a></li>
         <li><a href="#运行方式-4">运行方式</a></li>
         <li><a href="#扩展建议-4">扩展建议</a></li>
       </ul>
@@ -3583,6 +3607,258 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong><code>poll</code></strong>：解决了 <code>select</code> 的文件描述符数量限制问题，但仍存在性能瓶颈。</li>
 <li><strong><code>epoll</code></strong>：性能最优，适合高并发场景，但仅支持 Linux 系统<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
 </ul>
+<h2 id="提供一个java异步io的例子">
+  提供一个java异步I/O的例子
+  <a class="anchor" href="#%e6%8f%90%e4%be%9b%e4%b8%80%e4%b8%aajava%e5%bc%82%e6%ad%a5io%e7%9a%84%e4%be%8b%e5%ad%90">#</a>
+</h2>
+<p>以下是一个使用 Java 异步 I/O（AIO）的代码示例，展示了如何通过 <code>AsynchronousFileChannel</code> 进行异步文件读取操作：</p>
+<h3 id="示例代码异步文件读取">
+  示例代码：异步文件读取
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81%e5%bc%82%e6%ad%a5%e6%96%87%e4%bb%b6%e8%af%bb%e5%8f%96">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.ByteBuffer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.channels.AsynchronousFileChannel;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.Path;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.Paths;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.StandardOpenOption;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.Future;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AsyncFileReadExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 打开异步文件通道</span>
+</span></span><span style="display:flex;"><span>            Path path <span style="color:#f92672">=</span> Paths.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;example.txt&#34;</span>);
+</span></span><span style="display:flex;"><span>            AsynchronousFileChannel fileChannel <span style="color:#f92672">=</span> AsynchronousFileChannel.<span style="color:#a6e22e">open</span>(path, StandardOpenOption.<span style="color:#a6e22e">READ</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 分配缓冲区</span>
+</span></span><span style="display:flex;"><span>            ByteBuffer buffer <span style="color:#f92672">=</span> ByteBuffer.<span style="color:#a6e22e">allocate</span>(1024);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 发起异步读取操作</span>
+</span></span><span style="display:flex;"><span>            Future<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> future <span style="color:#f92672">=</span> fileChannel.<span style="color:#a6e22e">read</span>(buffer, 0);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 继续执行其他任务</span>
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;异步读取操作已发起，继续执行其他任务...&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 等待读取操作完成</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>future.<span style="color:#a6e22e">isDone</span>()) {
+</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;等待读取操作完成...&#34;</span>);
+</span></span><span style="display:flex;"><span>                Thread.<span style="color:#a6e22e">sleep</span>(500); <span style="color:#75715e">// 模拟其他任务</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 获取读取结果</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> bytesRead <span style="color:#f92672">=</span> future.<span style="color:#a6e22e">get</span>();
+</span></span><span style="display:flex;"><span>            buffer.<span style="color:#a6e22e">flip</span>(); <span style="color:#75715e">// 切换缓冲区为读模式</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> data <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span>buffer.<span style="color:#a6e22e">remaining</span>()<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>            buffer.<span style="color:#a6e22e">get</span>(data);
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;读取到的数据: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">new</span> String(data));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 关闭通道</span>
+</span></span><span style="display:flex;"><span>            fileChannel.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="代码说明-1">
+  代码说明
+  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-1">#</a>
+</h3>
+<ol>
+<li>
+<p><strong>打开异步文件通道</strong>：</p>
+<ul>
+<li>使用 <code>AsynchronousFileChannel.open()</code> 打开文件通道，并指定 <code>StandardOpenOption.READ</code> 以允许读取操作<a href="@ref">1</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>分配缓冲区</strong>：</p>
+<ul>
+<li>使用 <code>ByteBuffer.allocate()</code> 分配一个缓冲区，用于存储读取的数据<a href="@ref">1</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>发起异步读取操作</strong>：</p>
+<ul>
+<li>调用 <code>fileChannel.read()</code> 发起异步读取操作，返回一个 <code>Future&lt;Integer&gt;</code> 对象，表示读取操作的完成状态<a href="@ref">1</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>继续执行其他任务</strong>：</p>
+<ul>
+<li>在等待读取操作完成的过程中，可以继续执行其他任务，体现了异步 I/O 的非阻塞特性<a href="@ref">1</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>等待读取操作完成</strong>：</p>
+<ul>
+<li>使用 <code>future.isDone()</code> 检查读取操作是否完成，并通过 <code>future.get()</code> 获取读取的字节数<a href="@ref">1</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>处理读取结果</strong>：</p>
+<ul>
+<li>将缓冲区中的数据转换为字符串并输出<a href="@ref">1</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>关闭通道</strong>：</p>
+<ul>
+<li>使用 <code>fileChannel.close()</code> 关闭异步文件通道<a href="@ref">1</a>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="异步-io-的优势">
+  异步 I/O 的优势
+  <a class="anchor" href="#%e5%bc%82%e6%ad%a5-io-%e7%9a%84%e4%bc%98%e5%8a%bf">#</a>
+</h3>
+<ul>
+<li><strong>非阻塞</strong>：发起 I/O 操作后，线程可以继续执行其他任务，无需等待 I/O 操作完成<a href="@ref">1</a>。</li>
+<li><strong>高性能</strong>：适合高并发场景，能够充分利用系统资源<a href="@ref">1</a>。</li>
+</ul>
+<h3 id="参考">
+  参考
+  <a class="anchor" href="#%e5%8f%82%e8%80%83">#</a>
+</h3>
+<ul>
+<li><a href="@ref">1</a>: Java 异步 I/O 示例，https://www.cnblogs.com/robothy/p/15734643.html</li>
+<li><a href="@ref">2</a>: 使用 Java NIO 进行异步 I/O 编程，https://baijiahao.baidu.com/s?id=1768046800211280021</li>
+<li><a href="@ref">4</a>: Java 异步 I/O（AIO）：解析与实例，https://m.blog.csdn.net/DxProgram/article/details/133594390</li>
+</ul>
+<h2 id="在java中非阻塞io就是io多路复用吗">
+  在java中非阻塞IO就是IO多路复用吗
+  <a class="anchor" href="#%e5%9c%a8java%e4%b8%ad%e9%9d%9e%e9%98%bb%e5%a1%9eio%e5%b0%b1%e6%98%afio%e5%a4%9a%e8%b7%af%e5%a4%8d%e7%94%a8%e5%90%97">#</a>
+</h2>
+<p>在 Java 中，<strong>非阻塞 I/O（Non-blocking I/O）</strong> 和 <strong>I/O 多路复用（I/O Multiplexing）</strong> 是两个相关但不同的概念。它们都用于提高 I/O 操作的效率和性能，但实现方式和应用场景有所不同。</p>
+<hr>
+<h3 id="1-非阻塞-ionon-blocking-io">
+  1. <strong>非阻塞 I/O（Non-blocking I/O）</strong>
+  <a class="anchor" href="#1-%e9%9d%9e%e9%98%bb%e5%a1%9e-ionon-blocking-io">#</a>
+</h3>
+<p>非阻塞 I/O 是一种 I/O 模型，其核心特点是当进行 I/O 操作时，如果数据没有准备好，I/O 操作会立即返回，而不是阻塞线程等待数据就绪。线程可以继续执行其他任务，稍后再尝试执行 I/O 操作。</p>
+<ul>
+<li>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>通过 <code>Channel.configureBlocking(false)</code> 将通道设置为非阻塞模式。</li>
+<li>线程不会被阻塞，可以同时处理多个 I/O 操作。</li>
+<li>需要不断轮询检查 I/O 操作是否完成，可能会消耗 CPU 资源。</li>
+</ul>
+</li>
+<li>
+<p><strong>示例</strong>：
+在 Java NIO 中，<code>SocketChannel</code> 和 <code>ServerSocketChannel</code> 可以设置为非阻塞模式。例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>SocketChannel socketChannel <span style="color:#f92672">=</span> SocketChannel.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>socketChannel.<span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>socketChannel.<span style="color:#a6e22e">connect</span>(<span style="color:#66d9ef">new</span> InetSocketAddress(<span style="color:#e6db74">&#34;example.com&#34;</span>, 80));
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="2-io-多路复用io-multiplexing">
+  2. <strong>I/O 多路复用（I/O Multiplexing）</strong>
+  <a class="anchor" href="#2-io-%e5%a4%9a%e8%b7%af%e5%a4%8d%e7%94%a8io-multiplexing">#</a>
+</h3>
+<p>I/O 多路复用是一种机制，通过一个线程同时监控多个 I/O 通道（Channel），当某个通道有 I/O 事件就绪时，通知应用程序进行处理。Java NIO 中的 <code>Selector</code> 是实现 I/O 多路复用的核心组件。</p>
+<ul>
+<li>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>使用 <code>Selector</code> 监控多个 <code>Channel</code> 的 I/O 事件（如可读、可写、连接等）。</li>
+<li>单线程可以高效地管理多个 I/O 通道，适合高并发场景。</li>
+<li>避免了非阻塞 I/O 中轮询的开销，提高了资源利用率。</li>
+</ul>
+</li>
+<li>
+<p><strong>示例</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Selector selector <span style="color:#f92672">=</span> Selector.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>ServerSocketChannel serverChannel <span style="color:#f92672">=</span> ServerSocketChannel.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>serverChannel.<span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>serverChannel.<span style="color:#a6e22e">register</span>(selector, SelectionKey.<span style="color:#a6e22e">OP_ACCEPT</span>);
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="3-非阻塞-io-与-io-多路复用的关系">
+  3. <strong>非阻塞 I/O 与 I/O 多路复用的关系</strong>
+  <a class="anchor" href="#3-%e9%9d%9e%e9%98%bb%e5%a1%9e-io-%e4%b8%8e-io-%e5%a4%9a%e8%b7%af%e5%a4%8d%e7%94%a8%e7%9a%84%e5%85%b3%e7%b3%bb">#</a>
+</h3>
+<ul>
+<li><strong>非阻塞 I/O 是 I/O 多路复用的基础</strong>：I/O 多路复用依赖于通道的非阻塞模式。只有将通道设置为非阻塞模式，<code>Selector</code> 才能有效地监控多个通道的 I/O 事件。</li>
+<li><strong>I/O 多路复用是对非阻塞 I/O 的优化</strong>：非阻塞 I/O 需要不断轮询检查 I/O 操作是否完成，而 I/O 多路复用通过 <code>Selector</code> 实现了事件驱动机制，避免了轮询的开销<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</li>
+</ul>
+<hr>
+<h3 id="4-总结-1">
+  4. <strong>总结</strong>
+  <a class="anchor" href="#4-%e6%80%bb%e7%bb%93-1">#</a>
+</h3>
+<ul>
+<li><strong>非阻塞 I/O</strong> 是一种 I/O 模型，强调 I/O 操作不会阻塞线程，适用于简单的 I/O 场景。</li>
+<li><strong>I/O 多路复用</strong> 是一种机制，通过 <code>Selector</code> 高效管理多个非阻塞 I/O 通道，适合高并发场景。</li>
+<li>在 Java 中，I/O 多路复用通常基于非阻塞 I/O 实现，但两者并非等同<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</li>
+</ul>
+<h2 id="在java中selector算非阻塞还是多路复用">
+  在java中selector算非阻塞还是多路复用
+  <a class="anchor" href="#%e5%9c%a8java%e4%b8%adselector%e7%ae%97%e9%9d%9e%e9%98%bb%e5%a1%9e%e8%bf%98%e6%98%af%e5%a4%9a%e8%b7%af%e5%a4%8d%e7%94%a8">#</a>
+</h2>
+<p>在 Java 中，<code>Selector</code> 既是 <strong>非阻塞 I/O</strong> 的实现机制，也是 <strong>I/O 多路复用</strong> 的核心组件。它结合了这两种技术，使得单线程可以高效地管理多个 I/O 通道。以下是详细解释：</p>
+<hr>
+<h3 id="1-selector">
+  1. <strong><code>Selector</code> 是非阻塞 I/O 的实现</strong>
+  <a class="anchor" href="#1-selector">#</a>
+</h3>
+<p>非阻塞 I/O 的核心特点是，当进行 I/O 操作时，如果数据没有准备好，操作会立即返回，而不是阻塞线程等待数据就绪。在 Java 中，<code>Selector</code> 依赖于 <code>Channel</code> 的非阻塞模式。</p>
+<ul>
+<li><strong>非阻塞模式</strong>：在使用 <code>Selector</code> 时，必须将 <code>Channel</code> 设置为非阻塞模式：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>channel.<span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>);
+</span></span></code></pre></div>这样，<code>Channel</code> 的 I/O 操作（如 <code>read</code>、<code>write</code>）不会阻塞线程，而是立即返回结果（可能是 0 或 <code>-1</code>）。</li>
+<li><strong>事件驱动</strong>：<code>Selector</code> 通过监听 <code>Channel</code> 的 I/O 事件（如可读、可写、连接等），实现了非阻塞的事件驱动模型。</li>
+</ul>
+<hr>
+<h3 id="2-selector">
+  2. <strong><code>Selector</code> 是 I/O 多路复用的核心</strong>
+  <a class="anchor" href="#2-selector">#</a>
+</h3>
+<p>I/O 多路复用是一种机制，通过一个线程同时监控多个 I/O 通道，当某个通道有事件就绪时，通知应用程序进行处理。<code>Selector</code> 是 Java 中实现 I/O 多路复用的核心组件。</p>
+<ul>
+<li><strong>多路复用机制</strong>：<code>Selector</code> 使用底层的系统调用（如 Linux 的 <code>epoll</code>、Windows 的 <code>IOCP</code>）监控多个 <code>Channel</code>。当某个 <code>Channel</code> 的 I/O 事件就绪时，<code>Selector</code> 会将其标记为“就绪状态”，并通过 <code>selectedKeys()</code> 返回这些 <code>Channel</code> 的集合。</li>
+<li><strong>单线程管理多通道</strong>：通过 <code>Selector</code>，单线程可以同时管理成千上万的 <code>Channel</code>，避免了传统阻塞 I/O 中每个连接需要一个线程的开销。</li>
+</ul>
+<hr>
+<h3 id="3-selector">
+  3. <strong><code>Selector</code> 的工作原理</strong>
+  <a class="anchor" href="#3-selector">#</a>
+</h3>
+<p><code>Selector</code> 的工作流程如下：</p>
+<ol>
+<li><strong>创建 <code>Selector</code></strong>：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Selector selector <span style="color:#f92672">=</span> Selector.<span style="color:#a6e22e">open</span>();
+</span></span></code></pre></div></li>
+<li><strong>将 <code>Channel</code> 注册到 <code>Selector</code></strong>：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>channel.<span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>SelectionKey key <span style="color:#f92672">=</span> channel.<span style="color:#a6e22e">register</span>(selector, SelectionKey.<span style="color:#a6e22e">OP_READ</span>);
+</span></span></code></pre></div>这里指定了感兴趣的事件（如 <code>OP_READ</code>、<code>OP_WRITE</code>）。</li>
+<li><strong>轮询就绪事件</strong>：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> readyChannels <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">select</span>();
+</span></span><span style="display:flex;"><span>Set<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> selectedKeys <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">selectedKeys</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (SelectionKey key : selectedKeys) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">isReadable</span>()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 处理读事件</span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">isWritable</span>()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 处理写事件</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li><strong>处理事件</strong>：根据 <code>SelectionKey</code> 的类型，执行相应的 I/O 操作。</li>
+</ol>
+<hr>
+<h3 id="4-总结-2">
+  4. <strong>总结</strong>
+  <a class="anchor" href="#4-%e6%80%bb%e7%bb%93-2">#</a>
+</h3>
+<ul>
+<li><strong><code>Selector</code> 是非阻塞 I/O 的实现</strong>：它依赖于 <code>Channel</code> 的非阻塞模式，确保 I/O 操作不会阻塞线程。</li>
+<li><strong><code>Selector</code> 是 I/O 多路复用的核心</strong>：它通过监控多个 <code>Channel</code> 的 I/O 事件，实现了单线程管理多通道的高效机制。</li>
+</ul>
+<p>因此，<code>Selector</code> 既是非阻塞 I/O 的实现，也是 I/O 多路复用的核心组件<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</p>
 <h1 id="socket">
   socket
   <a class="anchor" href="#socket">#</a>
@@ -3943,9 +4219,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><hr>
-<h3 id="代码说明-1">
+<h3 id="代码说明-2">
   代码说明
-  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-1">#</a>
+  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-2">#</a>
 </h3>
 <ol>
 <li>
@@ -4091,9 +4367,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><hr>
-<h3 id="代码说明-2">
+<h3 id="代码说明-3">
   代码说明
-  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-2">#</a>
+  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-3">#</a>
 </h3>
 <ol>
 <li>
@@ -4138,9 +4414,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li>运行<code>MultiServerConnector</code>，它将连接这些服务端并处理数据。</li>
 </ol>
 <hr>
-<h3 id="参考">
+<h3 id="参考-1">
   参考
-  <a class="anchor" href="#%e5%8f%82%e8%80%83">#</a>
+  <a class="anchor" href="#%e5%8f%82%e8%80%83-1">#</a>
 </h3>
 <ul>
 <li>使用<code>Selector</code>实现I/O多路复用<a href="@ref">1</a><a href="@ref">2</a>。</li>
@@ -4353,9 +4629,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><hr>
-<h3 id="代码说明-3">
+<h3 id="代码说明-4">
   代码说明
-  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-3">#</a>
+  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-4">#</a>
 </h3>
 <ol>
 <li>
@@ -4651,9 +4927,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><hr>
-<h3 id="代码说明-4">
+<h3 id="代码说明-5">
   代码说明
-  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-4">#</a>
+  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-5">#</a>
 </h3>
 <ol>
 <li>
@@ -4939,9 +5215,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><hr>
-<h3 id="代码说明-5">
+<h3 id="代码说明-6">
   代码说明
-  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-5">#</a>
+  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-6">#</a>
 </h3>
 <ol>
 <li>
@@ -6217,7 +6493,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/45da8285d2ca72557398d7bf5e7c0bc1703551dc" title='最后修改者 penruins | 三月 6, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/50919d06cfc8bc6662f1d7c84f0cb53ccd51b989" title='最后修改者 penruins | 三月 6, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>三月 6, 2025</span>
     </a>
@@ -6524,6 +6800,30 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#总结-12">总结</a></li>
       </ul>
     </li>
+    <li><a href="#提供一个java异步io的例子">提供一个java异步I/O的例子</a>
+      <ul>
+        <li><a href="#示例代码异步文件读取">示例代码：异步文件读取</a></li>
+        <li><a href="#代码说明-1">代码说明</a></li>
+        <li><a href="#异步-io-的优势">异步 I/O 的优势</a></li>
+        <li><a href="#参考">参考</a></li>
+      </ul>
+    </li>
+    <li><a href="#在java中非阻塞io就是io多路复用吗">在java中非阻塞IO就是IO多路复用吗</a>
+      <ul>
+        <li><a href="#1-非阻塞-ionon-blocking-io">1. <strong>非阻塞 I/O（Non-blocking I/O）</strong></a></li>
+        <li><a href="#2-io-多路复用io-multiplexing">2. <strong>I/O 多路复用（I/O Multiplexing）</strong></a></li>
+        <li><a href="#3-非阻塞-io-与-io-多路复用的关系">3. <strong>非阻塞 I/O 与 I/O 多路复用的关系</strong></a></li>
+        <li><a href="#4-总结-1">4. <strong>总结</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#在java中selector算非阻塞还是多路复用">在java中selector算非阻塞还是多路复用</a>
+      <ul>
+        <li><a href="#1-selector">1. <strong><code>Selector</code> 是非阻塞 I/O 的实现</strong></a></li>
+        <li><a href="#2-selector">2. <strong><code>Selector</code> 是 I/O 多路复用的核心</strong></a></li>
+        <li><a href="#3-selector">3. <strong><code>Selector</code> 的工作原理</strong></a></li>
+        <li><a href="#4-总结-2">4. <strong>总结</strong></a></li>
+      </ul>
+    </li>
   </ul>
 
   <ul>
@@ -6560,7 +6860,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
       <ul>
         <li><a href="#服务端代码示例">服务端代码示例</a></li>
         <li><a href="#客户端代码示例">客户端代码示例</a></li>
-        <li><a href="#代码说明-1">代码说明</a></li>
+        <li><a href="#代码说明-2">代码说明</a></li>
         <li><a href="#运行方式">运行方式</a></li>
         <li><a href="#扩展建议">扩展建议</a></li>
       </ul>
@@ -6568,9 +6868,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
     <li><a href="#我有一个服务端需要连接多个服务端进行tcp连接给我一个java的代码示例">我有一个服务端，需要连接多个服务端进行tcp连接，给我一个java的代码示例</a>
       <ul>
         <li><a href="#代码示例">代码示例</a></li>
-        <li><a href="#代码说明-2">代码说明</a></li>
+        <li><a href="#代码说明-3">代码说明</a></li>
         <li><a href="#运行方式-1">运行方式</a></li>
-        <li><a href="#参考">参考</a></li>
+        <li><a href="#参考-1">参考</a></li>
         <li><a href="#扩展建议-1">扩展建议</a></li>
       </ul>
     </li>
@@ -6578,7 +6878,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
       <ul>
         <li><a href="#设计思路">设计思路</a></li>
         <li><a href="#代码实现">代码实现</a></li>
-        <li><a href="#代码说明-3">代码说明</a></li>
+        <li><a href="#代码说明-4">代码说明</a></li>
         <li><a href="#运行方式-2">运行方式</a></li>
         <li><a href="#扩展建议-2">扩展建议</a></li>
       </ul>
@@ -6595,7 +6895,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
     <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
       <ul>
         <li><a href="#代码实现-1">代码实现</a></li>
-        <li><a href="#代码说明-4">代码说明</a></li>
+        <li><a href="#代码说明-5">代码说明</a></li>
         <li><a href="#运行方式-3">运行方式</a></li>
         <li><a href="#扩展建议-3">扩展建议</a></li>
       </ul>
@@ -6604,7 +6904,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
       <ul>
         <li><a href="#设计思路-1">设计思路</a></li>
         <li><a href="#代码实现-2">代码实现</a></li>
-        <li><a href="#代码说明-5">代码说明</a></li>
+        <li><a href="#代码说明-6">代码说明</a></li>
         <li><a href="#运行方式-4">运行方式</a></li>
         <li><a href="#扩展建议-4">扩展建议</a></li>
       </ul>
