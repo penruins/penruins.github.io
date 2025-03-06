@@ -64,14 +64,14 @@ StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存�
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-03-06T15:08:29+08:00">
+    <meta property="article:modified_time" content="2025-03-06T20:55:51+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/java/java/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.df2acd6427edf6f19d612aa0f41ebf76283afaf1a9c30bbe50480a34aec6aa11.js" ></script>
+  <script defer src="/zh.search.min.06ae571909b4a295231ee09d00acd8bdbde903c47d70c29506d3bcb3fcd21964.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -800,6 +800,15 @@ https://github.com/alex-shpak/hugo-book
   </ul>
 
   <ul>
+    <li><a href="#什么是虚拟线程">什么是虚拟线程？</a>
+      <ul>
+        <li><a href="#虚拟线程的核心特点">虚拟线程的核心特点</a></li>
+        <li><a href="#虚拟线程的适用场景">虚拟线程的适用场景</a></li>
+        <li><a href="#虚拟线程的使用">虚拟线程的使用</a></li>
+        <li><a href="#虚拟线程的局限性">虚拟线程的局限性</a></li>
+        <li><a href="#总结-1">总结</a></li>
+      </ul>
+    </li>
     <li><a href="#响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么</a>
       <ul>
         <li><a href="#1-实现原理">1. <strong>实现原理</strong></a></li>
@@ -807,7 +816,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-适用场景">3. <strong>适用场景</strong></a></li>
         <li><a href="#4-开发体验">4. <strong>开发体验</strong></a></li>
         <li><a href="#5-性能优化">5. <strong>性能优化</strong></a></li>
-        <li><a href="#总结-1">总结</a></li>
+        <li><a href="#总结-2">总结</a></li>
       </ul>
     </li>
     <li><a href="#虚拟线程在jvm中的内存模型是怎样的">虚拟线程在jvm中的内存模型是怎样的</a>
@@ -817,7 +826,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-虚拟线程的调度与内存使用">3. <strong>虚拟线程的调度与内存使用</strong></a></li>
         <li><a href="#4-虚拟线程与垃圾回收">4. <strong>虚拟线程与垃圾回收</strong></a></li>
         <li><a href="#5-虚拟线程的适用场景">5. <strong>虚拟线程的适用场景</strong></a></li>
-        <li><a href="#总结-2">总结</a></li>
+        <li><a href="#总结-3">总结</a></li>
       </ul>
     </li>
     <li><a href="#虚拟线程会增加jvm的性能消耗吗">虚拟线程会增加jvm的性能消耗吗</a>
@@ -827,7 +836,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-cpu密集型任务的限制">3. <strong>CPU密集型任务的限制</strong></a></li>
         <li><a href="#4-jvm的性能消耗">4. <strong>JVM的性能消耗</strong></a></li>
         <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
-        <li><a href="#总结-3">总结</a></li>
+        <li><a href="#总结-4">总结</a></li>
       </ul>
     </li>
     <li><a href="#在-springboot-项目中虚拟线程可以怎么使用">在 springboot 项目中虚拟线程可以怎么使用</a>
@@ -871,7 +880,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#5-mn-模型的实现细节">5. <strong>M:N 模型的实现细节</strong></a></li>
         <li><a href="#6-示例">6. <strong>示例</strong></a></li>
         <li><a href="#7-与传统线程模型的对比">7. <strong>与传统线程模型的对比</strong></a></li>
-        <li><a href="#总结-4">总结</a></li>
+        <li><a href="#总结-5">总结</a></li>
       </ul>
     </li>
     <li><a href="#java虚拟线程和传统线程有什么区别">Java虚拟线程和传统线程有什么区别</a>
@@ -884,7 +893,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#6-资源占用">6. <strong>资源占用</strong></a></li>
         <li><a href="#7-兼容性">7. <strong>兼容性</strong></a></li>
         <li><a href="#8-示例对比">8. <strong>示例对比</strong></a></li>
-        <li><a href="#总结-5">总结</a></li>
+        <li><a href="#总结-6">总结</a></li>
       </ul>
     </li>
     <li><a href="#可以生成一个java使用虚拟线程的例子吗">可以生成一个java使用虚拟线程的例子吗</a>
@@ -896,6 +905,9 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#注意事项">注意事项</a></li>
       </ul>
     </li>
+  </ul>
+
+  <ul>
     <li><a href="#学习资料">学习资料</a></li>
     <li><a href="#basic">basic</a>
       <ul>
@@ -939,7 +951,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#java-19-2022">Java 19 (2022)</a></li>
         <li><a href="#java-20-2023">Java 20 (2023)</a></li>
         <li><a href="#java-21-2023">Java 21 (2023)</a></li>
-        <li><a href="#总结-6">总结</a></li>
+        <li><a href="#总结-7">总结</a></li>
       </ul>
     </li>
     <li><a href="#面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识</a>
@@ -971,7 +983,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-排序规则"><strong>3. 排序规则</strong></a></li>
         <li><a href="#4-性能与稳定性"><strong>4. 性能与稳定性</strong></a></li>
         <li><a href="#5-使用场景"><strong>5. 使用场景</strong></a></li>
-        <li><a href="#总结-7"><strong>总结</strong></a></li>
+        <li><a href="#总结-8"><strong>总结</strong></a></li>
       </ul>
     </li>
   </ul>
@@ -982,7 +994,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#jdk-17-及之前"><strong>JDK 1.7 及之前</strong></a></li>
         <li><a href="#jdk-18-及之后"><strong>JDK 1.8 及之后</strong></a></li>
         <li><a href="#核心机制"><strong>核心机制</strong></a></li>
-        <li><a href="#总结-8"><strong>总结</strong></a></li>
+        <li><a href="#总结-9"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？</a>
@@ -1013,7 +1025,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-使用读写锁-"><strong>3. 使用读写锁 (<code>ReadWriteLock</code>)</strong></a></li>
         <li><a href="#4-方法内部使用局部"><strong>4. 方法内部使用局部 <code>HashMap</code></strong></a></li>
         <li><a href="#5-初始化写后续只读"><strong>5. 初始化写，后续只读</strong></a></li>
-        <li><a href="#总结-9"><strong>总结</strong></a></li>
+        <li><a href="#总结-10"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？</a>
@@ -1025,7 +1037,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#5-扩容机制"><strong>5. 扩容机制</strong></a></li>
         <li><a href="#6-迭代器"><strong>6. 迭代器</strong></a></li>
         <li><a href="#7-计算哈希值的方式"><strong>7. 计算哈希值的方式</strong></a></li>
-        <li><a href="#总结-10"><strong>总结</strong></a></li>
+        <li><a href="#总结-11"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#当-hashmap-扩容时所有的红黑树或者链表都会重新构造吗">当 HashMap 扩容时，所有的红黑树或者链表都会重新构造吗</a>
@@ -1033,7 +1045,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#1-链表重新构造"><strong>1. 链表重新构造</strong></a></li>
         <li><a href="#2-红黑树重新构造"><strong>2. 红黑树重新构造</strong></a></li>
         <li><a href="#3-重新哈希的原因"><strong>3. 重新哈希的原因</strong></a></li>
-        <li><a href="#总结-11"><strong>总结</strong></a></li>
+        <li><a href="#总结-12"><strong>总结</strong></a></li>
       </ul>
     </li>
   </ul>
@@ -1045,7 +1057,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#2-poll">2. <strong>poll</strong></a></li>
         <li><a href="#3-epoll">3. <strong>epoll</strong></a></li>
         <li><a href="#对比总结">对比总结</a></li>
-        <li><a href="#总结-12">总结</a></li>
+        <li><a href="#总结-13">总结</a></li>
       </ul>
     </li>
     <li><a href="#提供一个java异步io的例子">提供一个java异步I/O的例子</a>
@@ -1137,7 +1149,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#2-数据传输中的关闭">2. <strong>数据传输中的关闭</strong></a></li>
         <li><a href="#3-异常情况">3. <strong>异常情况</strong></a></li>
         <li><a href="#4-最佳实践">4. <strong>最佳实践</strong></a></li>
-        <li><a href="#总结-13">总结</a></li>
+        <li><a href="#总结-14">总结</a></li>
       </ul>
     </li>
     <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
@@ -1198,7 +1210,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-线程创建和销毁的开销">3. <strong>线程创建和销毁的开销</strong></a></li>
         <li><a href="#4-线程池的优化">4. <strong>线程池的优化</strong></a></li>
         <li><a href="#5-如何减少线程内存开销">5. <strong>如何减少线程内存开销</strong></a></li>
-        <li><a href="#总结-14">总结</a></li>
+        <li><a href="#总结-15">总结</a></li>
       </ul>
     </li>
     <li><a href="#java中的selector使用的是select还是epoll">java中的selector使用的是select还是epoll</a></li>
@@ -1222,7 +1234,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#2-事件的检测">2. <strong>事件的检测</strong></a></li>
         <li><a href="#3-事件的触发机制">3. <strong>事件的触发机制</strong></a></li>
         <li><a href="#4-示例">4. <strong>示例</strong></a></li>
-        <li><a href="#总结-15">总结</a></li>
+        <li><a href="#总结-16">总结</a></li>
       </ul>
     </li>
     <li><a href="#java的selector的使用过程中概念总结一下">java的selector的使用过程中概念总结一下</a>
@@ -1261,7 +1273,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
         <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
         <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
-        <li><a href="#总结-16"><strong>总结</strong></a></li>
+        <li><a href="#总结-17"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
@@ -1271,7 +1283,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
         <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
         <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
-        <li><a href="#总结-17"><strong>总结</strong></a></li>
+        <li><a href="#总结-18"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
@@ -1285,7 +1297,127 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
         <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
         <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
-        <li><a href="#总结-18">总结</a></li>
+        <li><a href="#总结-19">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#reference">reference</a></li>
+    <li><a href="#给我举一个-reactor-模式的例子">给我举一个 reactor 模式的例子</a>
+      <ul>
+        <li><a href="#示例代码reactor-模式服务器">示例代码：Reactor 模式服务器</a></li>
+        <li><a href="#代码说明-7">代码说明</a></li>
+        <li><a href="#reactor-模式的核心组件12">Reactor 模式的核心组件<a href="@ref">1</a><a href="@ref">2</a></a></li>
+        <li><a href="#应用场景">应用场景</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#reference-1">reference</a></li>
+    <li><a href="#什么是响应式编程">什么是响应式编程</a>
+      <ul>
+        <li><a href="#核心概念">核心概念</a></li>
+        <li><a href="#响应式编程的特点">响应式编程的特点</a></li>
+        <li><a href="#应用场景-1">应用场景</a></li>
+        <li><a href="#优点">优点</a></li>
+        <li><a href="#缺点">缺点</a></li>
+        <li><a href="#示例">示例</a></li>
+        <li><a href="#总结-20">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#在springboot中有哪些响应式编程的运用">在springboot中有哪些响应式编程的运用</a>
+      <ul>
+        <li><a href="#1-响应式-web-开发spring-webflux">1. <strong>响应式 Web 开发（Spring WebFlux）</strong></a>
+          <ul>
+            <li><a href="#核心特性">核心特性：</a></li>
+            <li><a href="#示例代码-2">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-响应式数据库访问">2. <strong>响应式数据库访问</strong></a>
+          <ul>
+            <li><a href="#核心特性-1">核心特性：</a></li>
+            <li><a href="#示例代码-3">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-响应式消息传递">3. <strong>响应式消息传递</strong></a>
+          <ul>
+            <li><a href="#核心特性-2">核心特性：</a></li>
+            <li><a href="#示例代码-4">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-响应式安全spring-security-reactive">4. <strong>响应式安全（Spring Security Reactive）</strong></a>
+          <ul>
+            <li><a href="#核心特性-3">核心特性：</a></li>
+            <li><a href="#示例代码-5">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#5-响应式测试">5. <strong>响应式测试</strong></a>
+          <ul>
+            <li><a href="#示例代码-6">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#6-响应式流处理">6. <strong>响应式流处理</strong></a>
+          <ul>
+            <li><a href="#示例代码-7">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结-21">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#响应式数据库访问和传统的数据库访问有什么区别">响应式数据库访问和传统的数据库访问有什么区别</a>
+      <ul>
+        <li><a href="#1-编程模型">1. <strong>编程模型</strong></a></li>
+        <li><a href="#2-性能特点">2. <strong>性能特点</strong></a></li>
+        <li><a href="#3-适用场景-1">3. <strong>适用场景</strong></a></li>
+        <li><a href="#4-技术实现">4. <strong>技术实现</strong></a></li>
+        <li><a href="#5-优缺点对比">5. <strong>优缺点对比</strong></a></li>
+        <li><a href="#总结-22">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较</a>
+      <ul>
+        <li><a href="#1-非响应式后端服务的处理过程">1. <strong>非响应式后端服务的处理过程</strong></a>
+          <ul>
+            <li><a href="#处理流程">处理流程：</a></li>
+            <li><a href="#特点">特点：</a></li>
+            <li><a href="#示例-1">示例：</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-响应式后端服务的处理过程">2. <strong>响应式后端服务的处理过程</strong></a>
+          <ul>
+            <li><a href="#处理流程-1">处理流程：</a></li>
+            <li><a href="#特点-1">特点：</a></li>
+            <li><a href="#示例-2">示例：</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-两者的比较">3. <strong>两者的比较</strong></a></li>
+        <li><a href="#4-总结-3">4. <strong>总结</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#在java的响应式中mono是什么">在java的响应式中，mono是什么</a>
+      <ul>
+        <li><a href="#mono-的主要特点"><strong>Mono 的主要特点</strong></a></li>
+        <li><a href="#mono-的常见使用场景"><strong>Mono 的常见使用场景</strong></a></li>
+        <li><a href="#mono-的示例代码"><strong>Mono 的示例代码</strong></a></li>
+        <li><a href="#mono-的操作符"><strong>Mono 的操作符</strong></a></li>
+        <li><a href="#mono-与-flux-的区别"><strong>Mono 与 Flux 的区别</strong></a></li>
+        <li><a href="#总结-23"><strong>总结</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#mono-是如何实现非阻塞的">Mono 是如何实现非阻塞的</a>
+      <ul>
+        <li><a href="#1-事件驱动模型">1. <strong>事件驱动模型</strong></a></li>
+        <li><a href="#2-回调机制">2. <strong>回调机制</strong></a></li>
+        <li><a href="#3-非阻塞-io">3. <strong>非阻塞 I/O</strong></a></li>
+        <li><a href="#4-线程调度">4. <strong>线程调度</strong></a></li>
+        <li><a href="#5-背压支持">5. <strong>背压支持</strong></a></li>
+        <li><a href="#6-示例代码">6. <strong>示例代码</strong></a></li>
+        <li><a href="#总结-24">总结</a></li>
       </ul>
     </li>
   </ul>
@@ -1389,10 +1521,67 @@ https://github.com/alex-shpak/hugo-book
 <li><code>StringBuilder</code> 是线程不安全的，但性能更高<a href="@ref">5</a><a href="@ref">6</a><a href="@ref">7</a>。</li>
 </ul>
 <p>如果需要在多线程环境下操作字符串，建议使用 <code>StringBuffer</code>；在单线程环境下，建议使用 <code>StringBuilder</code> 以获得更好的性能<a href="@ref">5</a><a href="@ref">6</a><a href="@ref">7</a>。</p>
-<h1 id="java">
-  java
-  <a class="anchor" href="#java">#</a>
+<h1 id="虚拟线程">
+  虚拟线程
+  <a class="anchor" href="#%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b">#</a>
 </h1>
+<h2 id="什么是虚拟线程">
+  什么是虚拟线程？
+  <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b">#</a>
+</h2>
+<p><strong>虚拟线程（Virtual Threads）</strong> 是 Java 19 引入的一种轻量级线程，旨在简化和增强并发编程，特别是在处理大量 I/O 密集型任务时<a href="@ref">1</a><a href="@ref">2</a>。它是由 JVM 管理的线程，与传统线程（平台线程）相比，虚拟线程具有更高的并发性和更低的资源开销<a href="@ref">1</a><a href="@ref">6</a>。</p>
+<h3 id="虚拟线程的核心特点">
+  虚拟线程的核心特点
+  <a class="anchor" href="#%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e6%a0%b8%e5%bf%83%e7%89%b9%e7%82%b9">#</a>
+</h3>
+<ol>
+<li><strong>轻量级</strong>：虚拟线程的创建和切换开销非常小，可以轻松创建数百万个虚拟线程，而不会像传统线程那样消耗大量系统资源<a href="@ref">1</a><a href="@ref">6</a>。</li>
+<li><strong>I/O 优化</strong>：虚拟线程在遇到 I/O 阻塞（如网络通信、文件读取）时，会暂时放弃等待并切换到其他任务，从而提高 CPU 利用率，避免线程空闲<a href="@ref">1</a><a href="@ref">2</a>。</li>
+<li><strong>JVM 管理</strong>：虚拟线程由 JVM 调度和管理，而不是由操作系统直接管理。这使得虚拟线程的创建和销毁更加高效<a href="@ref">1</a><a href="@ref">6</a>。</li>
+<li><strong>与传统线程的区别</strong>：传统线程与操作系统线程是一对一的关系，资源消耗较大；而虚拟线程与操作系统线程是多对一的关系，多个虚拟线程可以在少量操作系统线程上运行<a href="@ref">6</a>。</li>
+</ol>
+<h3 id="虚拟线程的适用场景">
+  虚拟线程的适用场景
+  <a class="anchor" href="#%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h3>
+<p>虚拟线程特别适合以下场景：</p>
+<ul>
+<li><strong>高并发任务</strong>：如处理大量网络请求或文件 I/O 操作<a href="@ref">1</a><a href="@ref">6</a>。</li>
+<li><strong>I/O 密集型任务</strong>：任务中涉及大量等待时间（如数据库查询、HTTP 请求）<a href="@ref">1</a><a href="@ref">6</a>。</li>
+<li><strong>高吞吐量应用</strong>：需要同时处理大量任务的应用<a href="@ref">6</a>。</li>
+</ul>
+<h3 id="虚拟线程的使用">
+  虚拟线程的使用
+  <a class="anchor" href="#%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e4%bd%bf%e7%94%a8">#</a>
+</h3>
+<p>在 Java 21 中，虚拟线程已经成为正式功能，可以通过以下方式创建和使用：</p>
+<ol>
+<li><strong>直接创建虚拟线程</strong>：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Thread.<span style="color:#a6e22e">ofVirtual</span>().<span style="color:#a6e22e">start</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;这是一个虚拟线程&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div></li>
+<li><strong>使用虚拟线程池</strong>：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> (<span style="color:#66d9ef">var</span> executor <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newVirtualThreadPerTaskExecutor</span>()) {
+</span></span><span style="display:flex;"><span>    executor.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;任务在虚拟线程中执行&#34;</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="虚拟线程的局限性">
+  虚拟线程的局限性
+  <a class="anchor" href="#%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e5%b1%80%e9%99%90%e6%80%a7">#</a>
+</h3>
+<ul>
+<li><strong>CPU 密集型任务</strong>：虚拟线程在处理计算密集型任务时，性能与传统线程相比没有明显优势，因为计算任务不存在大量 I/O 等待<a href="@ref">1</a><a href="@ref">6</a>。</li>
+<li><strong>内存占用</strong>：虽然虚拟线程轻量，但大量虚拟线程仍会增加内存占用和垃圾回收的压力<a href="@ref">3</a>。</li>
+</ul>
+<h3 id="总结-1">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-1">#</a>
+</h3>
+<p>虚拟线程是 Java 并发编程的重要改进，特别适合高并发和 I/O 密集型任务。它通过轻量级的设计和高效的调度机制，显著提升了应用的吞吐量和资源利用率<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">6</a>。</p>
 <h2 id="响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">
   响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么
   <a class="anchor" href="#%e5%93%8d%e5%ba%94%e5%bc%8f%e7%bc%96%e7%a8%8b%e5%92%8c%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e9%83%bd%e8%83%bd%e6%8f%90%e9%ab%98%e7%a8%8b%e5%ba%8f%e7%9a%84%e5%b9%b6%e5%8f%91%e9%87%8f%e5%ae%83%e4%bb%ac%e7%9a%84%e5%b7%ae%e5%bc%82%e6%98%af%e4%bb%80%e4%b9%88">#</a>
@@ -1454,9 +1643,9 @@ https://github.com/alex-shpak/hugo-book
 虚拟线程通过轻量化的线程管理和高效的调度机制，减少了线程创建和上下文切换的开销。虚拟线程的性能优化由 JVM 自动完成，开发者无需额外干预。</li>
 </ul>
 <hr>
-<h3 id="总结-1">
+<h3 id="总结-2">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-1">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-2">#</a>
 </h3>
 <ul>
 <li><strong>响应式编程</strong>和<strong>虚拟线程</strong>的目标都是提高程序的并发性能，但它们的实现方式和适用场景不同。</li>
@@ -1499,9 +1688,9 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#5-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
 </h3>
 <p>虚拟线程特别适用于高并发、I/O密集型任务，例如网络请求、文件读写等。在这些场景下，虚拟线程可以显著减少线程阻塞带来的性能损失，从而提高整体吞吐量<a href="@ref">4</a><a href="@ref">5</a>。</p>
-<h3 id="总结-2">
+<h3 id="总结-3">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-2">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-3">#</a>
 </h3>
 <p>虚拟线程在JVM中的内存模型与传统平台线程类似，但由于其轻量化设计和由JVM管理的特性，虚拟线程的内存占用和调度开销显著降低。虚拟线程的内存模型仍然依赖于JVM的程序计数器、虚拟机栈、堆等结构，但其高效的调度机制和轻量化的内存占用使其在处理高并发任务时表现出色<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">4</a>。</p>
 <h2 id="虚拟线程会增加jvm的性能消耗吗">
@@ -1534,9 +1723,9 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#5-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
 </h3>
 <p>虚拟线程特别适用于高并发、I/O密集型任务，例如网络请求、文件读写等。在这些场景下，虚拟线程可以显著减少线程阻塞带来的性能损失，从而提高整体吞吐量<a href="@ref">2</a><a href="@ref">5</a>。</p>
-<h3 id="总结-3">
+<h3 id="总结-4">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-3">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-4">#</a>
 </h3>
 <p>虚拟线程不会显著增加JVM的性能消耗，反而通过优化任务调度和减少线程阻塞来提高性能。然而，对于CPU密集型任务，虚拟线程的性能提升有限<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">6</a>。</p>
 <h2 id="在-springboot-项目中虚拟线程可以怎么使用">
@@ -1762,36 +1951,39 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#3-%e5%85%b7%e4%bd%93%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b">#</a>
 </h3>
 <ol>
-<li><strong>虚拟线程创建</strong>：
+<li><strong>虚拟线程创建</strong>：</li>
+</ol>
 <ul>
 <li>当创建一个虚拟线程时，JVM 会为其分配一个轻量级的上下文（如栈、程序计数器等）。</li>
 <li>虚拟线程不会直接绑定到操作系统线程，而是由 JVM 管理。</li>
 </ul>
-</li>
-<li><strong>任务调度</strong>：
+<ol start="2">
+<li><strong>任务调度</strong>：</li>
+</ol>
 <ul>
 <li>当虚拟线程需要执行任务时，JVM 会将其调度到一个可用的操作系统线程上运行。</li>
 <li>操作系统线程是实际执行任务的载体。</li>
 </ul>
-</li>
-<li><strong>阻塞操作处理</strong>：
+<ol start="3">
+<li><strong>阻塞操作处理</strong>：</li>
+</ol>
 <ul>
 <li>如果虚拟线程执行了阻塞操作（如 I/O 或等待锁），JVM 会将其挂起。</li>
 <li>挂起后，操作系统线程会被释放，并可以执行其他虚拟线程。</li>
 </ul>
-</li>
-<li><strong>任务恢复</strong>：
+<ol start="4">
+<li><strong>任务恢复</strong>：</li>
+</ol>
 <ul>
 <li>当阻塞操作完成后，JVM 会重新调度该虚拟线程到某个操作系统线程上继续执行。</li>
 </ul>
-</li>
-<li><strong>线程切换</strong>：
+<ol start="5">
+<li><strong>线程切换</strong>：</li>
+</ol>
 <ul>
 <li>虚拟线程的切换由 JVM 管理，不需要操作系统介入。</li>
 <li>切换开销极小，因为虚拟线程的上下文是轻量级的。</li>
 </ul>
-</li>
-</ol>
 <hr>
 <h3 id="4-mn-模型的优势">
   4. <strong>M:N 模型的优势</strong>
@@ -1920,9 +2112,9 @@ https://github.com/alex-shpak/hugo-book
   </tbody>
 </table>
 <hr>
-<h3 id="总结-4">
+<h3 id="总结-5">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-4">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-5">#</a>
 </h3>
 <p>M:N 模型通过将大量轻量级虚拟线程映射到少量操作系统线程上，实现了高并发、低资源占用的线程管理。这种模型特别适合现代高并发、I/O 密集型的应用场景，同时简化了开发者的编程复杂度。</p>
 <h2 id="java虚拟线程和传统线程有什么区别">
@@ -2090,9 +2282,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span></code></pre></div></li>
 </ul>
 <hr>
-<h3 id="总结-5">
+<h3 id="总结-6">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-5">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-6">#</a>
 </h3>
 <table>
   <thead>
@@ -2227,6 +2419,10 @@ https://github.com/alex-shpak/hugo-book
 <li>虚拟线程的 I/O 操作会自动挂起并切换，而普通线程的 I/O 操作仍会阻塞<a href="@ref">1</a>。</li>
 </ul>
 <p>以上示例展示了虚拟线程的基本用法，适用于 Java 19 及以上版本。</p>
+<h1 id="java">
+  java
+  <a class="anchor" href="#java">#</a>
+</h1>
 <h2 id="学习资料">
   学习资料
   <a class="anchor" href="#%e5%ad%a6%e4%b9%a0%e8%b5%84%e6%96%99">#</a>
@@ -2527,9 +2723,9 @@ https://github.com/alex-shpak/hugo-book
 <li><strong>虚拟线程</strong>：正式支持虚拟线程。</li>
 <li><strong>字符串模板</strong>：引入字符串模板（预览）。</li>
 </ul>
-<h3 id="总结-6">
+<h3 id="总结-7">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-6">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-7">#</a>
 </h3>
 <p>Java每个版本都带来了新特性和改进，从基础功能到高级特性，不断提升开发效率和性能。</p>
 <h2 id="面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">
@@ -2836,9 +3032,9 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ul>
 <hr>
-<h3 id="总结-7">
+<h3 id="总结-8">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-7">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-8">#</a>
 </h3>
 <table>
   <thead>
@@ -2955,9 +3151,9 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ol>
 <hr>
-<h3 id="总结-8">
+<h3 id="总结-9">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-8">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-9">#</a>
 </h3>
 <ul>
 <li><strong>JDK 1.7</strong>：<code>数组 + 链表</code>，通过拉链法解决哈希冲突，性能较差。</li>
@@ -3223,9 +3419,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>缺点</strong>：仅适用于初始化后不再修改的场景<a href="@ref">2</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-9">
+<h3 id="总结-10">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-9">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-10">#</a>
 </h3>
 <table>
   <thead>
@@ -3339,9 +3535,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong><code>HashMap</code></strong>：对 <code>hashCode</code> 进行二次处理，通过 <code>(h = key.hashCode()) ^ (h &gt;&gt;&gt; 16)</code> 重新计算哈希值，以减少哈希冲突<a href="@ref">1</a><a href="@ref">3</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-10">
+<h3 id="总结-11">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-10">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-11">#</a>
 </h3>
 <table>
   <thead>
@@ -3435,9 +3631,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <p>扩容后，数组的长度变为原来的两倍（例如从 16 变为 32），哈希值的计算方式从 <code>(n - 1) &amp; hash</code> 变为 <code>(2n - 1) &amp; hash</code>。因此，原有的哈希值可能会映射到不同的位置，需要重新计算和分配<a href="@ref">1</a><a href="@ref">3</a>。</p>
 <hr>
-<h3 id="总结-11">
+<h3 id="总结-12">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-11">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-12">#</a>
 </h3>
 <p>当 HashMap 扩容时，所有的链表和红黑树都会重新构造。链表会被拆分为高位和低位链表，红黑树会被拆分为高位和低位树，并根据节点数决定是否转换为链表。这一过程确保了扩容后元素的分布依然均匀，维持了 HashMap 的高效性<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">5</a>。</p>
 <h1 id="io模型">
@@ -3598,9 +3794,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   </tbody>
 </table>
 <hr>
-<h3 id="总结-12">
+<h3 id="总结-13">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-12">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-13">#</a>
 </h3>
 <ul>
 <li><strong><code>select</code></strong>：适合低并发场景，跨平台支持好，但性能较差。</li>
@@ -4730,9 +4926,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li>使用 <code>SocketChannel.shutdownOutput</code> 先关闭输出流，确保对方知道本方不再发送数据，然后再调用 <code>close</code><a href="@ref">5</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-13">
+<h3 id="总结-14">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-13">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-14">#</a>
 </h3>
 <p><code>SocketChannel.close</code> 方法会按照 TCP 协议的正常流程关闭连接，<strong>不会</strong>导致数据传输时意外断开。但在网络故障或进程崩溃等异常情况下，可能会导致连接异常关闭。因此，建议在关闭连接前确保数据传输完成，并遵循 TCP 关闭的最佳实践<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</p>
 <h2 id="我还需要实现对特定连接发送命令报文">
@@ -5642,9 +5838,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>使用线程池</strong>：通过线程池管理线程，避免频繁创建和销毁线程。</li>
 <li><strong>优化任务设计</strong>：将任务拆分为更小的可并行单元，充分利用线程池的并发能力<a href="@ref">2</a><a href="@ref">3</a>。</li>
 </ul>
-<h3 id="总结-14">
+<h3 id="总结-15">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-14">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-15">#</a>
 </h3>
 <p>在Java中，每个线程默认会占用1MB的线程栈内存（实际可能为80KB到200KB），加上其他内存开销，创建大量线程可能会导致内存耗尽。通过使用线程池和优化线程栈大小，可以有效减少内存开销，提升系统性能<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</p>
 <h2 id="java中的selector使用的是select还是epoll">
@@ -5885,9 +6081,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>            }
 </span></span></code></pre></div><hr>
-<h3 id="总结-15">
+<h3 id="总结-16">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-15">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-16">#</a>
 </h3>
 <p><code>Selector</code> 中的事件是由 <strong>注册到 <code>Selector</code> 的 <code>Channel</code></strong> 产生的，<code>Selector</code> 负责检测这些事件并将其传递给应用程序进行处理。底层操作系统的 I/O 多路复用机制（如 <code>epoll</code> 或 <code>select</code>）是事件通知的关键<a href="@ref">1</a><a href="@ref">4</a>。</p>
 <h2 id="java的selector的使用过程中概念总结一下">
@@ -6265,9 +6461,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>场景</strong>：在某些特殊情况下（如密钥交换），私钥也可以用于加密，公钥用于解密。例如，在TLS/SSL协议中，服务器可能会用私钥加密某些信息，客户端用公钥解密以验证服务器的身份<a href="@ref">5</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-16">
+<h3 id="总结-17">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-16">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-17">#</a>
 </h3>
 <p>公钥和私钥的功能是灵活的，具体使用方式取决于应用场景：</p>
 <ul>
@@ -6394,9 +6590,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </li>
 </ul>
 <hr>
-<h3 id="总结-17">
+<h3 id="总结-18">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-17">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-18">#</a>
 </h3>
 <ul>
 <li><strong>推荐模式</strong>：CBC 和 CTR 模式，尤其是 CTR 模式，因其高效性和安全性<a href="@ref">1</a><a href="@ref">3</a>。</li>
@@ -6479,11 +6675,859 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>描述</strong>：主要用于RSA加密，填充格式为<code>00 + BT + PS + 00 + D</code>，其中<code>BT</code>为处理模式，<code>PS</code>为填充字节。</li>
 <li><strong>特点</strong>：适用于RSA加密，不常用于AES<a href="@ref">2</a>。</li>
 </ul>
-<h3 id="总结-18">
+<h3 id="总结-19">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-18">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-19">#</a>
 </h3>
 <p>AES中的填充方式多样，常见的包括 <strong>PKCS7</strong>、<strong>PKCS5</strong>、<strong>No Padding</strong>、<strong>ISO10126</strong> 等。选择填充方式时需根据具体应用场景和安全性需求进行权衡<a href="@ref">1</a><a href="@ref">2</a>。</p>
+<h1 id="reactor">
+  reactor
+  <a class="anchor" href="#reactor">#</a>
+</h1>
+<h2 id="reference">
+  reference
+  <a class="anchor" href="#reference">#</a>
+</h2>
+<ul>
+<li><a href="https://cloud.tencent.com/developer/article/1811347">五分钟快速理解 Reactor 模型</a>
+<ul>
+<li>1、线程模型1：传统阻塞 I/O 服务模型</li>
+<li>2、线程模型2：Reactor 模式
+<ul>
+<li>I/O 复用 + 线程</li>
+</ul>
+</li>
+<li>Reactor 模式中的两个关键组成
+<ul>
+<li>Reactor</li>
+<li>Handler</li>
+</ul>
+</li>
+<li>Reactor 的实现
+<ul>
+<li>单 Reactor 单线程</li>
+<li>单 Reactor 多线程</li>
+<li>主从 Reactor 多线程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="给我举一个-reactor-模式的例子">
+  给我举一个 reactor 模式的例子
+  <a class="anchor" href="#%e7%bb%99%e6%88%91%e4%b8%be%e4%b8%80%e4%b8%aa-reactor-%e6%a8%a1%e5%bc%8f%e7%9a%84%e4%be%8b%e5%ad%90">#</a>
+</h2>
+<p>以下是一个基于 <strong>Reactor 模式</strong> 的简单示例，使用 Java NIO 实现了一个非阻塞的服务器。这个示例展示了 Reactor 模式的核心思想：通过事件驱动机制，使用一个主线程（Reactor）监听多个 I/O 事件，并将事件分发给对应的处理器（Handler）进行处理。</p>
+<hr>
+<h3 id="示例代码reactor-模式服务器">
+  示例代码：Reactor 模式服务器
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81reactor-%e6%a8%a1%e5%bc%8f%e6%9c%8d%e5%8a%a1%e5%99%a8">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.InetSocketAddress;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.ByteBuffer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.channels.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Iterator;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Set;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReactorServer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 创建 Selector（事件多路复用器）</span>
+</span></span><span style="display:flex;"><span>        Selector selector <span style="color:#f92672">=</span> Selector.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 创建 ServerSocketChannel 并绑定端口</span>
+</span></span><span style="display:flex;"><span>        ServerSocketChannel serverSocketChannel <span style="color:#f92672">=</span> ServerSocketChannel.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>        serverSocketChannel.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">new</span> InetSocketAddress(8080));
+</span></span><span style="display:flex;"><span>        serverSocketChannel.<span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>); <span style="color:#75715e">// 设置为非阻塞模式</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 将 ServerSocketChannel 注册到 Selector，监听 ACCEPT 事件</span>
+</span></span><span style="display:flex;"><span>        serverSocketChannel.<span style="color:#a6e22e">register</span>(selector, SelectionKey.<span style="color:#a6e22e">OP_ACCEPT</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Server started on port 8080...&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 事件循环</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
+</span></span><span style="display:flex;"><span>            selector.<span style="color:#a6e22e">select</span>(); <span style="color:#75715e">// 阻塞等待事件发生</span>
+</span></span><span style="display:flex;"><span>            Set<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> selectedKeys <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">selectedKeys</span>();
+</span></span><span style="display:flex;"><span>            Iterator<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> iterator <span style="color:#f92672">=</span> selectedKeys.<span style="color:#a6e22e">iterator</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (iterator.<span style="color:#a6e22e">hasNext</span>()) {
+</span></span><span style="display:flex;"><span>                SelectionKey key <span style="color:#f92672">=</span> iterator.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>                iterator.<span style="color:#a6e22e">remove</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">isAcceptable</span>()) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 处理连接事件</span>
+</span></span><span style="display:flex;"><span>                    handleAccept(key, selector);
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">isReadable</span>()) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 处理读事件</span>
+</span></span><span style="display:flex;"><span>                    handleRead(key);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 处理连接事件</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleAccept</span>(SelectionKey key, Selector selector) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        ServerSocketChannel serverChannel <span style="color:#f92672">=</span> (ServerSocketChannel) key.<span style="color:#a6e22e">channel</span>();
+</span></span><span style="display:flex;"><span>        SocketChannel clientChannel <span style="color:#f92672">=</span> serverChannel.<span style="color:#a6e22e">accept</span>();
+</span></span><span style="display:flex;"><span>        clientChannel.<span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>); <span style="color:#75715e">// 设置为非阻塞模式</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 将客户端通道注册到 Selector，监听 READ 事件</span>
+</span></span><span style="display:flex;"><span>        clientChannel.<span style="color:#a6e22e">register</span>(selector, SelectionKey.<span style="color:#a6e22e">OP_READ</span>);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Client connected: &#34;</span> <span style="color:#f92672">+</span> clientChannel.<span style="color:#a6e22e">getRemoteAddress</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 处理读事件</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleRead</span>(SelectionKey key) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        SocketChannel clientChannel <span style="color:#f92672">=</span> (SocketChannel) key.<span style="color:#a6e22e">channel</span>();
+</span></span><span style="display:flex;"><span>        ByteBuffer buffer <span style="color:#f92672">=</span> ByteBuffer.<span style="color:#a6e22e">allocate</span>(1024);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> bytesRead <span style="color:#f92672">=</span> clientChannel.<span style="color:#a6e22e">read</span>(buffer);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (bytesRead <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 客户端断开连接</span>
+</span></span><span style="display:flex;"><span>            clientChannel.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Client disconnected: &#34;</span> <span style="color:#f92672">+</span> clientChannel.<span style="color:#a6e22e">getRemoteAddress</span>());
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (bytesRead <span style="color:#f92672">&gt;</span> 0) {
+</span></span><span style="display:flex;"><span>            buffer.<span style="color:#a6e22e">flip</span>(); <span style="color:#75715e">// 切换为读模式</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> data <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span>buffer.<span style="color:#a6e22e">limit</span>()<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>            buffer.<span style="color:#a6e22e">get</span>(data);
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Received: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">new</span> String(data));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 回显数据给客户端</span>
+</span></span><span style="display:flex;"><span>            clientChannel.<span style="color:#a6e22e">write</span>(ByteBuffer.<span style="color:#a6e22e">wrap</span>(data));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="代码说明-7">
+  代码说明
+  <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e8%af%b4%e6%98%8e-7">#</a>
+</h3>
+<ol>
+<li>
+<p><strong>Reactor</strong>：</p>
+<ul>
+<li><code>Selector</code> 是 Reactor 的核心组件，用于监听多个 <code>Channel</code> 的 I/O 事件。</li>
+<li>主线程通过 <code>selector.select()</code> 阻塞等待事件发生，然后遍历 <code>selectedKeys</code> 处理事件。</li>
+</ul>
+</li>
+<li>
+<p><strong>事件处理</strong>：</p>
+<ul>
+<li><strong>连接事件</strong>（<code>OP_ACCEPT</code>）：当有客户端连接时，<code>handleAccept</code> 方法会接受连接，并将客户端通道注册到 <code>Selector</code>，监听 <code>OP_READ</code> 事件。</li>
+<li><strong>读事件</strong>（<code>OP_READ</code>）：当客户端发送数据时，<code>handleRead</code> 方法会读取数据并回显给客户端。</li>
+</ul>
+</li>
+<li>
+<p><strong>非阻塞模式</strong>：</p>
+<ul>
+<li>所有的 <code>Channel</code> 都被设置为非阻塞模式（<code>configureBlocking(false)</code>），确保 I/O 操作不会阻塞线程。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="reactor-模式的核心组件12">
+  Reactor 模式的核心组件<a href="@ref">1</a><a href="@ref">2</a>
+  <a class="anchor" href="#reactor-%e6%a8%a1%e5%bc%8f%e7%9a%84%e6%a0%b8%e5%bf%83%e7%bb%84%e4%bb%b612">#</a>
+</h3>
+<ol>
+<li><strong>Reactor</strong>：负责监听和分发事件，是事件循环的核心。</li>
+<li><strong>Handler</strong>：事件处理器，用于处理 Reactor 分发的事件。</li>
+<li><strong>Acceptor</strong>：用于接受新的连接请求。</li>
+<li><strong>Event Demultiplexer</strong>（<code>Selector</code>）：用于等待多个 I/O 事件的发生。</li>
+</ol>
+<hr>
+<h3 id="应用场景">
+  应用场景
+  <a class="anchor" href="#%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h3>
+<p>Reactor 模式适合以下场景<a href="@ref">5</a>：</p>
+<ul>
+<li>高性能网络服务器（如 HTTP 服务器、聊天服务器）。</li>
+<li>实时通信系统（如推送服务）。</li>
+<li>分布式消息队列（如 Kafka）。</li>
+<li>游戏服务器。</li>
+</ul>
+<hr>
+<p>通过这个示例，你可以看到 Reactor 模式如何通过事件驱动机制高效地处理多个 I/O 事件，适合高并发场景。</p>
+<h1 id="响应式编程">
+  响应式编程
+  <a class="anchor" href="#%e5%93%8d%e5%ba%94%e5%bc%8f%e7%bc%96%e7%a8%8b">#</a>
+</h1>
+<h2 id="reference-1">
+  reference
+  <a class="anchor" href="#reference-1">#</a>
+</h2>
+<ul>
+<li><a href="https://www.zhihu.com/question/626744453/answer/3303246849">Java 虚拟线程对响应式编程开发有什么影响?</a></li>
+</ul>
+<h2 id="什么是响应式编程">
+  什么是响应式编程
+  <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af%e5%93%8d%e5%ba%94%e5%bc%8f%e7%bc%96%e7%a8%8b">#</a>
+</h2>
+<p><strong>响应式编程（Reactive Programming）<strong>是一种面向</strong>数据流</strong>和<strong>变化传播</strong>的声明式编程范式。它允许开发者方便地表达静态或动态的数据流，并自动将数据流中的变化传播到相关计算模型中<a href="@ref">3</a><a href="@ref">4</a>。</p>
+<h3 id="核心概念">
+  核心概念
+  <a class="anchor" href="#%e6%a0%b8%e5%bf%83%e6%a6%82%e5%bf%b5">#</a>
+</h3>
+<ol>
+<li><strong>数据流</strong>：响应式编程的核心是数据流，即数据的变化和流动。例如，在电子表格中，单元格的值会随着其他单元格的变化而自动更新<a href="@ref">3</a><a href="@ref">4</a>。</li>
+<li><strong>变化传播</strong>：当数据流中的某个值发生变化时，依赖该值的计算会自动更新，而不需要显式调用<a href="@ref">3</a><a href="@ref">4</a>。</li>
+<li><strong>声明式</strong>：开发者只需声明数据流和计算逻辑，而无需关注具体的执行细节<a href="@ref">3</a>。</li>
+</ol>
+<h3 id="响应式编程的特点">
+  响应式编程的特点
+  <a class="anchor" href="#%e5%93%8d%e5%ba%94%e5%bc%8f%e7%bc%96%e7%a8%8b%e7%9a%84%e7%89%b9%e7%82%b9">#</a>
+</h3>
+<ul>
+<li><strong>可应答性（Responsive）</strong>：系统能够及时响应请求，保持快速和一致的响应时间<a href="@ref">1</a><a href="@ref">4</a>。</li>
+<li><strong>弹性（Resilient）</strong>：系统在出现故障时仍能提供响应，例如返回错误页面而不是直接崩溃<a href="@ref">1</a><a href="@ref">4</a>。</li>
+<li><strong>可伸缩性（Elastic）</strong>：系统能够根据负载动态调整资源，例如在高负载时扩容，低负载时释放资源<a href="@ref">1</a><a href="@ref">4</a>。</li>
+<li><strong>消息驱动（Message Driven）</strong>：系统通过异步消息传递实现高效的资源利用和故障隔离<a href="@ref">1</a><a href="@ref">4</a>。</li>
+</ul>
+<h3 id="应用场景-1">
+  应用场景
+  <a class="anchor" href="#%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af-1">#</a>
+</h3>
+<ul>
+<li><strong>用户界面</strong>：响应式编程最初用于简化用户界面和实时系统动画的开发<a href="@ref">3</a><a href="@ref">4</a>。</li>
+<li><strong>实时数据处理</strong>：如金融交易系统、实时监控系统等<a href="@ref">1</a>。</li>
+<li><strong>高并发服务器</strong>：通过异步和非阻塞的方式处理大量并发请求<a href="@ref">2</a>。</li>
+</ul>
+<h3 id="优点">
+  优点
+  <a class="anchor" href="#%e4%bc%98%e7%82%b9">#</a>
+</h3>
+<ul>
+<li><strong>高效利用资源</strong>：通过异步和非阻塞的方式减少线程阻塞，提高 CPU 和内存的利用率<a href="@ref">1</a><a href="@ref">5</a>。</li>
+<li><strong>简化并发编程</strong>：开发者无需手动管理线程和同步问题<a href="@ref">1</a><a href="@ref">2</a>。</li>
+<li><strong>更好的扩展性</strong>：系统能够根据负载动态调整资源<a href="@ref">1</a><a href="@ref">4</a>。</li>
+</ul>
+<h3 id="缺点">
+  缺点
+  <a class="anchor" href="#%e7%bc%ba%e7%82%b9">#</a>
+</h3>
+<ul>
+<li><strong>复杂性</strong>：响应式编程的代码可能难以理解和调试，尤其是对于不熟悉异步编程的开发者<a href="@ref">5</a>。</li>
+<li><strong>学习成本高</strong>：需要理解数据流、背压（Backpressure）等概念<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="示例">
+  示例
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b">#</a>
+</h3>
+<p>在命令式编程中，表达式 <code>a = b + c</code> 只会计算一次，而在响应式编程中，<code>a</code> 的值会随着 <code>b</code> 和 <code>c</code> 的变化而自动更新<a href="@ref">3</a><a href="@ref">4</a>。</p>
+<h3 id="总结-20">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-20">#</a>
+</h3>
+<p>响应式编程是一种以数据流为核心的编程范式，适合处理高并发、实时性和动态变化的场景。尽管它具有一定的复杂性，但在现代高并发和实时系统中，响应式编程提供了高效且灵活的解决方案<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</p>
+<h2 id="在springboot中有哪些响应式编程的运用">
+  在springboot中有哪些响应式编程的运用
+  <a class="anchor" href="#%e5%9c%a8springboot%e4%b8%ad%e6%9c%89%e5%93%aa%e4%ba%9b%e5%93%8d%e5%ba%94%e5%bc%8f%e7%bc%96%e7%a8%8b%e7%9a%84%e8%bf%90%e7%94%a8">#</a>
+</h2>
+<p>在 Spring Boot 中，响应式编程主要通过 <strong>Spring WebFlux</strong> 和 <strong>Project Reactor</strong> 来实现。以下是 Spring Boot 中响应式编程的主要应用场景和实现方式：</p>
+<hr>
+<h3 id="1-响应式-web-开发spring-webflux">
+  1. <strong>响应式 Web 开发（Spring WebFlux）</strong>
+  <a class="anchor" href="#1-%e5%93%8d%e5%ba%94%e5%bc%8f-web-%e5%bc%80%e5%8f%91spring-webflux">#</a>
+</h3>
+<p>Spring WebFlux 是 Spring Framework 5.0 引入的响应式 Web 框架，支持异步非阻塞的请求处理，适合高并发场景<a href="@ref">1</a><a href="@ref">2</a>。</p>
+<h4 id="核心特性">
+  核心特性：
+  <a class="anchor" href="#%e6%a0%b8%e5%bf%83%e7%89%b9%e6%80%a7">#</a>
+</h4>
+<ul>
+<li><strong>非阻塞 I/O</strong>：使用异步非阻塞模型处理请求，提高并发能力。</li>
+<li><strong>Reactive Streams 支持</strong>：基于 Reactor 实现，支持背压（Backpressure）机制。</li>
+<li><strong>函数式编程</strong>：提供函数式 API（如 Router Functions）来定义路由和处理逻辑。</li>
+</ul>
+<h4 id="示例代码-2">
+  示例代码：
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-2">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserController</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Flux<span style="color:#f92672">&lt;</span>User<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getAllUsers</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Flux.<span style="color:#a6e22e">just</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> User(<span style="color:#e6db74">&#34;John&#34;</span>, 30),
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> User(<span style="color:#e6db74">&#34;Jane&#34;</span>, 25)
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在这个示例中，<code>Flux</code> 用于返回多个用户数据<a href="@ref">2</a>。</p>
+<hr>
+<h3 id="2-响应式数据库访问">
+  2. <strong>响应式数据库访问</strong>
+  <a class="anchor" href="#2-%e5%93%8d%e5%ba%94%e5%bc%8f%e6%95%b0%e6%8d%ae%e5%ba%93%e8%ae%bf%e9%97%ae">#</a>
+</h3>
+<p>Spring Boot 支持通过 <strong>Spring Data R2DBC</strong> 和 <strong>Spring Data MongoDB Reactive</strong> 实现响应式数据库访问<a href="@ref">2</a><a href="@ref">5</a>。</p>
+<h4 id="核心特性-1">
+  核心特性：
+  <a class="anchor" href="#%e6%a0%b8%e5%bf%83%e7%89%b9%e6%80%a7-1">#</a>
+</h4>
+<ul>
+<li><strong>非阻塞数据库操作</strong>：通过异步方式访问数据库，避免线程阻塞。</li>
+<li><strong>Reactive Repository</strong>：提供响应式的 CRUD 操作接口。</li>
+</ul>
+<h4 id="示例代码-3">
+  示例代码：
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-3">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Repository</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">UserRepository</span> <span style="color:#66d9ef">extends</span> ReactiveCrudRepository<span style="color:#f92672">&lt;</span>User, Long<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserService</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> UserRepository userRepository;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Flux<span style="color:#f92672">&lt;</span>User<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getAllUsers</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> userRepository.<span style="color:#a6e22e">findAll</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在这个示例中，<code>ReactiveCrudRepository</code> 用于实现响应式的数据库查询<a href="@ref">2</a>。</p>
+<hr>
+<h3 id="3-响应式消息传递">
+  3. <strong>响应式消息传递</strong>
+  <a class="anchor" href="#3-%e5%93%8d%e5%ba%94%e5%bc%8f%e6%b6%88%e6%81%af%e4%bc%a0%e9%80%92">#</a>
+</h3>
+<p>Spring Boot 支持通过 <strong>Spring Cloud Stream</strong> 和 <strong>Reactive Kafka</strong> 实现响应式消息传递<a href="@ref">5</a>。</p>
+<h4 id="核心特性-2">
+  核心特性：
+  <a class="anchor" href="#%e6%a0%b8%e5%bf%83%e7%89%b9%e6%80%a7-2">#</a>
+</h4>
+<ul>
+<li><strong>异步消息处理</strong>：通过非阻塞方式处理消息队列中的数据。</li>
+<li><strong>背压支持</strong>：根据消费者能力动态调整消息处理速度。</li>
+</ul>
+<h4 id="示例代码-4">
+  示例代码：
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-4">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> Consumer<span style="color:#f92672">&lt;</span>Flux<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">processMessage</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> messages <span style="color:#f92672">-&gt;</span> messages
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">doOnNext</span>(message <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Received: &#34;</span> <span style="color:#f92672">+</span> message))
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">subscribe</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在这个示例中，<code>Flux</code> 用于处理消息流<a href="@ref">5</a>。</p>
+<hr>
+<h3 id="4-响应式安全spring-security-reactive">
+  4. <strong>响应式安全（Spring Security Reactive）</strong>
+  <a class="anchor" href="#4-%e5%93%8d%e5%ba%94%e5%bc%8f%e5%ae%89%e5%85%a8spring-security-reactive">#</a>
+</h3>
+<p>Spring Boot 支持通过 <strong>Spring Security Reactive</strong> 实现响应式的安全控制<a href="@ref">5</a>。</p>
+<h4 id="核心特性-3">
+  核心特性：
+  <a class="anchor" href="#%e6%a0%b8%e5%bf%83%e7%89%b9%e6%80%a7-3">#</a>
+</h4>
+<ul>
+<li><strong>非阻塞认证和授权</strong>：通过异步方式处理用户认证和权限校验。</li>
+<li><strong>响应式上下文</strong>：支持在响应式环境中传递安全上下文。</li>
+</ul>
+<h4 id="示例代码-5">
+  示例代码：
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-5">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> SecurityWebFilterChain <span style="color:#a6e22e">securityWebFilterChain</span>(ServerHttpSecurity http) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> http
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">authorizeExchange</span>(exchanges <span style="color:#f92672">-&gt;</span> exchanges.<span style="color:#a6e22e">anyExchange</span>().<span style="color:#a6e22e">authenticated</span>())
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">httpBasic</span>(withDefaults())
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在这个示例中，<code>ServerHttpSecurity</code> 用于配置响应式安全规则<a href="@ref">5</a>。</p>
+<hr>
+<h3 id="5-响应式测试">
+  5. <strong>响应式测试</strong>
+  <a class="anchor" href="#5-%e5%93%8d%e5%ba%94%e5%bc%8f%e6%b5%8b%e8%af%95">#</a>
+</h3>
+<p>Spring Boot 提供对响应式组件的测试支持，包括 <code>WebTestClient</code> 和 <code>StepVerifier</code><a href="@ref">5</a>。</p>
+<h4 id="示例代码-6">
+  示例代码：
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-6">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Test</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testGetAllUsers</span>() {
+</span></span><span style="display:flex;"><span>    webTestClient.<span style="color:#a6e22e">get</span>().<span style="color:#a6e22e">uri</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">exchange</span>()
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">expectStatus</span>().<span style="color:#a6e22e">isOk</span>()
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">expectBodyList</span>(User.<span style="color:#a6e22e">class</span>).<span style="color:#a6e22e">hasSize</span>(2);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在这个示例中，<code>WebTestClient</code> 用于测试响应式 Web 接口<a href="@ref">5</a>。</p>
+<hr>
+<h3 id="6-响应式流处理">
+  6. <strong>响应式流处理</strong>
+  <a class="anchor" href="#6-%e5%93%8d%e5%ba%94%e5%bc%8f%e6%b5%81%e5%a4%84%e7%90%86">#</a>
+</h3>
+<p>通过 <strong>Project Reactor</strong>，Spring Boot 支持对数据流进行处理，包括转换、过滤、合并等操作<a href="@ref">1</a><a href="@ref">3</a>。</p>
+<h4 id="示例代码-7">
+  示例代码：
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-7">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Flux<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> numbers <span style="color:#f92672">=</span> Flux.<span style="color:#a6e22e">just</span>(1, 2, 3, 4, 5)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">filter</span>(n <span style="color:#f92672">-&gt;</span> n <span style="color:#f92672">%</span> 2 <span style="color:#f92672">==</span> 0)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">map</span>(n <span style="color:#f92672">-&gt;</span> n <span style="color:#f92672">*</span> 2);
+</span></span></code></pre></div><p>在这个示例中，<code>Flux</code> 用于对数据流进行过滤和转换<a href="@ref">3</a>。</p>
+<hr>
+<h3 id="总结-21">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-21">#</a>
+</h3>
+<p>在 Spring Boot 中，响应式编程的应用主要包括：</p>
+<ol>
+<li>响应式 Web 开发（Spring WebFlux）。</li>
+<li>响应式数据库访问（Spring Data R2DBC、Spring Data MongoDB Reactive）。</li>
+<li>响应式消息传递（Spring Cloud Stream、Reactive Kafka）。</li>
+<li>响应式安全（Spring Security Reactive）。</li>
+<li>响应式测试（WebTestClient、StepVerifier）。</li>
+<li>响应式流处理（Project Reactor）。</li>
+</ol>
+<p>这些技术共同构成了 Spring Boot 的响应式编程生态，适合构建高并发、低延迟的现代应用<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</p>
+<h2 id="响应式数据库访问和传统的数据库访问有什么区别">
+  响应式数据库访问和传统的数据库访问有什么区别
+  <a class="anchor" href="#%e5%93%8d%e5%ba%94%e5%bc%8f%e6%95%b0%e6%8d%ae%e5%ba%93%e8%ae%bf%e9%97%ae%e5%92%8c%e4%bc%a0%e7%bb%9f%e7%9a%84%e6%95%b0%e6%8d%ae%e5%ba%93%e8%ae%bf%e9%97%ae%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab">#</a>
+</h2>
+<p>响应式数据库访问与传统数据库访问的主要区别在于它们的编程模型、性能特点以及适用场景。以下是两者的详细对比：</p>
+<hr>
+<h3 id="1-编程模型">
+  1. <strong>编程模型</strong>
+  <a class="anchor" href="#1-%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%9e%8b">#</a>
+</h3>
+<ul>
+<li>
+<p><strong>传统数据库访问</strong>：</p>
+<ul>
+<li>基于 <strong>阻塞式 I/O</strong>，使用 JDBC（Java Database Connectivity）进行数据库操作。</li>
+<li>每个数据库操作都会阻塞当前线程，直到操作完成<a href="@ref">1</a>。</li>
+<li>适合同步编程模型，代码逻辑直观，但并发能力有限<a href="@ref">3</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>响应式数据库访问</strong>：</p>
+<ul>
+<li>基于 <strong>非阻塞 I/O</strong>，使用 R2DBC（Reactive Relational Database Connectivity）进行数据库操作。</li>
+<li>数据库操作不会阻塞线程，而是通过异步方式处理，线程可以继续执行其他任务<a href="@ref">1</a><a href="@ref">2</a>。</li>
+<li>适合异步和响应式编程模型，代码复杂度较高，但并发能力强<a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-性能特点">
+  2. <strong>性能特点</strong>
+  <a class="anchor" href="#2-%e6%80%a7%e8%83%bd%e7%89%b9%e7%82%b9">#</a>
+</h3>
+<ul>
+<li>
+<p><strong>传统数据库访问</strong>：</p>
+<ul>
+<li>在高并发场景下，线程阻塞会导致资源浪费，性能瓶颈明显<a href="@ref">1</a>。</li>
+<li>每个连接都需要一个独立的线程，线程创建和切换开销较大<a href="@ref">3</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>响应式数据库访问</strong>：</p>
+<ul>
+<li>非阻塞模型能够高效利用线程资源，支持更高的并发量<a href="@ref">2</a>。</li>
+<li>通过事件驱动和异步处理，减少线程阻塞，提升系统吞吐量<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-适用场景-1">
+  3. <strong>适用场景</strong>
+  <a class="anchor" href="#3-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af-1">#</a>
+</h3>
+<ul>
+<li>
+<p><strong>传统数据库访问</strong>：</p>
+<ul>
+<li>适合低并发、简单业务逻辑的场景，如传统的企业应用、小型网站<a href="@ref">7</a>。</li>
+<li>对事务一致性要求高的场景，如银行系统、财务系统<a href="@ref">7</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>响应式数据库访问</strong>：</p>
+<ul>
+<li>适合高并发、I/O 密集型场景，如实时数据处理、大规模在线服务<a href="@ref">2</a><a href="@ref">3</a>。</li>
+<li>对延迟敏感的场景，如实时通信、流媒体服务<a href="@ref">6</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-技术实现">
+  4. <strong>技术实现</strong>
+  <a class="anchor" href="#4-%e6%8a%80%e6%9c%af%e5%ae%9e%e7%8e%b0">#</a>
+</h3>
+<ul>
+<li>
+<p><strong>传统数据库访问</strong>：</p>
+<ul>
+<li>使用 JDBC，基于阻塞式 API，开发简单但性能受限<a href="@ref">1</a>。</li>
+<li>支持 ACID 事务，适合强一致性要求的场景<a href="@ref">7</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>响应式数据库访问</strong>：</p>
+<ul>
+<li>使用 R2DBC，基于 Reactive Streams 规范，支持非阻塞操作<a href="@ref">1</a><a href="@ref">2</a>。</li>
+<li>支持异步事务处理，但事务管理复杂度较高<a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-优缺点对比">
+  5. <strong>优缺点对比</strong>
+  <a class="anchor" href="#5-%e4%bc%98%e7%bc%ba%e7%82%b9%e5%af%b9%e6%af%94">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>特性</strong></th>
+          <th><strong>传统数据库访问</strong></th>
+          <th><strong>响应式数据库访问</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>编程复杂度</strong></td>
+          <td>简单，同步编程模型</td>
+          <td>复杂，异步编程模型</td>
+      </tr>
+      <tr>
+          <td><strong>并发能力</strong></td>
+          <td>低，受限于线程数量</td>
+          <td>高，非阻塞模型支持高并发</td>
+      </tr>
+      <tr>
+          <td><strong>资源利用率</strong></td>
+          <td>低，线程阻塞导致资源浪费</td>
+          <td>高，线程非阻塞，资源利用率高</td>
+      </tr>
+      <tr>
+          <td><strong>适用场景</strong></td>
+          <td>低并发、强一致性场景</td>
+          <td>高并发、低延迟场景</td>
+      </tr>
+      <tr>
+          <td><strong>事务支持</strong></td>
+          <td>支持 ACID 事务，实现简单</td>
+          <td>支持异步事务，实现复杂</td>
+      </tr>
+      <tr>
+          <td><strong>技术生态</strong></td>
+          <td>成熟，工具和文档丰富</td>
+          <td>较新，工具和文档仍在完善中<a href="@ref">2</a><a href="@ref">3</a></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="总结-22">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-22">#</a>
+</h3>
+<p>响应式数据库访问和传统数据库访问的主要区别在于：</p>
+<ol>
+<li><strong>编程模型</strong>：传统数据库访问是阻塞式同步模型，而响应式数据库访问是非阻塞异步模型<a href="@ref">1</a><a href="@ref">2</a>。</li>
+<li><strong>性能</strong>：响应式数据库访问在高并发场景下性能更优，资源利用率更高<a href="@ref">3</a>。</li>
+<li><strong>适用场景</strong>：传统数据库访问适合低并发、强一致性场景，响应式数据库访问适合高并发、低延迟场景<a href="@ref">6</a><a href="@ref">7</a>。</li>
+</ol>
+<p>根据具体业务需求选择合适的数据库访问方式，可以显著提升系统性能和开发效率。</p>
+<h2 id="一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">
+  一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较
+  <a class="anchor" href="#%e4%b8%80%e4%b8%aa%e8%af%b7%e6%b1%82%e5%9c%a8%e9%9d%9e%e5%93%8d%e5%ba%94%e5%bc%8f%e7%9a%84%e5%90%8e%e7%ab%af%e6%9c%8d%e5%8a%a1%e4%b8%ad%e7%9a%84%e5%a4%84%e7%90%86%e5%93%8d%e5%ba%94%e5%92%8c%e5%93%8d%e5%ba%94%e5%bc%8f%e7%9a%84%e5%90%8e%e7%ab%af%e6%9c%8d%e5%8a%a1%e4%b8%ad%e7%9a%84%e5%a4%84%e7%90%86%e7%9a%84%e8%bf%87%e7%a8%8b%e6%af%94%e8%be%83">#</a>
+</h2>
+<p>在处理请求时，<strong>非响应式后端服务</strong> 和 <strong>响应式后端服务</strong> 的工作机制和性能表现有显著差异。以下是两者的处理过程和比较：</p>
+<hr>
+<h3 id="1-非响应式后端服务的处理过程">
+  1. <strong>非响应式后端服务的处理过程</strong>
+  <a class="anchor" href="#1-%e9%9d%9e%e5%93%8d%e5%ba%94%e5%bc%8f%e5%90%8e%e7%ab%af%e6%9c%8d%e5%8a%a1%e7%9a%84%e5%a4%84%e7%90%86%e8%bf%87%e7%a8%8b">#</a>
+</h3>
+<p>非响应式后端服务通常采用 <strong>同步阻塞模型</strong>，其处理请求的过程如下：</p>
+<h4 id="处理流程">
+  处理流程：
+  <a class="anchor" href="#%e5%a4%84%e7%90%86%e6%b5%81%e7%a8%8b">#</a>
+</h4>
+<ol>
+<li><strong>接收请求</strong>：客户端发送请求到服务器，服务器接收请求并分配一个线程处理。</li>
+<li><strong>阻塞处理</strong>：线程会阻塞等待 I/O 操作完成（如数据库查询、文件读取等）。</li>
+<li><strong>执行逻辑</strong>：线程执行业务逻辑，处理请求数据。</li>
+<li><strong>返回响应</strong>：处理完成后，线程将结果返回给客户端。</li>
+<li><strong>释放资源</strong>：线程释放资源，等待下一个请求。</li>
+</ol>
+<h4 id="特点">
+  特点：
+  <a class="anchor" href="#%e7%89%b9%e7%82%b9">#</a>
+</h4>
+<ul>
+<li><strong>同步阻塞</strong>：每个请求需要一个独立的线程，线程在 I/O 操作时会阻塞，导致资源浪费。</li>
+<li><strong>并发能力有限</strong>：线程数量受限于线程池大小，高并发时容易达到瓶颈。</li>
+<li><strong>简单直观</strong>：代码逻辑简单，适合低并发、简单业务场景<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h4 id="示例-1">
+  示例：
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b-1">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NonReactiveController</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/data&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getData</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 阻塞式数据库查询</span>
+</span></span><span style="display:flex;"><span>        String result <span style="color:#f92672">=</span> database.<span style="color:#a6e22e">query</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="2-响应式后端服务的处理过程">
+  2. <strong>响应式后端服务的处理过程</strong>
+  <a class="anchor" href="#2-%e5%93%8d%e5%ba%94%e5%bc%8f%e5%90%8e%e7%ab%af%e6%9c%8d%e5%8a%a1%e7%9a%84%e5%a4%84%e7%90%86%e8%bf%87%e7%a8%8b">#</a>
+</h3>
+<p>响应式后端服务采用 <strong>异步非阻塞模型</strong>，其处理请求的过程如下：</p>
+<h4 id="处理流程-1">
+  处理流程：
+  <a class="anchor" href="#%e5%a4%84%e7%90%86%e6%b5%81%e7%a8%8b-1">#</a>
+</h4>
+<ol>
+<li><strong>接收请求</strong>：客户端发送请求到服务器，服务器接收请求并分派给事件循环处理。</li>
+<li><strong>非阻塞处理</strong>：事件循环不会阻塞等待 I/O 操作，而是注册回调函数，继续处理其他请求。</li>
+<li><strong>执行逻辑</strong>：当 I/O 操作完成时，事件循环触发回调函数，执行业务逻辑。</li>
+<li><strong>返回响应</strong>：处理完成后，事件循环将结果返回给客户端。</li>
+<li><strong>复用资源</strong>：事件循环继续处理其他请求，资源利用率高。</li>
+</ol>
+<h4 id="特点-1">
+  特点：
+  <a class="anchor" href="#%e7%89%b9%e7%82%b9-1">#</a>
+</h4>
+<ul>
+<li><strong>异步非阻塞</strong>：线程不会阻塞在 I/O 操作上，可以处理更多请求。</li>
+<li><strong>高并发能力</strong>：通过事件驱动模型，支持更高的并发量。</li>
+<li><strong>复杂但高效</strong>：代码逻辑复杂，但适合高并发、I/O 密集型场景<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+<h4 id="示例-2">
+  示例：
+  <a class="anchor" href="#%e7%a4%ba%e4%be%8b-2">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReactiveController</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/data&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Mono<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getData</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 非阻塞式数据库查询</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> database.<span style="color:#a6e22e">queryReactive</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="3-两者的比较">
+  3. <strong>两者的比较</strong>
+  <a class="anchor" href="#3-%e4%b8%a4%e8%80%85%e7%9a%84%e6%af%94%e8%be%83">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>特性</strong></th>
+          <th><strong>非响应式后端服务</strong></th>
+          <th><strong>响应式后端服务</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>模型</strong></td>
+          <td>同步阻塞</td>
+          <td>异步非阻塞</td>
+      </tr>
+      <tr>
+          <td><strong>线程使用</strong></td>
+          <td>每个请求需要一个独立线程</td>
+          <td>一个线程可以处理多个请求</td>
+      </tr>
+      <tr>
+          <td><strong>并发能力</strong></td>
+          <td>低，受限于线程数量</td>
+          <td>高，支持高并发</td>
+      </tr>
+      <tr>
+          <td><strong>资源利用率</strong></td>
+          <td>低，线程阻塞导致资源浪费</td>
+          <td>高，线程非阻塞，资源利用率高</td>
+      </tr>
+      <tr>
+          <td><strong>代码复杂度</strong></td>
+          <td>简单，直观</td>
+          <td>复杂，需要理解异步编程</td>
+      </tr>
+      <tr>
+          <td><strong>适用场景</strong></td>
+          <td>低并发、简单业务逻辑</td>
+          <td>高并发、I/O 密集型任务</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="4-总结-3">
+  4. <strong>总结</strong>
+  <a class="anchor" href="#4-%e6%80%bb%e7%bb%93-3">#</a>
+</h3>
+<ul>
+<li><strong>非响应式后端服务</strong>：适合低并发、简单业务场景，代码简单但性能有限。</li>
+<li><strong>响应式后端服务</strong>：适合高并发、I/O 密集型场景，性能优异但代码复杂度较高。</li>
+</ul>
+<p>根据具体需求选择合适的技术栈，可以显著提升系统的性能和开发效率<a href="@ref">1</a><a href="@ref">3</a>。</p>
+<h1 id="mono">
+  Mono
+  <a class="anchor" href="#mono">#</a>
+</h1>
+<h2 id="在java的响应式中mono是什么">
+  在java的响应式中，mono是什么
+  <a class="anchor" href="#%e5%9c%a8java%e7%9a%84%e5%93%8d%e5%ba%94%e5%bc%8f%e4%b8%admono%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h2>
+<p>在 Java 的响应式编程中，<strong>Mono</strong> 是 <strong>Reactor</strong> 库中的一个核心类，用于表示一个 <strong>异步的、单值的数据流</strong>。它代表了一个可能包含 <strong>零个或一个元素</strong> 的序列，通常用于处理返回单个结果或没有结果的异步操作。</p>
+<h3 id="mono-的主要特点">
+  <strong>Mono 的主要特点</strong>
+  <a class="anchor" href="#mono-%e7%9a%84%e4%b8%bb%e8%a6%81%e7%89%b9%e7%82%b9">#</a>
+</h3>
+<ol>
+<li><strong>单值流</strong>：Mono 用于表示最多包含一个元素的流，适合处理单个结果或空值的场景。</li>
+<li><strong>异步非阻塞</strong>：Mono 的操作是非阻塞的，适合处理 I/O 密集型任务，如数据库查询、网络请求等。</li>
+<li><strong>丰富的操作符</strong>：Mono 提供了多种操作符（如 <code>map</code>、<code>flatMap</code>、<code>filter</code> 等），可以对数据进行转换和处理。</li>
+<li><strong>背压支持</strong>：Mono 遵循 Reactive Streams 规范，支持背压机制，确保生产者和消费者之间的速率平衡。</li>
+</ol>
+<h3 id="mono-的常见使用场景">
+  <strong>Mono 的常见使用场景</strong>
+  <a class="anchor" href="#mono-%e7%9a%84%e5%b8%b8%e8%a7%81%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h3>
+<ol>
+<li><strong>数据库查询</strong>：查询单个记录或返回单个结果的操作。</li>
+<li><strong>网络请求</strong>：发送 HTTP 请求并接收单个响应。</li>
+<li><strong>任务执行</strong>：执行异步任务并返回单个结果。</li>
+</ol>
+<h3 id="mono-的示例代码">
+  <strong>Mono 的示例代码</strong>
+  <a class="anchor" href="#mono-%e7%9a%84%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#</a>
+</h3>
+<p>以下是一个简单的 Mono 使用示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> reactor.core.publisher.Mono;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MonoExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 创建一个包含单个值的 Mono</span>
+</span></span><span style="display:flex;"><span>        Mono<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> mono <span style="color:#f92672">=</span> Mono.<span style="color:#a6e22e">just</span>(<span style="color:#e6db74">&#34;Hello, Mono!&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 订阅并处理 Mono 中的值</span>
+</span></span><span style="display:flex;"><span>        mono.<span style="color:#a6e22e">subscribe</span>(value <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Received: &#34;</span> <span style="color:#f92672">+</span> value));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在这个示例中，<code>Mono.just</code> 创建了一个包含单个值的 Mono，<code>subscribe</code> 方法用于订阅并处理 Mono 中的值。</p>
+<h3 id="mono-的操作符">
+  <strong>Mono 的操作符</strong>
+  <a class="anchor" href="#mono-%e7%9a%84%e6%93%8d%e4%bd%9c%e7%ac%a6">#</a>
+</h3>
+<p>Mono 提供了多种操作符来处理数据，例如：</p>
+<ul>
+<li><strong><code>map</code></strong>：对 Mono 中的值进行转换。</li>
+<li><strong><code>flatMap</code></strong>：将 Mono 中的值转换为另一个 Mono。</li>
+<li><strong><code>filter</code></strong>：过滤 Mono 中的值。</li>
+</ul>
+<p>示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Mono<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> mono <span style="color:#f92672">=</span> Mono.<span style="color:#a6e22e">just</span>(10);
+</span></span><span style="display:flex;"><span>mono.<span style="color:#a6e22e">map</span>(value <span style="color:#f92672">-&gt;</span> value <span style="color:#f92672">*</span> 2)
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">subscribe</span>(result <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Result: &#34;</span> <span style="color:#f92672">+</span> result));
+</span></span></code></pre></div><h3 id="mono-与-flux-的区别">
+  <strong>Mono 与 Flux 的区别</strong>
+  <a class="anchor" href="#mono-%e4%b8%8e-flux-%e7%9a%84%e5%8c%ba%e5%88%ab">#</a>
+</h3>
+<ul>
+<li><strong>Mono</strong>：用于处理 <strong>单个值或空值</strong> 的异步序列。</li>
+<li><strong>Flux</strong>：用于处理 <strong>多个值</strong> 的异步序列，适合流式数据或集合操作<a href="@ref">4</a>。</li>
+</ul>
+<h3 id="总结-23">
+  <strong>总结</strong>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-23">#</a>
+</h3>
+<p>Mono 是 Java 响应式编程中用于处理 <strong>单值异步操作</strong> 的核心类，适合处理单个结果或空值的场景。它通过异步非阻塞的机制和丰富的操作符，能够高效地处理 I/O 密集型任务，并支持背压机制，确保系统的稳定性<a href="@ref">1</a><a href="@ref">4</a>。</p>
+<h2 id="mono-是如何实现非阻塞的">
+  Mono 是如何实现非阻塞的
+  <a class="anchor" href="#mono-%e6%98%af%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e9%9d%9e%e9%98%bb%e5%a1%9e%e7%9a%84">#</a>
+</h2>
+<p><strong>Mono</strong> 是 <strong>Reactor</strong> 库中的一个核心类，用于表示一个 <strong>异步的、单值的数据流</strong>。它通过 <strong>事件驱动</strong> 和 <strong>回调机制</strong> 实现了非阻塞的特性。以下是 Mono 实现非阻塞的具体机制：</p>
+<hr>
+<h3 id="1-事件驱动模型">
+  1. <strong>事件驱动模型</strong>
+  <a class="anchor" href="#1-%e4%ba%8b%e4%bb%b6%e9%a9%b1%e5%8a%a8%e6%a8%a1%e5%9e%8b">#</a>
+</h3>
+<p>Mono 基于 <strong>事件驱动模型</strong>，其核心思想是：</p>
+<ul>
+<li><strong>事件源</strong>：Mono 本身是一个事件源，表示一个可能产生单值或空值的异步操作。</li>
+<li><strong>观察者</strong>：通过 <code>subscribe</code> 方法订阅 Mono 的观察者，会在事件发生时被通知。</li>
+<li><strong>事件循环</strong>：Mono 的操作由事件循环驱动，线程不会阻塞在 I/O 操作上，而是继续处理其他任务。</li>
+</ul>
+<p>这种模型使得 Mono 能够高效处理异步操作，避免线程阻塞<a href="@ref">1</a>。</p>
+<hr>
+<h3 id="2-回调机制">
+  2. <strong>回调机制</strong>
+  <a class="anchor" href="#2-%e5%9b%9e%e8%b0%83%e6%9c%ba%e5%88%b6">#</a>
+</h3>
+<p>Mono 通过 <strong>回调机制</strong> 实现非阻塞：</p>
+<ul>
+<li><strong>订阅触发执行</strong>：Mono 的异步操作只有在被订阅时才会执行。例如：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Mono.<span style="color:#a6e22e">just</span>(<span style="color:#e6db74">&#34;Hello&#34;</span>).<span style="color:#a6e22e">subscribe</span>(value <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Received: &#34;</span> <span style="color:#f92672">+</span> value));
+</span></span></code></pre></div>这里的 <code>subscribe</code> 方法触发了 Mono 的执行，并通过回调函数处理结果。</li>
+<li><strong>异步通知</strong>：当 Mono 的异步操作完成时，会通过回调函数通知观察者，线程不会阻塞在等待结果上<a href="@ref">1</a>。</li>
+</ul>
+<hr>
+<h3 id="3-非阻塞-io">
+  3. <strong>非阻塞 I/O</strong>
+  <a class="anchor" href="#3-%e9%9d%9e%e9%98%bb%e5%a1%9e-io">#</a>
+</h3>
+<p>Mono 内部的操作是 <strong>非阻塞 I/O</strong> 的，例如数据库查询、网络请求等：</p>
+<ul>
+<li><strong>异步操作</strong>：Mono 将 I/O 操作封装为异步任务，线程不会阻塞在 I/O 操作上。</li>
+<li><strong>回调处理</strong>：当 I/O 操作完成时，Mono 通过回调机制将结果传递给观察者<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<hr>
+<h3 id="4-线程调度">
+  4. <strong>线程调度</strong>
+  <a class="anchor" href="#4-%e7%ba%bf%e7%a8%8b%e8%b0%83%e5%ba%a6">#</a>
+</h3>
+<p>Mono 使用 <strong>Reactor 调度器（Scheduler）</strong> 控制任务的执行线程：</p>
+<ul>
+<li><strong>事件循环线程</strong>：负责监听事件和分发任务。</li>
+<li><strong>工作线程</strong>：通过调度器（如 <code>Schedulers.parallel()</code>）执行异步任务。</li>
+<li><strong>线程复用</strong>：由于线程不会阻塞，少量线程可以高效处理大量并发请求<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<hr>
+<h3 id="5-背压支持">
+  5. <strong>背压支持</strong>
+  <a class="anchor" href="#5-%e8%83%8c%e5%8e%8b%e6%94%af%e6%8c%81">#</a>
+</h3>
+<p>Mono 遵循 <strong>Reactive Streams 规范</strong>，支持 <strong>背压（Backpressure）</strong> 机制：</p>
+<ul>
+<li><strong>速率控制</strong>：当生产者（Mono）和消费者（观察者）的速率不匹配时，背压机制会调节数据流速率，避免系统过载<a href="@ref">1</a>。</li>
+</ul>
+<hr>
+<h3 id="6-示例代码">
+  6. <strong>示例代码</strong>
+  <a class="anchor" href="#6-%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#</a>
+</h3>
+<p>以下是一个简单的 Mono 非阻塞示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Mono.<span style="color:#a6e22e">fromCallable</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 模拟一个耗时操作</span>
+</span></span><span style="display:flex;"><span>    Thread.<span style="color:#a6e22e">sleep</span>(1000);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Result&#34;</span>;
+</span></span><span style="display:flex;"><span>}).<span style="color:#a6e22e">subscribeOn</span>(Schedulers.<span style="color:#a6e22e">parallel</span>()) <span style="color:#75715e">// 指定线程池</span>
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">subscribe</span>(result <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Received: &#34;</span> <span style="color:#f92672">+</span> result));
+</span></span></code></pre></div><p>在这个示例中：</p>
+<ul>
+<li><code>fromCallable</code> 封装了一个耗时操作，但不会阻塞线程。</li>
+<li><code>subscribeOn</code> 指定了任务执行的线程池。</li>
+<li><code>subscribe</code> 触发任务执行，并通过回调处理结果<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<hr>
+<h3 id="总结-24">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-24">#</a>
+</h3>
+<p>Mono 通过 <strong>事件驱动模型</strong>、<strong>回调机制</strong>、<strong>非阻塞 I/O</strong> 和 <strong>线程调度</strong> 实现了非阻塞的特性。它的核心设计使得线程不会阻塞在异步操作上，从而高效处理高并发请求，适合 I/O 密集型任务<a href="@ref">1</a><a href="@ref">2</a>。</p>
 </article>
  
       
@@ -6493,7 +7537,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/50919d06cfc8bc6662f1d7c84f0cb53ccd51b989" title='最后修改者 penruins | 三月 6, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/948b78223b8c972a6b81110c83487a9550126b1e" title='最后修改者 penruins | 三月 6, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>三月 6, 2025</span>
     </a>
@@ -6552,6 +7596,15 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   </ul>
 
   <ul>
+    <li><a href="#什么是虚拟线程">什么是虚拟线程？</a>
+      <ul>
+        <li><a href="#虚拟线程的核心特点">虚拟线程的核心特点</a></li>
+        <li><a href="#虚拟线程的适用场景">虚拟线程的适用场景</a></li>
+        <li><a href="#虚拟线程的使用">虚拟线程的使用</a></li>
+        <li><a href="#虚拟线程的局限性">虚拟线程的局限性</a></li>
+        <li><a href="#总结-1">总结</a></li>
+      </ul>
+    </li>
     <li><a href="#响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么</a>
       <ul>
         <li><a href="#1-实现原理">1. <strong>实现原理</strong></a></li>
@@ -6559,7 +7612,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-适用场景">3. <strong>适用场景</strong></a></li>
         <li><a href="#4-开发体验">4. <strong>开发体验</strong></a></li>
         <li><a href="#5-性能优化">5. <strong>性能优化</strong></a></li>
-        <li><a href="#总结-1">总结</a></li>
+        <li><a href="#总结-2">总结</a></li>
       </ul>
     </li>
     <li><a href="#虚拟线程在jvm中的内存模型是怎样的">虚拟线程在jvm中的内存模型是怎样的</a>
@@ -6569,7 +7622,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-虚拟线程的调度与内存使用">3. <strong>虚拟线程的调度与内存使用</strong></a></li>
         <li><a href="#4-虚拟线程与垃圾回收">4. <strong>虚拟线程与垃圾回收</strong></a></li>
         <li><a href="#5-虚拟线程的适用场景">5. <strong>虚拟线程的适用场景</strong></a></li>
-        <li><a href="#总结-2">总结</a></li>
+        <li><a href="#总结-3">总结</a></li>
       </ul>
     </li>
     <li><a href="#虚拟线程会增加jvm的性能消耗吗">虚拟线程会增加jvm的性能消耗吗</a>
@@ -6579,7 +7632,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-cpu密集型任务的限制">3. <strong>CPU密集型任务的限制</strong></a></li>
         <li><a href="#4-jvm的性能消耗">4. <strong>JVM的性能消耗</strong></a></li>
         <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
-        <li><a href="#总结-3">总结</a></li>
+        <li><a href="#总结-4">总结</a></li>
       </ul>
     </li>
     <li><a href="#在-springboot-项目中虚拟线程可以怎么使用">在 springboot 项目中虚拟线程可以怎么使用</a>
@@ -6623,7 +7676,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#5-mn-模型的实现细节">5. <strong>M:N 模型的实现细节</strong></a></li>
         <li><a href="#6-示例">6. <strong>示例</strong></a></li>
         <li><a href="#7-与传统线程模型的对比">7. <strong>与传统线程模型的对比</strong></a></li>
-        <li><a href="#总结-4">总结</a></li>
+        <li><a href="#总结-5">总结</a></li>
       </ul>
     </li>
     <li><a href="#java虚拟线程和传统线程有什么区别">Java虚拟线程和传统线程有什么区别</a>
@@ -6636,7 +7689,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#6-资源占用">6. <strong>资源占用</strong></a></li>
         <li><a href="#7-兼容性">7. <strong>兼容性</strong></a></li>
         <li><a href="#8-示例对比">8. <strong>示例对比</strong></a></li>
-        <li><a href="#总结-5">总结</a></li>
+        <li><a href="#总结-6">总结</a></li>
       </ul>
     </li>
     <li><a href="#可以生成一个java使用虚拟线程的例子吗">可以生成一个java使用虚拟线程的例子吗</a>
@@ -6648,6 +7701,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#注意事项">注意事项</a></li>
       </ul>
     </li>
+  </ul>
+
+  <ul>
     <li><a href="#学习资料">学习资料</a></li>
     <li><a href="#basic">basic</a>
       <ul>
@@ -6691,7 +7747,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#java-19-2022">Java 19 (2022)</a></li>
         <li><a href="#java-20-2023">Java 20 (2023)</a></li>
         <li><a href="#java-21-2023">Java 21 (2023)</a></li>
-        <li><a href="#总结-6">总结</a></li>
+        <li><a href="#总结-7">总结</a></li>
       </ul>
     </li>
     <li><a href="#面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识</a>
@@ -6723,7 +7779,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-排序规则"><strong>3. 排序规则</strong></a></li>
         <li><a href="#4-性能与稳定性"><strong>4. 性能与稳定性</strong></a></li>
         <li><a href="#5-使用场景"><strong>5. 使用场景</strong></a></li>
-        <li><a href="#总结-7"><strong>总结</strong></a></li>
+        <li><a href="#总结-8"><strong>总结</strong></a></li>
       </ul>
     </li>
   </ul>
@@ -6734,7 +7790,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#jdk-17-及之前"><strong>JDK 1.7 及之前</strong></a></li>
         <li><a href="#jdk-18-及之后"><strong>JDK 1.8 及之后</strong></a></li>
         <li><a href="#核心机制"><strong>核心机制</strong></a></li>
-        <li><a href="#总结-8"><strong>总结</strong></a></li>
+        <li><a href="#总结-9"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？</a>
@@ -6765,7 +7821,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-使用读写锁-"><strong>3. 使用读写锁 (<code>ReadWriteLock</code>)</strong></a></li>
         <li><a href="#4-方法内部使用局部"><strong>4. 方法内部使用局部 <code>HashMap</code></strong></a></li>
         <li><a href="#5-初始化写后续只读"><strong>5. 初始化写，后续只读</strong></a></li>
-        <li><a href="#总结-9"><strong>总结</strong></a></li>
+        <li><a href="#总结-10"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？</a>
@@ -6777,7 +7833,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#5-扩容机制"><strong>5. 扩容机制</strong></a></li>
         <li><a href="#6-迭代器"><strong>6. 迭代器</strong></a></li>
         <li><a href="#7-计算哈希值的方式"><strong>7. 计算哈希值的方式</strong></a></li>
-        <li><a href="#总结-10"><strong>总结</strong></a></li>
+        <li><a href="#总结-11"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#当-hashmap-扩容时所有的红黑树或者链表都会重新构造吗">当 HashMap 扩容时，所有的红黑树或者链表都会重新构造吗</a>
@@ -6785,7 +7841,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#1-链表重新构造"><strong>1. 链表重新构造</strong></a></li>
         <li><a href="#2-红黑树重新构造"><strong>2. 红黑树重新构造</strong></a></li>
         <li><a href="#3-重新哈希的原因"><strong>3. 重新哈希的原因</strong></a></li>
-        <li><a href="#总结-11"><strong>总结</strong></a></li>
+        <li><a href="#总结-12"><strong>总结</strong></a></li>
       </ul>
     </li>
   </ul>
@@ -6797,7 +7853,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#2-poll">2. <strong>poll</strong></a></li>
         <li><a href="#3-epoll">3. <strong>epoll</strong></a></li>
         <li><a href="#对比总结">对比总结</a></li>
-        <li><a href="#总结-12">总结</a></li>
+        <li><a href="#总结-13">总结</a></li>
       </ul>
     </li>
     <li><a href="#提供一个java异步io的例子">提供一个java异步I/O的例子</a>
@@ -6889,7 +7945,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#2-数据传输中的关闭">2. <strong>数据传输中的关闭</strong></a></li>
         <li><a href="#3-异常情况">3. <strong>异常情况</strong></a></li>
         <li><a href="#4-最佳实践">4. <strong>最佳实践</strong></a></li>
-        <li><a href="#总结-13">总结</a></li>
+        <li><a href="#总结-14">总结</a></li>
       </ul>
     </li>
     <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
@@ -6950,7 +8006,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-线程创建和销毁的开销">3. <strong>线程创建和销毁的开销</strong></a></li>
         <li><a href="#4-线程池的优化">4. <strong>线程池的优化</strong></a></li>
         <li><a href="#5-如何减少线程内存开销">5. <strong>如何减少线程内存开销</strong></a></li>
-        <li><a href="#总结-14">总结</a></li>
+        <li><a href="#总结-15">总结</a></li>
       </ul>
     </li>
     <li><a href="#java中的selector使用的是select还是epoll">java中的selector使用的是select还是epoll</a></li>
@@ -6974,7 +8030,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#2-事件的检测">2. <strong>事件的检测</strong></a></li>
         <li><a href="#3-事件的触发机制">3. <strong>事件的触发机制</strong></a></li>
         <li><a href="#4-示例">4. <strong>示例</strong></a></li>
-        <li><a href="#总结-15">总结</a></li>
+        <li><a href="#总结-16">总结</a></li>
       </ul>
     </li>
     <li><a href="#java的selector的使用过程中概念总结一下">java的selector的使用过程中概念总结一下</a>
@@ -7013,7 +8069,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
         <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
         <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
-        <li><a href="#总结-16"><strong>总结</strong></a></li>
+        <li><a href="#总结-17"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
@@ -7023,7 +8079,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
         <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
         <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
-        <li><a href="#总结-17"><strong>总结</strong></a></li>
+        <li><a href="#总结-18"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
@@ -7037,7 +8093,127 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
         <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
         <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
-        <li><a href="#总结-18">总结</a></li>
+        <li><a href="#总结-19">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#reference">reference</a></li>
+    <li><a href="#给我举一个-reactor-模式的例子">给我举一个 reactor 模式的例子</a>
+      <ul>
+        <li><a href="#示例代码reactor-模式服务器">示例代码：Reactor 模式服务器</a></li>
+        <li><a href="#代码说明-7">代码说明</a></li>
+        <li><a href="#reactor-模式的核心组件12">Reactor 模式的核心组件<a href="@ref">1</a><a href="@ref">2</a></a></li>
+        <li><a href="#应用场景">应用场景</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#reference-1">reference</a></li>
+    <li><a href="#什么是响应式编程">什么是响应式编程</a>
+      <ul>
+        <li><a href="#核心概念">核心概念</a></li>
+        <li><a href="#响应式编程的特点">响应式编程的特点</a></li>
+        <li><a href="#应用场景-1">应用场景</a></li>
+        <li><a href="#优点">优点</a></li>
+        <li><a href="#缺点">缺点</a></li>
+        <li><a href="#示例">示例</a></li>
+        <li><a href="#总结-20">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#在springboot中有哪些响应式编程的运用">在springboot中有哪些响应式编程的运用</a>
+      <ul>
+        <li><a href="#1-响应式-web-开发spring-webflux">1. <strong>响应式 Web 开发（Spring WebFlux）</strong></a>
+          <ul>
+            <li><a href="#核心特性">核心特性：</a></li>
+            <li><a href="#示例代码-2">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-响应式数据库访问">2. <strong>响应式数据库访问</strong></a>
+          <ul>
+            <li><a href="#核心特性-1">核心特性：</a></li>
+            <li><a href="#示例代码-3">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-响应式消息传递">3. <strong>响应式消息传递</strong></a>
+          <ul>
+            <li><a href="#核心特性-2">核心特性：</a></li>
+            <li><a href="#示例代码-4">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-响应式安全spring-security-reactive">4. <strong>响应式安全（Spring Security Reactive）</strong></a>
+          <ul>
+            <li><a href="#核心特性-3">核心特性：</a></li>
+            <li><a href="#示例代码-5">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#5-响应式测试">5. <strong>响应式测试</strong></a>
+          <ul>
+            <li><a href="#示例代码-6">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#6-响应式流处理">6. <strong>响应式流处理</strong></a>
+          <ul>
+            <li><a href="#示例代码-7">示例代码：</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结-21">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#响应式数据库访问和传统的数据库访问有什么区别">响应式数据库访问和传统的数据库访问有什么区别</a>
+      <ul>
+        <li><a href="#1-编程模型">1. <strong>编程模型</strong></a></li>
+        <li><a href="#2-性能特点">2. <strong>性能特点</strong></a></li>
+        <li><a href="#3-适用场景-1">3. <strong>适用场景</strong></a></li>
+        <li><a href="#4-技术实现">4. <strong>技术实现</strong></a></li>
+        <li><a href="#5-优缺点对比">5. <strong>优缺点对比</strong></a></li>
+        <li><a href="#总结-22">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较</a>
+      <ul>
+        <li><a href="#1-非响应式后端服务的处理过程">1. <strong>非响应式后端服务的处理过程</strong></a>
+          <ul>
+            <li><a href="#处理流程">处理流程：</a></li>
+            <li><a href="#特点">特点：</a></li>
+            <li><a href="#示例-1">示例：</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-响应式后端服务的处理过程">2. <strong>响应式后端服务的处理过程</strong></a>
+          <ul>
+            <li><a href="#处理流程-1">处理流程：</a></li>
+            <li><a href="#特点-1">特点：</a></li>
+            <li><a href="#示例-2">示例：</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-两者的比较">3. <strong>两者的比较</strong></a></li>
+        <li><a href="#4-总结-3">4. <strong>总结</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#在java的响应式中mono是什么">在java的响应式中，mono是什么</a>
+      <ul>
+        <li><a href="#mono-的主要特点"><strong>Mono 的主要特点</strong></a></li>
+        <li><a href="#mono-的常见使用场景"><strong>Mono 的常见使用场景</strong></a></li>
+        <li><a href="#mono-的示例代码"><strong>Mono 的示例代码</strong></a></li>
+        <li><a href="#mono-的操作符"><strong>Mono 的操作符</strong></a></li>
+        <li><a href="#mono-与-flux-的区别"><strong>Mono 与 Flux 的区别</strong></a></li>
+        <li><a href="#总结-23"><strong>总结</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#mono-是如何实现非阻塞的">Mono 是如何实现非阻塞的</a>
+      <ul>
+        <li><a href="#1-事件驱动模型">1. <strong>事件驱动模型</strong></a></li>
+        <li><a href="#2-回调机制">2. <strong>回调机制</strong></a></li>
+        <li><a href="#3-非阻塞-io">3. <strong>非阻塞 I/O</strong></a></li>
+        <li><a href="#4-线程调度">4. <strong>线程调度</strong></a></li>
+        <li><a href="#5-背压支持">5. <strong>背压支持</strong></a></li>
+        <li><a href="#6-示例代码">6. <strong>示例代码</strong></a></li>
+        <li><a href="#总结-24">总结</a></li>
       </ul>
     </li>
   </ul>
