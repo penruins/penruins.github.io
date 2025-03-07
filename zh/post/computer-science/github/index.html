@@ -413,10 +413,60 @@ oldratlee
   广度优先搜索
   #
 
+public List&lt;Integer&gt; bfs(TreeNode root) {
+    Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
+    if (root != null) {
+        queue.offer(root);
+    }
+    List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+    while(!queue.isEmpty()) {
+        TreeNode node = queue.poll();
+        result.add(node.val);
+        if (node.left != null)
+            queue.offer(node.left);
+        if (node.right != null)
+            queue.offer(node.right);
+    }
+    return result;
+}
 
   面试题43：在完全二叉树中添加节点
   #
 
+// CBT Complete Binary Tree
+class CBTInserter {
+    private Queue&lt;TreeNode&gt; queue;
+    private TreeNode root;
+
+    public CBTInserter(TreeNode root) {
+        this.root = root;
+        queue = new LinkedList&lt;&gt;();
+        while (queue.peek().left != null &amp;&amp; queue.peek().right != null) {
+            TreeNode node = queue.poll();
+            queue.offer(node.left);
+            queue.offer(node.right);
+        }
+
+    }
+
+    public int insert(int v) {
+        TreeNode parent = queue.peek();
+        TreeNode node = new TreeNode(v);
+        if (parent.left == null) {
+            parent.left = node;
+        } else {
+            parent.right = node;
+            queue.poll();
+            queue.offer(parent.left);
+            queue.offer(parent.right);
+        }
+        return parent.val;
+    }
+
+    public TreeNode get_root() {
+        return this.root;
+    }
+}
 
   面试题44：二叉树中每层的最大值
   #
@@ -425,18 +475,113 @@ oldratlee
   用一个队列实现二叉树的广度优先搜索
   #
 
+public List&lt;Integer&gt; largestValues(TreeNode root) {
+    int current = 0;
+    int next = 0;
+    Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
+    if (root != null) {
+        queue.offer(root);
+        current = 1;
+    }
+    List&lt;Integer&gt; result = new LinkedList&lt;&gt;();
+    int max = Integer.MIN_VALUE;
+    while (!queue.isEmpty()) {
+        TreeNode node = queue.poll();
+        current--;
+        max = Math.max(max.node.val);
+
+        if (node.left != null) {
+            queue.offer(node.left);
+            next&#43;&#43;;
+        }
+        if (node.right != null) {
+            queue.offer(node.right);
+            next&#43;&#43;;
+        }
+        if (current == 0) {
+            result.add(max);
+            max = Integer.MIN_VALUE;
+            current = next;
+            next = 0;
+        }
+    }
+    return result;
+
+}
 
   用两个队列实现二叉树的广度优先搜索
   #
 
+public List&lt;Integer&gt; largestValues(TreeNode root) {
+    Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;();
+    Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;();
+    if (root != null) {
+        queue1.offer(root);
+    }
+    List&lt;Integer&gt; result = new LinkedList&lt;&gt;();
+    int max = Math.max(max, node.val);
+
+    if (node.left != null) {
+        queue2.offer(node.left);
+    }
+
+    if (node.right != null) {
+        queue2.offer(node.right);
+    }
+
+    if (queue1.isEmpty()) {
+        result.add(max);
+        max = Integer.MIN_VALUE;
+        queue1 = queue2;
+        queue2 = new LinkedList&lt;&gt;();
+    }
+    return result;
+}
 
   面试题45：二叉树最低层最左边的值
   #
 
+public int findBottomLeftValue(TreeNode root) {
+    Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;();
+    Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;();
+    queue1.offer(root);
+    int bottomLeft =root.val;
+    while(!queue.isEmpty()) {
+        TreeNode node = queue1.poll();
+        if (node.left != null) {
+            queue2.offer(node.left);
+        }
+        if (node.right != null) {
+            queue2.offer(node.right);
+        }
+        if (queue1.isEmpty()) {
+            queue1 = queue2;
+            queue2 = new LinkedList&lt;&gt;();
+            if (!queue1.isEmpty()) {
+                bottomLeft = queue1.peek().val;
+            }
+        }
+    }
+    return bottomLeft;
+}
 
   面试题46：二叉树的右侧视图
   #
 
+public List&lt;Integer&gt; rightSideView(TreeNode root) {
+    List&lt;Integer&gt; view = new LinkedList&lt;&gt;();
+    if (root == null) {
+        return view;
+    }
+    Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;();
+    Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;();
+    queue1.offer(root);
+    while(!queue1.isEmpty()) {
+        
+    }
+      
+      
+}
 
   7.4 本章小结
   #
@@ -908,18 +1053,18 @@ f(0) {}
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/github/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="github">
-  <meta property="og:description" content="github # Github Action # GitHub Actions 入门教程 repository # torvalds/linux CesiumGS/cesium CesiumJS is a JavaScript library for creating 3D globes and 2D maps in a web browser without a plugin. It uses WebGL for hardware-accelerated graphics, and is cross-platform, cross-browser, and tuned for dynamic-data visualization. ohmyzsh/ohmyzsh Oh My Zsh is an open source, community-driven framework for managing your zsh configuration. algorithm-practice # algorithm-practice dataStructure # com.penruins.dataStructure PriorityQueueDemo # demo1 PriorityQueue 默认为最小堆 如果 PriorityQueue 中没有元素了，则返回 null demo2 自定义一个比较器实现最大堆 follow # oldratlee algorithm practice 剑指 offer # 第1章 整数 # 1.1 整数的基础知识 # 面试题1：整数除法 # 1.2 二进制 # 面试题2：二进制加法 # 面试题3：前n个数字二进制形式中1的个数 # 简单计算每个整数的二进制形式中1的个数 # 根据“i&amp;（i-1）”计算i的二进制形式中1的个数 # 根据“i/2”计算i的二进制形式中1的个数 # 面试题4：只出现一次的数字 # 面试题5：单词长度的最大乘积 # 用哈希表记录字符串中出现的字符 # 用整数的二进制数位记录字符串中出现的字符 # 1.3 本章小结 # 第2章 数组 # 2.1 数组的基础知识 # 2.2 双指针 # 面试题6：排序数组中的两个数字之和 # 面试题7：数组中和为0的3个数字 # 面试题8：和大于或等于k的最短子数组 # 面试题9：乘积小于k的子数组 # 2.3 累加数组数字求子数组之和 # 面试题10：和为k的子数组 # 面试题11：0和1个数相同的子数组 # 面试题12：左右两边子数组的和相等 # 面试题13：二维子矩阵的数字之和 # 2.4 本章小结 # 第3章 字符串 # 3.1 字符串的基础知识 # 3.2 双指针 # 面试题14：字符串中的变位词 # 面试题15：字符串中的所有变位词 # 面试题16：不含重复字符的最长子字符串 # 需要多次遍历整个哈希表的解法 # 避免多次遍历整个哈希表的解法 # 面试题17：包含所有字符的最短字符串 # 3.3 回文字符串 # 面试题18：有效的回文 # 面试题19：最多删除一个字符得到回文 # 面试题20：回文子字符串的个数 # 3.4 本章小结 # 第4章 链表 # 4.1 链表的基础知识 # 4.2 哨兵节点 # 用哨兵节点简化链表插入操作 # 用哨兵节点简化链表删除操作 # 4.3 双指针 # 面试题21：删除倒数第k个节点 # 面试题22：链表中环的入口节点 # 需要知道环中节点数目的解法 # 不需要知道环中节点数目的解法 # 面试题23：两个链表的第1个重合节点 # 4.4 反转链表 # 面试题24：反转链表 # 面试题25：链表中的数字相加 # 面试题26：重排链表 # 面试题27：回文链表 # 4.5 双向链表和循环链表 # 面试题28：展平多级双向链 # 面试题29：排序的循环链表 # 4.6 本章小结 # 第5章 哈希表 # 5.1 哈希表的基础知识 # 5.2 哈希表的设计 # 5.3 哈希表的应用 # 5.4 本章小结 # 第6章 栈 # 6.1 栈的基础知识 # 6.2 栈的应用 # 面试题36：后缀表达式 # 面试题37：小行星碰撞 # 面试题38：每日温度 # 面试题39：直方图最大矩形面积 # 蛮力法 # 分治法 # 单调栈法 # 面试题40：矩阵中的最大矩形 # 6.3 本章小结 # 第7章 队列 # 7.1 队列的基础知识 # 7.2 队列的应用 # 面试题41：滑动窗口的平均值 # 面试题42：最近请求次数 # 7.3 二叉树的广度优先搜索 Solution0703001 # 广度优先搜索 # 面试题43：在完全二叉树中添加节点 # 面试题44：二叉树中每层的最大值 # 用一个队列实现二叉树的广度优先搜索 # 用两个队列实现二叉树的广度优先搜索 # 面试题45：二叉树最低层最左边的值 # 面试题46：二叉树的右侧视图 # 7.4 本章小结 # 第8章 树 # 8.1 树的基础知识 # 8.2 二叉树的深度优先搜索 # 中序遍历 # 前序遍历 # 后序遍历 # 3种遍历方法小结 # 面试题47：二叉树剪枝 # 面试题48：序列化和反序列化二叉树 # 面试题49：从根节点到叶节点的路径数字之和 # 面试题50：向下的路径节点值之和 # 面试题51：节点值之和最大的路径 # 8.3 二叉搜索树 # 面试题52：展平二叉搜索树 # 面试题53：二叉搜索树的下一个节点 # 时间复杂度O(n)的解法 # 时间复杂度O(h)的解法 # 面试题54：所有大于或等于节点的值之和 # 面试题55：二叉搜索树迭代器 # 面试题56：二叉搜索树种两个节点的值之和 # 利用哈希表，空间复杂度为O（n）的解法 # 应用双指针，空间复杂度为O（h）的解法 # 8.4 TreeSet和TreeMap的应用 # 面试题57：值和下标之差都在给定的范围内 # 时间复杂度为O（nlogk）的解法 # 时间复杂度为O（n）的解法 # 面试题58：日程表 # 8.5 本章小结 # 第9章 堆 # 9.1 堆的基础知识 # 9.2 堆的应用 # ✅ 面试题59：数据流的第k大数字 JZOffer59.java # ✅ 面试题60：出现频率最高的k个数字 JZOffer60.java # ✅ 面试题61：和最小的k个数对 JZOffer61.java # 使用最大堆 # 使用最小堆 # kSmallestPairs 9.3 本章小结 # 第10章 前缀树 # 10.1 前缀树的基础知识 # ✅ 面试题62：实现前缀树 JZOffer62.java # 10.2 前缀树的应用 # ✅ 面试题63：替换单词 JZOffer63.java # 面试题64：神奇的字典 # 面试题65：最短的单词编码 # 面试题66：单词之和 # 面试题67：最大的异或 # 10.3 本章小结 # 第11章 二分查找 # 11.1 二分查找的基础知识 # ✅ 二分查找算法 com.penruins.JZOffer.BinarySearch.java # 11.2 在排序数组中二分查找 # 面试题68：查找插入位置 # 面试题69：山峰数组的顶部 # 面试题70：排序数组中只出现一次的数字 com.penruins.JZOffer.JZOffer70.java # singleNonDuplicate 用异或运算的方式实现 面试题71：按权重生成随机数 # 11.3 在数值范围内二分查找 # 面试题72：求平方根 # 面试题73：狒狒吃香蕉 # 11.4 本章小结 # 第12章 排序 # 12.1 排序的基础知识 # 面试题74：合并区间 # 12.2 计数排序 # 面试题75：数组相对排序 # 12.3 快速排序 # 快速排序算法 com.penruins.JZOffer.QuickSort # 面试题76：数组中第k大的数字 # 12.4 归并排序 # 面试题77：链表排序 # 面试题78：合并排序链表 # 利用最小堆选取值最小的节点 # 按照归并排序的思路合并链表 # 12.5 本章小结 # 第13章 回溯法 # 13.1 回溯法的基础知识 # 13.2 集合的组合、排列 # 13.3 回溯法解决其他类型问题 # 13.4 本章小结 # 第14章 动态规划 # 14.1 动态规划的基础知识 # 14.2 单序列问题 # 14.3 双序列问题 # 14.4 矩阵路径问题 # 面试题98：路径的数目 # 分析确定状态转移方程 # 根据状态转移方程写递归代码 # 递归代码 # 优化空间效率 # 面试题99：最小路径之和 # 面试题100：三角形中最小路径之和 # 14.5 背包问题 # 0-1 背包问题 多重背包问题 完全背包问题 面试题101：分割等和子集 # 分析确定状态转移方程 # 根据状态转移方程写递归代码 # 根据状态转移方程写迭代代码 # 优化空间效率 # 面试题102：加减的目标值 # 面试题103：最小的硬币数目 # 分析确定状态转移方程 # 根据状态转移方程写代码 # 另一种思路 # 面试题104：排列的数目 # int[] nums = new int[1 2 3]; i = 3; f(i) = f(i - nums[0]) &#43; f(i - nums[1]) &#43; f(i - nums[2]); f(0) = 1; f(1) = f(0) &#43; f(-1) &#43; f(-2) = 1; f(2) = f(1) &#43; f(0) &#43; f(-1) = 2; f(3) = f(2) &#43; f(1) &#43; f(0) = 4; f(2) {1,1} {2} f(1) {1} f(0) {} 14.6 本章小结 # 第15章 图 305 # 15.1 图的基础知识 305 # 15.2 图的搜索 307 # 15.3 拓扑排序 333 # 15.4 并查集 342 # 15.5 本章小结 354 # 剑指offer这本书中每一道面试题对应leetcode的题目 # 《剑指Offer》是一本经典的编程面试书籍，其中包含了许多高质量的编程题目。很多题目与LeetCode上的题目有对应关系。以下是一些《剑指Offer》中的题目及其在LeetCode上的对应题目：">
+  <meta property="og:description" content="github # Github Action # GitHub Actions 入门教程 repository # torvalds/linux CesiumGS/cesium CesiumJS is a JavaScript library for creating 3D globes and 2D maps in a web browser without a plugin. It uses WebGL for hardware-accelerated graphics, and is cross-platform, cross-browser, and tuned for dynamic-data visualization. ohmyzsh/ohmyzsh Oh My Zsh is an open source, community-driven framework for managing your zsh configuration. algorithm-practice # algorithm-practice dataStructure # com.penruins.dataStructure PriorityQueueDemo # demo1 PriorityQueue 默认为最小堆 如果 PriorityQueue 中没有元素了，则返回 null demo2 自定义一个比较器实现最大堆 follow # oldratlee algorithm practice 剑指 offer # 第1章 整数 # 1.1 整数的基础知识 # 面试题1：整数除法 # 1.2 二进制 # 面试题2：二进制加法 # 面试题3：前n个数字二进制形式中1的个数 # 简单计算每个整数的二进制形式中1的个数 # 根据“i&amp;（i-1）”计算i的二进制形式中1的个数 # 根据“i/2”计算i的二进制形式中1的个数 # 面试题4：只出现一次的数字 # 面试题5：单词长度的最大乘积 # 用哈希表记录字符串中出现的字符 # 用整数的二进制数位记录字符串中出现的字符 # 1.3 本章小结 # 第2章 数组 # 2.1 数组的基础知识 # 2.2 双指针 # 面试题6：排序数组中的两个数字之和 # 面试题7：数组中和为0的3个数字 # 面试题8：和大于或等于k的最短子数组 # 面试题9：乘积小于k的子数组 # 2.3 累加数组数字求子数组之和 # 面试题10：和为k的子数组 # 面试题11：0和1个数相同的子数组 # 面试题12：左右两边子数组的和相等 # 面试题13：二维子矩阵的数字之和 # 2.4 本章小结 # 第3章 字符串 # 3.1 字符串的基础知识 # 3.2 双指针 # 面试题14：字符串中的变位词 # 面试题15：字符串中的所有变位词 # 面试题16：不含重复字符的最长子字符串 # 需要多次遍历整个哈希表的解法 # 避免多次遍历整个哈希表的解法 # 面试题17：包含所有字符的最短字符串 # 3.3 回文字符串 # 面试题18：有效的回文 # 面试题19：最多删除一个字符得到回文 # 面试题20：回文子字符串的个数 # 3.4 本章小结 # 第4章 链表 # 4.1 链表的基础知识 # 4.2 哨兵节点 # 用哨兵节点简化链表插入操作 # 用哨兵节点简化链表删除操作 # 4.3 双指针 # 面试题21：删除倒数第k个节点 # 面试题22：链表中环的入口节点 # 需要知道环中节点数目的解法 # 不需要知道环中节点数目的解法 # 面试题23：两个链表的第1个重合节点 # 4.4 反转链表 # 面试题24：反转链表 # 面试题25：链表中的数字相加 # 面试题26：重排链表 # 面试题27：回文链表 # 4.5 双向链表和循环链表 # 面试题28：展平多级双向链 # 面试题29：排序的循环链表 # 4.6 本章小结 # 第5章 哈希表 # 5.1 哈希表的基础知识 # 5.2 哈希表的设计 # 5.3 哈希表的应用 # 5.4 本章小结 # 第6章 栈 # 6.1 栈的基础知识 # 6.2 栈的应用 # 面试题36：后缀表达式 # 面试题37：小行星碰撞 # 面试题38：每日温度 # 面试题39：直方图最大矩形面积 # 蛮力法 # 分治法 # 单调栈法 # 面试题40：矩阵中的最大矩形 # 6.3 本章小结 # 第7章 队列 # 7.1 队列的基础知识 # 7.2 队列的应用 # 面试题41：滑动窗口的平均值 # 面试题42：最近请求次数 # 7.3 二叉树的广度优先搜索 Solution0703001 # 广度优先搜索 # public List&lt;Integer&gt; bfs(TreeNode root) { Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;(); if (root != null) { queue.offer(root); } List&lt;Integer&gt; result = new ArrayList&lt;&gt;(); while(!queue.isEmpty()) { TreeNode node = queue.poll(); result.add(node.val); if (node.left != null) queue.offer(node.left); if (node.right != null) queue.offer(node.right); } return result; } 面试题43：在完全二叉树中添加节点 # // CBT Complete Binary Tree class CBTInserter { private Queue&lt;TreeNode&gt; queue; private TreeNode root; public CBTInserter(TreeNode root) { this.root = root; queue = new LinkedList&lt;&gt;(); while (queue.peek().left != null &amp;&amp; queue.peek().right != null) { TreeNode node = queue.poll(); queue.offer(node.left); queue.offer(node.right); } } public int insert(int v) { TreeNode parent = queue.peek(); TreeNode node = new TreeNode(v); if (parent.left == null) { parent.left = node; } else { parent.right = node; queue.poll(); queue.offer(parent.left); queue.offer(parent.right); } return parent.val; } public TreeNode get_root() { return this.root; } } 面试题44：二叉树中每层的最大值 # 用一个队列实现二叉树的广度优先搜索 # public List&lt;Integer&gt; largestValues(TreeNode root) { int current = 0; int next = 0; Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;(); if (root != null) { queue.offer(root); current = 1; } List&lt;Integer&gt; result = new LinkedList&lt;&gt;(); int max = Integer.MIN_VALUE; while (!queue.isEmpty()) { TreeNode node = queue.poll(); current--; max = Math.max(max.node.val); if (node.left != null) { queue.offer(node.left); next&#43;&#43;; } if (node.right != null) { queue.offer(node.right); next&#43;&#43;; } if (current == 0) { result.add(max); max = Integer.MIN_VALUE; current = next; next = 0; } } return result; } 用两个队列实现二叉树的广度优先搜索 # public List&lt;Integer&gt; largestValues(TreeNode root) { Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;(); Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;(); if (root != null) { queue1.offer(root); } List&lt;Integer&gt; result = new LinkedList&lt;&gt;(); int max = Math.max(max, node.val); if (node.left != null) { queue2.offer(node.left); } if (node.right != null) { queue2.offer(node.right); } if (queue1.isEmpty()) { result.add(max); max = Integer.MIN_VALUE; queue1 = queue2; queue2 = new LinkedList&lt;&gt;(); } return result; } 面试题45：二叉树最低层最左边的值 # public int findBottomLeftValue(TreeNode root) { Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;(); Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;(); queue1.offer(root); int bottomLeft =root.val; while(!queue.isEmpty()) { TreeNode node = queue1.poll(); if (node.left != null) { queue2.offer(node.left); } if (node.right != null) { queue2.offer(node.right); } if (queue1.isEmpty()) { queue1 = queue2; queue2 = new LinkedList&lt;&gt;(); if (!queue1.isEmpty()) { bottomLeft = queue1.peek().val; } } } return bottomLeft; } 面试题46：二叉树的右侧视图 # public List&lt;Integer&gt; rightSideView(TreeNode root) { List&lt;Integer&gt; view = new LinkedList&lt;&gt;(); if (root == null) { return view; } Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;(); Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;(); queue1.offer(root); while(!queue1.isEmpty()) { } } 7.4 本章小结 # 第8章 树 # 8.1 树的基础知识 # 8.2 二叉树的深度优先搜索 # 中序遍历 # 前序遍历 # 后序遍历 # 3种遍历方法小结 # 面试题47：二叉树剪枝 # 面试题48：序列化和反序列化二叉树 # 面试题49：从根节点到叶节点的路径数字之和 # 面试题50：向下的路径节点值之和 # 面试题51：节点值之和最大的路径 # 8.3 二叉搜索树 # 面试题52：展平二叉搜索树 # 面试题53：二叉搜索树的下一个节点 # 时间复杂度O(n)的解法 # 时间复杂度O(h)的解法 # 面试题54：所有大于或等于节点的值之和 # 面试题55：二叉搜索树迭代器 # 面试题56：二叉搜索树种两个节点的值之和 # 利用哈希表，空间复杂度为O（n）的解法 # 应用双指针，空间复杂度为O（h）的解法 # 8.4 TreeSet和TreeMap的应用 # 面试题57：值和下标之差都在给定的范围内 # 时间复杂度为O（nlogk）的解法 # 时间复杂度为O（n）的解法 # 面试题58：日程表 # 8.5 本章小结 # 第9章 堆 # 9.1 堆的基础知识 # 9.2 堆的应用 # ✅ 面试题59：数据流的第k大数字 JZOffer59.java # ✅ 面试题60：出现频率最高的k个数字 JZOffer60.java # ✅ 面试题61：和最小的k个数对 JZOffer61.java # 使用最大堆 # 使用最小堆 # kSmallestPairs 9.3 本章小结 # 第10章 前缀树 # 10.1 前缀树的基础知识 # ✅ 面试题62：实现前缀树 JZOffer62.java # 10.2 前缀树的应用 # ✅ 面试题63：替换单词 JZOffer63.java # 面试题64：神奇的字典 # 面试题65：最短的单词编码 # 面试题66：单词之和 # 面试题67：最大的异或 # 10.3 本章小结 # 第11章 二分查找 # 11.1 二分查找的基础知识 # ✅ 二分查找算法 com.penruins.JZOffer.BinarySearch.java # 11.2 在排序数组中二分查找 # 面试题68：查找插入位置 # 面试题69：山峰数组的顶部 # 面试题70：排序数组中只出现一次的数字 com.penruins.JZOffer.JZOffer70.java # singleNonDuplicate 用异或运算的方式实现 面试题71：按权重生成随机数 # 11.3 在数值范围内二分查找 # 面试题72：求平方根 # 面试题73：狒狒吃香蕉 # 11.4 本章小结 # 第12章 排序 # 12.1 排序的基础知识 # 面试题74：合并区间 # 12.2 计数排序 # 面试题75：数组相对排序 # 12.3 快速排序 # 快速排序算法 com.penruins.JZOffer.QuickSort # 面试题76：数组中第k大的数字 # 12.4 归并排序 # 面试题77：链表排序 # 面试题78：合并排序链表 # 利用最小堆选取值最小的节点 # 按照归并排序的思路合并链表 # 12.5 本章小结 # 第13章 回溯法 # 13.1 回溯法的基础知识 # 13.2 集合的组合、排列 # 13.3 回溯法解决其他类型问题 # 13.4 本章小结 # 第14章 动态规划 # 14.1 动态规划的基础知识 # 14.2 单序列问题 # 14.3 双序列问题 # 14.4 矩阵路径问题 # 面试题98：路径的数目 # 分析确定状态转移方程 # 根据状态转移方程写递归代码 # 递归代码 # 优化空间效率 # 面试题99：最小路径之和 # 面试题100：三角形中最小路径之和 # 14.5 背包问题 # 0-1 背包问题 多重背包问题 完全背包问题 面试题101：分割等和子集 # 分析确定状态转移方程 # 根据状态转移方程写递归代码 # 根据状态转移方程写迭代代码 # 优化空间效率 # 面试题102：加减的目标值 # 面试题103：最小的硬币数目 # 分析确定状态转移方程 # 根据状态转移方程写代码 # 另一种思路 # 面试题104：排列的数目 # int[] nums = new int[1 2 3]; i = 3; f(i) = f(i - nums[0]) &#43; f(i - nums[1]) &#43; f(i - nums[2]); f(0) = 1; f(1) = f(0) &#43; f(-1) &#43; f(-2) = 1; f(2) = f(1) &#43; f(0) &#43; f(-1) = 2; f(3) = f(2) &#43; f(1) &#43; f(0) = 4; f(2) {1,1} {2} f(1) {1} f(0) {} 14.6 本章小结 # 第15章 图 305 # 15.1 图的基础知识 305 # 15.2 图的搜索 307 # 15.3 拓扑排序 333 # 15.4 并查集 342 # 15.5 本章小结 354 # 剑指offer这本书中每一道面试题对应leetcode的题目 # 《剑指Offer》是一本经典的编程面试书籍，其中包含了许多高质量的编程题目。很多题目与LeetCode上的题目有对应关系。以下是一些《剑指Offer》中的题目及其在LeetCode上的对应题目：">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-03-06T23:50:10+08:00">
+    <meta property="article:modified_time" content="2025-03-07T13:50:14+08:00">
 <title>github | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/github/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.06ae571909b4a295231ee09d00acd8bdbde903c47d70c29506d3bcb3fcd21964.js" ></script>
+  <script defer src="/zh.search.min.b799f4058b965ed144f6e9b9aa91907ddf4a423fcb42ed807be65a1ddafb5f32.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -2773,11 +2918,61 @@ https://github.com/alex-shpak/hugo-book
   广度优先搜索
   <a class="anchor" href="#%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2">#</a>
 </h5>
-<h5 id="面试题43在完全二叉树中添加节点">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">bfs</span>(TreeNode root) {
+</span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        queue.<span style="color:#a6e22e">offer</span>(root);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>queue.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>        TreeNode node <span style="color:#f92672">=</span> queue.<span style="color:#a6e22e">poll</span>();
+</span></span><span style="display:flex;"><span>        result.<span style="color:#a6e22e">add</span>(node.<span style="color:#a6e22e">val</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (node.<span style="color:#a6e22e">left</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            queue.<span style="color:#a6e22e">offer</span>(node.<span style="color:#a6e22e">left</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (node.<span style="color:#a6e22e">right</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            queue.<span style="color:#a6e22e">offer</span>(node.<span style="color:#a6e22e">right</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="面试题43在完全二叉树中添加节点">
   面试题43：在完全二叉树中添加节点
   <a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9843%e5%9c%a8%e5%ae%8c%e5%85%a8%e4%ba%8c%e5%8f%89%e6%a0%91%e4%b8%ad%e6%b7%bb%e5%8a%a0%e8%8a%82%e7%82%b9">#</a>
 </h5>
-<h5 id="面试题44二叉树中每层的最大值">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// CBT Complete Binary Tree</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CBTInserter</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> TreeNode root;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CBTInserter</span>(TreeNode root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>        queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (queue.<span style="color:#a6e22e">peek</span>().<span style="color:#a6e22e">left</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> queue.<span style="color:#a6e22e">peek</span>().<span style="color:#a6e22e">right</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            TreeNode node <span style="color:#f92672">=</span> queue.<span style="color:#a6e22e">poll</span>();
+</span></span><span style="display:flex;"><span>            queue.<span style="color:#a6e22e">offer</span>(node.<span style="color:#a6e22e">left</span>);
+</span></span><span style="display:flex;"><span>            queue.<span style="color:#a6e22e">offer</span>(node.<span style="color:#a6e22e">right</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">insert</span>(<span style="color:#66d9ef">int</span> v) {
+</span></span><span style="display:flex;"><span>        TreeNode parent <span style="color:#f92672">=</span> queue.<span style="color:#a6e22e">peek</span>();
+</span></span><span style="display:flex;"><span>        TreeNode node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(v);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (parent.<span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            parent.<span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            parent.<span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>            queue.<span style="color:#a6e22e">poll</span>();
+</span></span><span style="display:flex;"><span>            queue.<span style="color:#a6e22e">offer</span>(parent.<span style="color:#a6e22e">left</span>);
+</span></span><span style="display:flex;"><span>            queue.<span style="color:#a6e22e">offer</span>(parent.<span style="color:#a6e22e">right</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> parent.<span style="color:#a6e22e">val</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> TreeNode <span style="color:#a6e22e">get_root</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">root</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="面试题44二叉树中每层的最大值">
   面试题44：二叉树中每层的最大值
   <a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9844%e4%ba%8c%e5%8f%89%e6%a0%91%e4%b8%ad%e6%af%8f%e5%b1%82%e7%9a%84%e6%9c%80%e5%a4%a7%e5%80%bc">#</a>
 </h5>
@@ -2785,19 +2980,114 @@ https://github.com/alex-shpak/hugo-book
   用一个队列实现二叉树的广度优先搜索
   <a class="anchor" href="#%e7%94%a8%e4%b8%80%e4%b8%aa%e9%98%9f%e5%88%97%e5%ae%9e%e7%8e%b0%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2">#</a>
 </h6>
-<h6 id="用两个队列实现二叉树的广度优先搜索">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">largestValues</span>(TreeNode root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> current <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> next <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        queue.<span style="color:#a6e22e">offer</span>(root);
+</span></span><span style="display:flex;"><span>        current <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> max <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">MIN_VALUE</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>queue.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>        TreeNode node <span style="color:#f92672">=</span> queue.<span style="color:#a6e22e">poll</span>();
+</span></span><span style="display:flex;"><span>        current<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        max <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(max.<span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">val</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (node.<span style="color:#a6e22e">left</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            queue.<span style="color:#a6e22e">offer</span>(node.<span style="color:#a6e22e">left</span>);
+</span></span><span style="display:flex;"><span>            next<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (node.<span style="color:#a6e22e">right</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            queue.<span style="color:#a6e22e">offer</span>(node.<span style="color:#a6e22e">right</span>);
+</span></span><span style="display:flex;"><span>            next<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (current <span style="color:#f92672">==</span> 0) {
+</span></span><span style="display:flex;"><span>            result.<span style="color:#a6e22e">add</span>(max);
+</span></span><span style="display:flex;"><span>            max <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">MIN_VALUE</span>;
+</span></span><span style="display:flex;"><span>            current <span style="color:#f92672">=</span> next;
+</span></span><span style="display:flex;"><span>            next <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h6 id="用两个队列实现二叉树的广度优先搜索">
   用两个队列实现二叉树的广度优先搜索
   <a class="anchor" href="#%e7%94%a8%e4%b8%a4%e4%b8%aa%e9%98%9f%e5%88%97%e5%ae%9e%e7%8e%b0%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2">#</a>
 </h6>
-<h5 id="面试题45二叉树最低层最左边的值">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">largestValues</span>(TreeNode root) {
+</span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        queue1.<span style="color:#a6e22e">offer</span>(root);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> max <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">max</span>(max, node.<span style="color:#a6e22e">val</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (node.<span style="color:#a6e22e">left</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        queue2.<span style="color:#a6e22e">offer</span>(node.<span style="color:#a6e22e">left</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (node.<span style="color:#a6e22e">right</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        queue2.<span style="color:#a6e22e">offer</span>(node.<span style="color:#a6e22e">right</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (queue1.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>        result.<span style="color:#a6e22e">add</span>(max);
+</span></span><span style="display:flex;"><span>        max <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">MIN_VALUE</span>;
+</span></span><span style="display:flex;"><span>        queue1 <span style="color:#f92672">=</span> queue2;
+</span></span><span style="display:flex;"><span>        queue2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="面试题45二叉树最低层最左边的值">
   面试题45：二叉树最低层最左边的值
   <a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9845%e4%ba%8c%e5%8f%89%e6%a0%91%e6%9c%80%e4%bd%8e%e5%b1%82%e6%9c%80%e5%b7%a6%e8%be%b9%e7%9a%84%e5%80%bc">#</a>
 </h5>
-<h5 id="面试题46二叉树的右侧视图">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findBottomLeftValue</span>(TreeNode root) {
+</span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    queue1.<span style="color:#a6e22e">offer</span>(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> bottomLeft <span style="color:#f92672">=</span>root.<span style="color:#a6e22e">val</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>queue.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>        TreeNode node <span style="color:#f92672">=</span> queue1.<span style="color:#a6e22e">poll</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (node.<span style="color:#a6e22e">left</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            queue2.<span style="color:#a6e22e">offer</span>(node.<span style="color:#a6e22e">left</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (node.<span style="color:#a6e22e">right</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            queue2.<span style="color:#a6e22e">offer</span>(node.<span style="color:#a6e22e">right</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (queue1.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>            queue1 <span style="color:#f92672">=</span> queue2;
+</span></span><span style="display:flex;"><span>            queue2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>queue1.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>                bottomLeft <span style="color:#f92672">=</span> queue1.<span style="color:#a6e22e">peek</span>().<span style="color:#a6e22e">val</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bottomLeft;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="面试题46二叉树的右侧视图">
   面试题46：二叉树的右侧视图
   <a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9846%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%8f%b3%e4%be%a7%e8%a7%86%e5%9b%be">#</a>
 </h5>
-<h4 id="74-本章小结">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">rightSideView</span>(TreeNode root) {
+</span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> view <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> view;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    queue1.<span style="color:#a6e22e">offer</span>(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>queue1.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="74-本章小结">
   7.4 本章小结
   <a class="anchor" href="#74-%e6%9c%ac%e7%ab%a0%e5%b0%8f%e7%bb%93">#</a>
 </h4>
@@ -4766,9 +5056,9 @@ f(0) {}
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/6f5770c8f421a1a04b69663bfb90b12dca680829" title='最后修改者 penruins | 三月 6, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/8798f5519005a0184a37d150b37930dc56ed5382" title='最后修改者 penruins | 三月 7, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
-      <span>三月 6, 2025</span>
+      <span>三月 7, 2025</span>
     </a>
   </div>
 
