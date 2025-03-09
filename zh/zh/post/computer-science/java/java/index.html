@@ -64,14 +64,14 @@ StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存�
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
-    <meta property="article:modified_time" content="2025-03-09T18:40:12+08:00">
+    <meta property="article:modified_time" content="2025-03-09T20:30:13+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/computer-science/java/java/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.cbad11907c8c64a8e0e069b73d9ea79eef3da430e4c9f4fc624c083bb1e11844.js" ></script>
+  <script defer src="/zh.search.min.4fbd13e47f3aceb5e0e647e1ab5392d8c58ca7b5aaaf91a5602f1aef7e4422dc.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1118,6 +1118,17 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#总结-17"><strong>总结</strong></a></li>
       </ul>
     </li>
+    <li><a href="#为什么hashmap选择红黑树而不选择b树">为什么HashMap选择红黑树而不选择B+树</a>
+      <ul>
+        <li><a href="#1-算法实现复杂度">1. <strong>算法实现复杂度</strong></a></li>
+        <li><a href="#2-底层数据结构匹配">2. <strong>底层数据结构匹配</strong></a></li>
+        <li><a href="#3-修改效率">3. <strong>修改效率</strong></a></li>
+        <li><a href="#4-内存占用">4. <strong>内存占用</strong></a></li>
+        <li><a href="#5-适用场景-1">5. <strong>适用场景</strong></a></li>
+        <li><a href="#6-维护成本">6. <strong>维护成本</strong></a></li>
+        <li><a href="#总结-18">总结</a></li>
+      </ul>
+    </li>
   </ul>
 
   <ul>
@@ -1127,7 +1138,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#2-poll">2. <strong>poll</strong></a></li>
         <li><a href="#3-epoll">3. <strong>epoll</strong></a></li>
         <li><a href="#对比总结">对比总结</a></li>
-        <li><a href="#总结-18">总结</a></li>
+        <li><a href="#总结-19">总结</a></li>
       </ul>
     </li>
     <li><a href="#提供一个java异步io的例子">提供一个java异步I/O的例子</a>
@@ -1219,7 +1230,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#2-数据传输中的关闭">2. <strong>数据传输中的关闭</strong></a></li>
         <li><a href="#3-异常情况">3. <strong>异常情况</strong></a></li>
         <li><a href="#4-最佳实践">4. <strong>最佳实践</strong></a></li>
-        <li><a href="#总结-19">总结</a></li>
+        <li><a href="#总结-20">总结</a></li>
       </ul>
     </li>
     <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
@@ -1280,7 +1291,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-线程创建和销毁的开销">3. <strong>线程创建和销毁的开销</strong></a></li>
         <li><a href="#4-线程池的优化">4. <strong>线程池的优化</strong></a></li>
         <li><a href="#5-如何减少线程内存开销">5. <strong>如何减少线程内存开销</strong></a></li>
-        <li><a href="#总结-20">总结</a></li>
+        <li><a href="#总结-21">总结</a></li>
       </ul>
     </li>
     <li><a href="#java中的selector使用的是select还是epoll">java中的selector使用的是select还是epoll</a></li>
@@ -1304,7 +1315,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#2-事件的检测">2. <strong>事件的检测</strong></a></li>
         <li><a href="#3-事件的触发机制">3. <strong>事件的触发机制</strong></a></li>
         <li><a href="#4-示例">4. <strong>示例</strong></a></li>
-        <li><a href="#总结-21">总结</a></li>
+        <li><a href="#总结-22">总结</a></li>
       </ul>
     </li>
     <li><a href="#java的selector的使用过程中概念总结一下">java的selector的使用过程中概念总结一下</a>
@@ -1343,7 +1354,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
         <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
         <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
-        <li><a href="#总结-22"><strong>总结</strong></a></li>
+        <li><a href="#总结-23"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
@@ -1353,7 +1364,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
         <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
         <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
-        <li><a href="#总结-23"><strong>总结</strong></a></li>
+        <li><a href="#总结-24"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
@@ -1367,7 +1378,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
         <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
         <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
-        <li><a href="#总结-24">总结</a></li>
+        <li><a href="#总结-25">总结</a></li>
       </ul>
     </li>
   </ul>
@@ -1394,7 +1405,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#优点">优点</a></li>
         <li><a href="#缺点">缺点</a></li>
         <li><a href="#示例">示例</a></li>
-        <li><a href="#总结-25">总结</a></li>
+        <li><a href="#总结-26">总结</a></li>
       </ul>
     </li>
     <li><a href="#在springboot中有哪些响应式编程的运用">在springboot中有哪些响应式编程的运用</a>
@@ -1433,7 +1444,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#示例代码-7">示例代码：</a></li>
           </ul>
         </li>
-        <li><a href="#总结-26">总结</a></li>
+        <li><a href="#总结-27">总结</a></li>
       </ul>
     </li>
     <li><a href="#响应式数据库访问和传统的数据库访问有什么区别">响应式数据库访问和传统的数据库访问有什么区别</a>
@@ -1443,7 +1454,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-适用场景-1">3. <strong>适用场景</strong></a></li>
         <li><a href="#4-技术实现">4. <strong>技术实现</strong></a></li>
         <li><a href="#5-优缺点对比">5. <strong>优缺点对比</strong></a></li>
-        <li><a href="#总结-27">总结</a></li>
+        <li><a href="#总结-28">总结</a></li>
       </ul>
     </li>
     <li><a href="#一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较</a>
@@ -1481,7 +1492,7 @@ https://github.com/alex-shpak/hugo-book
         </li>
         <li><a href="#线程任务总结"><strong>线程任务总结</strong></a></li>
         <li><a href="#关键点"><strong>关键点</strong></a></li>
-        <li><a href="#总结-28"><strong>总结</strong></a></li>
+        <li><a href="#总结-29"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#在响应式编程中它的并发量会收到数据库连接池大小的限制那这不是和阻塞式的服务一样吗">在响应式编程中，它的并发量会收到数据库连接池大小的限制，那这不是和阻塞式的服务一样吗</a>
@@ -1498,7 +1509,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#2-具体流程"><strong>2. 具体流程</strong></a></li>
         <li><a href="#3-阻塞式io的线程模型"><strong>3. 阻塞式IO的线程模型</strong></a></li>
         <li><a href="#4-与响应式模型的区别"><strong>4. 与响应式模型的区别</strong></a></li>
-        <li><a href="#总结-29"><strong>总结</strong></a></li>
+        <li><a href="#总结-30"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#在使用-r2dbc-时处理数据库操作的线程如何设置">在使用 R2DBC 时，处理数据库操作的线程如何设置</a>
@@ -1513,7 +1524,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#3-线程处理的流程"><strong>3. 线程处理的流程</strong></a></li>
         <li><a href="#4-与传统阻塞式模型的区别"><strong>4. 与传统阻塞式模型的区别</strong></a></li>
         <li><a href="#5-优化建议"><strong>5. 优化建议</strong></a></li>
-        <li><a href="#总结-30"><strong>总结</strong></a></li>
+        <li><a href="#总结-31"><strong>总结</strong></a></li>
       </ul>
     </li>
   </ul>
@@ -1526,7 +1537,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#mono-的示例代码"><strong>Mono 的示例代码</strong></a></li>
         <li><a href="#mono-的操作符"><strong>Mono 的操作符</strong></a></li>
         <li><a href="#mono-与-flux-的区别"><strong>Mono 与 Flux 的区别</strong></a></li>
-        <li><a href="#总结-31"><strong>总结</strong></a></li>
+        <li><a href="#总结-32"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#mono-是如何实现非阻塞的">Mono 是如何实现非阻塞的</a>
@@ -1537,7 +1548,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#4-线程调度">4. <strong>线程调度</strong></a></li>
         <li><a href="#5-背压支持">5. <strong>背压支持</strong></a></li>
         <li><a href="#6-示例代码">6. <strong>示例代码</strong></a></li>
-        <li><a href="#总结-32">总结</a></li>
+        <li><a href="#总结-33">总结</a></li>
       </ul>
     </li>
   </ul>
@@ -4274,6 +4285,71 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-17">#</a>
 </h3>
 <p>当 HashMap 扩容时，所有的链表和红黑树都会重新构造。链表会被拆分为高位和低位链表，红黑树会被拆分为高位和低位树，并根据节点数决定是否转换为链表。这一过程确保了扩容后元素的分布依然均匀，维持了 HashMap 的高效性<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">5</a>。</p>
+<h2 id="为什么hashmap选择红黑树而不选择b树">
+  为什么HashMap选择红黑树而不选择B+树
+  <a class="anchor" href="#%e4%b8%ba%e4%bb%80%e4%b9%88hashmap%e9%80%89%e6%8b%a9%e7%ba%a2%e9%bb%91%e6%a0%91%e8%80%8c%e4%b8%8d%e9%80%89%e6%8b%a9b%e6%a0%91">#</a>
+</h2>
+<p><code>HashMap</code> 选择红黑树而不是 B+ 树的原因主要有以下几点：</p>
+<hr>
+<h3 id="1-算法实现复杂度">
+  1. <strong>算法实现复杂度</strong>
+  <a class="anchor" href="#1-%e7%ae%97%e6%b3%95%e5%ae%9e%e7%8e%b0%e5%a4%8d%e6%9d%82%e5%ba%a6">#</a>
+</h3>
+<ul>
+<li><strong>红黑树</strong>：Java 中已经实现了红黑树，且红黑树的实现相对简单，复杂度较低。红黑树是一种自平衡二叉查找树，适合内存中的数据结构操作<a href="@ref">22</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树的实现较为复杂，尤其是在内存中维护 B+ 树的结构需要更多的指针和节点管理，增加了实现的难度<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="2-底层数据结构匹配">
+  2. <strong>底层数据结构匹配</strong>
+  <a class="anchor" href="#2-%e5%ba%95%e5%b1%82%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e5%8c%b9%e9%85%8d">#</a>
+</h3>
+<ul>
+<li><strong>红黑树</strong>：<code>HashMap</code> 的底层是哈希表，红黑树作为链表过长时的替代结构，能够很好地与哈希表结合，解决哈希冲突问题<a href="@ref">22</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树通常用于磁盘存储结构，其设计目标是减少磁盘 I/O 操作。而 <code>HashMap</code> 是基于内存的数据结构，B+ 树的优势在内存中并不明显<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="3-修改效率">
+  3. <strong>修改效率</strong>
+  <a class="anchor" href="#3-%e4%bf%ae%e6%94%b9%e6%95%88%e7%8e%87">#</a>
+</h3>
+<ul>
+<li><strong>红黑树</strong>：红黑树在插入、删除和查找操作上都有较好的性能，且维护平衡的代价较低。红黑树的旋转操作次数较少，适合频繁修改的场景<a href="@ref">22</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树的修改操作需要调整节点和指针，尤其是在内存中频繁修改时，开销较大。B+ 树更适合静态或冷数据存储<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="4-内存占用">
+  4. <strong>内存占用</strong>
+  <a class="anchor" href="#4-%e5%86%85%e5%ad%98%e5%8d%a0%e7%94%a8">#</a>
+</h3>
+<ul>
+<li><strong>红黑树</strong>：红黑树的结构相对简单，内存占用较少，适合内存中的高效操作<a href="@ref">22</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树的节点通常包含多个子节点，需要更多的指针和空间来维护结构，内存占用较高<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="5-适用场景-1">
+  5. <strong>适用场景</strong>
+  <a class="anchor" href="#5-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af-1">#</a>
+</h3>
+<ul>
+<li><strong>红黑树</strong>：红黑树适合内存中的动态数据管理，尤其是需要频繁插入、删除和查找的场景。<code>HashMap</code> 在链表长度超过阈值（默认为 8）时，将链表转换为红黑树，以提高查询效率<a href="@ref">55</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树更适合磁盘存储，其设计目标是减少磁盘 I/O 操作，适用于数据库和文件系统等场景<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="6-维护成本">
+  6. <strong>维护成本</strong>
+  <a class="anchor" href="#6-%e7%bb%b4%e6%8a%a4%e6%88%90%e6%9c%ac">#</a>
+</h3>
+<ul>
+<li><strong>红黑树</strong>：红黑树的维护成本较低，适合高并发的场景。<code>HashMap</code> 在链表长度小于 6 时，会将红黑树转换回链表，进一步降低维护成本<a href="@ref">56</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树的维护成本较高，尤其是在内存中频繁修改时，需要复杂的节点调整和指针管理<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="总结-18">
+  总结
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-18">#</a>
+</h3>
+<p><code>HashMap</code> 选择红黑树而不是 B+ 树的主要原因在于红黑树更适合内存中的动态数据管理，实现简单、修改效率高、内存占用少，且维护成本低。而 B+ 树更适合磁盘存储，其优势在内存中无法充分发挥<a href="@ref">22</a><a href="@ref">55</a><a href="@ref">56</a>。</p>
 <h1 id="io模型">
   I/O模型
   <a class="anchor" href="#io%e6%a8%a1%e5%9e%8b">#</a>
@@ -4432,9 +4508,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   </tbody>
 </table>
 <hr>
-<h3 id="总结-18">
+<h3 id="总结-19">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-18">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-19">#</a>
 </h3>
 <ul>
 <li><strong><code>select</code></strong>：适合低并发场景，跨平台支持好，但性能较差。</li>
@@ -5564,9 +5640,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li>使用 <code>SocketChannel.shutdownOutput</code> 先关闭输出流，确保对方知道本方不再发送数据，然后再调用 <code>close</code><a href="@ref">5</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-19">
+<h3 id="总结-20">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-19">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-20">#</a>
 </h3>
 <p><code>SocketChannel.close</code> 方法会按照 TCP 协议的正常流程关闭连接，<strong>不会</strong>导致数据传输时意外断开。但在网络故障或进程崩溃等异常情况下，可能会导致连接异常关闭。因此，建议在关闭连接前确保数据传输完成，并遵循 TCP 关闭的最佳实践<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</p>
 <h2 id="我还需要实现对特定连接发送命令报文">
@@ -6476,9 +6552,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>使用线程池</strong>：通过线程池管理线程，避免频繁创建和销毁线程。</li>
 <li><strong>优化任务设计</strong>：将任务拆分为更小的可并行单元，充分利用线程池的并发能力<a href="@ref">2</a><a href="@ref">3</a>。</li>
 </ul>
-<h3 id="总结-20">
+<h3 id="总结-21">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-20">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-21">#</a>
 </h3>
 <p>在Java中，每个线程默认会占用1MB的线程栈内存（实际可能为80KB到200KB），加上其他内存开销，创建大量线程可能会导致内存耗尽。通过使用线程池和优化线程栈大小，可以有效减少内存开销，提升系统性能<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</p>
 <h2 id="java中的selector使用的是select还是epoll">
@@ -6719,9 +6795,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>            }
 </span></span></code></pre></div><hr>
-<h3 id="总结-21">
+<h3 id="总结-22">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-21">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-22">#</a>
 </h3>
 <p><code>Selector</code> 中的事件是由 <strong>注册到 <code>Selector</code> 的 <code>Channel</code></strong> 产生的，<code>Selector</code> 负责检测这些事件并将其传递给应用程序进行处理。底层操作系统的 I/O 多路复用机制（如 <code>epoll</code> 或 <code>select</code>）是事件通知的关键<a href="@ref">1</a><a href="@ref">4</a>。</p>
 <h2 id="java的selector的使用过程中概念总结一下">
@@ -7099,9 +7175,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>场景</strong>：在某些特殊情况下（如密钥交换），私钥也可以用于加密，公钥用于解密。例如，在TLS/SSL协议中，服务器可能会用私钥加密某些信息，客户端用公钥解密以验证服务器的身份<a href="@ref">5</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-22">
+<h3 id="总结-23">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-22">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-23">#</a>
 </h3>
 <p>公钥和私钥的功能是灵活的，具体使用方式取决于应用场景：</p>
 <ul>
@@ -7228,9 +7304,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </li>
 </ul>
 <hr>
-<h3 id="总结-23">
+<h3 id="总结-24">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-23">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-24">#</a>
 </h3>
 <ul>
 <li><strong>推荐模式</strong>：CBC 和 CTR 模式，尤其是 CTR 模式，因其高效性和安全性<a href="@ref">1</a><a href="@ref">3</a>。</li>
@@ -7313,9 +7389,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>描述</strong>：主要用于RSA加密，填充格式为<code>00 + BT + PS + 00 + D</code>，其中<code>BT</code>为处理模式，<code>PS</code>为填充字节。</li>
 <li><strong>特点</strong>：适用于RSA加密，不常用于AES<a href="@ref">2</a>。</li>
 </ul>
-<h3 id="总结-24">
+<h3 id="总结-25">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-24">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-25">#</a>
 </h3>
 <p>AES中的填充方式多样，常见的包括 <strong>PKCS7</strong>、<strong>PKCS5</strong>、<strong>No Padding</strong>、<strong>ISO10126</strong> 等。选择填充方式时需根据具体应用场景和安全性需求进行权衡<a href="@ref">1</a><a href="@ref">2</a>。</p>
 <h1 id="reactor">
@@ -7554,9 +7630,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#%e7%a4%ba%e4%be%8b">#</a>
 </h3>
 <p>在命令式编程中，表达式 <code>a = b + c</code> 只会计算一次，而在响应式编程中，<code>a</code> 的值会随着 <code>b</code> 和 <code>c</code> 的变化而自动更新<a href="@ref">3</a><a href="@ref">4</a>。</p>
-<h3 id="总结-25">
+<h3 id="总结-26">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-25">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-26">#</a>
 </h3>
 <p>响应式编程是一种以数据流为核心的编程范式，适合处理高并发、实时性和动态变化的场景。尽管它具有一定的复杂性，但在现代高并发和实时系统中，响应式编程提供了高效且灵活的解决方案<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</p>
 <h2 id="在springboot中有哪些响应式编程的运用">
@@ -7710,9 +7786,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">map</span>(n <span style="color:#f92672">-&gt;</span> n <span style="color:#f92672">*</span> 2);
 </span></span></code></pre></div><p>在这个示例中，<code>Flux</code> 用于对数据流进行过滤和转换<a href="@ref">3</a>。</p>
 <hr>
-<h3 id="总结-26">
+<h3 id="总结-27">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-26">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-27">#</a>
 </h3>
 <p>在 Spring Boot 中，响应式编程的应用主要包括：</p>
 <ol>
@@ -7862,9 +7938,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   </tbody>
 </table>
 <hr>
-<h3 id="总结-27">
+<h3 id="总结-28">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-27">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-28">#</a>
 </h3>
 <p>响应式数据库访问和传统数据库访问的主要区别在于：</p>
 <ol>
@@ -8161,9 +8237,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>事件驱动</strong>：通过事件循环机制，任务完成后会自动触发回调，无需线程主动轮询。</li>
 </ol>
 <hr>
-<h3 id="总结-28">
+<h3 id="总结-29">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-28">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-29">#</a>
 </h3>
 <p>在这个例子中，一个线程（<code>Thread-1</code>）在接收到请求后，发起异步数据库查询并立即释放，继续处理其他请求。数据库查询完成后，由另一个线程（<code>nioEventLoopGroup-2-1</code>）处理结果并返回给客户端。通过这种非阻塞和事件驱动的方式，一个线程可以高效地处理多个请求，显著提升了系统的并发能力。</p>
 <h2 id="在响应式编程中它的并发量会收到数据库连接池大小的限制那这不是和阻塞式的服务一样吗">
@@ -8294,9 +8370,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li>数据库操作完成后，通过回调机制通知线程处理结果<a href="@ref">34</a><a href="@ref">41</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-29">
+<h3 id="总结-30">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-29">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-30">#</a>
 </h3>
 <p>在阻塞式IO中，<strong>数据库的处理线程就是处理请求的那个线程</strong>。这种模型虽然简单，但在高并发场景下效率较低，因为线程会因等待IO操作而阻塞，无法充分利用系统资源。相比之下，响应式编程模型通过非阻塞和事件驱动的方式，能够更好地处理高并发请求<a href="@ref">1</a><a href="@ref">34</a><a href="@ref">41</a>。</p>
 <h2 id="在使用-r2dbc-时处理数据库操作的线程如何设置">
@@ -8382,9 +8458,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>监控线程池性能</strong>：通过监控工具（如 Micrometer）观察线程池的使用情况，及时调整配置<a href="@ref">39</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-30">
+<h3 id="总结-31">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-30">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-31">#</a>
 </h3>
 <p>在 R2DBC 中，处理数据库操作的线程主要由底层的异步 I/O 线程（如 Netty 的 <code>EventLoopGroup</code>）负责，而不是传统的阻塞式线程池。通过合理配置连接池和优化异步 I/O 线程，可以显著提升系统的并发性能和资源利用率。</p>
 <h1 id="mono">
@@ -8454,9 +8530,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>Mono</strong>：用于处理 <strong>单个值或空值</strong> 的异步序列。</li>
 <li><strong>Flux</strong>：用于处理 <strong>多个值</strong> 的异步序列，适合流式数据或集合操作<a href="@ref">4</a>。</li>
 </ul>
-<h3 id="总结-31">
+<h3 id="总结-32">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-31">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-32">#</a>
 </h3>
 <p>Mono 是 Java 响应式编程中用于处理 <strong>单值异步操作</strong> 的核心类，适合处理单个结果或空值的场景。它通过异步非阻塞的机制和丰富的操作符，能够高效地处理 I/O 密集型任务，并支持背压机制，确保系统的稳定性<a href="@ref">1</a><a href="@ref">4</a>。</p>
 <h2 id="mono-是如何实现非阻塞的">
@@ -8537,9 +8613,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><code>subscribe</code> 触发任务执行，并通过回调处理结果<a href="@ref">1</a><a href="@ref">2</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-32">
+<h3 id="总结-33">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-32">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-33">#</a>
 </h3>
 <p>Mono 通过 <strong>事件驱动模型</strong>、<strong>回调机制</strong>、<strong>非阻塞 I/O</strong> 和 <strong>线程调度</strong> 实现了非阻塞的特性。它的核心设计使得线程不会阻塞在异步操作上，从而高效处理高并发请求，适合 I/O 密集型任务<a href="@ref">1</a><a href="@ref">2</a>。</p>
 </article>
@@ -8551,7 +8627,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/d26240eab23df178335fe28952ebcf7be2f5049e" title='最后修改者 penruins | 三月 9, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/02c7cf5f039c55f1346b8296df75933431757963" title='最后修改者 penruins | 三月 9, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>三月 9, 2025</span>
     </a>
@@ -8928,6 +9004,17 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#总结-17"><strong>总结</strong></a></li>
       </ul>
     </li>
+    <li><a href="#为什么hashmap选择红黑树而不选择b树">为什么HashMap选择红黑树而不选择B+树</a>
+      <ul>
+        <li><a href="#1-算法实现复杂度">1. <strong>算法实现复杂度</strong></a></li>
+        <li><a href="#2-底层数据结构匹配">2. <strong>底层数据结构匹配</strong></a></li>
+        <li><a href="#3-修改效率">3. <strong>修改效率</strong></a></li>
+        <li><a href="#4-内存占用">4. <strong>内存占用</strong></a></li>
+        <li><a href="#5-适用场景-1">5. <strong>适用场景</strong></a></li>
+        <li><a href="#6-维护成本">6. <strong>维护成本</strong></a></li>
+        <li><a href="#总结-18">总结</a></li>
+      </ul>
+    </li>
   </ul>
 
   <ul>
@@ -8937,7 +9024,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#2-poll">2. <strong>poll</strong></a></li>
         <li><a href="#3-epoll">3. <strong>epoll</strong></a></li>
         <li><a href="#对比总结">对比总结</a></li>
-        <li><a href="#总结-18">总结</a></li>
+        <li><a href="#总结-19">总结</a></li>
       </ul>
     </li>
     <li><a href="#提供一个java异步io的例子">提供一个java异步I/O的例子</a>
@@ -9029,7 +9116,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#2-数据传输中的关闭">2. <strong>数据传输中的关闭</strong></a></li>
         <li><a href="#3-异常情况">3. <strong>异常情况</strong></a></li>
         <li><a href="#4-最佳实践">4. <strong>最佳实践</strong></a></li>
-        <li><a href="#总结-19">总结</a></li>
+        <li><a href="#总结-20">总结</a></li>
       </ul>
     </li>
     <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
@@ -9090,7 +9177,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-线程创建和销毁的开销">3. <strong>线程创建和销毁的开销</strong></a></li>
         <li><a href="#4-线程池的优化">4. <strong>线程池的优化</strong></a></li>
         <li><a href="#5-如何减少线程内存开销">5. <strong>如何减少线程内存开销</strong></a></li>
-        <li><a href="#总结-20">总结</a></li>
+        <li><a href="#总结-21">总结</a></li>
       </ul>
     </li>
     <li><a href="#java中的selector使用的是select还是epoll">java中的selector使用的是select还是epoll</a></li>
@@ -9114,7 +9201,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#2-事件的检测">2. <strong>事件的检测</strong></a></li>
         <li><a href="#3-事件的触发机制">3. <strong>事件的触发机制</strong></a></li>
         <li><a href="#4-示例">4. <strong>示例</strong></a></li>
-        <li><a href="#总结-21">总结</a></li>
+        <li><a href="#总结-22">总结</a></li>
       </ul>
     </li>
     <li><a href="#java的selector的使用过程中概念总结一下">java的selector的使用过程中概念总结一下</a>
@@ -9153,7 +9240,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
         <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
         <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
-        <li><a href="#总结-22"><strong>总结</strong></a></li>
+        <li><a href="#总结-23"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
@@ -9163,7 +9250,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
         <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
         <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
-        <li><a href="#总结-23"><strong>总结</strong></a></li>
+        <li><a href="#总结-24"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
@@ -9177,7 +9264,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
         <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
         <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
-        <li><a href="#总结-24">总结</a></li>
+        <li><a href="#总结-25">总结</a></li>
       </ul>
     </li>
   </ul>
@@ -9204,7 +9291,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#优点">优点</a></li>
         <li><a href="#缺点">缺点</a></li>
         <li><a href="#示例">示例</a></li>
-        <li><a href="#总结-25">总结</a></li>
+        <li><a href="#总结-26">总结</a></li>
       </ul>
     </li>
     <li><a href="#在springboot中有哪些响应式编程的运用">在springboot中有哪些响应式编程的运用</a>
@@ -9243,7 +9330,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
             <li><a href="#示例代码-7">示例代码：</a></li>
           </ul>
         </li>
-        <li><a href="#总结-26">总结</a></li>
+        <li><a href="#总结-27">总结</a></li>
       </ul>
     </li>
     <li><a href="#响应式数据库访问和传统的数据库访问有什么区别">响应式数据库访问和传统的数据库访问有什么区别</a>
@@ -9253,7 +9340,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-适用场景-1">3. <strong>适用场景</strong></a></li>
         <li><a href="#4-技术实现">4. <strong>技术实现</strong></a></li>
         <li><a href="#5-优缺点对比">5. <strong>优缺点对比</strong></a></li>
-        <li><a href="#总结-27">总结</a></li>
+        <li><a href="#总结-28">总结</a></li>
       </ul>
     </li>
     <li><a href="#一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较</a>
@@ -9291,7 +9378,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         </li>
         <li><a href="#线程任务总结"><strong>线程任务总结</strong></a></li>
         <li><a href="#关键点"><strong>关键点</strong></a></li>
-        <li><a href="#总结-28"><strong>总结</strong></a></li>
+        <li><a href="#总结-29"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#在响应式编程中它的并发量会收到数据库连接池大小的限制那这不是和阻塞式的服务一样吗">在响应式编程中，它的并发量会收到数据库连接池大小的限制，那这不是和阻塞式的服务一样吗</a>
@@ -9308,7 +9395,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#2-具体流程"><strong>2. 具体流程</strong></a></li>
         <li><a href="#3-阻塞式io的线程模型"><strong>3. 阻塞式IO的线程模型</strong></a></li>
         <li><a href="#4-与响应式模型的区别"><strong>4. 与响应式模型的区别</strong></a></li>
-        <li><a href="#总结-29"><strong>总结</strong></a></li>
+        <li><a href="#总结-30"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#在使用-r2dbc-时处理数据库操作的线程如何设置">在使用 R2DBC 时，处理数据库操作的线程如何设置</a>
@@ -9323,7 +9410,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#3-线程处理的流程"><strong>3. 线程处理的流程</strong></a></li>
         <li><a href="#4-与传统阻塞式模型的区别"><strong>4. 与传统阻塞式模型的区别</strong></a></li>
         <li><a href="#5-优化建议"><strong>5. 优化建议</strong></a></li>
-        <li><a href="#总结-30"><strong>总结</strong></a></li>
+        <li><a href="#总结-31"><strong>总结</strong></a></li>
       </ul>
     </li>
   </ul>
@@ -9336,7 +9423,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#mono-的示例代码"><strong>Mono 的示例代码</strong></a></li>
         <li><a href="#mono-的操作符"><strong>Mono 的操作符</strong></a></li>
         <li><a href="#mono-与-flux-的区别"><strong>Mono 与 Flux 的区别</strong></a></li>
-        <li><a href="#总结-31"><strong>总结</strong></a></li>
+        <li><a href="#总结-32"><strong>总结</strong></a></li>
       </ul>
     </li>
     <li><a href="#mono-是如何实现非阻塞的">Mono 是如何实现非阻塞的</a>
@@ -9347,7 +9434,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         <li><a href="#4-线程调度">4. <strong>线程调度</strong></a></li>
         <li><a href="#5-背压支持">5. <strong>背压支持</strong></a></li>
         <li><a href="#6-示例代码">6. <strong>示例代码</strong></a></li>
-        <li><a href="#总结-32">总结</a></li>
+        <li><a href="#总结-33">总结</a></li>
       </ul>
     </li>
   </ul>
