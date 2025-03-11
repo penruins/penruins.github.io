@@ -104,27 +104,27 @@ Hidden space 隐藏空间
 transmit 文件传输工具
 
 
-  把一个java程序配置为一个服务
+  mac 上抓取应用的https的包
   #
 
-在 macOS 中将 Java 程序配置为服务，可以通过创建一个 LaunchDaemon 或 LaunchAgent 来实现。这里我们以创建一个 LaunchDaemon 为例来说明如何操作。">
+在Mac上抓取应用的HTTPS流量，你需要使用网络分析工具，如Wireshark、Charles Proxy或MITMproxy。由于HTTPS加密了数据传输，直接抓包无法查看具体内容，因此通常需要设置一个代理服务器来进行中间人攻击（Man-in-the-Middle, MITM）来解密和检查HTTPS流量。">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/mac/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="mac">
-  <meta property="og:description" content="mac # brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf ffmpeg # 安装 brew install ffmpeg postgresql # Homebrew 安装 postgresql yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx transmit 文件传输工具 把一个java程序配置为一个服务 # 在 macOS 中将 Java 程序配置为服务，可以通过创建一个 LaunchDaemon 或 LaunchAgent 来实现。这里我们以创建一个 LaunchDaemon 为例来说明如何操作。">
+  <meta property="og:description" content="mac # brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf ffmpeg # 安装 brew install ffmpeg postgresql # Homebrew 安装 postgresql yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx transmit 文件传输工具 mac 上抓取应用的https的包 # 在Mac上抓取应用的HTTPS流量，你需要使用网络分析工具，如Wireshark、Charles Proxy或MITMproxy。由于HTTPS加密了数据传输，直接抓包无法查看具体内容，因此通常需要设置一个代理服务器来进行中间人攻击（Man-in-the-Middle, MITM）来解密和检查HTTPS流量。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
-    <meta property="article:modified_time" content="2025-03-10T21:20:11+08:00">
+    <meta property="article:modified_time" content="2025-03-11T16:20:17+08:00">
 <title>mac | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/computer-science/mac/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.4fbd13e47f3aceb5e0e647e1ab5392d8c58ca7b5aaaf91a5602f1aef7e4422dc.js" ></script>
+  <script defer src="/zh.search.min.174c80304ba546d6026fbb3092a6517835e49eeb3f5663c40978ee5b75a29b41.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -840,9 +840,6 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#player">player</a></li>
     <li><a href="#disk">disk</a></li>
-    <li><a href="#把一个java程序配置为一个服务">把一个java程序配置为一个服务</a></li>
-    <li><a href="#怎么查看-launchctl-服务的状态">怎么查看 launchctl 服务的状态</a></li>
-    <li><a href="#怎么查看-launchctl-中一个服务的内存使用情况">怎么查看 launchctl 中一个服务的内存使用情况</a></li>
     <li><a href="#mac-上抓取应用的https的包">mac 上抓取应用的https的包</a>
       <ul>
         <li><a href="#charles">charles</a></li>
@@ -961,221 +958,6 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
 </li>
 <li>transmit 文件传输工具</li>
 </ul>
-<h2 id="把一个java程序配置为一个服务">
-  把一个java程序配置为一个服务
-  <a class="anchor" href="#%e6%8a%8a%e4%b8%80%e4%b8%aajava%e7%a8%8b%e5%ba%8f%e9%85%8d%e7%bd%ae%e4%b8%ba%e4%b8%80%e4%b8%aa%e6%9c%8d%e5%8a%a1">#</a>
-</h2>
-<p>在 macOS 中将 Java 程序配置为服务，可以通过创建一个 LaunchDaemon 或 LaunchAgent 来实现。这里我们以创建一个 LaunchDaemon 为例来说明如何操作。</p>
-<p>准备工作</p>
-<ol>
-<li>
-<p><strong>确保你的 Java 程序可以无交互地运行</strong>：</p>
-<ul>
-<li>你的 Java 应用应该能够从命令行启动，并且不需要用户界面或用户输入。</li>
-</ul>
-</li>
-<li>
-<p><strong>编写启动脚本</strong>（可选）：</p>
-<ul>
-<li>如果你的 Java 程序需要复杂的启动参数或者环境变量设置，建议先编写一个 Shell 脚本来处理这些细节。例如，你可以创建一个名为 <code>start-myapp.sh</code> 的脚本文件，内容如下：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cd /path/to/your/app
-</span></span><span style="display:flex;"><span>export JAVA_OPTS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-Xms512m -Xmx1024m&#34;</span>
-</span></span><span style="display:flex;"><span>exec java $JAVA_OPTS -jar your-application.jar
-</span></span></code></pre></div></li>
-<li>记得给这个脚本执行权限：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>chmod +x start-myapp.sh
-</span></span></code></pre></div></li>
-</ul>
-</li>
-</ol>
-<p>创建 LaunchDaemon 配置文件</p>
-<ol>
-<li>
-<p><strong>创建配置文件</strong>：</p>
-<ul>
-<li>在 <code>/Library/LaunchDaemons/</code> 目录下创建一个新的 <code>.plist</code> 文件。文件名应该包含反向域名格式的唯一标识符，例如 <code>com.yourdomain.yourapp.plist</code>。</li>
-<li>使用文本编辑器创建并编辑这个文件，内容如下：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;plist</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dict&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>Label<span style="color:#f92672">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>com.yourdomain.yourapp<span style="color:#f92672">&lt;/string&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>ProgramArguments<span style="color:#f92672">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;array&gt;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;string&gt;</span>/path/to/start-myapp.sh<span style="color:#f92672">&lt;/string&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/array&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>RunAtLoad<span style="color:#f92672">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;true/&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>KeepAlive<span style="color:#f92672">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;true/&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>StandardOutPath<span style="color:#f92672">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>/path/to/yourapp.log<span style="color:#f92672">&lt;/string&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>StandardErrorPath<span style="color:#f92672">&lt;/key&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;string&gt;</span>/path/to/yourapp.err<span style="color:#f92672">&lt;/string&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dict&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/plist&gt;</span>
-</span></span></code></pre></div></li>
-<li>解释：
-<ul>
-<li><code>Label</code> 是服务的唯一标识符。</li>
-<li><code>ProgramArguments</code> 指定了启动程序的命令及其参数。</li>
-<li><code>RunAtLoad</code> 设置为 <code>true</code> 表示系统启动时自动启动该服务。</li>
-<li><code>KeepAlive</code> 设置为 <code>true</code> 表示如果服务停止，则系统会自动重启它。</li>
-<li><code>StandardOutPath</code> 和 <code>StandardErrorPath</code> 分别指定了标准输出和错误输出的日志文件路径。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>加载服务</strong>：</p>
-<ul>
-<li>将配置文件保存后，使用以下命令加载服务：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl load /Library/LaunchDaemons/com.yourdomain.yourapp.plist
-</span></span></code></pre></div></li>
-<li>启动服务：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl start com.yourdomain.yourapp
-</span></span></code></pre></div></li>
-</ul>
-</li>
-</ol>
-<p>停止和卸载服务</p>
-<ul>
-<li><strong>停止服务</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl stop com.yourdomain.yourapp
-</span></span></code></pre></div></li>
-<li><strong>卸载服务</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl unload /Library/LaunchDaemons/com.yourdomain.yourapp.plist
-</span></span></code></pre></div></li>
-</ul>
-<p>以上步骤完成后，你的 Java 应用程序就会作为一个 macOS 服务运行了。如果有任何问题，可以检查指定的日志文件以获取更多信息。</p>
-<h2 id="怎么查看-launchctl-服务的状态">
-  怎么查看 launchctl 服务的状态
-  <a class="anchor" href="#%e6%80%8e%e4%b9%88%e6%9f%a5%e7%9c%8b-launchctl-%e6%9c%8d%e5%8a%a1%e7%9a%84%e7%8a%b6%e6%80%81">#</a>
-</h2>
-<p>在 macOS 中，你可以使用 <code>launchctl</code> 命令来查看服务的状态。以下是几种常见的方法来检查 <code>launchctl</code> 服务的状态：</p>
-<ol>
-<li>查看所有已加载的服务</li>
-</ol>
-<p>使用 <code>list</code> 子命令可以列出所有已加载的 <code>launchd</code> 服务及其状态：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl list
-</span></span></code></pre></div><p>这将显示一个列表，其中包括服务的标签（Label）、进程 ID（PID）以及退出状态（LastExitStatus）。</p>
-<ol start="2">
-<li>查看特定服务的状态</li>
-</ol>
-<p>如果你只想查看某个特定服务的状态，可以使用服务的标签（Label）来过滤输出。例如，如果你的服务标签是 <code>com.yourdomain.yourapp</code>，可以使用以下命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl list com.yourdomain.yourapp
-</span></span></code></pre></div><ol start="3">
-<li>查看服务的详细信息</li>
-</ol>
-<p>如果你想查看更详细的信息，可以使用 <code>print</code> 子命令。例如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl print system/com.yourdomain.yourapp
-</span></span></code></pre></div><p>这将显示关于该服务的详细信息，包括其配置、状态、环境变量等。</p>
-<ol start="4">
-<li>检查服务日志</li>
-</ol>
-<p>如果服务有日志输出，可以使用 <code>log</code> 命令来查看日志。例如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo log show --predicate <span style="color:#e6db74">&#39;process == &#34;yourapp&#34;&#39;</span> --info --debug --last 1h
-</span></span></code></pre></div><p>这将显示过去一小时内与 <code>yourapp</code> 进程相关的所有日志信息。</p>
-<p>示例</p>
-<p>假设你有一个服务标签为 <code>com.example.myapp</code> 的服务，你可以按以下步骤检查其状态：</p>
-<ol>
-<li>
-<p><strong>查看所有已加载的服务</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl list
-</span></span></code></pre></div></li>
-<li>
-<p><strong>查看特定服务的状态</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl list com.example.myapp
-</span></span></code></pre></div></li>
-<li>
-<p><strong>查看服务的详细信息</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo launchctl print system/com.example.myapp
-</span></span></code></pre></div></li>
-<li>
-<p><strong>查看服务日志</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo log show --predicate <span style="color:#e6db74">&#39;process == &#34;myapp&#34;&#39;</span> --info --debug --last 1h
-</span></span></code></pre></div></li>
-</ol>
-<p>通过这些命令，你可以轻松地检查和管理 <code>launchctl</code> 服务的状态。</p>
-<h2 id="怎么查看-launchctl-中一个服务的内存使用情况">
-  怎么查看 launchctl 中一个服务的内存使用情况
-  <a class="anchor" href="#%e6%80%8e%e4%b9%88%e6%9f%a5%e7%9c%8b-launchctl-%e4%b8%ad%e4%b8%80%e4%b8%aa%e6%9c%8d%e5%8a%a1%e7%9a%84%e5%86%85%e5%ad%98%e4%bd%bf%e7%94%a8%e6%83%85%e5%86%b5">#</a>
-</h2>
-<p>在 macOS 中，你可以使用多种方法来查看 <code>launchctl</code> 服务的内存使用情况。以下是几种常见的方法：</p>
-<p>使用 <code>top</code> 命令</p>
-<p><code>top</code> 命令是一个实时系统监视工具，可以显示系统的整体状态，包括 CPU 和内存使用情况。你可以通过 <code>top</code> 命令来查找特定服务的进程 ID（PID），然后查看其内存使用情况。</p>
-<ol>
-<li>
-<p><strong>打开 <code>top</code> 并查找进程</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>top
-</span></span></code></pre></div></li>
-<li>
-<p><strong>在 <code>top</code> 界面中查找你的服务</strong>：</p>
-<ul>
-<li>按 <code>P</code> 可以按 CPU 使用率排序。</li>
-<li>按 <code>M</code> 可以按内存使用率排序。</li>
-<li>查找你的服务进程，通常可以通过进程名称或部分名称来识别。</li>
-</ul>
-</li>
-</ol>
-<p>使用 <code>ps</code> 命令</p>
-<p><code>ps</code> 命令可以显示当前系统中运行的进程信息。你可以结合 <code>grep</code> 命令来查找特定服务的进程信息。</p>
-<ol>
-<li>
-<p><strong>查找服务的 PID</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ps aux | grep com.yourdomain.yourapp
-</span></span></code></pre></div><p>这将显示与 <code>com.yourdomain.yourapp</code> 相关的所有进程信息。找到你的服务进程的 PID。</p>
-</li>
-<li>
-<p><strong>查看特定进程的内存使用情况</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ps -p &lt;PID&gt; -o %mem,%cpu,rss
-</span></span></code></pre></div><p>其中 <code>&lt;PID&gt;</code> 是你在上一步中找到的进程 ID。<code>%mem</code> 显示内存使用百分比，<code>%cpu</code> 显示 CPU 使用百分比，<code>rss</code> 显示常驻集大小（Resident Set Size，即进程占用的实际物理内存）。</p>
-</li>
-<li>
-<p>使用 <code>activity monitor</code></p>
-</li>
-</ol>
-<p>macOS 自带的“活动监视器”应用程序也可以用来查看进程的内存使用情况。</p>
-<ol>
-<li>
-<p><strong>打开“活动监视器”</strong>：</p>
-<ul>
-<li>你可以通过 Spotlight 搜索（按 <code>Cmd + Space</code>，然后输入“活动监视器”）来打开它。</li>
-</ul>
-</li>
-<li>
-<p><strong>切换到“内存”标签页</strong>：</p>
-<ul>
-<li>在“活动监视器”中，选择“内存”标签页，这里会显示所有进程的内存使用情况。</li>
-</ul>
-</li>
-<li>
-<p><strong>查找你的服务</strong>：</p>
-<ul>
-<li>在进程列表中查找你的服务名称，查看其内存使用情况。</li>
-</ul>
-</li>
-<li>
-<p>使用 <code>memory_pressure</code> 命令</p>
-</li>
-</ol>
-<p><code>memory_pressure</code> 命令可以显示系统的内存压力情况，虽然它不能直接显示单个进程的内存使用情况，但可以帮助你了解系统整体的内存状况。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>memory_pressure
-</span></span></code></pre></div><p>示例</p>
-<p>假设你的服务标签是 <code>com.example.myapp</code>，你可以按以下步骤查看其内存使用情况：</p>
-<ol>
-<li>
-<p><strong>查找服务的 PID</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ps aux | grep com.example.myapp
-</span></span></code></pre></div></li>
-<li>
-<p><strong>假设找到的 PID 是 12345，查看该进程的内存使用情况</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ps -p <span style="color:#ae81ff">12345</span> -o %mem,%cpu,rss
-</span></span></code></pre></div></li>
-</ol>
-<p>通过这些方法，你可以轻松地查看 <code>launchctl</code> 服务的内存使用情况。</p>
 <h2 id="mac-上抓取应用的https的包">
   mac 上抓取应用的https的包
   <a class="anchor" href="#mac-%e4%b8%8a%e6%8a%93%e5%8f%96%e5%ba%94%e7%94%a8%e7%9a%84https%e7%9a%84%e5%8c%85">#</a>
@@ -1272,9 +1054,9 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/bf4e0759baabededc666ea41c132bedb3ad479e3" title='最后修改者 penruins | 三月 10, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/c8d2337a99bce3e2fc9dde7a242dd01f33c003da" title='最后修改者 penruins | 三月 11, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
-      <span>三月 10, 2025</span>
+      <span>三月 11, 2025</span>
     </a>
   </div>
 
@@ -1318,9 +1100,6 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#player">player</a></li>
     <li><a href="#disk">disk</a></li>
-    <li><a href="#把一个java程序配置为一个服务">把一个java程序配置为一个服务</a></li>
-    <li><a href="#怎么查看-launchctl-服务的状态">怎么查看 launchctl 服务的状态</a></li>
-    <li><a href="#怎么查看-launchctl-中一个服务的内存使用情况">怎么查看 launchctl 中一个服务的内存使用情况</a></li>
     <li><a href="#mac-上抓取应用的https的包">mac 上抓取应用的https的包</a>
       <ul>
         <li><a href="#charles">charles</a></li>
