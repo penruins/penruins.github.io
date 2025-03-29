@@ -6,7 +6,7 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en-US"
-                href="/en/categories/"
+                href="/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -23,7 +23,7 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en-US"
-                href="/en/"
+                href="/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -40,7 +40,7 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en-US"
-                href="/en/tags/"
+                href="/tags/"
                 />
     <xhtml:link
                 rel="alternate"
