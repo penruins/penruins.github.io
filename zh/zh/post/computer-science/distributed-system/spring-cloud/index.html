@@ -8,6 +8,160 @@
   #
 
 
+  服务注册与发现
+  #
+
+
+  Eureka
+  #
+
+
+Netflix 开源的服务注册中心，采用 AP 架构（高可用性），通过心跳机制检测服务状态
+包含 Eureka Server（注册中心）和 Eureka Client（服务提供者/消费者）
+注：Eureka 2.x 已停止维护，建议新项目使用 Nacos
+
+
+  Nacos
+  #
+
+
+Spring Cloud Alibaba 的核心组件，兼具服务注册中心和配置中心功能，支持 CP/AP 模式切换
+提供动态服务发现、健康检查、配置管理等功能，适用于云原生场景
+
+
+  服务调用与负载均衡
+  #
+
+
+  Feign
+  #
+
+
+声明式的 REST 客户端，通过动态代理简化服务间 HTTP 调用，整合了 Ribbon 实现负载均衡
+
+
+  Ribbon
+  #
+
+
+客户端负载均衡组件，支持轮询、随机、权重等算法，需配合 Eureka/Nacos 使用
+注：Ribbon 已进入维护阶段，Spring Cloud LoadBalancer 是新一代替代方案
+
+
+  Dubbo
+  #
+
+
+Spring Cloud Alibaba 支持的 RPC 框架，适用于高性能服务调用，替代 Feign&#43;Ribbon 的组合
+
+
+  服务容错与熔断
+  #
+
+
+  Hystrix
+  #
+
+
+Netflix 开源的熔断器，通过熔断、降级、隔离机制防止服务雪崩
+注：Hystrix 已停止维护，推荐使用 Sentinel
+
+
+  Sentinel
+  #
+
+
+Alibaba 开源的流量控制组件，支持熔断、限流、系统自适应保护，提供实时监控
+
+
+  服务网关
+  #
+
+
+  Zuul
+  #
+
+
+Netflix 的 API 网关，负责路由、过滤、负载均衡，但性能较低
+注：Zuul 1.x 已停止维护，Zuul 2.x 未集成到 Spring Cloud
+
+
+  Spring Cloud Gateway
+  #
+
+
+基于 Reactor 的高性能网关，支持动态路由、限流、集成 Sentinel
+
+
+  配置中心
+  #
+
+
+  Spring Cloud Config
+  #
+
+
+集中化管理配置，支持 Git、本地存储等，但需配合 Bus 实现动态刷新
+
+
+  Nacos Config
+  #
+
+
+与 Nacos 注册中心无缝集成，支持配置动态更新和版本管理
+
+
+  消息总线与事件驱动
+  #
+
+
+  Spring Cloud Bus
+  #
+
+
+通过消息队列（如 RabbitMQ、Kafka）广播配置变更，实现配置热更新
+
+
+  Spring Cloud Stream
+  #
+
+
+统一消息中间件抽象层，支持 Kafka、RocketMQ 等
+
+
+  分布式链路追踪
+  #
+
+
+  Sleuth &#43; Zipkin
+  #
+
+
+追踪微服务调用链路，生成请求依赖图，便于故障排查
+
+
+  SkyWalking
+  #
+
+
+更强大的 APM 工具，支持分布式追踪、性能监控
+
+
+  分布式事务
+  #
+
+
+  Seata
+  #
+
+
+Alibaba 开源的分布式事务解决方案，支持 AT、TCC、SAGA 模式
+
+
+  其他组件
+  #
+
+
   Reference
   #
 ">
@@ -16,18 +170,18 @@
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/distributed-system/spring-cloud/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Spring Cloud">
-  <meta property="og:description" content="Spring Cloud # Reference #">
+  <meta property="og:description" content="Spring Cloud # 服务注册与发现 # Eureka # Netflix 开源的服务注册中心，采用 AP 架构（高可用性），通过心跳机制检测服务状态 包含 Eureka Server（注册中心）和 Eureka Client（服务提供者/消费者） 注：Eureka 2.x 已停止维护，建议新项目使用 Nacos Nacos # Spring Cloud Alibaba 的核心组件，兼具服务注册中心和配置中心功能，支持 CP/AP 模式切换 提供动态服务发现、健康检查、配置管理等功能，适用于云原生场景 服务调用与负载均衡 # Feign # 声明式的 REST 客户端，通过动态代理简化服务间 HTTP 调用，整合了 Ribbon 实现负载均衡 Ribbon # 客户端负载均衡组件，支持轮询、随机、权重等算法，需配合 Eureka/Nacos 使用 注：Ribbon 已进入维护阶段，Spring Cloud LoadBalancer 是新一代替代方案 Dubbo # Spring Cloud Alibaba 支持的 RPC 框架，适用于高性能服务调用，替代 Feign&#43;Ribbon 的组合 服务容错与熔断 # Hystrix # Netflix 开源的熔断器，通过熔断、降级、隔离机制防止服务雪崩 注：Hystrix 已停止维护，推荐使用 Sentinel Sentinel # Alibaba 开源的流量控制组件，支持熔断、限流、系统自适应保护，提供实时监控 服务网关 # Zuul # Netflix 的 API 网关，负责路由、过滤、负载均衡，但性能较低 注：Zuul 1.x 已停止维护，Zuul 2.x 未集成到 Spring Cloud Spring Cloud Gateway # 基于 Reactor 的高性能网关，支持动态路由、限流、集成 Sentinel 配置中心 # Spring Cloud Config # 集中化管理配置，支持 Git、本地存储等，但需配合 Bus 实现动态刷新 Nacos Config # 与 Nacos 注册中心无缝集成，支持配置动态更新和版本管理 消息总线与事件驱动 # Spring Cloud Bus # 通过消息队列（如 RabbitMQ、Kafka）广播配置变更，实现配置热更新 Spring Cloud Stream # 统一消息中间件抽象层，支持 Kafka、RocketMQ 等 分布式链路追踪 # Sleuth &#43; Zipkin # 追踪微服务调用链路，生成请求依赖图，便于故障排查 SkyWalking # 更强大的 APM 工具，支持分布式追踪、性能监控 分布式事务 # Seata # Alibaba 开源的分布式事务解决方案，支持 AT、TCC、SAGA 模式 其他组件 # Reference #">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
-    <meta property="article:modified_time" content="2025-03-29T19:34:59+08:00">
+    <meta property="article:modified_time" content="2025-03-29T19:44:58+08:00">
 <title>Spring Cloud | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/zh/post/computer-science/distributed-system/spring-cloud/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.9035f8efb95b6c2d35e9b2cd796cdbf370f13f8ba8d52c0d616000d72451cf9d.js" ></script>
+  <script defer src="/zh.search.min.4cad167462de303c04f93f779c7282ed555bc89ea655a977d455c73c31efdf36.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -808,6 +962,55 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#服务注册与发现">服务注册与发现</a>
+      <ul>
+        <li><a href="#eureka">Eureka</a></li>
+        <li><a href="#nacos">Nacos</a></li>
+      </ul>
+    </li>
+    <li><a href="#服务调用与负载均衡">服务调用与负载均衡</a>
+      <ul>
+        <li><a href="#feign">Feign</a></li>
+        <li><a href="#ribbon">Ribbon</a></li>
+        <li><a href="#dubbo">Dubbo</a></li>
+      </ul>
+    </li>
+    <li><a href="#服务容错与熔断">服务容错与熔断</a>
+      <ul>
+        <li><a href="#hystrix">Hystrix</a></li>
+        <li><a href="#sentinel">Sentinel</a></li>
+      </ul>
+    </li>
+    <li><a href="#服务网关">服务网关</a>
+      <ul>
+        <li><a href="#zuul">Zuul</a></li>
+        <li><a href="#spring-cloud-gateway">Spring Cloud Gateway</a></li>
+      </ul>
+    </li>
+    <li><a href="#配置中心">配置中心</a>
+      <ul>
+        <li><a href="#spring-cloud-config">Spring Cloud Config</a></li>
+        <li><a href="#nacos-config">Nacos Config</a></li>
+      </ul>
+    </li>
+    <li><a href="#消息总线与事件驱动">消息总线与事件驱动</a>
+      <ul>
+        <li><a href="#spring-cloud-bus">Spring Cloud Bus</a></li>
+        <li><a href="#spring-cloud-stream">Spring Cloud Stream</a></li>
+      </ul>
+    </li>
+    <li><a href="#分布式链路追踪">分布式链路追踪</a>
+      <ul>
+        <li><a href="#sleuth--zipkin">Sleuth + Zipkin</a></li>
+        <li><a href="#skywalking">SkyWalking</a></li>
+      </ul>
+    </li>
+    <li><a href="#分布式事务">分布式事务</a>
+      <ul>
+        <li><a href="#seata"><code>Seata</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#其他组件">其他组件</a></li>
     <li><a href="#reference">Reference</a></li>
   </ul>
 </nav>
@@ -825,6 +1028,160 @@ https://github.com/alex-shpak/hugo-book
   Spring Cloud
   <a class="anchor" href="#spring-cloud">#</a>
 </h1>
+<h2 id="服务注册与发现">
+  服务注册与发现
+  <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e6%b3%a8%e5%86%8c%e4%b8%8e%e5%8f%91%e7%8e%b0">#</a>
+</h2>
+<h3 id="eureka">
+  Eureka
+  <a class="anchor" href="#eureka">#</a>
+</h3>
+<ul>
+<li>Netflix 开源的服务注册中心，采用 AP 架构（高可用性），通过心跳机制检测服务状态</li>
+<li>包含 Eureka Server（注册中心）和 Eureka Client（服务提供者/消费者）</li>
+<li>注：Eureka 2.x 已停止维护，建议新项目使用 Nacos</li>
+</ul>
+<h3 id="nacos">
+  Nacos
+  <a class="anchor" href="#nacos">#</a>
+</h3>
+<ul>
+<li>Spring Cloud Alibaba 的核心组件，兼具服务注册中心和配置中心功能，支持 CP/AP 模式切换</li>
+<li>提供动态服务发现、健康检查、配置管理等功能，适用于云原生场景</li>
+</ul>
+<h2 id="服务调用与负载均衡">
+  服务调用与负载均衡
+  <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e8%b0%83%e7%94%a8%e4%b8%8e%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1">#</a>
+</h2>
+<h3 id="feign">
+  Feign
+  <a class="anchor" href="#feign">#</a>
+</h3>
+<ul>
+<li>声明式的 REST 客户端，通过动态代理简化服务间 HTTP 调用，整合了 Ribbon 实现负载均衡</li>
+</ul>
+<h3 id="ribbon">
+  Ribbon
+  <a class="anchor" href="#ribbon">#</a>
+</h3>
+<ul>
+<li>客户端负载均衡组件，支持轮询、随机、权重等算法，需配合 Eureka/Nacos 使用</li>
+<li>注：Ribbon 已进入维护阶段，Spring Cloud LoadBalancer 是新一代替代方案</li>
+</ul>
+<h3 id="dubbo">
+  Dubbo
+  <a class="anchor" href="#dubbo">#</a>
+</h3>
+<ul>
+<li>Spring Cloud Alibaba 支持的 RPC 框架，适用于高性能服务调用，替代 Feign+Ribbon 的组合</li>
+</ul>
+<h2 id="服务容错与熔断">
+  服务容错与熔断
+  <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e5%ae%b9%e9%94%99%e4%b8%8e%e7%86%94%e6%96%ad">#</a>
+</h2>
+<h3 id="hystrix">
+  Hystrix
+  <a class="anchor" href="#hystrix">#</a>
+</h3>
+<ul>
+<li>Netflix 开源的熔断器，通过熔断、降级、隔离机制防止服务雪崩</li>
+<li>注：Hystrix 已停止维护，推荐使用 Sentinel</li>
+</ul>
+<h3 id="sentinel">
+  Sentinel
+  <a class="anchor" href="#sentinel">#</a>
+</h3>
+<ul>
+<li>Alibaba 开源的流量控制组件，支持熔断、限流、系统自适应保护，提供实时监控</li>
+</ul>
+<h2 id="服务网关">
+  服务网关
+  <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e7%bd%91%e5%85%b3">#</a>
+</h2>
+<h3 id="zuul">
+  Zuul
+  <a class="anchor" href="#zuul">#</a>
+</h3>
+<ul>
+<li>Netflix 的 API 网关，负责路由、过滤、负载均衡，但性能较低</li>
+<li>注：Zuul 1.x 已停止维护，Zuul 2.x 未集成到 Spring Cloud</li>
+</ul>
+<h3 id="spring-cloud-gateway">
+  Spring Cloud Gateway
+  <a class="anchor" href="#spring-cloud-gateway">#</a>
+</h3>
+<ul>
+<li>基于 Reactor 的高性能网关，支持动态路由、限流、集成 Sentinel</li>
+</ul>
+<h2 id="配置中心">
+  配置中心
+  <a class="anchor" href="#%e9%85%8d%e7%bd%ae%e4%b8%ad%e5%bf%83">#</a>
+</h2>
+<h3 id="spring-cloud-config">
+  Spring Cloud Config
+  <a class="anchor" href="#spring-cloud-config">#</a>
+</h3>
+<ul>
+<li>集中化管理配置，支持 Git、本地存储等，但需配合 Bus 实现动态刷新</li>
+</ul>
+<h3 id="nacos-config">
+  Nacos Config
+  <a class="anchor" href="#nacos-config">#</a>
+</h3>
+<ul>
+<li>与 <code>Nacos</code> 注册中心无缝集成，支持配置动态更新和版本管理</li>
+</ul>
+<h2 id="消息总线与事件驱动">
+  消息总线与事件驱动
+  <a class="anchor" href="#%e6%b6%88%e6%81%af%e6%80%bb%e7%ba%bf%e4%b8%8e%e4%ba%8b%e4%bb%b6%e9%a9%b1%e5%8a%a8">#</a>
+</h2>
+<h3 id="spring-cloud-bus">
+  Spring Cloud Bus
+  <a class="anchor" href="#spring-cloud-bus">#</a>
+</h3>
+<ul>
+<li>通过消息队列（如 RabbitMQ、Kafka）广播配置变更，实现配置热更新</li>
+</ul>
+<h3 id="spring-cloud-stream">
+  Spring Cloud Stream
+  <a class="anchor" href="#spring-cloud-stream">#</a>
+</h3>
+<ul>
+<li>统一消息中间件抽象层，支持 Kafka、RocketMQ 等</li>
+</ul>
+<h2 id="分布式链路追踪">
+  分布式链路追踪
+  <a class="anchor" href="#%e5%88%86%e5%b8%83%e5%bc%8f%e9%93%be%e8%b7%af%e8%bf%bd%e8%b8%aa">#</a>
+</h2>
+<h3 id="sleuth--zipkin">
+  Sleuth + Zipkin
+  <a class="anchor" href="#sleuth--zipkin">#</a>
+</h3>
+<ul>
+<li>追踪微服务调用链路，生成请求依赖图，便于故障排查</li>
+</ul>
+<h3 id="skywalking">
+  SkyWalking
+  <a class="anchor" href="#skywalking">#</a>
+</h3>
+<ul>
+<li>更强大的 APM 工具，支持分布式追踪、性能监控</li>
+</ul>
+<h2 id="分布式事务">
+  分布式事务
+  <a class="anchor" href="#%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1">#</a>
+</h2>
+<h3 id="seata">
+  <code>Seata</code>
+  <a class="anchor" href="#seata">#</a>
+</h3>
+<ul>
+<li>Alibaba 开源的分布式事务解决方案，支持 AT、TCC、SAGA 模式</li>
+</ul>
+<h2 id="其他组件">
+  其他组件
+  <a class="anchor" href="#%e5%85%b6%e4%bb%96%e7%bb%84%e4%bb%b6">#</a>
+</h2>
 <h2 id="reference">
   Reference
   <a class="anchor" href="#reference">#</a>
@@ -838,7 +1195,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/45d349bb6390aa90cb0c481c78ae078d86406610" title='最后修改者 penruins | 三月 29, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/4ed123ba0891b047e49469150de63be8d61cfd66" title='最后修改者 penruins | 三月 29, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>三月 29, 2025</span>
     </a>
@@ -876,6 +1233,55 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#服务注册与发现">服务注册与发现</a>
+      <ul>
+        <li><a href="#eureka">Eureka</a></li>
+        <li><a href="#nacos">Nacos</a></li>
+      </ul>
+    </li>
+    <li><a href="#服务调用与负载均衡">服务调用与负载均衡</a>
+      <ul>
+        <li><a href="#feign">Feign</a></li>
+        <li><a href="#ribbon">Ribbon</a></li>
+        <li><a href="#dubbo">Dubbo</a></li>
+      </ul>
+    </li>
+    <li><a href="#服务容错与熔断">服务容错与熔断</a>
+      <ul>
+        <li><a href="#hystrix">Hystrix</a></li>
+        <li><a href="#sentinel">Sentinel</a></li>
+      </ul>
+    </li>
+    <li><a href="#服务网关">服务网关</a>
+      <ul>
+        <li><a href="#zuul">Zuul</a></li>
+        <li><a href="#spring-cloud-gateway">Spring Cloud Gateway</a></li>
+      </ul>
+    </li>
+    <li><a href="#配置中心">配置中心</a>
+      <ul>
+        <li><a href="#spring-cloud-config">Spring Cloud Config</a></li>
+        <li><a href="#nacos-config">Nacos Config</a></li>
+      </ul>
+    </li>
+    <li><a href="#消息总线与事件驱动">消息总线与事件驱动</a>
+      <ul>
+        <li><a href="#spring-cloud-bus">Spring Cloud Bus</a></li>
+        <li><a href="#spring-cloud-stream">Spring Cloud Stream</a></li>
+      </ul>
+    </li>
+    <li><a href="#分布式链路追踪">分布式链路追踪</a>
+      <ul>
+        <li><a href="#sleuth--zipkin">Sleuth + Zipkin</a></li>
+        <li><a href="#skywalking">SkyWalking</a></li>
+      </ul>
+    </li>
+    <li><a href="#分布式事务">分布式事务</a>
+      <ul>
+        <li><a href="#seata"><code>Seata</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#其他组件">其他组件</a></li>
     <li><a href="#reference">Reference</a></li>
   </ul>
 </nav>
