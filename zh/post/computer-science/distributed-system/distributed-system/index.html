@@ -6,24 +6,53 @@
 <meta name="description" content="
   distributed system
   #
+
+
+  微服务和分布式的比较
+  #
+
+
+微服务架构和分布式架构是现代软件系统中两种重要的设计模式
+分布式架构
+
+分布式架构是指将系统组件部署在不同的物理或虚拟节点上，通过网络协作完成任务。其核心目标是解决性能、可扩展性、容错性等问题，例如通过负载均衡、数据分片等技术提升系统吞吐能力
+典型场景：分布式数据库（如Cassandra）、分布式计算（如Spark）
+适合需要高性能、高可用性的场景，如大规模数据处理、高并发请求
+
+
+微服务架构
+
+微服务是一种将单体应用拆分为多个小型、独立服务的架构风格，每个服务围绕特定业务功能构建，通过轻量级通信（如HTTP/REST、gRPC）交互。核心目标是提升开发效率、灵活性和可维护性，解决业务复杂度问题
+典型场景：电商平台（订单、库存等独立服务）。
+适合业务复杂、需快速迭代的系统，尤其是多团队协作开发时
+
+
+分布式是手段：通过物理分散提升系统能力
+微服务是策略：通过逻辑拆分优化开发和维护
+选择依据：
+
+若需解决性能瓶颈，优先考虑分布式
+若需应对业务复杂性，选择微服务
+
+
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/distributed-system/distributed-system/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="distributed system">
-  <meta property="og:description" content="distributed system #">
+  <meta property="og:description" content="distributed system # 微服务和分布式的比较 # 微服务架构和分布式架构是现代软件系统中两种重要的设计模式 分布式架构 分布式架构是指将系统组件部署在不同的物理或虚拟节点上，通过网络协作完成任务。其核心目标是解决性能、可扩展性、容错性等问题，例如通过负载均衡、数据分片等技术提升系统吞吐能力 典型场景：分布式数据库（如Cassandra）、分布式计算（如Spark） 适合需要高性能、高可用性的场景，如大规模数据处理、高并发请求 微服务架构 微服务是一种将单体应用拆分为多个小型、独立服务的架构风格，每个服务围绕特定业务功能构建，通过轻量级通信（如HTTP/REST、gRPC）交互。核心目标是提升开发效率、灵活性和可维护性，解决业务复杂度问题 典型场景：电商平台（订单、库存等独立服务）。 适合业务复杂、需快速迭代的系统，尤其是多团队协作开发时 分布式是手段：通过物理分散提升系统能力 微服务是策略：通过逻辑拆分优化开发和维护 选择依据： 若需解决性能瓶颈，优先考虑分布式 若需应对业务复杂性，选择微服务">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-03-29T19:24:36+08:00">
+    <meta property="article:modified_time" content="2025-03-29T19:29:01+08:00">
 <title>distributed system | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/distributed-system/distributed-system/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.c02fd4de1a33d45adb99ed77be9ef9d182422ba2324824dfd8236f98f2118642.js" ></script>
+  <script defer src="/zh.search.min.96f05e50538599a3d217bec93038a4631f4d53d7aa38a9d82afa216dbea5d4d3.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -776,7 +805,11 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#微服务和分布式的比较">微服务和分布式的比较</a></li>
+  </ul>
+</nav>
 
 
 
@@ -791,6 +824,35 @@ https://github.com/alex-shpak/hugo-book
   distributed system
   <a class="anchor" href="#distributed-system">#</a>
 </h1>
+<h2 id="微服务和分布式的比较">
+  微服务和分布式的比较
+  <a class="anchor" href="#%e5%be%ae%e6%9c%8d%e5%8a%a1%e5%92%8c%e5%88%86%e5%b8%83%e5%bc%8f%e7%9a%84%e6%af%94%e8%be%83">#</a>
+</h2>
+<ul>
+<li>微服务架构和分布式架构是现代软件系统中两种重要的设计模式</li>
+<li>分布式架构
+<ul>
+<li>分布式架构是指将系统组件部署在不同的物理或虚拟节点上，通过网络协作完成任务。其核心目标是解决性能、可扩展性、容错性等问题，例如通过负载均衡、数据分片等技术提升系统吞吐能力</li>
+<li>典型场景：分布式数据库（如Cassandra）、分布式计算（如Spark）</li>
+<li>适合需要高性能、高可用性的场景，如大规模数据处理、高并发请求</li>
+</ul>
+</li>
+<li>微服务架构
+<ul>
+<li>微服务是一种将单体应用拆分为多个小型、独立服务的架构风格，每个服务围绕特定业务功能构建，通过轻量级通信（如HTTP/REST、gRPC）交互。核心目标是提升开发效率、灵活性和可维护性，解决业务复杂度问题</li>
+<li>典型场景：电商平台（订单、库存等独立服务）。</li>
+<li>适合业务复杂、需快速迭代的系统，尤其是多团队协作开发时</li>
+</ul>
+</li>
+<li>分布式是手段：通过物理分散提升系统能力</li>
+<li>微服务是策略：通过逻辑拆分优化开发和维护</li>
+<li>选择依据：
+<ul>
+<li>若需解决性能瓶颈，优先考虑分布式</li>
+<li>若需应对业务复杂性，选择微服务</li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -800,7 +862,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/fa25d76cb17f18ada4b22da55b0a859bc2b69a03" title='最后修改者 penruins | 三月 29, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/8b1b4707ed84ec356822e64bdc0d2d57dfa6b83c" title='最后修改者 penruins | 三月 29, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>三月 29, 2025</span>
     </a>
@@ -836,7 +898,11 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#微服务和分布式的比较">微服务和分布式的比较</a></li>
+  </ul>
+</nav>
 
 
  
