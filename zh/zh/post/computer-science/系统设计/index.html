@@ -12,6 +12,43 @@
   #
 
 
+  缓存
+  #
+
+
+  客户端缓存
+  #
+
+
+  系统是否真的需要缓存？
+  #
+
+
+软件开发中引入缓存的负面作用要明显大于硬件缓存带来的负面作用
+
+从开发角度来说
+
+你要考虑缓存的失效、更新、一致性等问题（硬件缓存也有这些问题，只是不需要由你去考虑，主流的ISA也都没有提供任何直接操作缓存的指令）
+
+
+从运维角度来说
+
+缓存会掩盖一些缺陷，让问题在更久的时间以后，出现在距离发生现场更远的位置上
+
+
+从安全角度来说
+
+缓存可能会泄漏某些保密数据，也是容易受到攻击的薄弱点
+
+
+
+
+
+
+  服务端缓存
+  #
+
+
   负载均衡
   #
 
@@ -84,7 +121,7 @@
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/zh/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="系统设计">
-  <meta property="og:description" content="系统设计 # 服务发现 # 负载均衡 # 流量治理 # 服务容错 # 流量控制 # 可观测性 # 时间日志 # 链路追踪 # 聚合度量 # 架构安全性 # 认证 # 授权 # 凭证 # 保密 # 传输 # 分布式共识 # Reference # 凤凰架构 构建可靠的大型分布式系统 搞定系统设计 面试敲开大厂的门">
+  <meta property="og:description" content="系统设计 # 服务发现 # 缓存 # 客户端缓存 # 系统是否真的需要缓存？ # 软件开发中引入缓存的负面作用要明显大于硬件缓存带来的负面作用 从开发角度来说 你要考虑缓存的失效、更新、一致性等问题（硬件缓存也有这些问题，只是不需要由你去考虑，主流的ISA也都没有提供任何直接操作缓存的指令） 从运维角度来说 缓存会掩盖一些缺陷，让问题在更久的时间以后，出现在距离发生现场更远的位置上 从安全角度来说 缓存可能会泄漏某些保密数据，也是容易受到攻击的薄弱点 服务端缓存 # 负载均衡 # 流量治理 # 服务容错 # 流量控制 # 可观测性 # 时间日志 # 链路追踪 # 聚合度量 # 架构安全性 # 认证 # 授权 # 凭证 # 保密 # 传输 # 分布式共识 # Reference # 凤凰架构 构建可靠的大型分布式系统 搞定系统设计 面试敲开大厂的门">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="zh">
@@ -94,7 +131,7 @@
 <link rel="canonical" href="/zh/zh/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.cb8280de623506e14a06d5069eaa581924467603ef4091a29d46cb6fd3087a85.js" ></script>
+  <script defer src="/zh.search.min.a2125930d9ceedf8720bd47710b8df31931c9f16275c71af842deb82ae73487f.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -816,6 +853,16 @@ https://github.com/alex-shpak/hugo-book
 <nav id="TableOfContents">
   <ul>
     <li><a href="#服务发现">服务发现</a></li>
+    <li><a href="#缓存">缓存</a>
+      <ul>
+        <li><a href="#客户端缓存">客户端缓存</a>
+          <ul>
+            <li><a href="#系统是否真的需要缓存">系统是否真的需要缓存？</a></li>
+          </ul>
+        </li>
+        <li><a href="#服务端缓存">服务端缓存</a></li>
+      </ul>
+    </li>
     <li><a href="#负载均衡">负载均衡</a></li>
     <li><a href="#流量治理">流量治理</a>
       <ul>
@@ -861,6 +908,43 @@ https://github.com/alex-shpak/hugo-book
   服务发现
   <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e5%8f%91%e7%8e%b0">#</a>
 </h2>
+<h2 id="缓存">
+  缓存
+  <a class="anchor" href="#%e7%bc%93%e5%ad%98">#</a>
+</h2>
+<h3 id="客户端缓存">
+  客户端缓存
+  <a class="anchor" href="#%e5%ae%a2%e6%88%b7%e7%ab%af%e7%bc%93%e5%ad%98">#</a>
+</h3>
+<h4 id="系统是否真的需要缓存">
+  系统是否真的需要缓存？
+  <a class="anchor" href="#%e7%b3%bb%e7%bb%9f%e6%98%af%e5%90%a6%e7%9c%9f%e7%9a%84%e9%9c%80%e8%a6%81%e7%bc%93%e5%ad%98">#</a>
+</h4>
+<ul>
+<li>软件开发中引入缓存的负面作用要明显大于硬件缓存带来的负面作用
+<ul>
+<li>从开发角度来说
+<ul>
+<li>你要考虑缓存的失效、更新、一致性等问题（硬件缓存也有这些问题，只是不需要由你去考虑，主流的ISA也都没有提供任何直接操作缓存的指令）</li>
+</ul>
+</li>
+<li>从运维角度来说
+<ul>
+<li>缓存会掩盖一些缺陷，让问题在更久的时间以后，出现在距离发生现场更远的位置上</li>
+</ul>
+</li>
+<li>从安全角度来说
+<ul>
+<li>缓存可能会泄漏某些保密数据，也是容易受到攻击的薄弱点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="服务端缓存">
+  服务端缓存
+  <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e7%ab%af%e7%bc%93%e5%ad%98">#</a>
+</h3>
 <h2 id="负载均衡">
   负载均衡
   <a class="anchor" href="#%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1">#</a>
@@ -971,6 +1055,16 @@ https://github.com/alex-shpak/hugo-book
 <nav id="TableOfContents">
   <ul>
     <li><a href="#服务发现">服务发现</a></li>
+    <li><a href="#缓存">缓存</a>
+      <ul>
+        <li><a href="#客户端缓存">客户端缓存</a>
+          <ul>
+            <li><a href="#系统是否真的需要缓存">系统是否真的需要缓存？</a></li>
+          </ul>
+        </li>
+        <li><a href="#服务端缓存">服务端缓存</a></li>
+      </ul>
+    </li>
     <li><a href="#负载均衡">负载均衡</a></li>
     <li><a href="#流量治理">流量治理</a>
       <ul>
