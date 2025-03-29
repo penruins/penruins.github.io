@@ -28,5 +28,12 @@
       <guid>/zh/zh/post/computer-science/java/jvm/</guid>
       <description>&lt;h1 id=&#34;jvm&#34;&gt;&#xA;  jvm&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#jvm&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
     </item>
+    <item>
+      <title>spring boot</title>
+      <link>/zh/zh/post/computer-science/java/springboot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/zh/post/computer-science/java/springboot/</guid>
+      <description>&lt;h1 id=&#34;spring-boot&#34;&gt;&#xA;  spring boot&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#spring-boot&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;spring-boot-monitor&#34;&gt;&#xA;  Spring-boot-monitor&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#spring-boot-monitor&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;单机监控SpringBoot应用指标&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.pomit.cn/SpringBootMonitor/#/&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
   </channel>
 </rss>
