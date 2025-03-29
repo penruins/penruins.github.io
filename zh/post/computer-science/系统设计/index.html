@@ -8,6 +8,22 @@
   #
 
 
+  数据持久化
+  #
+
+
+  冷热分离
+  #
+
+
+  查询分离
+  #
+
+
+  分表分库
+  #
+
+
   服务发现
   #
 
@@ -61,6 +77,14 @@
 
 
   服务端缓存
+  #
+
+
+  读缓存
+  #
+
+
+  写缓存
   #
 
 
@@ -136,7 +160,7 @@
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="系统设计">
-  <meta property="og:description" content="系统设计 # 服务发现 # 缓存 # 客户端缓存 # 系统是否真的需要缓存？ # 软件开发中引入缓存的负面作用要明显大于硬件缓存带来的负面作用 从开发角度来说 你要考虑缓存的失效、更新、一致性等问题（硬件缓存也有这些问题，只是不需要由你去考虑，主流的ISA也都没有提供任何直接操作缓存的指令） 从运维角度来说 缓存会掩盖一些缺陷，让问题在更久的时间以后，出现在距离发生现场更远的位置上 从安全角度来说 缓存可能会泄漏某些保密数据，也是容易受到攻击的薄弱点 引入缓存的理由 为缓解CPU压力而引入缓存 譬如把方法运行结果存储起来、把原本要实时计算的内容提前算好、对一些公用的数据进行复用，这可以节省CPU算力，顺带提升响应性能 为缓解I/O压力而引入缓存 譬如把原本对网络、磁盘等较慢介质的读写访问变为对内存等较快介质的访问， 将原本对单点部件（如数据库）的读写访问变为对可扩缩部件（如缓存中间件）的访问，顺带提升响应性能 服务端缓存 # 负载均衡 # 流量治理 # 服务容错 # 流量控制 # 可观测性 # 时间日志 # 链路追踪 # 聚合度量 # 架构安全性 # 认证 # 授权 # 凭证 # 保密 # 传输 # 分布式共识 # Reference # 凤凰架构 构建可靠的大型分布式系统 搞定系统设计 面试敲开大厂的门">
+  <meta property="og:description" content="系统设计 # 数据持久化 # 冷热分离 # 查询分离 # 分表分库 # 服务发现 # 缓存 # 客户端缓存 # 系统是否真的需要缓存？ # 软件开发中引入缓存的负面作用要明显大于硬件缓存带来的负面作用 从开发角度来说 你要考虑缓存的失效、更新、一致性等问题（硬件缓存也有这些问题，只是不需要由你去考虑，主流的ISA也都没有提供任何直接操作缓存的指令） 从运维角度来说 缓存会掩盖一些缺陷，让问题在更久的时间以后，出现在距离发生现场更远的位置上 从安全角度来说 缓存可能会泄漏某些保密数据，也是容易受到攻击的薄弱点 引入缓存的理由 为缓解CPU压力而引入缓存 譬如把方法运行结果存储起来、把原本要实时计算的内容提前算好、对一些公用的数据进行复用，这可以节省CPU算力，顺带提升响应性能 为缓解I/O压力而引入缓存 譬如把原本对网络、磁盘等较慢介质的读写访问变为对内存等较快介质的访问， 将原本对单点部件（如数据库）的读写访问变为对可扩缩部件（如缓存中间件）的访问，顺带提升响应性能 服务端缓存 # 读缓存 # 写缓存 # 负载均衡 # 流量治理 # 服务容错 # 流量控制 # 可观测性 # 时间日志 # 链路追踪 # 聚合度量 # 架构安全性 # 认证 # 授权 # 凭证 # 保密 # 传输 # 分布式共识 # Reference # 凤凰架构 构建可靠的大型分布式系统 搞定系统设计 面试敲开大厂的门">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -146,7 +170,7 @@
 <link rel="canonical" href="/zh/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.b925e83f5289000cba0d1a3c387c1b73ef6e9f8757bcc553511b9dc1d56c79f3.js" ></script>
+  <script defer src="/zh.search.min.82bb1efff017a794c9d4856da85895296575b10e9154821236ae17d483a7ff26.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -867,6 +891,13 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#数据持久化">数据持久化</a>
+      <ul>
+        <li><a href="#冷热分离">冷热分离</a></li>
+        <li><a href="#查询分离">查询分离</a></li>
+        <li><a href="#分表分库">分表分库</a></li>
+      </ul>
+    </li>
     <li><a href="#服务发现">服务发现</a></li>
     <li><a href="#缓存">缓存</a>
       <ul>
@@ -875,7 +906,12 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#系统是否真的需要缓存">系统是否真的需要缓存？</a></li>
           </ul>
         </li>
-        <li><a href="#服务端缓存">服务端缓存</a></li>
+        <li><a href="#服务端缓存">服务端缓存</a>
+          <ul>
+            <li><a href="#读缓存">读缓存</a></li>
+            <li><a href="#写缓存">写缓存</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#负载均衡">负载均衡</a></li>
@@ -919,6 +955,22 @@ https://github.com/alex-shpak/hugo-book
   系统设计
   <a class="anchor" href="#%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1">#</a>
 </h1>
+<h2 id="数据持久化">
+  数据持久化
+  <a class="anchor" href="#%e6%95%b0%e6%8d%ae%e6%8c%81%e4%b9%85%e5%8c%96">#</a>
+</h2>
+<h3 id="冷热分离">
+  冷热分离
+  <a class="anchor" href="#%e5%86%b7%e7%83%ad%e5%88%86%e7%a6%bb">#</a>
+</h3>
+<h3 id="查询分离">
+  查询分离
+  <a class="anchor" href="#%e6%9f%a5%e8%af%a2%e5%88%86%e7%a6%bb">#</a>
+</h3>
+<h3 id="分表分库">
+  分表分库
+  <a class="anchor" href="#%e5%88%86%e8%a1%a8%e5%88%86%e5%ba%93">#</a>
+</h3>
 <h2 id="服务发现">
   服务发现
   <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e5%8f%91%e7%8e%b0">#</a>
@@ -975,6 +1027,14 @@ https://github.com/alex-shpak/hugo-book
   服务端缓存
   <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e7%ab%af%e7%bc%93%e5%ad%98">#</a>
 </h3>
+<h4 id="读缓存">
+  读缓存
+  <a class="anchor" href="#%e8%af%bb%e7%bc%93%e5%ad%98">#</a>
+</h4>
+<h4 id="写缓存">
+  写缓存
+  <a class="anchor" href="#%e5%86%99%e7%bc%93%e5%ad%98">#</a>
+</h4>
 <h2 id="负载均衡">
   负载均衡
   <a class="anchor" href="#%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1">#</a>
@@ -1084,6 +1144,13 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#数据持久化">数据持久化</a>
+      <ul>
+        <li><a href="#冷热分离">冷热分离</a></li>
+        <li><a href="#查询分离">查询分离</a></li>
+        <li><a href="#分表分库">分表分库</a></li>
+      </ul>
+    </li>
     <li><a href="#服务发现">服务发现</a></li>
     <li><a href="#缓存">缓存</a>
       <ul>
@@ -1092,7 +1159,12 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#系统是否真的需要缓存">系统是否真的需要缓存？</a></li>
           </ul>
         </li>
-        <li><a href="#服务端缓存">服务端缓存</a></li>
+        <li><a href="#服务端缓存">服务端缓存</a>
+          <ul>
+            <li><a href="#读缓存">读缓存</a></li>
+            <li><a href="#写缓存">写缓存</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#负载均衡">负载均衡</a></li>
