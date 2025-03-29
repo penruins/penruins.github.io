@@ -98,5 +98,12 @@
       <guid>/zh/zh/post/computer-science/linux/</guid>
       <description>&lt;h1 id=&#34;linux&#34;&gt;&#xA;  linux&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#linux&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;resources&#34;&gt;&#xA;  resources&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#resources&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/index.html&#34;&gt;鸟哥的Linux私房菜：基础学习篇 第四版&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;tail&#34;&gt;&#xA;  tail&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#tail&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;tail -f xxxx&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
+    <item>
+      <title>系统设计</title>
+      <link>/zh/zh/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/zh/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</guid>
+      <description>&lt;h1 id=&#34;系统设计&#34;&gt;&#xA;  系统设计&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;</description>
+    </item>
   </channel>
 </rss>
