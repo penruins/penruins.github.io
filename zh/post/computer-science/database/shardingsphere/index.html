@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  shardingsphere
+  #
+
+
+  高性能数据库集群
+  #
+
+
+  第一种：读写分离
+  #
+
+
+主库负责处理事务性的增删改操作，从库负责处理查询操作
+能够有效的避免由数据更新导致的行锁，使得整个系统的查询性能得到极大的改善
+读写分离是根据SQL语义的分析，将读操作和写操作分别路由至主库与从库
+两种方式
+
+一主多从
+多主多从
+
+
+
+
+  第二种：数据库分片
+  #
+
+
+读写分离分散了数据库读写操作的压力，但是没有分散存储的压力，为了满足业务数据存储的需求，就需要将存储分散到多台数据库服务器上
+数据分片的有效手段是对关系型数据库进行分库和分表
+数据分片的拆分方式
+
+垂直分片
+
+专库专用
+
+例如将商城库拆分为订单库、用户库、库存库
+
+
+垂直拆分可以缓解数据量和访问量带来的问题，但无法根治。如果垂直拆分之后，表中的数据量依然超过单节点所能承载的阈值，则需要水平分片来进一步处理
+垂直分表适合将表中某些不常用的列，或者是占了大量空间的列拆分出去
+
+
+水平分片
+
+水平分表
+
+单表切分为多表之后，新的表即使在同一个数据库服务器中，也可能带来可观的性能提升，如果性能能够满足业务要求，可以不拆分到多台数据库服务器，毕竟业务分库也会引入很多复杂性
+
+
+水平分库
+
+如果单表拆分为多表后，单台服务器依然无法满足性能要求，那就需要将多个表分散在不同的数据库服务器中
+
+
+
+
+
+
+
+
+
+CAP理论中的C在实践中是不可能完美实现的，在数据复制的过程中，节点N1和节点N2的数据并不一致（强一致性）。即使无法做到强一致性，但应用可以采用合适的方式达到最终一致性
+
+基本可用
+软引用
+最终一致性
+
+
+阿里巴巴Java开发手册
+
+单表行数超过500万行或者单表容量超过2GB，才推荐进行分库分表
+如果预计3年后的数据量根本达不到这个级别，请不要在创建表时就分库分表
+
+
+读写分离和数据分片具体的视线方式有两种
+
+程序代码封装
+
+在代码中抽象一个数据访问层（中间层封装），实现读写操作分离和数据库服务器连接的管理
+Apache ShardingSphere
+
+ShardingSphere-JDBC 程序代码封装
+ShardingSphere-Proxy 中间件封装
+
+
+
+
+中间件封装
+
+独立一套系统处理，实现读写操作分离和数据库服务器连接的管理。对于业务服务器来说，访问中间件和访问数据库没有区别，在业务服务器看来，中间件就是一个数据库服务器
+MyCat
+
+
+
+
+
+
+  主从同步原理
+  #
+
+
+slave会从master读取binlog来进行数据同步
+1 master将数据改变记录到bin log中
+2 当 slave 上执行 start slave 命令之后，slave会创建一个IO连接用来连接master，请求master中的binlog
+3 当 slave 连接 master 时，master 会创建一个 log dump 线程，用于发送 bin log 的内容。在读取 binlog 的内容的操作中，会对主节点中的binlog加锁，当读取完成并发送给从服务器后解锁
+4 IO 线程接收主节点 binlog dump 进程发来的更新之后，保存到中继日志 relay log 中
+5 slave 的 SQL 线程，读取 relay log 日志，并解析成具体操作，从而实现主从操作一直，最终数据一致
+
+
+  MyCat与ShardingSphere深度对比
+  #
+
+
+如果是从传统单体结构迁移，且只需要基本的分库分表功能，MyCat可能更合适
+如果是新建的云原生系统或微服务架构，ShardingSphere是更好的选择
+考虑到技术演进和社区支持，新项目建议优先考虑ShardingSphere
+某些场景可以组合使用-用ShardingSphere-JDBC处理应用内分片，用MyCat/ShardingShpere-Proxy处理遗留系统访问
+
+
+  ShardingSphere的分布式事务功能具体是如何实现的？
+  #
+
+
+  XA事务（强一致性）
+  #
+
+
+实现原理
+
+基于XA协议的两阶段提交(2PC)
+使用ShardingSphere的XATransactionManager作为事务管理器
+
+
+工作流程
+
+准备阶段
+
+事务协调器向所有参与者发送prepare请求
+各参与者执行事务但不提交，记录undo/redo日志
+参与者返回准备就绪或失败响应
+
+
+提交/回滚阶段
+
+如果所有参与者都准备就绪，发送commit请求
+如果任一参与者准备失败，发送rollback请求
+参与者根据指令完成最终操作
+
+
+
+
+
+
+  Seata事务（柔性事务/AT模式）
+  #
+
+
+整合Seata的AT(Automatic Transaction)模式
+基于全局锁&#43;分支事务的补偿机制
+工作流程
+
+第一阶段
+
+业务SQL被Seata拦截解析
+RM生成undo log记录修改前数据
+执行业务SQL并提交本地事务
+向TC注册分支事务并报告状态
+
+
+第二阶段
+
+成功时：异步删除undo log
+失败时：基于 undo log 进行补偿回滚
+
+
+
+
+
+
+  BASE事务（Saga模式）
+  #
+
+
+基于Saga模式的长事务解决方案
+每个子事务都有对应的补偿操作
+最终一致性模型
+执行模式
+
+正向流程：按顺序执行所有子事务
+补偿流程：出现失败时，逆序执行补偿操作
+
+
+
+
+  生产实践建议
+  #
+
+
+金融核心系统：优先考虑XA事务
+普通交易系统：推荐Seata AT模式
+跨系统长流程：考虑Saga模式
+
+
+  Reference
+  #
+
+
+shardingsphere分库分表示例（逻辑表，真实表，绑定表，广播表，单表），分页性能测试
+ShardingSphere学习（超详细）
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/database/shardingsphere/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="shardingsphere">
+  <meta property="og:description" content="shardingsphere # 高性能数据库集群 # 第一种：读写分离 # 主库负责处理事务性的增删改操作，从库负责处理查询操作 能够有效的避免由数据更新导致的行锁，使得整个系统的查询性能得到极大的改善 读写分离是根据SQL语义的分析，将读操作和写操作分别路由至主库与从库 两种方式 一主多从 多主多从 第二种：数据库分片 # 读写分离分散了数据库读写操作的压力，但是没有分散存储的压力，为了满足业务数据存储的需求，就需要将存储分散到多台数据库服务器上 数据分片的有效手段是对关系型数据库进行分库和分表 数据分片的拆分方式 垂直分片 专库专用 例如将商城库拆分为订单库、用户库、库存库 垂直拆分可以缓解数据量和访问量带来的问题，但无法根治。如果垂直拆分之后，表中的数据量依然超过单节点所能承载的阈值，则需要水平分片来进一步处理 垂直分表适合将表中某些不常用的列，或者是占了大量空间的列拆分出去 水平分片 水平分表 单表切分为多表之后，新的表即使在同一个数据库服务器中，也可能带来可观的性能提升，如果性能能够满足业务要求，可以不拆分到多台数据库服务器，毕竟业务分库也会引入很多复杂性 水平分库 如果单表拆分为多表后，单台服务器依然无法满足性能要求，那就需要将多个表分散在不同的数据库服务器中 CAP理论中的C在实践中是不可能完美实现的，在数据复制的过程中，节点N1和节点N2的数据并不一致（强一致性）。即使无法做到强一致性，但应用可以采用合适的方式达到最终一致性 基本可用 软引用 最终一致性 阿里巴巴Java开发手册 单表行数超过500万行或者单表容量超过2GB，才推荐进行分库分表 如果预计3年后的数据量根本达不到这个级别，请不要在创建表时就分库分表 读写分离和数据分片具体的视线方式有两种 程序代码封装 在代码中抽象一个数据访问层（中间层封装），实现读写操作分离和数据库服务器连接的管理 Apache ShardingSphere ShardingSphere-JDBC 程序代码封装 ShardingSphere-Proxy 中间件封装 中间件封装 独立一套系统处理，实现读写操作分离和数据库服务器连接的管理。对于业务服务器来说，访问中间件和访问数据库没有区别，在业务服务器看来，中间件就是一个数据库服务器 MyCat 主从同步原理 # slave会从master读取binlog来进行数据同步 1 master将数据改变记录到bin log中 2 当 slave 上执行 start slave 命令之后，slave会创建一个IO连接用来连接master，请求master中的binlog 3 当 slave 连接 master 时，master 会创建一个 log dump 线程，用于发送 bin log 的内容。在读取 binlog 的内容的操作中，会对主节点中的binlog加锁，当读取完成并发送给从服务器后解锁 4 IO 线程接收主节点 binlog dump 进程发来的更新之后，保存到中继日志 relay log 中 5 slave 的 SQL 线程，读取 relay log 日志，并解析成具体操作，从而实现主从操作一直，最终数据一致 MyCat与ShardingSphere深度对比 # 如果是从传统单体结构迁移，且只需要基本的分库分表功能，MyCat可能更合适 如果是新建的云原生系统或微服务架构，ShardingSphere是更好的选择 考虑到技术演进和社区支持，新项目建议优先考虑ShardingSphere 某些场景可以组合使用-用ShardingSphere-JDBC处理应用内分片，用MyCat/ShardingShpere-Proxy处理遗留系统访问 ShardingSphere的分布式事务功能具体是如何实现的？ # XA事务（强一致性） # 实现原理 基于XA协议的两阶段提交(2PC) 使用ShardingSphere的XATransactionManager作为事务管理器 工作流程 准备阶段 事务协调器向所有参与者发送prepare请求 各参与者执行事务但不提交，记录undo/redo日志 参与者返回准备就绪或失败响应 提交/回滚阶段 如果所有参与者都准备就绪，发送commit请求 如果任一参与者准备失败，发送rollback请求 参与者根据指令完成最终操作 Seata事务（柔性事务/AT模式） # 整合Seata的AT(Automatic Transaction)模式 基于全局锁&#43;分支事务的补偿机制 工作流程 第一阶段 业务SQL被Seata拦截解析 RM生成undo log记录修改前数据 执行业务SQL并提交本地事务 向TC注册分支事务并报告状态 第二阶段 成功时：异步删除undo log 失败时：基于 undo log 进行补偿回滚 BASE事务（Saga模式） # 基于Saga模式的长事务解决方案 每个子事务都有对应的补偿操作 最终一致性模型 执行模式 正向流程：按顺序执行所有子事务 补偿流程：出现失败时，逆序执行补偿操作 生产实践建议 # 金融核心系统：优先考虑XA事务 普通交易系统：推荐Seata AT模式 跨系统长流程：考虑Saga模式 Reference # shardingsphere分库分表示例（逻辑表，真实表，绑定表，广播表，单表），分页性能测试 ShardingSphere学习（超详细）">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-03-30T16:45:03+08:00">
+<title>shardingsphere | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/zh/post/computer-science/database/shardingsphere/">
+<link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/zh.search.min.53d58fd906214981962199c45d6fafdbe7e62a6e27d9a46e2a9b3fa6077fb45f.js" ></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/zh/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        中文
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="/cn/">
+          
+        </a>
+      </li>
+      
+      <li>
+        <a href="/">
+          English
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2fd038694774047286c43d1411cff6e5" class="toggle"  />
+    <label for="section-2fd038694774047286c43d1411cff6e5" class="flex justify-between">
+      <a role="button" class="">Life</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/movies-log/" class="">观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/bilibili/" class="">bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/cycling/" class="">cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/hiking/" class="">hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/life-recommend/" class="">life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/learning-others-log/" class="">other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/podcast/" class="">podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/politics/" class="">politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/goal/" class="">goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/coffee/" class="">coffee</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Computer Science</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-835bdcf5bd8a83c6a5d31798f93ea1e0" class="toggle" checked />
+    <label for="section-835bdcf5bd8a83c6a5d31798f93ea1e0" class="flex justify-between">
+      <a role="button" class="">Database</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/database/" class="">database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/druid/" class="">elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/elasticsearch/" class="">elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/mycat/" class="">mycat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/mysql/" class="">mysql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/postgresql/" class="">postgresql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/shardingsphere/" class="active">shardingsphere</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/sql/" class="">SQL</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4cf92766fb993473c676bdbc75728e6f" class="toggle"  />
+    <label for="section-4cf92766fb993473c676bdbc75728e6f" class="flex justify-between">
+      <a role="button" class="">Distributed System</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7f2426ba5dcd7aac16102cd62c693ee8" class="toggle"  />
+    <label for="section-7f2426ba5dcd7aac16102cd62c693ee8" class="flex justify-between">
+      <a role="button" class="">Message Queue</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/message-queue/kafka/" class="">kafka</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/message-queue/message-queue/" class="">Message Queue</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/distributed-system/" class="">distributed system</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/sentinel/" class="">Sentinel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/spring-cloud/" class="">Spring Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">Spring Cloud Alibaba</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-855531983528655844a29f37632e7e30" class="toggle"  />
+    <label for="section-855531983528655844a29f37632e7e30" class="flex justify-between">
+      <a role="button" class="">Java</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/java-basic/" class="">java basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/java/" class="">java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/concurrent/" class="">concurrent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/jvm/" class="">jvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/mybatis/" class="">Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/spring/" class="">spring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/springboot/" class="">spring boot</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a219614941aba365a56c79528c4026e6" class="toggle"  />
+    <label for="section-a219614941aba365a56c79528c4026e6" class="flex justify-between">
+      <a role="button" class="">Tools</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/tools/idea/" class="">IDEA</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/computer-science-recommend/" class="">推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/computer-science-learning-log/" class="">学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/echarts/" class="">echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/github/" class="">github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/ios/" class="">ios</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/job/" class="">job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/linux/" class="">linux</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/mac/" class="">mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/raspberrypi/" class="">raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/redis/" class="">redis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/security/" class="">security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/vue/" class="">vue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/algorithm/" class="">Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">系统设计</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Others</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/others/about-me/" class="">about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/others/english-learning/" class="">English Learning</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Books</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-70696d57febbe00561bcceac2d174d7c" class="toggle"  />
+    <label for="section-70696d57febbe00561bcceac2d174d7c" class="flex justify-between">
+      <a role="button" class="">Computer Science</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>shardingsphere</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#高性能数据库集群">高性能数据库集群</a>
+      <ul>
+        <li><a href="#第一种读写分离">第一种：读写分离</a></li>
+        <li><a href="#第二种数据库分片">第二种：数据库分片</a></li>
+      </ul>
+    </li>
+    <li><a href="#主从同步原理">主从同步原理</a></li>
+    <li><a href="#mycat与shardingsphere深度对比">MyCat与ShardingSphere深度对比</a></li>
+    <li><a href="#shardingsphere的分布式事务功能具体是如何实现的">ShardingSphere的分布式事务功能具体是如何实现的？</a>
+      <ul>
+        <li><a href="#xa事务强一致性">XA事务（强一致性）</a></li>
+        <li><a href="#seata事务柔性事务at模式"><code>Seata</code>事务（柔性事务/AT模式）</a></li>
+        <li><a href="#base事务saga模式">BASE事务（Saga模式）</a></li>
+        <li><a href="#生产实践建议">生产实践建议</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="shardingsphere">
+  shardingsphere
+  <a class="anchor" href="#shardingsphere">#</a>
+</h1>
+<h2 id="高性能数据库集群">
+  高性能数据库集群
+  <a class="anchor" href="#%e9%ab%98%e6%80%a7%e8%83%bd%e6%95%b0%e6%8d%ae%e5%ba%93%e9%9b%86%e7%be%a4">#</a>
+</h2>
+<h3 id="第一种读写分离">
+  第一种：读写分离
+  <a class="anchor" href="#%e7%ac%ac%e4%b8%80%e7%a7%8d%e8%af%bb%e5%86%99%e5%88%86%e7%a6%bb">#</a>
+</h3>
+<ul>
+<li>主库负责处理事务性的增删改操作，从库负责处理查询操作</li>
+<li>能够有效的避免由数据更新导致的行锁，使得整个系统的查询性能得到极大的改善</li>
+<li>读写分离是根据SQL语义的分析，将读操作和写操作分别路由至主库与从库</li>
+<li>两种方式
+<ul>
+<li>一主多从</li>
+<li>多主多从</li>
+</ul>
+</li>
+</ul>
+<h3 id="第二种数据库分片">
+  第二种：数据库分片
+  <a class="anchor" href="#%e7%ac%ac%e4%ba%8c%e7%a7%8d%e6%95%b0%e6%8d%ae%e5%ba%93%e5%88%86%e7%89%87">#</a>
+</h3>
+<ul>
+<li>读写分离分散了数据库读写操作的压力，但是没有分散存储的压力，为了满足业务数据存储的需求，就需要将存储分散到多台数据库服务器上</li>
+<li>数据分片的有效手段是对关系型数据库进行分库和分表</li>
+<li>数据分片的拆分方式
+<ul>
+<li>垂直分片
+<ul>
+<li>专库专用
+<ul>
+<li>例如将商城库拆分为订单库、用户库、库存库</li>
+</ul>
+</li>
+<li>垂直拆分可以缓解数据量和访问量带来的问题，但无法根治。如果垂直拆分之后，表中的数据量依然超过单节点所能承载的阈值，则需要水平分片来进一步处理</li>
+<li>垂直分表适合将表中某些不常用的列，或者是占了大量空间的列拆分出去</li>
+</ul>
+</li>
+<li>水平分片
+<ul>
+<li>水平分表
+<ul>
+<li>单表切分为多表之后，新的表即使在同一个数据库服务器中，也可能带来可观的性能提升，如果性能能够满足业务要求，可以不拆分到多台数据库服务器，毕竟业务分库也会引入很多复杂性</li>
+</ul>
+</li>
+<li>水平分库
+<ul>
+<li>如果单表拆分为多表后，单台服务器依然无法满足性能要求，那就需要将多个表分散在不同的数据库服务器中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>CAP理论中的C在实践中是不可能完美实现的，在数据复制的过程中，节点N1和节点N2的数据并不一致（强一致性）。即使无法做到强一致性，但应用可以采用合适的方式达到最终一致性
+<ul>
+<li>基本可用</li>
+<li>软引用</li>
+<li>最终一致性</li>
+</ul>
+</li>
+<li>阿里巴巴Java开发手册
+<ul>
+<li>单表行数超过500万行或者单表容量超过2GB，才推荐进行分库分表</li>
+<li>如果预计3年后的数据量根本达不到这个级别，请不要在创建表时就分库分表</li>
+</ul>
+</li>
+<li>读写分离和数据分片具体的视线方式有两种
+<ul>
+<li>程序代码封装
+<ul>
+<li>在代码中抽象一个数据访问层（中间层封装），实现读写操作分离和数据库服务器连接的管理</li>
+<li>Apache ShardingSphere
+<ul>
+<li>ShardingSphere-JDBC 程序代码封装</li>
+<li>ShardingSphere-Proxy 中间件封装</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>中间件封装
+<ul>
+<li>独立一套系统处理，实现读写操作分离和数据库服务器连接的管理。对于业务服务器来说，访问中间件和访问数据库没有区别，在业务服务器看来，中间件就是一个数据库服务器</li>
+<li>MyCat</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="主从同步原理">
+  主从同步原理
+  <a class="anchor" href="#%e4%b8%bb%e4%bb%8e%e5%90%8c%e6%ad%a5%e5%8e%9f%e7%90%86">#</a>
+</h2>
+<ul>
+<li>slave会从master读取binlog来进行数据同步</li>
+<li>1 master将数据改变记录到bin log中</li>
+<li>2 当 slave 上执行 start slave 命令之后，slave会创建一个IO连接用来连接master，请求master中的binlog</li>
+<li>3 当 slave 连接 master 时，master 会创建一个 log dump 线程，用于发送 bin log 的内容。在读取 binlog 的内容的操作中，会对主节点中的binlog加锁，当读取完成并发送给从服务器后解锁</li>
+<li>4 IO 线程接收主节点 binlog dump 进程发来的更新之后，保存到中继日志 relay log 中</li>
+<li>5 slave 的 SQL 线程，读取 relay log 日志，并解析成具体操作，从而实现主从操作一直，最终数据一致</li>
+</ul>
+<h2 id="mycat与shardingsphere深度对比">
+  MyCat与ShardingSphere深度对比
+  <a class="anchor" href="#mycat%e4%b8%8eshardingsphere%e6%b7%b1%e5%ba%a6%e5%af%b9%e6%af%94">#</a>
+</h2>
+<ul>
+<li>如果是从传统单体结构迁移，且只需要基本的分库分表功能，MyCat可能更合适</li>
+<li>如果是新建的云原生系统或微服务架构，ShardingSphere是更好的选择</li>
+<li>考虑到技术演进和社区支持，新项目建议优先考虑ShardingSphere</li>
+<li>某些场景可以组合使用-用ShardingSphere-JDBC处理应用内分片，用MyCat/ShardingShpere-Proxy处理遗留系统访问</li>
+</ul>
+<h2 id="shardingsphere的分布式事务功能具体是如何实现的">
+  ShardingSphere的分布式事务功能具体是如何实现的？
+  <a class="anchor" href="#shardingsphere%e7%9a%84%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1%e5%8a%9f%e8%83%bd%e5%85%b7%e4%bd%93%e6%98%af%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e7%9a%84">#</a>
+</h2>
+<h3 id="xa事务强一致性">
+  XA事务（强一致性）
+  <a class="anchor" href="#xa%e4%ba%8b%e5%8a%a1%e5%bc%ba%e4%b8%80%e8%87%b4%e6%80%a7">#</a>
+</h3>
+<ul>
+<li>实现原理
+<ul>
+<li>基于XA协议的两阶段提交(2PC)</li>
+<li>使用ShardingSphere的XATransactionManager作为事务管理器</li>
+</ul>
+</li>
+<li>工作流程
+<ul>
+<li>准备阶段
+<ul>
+<li>事务协调器向所有参与者发送prepare请求</li>
+<li>各参与者执行事务但不提交，记录undo/redo日志</li>
+<li>参与者返回准备就绪或失败响应</li>
+</ul>
+</li>
+<li>提交/回滚阶段
+<ul>
+<li>如果所有参与者都准备就绪，发送<code>commit</code>请求</li>
+<li>如果任一参与者准备失败，发送<code>rollback</code>请求</li>
+<li>参与者根据指令完成最终操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="seata事务柔性事务at模式">
+  <code>Seata</code>事务（柔性事务/AT模式）
+  <a class="anchor" href="#seata%e4%ba%8b%e5%8a%a1%e6%9f%94%e6%80%a7%e4%ba%8b%e5%8a%a1at%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li>整合<code>Seata</code>的AT(Automatic Transaction)模式</li>
+<li>基于全局锁+分支事务的补偿机制</li>
+<li>工作流程
+<ul>
+<li>第一阶段
+<ul>
+<li>业务SQL被Seata拦截解析</li>
+<li>RM生成undo log记录修改前数据</li>
+<li>执行业务SQL并提交本地事务</li>
+<li>向TC注册分支事务并报告状态</li>
+</ul>
+</li>
+<li>第二阶段
+<ul>
+<li>成功时：异步删除undo log</li>
+<li>失败时：基于 undo log 进行补偿回滚</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="base事务saga模式">
+  BASE事务（Saga模式）
+  <a class="anchor" href="#base%e4%ba%8b%e5%8a%a1saga%e6%a8%a1%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li>基于Saga模式的长事务解决方案</li>
+<li>每个子事务都有对应的补偿操作</li>
+<li>最终一致性模型</li>
+<li>执行模式
+<ul>
+<li>正向流程：按顺序执行所有子事务</li>
+<li>补偿流程：出现失败时，逆序执行补偿操作</li>
+</ul>
+</li>
+</ul>
+<h3 id="生产实践建议">
+  生产实践建议
+  <a class="anchor" href="#%e7%94%9f%e4%ba%a7%e5%ae%9e%e8%b7%b5%e5%bb%ba%e8%ae%ae">#</a>
+</h3>
+<ul>
+<li>金融核心系统：优先考虑XA事务</li>
+<li>普通交易系统：推荐<code>Seata AT</code>模式</li>
+<li>跨系统长流程：考虑<code>Saga</code>模式</li>
+</ul>
+<h2 id="reference">
+  Reference
+  <a class="anchor" href="#reference">#</a>
+</h2>
+<ul>
+<li><a href="https://blog.csdn.net/qq_38263083/article/details/125439693">shardingsphere分库分表示例（逻辑表，真实表，绑定表，广播表，单表），分页性能测试</a></li>
+<li><a href="https://blog.csdn.net/hyzsuccess/article/details/127644291">ShardingSphere学习（超详细）</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/651e2b56b5d7bef7d94b4a74cdf722fbd599bb3a" title='最后修改者 penruins | 三月 30, 2025' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="" />
+      <span>三月 30, 2025</span>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#高性能数据库集群">高性能数据库集群</a>
+      <ul>
+        <li><a href="#第一种读写分离">第一种：读写分离</a></li>
+        <li><a href="#第二种数据库分片">第二种：数据库分片</a></li>
+      </ul>
+    </li>
+    <li><a href="#主从同步原理">主从同步原理</a></li>
+    <li><a href="#mycat与shardingsphere深度对比">MyCat与ShardingSphere深度对比</a></li>
+    <li><a href="#shardingsphere的分布式事务功能具体是如何实现的">ShardingSphere的分布式事务功能具体是如何实现的？</a>
+      <ul>
+        <li><a href="#xa事务强一致性">XA事务（强一致性）</a></li>
+        <li><a href="#seata事务柔性事务at模式"><code>Seata</code>事务（柔性事务/AT模式）</a></li>
+        <li><a href="#base事务saga模式">BASE事务（Saga模式）</a></li>
+        <li><a href="#生产实践建议">生产实践建议</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
