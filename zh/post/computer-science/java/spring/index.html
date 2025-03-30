@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Spring
+  #
+
+
+  什么是Spring
+  #
+
+
+Spring是一个java开发框架
+它的核心特性是
+
+控制反转
+依赖注入
+面向切面编程
+声明式事务管理
+模块化设计
+
+
+
+
+  Spring MVC
+  #
+
+
+  Spring MVC 流程
+  #
+
+
+流程
+
+用户发送请求
+DispatcherServlet 调用 HandlerMapping
+DispatcherServlet 调用 HandlerAdapter
+Controller 处理请求
+DispatcherServlet 调用 ViewResolver
+视图渲染 ModelAndView -&gt; ViewResolver -&gt; View
+返回响应
+
+
+核心组件
+
+DispatcherServlet：前端控制器，负责请求的分发和协调
+HandlerMapping：根据请求 URL 查找对应的 Handler
+HandlerAdapter：适配并执行 Handler
+Controller：处理具体的业务逻辑
+ViewResolver：解析视图名称，生成具体的 View 对象
+View：负责视图的渲染
+
+
+
+
+  Bean
+  #
+
+
+  Bean的生命周期
+  #
+
+
+Bean的实例化
+
+通过反射调用 Bean 的构造函数，创建Bean的实例
+
+
+填充属性（依赖注入）
+
+Spring根据配置文件或注解，将依赖的Bean注入到当前Bean中
+
+
+调用Aware接口
+
+如果Bean实现了Spring的Aware接口，Spring会调用对应的回调方法
+
+
+BeanPostProcessor 的前置处理
+
+Spring调用所有BeanPostProcessor的postProcessBeforeInitialization()方法
+
+
+执行初始化方法
+
+Spring会调用Bean的初始化方法。
+@PostConstruct
+
+
+BeanPostProcessor的后置处理
+
+Spring调用所有BeanPostProcessor的postProcessAfterInitialization()方法。
+
+
+Bean初始化完成
+
+Bean已经完全初始化，可以被其他Bean使用。
+
+
+Bean的使用
+Bean的销毁
+
+
+  Bean的作用域
+  #
+
+
+Singleton（单例）
+
+默认作用域，单例模式
+
+
+Prototype（原型）
+
+每次请求创建新实例
+
+
+Request（请求）
+
+每个 HTTP 请求创建一个实例
+
+
+Session（会话）
+
+每个 HTTP Session 创建一个实例
+
+
+Application（应用）
+
+整个 ServletContext 生命周期内有效
+
+
+WebSocket
+
+WebSocket 会话生命周期内有效
+
+
+
+
+  spring 循环依赖如何解决？
+  #
+
+
+三级缓存
+
+singletonObjects：一级缓存，存储经历了完整生命周期的Bean对象
+earlySingletonObjects：二级缓存，存储提前暴露出来的Bean对象，其生命周期未结束，属性未完全填充
+singletonFactories：三级缓存，存储生成Bean的工厂
+
+
+
+
+  IOC
+  #
+
+
+  什么是IOC
+  #
+
+
+IOC是控制反转的意思，在一个程序中对象的创建与管理由一个容器负责，对象之间的引用通过注入(属性填充)的方式从容器中获取，降低了代码之间的耦合度
+
+
+  IOC 的核心概念是什么？
+  #
+
+
+依赖注入
+控制反转
+IOC容器
+
+
+  举一个 Spring 的容器？
+  #
+
+
+BeanFactory
+ApplicationContext
+WebApplicationContext
+
+
+  IOC 的优势是什么？
+  #
+
+
+降低耦合度
+提高可测试性
+
+注入模拟对象进行测试
+
+
+增强可扩展性
+优化资源管理
+
+容器管理对象的创建和销毁，避免资源浪费
+
+
+
+
+  AOP
+  #
+
+
+  什么是AOP？
+  #
+
+
+AOP 是一种编程范式, 通过将横切关注点与业务代码分离，提高代码的可维护性与可重用性
+
+
+  AOP的核心概念是什么？
+  #
+
+
+切面 Aspect
+连接点 Join Point
+
+程序执行过程中可以插入切面的点（方法的调用或异常的处理）
+
+
+通知 Advice 切面在连接点执行的操作
+
+@Before
+@After
+@Around
+
+
+切入点 Pointcut
+
+定义在哪些连接点上应用通知，通常通过表达式来匹配
+
+
+织入 Weaving
+
+将切面应用到目标对象并创建代理对象的过程，可以在编译期、类加载期或运行期进行
+
+
+
+
+  AOP的应用场景
+  #
+
+
+日志记录
+事务管理
+权限控制
+性能监控
+
+记录方法执行时间
+
+
+
+
+  AOP的实现方式
+  #
+
+
+JDK动态代理
+
+实现了接口的类
+
+
+CGLIB代理
+
+未实现接口的类
+
+
+
+
+  事务
+  #
+
+
+  @Transaction的底层原理是什么？
+  #
+
+
+spring的事务管理机制，结合AOP和动态代理技术实现事务的控制和管理
+事务管理核心组件
+
+事务管理器
+事务拦截器
+事务属性源
+事务代理对象
+
+
+实现流程
+
+代理对象的创建
+事务拦截器的应用 TransactionInterceptor
+事务的开启与提交
+事务的传播行为
+
+
+
+
+  @Transactional 事务传播机制
+  #
+
+
+当一个事务方法调用另一个事务方法时，事务应该如何传递或处理
+
+REQUIRED
+
+如果当前存在事务，则加入该事务；如果不存在事务，则创建一个新事务
+
+
+SUPPORTS
+
+如果当前存在事务，则加入该事务；如果不存在事务，则以非事务方式执行
+场景：适用于查询操作，是否在事务中执行均可
+
+
+MANDATORY
+
+如果当前存在事务，则加入该事务；如果不存在事务，则抛出异常
+场景：强制要求调用方必须在事务中调用该方法
+
+
+REQUIRES_NEW
+NOT_SUPPORTED
+NEVER
+NESTED
+
+
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/java/spring/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="spring">
+  <meta property="og:description" content="Spring # 什么是Spring # Spring是一个java开发框架 它的核心特性是 控制反转 依赖注入 面向切面编程 声明式事务管理 模块化设计 Spring MVC # Spring MVC 流程 # 流程 用户发送请求 DispatcherServlet 调用 HandlerMapping DispatcherServlet 调用 HandlerAdapter Controller 处理请求 DispatcherServlet 调用 ViewResolver 视图渲染 ModelAndView -&gt; ViewResolver -&gt; View 返回响应 核心组件 DispatcherServlet：前端控制器，负责请求的分发和协调 HandlerMapping：根据请求 URL 查找对应的 Handler HandlerAdapter：适配并执行 Handler Controller：处理具体的业务逻辑 ViewResolver：解析视图名称，生成具体的 View 对象 View：负责视图的渲染 Bean # Bean的生命周期 # Bean的实例化 通过反射调用 Bean 的构造函数，创建Bean的实例 填充属性（依赖注入） Spring根据配置文件或注解，将依赖的Bean注入到当前Bean中 调用Aware接口 如果Bean实现了Spring的Aware接口，Spring会调用对应的回调方法 BeanPostProcessor 的前置处理 Spring调用所有BeanPostProcessor的postProcessBeforeInitialization()方法 执行初始化方法 Spring会调用Bean的初始化方法。 @PostConstruct BeanPostProcessor的后置处理 Spring调用所有BeanPostProcessor的postProcessAfterInitialization()方法。 Bean初始化完成 Bean已经完全初始化，可以被其他Bean使用。 Bean的使用 Bean的销毁 Bean的作用域 # Singleton（单例） 默认作用域，单例模式 Prototype（原型） 每次请求创建新实例 Request（请求） 每个 HTTP 请求创建一个实例 Session（会话） 每个 HTTP Session 创建一个实例 Application（应用） 整个 ServletContext 生命周期内有效 WebSocket WebSocket 会话生命周期内有效 spring 循环依赖如何解决？ # 三级缓存 singletonObjects：一级缓存，存储经历了完整生命周期的Bean对象 earlySingletonObjects：二级缓存，存储提前暴露出来的Bean对象，其生命周期未结束，属性未完全填充 singletonFactories：三级缓存，存储生成Bean的工厂 IOC # 什么是IOC # IOC是控制反转的意思，在一个程序中对象的创建与管理由一个容器负责，对象之间的引用通过注入(属性填充)的方式从容器中获取，降低了代码之间的耦合度 IOC 的核心概念是什么？ # 依赖注入 控制反转 IOC容器 举一个 Spring 的容器？ # BeanFactory ApplicationContext WebApplicationContext IOC 的优势是什么？ # 降低耦合度 提高可测试性 注入模拟对象进行测试 增强可扩展性 优化资源管理 容器管理对象的创建和销毁，避免资源浪费 AOP # 什么是AOP？ # AOP 是一种编程范式, 通过将横切关注点与业务代码分离，提高代码的可维护性与可重用性 AOP的核心概念是什么？ # 切面 Aspect 连接点 Join Point 程序执行过程中可以插入切面的点（方法的调用或异常的处理） 通知 Advice 切面在连接点执行的操作 @Before @After @Around 切入点 Pointcut 定义在哪些连接点上应用通知，通常通过表达式来匹配 织入 Weaving 将切面应用到目标对象并创建代理对象的过程，可以在编译期、类加载期或运行期进行 AOP的应用场景 # 日志记录 事务管理 权限控制 性能监控 记录方法执行时间 AOP的实现方式 # JDK动态代理 实现了接口的类 CGLIB代理 未实现接口的类 事务 # @Transaction的底层原理是什么？ # spring的事务管理机制，结合AOP和动态代理技术实现事务的控制和管理 事务管理核心组件 事务管理器 事务拦截器 事务属性源 事务代理对象 实现流程 代理对象的创建 事务拦截器的应用 TransactionInterceptor 事务的开启与提交 事务的传播行为 @Transactional 事务传播机制 # 当一个事务方法调用另一个事务方法时，事务应该如何传递或处理 REQUIRED 如果当前存在事务，则加入该事务；如果不存在事务，则创建一个新事务 SUPPORTS 如果当前存在事务，则加入该事务；如果不存在事务，则以非事务方式执行 场景：适用于查询操作，是否在事务中执行均可 MANDATORY 如果当前存在事务，则加入该事务；如果不存在事务，则抛出异常 场景：强制要求调用方必须在事务中调用该方法 REQUIRES_NEW NOT_SUPPORTED NEVER NESTED">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-03-30T15:40:08+08:00">
+<title>spring | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/zh/post/computer-science/java/spring/">
+<link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/zh.search.min.5a0b2992415de22cf96b5300385925708c8efe325f9adc33415a595092d5a1a1.js" ></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/zh/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+  
+
+
+
+  
+    
+  
+    
+  
+
+
+
+<ul class="book-languages">
+  <li>
+    <input type="checkbox" id="languages" class="toggle" />
+    <label for="languages" class="flex justify-between">
+      <a role="button" class="flex align-center">
+        <img src="/svg/translate.svg" class="book-icon" alt="Languages" />
+        中文
+      </a>
+    </label>
+
+    <ul>
+      
+      <li>
+        <a href="/cn/">
+          
+        </a>
+      </li>
+      
+      <li>
+        <a href="/">
+          English
+        </a>
+      </li>
+      
+    </ul>
+  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2fd038694774047286c43d1411cff6e5" class="toggle"  />
+    <label for="section-2fd038694774047286c43d1411cff6e5" class="flex justify-between">
+      <a role="button" class="">Life</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/movies-log/" class="">观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/bilibili/" class="">bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/cycling/" class="">cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/hiking/" class="">hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/life-recommend/" class="">life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/learning-others-log/" class="">other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/podcast/" class="">podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/politics/" class="">politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/goal/" class="">goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/life/coffee/" class="">coffee</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Computer Science</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-835bdcf5bd8a83c6a5d31798f93ea1e0" class="toggle"  />
+    <label for="section-835bdcf5bd8a83c6a5d31798f93ea1e0" class="flex justify-between">
+      <a role="button" class="">Database</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/database/" class="">database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/elasticsearch/" class="">elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/mysql/" class="">mysql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/postgresql/" class="">postgresql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/database/sql/" class="">SQL</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4cf92766fb993473c676bdbc75728e6f" class="toggle"  />
+    <label for="section-4cf92766fb993473c676bdbc75728e6f" class="flex justify-between">
+      <a role="button" class="">Distributed System</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7f2426ba5dcd7aac16102cd62c693ee8" class="toggle"  />
+    <label for="section-7f2426ba5dcd7aac16102cd62c693ee8" class="flex justify-between">
+      <a role="button" class="">Message Queue</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/message-queue/kafka/" class="">kafka</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/message-queue/message-queue/" class="">Message Queue</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/distributed-system/" class="">distributed system</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/sentinel/" class="">Sentinel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/spring-cloud/" class="">Spring Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">Spring Cloud Alibaba</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-855531983528655844a29f37632e7e30" class="toggle" checked />
+    <label for="section-855531983528655844a29f37632e7e30" class="flex justify-between">
+      <a role="button" class="">Java</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/java-basic/" class="">java basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/java/" class="">java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/concurrent/" class="">concurrent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/jvm/" class="">jvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/mybatis/" class="">Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/spring/" class="active">spring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/java/springboot/" class="">spring boot</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a219614941aba365a56c79528c4026e6" class="toggle"  />
+    <label for="section-a219614941aba365a56c79528c4026e6" class="flex justify-between">
+      <a role="button" class="">Tools</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/tools/idea/" class="">IDEA</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/computer-science-recommend/" class="">推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/computer-science-learning-log/" class="">学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/echarts/" class="">echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/github/" class="">github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/ios/" class="">ios</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/job/" class="">job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/linux/" class="">linux</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/mac/" class="">mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/raspberrypi/" class="">raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/redis/" class="">redis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/security/" class="">security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/vue/" class="">vue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/algorithm/" class="">Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">系统设计</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Others</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/others/about-me/" class="">about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/others/english-learning/" class="">English Learning</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Books</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-70696d57febbe00561bcceac2d174d7c" class="toggle"  />
+    <label for="section-70696d57febbe00561bcceac2d174d7c" class="flex justify-between">
+      <a role="button" class="">Computer Science</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>spring</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是spring">什么是Spring</a></li>
+    <li><a href="#spring-mvc">Spring MVC</a>
+      <ul>
+        <li><a href="#spring-mvc-流程">Spring MVC 流程</a></li>
+      </ul>
+    </li>
+    <li><a href="#bean">Bean</a>
+      <ul>
+        <li><a href="#bean的生命周期">Bean的生命周期</a></li>
+        <li><a href="#bean的作用域">Bean的作用域</a></li>
+        <li><a href="#spring-循环依赖如何解决">spring 循环依赖如何解决？</a></li>
+      </ul>
+    </li>
+    <li><a href="#ioc">IOC</a>
+      <ul>
+        <li><a href="#什么是ioc">什么是IOC</a></li>
+        <li><a href="#ioc-的核心概念是什么">IOC 的核心概念是什么？</a></li>
+        <li><a href="#举一个-spring-的容器">举一个 Spring 的容器？</a></li>
+        <li><a href="#ioc-的优势是什么">IOC 的优势是什么？</a></li>
+      </ul>
+    </li>
+    <li><a href="#aop">AOP</a>
+      <ul>
+        <li><a href="#什么是aop">什么是AOP？</a></li>
+        <li><a href="#aop的核心概念是什么">AOP的核心概念是什么？</a></li>
+        <li><a href="#aop的应用场景">AOP的应用场景</a></li>
+        <li><a href="#aop的实现方式">AOP的实现方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#事务">事务</a>
+      <ul>
+        <li><a href="#transaction的底层原理是什么">@Transaction的底层原理是什么？</a></li>
+        <li><a href="#transactional-事务传播机制">@Transactional 事务传播机制</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="spring">
+  Spring
+  <a class="anchor" href="#spring">#</a>
+</h1>
+<h2 id="什么是spring">
+  什么是Spring
+  <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%afspring">#</a>
+</h2>
+<ul>
+<li>Spring是一个java开发框架</li>
+<li>它的核心特性是
+<ul>
+<li><strong>控制反转</strong></li>
+<li><strong>依赖注入</strong></li>
+<li><strong>面向切面编程</strong></li>
+<li><strong>声明式事务管理</strong></li>
+<li><strong>模块化设计</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="spring-mvc">
+  Spring MVC
+  <a class="anchor" href="#spring-mvc">#</a>
+</h2>
+<h3 id="spring-mvc-流程">
+  Spring MVC 流程
+  <a class="anchor" href="#spring-mvc-%e6%b5%81%e7%a8%8b">#</a>
+</h3>
+<ul>
+<li>流程
+<ul>
+<li>用户发送请求</li>
+<li><code>DispatcherServlet</code> 调用 <code>HandlerMapping</code></li>
+<li><code>DispatcherServlet</code> 调用 <code>HandlerAdapter</code></li>
+<li>Controller 处理请求</li>
+<li><code>DispatcherServlet</code> 调用 <code>ViewResolver</code></li>
+<li>视图渲染 ModelAndView -&gt; ViewResolver -&gt; View</li>
+<li>返回响应</li>
+</ul>
+</li>
+<li>核心组件
+<ul>
+<li><strong>DispatcherServlet</strong>：前端控制器，负责请求的分发和协调</li>
+<li><strong>HandlerMapping</strong>：根据请求 URL 查找对应的 Handler</li>
+<li><strong>HandlerAdapter</strong>：适配并执行 Handler</li>
+<li><strong>Controller</strong>：处理具体的业务逻辑</li>
+<li><strong>ViewResolver</strong>：解析视图名称，生成具体的 View 对象</li>
+<li><strong>View</strong>：负责视图的渲染</li>
+</ul>
+</li>
+</ul>
+<h2 id="bean">
+  Bean
+  <a class="anchor" href="#bean">#</a>
+</h2>
+<h3 id="bean的生命周期">
+  Bean的生命周期
+  <a class="anchor" href="#bean%e7%9a%84%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f">#</a>
+</h3>
+<ul>
+<li>Bean的实例化
+<ul>
+<li>通过反射调用 Bean 的构造函数，创建Bean的实例</li>
+</ul>
+</li>
+<li>填充属性（依赖注入）
+<ul>
+<li>Spring根据配置文件或注解，将依赖的Bean注入到当前Bean中</li>
+</ul>
+</li>
+<li>调用Aware接口
+<ul>
+<li>如果Bean实现了Spring的<code>Aware</code>接口，Spring会调用对应的回调方法</li>
+</ul>
+</li>
+<li><code>BeanPostProcessor</code> 的前置处理
+<ul>
+<li>Spring调用所有<code>BeanPostProcessor</code>的<code>postProcessBeforeInitialization()</code>方法</li>
+</ul>
+</li>
+<li>执行初始化方法
+<ul>
+<li>Spring会调用Bean的初始化方法。</li>
+<li>@PostConstruct</li>
+</ul>
+</li>
+<li>BeanPostProcessor的后置处理
+<ul>
+<li>Spring调用所有<code>BeanPostProcessor</code>的<code>postProcessAfterInitialization()</code>方法。</li>
+</ul>
+</li>
+<li>Bean初始化完成
+<ul>
+<li>Bean已经完全初始化，可以被其他Bean使用。</li>
+</ul>
+</li>
+<li>Bean的使用</li>
+<li>Bean的销毁</li>
+</ul>
+<h3 id="bean的作用域">
+  Bean的作用域
+  <a class="anchor" href="#bean%e7%9a%84%e4%bd%9c%e7%94%a8%e5%9f%9f">#</a>
+</h3>
+<ul>
+<li>Singleton（单例）
+<ul>
+<li>默认作用域，单例模式</li>
+</ul>
+</li>
+<li>Prototype（原型）
+<ul>
+<li>每次请求创建新实例</li>
+</ul>
+</li>
+<li>Request（请求）
+<ul>
+<li>每个 HTTP 请求创建一个实例</li>
+</ul>
+</li>
+<li>Session（会话）
+<ul>
+<li>每个 HTTP Session 创建一个实例</li>
+</ul>
+</li>
+<li>Application（应用）
+<ul>
+<li>整个 ServletContext 生命周期内有效</li>
+</ul>
+</li>
+<li>WebSocket
+<ul>
+<li>WebSocket 会话生命周期内有效</li>
+</ul>
+</li>
+</ul>
+<h3 id="spring-循环依赖如何解决">
+  spring 循环依赖如何解决？
+  <a class="anchor" href="#spring-%e5%be%aa%e7%8e%af%e4%be%9d%e8%b5%96%e5%a6%82%e4%bd%95%e8%a7%a3%e5%86%b3">#</a>
+</h3>
+<ul>
+<li>三级缓存
+<ul>
+<li><code>singletonObjects</code>：一级缓存，存储经历了完整生命周期的Bean对象</li>
+<li><code>earlySingletonObjects</code>：二级缓存，存储提前暴露出来的Bean对象，其生命周期未结束，属性未完全填充</li>
+<li><code>singletonFactories</code>：三级缓存，存储生成Bean的工厂</li>
+</ul>
+</li>
+</ul>
+<h2 id="ioc">
+  IOC
+  <a class="anchor" href="#ioc">#</a>
+</h2>
+<h3 id="什么是ioc">
+  什么是IOC
+  <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%afioc">#</a>
+</h3>
+<ul>
+<li>IOC是控制反转的意思，在一个程序中对象的创建与管理由一个容器负责，对象之间的引用通过注入(属性填充)的方式从容器中获取，降低了代码之间的耦合度</li>
+</ul>
+<h3 id="ioc-的核心概念是什么">
+  IOC 的核心概念是什么？
+  <a class="anchor" href="#ioc-%e7%9a%84%e6%a0%b8%e5%bf%83%e6%a6%82%e5%bf%b5%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h3>
+<ul>
+<li>依赖注入</li>
+<li>控制反转</li>
+<li>IOC容器</li>
+</ul>
+<h3 id="举一个-spring-的容器">
+  举一个 Spring 的容器？
+  <a class="anchor" href="#%e4%b8%be%e4%b8%80%e4%b8%aa-spring-%e7%9a%84%e5%ae%b9%e5%99%a8">#</a>
+</h3>
+<ul>
+<li><code>BeanFactory</code></li>
+<li><code>ApplicationContext</code></li>
+<li><code>WebApplicationContext</code></li>
+</ul>
+<h3 id="ioc-的优势是什么">
+  IOC 的优势是什么？
+  <a class="anchor" href="#ioc-%e7%9a%84%e4%bc%98%e5%8a%bf%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h3>
+<ul>
+<li>降低耦合度</li>
+<li>提高可测试性
+<ul>
+<li>注入模拟对象进行测试</li>
+</ul>
+</li>
+<li>增强可扩展性</li>
+<li>优化资源管理
+<ul>
+<li>容器管理对象的创建和销毁，避免资源浪费</li>
+</ul>
+</li>
+</ul>
+<h2 id="aop">
+  AOP
+  <a class="anchor" href="#aop">#</a>
+</h2>
+<h3 id="什么是aop">
+  什么是AOP？
+  <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%afaop">#</a>
+</h3>
+<ul>
+<li>AOP 是一种<strong>编程范式</strong>, 通过将横切关注点与业务代码分离，提高代码的可维护性与可重用性</li>
+</ul>
+<h3 id="aop的核心概念是什么">
+  AOP的核心概念是什么？
+  <a class="anchor" href="#aop%e7%9a%84%e6%a0%b8%e5%bf%83%e6%a6%82%e5%bf%b5%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h3>
+<ul>
+<li>切面 <strong>Aspect</strong></li>
+<li>连接点 <strong>Join Point</strong>
+<ul>
+<li>程序执行过程中可以插入切面的点（方法的调用或异常的处理）</li>
+</ul>
+</li>
+<li>通知 <strong>Advice</strong> 切面在连接点执行的操作
+<ul>
+<li>@Before</li>
+<li>@After</li>
+<li>@Around</li>
+</ul>
+</li>
+<li>切入点 <strong>Pointcut</strong>
+<ul>
+<li>定义在哪些连接点上应用通知，通常通过表达式来匹配</li>
+</ul>
+</li>
+<li>织入 <strong>Weaving</strong>
+<ul>
+<li>将切面应用到目标对象并创建代理对象的过程，可以在编译期、类加载期或运行期进行</li>
+</ul>
+</li>
+</ul>
+<h3 id="aop的应用场景">
+  AOP的应用场景
+  <a class="anchor" href="#aop%e7%9a%84%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h3>
+<ul>
+<li>日志记录</li>
+<li>事务管理</li>
+<li>权限控制</li>
+<li>性能监控
+<ul>
+<li>记录方法执行时间</li>
+</ul>
+</li>
+</ul>
+<h3 id="aop的实现方式">
+  AOP的实现方式
+  <a class="anchor" href="#aop%e7%9a%84%e5%ae%9e%e7%8e%b0%e6%96%b9%e5%bc%8f">#</a>
+</h3>
+<ul>
+<li>JDK动态代理
+<ul>
+<li>实现了接口的类</li>
+</ul>
+</li>
+<li>CGLIB代理
+<ul>
+<li>未实现接口的类</li>
+</ul>
+</li>
+</ul>
+<h2 id="事务">
+  事务
+  <a class="anchor" href="#%e4%ba%8b%e5%8a%a1">#</a>
+</h2>
+<h3 id="transaction的底层原理是什么">
+  @Transaction的底层原理是什么？
+  <a class="anchor" href="#transaction%e7%9a%84%e5%ba%95%e5%b1%82%e5%8e%9f%e7%90%86%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h3>
+<ul>
+<li>spring的事务管理机制，结合AOP和动态代理技术实现事务的控制和管理</li>
+<li>事务管理核心组件
+<ul>
+<li>事务管理器</li>
+<li>事务拦截器</li>
+<li>事务属性源</li>
+<li>事务代理对象</li>
+</ul>
+</li>
+<li>实现流程
+<ul>
+<li>代理对象的创建</li>
+<li>事务拦截器的应用 TransactionInterceptor</li>
+<li>事务的开启与提交</li>
+<li>事务的传播行为</li>
+</ul>
+</li>
+</ul>
+<h3 id="transactional-事务传播机制">
+  @Transactional 事务传播机制
+  <a class="anchor" href="#transactional-%e4%ba%8b%e5%8a%a1%e4%bc%a0%e6%92%ad%e6%9c%ba%e5%88%b6">#</a>
+</h3>
+<ul>
+<li>当一个事务方法调用另一个事务方法时，事务应该如何传递或处理
+<ul>
+<li>REQUIRED
+<ul>
+<li>如果当前存在事务，则加入该事务；如果不存在事务，则创建一个新事务</li>
+</ul>
+</li>
+<li>SUPPORTS
+<ul>
+<li>如果当前存在事务，则加入该事务；如果不存在事务，则以非事务方式执行</li>
+<li>场景：适用于查询操作，是否在事务中执行均可</li>
+</ul>
+</li>
+<li>MANDATORY
+<ul>
+<li>如果当前存在事务，则加入该事务；如果不存在事务，则抛出异常</li>
+<li>场景：强制要求调用方必须在事务中调用该方法</li>
+</ul>
+</li>
+<li>REQUIRES_NEW</li>
+<li>NOT_SUPPORTED</li>
+<li>NEVER</li>
+<li>NESTED</li>
+</ul>
+</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/4b1357c3f9462b4ea43c484bd51ce6d51604098f" title='最后修改者 penruins | 三月 30, 2025' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="" />
+      <span>三月 30, 2025</span>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是spring">什么是Spring</a></li>
+    <li><a href="#spring-mvc">Spring MVC</a>
+      <ul>
+        <li><a href="#spring-mvc-流程">Spring MVC 流程</a></li>
+      </ul>
+    </li>
+    <li><a href="#bean">Bean</a>
+      <ul>
+        <li><a href="#bean的生命周期">Bean的生命周期</a></li>
+        <li><a href="#bean的作用域">Bean的作用域</a></li>
+        <li><a href="#spring-循环依赖如何解决">spring 循环依赖如何解决？</a></li>
+      </ul>
+    </li>
+    <li><a href="#ioc">IOC</a>
+      <ul>
+        <li><a href="#什么是ioc">什么是IOC</a></li>
+        <li><a href="#ioc-的核心概念是什么">IOC 的核心概念是什么？</a></li>
+        <li><a href="#举一个-spring-的容器">举一个 Spring 的容器？</a></li>
+        <li><a href="#ioc-的优势是什么">IOC 的优势是什么？</a></li>
+      </ul>
+    </li>
+    <li><a href="#aop">AOP</a>
+      <ul>
+        <li><a href="#什么是aop">什么是AOP？</a></li>
+        <li><a href="#aop的核心概念是什么">AOP的核心概念是什么？</a></li>
+        <li><a href="#aop的应用场景">AOP的应用场景</a></li>
+        <li><a href="#aop的实现方式">AOP的实现方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#事务">事务</a>
+      <ul>
+        <li><a href="#transaction的底层原理是什么">@Transaction的底层原理是什么？</a></li>
+        <li><a href="#transactional-事务传播机制">@Transactional 事务传播机制</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
