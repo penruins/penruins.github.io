@@ -3,42 +3,22 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="
-  Message Queue
-  #
-
-
-  消息队列如何选型？
-  #
-
-
-高吞吐量、大数据场景：Kafka
-金融交易、高可靠场景：RocketMQ
-
-支持事务消息和高可用性
-
-
-易于使用、功能丰富：RabbitMQ
-云原生、多租户场景：Pulsar 适合需要高扩展性和分层存储的场景
-简单轻量、定制开发场景：NSQ 适合 Golang技术栈
-">
+<meta name="description" content="">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/distributed-system/message-queue/message-queue/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/monitor/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Message Queue">
-  <meta property="og:description" content="Message Queue # 消息队列如何选型？ # 高吞吐量、大数据场景：Kafka 金融交易、高可靠场景：RocketMQ 支持事务消息和高可用性 易于使用、功能丰富：RabbitMQ 云原生、多租户场景：Pulsar 适合需要高扩展性和分层存储的场景 简单轻量、定制开发场景：NSQ 适合 Golang技术栈">
+  <meta property="og:title" content="Penruins">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-03-31T01:10:10+08:00">
-<title>Message Queue | Penruins</title>
+  <meta property="og:type" content="website">
+<title>Monitor | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/zh/post/computer-science/distributed-system/message-queue/message-queue/">
+<link rel="canonical" href="/zh/post/computer-science/monitor/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/zh.search.min.9cbb2d85654cd418843535798c31076971df7f1385c723cff645a5ed41892ed7.js" ></script>
+<link rel="alternate" type="application/rss+xml" href="/zh/post/computer-science/monitor/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -420,7 +400,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-4cf92766fb993473c676bdbc75728e6f" class="toggle" checked />
+    <input type="checkbox" id="section-4cf92766fb993473c676bdbc75728e6f" class="toggle"  />
     <label for="section-4cf92766fb993473c676bdbc75728e6f" class="flex justify-between">
       <a role="button" class="">Distributed System</a>
     </label>
@@ -436,7 +416,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7f2426ba5dcd7aac16102cd62c693ee8" class="toggle" checked />
+    <input type="checkbox" id="section-7f2426ba5dcd7aac16102cd62c693ee8" class="toggle"  />
     <label for="section-7f2426ba5dcd7aac16102cd62c693ee8" class="flex justify-between">
       <a role="button" class="">Message Queue</a>
     </label>
@@ -465,7 +445,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/zh/post/computer-science/distributed-system/message-queue/message-queue/" class="active">Message Queue</a>
+    <a href="/zh/post/computer-science/distributed-system/message-queue/message-queue/" class="">Message Queue</a>
   
 
         </li>
@@ -652,9 +632,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-770b0e760537cfb46f74c2eb433ea696" class="toggle"  />
+    <input type="checkbox" id="section-770b0e760537cfb46f74c2eb433ea696" class="toggle" checked />
     <label for="section-770b0e760537cfb46f74c2eb433ea696" class="flex justify-between">
-      <a role="button" class="">Monitor</a>
+      <a role="button" class="active">Monitor</a>
     </label>
   
 
@@ -1111,7 +1091,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Message Queue</h3>
+  <h3>Monitor</h3>
 
   <label for="toc-control">
     
@@ -1125,11 +1105,7 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#消息队列如何选型">消息队列如何选型？</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
 
@@ -1140,26 +1116,7 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="message-queue">
-  Message Queue
-  <a class="anchor" href="#message-queue">#</a>
-</h1>
-<h2 id="消息队列如何选型">
-  消息队列如何选型？
-  <a class="anchor" href="#%e6%b6%88%e6%81%af%e9%98%9f%e5%88%97%e5%a6%82%e4%bd%95%e9%80%89%e5%9e%8b">#</a>
-</h2>
-<ul>
-<li>高吞吐量、大数据场景：<strong>Kafka</strong></li>
-<li>金融交易、高可靠场景：<strong>RocketMQ</strong>
-<ul>
-<li>支持事务消息和高可用性</li>
-</ul>
-</li>
-<li>易于使用、功能丰富：<strong>RabbitMQ</strong></li>
-<li>云原生、多租户场景：Pulsar 适合需要高扩展性和分层存储的场景</li>
-<li>简单轻量、定制开发场景：NSQ 适合 Golang技术栈</li>
-</ul>
-</article>
+  <article class="markdown book-article"></article>
  
       
 
@@ -1190,10 +1147,6 @@ https://github.com/alex-shpak/hugo-book
 
       
   
-  <div class="book-comments">
-
-</div>
-  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
@@ -1204,11 +1157,7 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#消息队列如何选型">消息队列如何选型？</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
  
