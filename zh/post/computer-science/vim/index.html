@@ -57,89 +57,46 @@ lazyvim org
 iamcco/markdown-preview.nvim
 My neovim markdown setup in 2024
 tadmccorkle/markdown.nvim
+cnshsliu/smp.nvim
 
 
-Vim Markdown Folding?
-直接在配置文件中加上下面这段
-function! MarkdownLevel()
-    if getline(v:lnum) =~ &#39;^# .*$&#39;
-        return &#34;&gt;1&#34;
-    endif
-    if getline(v:lnum) =~ &#39;^## .*$&#39;
-        return &#34;&gt;2&#34;
-    endif
-    if getline(v:lnum) =~ &#39;^### .*$&#39;
-        return &#34;&gt;3&#34;
-    endif
-    if getline(v:lnum) =~ &#39;^#### .*$&#39;
-        return &#34;&gt;4&#34;
-    endif
-    if getline(v:lnum) =~ &#39;^##### .*$&#39;
-        return &#34;&gt;5&#34;
-    endif
-    if getline(v:lnum) =~ &#39;^###### .*$&#39;
-        return &#34;&gt;6&#34;
-    endif
-    return &#34;=&#34; 
-endfunction
-au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
-au BufEnter *.md setlocal foldmethod=expr 
-
-  搜索插件
+  outline.nvim
   #
 
 
-  fzf
-  #
+hedyhli/outline.nvim
 
-
-note
-只能搜索文件，不能进行全文搜索
-安装fzf
-
-brew install fzf
-
-
-安装 fzf 的vim的插件
-
-junegunn/fzf.vim
+这个插件太优秀了！
 
 
 
 
-  telescope
-  #
+解决 outline 左箭头和下箭头乱码的问题
+symbol_folding = {
+  autofold_depth = false,
+  markers = { &#39;&gt;&#39;, &#39;∨&#39; },
+}
 
-
-nvim-telescope/telescope.nvim
-支持全文搜索需要额外安装这个插件
-
-BurntSushi/ripgrep
-
-
-
-
-搜索结果换行的配置，vimscript 版本">
+Vim Markdown Folding?">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/vim/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Penruins">
   <meta property="og:description" content="vim # nvim # neovim.io 直接用brew安装就行 brew install neovim 第一步肯定是要把插件管理工具安装一下 junegunn/vim-plug 直接运行文档中linux的安装命令 剪贴板 # 直接在配置文件中添加这两行，就可以了
-vnoremap y &#34;&#43;y set clipboard&#43;=unnamedplus quickfix # VIM学习笔记 QuickFix LazyVim # lazyvim org 用 neovim 写 markdown 是一种什么样的体验(含技巧) markdown # iamcco/markdown-preview.nvim My neovim markdown setup in 2024 tadmccorkle/markdown.nvim Vim Markdown Folding?
-直接在配置文件中加上下面这段
-function! MarkdownLevel() if getline(v:lnum) =~ &#39;^# .*$&#39; return &#34;&gt;1&#34; endif if getline(v:lnum) =~ &#39;^## .*$&#39; return &#34;&gt;2&#34; endif if getline(v:lnum) =~ &#39;^### .*$&#39; return &#34;&gt;3&#34; endif if getline(v:lnum) =~ &#39;^#### .*$&#39; return &#34;&gt;4&#34; endif if getline(v:lnum) =~ &#39;^##### .*$&#39; return &#34;&gt;5&#34; endif if getline(v:lnum) =~ &#39;^###### .*$&#39; return &#34;&gt;6&#34; endif return &#34;=&#34; endfunction au BufEnter *.md setlocal foldexpr=MarkdownLevel() au BufEnter *.md setlocal foldmethod=expr 搜索插件 # fzf # note 只能搜索文件，不能进行全文搜索 安装fzf brew install fzf 安装 fzf 的vim的插件 junegunn/fzf.vim telescope # nvim-telescope/telescope.nvim 支持全文搜索需要额外安装这个插件 BurntSushi/ripgrep 搜索结果换行的配置，vimscript 版本">
+vnoremap y &#34;&#43;y set clipboard&#43;=unnamedplus quickfix # VIM学习笔记 QuickFix LazyVim # lazyvim org 用 neovim 写 markdown 是一种什么样的体验(含技巧) markdown # iamcco/markdown-preview.nvim My neovim markdown setup in 2024 tadmccorkle/markdown.nvim cnshsliu/smp.nvim outline.nvim # hedyhli/outline.nvim 这个插件太优秀了！ 解决 outline 左箭头和下箭头乱码的问题
+symbol_folding = { autofold_depth = false, markers = { &#39;&gt;&#39;, &#39;∨&#39; }, } Vim Markdown Folding?">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-03-31T21:20:07+08:00">
+    <meta property="article:modified_time" content="2025-04-01T02:20:11+08:00">
 <title>Vim | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/vim/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.f7662e0e36a826712c25e61a9b522119326b4b83813449280fa55c6034e90ab1.js" ></script>
+  <script defer src="/zh.search.min.2723750eaaf26493ef5cec2d78d9340c08ff1a632c30c36ea944f39844f6b2c8.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1298,7 +1255,11 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#剪贴板">剪贴板</a></li>
         <li><a href="#quickfix">quickfix</a></li>
         <li><a href="#lazyvim">LazyVim</a></li>
-        <li><a href="#markdown">markdown</a></li>
+        <li><a href="#markdown">markdown</a>
+          <ul>
+            <li><a href="#outlinenvim">outline.nvim</a></li>
+          </ul>
+        </li>
         <li><a href="#搜索插件">搜索插件</a>
           <ul>
             <li><a href="#fzf">fzf</a></li>
@@ -1307,6 +1268,7 @@ https://github.com/alex-shpak/hugo-book
         </li>
       </ul>
     </li>
+    <li><a href="#lua">lua</a></li>
   </ul>
 </nav>
 
@@ -1373,8 +1335,26 @@ set clipboard+=unnamedplus
 <li><a href="https://github.com/iamcco/markdown-preview.nvim">iamcco/markdown-preview.nvim</a></li>
 <li><a href="https://linkarzu.com/posts/neovim/markdown-setup-2024/">My neovim markdown setup in 2024</a></li>
 <li><a href="https://github.com/tadmccorkle/markdown.nvim">tadmccorkle/markdown.nvim</a></li>
+<li><a href="https://github.com/cnshsliu/smp.nvim">cnshsliu/smp.nvim</a></li>
+</ul>
+<h4 id="outlinenvim">
+  outline.nvim
+  <a class="anchor" href="#outlinenvim">#</a>
+</h4>
+<ul>
+<li><a href="https://github.com/hedyhli/outline.nvim">hedyhli/outline.nvim</a>
+<ul>
+<li>这个插件太优秀了！</li>
+</ul>
+</li>
 </ul>
 <hr>
+<p>解决 outline 左箭头和下箭头乱码的问题</p>
+<pre tabindex="0"><code>symbol_folding = {
+  autofold_depth = false,
+  markers = { &#39;&gt;&#39;, &#39;∨&#39; },
+}
+</code></pre><hr>
 <p><a href="https://stackoverflow.com/questions/3828606/vim-markdown-folding">Vim Markdown Folding?</a></p>
 <p>直接在配置文件中加上下面这段</p>
 <pre tabindex="0"><code>function! MarkdownLevel()
@@ -1421,6 +1401,11 @@ au BufEnter *.md setlocal foldmethod=expr
 <li><a href="https://github.com/junegunn/fzf.vim">junegunn/fzf.vim</a></li>
 </ul>
 </li>
+<li>Reference
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1bJ411s74r">FZF：终端下的文件查找器【猛男必备233333】</a></li>
+</ul>
+</li>
 </ul>
 <h4 id="telescope">
   telescope
@@ -1448,7 +1433,14 @@ require(&#34;telescope&#34;).setup {
   }
 }
 EOF
-</code></pre></article>
+</code></pre><h2 id="lua">
+  lua
+  <a class="anchor" href="#lua">#</a>
+</h2>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV13k4y1V7v3">Lua实战：加强Neovim｜Neovim Vlog[1]</a></li>
+</ul>
+</article>
  
       
 
@@ -1457,7 +1449,7 @@ EOF
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/c7741c0fc682ab721a498e95996f66aaad7834ae" title='最后修改者 penruins | 三月 31, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/1c778b101fbf0c2001641f031b6cc582ab29b6d5" title='最后修改者 penruins | 三月 31, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>三月 31, 2025</span>
     </a>
@@ -1500,7 +1492,11 @@ EOF
         <li><a href="#剪贴板">剪贴板</a></li>
         <li><a href="#quickfix">quickfix</a></li>
         <li><a href="#lazyvim">LazyVim</a></li>
-        <li><a href="#markdown">markdown</a></li>
+        <li><a href="#markdown">markdown</a>
+          <ul>
+            <li><a href="#outlinenvim">outline.nvim</a></li>
+          </ul>
+        </li>
         <li><a href="#搜索插件">搜索插件</a>
           <ul>
             <li><a href="#fzf">fzf</a></li>
@@ -1509,6 +1505,7 @@ EOF
         </li>
       </ul>
     </li>
+    <li><a href="#lua">lua</a></li>
   </ul>
 </nav>
 
