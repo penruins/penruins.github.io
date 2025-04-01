@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Penruins</title>
+    <link>/zh/post/computer-science/big-data/</link>
+    <description>Recent content on Penruins</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <atom:link href="/zh/post/computer-science/big-data/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hbase</title>
+      <link>/zh/post/computer-science/big-data/hbase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/zh/post/computer-science/big-data/hbase/</guid>
+      <description>&lt;h1 id=&#34;hbase&#34;&gt;&#xA;  hbase&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#hbase&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;HBase 是一个面向列式存储的分布式数据库，其设计思想来源于 Google 的 BigTable 论文&lt;/li&gt;&#xA;&lt;li&gt;HBase 底层存储基于 HDFS 实现，集群的管理基于 ZooKeeper 实现&lt;/li&gt;&#xA;&lt;li&gt;HBase 良好的分布式架构设计为海量数据的快速存储、随机访问提供了可能，基于数据副本机制和分区机制可以轻松实现在线扩容、缩容和数据容灾，是大数据领域中 Key-Value 数据结构存储最常用的数据库方案&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;hbase-的特点&#34;&gt;&#xA;  hbase 的特点&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#hbase-%e7%9a%84%e7%89%b9%e7%82%b9&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;易扩展&lt;/li&gt;&#xA;&lt;li&gt;海量存储&lt;/li&gt;&#xA;&lt;li&gt;列式存储&lt;/li&gt;&#xA;&lt;li&gt;高可靠性&lt;/li&gt;&#xA;&lt;li&gt;稀疏性&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;模块组成&#34;&gt;&#xA;  模块组成&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e6%a8%a1%e5%9d%97%e7%bb%84%e6%88%90&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;HBase 可以将数据存储在本地文件系统，也可以存储在 HDFS 文件系统。在生产环境中，HBase 一般运行在 HDFS 上，以 HDFS 作为基础的存储设施。HBase 通过 HBase Client 提供的 Java API 来访问 HBase 数据库，以完成数据的写入和读取。HBase 集群主由HMaster、Region Server 和 ZooKeeper 组成&#xA;&lt;ul&gt;&#xA;&lt;li&gt;HMaster&#xA;&lt;ul&gt;&#xA;&lt;li&gt;负责管理 RegionServer，实现其负载均衡&lt;/li&gt;&#xA;&lt;li&gt;管理和分配 Region，比如在 Region split时分配新的 Region，在 RegionServer 退出时迁移其内的 Region 到其他 RegionServer上&lt;/li&gt;&#xA;&lt;li&gt;管理namespace和table的元数据（实际存储在HDFS上）&lt;/li&gt;&#xA;&lt;li&gt;权限控制（ACL）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;RegionServer&#xA;&lt;ul&gt;&#xA;&lt;li&gt;存放和管理本地 Region&lt;/li&gt;&#xA;&lt;li&gt;读写HDFS，管理Table中的数据&lt;/li&gt;&#xA;&lt;li&gt;Client 从 HMaster 中获取元数据，找到 RowKey 所在的 RegionServer 进行读写数据&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;ZooKeeper&#xA;&lt;ul&gt;&#xA;&lt;li&gt;存放整个 HBase集群的元数据以及集群的状态信息&lt;/li&gt;&#xA;&lt;li&gt;实现HMaster主从节点的failover&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;reference&#34;&gt;&#xA;  Reference&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#reference&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/datadance/p/16327298.html&#34;&gt;什么是HBase？终于有人讲明白了&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

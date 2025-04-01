@@ -22,7 +22,7 @@ Redo log是InnoDB存储引擎特有的物理日志，主要保证事务的持久
 Redo log采用&quot;预写日志(WAL, Write-Ahead Logging)&ldquo;机制：在数据页修改前，先记录日志到redo log buffer，再根据策略刷盘到redo log文件
 刷盘策略
 
-通过innodb_flush_log_at_trx_commit参数控制
+通过innodb_flush_log_at_trx_commit 参数控制
 
 0：每秒刷盘一次，事务提交时不刷盘(可能丢失1秒数据)
 1：每次事务提交都刷盘(默认，最安全)
@@ -72,6 +72,15 @@ Commit阶段：将redo log标记为commit状态
 
 
 
+  读写分离
+  #
+
+
+SpringBoot&#43;Mybatis-Plus实现mysql读写分离方案
+在 Spring Boot 中优雅地实现读写分离
+【读写分离】SpringBoot整合多数据源实现读写分离（一）
+
+
   Reference
   #
 
@@ -83,18 +92,18 @@ MySQL 架构原理
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/database/mysql/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="mysql">
-  <meta property="og:description" content="mysql # binlog # redo log 和 binlog日志 # redo log 重做日志 Redo log是InnoDB存储引擎特有的物理日志，主要保证事务的持久性和崩溃恢复能力(crash-safe)。当MySQL实例意外宕机时，InnoDB可以通过redo log恢复已提交但未写入数据文件的事务，确保数据不会丢失 Redo log采用&#34;预写日志(WAL, Write-Ahead Logging)“机制：在数据页修改前，先记录日志到redo log buffer，再根据策略刷盘到redo log文件 刷盘策略 通过innodb_flush_log_at_trx_commit参数控制 0：每秒刷盘一次，事务提交时不刷盘(可能丢失1秒数据) 1：每次事务提交都刷盘(默认，最安全) 2：写入OS缓存，不立即刷盘(仅MySQL崩溃安全，服务器宕机可能丢失数据) bin log 二进制日志 Binlog是MySQL Server层维护的逻辑日志，记录所有引起数据变更的SQL语句或行变更 主要用于 主从复制：从库通过重放主库的binlog实现数据同步 时间点恢复：结合全量备份和binlog可实现任意时间点的数据恢复 数据归档：记录数据库所有变更历史 三种格式 STATEMENT：记录SQL原文(默认)，可能因函数(如NOW())导致主从不一致 ROW：记录行数据变更(最安全)，但日志量大 MIXED：混合模式，根据语句自动选择格式 刷盘控制 通过 sync_binlog 参数控制 0：由系统决定刷盘时机 1：每次事务提交都刷盘(最安全) N：每N个事务刷盘一次(平衡性能与安全性) 两阶段提交：保证日志一致性 Prepare阶段：写入redo log并标记为prepare状态 写入binlog Commit阶段：将redo log标记为commit状态 Reference # MySQL 架构原理">
+  <meta property="og:description" content="mysql # binlog # redo log 和 binlog日志 # redo log 重做日志 Redo log是InnoDB存储引擎特有的物理日志，主要保证事务的持久性和崩溃恢复能力(crash-safe)。当MySQL实例意外宕机时，InnoDB可以通过redo log恢复已提交但未写入数据文件的事务，确保数据不会丢失 Redo log采用&#34;预写日志(WAL, Write-Ahead Logging)“机制：在数据页修改前，先记录日志到redo log buffer，再根据策略刷盘到redo log文件 刷盘策略 通过innodb_flush_log_at_trx_commit 参数控制 0：每秒刷盘一次，事务提交时不刷盘(可能丢失1秒数据) 1：每次事务提交都刷盘(默认，最安全) 2：写入OS缓存，不立即刷盘(仅MySQL崩溃安全，服务器宕机可能丢失数据) bin log 二进制日志 Binlog是MySQL Server层维护的逻辑日志，记录所有引起数据变更的SQL语句或行变更 主要用于 主从复制：从库通过重放主库的binlog实现数据同步 时间点恢复：结合全量备份和binlog可实现任意时间点的数据恢复 数据归档：记录数据库所有变更历史 三种格式 STATEMENT：记录SQL原文(默认)，可能因函数(如NOW())导致主从不一致 ROW：记录行数据变更(最安全)，但日志量大 MIXED：混合模式，根据语句自动选择格式 刷盘控制 通过 sync_binlog 参数控制 0：由系统决定刷盘时机 1：每次事务提交都刷盘(最安全) N：每N个事务刷盘一次(平衡性能与安全性) 两阶段提交：保证日志一致性 Prepare阶段：写入redo log并标记为prepare状态 写入binlog Commit阶段：将redo log标记为commit状态 读写分离 # SpringBoot&#43;Mybatis-Plus实现mysql读写分离方案 在 Spring Boot 中优雅地实现读写分离 【读写分离】SpringBoot整合多数据源实现读写分离（一） Reference # MySQL 架构原理">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-04-01T19:30:09+08:00">
+    <meta property="article:modified_time" content="2025-04-01T22:40:11+08:00">
 <title>mysql | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/database/mysql/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.7463dfccce2e2173e0b91f40ca1bfc5ba0824113a09819e077a03edf5d7fc47e.js" ></script>
+  <script defer src="/zh.search.min.7993920d32e137e132f713609bd4805e80d902324f57bad28476cb90db99887c.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -343,6 +352,40 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-596abb319feca0e5bcf54abbd3adf85c" class="toggle"  />
+    <label for="section-596abb319feca0e5bcf54abbd3adf85c" class="flex justify-between">
+      <a role="button" class="">Big Data</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/big-data/hbase/" class="">hbase</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
     
       
         <li>
@@ -1253,6 +1296,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#redo-log-和-binlog日志">redo log 和 binlog日志</a></li>
       </ul>
     </li>
+    <li><a href="#读写分离">读写分离</a></li>
     <li><a href="#reference">Reference</a></li>
   </ul>
 </nav>
@@ -1285,7 +1329,7 @@ https://github.com/alex-shpak/hugo-book
 <li>Redo log采用&quot;预写日志(WAL, Write-Ahead Logging)&ldquo;机制：在数据页修改前，先记录日志到redo log buffer，再根据策略刷盘到redo log文件</li>
 <li>刷盘策略
 <ul>
-<li>通过innodb_flush_log_at_trx_commit参数控制
+<li>通过<code>innodb_flush_log_at_trx_commit</code> 参数控制
 <ul>
 <li>0：每秒刷盘一次，事务提交时不刷盘(可能丢失1秒数据)</li>
 <li>1：每次事务提交都刷盘(默认，最安全)</li>
@@ -1315,7 +1359,7 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>刷盘控制
 <ul>
-<li>通过 sync_binlog 参数控制
+<li>通过 <code>sync_binlog</code> 参数控制
 <ul>
 <li>0：由系统决定刷盘时机</li>
 <li>1：每次事务提交都刷盘(最安全)</li>
@@ -1334,6 +1378,15 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
+<h2 id="读写分离">
+  读写分离
+  <a class="anchor" href="#%e8%af%bb%e5%86%99%e5%88%86%e7%a6%bb">#</a>
+</h2>
+<ul>
+<li><a href="https://blog.csdn.net/AAAAABBBBBYYYYY/article/details/110875245">SpringBoot+Mybatis-Plus实现mysql读写分离方案</a></li>
+<li><a href="https://springdoc.cn/spring-boot-implement-read-write-separation/">在 Spring Boot 中优雅地实现读写分离</a></li>
+<li><a href="https://blog.csdn.net/qq_33101675/article/details/114396476">【读写分离】SpringBoot整合多数据源实现读写分离（一）</a></li>
+</ul>
 <h2 id="reference">
   Reference
   <a class="anchor" href="#reference">#</a>
@@ -1350,7 +1403,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/2ccc3d09f2ab2532852a56bc31aa0f658b8b5f35" title='最后修改者 penruins | 四月 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/107292e780288f623e47b58672ccf4cf3db153dd" title='最后修改者 penruins | 四月 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>四月 1, 2025</span>
     </a>
@@ -1393,6 +1446,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#redo-log-和-binlog日志">redo log 和 binlog日志</a></li>
       </ul>
     </li>
+    <li><a href="#读写分离">读写分离</a></li>
     <li><a href="#reference">Reference</a></li>
   </ul>
 </nav>

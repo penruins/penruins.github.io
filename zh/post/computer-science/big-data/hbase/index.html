@@ -4,24 +4,77 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  mongodb
+  hbase
   #
+
+
+HBase 是一个面向列式存储的分布式数据库，其设计思想来源于 Google 的 BigTable 论文
+HBase 底层存储基于 HDFS 实现，集群的管理基于 ZooKeeper 实现
+HBase 良好的分布式架构设计为海量数据的快速存储、随机访问提供了可能，基于数据副本机制和分区机制可以轻松实现在线扩容、缩容和数据容灾，是大数据领域中 Key-Value 数据结构存储最常用的数据库方案
+
+
+  hbase 的特点
+  #
+
+
+易扩展
+海量存储
+列式存储
+高可靠性
+稀疏性
+
+
+  模块组成
+  #
+
+
+HBase 可以将数据存储在本地文件系统，也可以存储在 HDFS 文件系统。在生产环境中，HBase 一般运行在 HDFS 上，以 HDFS 作为基础的存储设施。HBase 通过 HBase Client 提供的 Java API 来访问 HBase 数据库，以完成数据的写入和读取。HBase 集群主由HMaster、Region Server 和 ZooKeeper 组成
+
+HMaster
+
+负责管理 RegionServer，实现其负载均衡
+管理和分配 Region，比如在 Region split时分配新的 Region，在 RegionServer 退出时迁移其内的 Region 到其他 RegionServer上
+管理namespace和table的元数据（实际存储在HDFS上）
+权限控制（ACL）
+
+
+RegionServer
+
+存放和管理本地 Region
+读写HDFS，管理Table中的数据
+Client 从 HMaster 中获取元数据，找到 RowKey 所在的 RegionServer 进行读写数据
+
+
+ZooKeeper
+
+存放整个 HBase集群的元数据以及集群的状态信息
+实现HMaster主从节点的failover
+
+
+
+
+
+
+  Reference
+  #
+
+
+什么是HBase？终于有人讲明白了
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/database/mongodb/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/big-data/hbase/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="mongodb #">
+  <meta property="og:title" content="hbase">
+  <meta property="og:description" content="hbase # HBase 是一个面向列式存储的分布式数据库，其设计思想来源于 Google 的 BigTable 论文 HBase 底层存储基于 HDFS 实现，集群的管理基于 ZooKeeper 实现 HBase 良好的分布式架构设计为海量数据的快速存储、随机访问提供了可能，基于数据副本机制和分区机制可以轻松实现在线扩容、缩容和数据容灾，是大数据领域中 Key-Value 数据结构存储最常用的数据库方案 hbase 的特点 # 易扩展 海量存储 列式存储 高可靠性 稀疏性 模块组成 # HBase 可以将数据存储在本地文件系统，也可以存储在 HDFS 文件系统。在生产环境中，HBase 一般运行在 HDFS 上，以 HDFS 作为基础的存储设施。HBase 通过 HBase Client 提供的 Java API 来访问 HBase 数据库，以完成数据的写入和读取。HBase 集群主由HMaster、Region Server 和 ZooKeeper 组成 HMaster 负责管理 RegionServer，实现其负载均衡 管理和分配 Region，比如在 Region split时分配新的 Region，在 RegionServer 退出时迁移其内的 Region 到其他 RegionServer上 管理namespace和table的元数据（实际存储在HDFS上） 权限控制（ACL） RegionServer 存放和管理本地 Region 读写HDFS，管理Table中的数据 Client 从 HMaster 中获取元数据，找到 RowKey 所在的 RegionServer 进行读写数据 ZooKeeper 存放整个 HBase集群的元数据以及集群的状态信息 实现HMaster主从节点的failover Reference # 什么是HBase？终于有人讲明白了">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2024-11-14T08:59:49+08:00">
     <meta property="article:modified_time" content="2025-04-01T22:40:11+08:00">
-<title>Penruins | Penruins</title>
+<title>hbase | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/zh/post/computer-science/database/mongodb/">
+<link rel="canonical" href="/zh/post/computer-science/big-data/hbase/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/zh.search.min.7993920d32e137e132f713609bd4805e80d902324f57bad28476cb90db99887c.js" ></script>
@@ -281,7 +334,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-596abb319feca0e5bcf54abbd3adf85c" class="toggle"  />
+    <input type="checkbox" id="section-596abb319feca0e5bcf54abbd3adf85c" class="toggle" checked />
     <label for="section-596abb319feca0e5bcf54abbd3adf85c" class="flex justify-between">
       <a role="button" class="">Big Data</a>
     </label>
@@ -297,7 +350,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/zh/post/computer-science/big-data/hbase/" class="">hbase</a>
+    <a href="/zh/post/computer-science/big-data/hbase/" class="active">hbase</a>
   
 
         </li>
@@ -315,7 +368,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-835bdcf5bd8a83c6a5d31798f93ea1e0" class="toggle" checked />
+    <input type="checkbox" id="section-835bdcf5bd8a83c6a5d31798f93ea1e0" class="toggle"  />
     <label for="section-835bdcf5bd8a83c6a5d31798f93ea1e0" class="flex justify-between">
       <a role="button" class="">Database</a>
     </label>
@@ -435,7 +488,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/zh/post/computer-science/database/mongodb/" class="active">Penruins</a>
+    <a href="/zh/post/computer-science/database/mongodb/" class="">Penruins</a>
   
 
         </li>
@@ -1196,7 +1249,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>hbase</h3>
 
   <label for="toc-control">
     
@@ -1210,7 +1263,13 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#hbase-的特点">hbase 的特点</a></li>
+    <li><a href="#模块组成">模块组成</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
 
 
 
@@ -1221,10 +1280,64 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="mongodb">
-  mongodb
-  <a class="anchor" href="#mongodb">#</a>
+  <article class="markdown book-article"><h1 id="hbase">
+  hbase
+  <a class="anchor" href="#hbase">#</a>
 </h1>
+<ul>
+<li>HBase 是一个面向列式存储的分布式数据库，其设计思想来源于 Google 的 BigTable 论文</li>
+<li>HBase 底层存储基于 HDFS 实现，集群的管理基于 ZooKeeper 实现</li>
+<li>HBase 良好的分布式架构设计为海量数据的快速存储、随机访问提供了可能，基于数据副本机制和分区机制可以轻松实现在线扩容、缩容和数据容灾，是大数据领域中 Key-Value 数据结构存储最常用的数据库方案</li>
+</ul>
+<h2 id="hbase-的特点">
+  hbase 的特点
+  <a class="anchor" href="#hbase-%e7%9a%84%e7%89%b9%e7%82%b9">#</a>
+</h2>
+<ul>
+<li>易扩展</li>
+<li>海量存储</li>
+<li>列式存储</li>
+<li>高可靠性</li>
+<li>稀疏性</li>
+</ul>
+<h2 id="模块组成">
+  模块组成
+  <a class="anchor" href="#%e6%a8%a1%e5%9d%97%e7%bb%84%e6%88%90">#</a>
+</h2>
+<ul>
+<li>HBase 可以将数据存储在本地文件系统，也可以存储在 HDFS 文件系统。在生产环境中，HBase 一般运行在 HDFS 上，以 HDFS 作为基础的存储设施。HBase 通过 HBase Client 提供的 Java API 来访问 HBase 数据库，以完成数据的写入和读取。HBase 集群主由HMaster、Region Server 和 ZooKeeper 组成
+<ul>
+<li>HMaster
+<ul>
+<li>负责管理 RegionServer，实现其负载均衡</li>
+<li>管理和分配 Region，比如在 Region split时分配新的 Region，在 RegionServer 退出时迁移其内的 Region 到其他 RegionServer上</li>
+<li>管理namespace和table的元数据（实际存储在HDFS上）</li>
+<li>权限控制（ACL）</li>
+</ul>
+</li>
+<li>RegionServer
+<ul>
+<li>存放和管理本地 Region</li>
+<li>读写HDFS，管理Table中的数据</li>
+<li>Client 从 HMaster 中获取元数据，找到 RowKey 所在的 RegionServer 进行读写数据</li>
+</ul>
+</li>
+<li>ZooKeeper
+<ul>
+<li>存放整个 HBase集群的元数据以及集群的状态信息</li>
+<li>实现HMaster主从节点的failover</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="reference">
+  Reference
+  <a class="anchor" href="#reference">#</a>
+</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/datadance/p/16327298.html">什么是HBase？终于有人讲明白了</a></li>
+</ul>
 </article>
  
       
@@ -1270,7 +1383,13 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#hbase-的特点">hbase 的特点</a></li>
+    <li><a href="#模块组成">模块组成</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
 
 
  
