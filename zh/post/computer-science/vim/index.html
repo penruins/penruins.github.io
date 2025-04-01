@@ -28,7 +28,18 @@ junegunn/vim-plug
 
 
 
-  剪贴板
+  indent
+  #
+
+
+How can I make (Neo)Vim wrap lines in respect to indentation?
+
+这个可以解决缩进换行的问题，很棒！
+
+
+
+
+  clipboard 剪贴板
   #
 
 直接在配置文件中添加这两行，就可以了
@@ -71,32 +82,25 @@ hedyhli/outline.nvim
 
 
 
-解决 outline 左箭头和下箭头乱码的问题
-symbol_folding = {
-  autofold_depth = false,
-  markers = { &#39;&gt;&#39;, &#39;∨&#39; },
-}
-
-Vim Markdown Folding?">
+解决 outline 左箭头和下箭头乱码的问题">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/vim/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="vim # nvim # neovim.io 直接用brew安装就行 brew install neovim 第一步肯定是要把插件管理工具安装一下 junegunn/vim-plug 直接运行文档中linux的安装命令 剪贴板 # 直接在配置文件中添加这两行，就可以了
-vnoremap y &#34;&#43;y set clipboard&#43;=unnamedplus quickfix # VIM学习笔记 QuickFix LazyVim # lazyvim org 用 neovim 写 markdown 是一种什么样的体验(含技巧) markdown # iamcco/markdown-preview.nvim My neovim markdown setup in 2024 tadmccorkle/markdown.nvim cnshsliu/smp.nvim outline.nvim # hedyhli/outline.nvim 这个插件太优秀了！ 解决 outline 左箭头和下箭头乱码的问题
-symbol_folding = { autofold_depth = false, markers = { &#39;&gt;&#39;, &#39;∨&#39; }, } Vim Markdown Folding?">
+  <meta property="og:description" content="vim # nvim # neovim.io 直接用brew安装就行 brew install neovim 第一步肯定是要把插件管理工具安装一下 junegunn/vim-plug 直接运行文档中linux的安装命令 indent # How can I make (Neo)Vim wrap lines in respect to indentation? 这个可以解决缩进换行的问题，很棒！ clipboard 剪贴板 # 直接在配置文件中添加这两行，就可以了
+vnoremap y &#34;&#43;y set clipboard&#43;=unnamedplus quickfix # VIM学习笔记 QuickFix LazyVim # lazyvim org 用 neovim 写 markdown 是一种什么样的体验(含技巧) markdown # iamcco/markdown-preview.nvim My neovim markdown setup in 2024 tadmccorkle/markdown.nvim cnshsliu/smp.nvim outline.nvim # hedyhli/outline.nvim 这个插件太优秀了！ 解决 outline 左箭头和下箭头乱码的问题">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-04-01T02:20:11+08:00">
+    <meta property="article:modified_time" content="2025-04-01T13:10:06+08:00">
 <title>Vim | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/vim/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.2723750eaaf26493ef5cec2d78d9340c08ff1a632c30c36ea944f39844f6b2c8.js" ></script>
+  <script defer src="/zh.search.min.0a044e4b361f378ecc87976c09212f47566dc6ab2a729fd1dc067ea2af57730f.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1252,7 +1256,8 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li><a href="#nvim">nvim</a>
       <ul>
-        <li><a href="#剪贴板">剪贴板</a></li>
+        <li><a href="#indent">indent</a></li>
+        <li><a href="#clipboard-剪贴板">clipboard 剪贴板</a></li>
         <li><a href="#quickfix">quickfix</a></li>
         <li><a href="#lazyvim">LazyVim</a></li>
         <li><a href="#markdown">markdown</a>
@@ -1266,6 +1271,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#telescope">telescope</a></li>
           </ul>
         </li>
+        <li><a href="#美化">美化</a></li>
       </ul>
     </li>
     <li><a href="#lua">lua</a></li>
@@ -1305,9 +1311,20 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="剪贴板">
-  剪贴板
-  <a class="anchor" href="#%e5%89%aa%e8%b4%b4%e6%9d%bf">#</a>
+<h3 id="indent">
+  indent
+  <a class="anchor" href="#indent">#</a>
+</h3>
+<ul>
+<li><a href="https://vi.stackexchange.com/questions/42406/how-can-i-make-neovim-wrap-lines-in-respect-to-indentation">How can I make (Neo)Vim wrap lines in respect to indentation?</a>
+<ul>
+<li>这个可以解决缩进换行的问题，很棒！</li>
+</ul>
+</li>
+</ul>
+<h3 id="clipboard-剪贴板">
+  clipboard 剪贴板
+  <a class="anchor" href="#clipboard-%e5%89%aa%e8%b4%b4%e6%9d%bf">#</a>
 </h3>
 <p>直接在配置文件中添加这两行，就可以了</p>
 <pre tabindex="0"><code>vnoremap y &#34;+y
@@ -1433,7 +1450,32 @@ require(&#34;telescope&#34;).setup {
   }
 }
 EOF
-</code></pre><h2 id="lua">
+</code></pre><h3 id="美化">
+  美化
+  <a class="anchor" href="#%e7%be%8e%e5%8c%96">#</a>
+</h3>
+<ul>
+<li><a href="https://www.reddit.com/r/neovim/comments/q8uvpa/looking_for_airline_replacement/">Looking for airline replacement</a></li>
+<li><a href="https://github.com/famiu/feline.nvim">famiu/feline.nvim</a></li>
+<li>buffer
+<ul>
+<li><a href="https://github.com/akinsho/bufferline.nvim">akinsho/bufferline.nvim</a>
+<ul>
+<li>需要安装一个字体，不然图标显示不出来很丑
+<ul>
+<li><a href="https://github.com/ryanoasis/nerd-fonts">ryanoasis/nerd-fonts</a>
+<ul>
+<li><code>brew install font-hack-nerd-font</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="lua">
   lua
   <a class="anchor" href="#lua">#</a>
 </h2>
@@ -1449,9 +1491,9 @@ EOF
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/1c778b101fbf0c2001641f031b6cc582ab29b6d5" title='最后修改者 penruins | 三月 31, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/69990d9155a45215fb2c357136aaa344d84154b1" title='最后修改者 penruins | 四月 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
-      <span>三月 31, 2025</span>
+      <span>四月 1, 2025</span>
     </a>
   </div>
 
@@ -1489,7 +1531,8 @@ EOF
   <ul>
     <li><a href="#nvim">nvim</a>
       <ul>
-        <li><a href="#剪贴板">剪贴板</a></li>
+        <li><a href="#indent">indent</a></li>
+        <li><a href="#clipboard-剪贴板">clipboard 剪贴板</a></li>
         <li><a href="#quickfix">quickfix</a></li>
         <li><a href="#lazyvim">LazyVim</a></li>
         <li><a href="#markdown">markdown</a>
@@ -1503,6 +1546,7 @@ EOF
             <li><a href="#telescope">telescope</a></li>
           </ul>
         </li>
+        <li><a href="#美化">美化</a></li>
       </ul>
     </li>
     <li><a href="#lua">lua</a></li>
