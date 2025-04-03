@@ -3,24 +3,173 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="
+  hadoop
+  #
+
+
+Hadoop生态系统是一个由Apache基金会维护的开源软件集合，用于处理和分析大规模数据集。经过多年发展，Hadoop已从最初的HDFS和MapReduce两个核心组件扩展为一个包含众多工具和框架的完整生态系统
+核心基础组件
+
+HDFS (Hadoop Distributed File System)
+
+Hadoop的分布式文件系统，用于存储超大规模数据集
+采用主从架构：NameNode(主节点)管理元数据，DataNode(从节点)存储实际数据块
+特点：高容错性、高吞吐量、适合部署在廉价硬件上
+
+
+YARN (Yet Another Resource Negotiator)
+
+Hadoop 2.0引入的资源管理和作业调度框架
+包含ResourceManager(集群资源管理)和NodeManager(节点资源监控)
+支持多种计算框架(MapReduce、Spark等)共享集群资源
+
+
+MapReduce
+
+分布式计算框架，采用&quot;分而治之&quot;思想
+包含Map(数据分解)和Reduce(结果汇总)两个阶段
+适合处理大规模离线批处理任务
+
+
+
+
+数据存储组件
+
+HBase
+
+分布式列式NoSQL数据库，基于Google BigTable设计
+构建在HDFS之上，提供实时读写能力
+适合存储海量结构化数据
+
+
+Hive
+
+数据仓库工具，提供类SQL查询语言(HiveQL)
+将SQL转换为MapReduce/Tez/Spark作业执行
+适合数据汇总、即席查询和分析
+
+
+Pig
+
+高级数据流语言(Pig Latin)和执行框架
+简化MapReduce编程，适合ETL流程
+支持结构化/半结构化数据处理
+
+
+
+
+数据采集与传输组件
+
+Sqoop
+
+关系型数据库与Hadoop间数据传输工具
+支持从MySQL、Oracle等导入数据到HDFS/Hive/HBase
+也支持将Hadoop数据导出到关系数据库
+
+
+Flume
+
+分布式日志收集系统
+适合采集、聚合和移动大量日志数据到HDFS
+包含Source(数据源)、Channel(传输通道)和Sink(目的地)三个组件
+
+
+
+
+协调与管理组件
+
+Zookeeper
+
+分布式协调服务
+提供统一命名服务、配置管理、集群同步等
+解决分布式环境下的数据一致性问题
+
+
+Oozie
+
+工作流调度系统
+用于编排Hadoop作业(MapReduce、Pig、Hive等)
+支持定时和依赖触发
+
+
+Ambari
+
+Hadoop集群管理工具
+提供Web界面监控、配置和管理Hadoop集群
+支持大多数Hadoop组件
+
+
+
+
+高级计算框架
+
+Spark
+
+内存计算框架，比MapReduce快10-100倍
+支持批处理、流处理、机器学习和图计算
+可与HDFS、HBase等集成
+
+
+Flink
+
+流处理框架，支持事件时间和精确一次处理
+适合实时数据分析场景
+与Hadoop生态系统兼容
+
+
+Mahout
+
+机器学习算法库
+提供聚类、分类、推荐等算法实现
+可扩展至大规模数据集
+
+
+
+
+其他重要组件
+
+Kafka
+
+分布式消息队列系统
+高吞吐量、低延迟
+常用于实时数据管道
+
+
+Tez
+
+优化后的MapReduce执行引擎
+减少中间结果写入磁盘，提高性能
+被Hive、Pig等采用
+
+
+Avro
+
+数据序列化系统
+提供紧凑的二进制数据格式
+支持RPC通信
+
+
+
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/categories/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/big-data/hadoop/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Categories">
+  <meta property="og:title" content="hadoop">
+  <meta property="og:description" content="hadoop # Hadoop生态系统是一个由Apache基金会维护的开源软件集合，用于处理和分析大规模数据集。经过多年发展，Hadoop已从最初的HDFS和MapReduce两个核心组件扩展为一个包含众多工具和框架的完整生态系统 核心基础组件 HDFS (Hadoop Distributed File System) Hadoop的分布式文件系统，用于存储超大规模数据集 采用主从架构：NameNode(主节点)管理元数据，DataNode(从节点)存储实际数据块 特点：高容错性、高吞吐量、适合部署在廉价硬件上 YARN (Yet Another Resource Negotiator) Hadoop 2.0引入的资源管理和作业调度框架 包含ResourceManager(集群资源管理)和NodeManager(节点资源监控) 支持多种计算框架(MapReduce、Spark等)共享集群资源 MapReduce 分布式计算框架，采用&#34;分而治之&#34;思想 包含Map(数据分解)和Reduce(结果汇总)两个阶段 适合处理大规模离线批处理任务 数据存储组件 HBase 分布式列式NoSQL数据库，基于Google BigTable设计 构建在HDFS之上，提供实时读写能力 适合存储海量结构化数据 Hive 数据仓库工具，提供类SQL查询语言(HiveQL) 将SQL转换为MapReduce/Tez/Spark作业执行 适合数据汇总、即席查询和分析 Pig 高级数据流语言(Pig Latin)和执行框架 简化MapReduce编程，适合ETL流程 支持结构化/半结构化数据处理 数据采集与传输组件 Sqoop 关系型数据库与Hadoop间数据传输工具 支持从MySQL、Oracle等导入数据到HDFS/Hive/HBase 也支持将Hadoop数据导出到关系数据库 Flume 分布式日志收集系统 适合采集、聚合和移动大量日志数据到HDFS 包含Source(数据源)、Channel(传输通道)和Sink(目的地)三个组件 协调与管理组件 Zookeeper 分布式协调服务 提供统一命名服务、配置管理、集群同步等 解决分布式环境下的数据一致性问题 Oozie 工作流调度系统 用于编排Hadoop作业(MapReduce、Pig、Hive等) 支持定时和依赖触发 Ambari Hadoop集群管理工具 提供Web界面监控、配置和管理Hadoop集群 支持大多数Hadoop组件 高级计算框架 Spark 内存计算框架，比MapReduce快10-100倍 支持批处理、流处理、机器学习和图计算 可与HDFS、HBase等集成 Flink 流处理框架，支持事件时间和精确一次处理 适合实时数据分析场景 与Hadoop生态系统兼容 Mahout 机器学习算法库 提供聚类、分类、推荐等算法实现 可扩展至大规模数据集 其他重要组件 Kafka 分布式消息队列系统 高吞吐量、低延迟 常用于实时数据管道 Tez 优化后的MapReduce执行引擎 减少中间结果写入磁盘，提高性能 被Hive、Pig等采用 Avro 数据序列化系统 提供紧凑的二进制数据格式 支持RPC通信">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="website">
-<title>Categories | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-04-03T14:40:09+08:00">
+<title>hadoop | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/zh/categories/">
-  <link rel="alternate" hreflang="en" href="/categories/" title="Categories">
-  <link rel="alternate" hreflang="cn" href="/cn/categories/" title="Categories">
+<link rel="canonical" href="/zh/post/computer-science/big-data/hadoop/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/zh.search.min.e197a31d048c83b00cb3145a2ffd9bb08abdefd6de728297add417e02ee1fa62.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/zh/categories/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -61,10 +210,6 @@ https://github.com/alex-shpak/hugo-book
   
 
 
-  
-
-  
-
 
 <ul class="book-languages">
   <li>
@@ -79,13 +224,13 @@ https://github.com/alex-shpak/hugo-book
     <ul>
       
       <li>
-        <a href="/cn/categories/">
+        <a href="/cn/">
           
         </a>
       </li>
       
       <li>
-        <a href="/categories/">
+        <a href="/">
           English
         </a>
       </li>
@@ -281,7 +426,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-596abb319feca0e5bcf54abbd3adf85c" class="toggle"  />
+    <input type="checkbox" id="section-596abb319feca0e5bcf54abbd3adf85c" class="toggle" checked />
     <label for="section-596abb319feca0e5bcf54abbd3adf85c" class="flex justify-between">
       <a role="button" class="">Big Data</a>
     </label>
@@ -297,7 +442,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/zh/post/computer-science/big-data/hadoop/" class="">hadoop</a>
+    <a href="/zh/post/computer-science/big-data/hadoop/" class="active">hadoop</a>
   
 
         </li>
@@ -1222,7 +1367,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Categories</h3>
+  <h3>hadoop</h3>
 
   <label for="toc-control">
     
@@ -1235,29 +1380,9 @@ https://github.com/alex-shpak/hugo-book
   
   <aside class="hidden clearfix">
     
-  <nav>
-  <ul>
   
-    
-    <li class="book-section-flat">
-      <strong>Categories</strong>
-      <ul>
-      
-      </ul>
-    </li>
-    
-  
-    
-    <li class="book-section-flat">
-      <strong>Tags</strong>
-      <ul>
-      
-      </ul>
-    </li>
-    
-  
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
+
 
 
   </aside>
@@ -1267,9 +1392,157 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  
-
-  
+  <article class="markdown book-article"><h1 id="hadoop">
+  hadoop
+  <a class="anchor" href="#hadoop">#</a>
+</h1>
+<ul>
+<li>Hadoop生态系统是一个由Apache基金会维护的开源软件集合，用于处理和分析大规模数据集。经过多年发展，Hadoop已从最初的HDFS和MapReduce两个核心组件扩展为一个包含众多工具和框架的完整生态系统</li>
+<li>核心基础组件
+<ul>
+<li><strong>HDFS (Hadoop Distributed File System)</strong>
+<ul>
+<li>Hadoop的分布式文件系统，用于存储超大规模数据集</li>
+<li>采用主从架构：NameNode(主节点)管理元数据，DataNode(从节点)存储实际数据块</li>
+<li>特点：高容错性、高吞吐量、适合部署在廉价硬件上</li>
+</ul>
+</li>
+<li><strong>YARN (Yet Another Resource Negotiator)</strong>
+<ul>
+<li>Hadoop 2.0引入的资源管理和作业调度框架</li>
+<li>包含ResourceManager(集群资源管理)和NodeManager(节点资源监控)</li>
+<li>支持多种计算框架(MapReduce、Spark等)共享集群资源</li>
+</ul>
+</li>
+<li><strong>MapReduce</strong>
+<ul>
+<li>分布式计算框架，采用&quot;分而治之&quot;思想</li>
+<li>包含Map(数据分解)和Reduce(结果汇总)两个阶段</li>
+<li>适合处理大规模离线批处理任务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据存储组件
+<ul>
+<li><strong>HBase</strong>
+<ul>
+<li>分布式列式NoSQL数据库，基于Google BigTable设计</li>
+<li>构建在HDFS之上，提供实时读写能力</li>
+<li>适合存储海量结构化数据</li>
+</ul>
+</li>
+<li><strong>Hive</strong>
+<ul>
+<li>数据仓库工具，提供类SQL查询语言(HiveQL)</li>
+<li>将SQL转换为MapReduce/Tez/Spark作业执行</li>
+<li>适合数据汇总、即席查询和分析</li>
+</ul>
+</li>
+<li><strong>Pig</strong>
+<ul>
+<li>高级数据流语言(Pig Latin)和执行框架</li>
+<li>简化MapReduce编程，适合ETL流程</li>
+<li>支持结构化/半结构化数据处理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据采集与传输组件
+<ul>
+<li><strong>Sqoop</strong>
+<ul>
+<li>关系型数据库与Hadoop间数据传输工具</li>
+<li>支持从MySQL、Oracle等导入数据到HDFS/Hive/HBase</li>
+<li>也支持将Hadoop数据导出到关系数据库</li>
+</ul>
+</li>
+<li><strong>Flume</strong>
+<ul>
+<li>分布式日志收集系统</li>
+<li>适合采集、聚合和移动大量日志数据到HDFS</li>
+<li>包含Source(数据源)、Channel(传输通道)和Sink(目的地)三个组件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>协调与管理组件
+<ul>
+<li><strong>Zookeeper</strong>
+<ul>
+<li>分布式协调服务</li>
+<li>提供统一命名服务、配置管理、集群同步等</li>
+<li>解决分布式环境下的数据一致性问题</li>
+</ul>
+</li>
+<li><strong>Oozie</strong>
+<ul>
+<li>工作流调度系统</li>
+<li>用于编排Hadoop作业(MapReduce、Pig、Hive等)</li>
+<li>支持定时和依赖触发</li>
+</ul>
+</li>
+<li><strong>Ambari</strong>
+<ul>
+<li>Hadoop集群管理工具</li>
+<li>提供Web界面监控、配置和管理Hadoop集群</li>
+<li>支持大多数Hadoop组件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>高级计算框架
+<ul>
+<li><strong>Spark</strong>
+<ul>
+<li>内存计算框架，比MapReduce快10-100倍</li>
+<li>支持批处理、流处理、机器学习和图计算</li>
+<li>可与HDFS、HBase等集成</li>
+</ul>
+</li>
+<li><strong>Flink</strong>
+<ul>
+<li>流处理框架，支持事件时间和精确一次处理</li>
+<li>适合实时数据分析场景</li>
+<li>与Hadoop生态系统兼容</li>
+</ul>
+</li>
+<li><strong>Mahout</strong>
+<ul>
+<li>机器学习算法库</li>
+<li>提供聚类、分类、推荐等算法实现</li>
+<li>可扩展至大规模数据集</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他重要组件
+<ul>
+<li><strong>Kafka</strong>
+<ul>
+<li>分布式消息队列系统</li>
+<li>高吞吐量、低延迟</li>
+<li>常用于实时数据管道</li>
+</ul>
+</li>
+<li><strong>Tez</strong>
+<ul>
+<li>优化后的MapReduce执行引擎</li>
+<li>减少中间结果写入磁盘，提高性能</li>
+<li>被Hive、Pig等采用</li>
+</ul>
+</li>
+<li><strong>Avro</strong>
+<ul>
+<li>数据序列化系统</li>
+<li>提供紧凑的二进制数据格式</li>
+<li>支持RPC通信</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</article>
  
       
 
@@ -1277,6 +1550,12 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex flex-wrap justify-between">
 
+
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/774fdfd757fcdfd0c9f82bac7f1383065f7efadf" title='最后修改者 penruins | 四月 3, 2025' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="" />
+      <span>四月 3, 2025</span>
+    </a>
+  </div>
 
 
 
@@ -1294,6 +1573,10 @@ https://github.com/alex-shpak/hugo-book
 
       
   
+  <div class="book-comments">
+
+</div>
+  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
@@ -1303,29 +1586,9 @@ https://github.com/alex-shpak/hugo-book
     <aside class="book-toc">
       <div class="book-toc-content">
         
-  <nav>
-  <ul>
   
-    
-    <li class="book-section-flat">
-      <strong>Categories</strong>
-      <ul>
-      
-      </ul>
-    </li>
-    
-  
-    
-    <li class="book-section-flat">
-      <strong>Tags</strong>
-      <ul>
-      
-      </ul>
-    </li>
-    
-  
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
+
 
  
       </div>
