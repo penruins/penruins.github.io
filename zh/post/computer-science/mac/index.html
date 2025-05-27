@@ -97,6 +97,19 @@ Homebrew 安装 postgresql
 docs
 
 
+  git
+  #
+
+
+  lazygit
+  #
+
+
+jesseduffield/lazygit
+zen·工作环境搭建之git篇之Lazygit
+LazyGit 使用教程：简化 Git 操作的终端工具
+
+
   yt-dlp
   #
 
@@ -123,6 +136,27 @@ Mac下最好的视频播放器
 IINA
 
 
+
+
+  orbstack
+  #
+
+
+orbstack
+
+
+  reference
+  #
+
+
+如何评价Orbstack（在Mac上低开销地运行容器和Linux）？
+
+
+  登录虚拟机
+  #
+
+
+orb -m ubuntu -u xiangliu
 
 
   disk
@@ -175,18 +209,18 @@ altente
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/zh/post/computer-science/mac/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="mac">
-  <meta property="og:description" content="mac # icloud # 文件APP不同步-iCloud云盘延迟同步解决方法 killall bird killall cloudd brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf 窗口管理 # AltTab # 官网 相比起系统自带的 command &#43; tab 它提供相同应用的窗口切换（例如浏览器打开了多个窗口，系统自带的是不能指定某一个窗口进行切换的） 可以设置UI的样式，用列表的方式来展示窗口，文字设置的小一点 Yabai # 用Mac不用它，你的Mac白买了 —— 平铺式窗口管理器yabai ffmpeg # 安装 brew install ffmpeg postgresql # Homebrew 安装 postgresql yazi # docs yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx transmit 文件传输工具 Raycast # 最强macOS生产力软件：Raycast AeroSpace # 我用AeroSpace替代了yabai&#43;skhd battery # Powerflow：轻巧好用的 macOS 电源与充电状态监控神器 vladkens/macmon altente mac 上抓取应用的https的包 # 在Mac上抓取应用的HTTPS流量，你需要使用网络分析工具，如Wireshark、Charles Proxy或MITMproxy。由于HTTPS加密了数据传输，直接抓包无法查看具体内容，因此通常需要设置一个代理服务器来进行中间人攻击（Man-in-the-Middle, MITM）来解密和检查HTTPS流量。">
+  <meta property="og:description" content="mac # icloud # 文件APP不同步-iCloud云盘延迟同步解决方法 killall bird killall cloudd brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf 窗口管理 # AltTab # 官网 相比起系统自带的 command &#43; tab 它提供相同应用的窗口切换（例如浏览器打开了多个窗口，系统自带的是不能指定某一个窗口进行切换的） 可以设置UI的样式，用列表的方式来展示窗口，文字设置的小一点 Yabai # 用Mac不用它，你的Mac白买了 —— 平铺式窗口管理器yabai ffmpeg # 安装 brew install ffmpeg postgresql # Homebrew 安装 postgresql yazi # docs git # lazygit # jesseduffield/lazygit zen·工作环境搭建之git篇之Lazygit LazyGit 使用教程：简化 Git 操作的终端工具 yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA orbstack # orbstack reference # 如何评价Orbstack（在Mac上低开销地运行容器和Linux）？ 登录虚拟机 # orb -m ubuntu -u xiangliu disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx transmit 文件传输工具 Raycast # 最强macOS生产力软件：Raycast AeroSpace # 我用AeroSpace替代了yabai&#43;skhd battery # Powerflow：轻巧好用的 macOS 电源与充电状态监控神器 vladkens/macmon altente mac 上抓取应用的https的包 # 在Mac上抓取应用的HTTPS流量，你需要使用网络分析工具，如Wireshark、Charles Proxy或MITMproxy。由于HTTPS加密了数据传输，直接抓包无法查看具体内容，因此通常需要设置一个代理服务器来进行中间人攻击（Man-in-the-Middle, MITM）来解密和检查HTTPS流量。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-04-05T00:50:07+08:00">
+    <meta property="article:modified_time" content="2025-05-27T21:00:17+08:00">
 <title>mac | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/zh/post/computer-science/mac/">
-<link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
+<link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.2934fcfdfee6a0d611e4e780fad7d4ea0b7ef5bf4eb67df869dd70c93342a8cf.js" ></script>
+  <script defer src="/zh.search.min.24a1741e4966b0105a43fee33ac3017de44256597a6d1bbfefe56ee500a89aa3.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1149,6 +1183,45 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/zh/post/computer-science/crawler/" class="">crawler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/jenkins/" class="">Jenkins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/zh/post/computer-science/nexus/" class="">Nexus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/zh/post/computer-science/python/" class="">Python</a>
   
 
@@ -1439,8 +1512,19 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#ffmpeg">ffmpeg</a></li>
     <li><a href="#postgresql">postgresql</a></li>
     <li><a href="#yazi">yazi</a></li>
+    <li><a href="#git">git</a>
+      <ul>
+        <li><a href="#lazygit">lazygit</a></li>
+      </ul>
+    </li>
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#player">player</a></li>
+    <li><a href="#orbstack">orbstack</a></li>
+    <li><a href="#reference">reference</a>
+      <ul>
+        <li><a href="#登录虚拟机">登录虚拟机</a></li>
+      </ul>
+    </li>
     <li><a href="#disk">disk</a></li>
     <li><a href="#raycast">Raycast</a></li>
     <li><a href="#aerospace">AeroSpace</a></li>
@@ -1448,6 +1532,11 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#mac-上抓取应用的https的包">mac 上抓取应用的https的包</a>
       <ul>
         <li><a href="#charles">charles</a></li>
+      </ul>
+    </li>
+    <li><a href="#tools">tools</a>
+      <ul>
+        <li><a href="#neofetch">neofetch</a></li>
       </ul>
     </li>
     <li><a href="#mess">mess</a></li>
@@ -1557,6 +1646,19 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><a href="https://yazi-rs.github.io/docs/installation/">docs</a></li>
 </ul>
+<h2 id="git">
+  git
+  <a class="anchor" href="#git">#</a>
+</h2>
+<h3 id="lazygit">
+  lazygit
+  <a class="anchor" href="#lazygit">#</a>
+</h3>
+<ul>
+<li><a href="https://github.com/jesseduffield/lazygit">jesseduffield/lazygit</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/586776869">zen·工作环境搭建之git篇之Lazygit</a></li>
+<li><a href="https://awesometop.cn/posts/2e318106490149a49c02268da48dd370">LazyGit 使用教程：简化 Git 操作的终端工具</a></li>
+</ul>
 <h2 id="yt-dlp">
   yt-dlp
   <a class="anchor" href="#yt-dlp">#</a>
@@ -1584,6 +1686,27 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
 <li><a href="https://iina.io">IINA</a></li>
 </ul>
 </li>
+</ul>
+<h2 id="orbstack">
+  orbstack
+  <a class="anchor" href="#orbstack">#</a>
+</h2>
+<ul>
+<li><a href="https://orbstack.dev/">orbstack</a></li>
+</ul>
+<h2 id="reference">
+  reference
+  <a class="anchor" href="#reference">#</a>
+</h2>
+<ul>
+<li><a href="https://www.zhihu.com/question/589301822">如何评价Orbstack（在Mac上低开销地运行容器和Linux）？</a></li>
+</ul>
+<h3 id="登录虚拟机">
+  登录虚拟机
+  <a class="anchor" href="#%e7%99%bb%e5%bd%95%e8%99%9a%e6%8b%9f%e6%9c%ba">#</a>
+</h3>
+<ul>
+<li><code>orb -m ubuntu -u xiangliu</code></li>
 </ul>
 <h2 id="disk">
   disk
@@ -1692,6 +1815,18 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
 <li><a href="https://stackoverflow.com/questions/52862256/charles-proxy-for-mobile-apps-that-use-ssl-pinning">Charles Proxy for Mobile apps that use SSL Pinning</a></li>
 <li><a href="https://www.appknox.com/blog/bypass-ssl-pinning-in-ios-app">8 Ways to Bypass SSL Pinning in iOS</a></li>
 </ul>
+<h2 id="tools">
+  tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<h3 id="neofetch">
+  neofetch
+  <a class="anchor" href="#neofetch">#</a>
+</h3>
+<ul>
+<li>mac 安装 <code>brew install neofetch</code></li>
+<li>ubuntu 安装 <code>sudo apt install neofetch</code></li>
+</ul>
 <h2 id="mess">
   mess
   <a class="anchor" href="#mess">#</a>
@@ -1730,9 +1865,9 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/debf9f2c9e3a789a7adfa7e5fe7cd96b78c97bfe" title='最后修改者 penruins | 四月 4, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/6fa7693a54dd97bc284e1471f4b833d3f3045911" title='最后修改者 liuxiang | 五月 27, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
-      <span>四月 4, 2025</span>
+      <span>五月 27, 2025</span>
     </a>
   </div>
 
@@ -1781,8 +1916,19 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
     <li><a href="#ffmpeg">ffmpeg</a></li>
     <li><a href="#postgresql">postgresql</a></li>
     <li><a href="#yazi">yazi</a></li>
+    <li><a href="#git">git</a>
+      <ul>
+        <li><a href="#lazygit">lazygit</a></li>
+      </ul>
+    </li>
     <li><a href="#yt-dlp">yt-dlp</a></li>
     <li><a href="#player">player</a></li>
+    <li><a href="#orbstack">orbstack</a></li>
+    <li><a href="#reference">reference</a>
+      <ul>
+        <li><a href="#登录虚拟机">登录虚拟机</a></li>
+      </ul>
+    </li>
     <li><a href="#disk">disk</a></li>
     <li><a href="#raycast">Raycast</a></li>
     <li><a href="#aerospace">AeroSpace</a></li>
@@ -1790,6 +1936,11 @@ yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://
     <li><a href="#mac-上抓取应用的https的包">mac 上抓取应用的https的包</a>
       <ul>
         <li><a href="#charles">charles</a></li>
+      </ul>
+    </li>
+    <li><a href="#tools">tools</a>
+      <ul>
+        <li><a href="#neofetch">neofetch</a></li>
       </ul>
     </li>
     <li><a href="#mess">mess</a></li>
