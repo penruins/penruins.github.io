@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Kafka突然宕机了消息会不会丢失
+  #
+
+Kafka 在突然宕机时是否会导致消息丢失，取决于其副本机制、生产者配置、刷盘策略等多个因素。以下是具体分析：
+
+
+  一、可能导致消息丢失的场景
+  #
+
+
+
+生产者未启用高可靠性配置
+
+若生产者设置 acks=0 或 acks=1，且消息未完全同步到副本时 Leader 宕机，消息会丢失：
+
+acks=0：生产者不等待 Broker 确认，直接发送下一条消息，宕机时丢失风险最高111。
+acks=1：仅 Leader 写入本地日志即返回成功，若 Follower 未同步且 Leader 宕机，消息丢失1118。
+
+
+
+
+
+Broker 刷盘策略为异步
+
+Kafka 默认先将消息写入操作系统的 PageCache，异步刷盘。若服务器宕机，PageCache 中未刷盘的消息会丢失1118。
+
+
+
+副本同步不足
+
+若 min.insync.replicas=1（默认），且仅 Leader 持有消息时宕机，即使设置 acks=all 也可能丢失消息1823。
+
+
+
+
+
+  二、避免消息丢失的配置
+  #
+
+
+
+生产者端
+
+设置 acks=all：确保所有 ISR（同步副本）均写入消息后才返回成功1118。
+启用幂等性（enable.idempotence=true）和重试机制（retries&gt;0），防止重复发送和网络抖动导致丢失143。
+
+
+
+Broker 端
+
+提高 min.insync.replicas（如设置为 2），确保至少两个副本同步成功1823。
+同步刷盘（log.flush.interval.messages=1），但会显著降低性能，仅适用于金融等高可靠性场景1118。
+
+
+
+Topic 配置
+
+设置 replication.factor≥3，多副本冗余存储，即使一台 Broker 宕机，其他副本仍可提供服务23。
+
+
+
+
+
+  三、Kafka 的可靠性保障机制
+  #
+
+
+ISR 机制
+
+只有与 Leader 同步的副本（ISR）才能参与选举，避免数据不一致1823。
+
+
+自动故障恢复
+
+Leader 宕机后，Controller 会从 ISR 中选举新 Leader，继续提供服务23。
+
+
+持久化设计
+
+消息以追加日志（append-only）形式写入磁盘，即使消费者已消费，数据仍保留（可配置保留时间）。
+
+
+
+
+
+  四、总结
+  #
+
+
+可能丢失：若配置为 acks=0/1、异步刷盘或副本不足时，宕机会导致消息丢失。
+不会丢失：若配置 acks=all、同步刷盘且 min.insync.replicas≥2，即使单台 Broker 宕机，消息仍可从其他副本恢复111823。
+
+建议：根据业务重要性权衡性能与可靠性，金融级场景建议同步刷盘 &#43; 多副本 &#43; 事务支持（transactional.id）43。">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/llm/2025-03-30-9-kafka%E7%AA%81%E7%84%B6%E5%AE%95%E6%9C%BA%E4%BA%86%E6%B6%88%E6%81%AF%E4%BC%9A%E4%B8%8D%E4%BC%9A%E4%B8%A2%E5%A4%B1/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="Kafka突然宕机了消息会不会丢失">
+  <meta property="og:description" content="Kafka突然宕机了消息会不会丢失 # Kafka 在突然宕机时是否会导致消息丢失，取决于其副本机制、生产者配置、刷盘策略等多个因素。以下是具体分析：
+一、可能导致消息丢失的场景 # 生产者未启用高可靠性配置
+若生产者设置 acks=0 或 acks=1，且消息未完全同步到副本时 Leader 宕机，消息会丢失： acks=0：生产者不等待 Broker 确认，直接发送下一条消息，宕机时丢失风险最高111。 acks=1：仅 Leader 写入本地日志即返回成功，若 Follower 未同步且 Leader 宕机，消息丢失1118。 Broker 刷盘策略为异步
+Kafka 默认先将消息写入操作系统的 PageCache，异步刷盘。若服务器宕机，PageCache 中未刷盘的消息会丢失1118。 副本同步不足
+若 min.insync.replicas=1（默认），且仅 Leader 持有消息时宕机，即使设置 acks=all 也可能丢失消息1823。 二、避免消息丢失的配置 # 生产者端
+设置 acks=all：确保所有 ISR（同步副本）均写入消息后才返回成功1118。 启用幂等性（enable.idempotence=true）和重试机制（retries&gt;0），防止重复发送和网络抖动导致丢失143。 Broker 端
+提高 min.insync.replicas（如设置为 2），确保至少两个副本同步成功1823。 同步刷盘（log.flush.interval.messages=1），但会显著降低性能，仅适用于金融等高可靠性场景1118。 Topic 配置
+设置 replication.factor≥3，多副本冗余存储，即使一台 Broker 宕机，其他副本仍可提供服务23。 三、Kafka 的可靠性保障机制 # ISR 机制 只有与 Leader 同步的副本（ISR）才能参与选举，避免数据不一致1823。 自动故障恢复 Leader 宕机后，Controller 会从 ISR 中选举新 Leader，继续提供服务23。 持久化设计 消息以追加日志（append-only）形式写入磁盘，即使消费者已消费，数据仍保留（可配置保留时间）。 四、总结 # 可能丢失：若配置为 acks=0/1、异步刷盘或副本不足时，宕机会导致消息丢失。 不会丢失：若配置 acks=all、同步刷盘且 min.insync.replicas≥2，即使单台 Broker 宕机，消息仍可从其他副本恢复111823。 建议：根据业务重要性权衡性能与可靠性，金融级场景建议同步刷盘 &#43; 多副本 &#43; 事务支持（transactional.id）43。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+<title>Kafka突然宕机了消息会不会丢失 | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/post/computer-science/llm/2025-03-30-9-kafka%E7%AA%81%E7%84%B6%E5%AE%95%E6%9C%BA%E4%BA%86%E6%B6%88%E6%81%AF%E4%BC%9A%E4%B8%8D%E4%BC%9A%E4%B8%A2%E5%A4%B1/">
+<link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.70df96b2cbc79a78ed44f27386fedc5427f7c614e1a56086e76f1abafcc9d892.js" ></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1f044d5fe299e2a50ad480135136465e" class="toggle"  />
+    <label for="section-1f044d5fe299e2a50ad480135136465e" class="flex justify-between">
+      <a role="button" class="">Life</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/movies-log/" class="">观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/bilibili/" class="">bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/cycling/" class="">cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/hiking/" class="">hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life-recommend/" class="">life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/learning-others-log/" class="">other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/podcast/" class="">podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/politics/" class="">politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/goal/" class="">goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/coffee/" class="">coffee</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Computer Science</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7ab6eb16d87ee717ab25cc84269ec7f9" class="toggle"  />
+    <label for="section-7ab6eb16d87ee717ab25cc84269ec7f9" class="flex justify-between">
+      <a role="button" class="">Big Data</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hadoop/" class="">hadoop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hbase/" class="">hbase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hive/" class="">hive</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-859fd182f99952efd6ae86320529c63d" class="toggle"  />
+    <label for="section-859fd182f99952efd6ae86320529c63d" class="flex justify-between">
+      <a role="button" class="">Database</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/database/" class="">database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/druid/" class="">druid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/elasticsearch/" class="">elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mycat/" class="">mycat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mysql/" class="">mysql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/postgresql/" class="">postgresql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/shardingsphere/" class="">shardingsphere</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/sql/" class="">SQL</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mongodb/" class="">Penruins</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-08231b363489d85c9f808700d743ce65" class="toggle"  />
+    <label for="section-08231b363489d85c9f808700d743ce65" class="flex justify-between">
+      <a role="button" class="">Distributed System</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-92803a0b927e7b223b49867047da77ad" class="toggle"  />
+    <label for="section-92803a0b927e7b223b49867047da77ad" class="flex justify-between">
+      <a role="button" class="">Message Queue</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/kafka/" class="">kafka</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/message-queue/" class="">Message Queue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">rabbitmq</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/distributed-system/" class="">distributed system</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/sentinel/" class="">Sentinel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud/" class="">Spring Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">Spring Cloud Alibaba</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-ca0677f03580f20779b09f474723b113" class="toggle"  />
+    <label for="section-ca0677f03580f20779b09f474723b113" class="flex justify-between">
+      <a role="button" class="">Java</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-basic/" class="">java basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java/" class="">java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/concurrent/" class="">concurrent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jvm/" class="">jvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis/" class="">Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/" class="">spring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/springboot/" class="">spring boot</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-38c4d1edc00af801a5cead99c216a484" class="toggle"  />
+    <label for="section-38c4d1edc00af801a5cead99c216a484" class="flex justify-between">
+      <a role="button" class="">Monitor</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/monitor/prometheus/" class="">prometheus</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-580097d540eb28e9fcf7fd7cfd7cf3f5" class="toggle"  />
+    <label for="section-580097d540eb28e9fcf7fd7cfd7cf3f5" class="flex justify-between">
+      <a role="button" class="">Tools</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/tools/idea/" class="">IDEA</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-recommend/" class="">推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-learning-log/" class="">学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/echarts/" class="">echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/github/" class="">github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ios/" class="">ios</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/job/" class="">job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/linux/" class="">linux</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/mac/" class="">mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/raspberrypi/" class="">raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/redis/" class="">redis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/security/" class="">security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/vue/" class="">vue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/" class="">Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/cloud/" class="">Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/artificial-intelligence/" class="">Artificial Intelligence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/crawler/" class="">crawler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/jenkins/" class="">Jenkins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/nexus/" class="">Nexus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/python/" class="">Python</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/vim/" class="">vim</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">系统设计</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Others</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/about-me/" class="">about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/english-learning/" class="">English Learning</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Books</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3045b94b25ef0b17b04a92aba83672b7" class="toggle"  />
+    <label for="section-3045b94b25ef0b17b04a92aba83672b7" class="flex justify-between">
+      <a role="button" class="">Computer Science</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/blog/2025/2025-03-31-shardingsphere-prometheus-%E9%85%8D%E7%BD%AE/" class="">2025 03 31 Shardingsphere Prometheus 配置</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Kafka突然宕机了消息会不会丢失</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一可能导致消息丢失的场景">一、<strong>可能导致消息丢失的场景</strong></a></li>
+        <li><a href="#二避免消息丢失的配置">二、<strong>避免消息丢失的配置</strong></a></li>
+        <li><a href="#三kafka-的可靠性保障机制">三、<strong>Kafka 的可靠性保障机制</strong></a></li>
+        <li><a href="#四总结">四、<strong>总结</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="kafka突然宕机了消息会不会丢失">
+  Kafka突然宕机了消息会不会丢失
+  <a class="anchor" href="#kafka%e7%aa%81%e7%84%b6%e5%ae%95%e6%9c%ba%e4%ba%86%e6%b6%88%e6%81%af%e4%bc%9a%e4%b8%8d%e4%bc%9a%e4%b8%a2%e5%a4%b1">#</a>
+</h1>
+<p>Kafka 在突然宕机时是否会导致消息丢失，取决于其<strong>副本机制、生产者配置、刷盘策略</strong>等多个因素。以下是具体分析：</p>
+<hr>
+<h3 id="一可能导致消息丢失的场景">
+  一、<strong>可能导致消息丢失的场景</strong>
+  <a class="anchor" href="#%e4%b8%80%e5%8f%af%e8%83%bd%e5%af%bc%e8%87%b4%e6%b6%88%e6%81%af%e4%b8%a2%e5%a4%b1%e7%9a%84%e5%9c%ba%e6%99%af">#</a>
+</h3>
+<ol>
+<li>
+<p><strong>生产者未启用高可靠性配置</strong></p>
+<ul>
+<li>若生产者设置 <code>acks=0</code> 或 <code>acks=1</code>，且消息未完全同步到副本时 Leader 宕机，消息会丢失：
+<ul>
+<li><code>acks=0</code>：生产者不等待 Broker 确认，直接发送下一条消息，宕机时丢失风险最高<a href="@ref">1</a><a href="@ref">11</a>。</li>
+<li><code>acks=1</code>：仅 Leader 写入本地日志即返回成功，若 Follower 未同步且 Leader 宕机，消息丢失<a href="@ref">11</a><a href="@ref">18</a>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Broker 刷盘策略为异步</strong></p>
+<ul>
+<li>Kafka 默认先将消息写入操作系统的 <strong>PageCache</strong>，异步刷盘。若服务器宕机，PageCache 中未刷盘的消息会丢失<a href="@ref">11</a><a href="@ref">18</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>副本同步不足</strong></p>
+<ul>
+<li>若 <code>min.insync.replicas=1</code>（默认），且仅 Leader 持有消息时宕机，即使设置 <code>acks=all</code> 也可能丢失消息<a href="@ref">18</a><a href="@ref">23</a>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="二避免消息丢失的配置">
+  二、<strong>避免消息丢失的配置</strong>
+  <a class="anchor" href="#%e4%ba%8c%e9%81%bf%e5%85%8d%e6%b6%88%e6%81%af%e4%b8%a2%e5%a4%b1%e7%9a%84%e9%85%8d%e7%bd%ae">#</a>
+</h3>
+<ol>
+<li>
+<p><strong>生产者端</strong></p>
+<ul>
+<li>设置 <code>acks=all</code>：确保所有 ISR（同步副本）均写入消息后才返回成功<a href="@ref">11</a><a href="@ref">18</a>。</li>
+<li>启用幂等性（<code>enable.idempotence=true</code>）和重试机制（<code>retries&gt;0</code>），防止重复发送和网络抖动导致丢失<a href="@ref">1</a><a href="@ref">43</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>Broker 端</strong></p>
+<ul>
+<li>提高 <code>min.insync.replicas</code>（如设置为 2），确保至少两个副本同步成功<a href="@ref">18</a><a href="@ref">23</a>。</li>
+<li>同步刷盘（<code>log.flush.interval.messages=1</code>），但会显著降低性能，仅适用于金融等高可靠性场景<a href="@ref">11</a><a href="@ref">18</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>Topic 配置</strong></p>
+<ul>
+<li>设置 <code>replication.factor≥3</code>，多副本冗余存储，即使一台 Broker 宕机，其他副本仍可提供服务<a href="@ref">23</a>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="三kafka-的可靠性保障机制">
+  三、<strong>Kafka 的可靠性保障机制</strong>
+  <a class="anchor" href="#%e4%b8%89kafka-%e7%9a%84%e5%8f%af%e9%9d%a0%e6%80%a7%e4%bf%9d%e9%9a%9c%e6%9c%ba%e5%88%b6">#</a>
+</h3>
+<ol>
+<li><strong>ISR 机制</strong>
+<ul>
+<li>只有与 Leader 同步的副本（ISR）才能参与选举，避免数据不一致<a href="@ref">18</a><a href="@ref">23</a>。</li>
+</ul>
+</li>
+<li><strong>自动故障恢复</strong>
+<ul>
+<li>Leader 宕机后，Controller 会从 ISR 中选举新 Leader，继续提供服务<a href="@ref">23</a>。</li>
+</ul>
+</li>
+<li><strong>持久化设计</strong>
+<ul>
+<li>消息以追加日志（append-only）形式写入磁盘，即使消费者已消费，数据仍保留（可配置保留时间）。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="四总结">
+  四、<strong>总结</strong>
+  <a class="anchor" href="#%e5%9b%9b%e6%80%bb%e7%bb%93">#</a>
+</h3>
+<ul>
+<li><strong>可能丢失</strong>：若配置为 <code>acks=0/1</code>、异步刷盘或副本不足时，宕机会导致消息丢失。</li>
+<li><strong>不会丢失</strong>：若配置 <code>acks=all</code>、同步刷盘且 <code>min.insync.replicas≥2</code>，即使单台 Broker 宕机，消息仍可从其他副本恢复<a href="@ref">11</a><a href="@ref">18</a><a href="@ref">23</a>。</li>
+</ul>
+<p><strong>建议</strong>：根据业务重要性权衡性能与可靠性，金融级场景建议同步刷盘 + 多副本 + 事务支持（<code>transactional.id</code>）<a href="@ref">43</a>。</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一可能导致消息丢失的场景">一、<strong>可能导致消息丢失的场景</strong></a></li>
+        <li><a href="#二避免消息丢失的配置">二、<strong>避免消息丢失的配置</strong></a></li>
+        <li><a href="#三kafka-的可靠性保障机制">三、<strong>Kafka 的可靠性保障机制</strong></a></li>
+        <li><a href="#四总结">四、<strong>总结</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
