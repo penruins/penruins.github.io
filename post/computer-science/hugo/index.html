@@ -4,30 +4,81 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Nexus
+  在 Hugo 中配置 TOC 从一级标题开始显示
+  #
+
+要在 Hugo 中让侧边栏的目录(TOC)从一级标题(h1)开始显示，你可以通过以下几种方法实现：
+
+  方法一：修改 config.toml
+  #
+
+在你的 Hugo 配置文件(通常是 config.toml 或 config.yaml)中添加或修改以下设置：
+[markup]
+  [markup.tableOfContents]
+    startLevel = 1
+    endLevel = 6
+或者对于 YAML 格式：
+markup:
+  tableOfContents:
+    startLevel: 1
+    endLevel: 6
+
+  方法二：模板中指定
+  #
+
+如果你在模板中调用 TOC，可以这样指定：
+{{ .TableOfContents }}
+默认情况下，Hugo 会从二级标题(h2)开始显示 TOC。要修改这个行为，你需要使用方法一中的配置。
+
+  方法三：使用自定义 CSS
+  #
+
+如果配置修改后仍然不符合预期，你可以添加自定义 CSS 来隐藏不需要的层级：
+/* 隐藏除一级标题外的其他层级 */
+#TableOfContents ul ul {
+    display: none;
+}
+
+  方法四：使用 Goldmark 配置
+  #
+
+如果你使用的是 Goldmark 渲染器(默认)，确保配置正确：
+[markup.goldmark]
+  [markup.goldmark.parser]
+    [markup.goldmark.parser.attribute]
+      block = true
+      title = true
+
+  注意事项
   #
 
 
-docker sonatype/nexus3
+确保你的内容中确实有一级标题(# 或 &lt;h1&gt;)
+某些主题可能会覆盖默认的 TOC 行为，你可能需要检查主题文档
+清除缓存(hugo --gc)有时能解决显示问题
 
-install docker run -d -p 8081:8081 --name nexus sonatype/nexus3
-
-
-">
+如果你使用的是特定主题，可能需要查看该主题的文档，因为有些主题会提供自己的 TOC 配置选项。">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/nexus/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/hugo/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Nexus">
-  <meta property="og:description" content="Nexus # docker sonatype/nexus3 install docker run -d -p 8081:8081 --name nexus sonatype/nexus3">
+  <meta property="og:title" content="Penruins">
+  <meta property="og:description" content="在 Hugo 中配置 TOC 从一级标题开始显示 # 要在 Hugo 中让侧边栏的目录(TOC)从一级标题(h1)开始显示，你可以通过以下几种方法实现：
+方法一：修改 config.toml # 在你的 Hugo 配置文件(通常是 config.toml 或 config.yaml)中添加或修改以下设置：
+[markup] [markup.tableOfContents] startLevel = 1 endLevel = 6 或者对于 YAML 格式：
+markup: tableOfContents: startLevel: 1 endLevel: 6 方法二：模板中指定 # 如果你在模板中调用 TOC，可以这样指定：
+{{ .TableOfContents }} 默认情况下，Hugo 会从二级标题(h2)开始显示 TOC。要修改这个行为，你需要使用方法一中的配置。
+方法三：使用自定义 CSS # 如果配置修改后仍然不符合预期，你可以添加自定义 CSS 来隐藏不需要的层级：
+/* 隐藏除一级标题外的其他层级 */ #TableOfContents ul ul { display: none; } 方法四：使用 Goldmark 配置 # 如果你使用的是 Goldmark 渲染器(默认)，确保配置正确：
+[markup.goldmark] [markup.goldmark.parser] [markup.goldmark.parser.attribute] block = true title = true 注意事项 # 确保你的内容中确实有一级标题(# 或 &lt;h1&gt;) 某些主题可能会覆盖默认的 TOC 行为，你可能需要检查主题文档 清除缓存(hugo --gc)有时能解决显示问题 如果你使用的是特定主题，可能需要查看该主题的文档，因为有些主题会提供自己的 TOC 配置选项。">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
     <meta property="article:modified_time" content="2025-08-01T14:50:57+08:00">
-<title>Nexus | Penruins</title>
+<title>Hugo | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/nexus/">
+<link rel="canonical" href="/post/computer-science/hugo/">
 <link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.30edc79e5d2af136d81412fa1ba36870ad8c26d33ad1fe80f1b9a268b2251883.js" ></script>
@@ -965,7 +1016,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/hugo/" class="">Hugo</a>
+    <a href="/post/computer-science/hugo/" class="active">Hugo</a>
   
 
         </li>
@@ -1030,7 +1081,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/nexus/" class="active">Nexus</a>
+    <a href="/post/computer-science/nexus/" class="">Nexus</a>
   
 
         </li>
@@ -1304,31 +1355,98 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Nexus</h3>
+  <h3>Hugo</h3>
 
   <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
 
 
   
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#在-hugo-中配置-toc-从一级标题开始显示">在 Hugo 中配置 TOC 从一级标题开始显示</a>
+      <ul>
+        <li><a href="#方法一修改-configtoml">方法一：修改 config.toml</a></li>
+        <li><a href="#方法二模板中指定">方法二：模板中指定</a></li>
+        <li><a href="#方法三使用自定义-css">方法三：使用自定义 CSS</a></li>
+        <li><a href="#方法四使用-goldmark-配置">方法四：使用 Goldmark 配置</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
  
       </header>
 
       
       
-  <article class="markdown book-article"><h1 id="nexus">
-  Nexus
-  <a class="anchor" href="#nexus">#</a>
+  <article class="markdown book-article"><h1 id="在-hugo-中配置-toc-从一级标题开始显示">
+  在 Hugo 中配置 TOC 从一级标题开始显示
+  <a class="anchor" href="#%e5%9c%a8-hugo-%e4%b8%ad%e9%85%8d%e7%bd%ae-toc-%e4%bb%8e%e4%b8%80%e7%ba%a7%e6%a0%87%e9%a2%98%e5%bc%80%e5%a7%8b%e6%98%be%e7%a4%ba">#</a>
 </h1>
-<ul>
-<li><a href="https://hub.docker.com/r/sonatype/nexus3/tags">docker sonatype/nexus3</a>
-<ul>
-<li>install <code>docker run -d -p 8081:8081 --name nexus sonatype/nexus3</code></li>
-</ul>
-</li>
-</ul>
+<p>要在 Hugo 中让侧边栏的目录(TOC)从一级标题(<code>h1</code>)开始显示，你可以通过以下几种方法实现：</p>
+<h2 id="方法一修改-configtoml">
+  方法一：修改 config.toml
+  <a class="anchor" href="#%e6%96%b9%e6%b3%95%e4%b8%80%e4%bf%ae%e6%94%b9-configtoml">#</a>
+</h2>
+<p>在你的 Hugo 配置文件(通常是 <code>config.toml</code> 或 <code>config.yaml</code>)中添加或修改以下设置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">markup</span>]
+</span></span><span style="display:flex;"><span>  [<span style="color:#a6e22e">markup</span>.<span style="color:#a6e22e">tableOfContents</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">startLevel</span> = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">endLevel</span> = <span style="color:#ae81ff">6</span>
+</span></span></code></pre></div><p>或者对于 YAML 格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">markup</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tableOfContents</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">startLevel</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">endLevel</span>: <span style="color:#ae81ff">6</span>
+</span></span></code></pre></div><h2 id="方法二模板中指定">
+  方法二：模板中指定
+  <a class="anchor" href="#%e6%96%b9%e6%b3%95%e4%ba%8c%e6%a8%a1%e6%9d%bf%e4%b8%ad%e6%8c%87%e5%ae%9a">#</a>
+</h2>
+<p>如果你在模板中调用 TOC，可以这样指定：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{ .TableOfContents }}
+</span></span></code></pre></div><p>默认情况下，Hugo 会从二级标题(h2)开始显示 TOC。要修改这个行为，你需要使用方法一中的配置。</p>
+<h2 id="方法三使用自定义-css">
+  方法三：使用自定义 CSS
+  <a class="anchor" href="#%e6%96%b9%e6%b3%95%e4%b8%89%e4%bd%bf%e7%94%a8%e8%87%aa%e5%ae%9a%e4%b9%89-css">#</a>
+</h2>
+<p>如果配置修改后仍然不符合预期，你可以添加自定义 CSS 来隐藏不需要的层级：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#75715e">/* 隐藏除一级标题外的其他层级 */</span>
+</span></span><span style="display:flex;"><span>#TableOfContents <span style="color:#f92672">ul</span> <span style="color:#f92672">ul</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">display</span>: <span style="color:#66d9ef">none</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="方法四使用-goldmark-配置">
+  方法四：使用 Goldmark 配置
+  <a class="anchor" href="#%e6%96%b9%e6%b3%95%e5%9b%9b%e4%bd%bf%e7%94%a8-goldmark-%e9%85%8d%e7%bd%ae">#</a>
+</h2>
+<p>如果你使用的是 Goldmark 渲染器(默认)，确保配置正确：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">markup</span>.<span style="color:#a6e22e">goldmark</span>]
+</span></span><span style="display:flex;"><span>  [<span style="color:#a6e22e">markup</span>.<span style="color:#a6e22e">goldmark</span>.<span style="color:#a6e22e">parser</span>]
+</span></span><span style="display:flex;"><span>    [<span style="color:#a6e22e">markup</span>.<span style="color:#a6e22e">goldmark</span>.<span style="color:#a6e22e">parser</span>.<span style="color:#a6e22e">attribute</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">block</span> = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">title</span> = <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><h2 id="注意事项">
+  注意事项
+  <a class="anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a>
+</h2>
+<ol>
+<li>确保你的内容中确实有一级标题(<code>#</code> 或 <code>&lt;h1&gt;</code>)</li>
+<li>某些主题可能会覆盖默认的 TOC 行为，你可能需要检查主题文档</li>
+<li>清除缓存(<code>hugo --gc</code>)有时能解决显示问题</li>
+</ol>
+<p>如果你使用的是特定主题，可能需要查看该主题的文档，因为有些主题会提供自己的 TOC 配置选项。</p>
 </article>
  
       
@@ -1369,6 +1487,29 @@ https://github.com/alex-shpak/hugo-book
       <label for="menu-control" class="hidden book-menu-overlay"></label>
     </div>
 
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#在-hugo-中配置-toc-从一级标题开始显示">在 Hugo 中配置 TOC 从一级标题开始显示</a>
+      <ul>
+        <li><a href="#方法一修改-configtoml">方法一：修改 config.toml</a></li>
+        <li><a href="#方法二模板中指定">方法二：模板中指定</a></li>
+        <li><a href="#方法三使用自定义-css">方法三：使用自定义 CSS</a></li>
+        <li><a href="#方法四使用-goldmark-配置">方法四：使用 Goldmark 配置</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
     
   </main>
 
