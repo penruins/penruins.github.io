@@ -327,7 +327,7 @@ Redis提供了两种运行Lua的方法
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-01T14:34:25+08:00">
+    <meta property="article:modified_time" content="2025-08-01T14:39:10+08:00">
 <title>spring boot | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
@@ -1611,54 +1611,58 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#aop">AOP</a>
+    <li><a href="#spring-boot">spring boot</a>
       <ul>
-        <li><a href="#为什么要使用aop">为什么要使用AOP？</a></li>
-        <li><a href="#aop的术语和流程">AOP的术语和流程</a></li>
-        <li><a href="#aop开发详解">AOP开发详解</a></li>
-        <li><a href="#环绕通知">环绕通知</a></li>
-        <li><a href="#引入">引入</a></li>
-        <li><a href="#通知获取参数">通知获取参数</a></li>
-        <li><a href="#织入">织入</a></li>
-        <li><a href="#多个切面">多个切面</a></li>
-      </ul>
-    </li>
-    <li><a href="#数据库事务">数据库事务</a>
-      <ul>
-        <li><a href="#jdbc的数据库事务">JDBC的数据库事务</a></li>
-        <li><a href="#spring声明式事务的使用">Spring声明式事务的使用</a>
+        <li><a href="#aop">AOP</a>
           <ul>
-            <li><a href="#spring事务管理器">Spring事务管理器</a></li>
+            <li><a href="#为什么要使用aop">为什么要使用AOP？</a></li>
+            <li><a href="#aop的术语和流程">AOP的术语和流程</a></li>
+            <li><a href="#aop开发详解">AOP开发详解</a></li>
+            <li><a href="#环绕通知">环绕通知</a></li>
+            <li><a href="#引入">引入</a></li>
+            <li><a href="#通知获取参数">通知获取参数</a></li>
+            <li><a href="#织入">织入</a></li>
+            <li><a href="#多个切面">多个切面</a></li>
           </ul>
         </li>
-        <li><a href="#隔离级别">隔离级别</a></li>
-        <li><a href="#传播行为">传播行为</a></li>
-        <li><a href="#占用事务时间过长">占用事务时间过长</a></li>
-        <li><a href="#transactional自调用失效问题">@Transactional自调用失效问题</a></li>
-      </ul>
-    </li>
-    <li><a href="#spring-data-redis">spring-data-redis</a>
-      <ul>
-        <li><a href="#lettuce-vs-jedis">Lettuce vs Jedis</a></li>
-        <li><a href="#redistemplate和-stringredistemplate">RedisTemplate和 StringRedisTemplate</a></li>
-        <li><a href="#spring对redis数据类型操作的封装">Spring对Redis数据类型操作的封装</a></li>
-        <li><a href="#sessioncallback-和-rediscallback-接口">SessionCallback 和 RedisCallback 接口</a></li>
-        <li><a href="#redis事务">Redis事务</a></li>
-        <li><a href="#使用-redis-流水线">使用 Redis 流水线</a></li>
-        <li><a href="#使用-redis发布--订阅">使用 Redis发布 / 订阅</a></li>
-        <li><a href="#使用-lua-脚本">使用 Lua 脚本</a></li>
-        <li><a href="#使用-spring-缓存注解操作-redis">使用 Spring 缓存注解操作 Redis</a>
+        <li><a href="#数据库事务">数据库事务</a>
           <ul>
-            <li><a href="#缓存注解自调用失效问题">缓存注解自调用失效问题</a></li>
-            <li><a href="#自定义缓存管理器">自定义缓存管理器</a></li>
+            <li><a href="#jdbc的数据库事务">JDBC的数据库事务</a></li>
+            <li><a href="#spring声明式事务的使用">Spring声明式事务的使用</a>
+              <ul>
+                <li><a href="#spring事务管理器">Spring事务管理器</a></li>
+              </ul>
+            </li>
+            <li><a href="#隔离级别">隔离级别</a></li>
+            <li><a href="#传播行为">传播行为</a></li>
+            <li><a href="#占用事务时间过长">占用事务时间过长</a></li>
+            <li><a href="#transactional自调用失效问题">@Transactional自调用失效问题</a></li>
           </ul>
         </li>
+        <li><a href="#spring-data-redis">spring-data-redis</a>
+          <ul>
+            <li><a href="#lettuce-vs-jedis">Lettuce vs Jedis</a></li>
+            <li><a href="#redistemplate和-stringredistemplate">RedisTemplate和 StringRedisTemplate</a></li>
+            <li><a href="#spring对redis数据类型操作的封装">Spring对Redis数据类型操作的封装</a></li>
+            <li><a href="#sessioncallback-和-rediscallback-接口">SessionCallback 和 RedisCallback 接口</a></li>
+            <li><a href="#redis事务">Redis事务</a></li>
+            <li><a href="#使用-redis-流水线">使用 Redis 流水线</a></li>
+            <li><a href="#使用-redis发布--订阅">使用 Redis发布 / 订阅</a></li>
+            <li><a href="#使用-lua-脚本">使用 Lua 脚本</a></li>
+            <li><a href="#使用-spring-缓存注解操作-redis">使用 Spring 缓存注解操作 Redis</a>
+              <ul>
+                <li><a href="#缓存注解自调用失效问题">缓存注解自调用失效问题</a></li>
+                <li><a href="#自定义缓存管理器">自定义缓存管理器</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#异步线程池">异步线程池</a></li>
+        <li><a href="#异步消息-rabbitmq">异步消息 RabbitMQ</a></li>
+        <li><a href="#定时任务">定时任务</a></li>
+        <li><a href="#spring-boot-monitor">Spring-boot-monitor</a></li>
       </ul>
     </li>
-    <li><a href="#异步线程池">异步线程池</a></li>
-    <li><a href="#异步消息-rabbitmq">异步消息 RabbitMQ</a></li>
-    <li><a href="#定时任务">定时任务</a></li>
-    <li><a href="#spring-boot-monitor">Spring-boot-monitor</a></li>
   </ul>
 </nav>
 
@@ -1995,7 +1999,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/21d3722c34a1c4d34d72a1190641e2127a91c745" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d22cce5b375164ec5e27179ef6afa8ca7f3c00d" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
@@ -2033,54 +2037,58 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#aop">AOP</a>
+    <li><a href="#spring-boot">spring boot</a>
       <ul>
-        <li><a href="#为什么要使用aop">为什么要使用AOP？</a></li>
-        <li><a href="#aop的术语和流程">AOP的术语和流程</a></li>
-        <li><a href="#aop开发详解">AOP开发详解</a></li>
-        <li><a href="#环绕通知">环绕通知</a></li>
-        <li><a href="#引入">引入</a></li>
-        <li><a href="#通知获取参数">通知获取参数</a></li>
-        <li><a href="#织入">织入</a></li>
-        <li><a href="#多个切面">多个切面</a></li>
-      </ul>
-    </li>
-    <li><a href="#数据库事务">数据库事务</a>
-      <ul>
-        <li><a href="#jdbc的数据库事务">JDBC的数据库事务</a></li>
-        <li><a href="#spring声明式事务的使用">Spring声明式事务的使用</a>
+        <li><a href="#aop">AOP</a>
           <ul>
-            <li><a href="#spring事务管理器">Spring事务管理器</a></li>
+            <li><a href="#为什么要使用aop">为什么要使用AOP？</a></li>
+            <li><a href="#aop的术语和流程">AOP的术语和流程</a></li>
+            <li><a href="#aop开发详解">AOP开发详解</a></li>
+            <li><a href="#环绕通知">环绕通知</a></li>
+            <li><a href="#引入">引入</a></li>
+            <li><a href="#通知获取参数">通知获取参数</a></li>
+            <li><a href="#织入">织入</a></li>
+            <li><a href="#多个切面">多个切面</a></li>
           </ul>
         </li>
-        <li><a href="#隔离级别">隔离级别</a></li>
-        <li><a href="#传播行为">传播行为</a></li>
-        <li><a href="#占用事务时间过长">占用事务时间过长</a></li>
-        <li><a href="#transactional自调用失效问题">@Transactional自调用失效问题</a></li>
-      </ul>
-    </li>
-    <li><a href="#spring-data-redis">spring-data-redis</a>
-      <ul>
-        <li><a href="#lettuce-vs-jedis">Lettuce vs Jedis</a></li>
-        <li><a href="#redistemplate和-stringredistemplate">RedisTemplate和 StringRedisTemplate</a></li>
-        <li><a href="#spring对redis数据类型操作的封装">Spring对Redis数据类型操作的封装</a></li>
-        <li><a href="#sessioncallback-和-rediscallback-接口">SessionCallback 和 RedisCallback 接口</a></li>
-        <li><a href="#redis事务">Redis事务</a></li>
-        <li><a href="#使用-redis-流水线">使用 Redis 流水线</a></li>
-        <li><a href="#使用-redis发布--订阅">使用 Redis发布 / 订阅</a></li>
-        <li><a href="#使用-lua-脚本">使用 Lua 脚本</a></li>
-        <li><a href="#使用-spring-缓存注解操作-redis">使用 Spring 缓存注解操作 Redis</a>
+        <li><a href="#数据库事务">数据库事务</a>
           <ul>
-            <li><a href="#缓存注解自调用失效问题">缓存注解自调用失效问题</a></li>
-            <li><a href="#自定义缓存管理器">自定义缓存管理器</a></li>
+            <li><a href="#jdbc的数据库事务">JDBC的数据库事务</a></li>
+            <li><a href="#spring声明式事务的使用">Spring声明式事务的使用</a>
+              <ul>
+                <li><a href="#spring事务管理器">Spring事务管理器</a></li>
+              </ul>
+            </li>
+            <li><a href="#隔离级别">隔离级别</a></li>
+            <li><a href="#传播行为">传播行为</a></li>
+            <li><a href="#占用事务时间过长">占用事务时间过长</a></li>
+            <li><a href="#transactional自调用失效问题">@Transactional自调用失效问题</a></li>
           </ul>
         </li>
+        <li><a href="#spring-data-redis">spring-data-redis</a>
+          <ul>
+            <li><a href="#lettuce-vs-jedis">Lettuce vs Jedis</a></li>
+            <li><a href="#redistemplate和-stringredistemplate">RedisTemplate和 StringRedisTemplate</a></li>
+            <li><a href="#spring对redis数据类型操作的封装">Spring对Redis数据类型操作的封装</a></li>
+            <li><a href="#sessioncallback-和-rediscallback-接口">SessionCallback 和 RedisCallback 接口</a></li>
+            <li><a href="#redis事务">Redis事务</a></li>
+            <li><a href="#使用-redis-流水线">使用 Redis 流水线</a></li>
+            <li><a href="#使用-redis发布--订阅">使用 Redis发布 / 订阅</a></li>
+            <li><a href="#使用-lua-脚本">使用 Lua 脚本</a></li>
+            <li><a href="#使用-spring-缓存注解操作-redis">使用 Spring 缓存注解操作 Redis</a>
+              <ul>
+                <li><a href="#缓存注解自调用失效问题">缓存注解自调用失效问题</a></li>
+                <li><a href="#自定义缓存管理器">自定义缓存管理器</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#异步线程池">异步线程池</a></li>
+        <li><a href="#异步消息-rabbitmq">异步消息 RabbitMQ</a></li>
+        <li><a href="#定时任务">定时任务</a></li>
+        <li><a href="#spring-boot-monitor">Spring-boot-monitor</a></li>
       </ul>
     </li>
-    <li><a href="#异步线程池">异步线程池</a></li>
-    <li><a href="#异步消息-rabbitmq">异步消息 RabbitMQ</a></li>
-    <li><a href="#定时任务">定时任务</a></li>
-    <li><a href="#spring-boot-monitor">Spring-boot-monitor</a></li>
   </ul>
 </nav>
 

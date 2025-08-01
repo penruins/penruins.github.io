@@ -87,7 +87,7 @@ limit 1 offset 1
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-01T14:34:25+08:00">
+    <meta property="article:modified_time" content="2025-08-01T14:39:10+08:00">
 <title>SQL | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
@@ -1371,94 +1371,99 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#2502-设计内存分配器">2502 设计内存分配器</a></li>
-    <li><a href="#-175-组合两个表">✅ 175 组合两个表</a></li>
-    <li><a href="#176-第二高的薪水">176 第二高的薪水</a></li>
-    <li><a href="#177-第n高的薪水">177 第N高的薪水</a></li>
-    <li><a href="#178-分数排名">178 分数排名</a>
+    <li><a href="#sql">sql</a>
       <ul>
-        <li><a href="#方法-1dense_rank">方法 1：DENSE_RANK</a>
+        <li><a href="#2502-设计内存分配器">2502 设计内存分配器</a></li>
+        <li><a href="#-175-组合两个表">✅ 175 组合两个表</a></li>
+        <li><a href="#176-第二高的薪水">176 第二高的薪水</a></li>
+        <li><a href="#177-第n高的薪水">177 第N高的薪水</a></li>
+        <li><a href="#178-分数排名">178 分数排名</a>
           <ul>
-            <li><a href="#窗口函数">窗口函数</a></li>
+            <li><a href="#方法-1dense_rank">方法 1：DENSE_RANK</a>
+              <ul>
+                <li><a href="#窗口函数">窗口函数</a></li>
+              </ul>
+            </li>
+            <li><a href="#方法-2-使用-countdistinct--的相关子查询">方法 2: 使用 COUNT(DISTINCT &hellip;) 的相关子查询</a></li>
+            <li><a href="#方法-3使用-inner-join-和-countdistinct">方法 3：使用 INNER JOIN 和 COUNT(DISTINCT&hellip;)</a>
+              <ul>
+                <li><a href="#数据库表自身进行内连接的结果是什么">数据库表自身进行内连接的结果是什么</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li><a href="#方法-2-使用-countdistinct--的相关子查询">方法 2: 使用 COUNT(DISTINCT &hellip;) 的相关子查询</a></li>
-        <li><a href="#方法-3使用-inner-join-和-countdistinct">方法 3：使用 INNER JOIN 和 COUNT(DISTINCT&hellip;)</a>
+        <li><a href="#180-连续出现的数字">180 连续出现的数字</a></li>
+        <li><a href="#-181-超过经理收入的员工">✅ 181 超过经理收入的员工</a></li>
+        <li><a href="#182-查找重复的电子邮箱">182 查找重复的电子邮箱</a>
           <ul>
-            <li><a href="#数据库表自身进行内连接的结果是什么">数据库表自身进行内连接的结果是什么</a></li>
+            <li><a href="#方法一使用-group-by-和临时表">方法一：使用 GROUP BY 和临时表</a></li>
+            <li><a href="#方法二使用-group-by-和-having-条件">方法二：使用 GROUP BY 和 HAVING 条件</a></li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><a href="#180-连续出现的数字">180 连续出现的数字</a></li>
-    <li><a href="#-181-超过经理收入的员工">✅ 181 超过经理收入的员工</a></li>
-    <li><a href="#182-查找重复的电子邮箱">182 查找重复的电子邮箱</a>
-      <ul>
-        <li><a href="#方法一使用-group-by-和临时表">方法一：使用 GROUP BY 和临时表</a></li>
-        <li><a href="#方法二使用-group-by-和-having-条件">方法二：使用 GROUP BY 和 HAVING 条件</a></li>
-      </ul>
-    </li>
-    <li><a href="#-183-从不订购的客户">✅ 183 从不订购的客户</a></li>
-    <li><a href="#-184-部门工资最高的员工">✅ 184 部门工资最高的员工</a></li>
-    <li><a href="#185-部门工资前三高的所有员工">185 部门工资前三高的所有员工</a></li>
-    <li><a href="#196-删除重复的电子邮箱">196 删除重复的电子邮箱</a></li>
-    <li><a href="#197-上升的温度">197 上升的温度</a></li>
-    <li><a href="#262-行程和用户">262 行程和用户</a></li>
-    <li><a href="#511-游戏玩法分析-i">511 游戏玩法分析 I</a>
-      <ul>
-        <li><a href="#方法-1分组并提取最小值">方法 1：分组并提取最小值</a></li>
-        <li><a href="#方法-2窗口函数">方法 2：窗口函数</a>
+        <li><a href="#-183-从不订购的客户">✅ 183 从不订购的客户</a></li>
+        <li><a href="#-184-部门工资最高的员工">✅ 184 部门工资最高的员工</a></li>
+        <li><a href="#185-部门工资前三高的所有员工">185 部门工资前三高的所有员工</a></li>
+        <li><a href="#196-删除重复的电子邮箱">196 删除重复的电子邮箱</a></li>
+        <li><a href="#197-上升的温度">197 上升的温度</a></li>
+        <li><a href="#262-行程和用户">262 行程和用户</a></li>
+        <li><a href="#511-游戏玩法分析-i">511 游戏玩法分析 I</a>
           <ul>
-            <li><a href="#rank">rank()</a></li>
-            <li><a href="#first_value">first_value()</a></li>
+            <li><a href="#方法-1分组并提取最小值">方法 1：分组并提取最小值</a></li>
+            <li><a href="#方法-2窗口函数">方法 2：窗口函数</a>
+              <ul>
+                <li><a href="#rank">rank()</a></li>
+                <li><a href="#first_value">first_value()</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
+        <li><a href="#512-游戏玩法分析-ii">512 游戏玩法分析 II</a></li>
+        <li><a href="#534-游戏玩法分析-iii">534 游戏玩法分析 III</a></li>
+        <li><a href="#550-游戏玩法分析-iv">550 游戏玩法分析 IV</a>
+          <ul>
+            <li><a href="#在sql中from后面用逗号写了多张表这样属于什么连接">在sql中，from后面用逗号写了多张表，这样属于什么连接</a></li>
+          </ul>
+        </li>
+        <li><a href="#569-员工薪水中位数">569 员工薪水中位数</a></li>
+        <li><a href="#570-至少有5名直接下属的经理">570 至少有5名直接下属的经理</a></li>
+        <li><a href="#571-给定数字的频率查询中位数">571 给定数字的频率查询中位数</a></li>
+        <li><a href="#574-当选者">574 当选者</a></li>
+        <li><a href="#577-员工奖金">577 员工奖金</a></li>
+        <li><a href="#578-查询回答率最高的问题">578 查询回答率最高的问题</a></li>
+        <li><a href="#579-查询员工的累计薪水">579 查询员工的累计薪水</a></li>
+        <li><a href="#580-统计各专业学生人数">580 统计各专业学生人数</a></li>
+        <li><a href="#584-寻找用户推荐人">584 寻找用户推荐人</a></li>
+        <li><a href="#585-2016年的投资">585 2016年的投资</a></li>
+        <li><a href="#586-订单最多的客户">586 订单最多的客户</a></li>
+        <li><a href="#595-大的国家">595 大的国家</a></li>
+        <li><a href="#596-超过-5-名学生的课">596 超过 5 名学生的课</a></li>
+        <li><a href="#597-好友申请-i总体通过率">597 好友申请 I：总体通过率</a></li>
+        <li><a href="#601-体育馆的人流量">601 体育馆的人流量</a></li>
+        <li><a href="#602-好友申请-ii-谁有最多的好友">602 好友申请 II ：谁有最多的好友</a></li>
+        <li><a href="#603-连续空余座位">603 连续空余座位</a></li>
+        <li><a href="#607-销售员">607 销售员</a></li>
+        <li><a href="#608-树节点">608 树节点</a></li>
+        <li><a href="#610-判断三角形">610 判断三角形</a></li>
+        <li><a href="#612-平面上的最近距离">612 平面上的最近距离</a></li>
+        <li><a href="#613-直线上的最近距离">613 直线上的最近距离</a></li>
+        <li><a href="#614-二级关注者">614 二级关注者</a></li>
+        <li><a href="#615-平均工资部门与公司比较">615 平均工资：部门与公司比较</a></li>
+        <li><a href="#618-学生地理信息报告">618 学生地理信息报告</a></li>
+        <li><a href="#619-只出现一次的最大数字">619 只出现一次的最大数字</a></li>
+        <li><a href="#620-有趣的电影">620 有趣的电影</a></li>
+        <li><a href="#626-换座位">626 换座位</a></li>
+        <li><a href="#627-变更性别">627 变更性别</a></li>
+        <li><a href="#1045-买下所有产品的客户">1045 买下所有产品的客户</a></li>
+        <li><a href="#1050-合作过至少三次的演员和导演">1050 合作过至少三次的演员和导演</a></li>
+        <li><a href="#1068-产品销售分析-i">1068 产品销售分析 I</a></li>
+        <li><a href="#1069-产品销售分析-ii">1069 产品销售分析 II</a></li>
       </ul>
     </li>
-    <li><a href="#512-游戏玩法分析-ii">512 游戏玩法分析 II</a></li>
-    <li><a href="#534-游戏玩法分析-iii">534 游戏玩法分析 III</a></li>
-    <li><a href="#550-游戏玩法分析-iv">550 游戏玩法分析 IV</a>
+    <li><a href="#mac2025-mysql">mac2025 mysql</a>
       <ul>
-        <li><a href="#在sql中from后面用逗号写了多张表这样属于什么连接">在sql中，from后面用逗号写了多张表，这样属于什么连接</a></li>
+        <li><a href="#leetcode">leetcode</a></li>
       </ul>
     </li>
-    <li><a href="#569-员工薪水中位数">569 员工薪水中位数</a></li>
-    <li><a href="#570-至少有5名直接下属的经理">570 至少有5名直接下属的经理</a></li>
-    <li><a href="#571-给定数字的频率查询中位数">571 给定数字的频率查询中位数</a></li>
-    <li><a href="#574-当选者">574 当选者</a></li>
-    <li><a href="#577-员工奖金">577 员工奖金</a></li>
-    <li><a href="#578-查询回答率最高的问题">578 查询回答率最高的问题</a></li>
-    <li><a href="#579-查询员工的累计薪水">579 查询员工的累计薪水</a></li>
-    <li><a href="#580-统计各专业学生人数">580 统计各专业学生人数</a></li>
-    <li><a href="#584-寻找用户推荐人">584 寻找用户推荐人</a></li>
-    <li><a href="#585-2016年的投资">585 2016年的投资</a></li>
-    <li><a href="#586-订单最多的客户">586 订单最多的客户</a></li>
-    <li><a href="#595-大的国家">595 大的国家</a></li>
-    <li><a href="#596-超过-5-名学生的课">596 超过 5 名学生的课</a></li>
-    <li><a href="#597-好友申请-i总体通过率">597 好友申请 I：总体通过率</a></li>
-    <li><a href="#601-体育馆的人流量">601 体育馆的人流量</a></li>
-    <li><a href="#602-好友申请-ii-谁有最多的好友">602 好友申请 II ：谁有最多的好友</a></li>
-    <li><a href="#603-连续空余座位">603 连续空余座位</a></li>
-    <li><a href="#607-销售员">607 销售员</a></li>
-    <li><a href="#608-树节点">608 树节点</a></li>
-    <li><a href="#610-判断三角形">610 判断三角形</a></li>
-    <li><a href="#612-平面上的最近距离">612 平面上的最近距离</a></li>
-    <li><a href="#613-直线上的最近距离">613 直线上的最近距离</a></li>
-    <li><a href="#614-二级关注者">614 二级关注者</a></li>
-    <li><a href="#615-平均工资部门与公司比较">615 平均工资：部门与公司比较</a></li>
-    <li><a href="#618-学生地理信息报告">618 学生地理信息报告</a></li>
-    <li><a href="#619-只出现一次的最大数字">619 只出现一次的最大数字</a></li>
-    <li><a href="#620-有趣的电影">620 有趣的电影</a></li>
-    <li><a href="#626-换座位">626 换座位</a></li>
-    <li><a href="#627-变更性别">627 变更性别</a></li>
-    <li><a href="#1045-买下所有产品的客户">1045 买下所有产品的客户</a></li>
-    <li><a href="#1050-合作过至少三次的演员和导演">1050 合作过至少三次的演员和导演</a></li>
-    <li><a href="#1068-产品销售分析-i">1068 产品销售分析 I</a></li>
-    <li><a href="#1069-产品销售分析-ii">1069 产品销售分析 II</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#leetcode">leetcode</a></li>
   </ul>
 </nav>
 
@@ -2424,7 +2429,7 @@ id 是该表的主键（具有唯一值的列）。
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/21d3722c34a1c4d34d72a1190641e2127a91c745" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d22cce5b375164ec5e27179ef6afa8ca7f3c00d" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
@@ -2462,94 +2467,99 @@ id 是该表的主键（具有唯一值的列）。
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#2502-设计内存分配器">2502 设计内存分配器</a></li>
-    <li><a href="#-175-组合两个表">✅ 175 组合两个表</a></li>
-    <li><a href="#176-第二高的薪水">176 第二高的薪水</a></li>
-    <li><a href="#177-第n高的薪水">177 第N高的薪水</a></li>
-    <li><a href="#178-分数排名">178 分数排名</a>
+    <li><a href="#sql">sql</a>
       <ul>
-        <li><a href="#方法-1dense_rank">方法 1：DENSE_RANK</a>
+        <li><a href="#2502-设计内存分配器">2502 设计内存分配器</a></li>
+        <li><a href="#-175-组合两个表">✅ 175 组合两个表</a></li>
+        <li><a href="#176-第二高的薪水">176 第二高的薪水</a></li>
+        <li><a href="#177-第n高的薪水">177 第N高的薪水</a></li>
+        <li><a href="#178-分数排名">178 分数排名</a>
           <ul>
-            <li><a href="#窗口函数">窗口函数</a></li>
+            <li><a href="#方法-1dense_rank">方法 1：DENSE_RANK</a>
+              <ul>
+                <li><a href="#窗口函数">窗口函数</a></li>
+              </ul>
+            </li>
+            <li><a href="#方法-2-使用-countdistinct--的相关子查询">方法 2: 使用 COUNT(DISTINCT &hellip;) 的相关子查询</a></li>
+            <li><a href="#方法-3使用-inner-join-和-countdistinct">方法 3：使用 INNER JOIN 和 COUNT(DISTINCT&hellip;)</a>
+              <ul>
+                <li><a href="#数据库表自身进行内连接的结果是什么">数据库表自身进行内连接的结果是什么</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li><a href="#方法-2-使用-countdistinct--的相关子查询">方法 2: 使用 COUNT(DISTINCT &hellip;) 的相关子查询</a></li>
-        <li><a href="#方法-3使用-inner-join-和-countdistinct">方法 3：使用 INNER JOIN 和 COUNT(DISTINCT&hellip;)</a>
+        <li><a href="#180-连续出现的数字">180 连续出现的数字</a></li>
+        <li><a href="#-181-超过经理收入的员工">✅ 181 超过经理收入的员工</a></li>
+        <li><a href="#182-查找重复的电子邮箱">182 查找重复的电子邮箱</a>
           <ul>
-            <li><a href="#数据库表自身进行内连接的结果是什么">数据库表自身进行内连接的结果是什么</a></li>
+            <li><a href="#方法一使用-group-by-和临时表">方法一：使用 GROUP BY 和临时表</a></li>
+            <li><a href="#方法二使用-group-by-和-having-条件">方法二：使用 GROUP BY 和 HAVING 条件</a></li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><a href="#180-连续出现的数字">180 连续出现的数字</a></li>
-    <li><a href="#-181-超过经理收入的员工">✅ 181 超过经理收入的员工</a></li>
-    <li><a href="#182-查找重复的电子邮箱">182 查找重复的电子邮箱</a>
-      <ul>
-        <li><a href="#方法一使用-group-by-和临时表">方法一：使用 GROUP BY 和临时表</a></li>
-        <li><a href="#方法二使用-group-by-和-having-条件">方法二：使用 GROUP BY 和 HAVING 条件</a></li>
-      </ul>
-    </li>
-    <li><a href="#-183-从不订购的客户">✅ 183 从不订购的客户</a></li>
-    <li><a href="#-184-部门工资最高的员工">✅ 184 部门工资最高的员工</a></li>
-    <li><a href="#185-部门工资前三高的所有员工">185 部门工资前三高的所有员工</a></li>
-    <li><a href="#196-删除重复的电子邮箱">196 删除重复的电子邮箱</a></li>
-    <li><a href="#197-上升的温度">197 上升的温度</a></li>
-    <li><a href="#262-行程和用户">262 行程和用户</a></li>
-    <li><a href="#511-游戏玩法分析-i">511 游戏玩法分析 I</a>
-      <ul>
-        <li><a href="#方法-1分组并提取最小值">方法 1：分组并提取最小值</a></li>
-        <li><a href="#方法-2窗口函数">方法 2：窗口函数</a>
+        <li><a href="#-183-从不订购的客户">✅ 183 从不订购的客户</a></li>
+        <li><a href="#-184-部门工资最高的员工">✅ 184 部门工资最高的员工</a></li>
+        <li><a href="#185-部门工资前三高的所有员工">185 部门工资前三高的所有员工</a></li>
+        <li><a href="#196-删除重复的电子邮箱">196 删除重复的电子邮箱</a></li>
+        <li><a href="#197-上升的温度">197 上升的温度</a></li>
+        <li><a href="#262-行程和用户">262 行程和用户</a></li>
+        <li><a href="#511-游戏玩法分析-i">511 游戏玩法分析 I</a>
           <ul>
-            <li><a href="#rank">rank()</a></li>
-            <li><a href="#first_value">first_value()</a></li>
+            <li><a href="#方法-1分组并提取最小值">方法 1：分组并提取最小值</a></li>
+            <li><a href="#方法-2窗口函数">方法 2：窗口函数</a>
+              <ul>
+                <li><a href="#rank">rank()</a></li>
+                <li><a href="#first_value">first_value()</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
+        <li><a href="#512-游戏玩法分析-ii">512 游戏玩法分析 II</a></li>
+        <li><a href="#534-游戏玩法分析-iii">534 游戏玩法分析 III</a></li>
+        <li><a href="#550-游戏玩法分析-iv">550 游戏玩法分析 IV</a>
+          <ul>
+            <li><a href="#在sql中from后面用逗号写了多张表这样属于什么连接">在sql中，from后面用逗号写了多张表，这样属于什么连接</a></li>
+          </ul>
+        </li>
+        <li><a href="#569-员工薪水中位数">569 员工薪水中位数</a></li>
+        <li><a href="#570-至少有5名直接下属的经理">570 至少有5名直接下属的经理</a></li>
+        <li><a href="#571-给定数字的频率查询中位数">571 给定数字的频率查询中位数</a></li>
+        <li><a href="#574-当选者">574 当选者</a></li>
+        <li><a href="#577-员工奖金">577 员工奖金</a></li>
+        <li><a href="#578-查询回答率最高的问题">578 查询回答率最高的问题</a></li>
+        <li><a href="#579-查询员工的累计薪水">579 查询员工的累计薪水</a></li>
+        <li><a href="#580-统计各专业学生人数">580 统计各专业学生人数</a></li>
+        <li><a href="#584-寻找用户推荐人">584 寻找用户推荐人</a></li>
+        <li><a href="#585-2016年的投资">585 2016年的投资</a></li>
+        <li><a href="#586-订单最多的客户">586 订单最多的客户</a></li>
+        <li><a href="#595-大的国家">595 大的国家</a></li>
+        <li><a href="#596-超过-5-名学生的课">596 超过 5 名学生的课</a></li>
+        <li><a href="#597-好友申请-i总体通过率">597 好友申请 I：总体通过率</a></li>
+        <li><a href="#601-体育馆的人流量">601 体育馆的人流量</a></li>
+        <li><a href="#602-好友申请-ii-谁有最多的好友">602 好友申请 II ：谁有最多的好友</a></li>
+        <li><a href="#603-连续空余座位">603 连续空余座位</a></li>
+        <li><a href="#607-销售员">607 销售员</a></li>
+        <li><a href="#608-树节点">608 树节点</a></li>
+        <li><a href="#610-判断三角形">610 判断三角形</a></li>
+        <li><a href="#612-平面上的最近距离">612 平面上的最近距离</a></li>
+        <li><a href="#613-直线上的最近距离">613 直线上的最近距离</a></li>
+        <li><a href="#614-二级关注者">614 二级关注者</a></li>
+        <li><a href="#615-平均工资部门与公司比较">615 平均工资：部门与公司比较</a></li>
+        <li><a href="#618-学生地理信息报告">618 学生地理信息报告</a></li>
+        <li><a href="#619-只出现一次的最大数字">619 只出现一次的最大数字</a></li>
+        <li><a href="#620-有趣的电影">620 有趣的电影</a></li>
+        <li><a href="#626-换座位">626 换座位</a></li>
+        <li><a href="#627-变更性别">627 变更性别</a></li>
+        <li><a href="#1045-买下所有产品的客户">1045 买下所有产品的客户</a></li>
+        <li><a href="#1050-合作过至少三次的演员和导演">1050 合作过至少三次的演员和导演</a></li>
+        <li><a href="#1068-产品销售分析-i">1068 产品销售分析 I</a></li>
+        <li><a href="#1069-产品销售分析-ii">1069 产品销售分析 II</a></li>
       </ul>
     </li>
-    <li><a href="#512-游戏玩法分析-ii">512 游戏玩法分析 II</a></li>
-    <li><a href="#534-游戏玩法分析-iii">534 游戏玩法分析 III</a></li>
-    <li><a href="#550-游戏玩法分析-iv">550 游戏玩法分析 IV</a>
+    <li><a href="#mac2025-mysql">mac2025 mysql</a>
       <ul>
-        <li><a href="#在sql中from后面用逗号写了多张表这样属于什么连接">在sql中，from后面用逗号写了多张表，这样属于什么连接</a></li>
+        <li><a href="#leetcode">leetcode</a></li>
       </ul>
     </li>
-    <li><a href="#569-员工薪水中位数">569 员工薪水中位数</a></li>
-    <li><a href="#570-至少有5名直接下属的经理">570 至少有5名直接下属的经理</a></li>
-    <li><a href="#571-给定数字的频率查询中位数">571 给定数字的频率查询中位数</a></li>
-    <li><a href="#574-当选者">574 当选者</a></li>
-    <li><a href="#577-员工奖金">577 员工奖金</a></li>
-    <li><a href="#578-查询回答率最高的问题">578 查询回答率最高的问题</a></li>
-    <li><a href="#579-查询员工的累计薪水">579 查询员工的累计薪水</a></li>
-    <li><a href="#580-统计各专业学生人数">580 统计各专业学生人数</a></li>
-    <li><a href="#584-寻找用户推荐人">584 寻找用户推荐人</a></li>
-    <li><a href="#585-2016年的投资">585 2016年的投资</a></li>
-    <li><a href="#586-订单最多的客户">586 订单最多的客户</a></li>
-    <li><a href="#595-大的国家">595 大的国家</a></li>
-    <li><a href="#596-超过-5-名学生的课">596 超过 5 名学生的课</a></li>
-    <li><a href="#597-好友申请-i总体通过率">597 好友申请 I：总体通过率</a></li>
-    <li><a href="#601-体育馆的人流量">601 体育馆的人流量</a></li>
-    <li><a href="#602-好友申请-ii-谁有最多的好友">602 好友申请 II ：谁有最多的好友</a></li>
-    <li><a href="#603-连续空余座位">603 连续空余座位</a></li>
-    <li><a href="#607-销售员">607 销售员</a></li>
-    <li><a href="#608-树节点">608 树节点</a></li>
-    <li><a href="#610-判断三角形">610 判断三角形</a></li>
-    <li><a href="#612-平面上的最近距离">612 平面上的最近距离</a></li>
-    <li><a href="#613-直线上的最近距离">613 直线上的最近距离</a></li>
-    <li><a href="#614-二级关注者">614 二级关注者</a></li>
-    <li><a href="#615-平均工资部门与公司比较">615 平均工资：部门与公司比较</a></li>
-    <li><a href="#618-学生地理信息报告">618 学生地理信息报告</a></li>
-    <li><a href="#619-只出现一次的最大数字">619 只出现一次的最大数字</a></li>
-    <li><a href="#620-有趣的电影">620 有趣的电影</a></li>
-    <li><a href="#626-换座位">626 换座位</a></li>
-    <li><a href="#627-变更性别">627 变更性别</a></li>
-    <li><a href="#1045-买下所有产品的客户">1045 买下所有产品的客户</a></li>
-    <li><a href="#1050-合作过至少三次的演员和导演">1050 合作过至少三次的演员和导演</a></li>
-    <li><a href="#1068-产品销售分析-i">1068 产品销售分析 I</a></li>
-    <li><a href="#1069-产品销售分析-ii">1069 产品销售分析 II</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#leetcode">leetcode</a></li>
   </ul>
 </nav>
 

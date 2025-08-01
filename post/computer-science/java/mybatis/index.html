@@ -61,7 +61,7 @@ SqlSession sqlSession = sqlSessionFactory.openSession(); try{ // 执行数据库
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-01T14:34:25+08:00">
+    <meta property="article:modified_time" content="2025-08-01T14:39:10+08:00">
 <title>Mybatis | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
@@ -1345,68 +1345,72 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#mybatis是怎么进行事务管理的-2025-02-08">mybatis是怎么进行事务管理的 2025-02-08</a>
+    <li>
       <ul>
-        <li><a href="#1-使用-jdbc-事务管理">1. 使用 JDBC 事务管理</a></li>
-        <li><a href="#2-集成-spring-事务管理">2. 集成 Spring 事务管理</a>
+        <li><a href="#mybatis是怎么进行事务管理的-2025-02-08">mybatis是怎么进行事务管理的 2025-02-08</a>
           <ul>
-            <li><a href="#21-声明式事务管理">2.1 声明式事务管理</a></li>
-            <li><a href="#22-编程式事务管理">2.2 编程式事务管理</a></li>
+            <li><a href="#1-使用-jdbc-事务管理">1. 使用 JDBC 事务管理</a></li>
+            <li><a href="#2-集成-spring-事务管理">2. 集成 Spring 事务管理</a>
+              <ul>
+                <li><a href="#21-声明式事务管理">2.1 声明式事务管理</a></li>
+                <li><a href="#22-编程式事务管理">2.2 编程式事务管理</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-使用-java-ee-容器的事务管理">3. 使用 Java EE 容器的事务管理</a></li>
+            <li><a href="#总结">总结</a></li>
           </ul>
         </li>
-        <li><a href="#3-使用-java-ee-容器的事务管理">3. 使用 Java EE 容器的事务管理</a></li>
-        <li><a href="#总结">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#我使用springboot框架我在一个方法中使用mybatis提供的mapper方法插入了一条数据但是我没有在方法上使用transactional注解这种情况下有事务吗-2025-02-08">我使用springboot框架，我在一个方法中使用mybatis提供的mapper方法插入了一条数据，但是我没有在方法上使用@Transactional注解，这种情况下有事务吗 2025-02-08</a>
-      <ul>
-        <li><a href="#1-没有事务的情况">1. <strong>没有事务的情况</strong></a></li>
-        <li><a href="#2-可能的风险">2. <strong>可能的风险</strong></a></li>
-        <li><a href="#3-如何验证没有事务">3. <strong>如何验证没有事务</strong></a></li>
-        <li><a href="#4-如何启用事务">4. <strong>如何启用事务</strong></a>
+        <li><a href="#我使用springboot框架我在一个方法中使用mybatis提供的mapper方法插入了一条数据但是我没有在方法上使用transactional注解这种情况下有事务吗-2025-02-08">我使用springboot框架，我在一个方法中使用mybatis提供的mapper方法插入了一条数据，但是我没有在方法上使用@Transactional注解，这种情况下有事务吗 2025-02-08</a>
           <ul>
-            <li><a href="#41-使用-transactional-注解">4.1 使用 <code>@Transactional</code> 注解</a></li>
-            <li><a href="#42-配置事务管理器">4.2 配置事务管理器</a></li>
+            <li><a href="#1-没有事务的情况">1. <strong>没有事务的情况</strong></a></li>
+            <li><a href="#2-可能的风险">2. <strong>可能的风险</strong></a></li>
+            <li><a href="#3-如何验证没有事务">3. <strong>如何验证没有事务</strong></a></li>
+            <li><a href="#4-如何启用事务">4. <strong>如何启用事务</strong></a>
+              <ul>
+                <li><a href="#41-使用-transactional-注解">4.1 使用 <code>@Transactional</code> 注解</a></li>
+                <li><a href="#42-配置事务管理器">4.2 配置事务管理器</a></li>
+              </ul>
+            </li>
+            <li><a href="#5-总结">5. <strong>总结</strong></a></li>
           </ul>
         </li>
-        <li><a href="#5-总结">5. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#什么是乐观锁悲观锁-2025-02-08">什么是乐观锁、悲观锁 2025-02-08</a>
-      <ul>
-        <li><a href="#1-悲观锁pessimistic-locking">1. <strong>悲观锁（Pessimistic Locking）</strong></a>
+        <li><a href="#什么是乐观锁悲观锁-2025-02-08">什么是乐观锁、悲观锁 2025-02-08</a>
           <ul>
-            <li><a href="#实现方式">实现方式</a></li>
-            <li><a href="#特点">特点</a></li>
-            <li><a href="#适用场景">适用场景</a></li>
-            <li><a href="#示例">示例</a></li>
+            <li><a href="#1-悲观锁pessimistic-locking">1. <strong>悲观锁（Pessimistic Locking）</strong></a>
+              <ul>
+                <li><a href="#实现方式">实现方式</a></li>
+                <li><a href="#特点">特点</a></li>
+                <li><a href="#适用场景">适用场景</a></li>
+                <li><a href="#示例">示例</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-乐观锁optimistic-locking">2. <strong>乐观锁（Optimistic Locking）</strong></a>
+              <ul>
+                <li><a href="#实现方式-1">实现方式</a></li>
+                <li><a href="#特点-1">特点</a></li>
+                <li><a href="#适用场景-1">适用场景</a></li>
+                <li><a href="#示例-1">示例</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-对比总结">3. <strong>对比总结</strong></a></li>
+            <li><a href="#4-如何选择">4. <strong>如何选择</strong></a></li>
+            <li><a href="#5-实际应用中的注意事项">5. <strong>实际应用中的注意事项</strong></a></li>
           </ul>
         </li>
-        <li><a href="#2-乐观锁optimistic-locking">2. <strong>乐观锁（Optimistic Locking）</strong></a>
+        <li><a href="#mybatis-框架使用了哪些设计模式">mybatis 框架使用了哪些设计模式</a>
           <ul>
-            <li><a href="#实现方式-1">实现方式</a></li>
-            <li><a href="#特点-1">特点</a></li>
-            <li><a href="#适用场景-1">适用场景</a></li>
-            <li><a href="#示例-1">示例</a></li>
+            <li><a href="#1-builder模式">1. <strong>Builder模式</strong></a></li>
+            <li><a href="#2-工厂模式">2. <strong>工厂模式</strong></a></li>
+            <li><a href="#3-单例模式">3. <strong>单例模式</strong></a></li>
+            <li><a href="#4-代理模式">4. <strong>代理模式</strong></a></li>
+            <li><a href="#5-装饰器模式">5. <strong>装饰器模式</strong></a></li>
+            <li><a href="#6-模板方法模式">6. <strong>模板方法模式</strong></a></li>
+            <li><a href="#7-适配器模式">7. <strong>适配器模式</strong></a></li>
+            <li><a href="#8-组合模式">8. <strong>组合模式</strong></a></li>
+            <li><a href="#9-迭代器模式">9. <strong>迭代器模式</strong></a></li>
+            <li><a href="#总结-1">总结</a></li>
           </ul>
         </li>
-        <li><a href="#3-对比总结">3. <strong>对比总结</strong></a></li>
-        <li><a href="#4-如何选择">4. <strong>如何选择</strong></a></li>
-        <li><a href="#5-实际应用中的注意事项">5. <strong>实际应用中的注意事项</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#mybatis-框架使用了哪些设计模式">mybatis 框架使用了哪些设计模式</a>
-      <ul>
-        <li><a href="#1-builder模式">1. <strong>Builder模式</strong></a></li>
-        <li><a href="#2-工厂模式">2. <strong>工厂模式</strong></a></li>
-        <li><a href="#3-单例模式">3. <strong>单例模式</strong></a></li>
-        <li><a href="#4-代理模式">4. <strong>代理模式</strong></a></li>
-        <li><a href="#5-装饰器模式">5. <strong>装饰器模式</strong></a></li>
-        <li><a href="#6-模板方法模式">6. <strong>模板方法模式</strong></a></li>
-        <li><a href="#7-适配器模式">7. <strong>适配器模式</strong></a></li>
-        <li><a href="#8-组合模式">8. <strong>组合模式</strong></a></li>
-        <li><a href="#9-迭代器模式">9. <strong>迭代器模式</strong></a></li>
-        <li><a href="#总结-1">总结</a></li>
       </ul>
     </li>
   </ul>
@@ -1881,7 +1885,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/21d3722c34a1c4d34d72a1190641e2127a91c745" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d22cce5b375164ec5e27179ef6afa8ca7f3c00d" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
@@ -1919,68 +1923,72 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#mybatis是怎么进行事务管理的-2025-02-08">mybatis是怎么进行事务管理的 2025-02-08</a>
+    <li>
       <ul>
-        <li><a href="#1-使用-jdbc-事务管理">1. 使用 JDBC 事务管理</a></li>
-        <li><a href="#2-集成-spring-事务管理">2. 集成 Spring 事务管理</a>
+        <li><a href="#mybatis是怎么进行事务管理的-2025-02-08">mybatis是怎么进行事务管理的 2025-02-08</a>
           <ul>
-            <li><a href="#21-声明式事务管理">2.1 声明式事务管理</a></li>
-            <li><a href="#22-编程式事务管理">2.2 编程式事务管理</a></li>
+            <li><a href="#1-使用-jdbc-事务管理">1. 使用 JDBC 事务管理</a></li>
+            <li><a href="#2-集成-spring-事务管理">2. 集成 Spring 事务管理</a>
+              <ul>
+                <li><a href="#21-声明式事务管理">2.1 声明式事务管理</a></li>
+                <li><a href="#22-编程式事务管理">2.2 编程式事务管理</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-使用-java-ee-容器的事务管理">3. 使用 Java EE 容器的事务管理</a></li>
+            <li><a href="#总结">总结</a></li>
           </ul>
         </li>
-        <li><a href="#3-使用-java-ee-容器的事务管理">3. 使用 Java EE 容器的事务管理</a></li>
-        <li><a href="#总结">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#我使用springboot框架我在一个方法中使用mybatis提供的mapper方法插入了一条数据但是我没有在方法上使用transactional注解这种情况下有事务吗-2025-02-08">我使用springboot框架，我在一个方法中使用mybatis提供的mapper方法插入了一条数据，但是我没有在方法上使用@Transactional注解，这种情况下有事务吗 2025-02-08</a>
-      <ul>
-        <li><a href="#1-没有事务的情况">1. <strong>没有事务的情况</strong></a></li>
-        <li><a href="#2-可能的风险">2. <strong>可能的风险</strong></a></li>
-        <li><a href="#3-如何验证没有事务">3. <strong>如何验证没有事务</strong></a></li>
-        <li><a href="#4-如何启用事务">4. <strong>如何启用事务</strong></a>
+        <li><a href="#我使用springboot框架我在一个方法中使用mybatis提供的mapper方法插入了一条数据但是我没有在方法上使用transactional注解这种情况下有事务吗-2025-02-08">我使用springboot框架，我在一个方法中使用mybatis提供的mapper方法插入了一条数据，但是我没有在方法上使用@Transactional注解，这种情况下有事务吗 2025-02-08</a>
           <ul>
-            <li><a href="#41-使用-transactional-注解">4.1 使用 <code>@Transactional</code> 注解</a></li>
-            <li><a href="#42-配置事务管理器">4.2 配置事务管理器</a></li>
+            <li><a href="#1-没有事务的情况">1. <strong>没有事务的情况</strong></a></li>
+            <li><a href="#2-可能的风险">2. <strong>可能的风险</strong></a></li>
+            <li><a href="#3-如何验证没有事务">3. <strong>如何验证没有事务</strong></a></li>
+            <li><a href="#4-如何启用事务">4. <strong>如何启用事务</strong></a>
+              <ul>
+                <li><a href="#41-使用-transactional-注解">4.1 使用 <code>@Transactional</code> 注解</a></li>
+                <li><a href="#42-配置事务管理器">4.2 配置事务管理器</a></li>
+              </ul>
+            </li>
+            <li><a href="#5-总结">5. <strong>总结</strong></a></li>
           </ul>
         </li>
-        <li><a href="#5-总结">5. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#什么是乐观锁悲观锁-2025-02-08">什么是乐观锁、悲观锁 2025-02-08</a>
-      <ul>
-        <li><a href="#1-悲观锁pessimistic-locking">1. <strong>悲观锁（Pessimistic Locking）</strong></a>
+        <li><a href="#什么是乐观锁悲观锁-2025-02-08">什么是乐观锁、悲观锁 2025-02-08</a>
           <ul>
-            <li><a href="#实现方式">实现方式</a></li>
-            <li><a href="#特点">特点</a></li>
-            <li><a href="#适用场景">适用场景</a></li>
-            <li><a href="#示例">示例</a></li>
+            <li><a href="#1-悲观锁pessimistic-locking">1. <strong>悲观锁（Pessimistic Locking）</strong></a>
+              <ul>
+                <li><a href="#实现方式">实现方式</a></li>
+                <li><a href="#特点">特点</a></li>
+                <li><a href="#适用场景">适用场景</a></li>
+                <li><a href="#示例">示例</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-乐观锁optimistic-locking">2. <strong>乐观锁（Optimistic Locking）</strong></a>
+              <ul>
+                <li><a href="#实现方式-1">实现方式</a></li>
+                <li><a href="#特点-1">特点</a></li>
+                <li><a href="#适用场景-1">适用场景</a></li>
+                <li><a href="#示例-1">示例</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-对比总结">3. <strong>对比总结</strong></a></li>
+            <li><a href="#4-如何选择">4. <strong>如何选择</strong></a></li>
+            <li><a href="#5-实际应用中的注意事项">5. <strong>实际应用中的注意事项</strong></a></li>
           </ul>
         </li>
-        <li><a href="#2-乐观锁optimistic-locking">2. <strong>乐观锁（Optimistic Locking）</strong></a>
+        <li><a href="#mybatis-框架使用了哪些设计模式">mybatis 框架使用了哪些设计模式</a>
           <ul>
-            <li><a href="#实现方式-1">实现方式</a></li>
-            <li><a href="#特点-1">特点</a></li>
-            <li><a href="#适用场景-1">适用场景</a></li>
-            <li><a href="#示例-1">示例</a></li>
+            <li><a href="#1-builder模式">1. <strong>Builder模式</strong></a></li>
+            <li><a href="#2-工厂模式">2. <strong>工厂模式</strong></a></li>
+            <li><a href="#3-单例模式">3. <strong>单例模式</strong></a></li>
+            <li><a href="#4-代理模式">4. <strong>代理模式</strong></a></li>
+            <li><a href="#5-装饰器模式">5. <strong>装饰器模式</strong></a></li>
+            <li><a href="#6-模板方法模式">6. <strong>模板方法模式</strong></a></li>
+            <li><a href="#7-适配器模式">7. <strong>适配器模式</strong></a></li>
+            <li><a href="#8-组合模式">8. <strong>组合模式</strong></a></li>
+            <li><a href="#9-迭代器模式">9. <strong>迭代器模式</strong></a></li>
+            <li><a href="#总结-1">总结</a></li>
           </ul>
         </li>
-        <li><a href="#3-对比总结">3. <strong>对比总结</strong></a></li>
-        <li><a href="#4-如何选择">4. <strong>如何选择</strong></a></li>
-        <li><a href="#5-实际应用中的注意事项">5. <strong>实际应用中的注意事项</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#mybatis-框架使用了哪些设计模式">mybatis 框架使用了哪些设计模式</a>
-      <ul>
-        <li><a href="#1-builder模式">1. <strong>Builder模式</strong></a></li>
-        <li><a href="#2-工厂模式">2. <strong>工厂模式</strong></a></li>
-        <li><a href="#3-单例模式">3. <strong>单例模式</strong></a></li>
-        <li><a href="#4-代理模式">4. <strong>代理模式</strong></a></li>
-        <li><a href="#5-装饰器模式">5. <strong>装饰器模式</strong></a></li>
-        <li><a href="#6-模板方法模式">6. <strong>模板方法模式</strong></a></li>
-        <li><a href="#7-适配器模式">7. <strong>适配器模式</strong></a></li>
-        <li><a href="#8-组合模式">8. <strong>组合模式</strong></a></li>
-        <li><a href="#9-迭代器模式">9. <strong>迭代器模式</strong></a></li>
-        <li><a href="#总结-1">总结</a></li>
       </ul>
     </li>
   </ul>

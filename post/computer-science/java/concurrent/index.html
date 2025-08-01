@@ -486,7 +486,7 @@ tryAcquireReleased
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-01T14:34:25+08:00">
+    <meta property="article:modified_time" content="2025-08-01T14:39:10+08:00">
 <title>concurrent | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
@@ -1770,72 +1770,76 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#synchronized">synchronized</a>
+    <li><a href="#concurrent">concurrent</a>
       <ul>
-        <li><a href="#synchronized-的底层原理是什么">synchronized 的底层原理是什么？</a></li>
-      </ul>
-    </li>
-    <li><a href="#concurrenthashmap">ConcurrentHashMap</a></li>
-    <li><a href="#concurrentlinkedhashmap">ConcurrentLinkedHashMap</a>
-      <ul>
-        <li><a href="#比较-concurrenthash-和-concurrentlinkedhashmap">比较 ConcurrentHash 和 ConcurrentLinkedHashMap</a></li>
-      </ul>
-    </li>
-    <li><a href="#线程池">线程池</a>
-      <ul>
-        <li><a href="#线程池的核心参数">线程池的核心参数</a></li>
-        <li><a href="#线程池的关键参数比如核心线程数等待队列拒绝策略在创建的时候做什么考虑">线程池的关键参数，比如核心线程数、等待队列、拒绝策略，在创建的时候做什么考虑</a></li>
-        <li><a href="#线程池拒绝策略有哪些你项目通常选用哪个遇到重要场景触发拒绝策略必须需要处理任务你如何处理">线程池拒绝策略有哪些，你项目通常选用哪个，遇到重要场景触发拒绝策略必须需要处理任务你如何处理</a></li>
-        <li><a href="#如何实现动态线程池">如何实现动态线程池？</a></li>
-        <li><a href="#jdk-创建线程池有哪些方式">JDK 创建线程池有哪些方式</a></li>
-      </ul>
-    </li>
-    <li><a href="#进程间通信">进程间通信</a></li>
-    <li><a href="#juc">JUC</a>
-      <ul>
-        <li><a href="#juc-包下的7大类">JUC 包下的7大类</a></li>
-      </ul>
-    </li>
-    <li><a href="#threadlocal">ThreadLocal</a>
-      <ul>
-        <li><a href="#threadlocal-原理">ThreadLocal 原理</a></li>
-      </ul>
-    </li>
-    <li><a href="#锁">锁</a>
-      <ul>
-        <li><a href="#java里的锁有哪些">Java里的锁有哪些</a></li>
-        <li><a href="#锁升级">锁升级</a>
+        <li><a href="#synchronized">synchronized</a>
           <ul>
-            <li><a href="#锁升级的过程">锁升级的过程</a></li>
-            <li><a href="#锁升级的4个阶段是什么">锁升级的4个阶段是什么？</a></li>
+            <li><a href="#synchronized-的底层原理是什么">synchronized 的底层原理是什么？</a></li>
           </ul>
         </li>
-        <li><a href="#公平非公平">公平、非公平</a>
+        <li><a href="#concurrenthashmap">ConcurrentHashMap</a></li>
+        <li><a href="#concurrentlinkedhashmap">ConcurrentLinkedHashMap</a>
           <ul>
-            <li><a href="#什么是公平锁非公平锁">什么是公平锁、非公平锁？</a></li>
-            <li><a href="#synchronized-是公平的还是不公平的">synchronized 是公平的还是不公平的？</a></li>
-            <li><a href="#reentrantlock-公平性">ReentrantLock 公平性</a></li>
+            <li><a href="#比较-concurrenthash-和-concurrentlinkedhashmap">比较 ConcurrentHash 和 ConcurrentLinkedHashMap</a></li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><a href="#cas">CAS</a>
-      <ul>
-        <li><a href="#什么是cas">什么是CAS</a></li>
-      </ul>
-    </li>
-    <li><a href="#aqs">AQS</a>
-      <ul>
-        <li><a href="#什么是aqs">什么是AQS</a></li>
-        <li><a href="#aqs的核心概念是什么">AQS的核心概念是什么？</a></li>
-        <li><a href="#aqs的模板方法有哪些">AQS的模板方法有哪些？</a></li>
-      </ul>
-    </li>
-    <li><a href="#aba-问题">ABA 问题</a>
-      <ul>
-        <li><a href="#aba问题产生的原因是什么">ABA问题产生的原因是什么？</a></li>
-        <li><a href="#如何解决aba问题">如何解决ABA问题？</a></li>
-        <li><a href="#jdk提供的原子变量类会存在aba问题吗">JDK提供的原子变量类会存在ABA问题吗？</a></li>
+        <li><a href="#线程池">线程池</a>
+          <ul>
+            <li><a href="#线程池的核心参数">线程池的核心参数</a></li>
+            <li><a href="#线程池的关键参数比如核心线程数等待队列拒绝策略在创建的时候做什么考虑">线程池的关键参数，比如核心线程数、等待队列、拒绝策略，在创建的时候做什么考虑</a></li>
+            <li><a href="#线程池拒绝策略有哪些你项目通常选用哪个遇到重要场景触发拒绝策略必须需要处理任务你如何处理">线程池拒绝策略有哪些，你项目通常选用哪个，遇到重要场景触发拒绝策略必须需要处理任务你如何处理</a></li>
+            <li><a href="#如何实现动态线程池">如何实现动态线程池？</a></li>
+            <li><a href="#jdk-创建线程池有哪些方式">JDK 创建线程池有哪些方式</a></li>
+          </ul>
+        </li>
+        <li><a href="#进程间通信">进程间通信</a></li>
+        <li><a href="#juc">JUC</a>
+          <ul>
+            <li><a href="#juc-包下的7大类">JUC 包下的7大类</a></li>
+          </ul>
+        </li>
+        <li><a href="#threadlocal">ThreadLocal</a>
+          <ul>
+            <li><a href="#threadlocal-原理">ThreadLocal 原理</a></li>
+          </ul>
+        </li>
+        <li><a href="#锁">锁</a>
+          <ul>
+            <li><a href="#java里的锁有哪些">Java里的锁有哪些</a></li>
+            <li><a href="#锁升级">锁升级</a>
+              <ul>
+                <li><a href="#锁升级的过程">锁升级的过程</a></li>
+                <li><a href="#锁升级的4个阶段是什么">锁升级的4个阶段是什么？</a></li>
+              </ul>
+            </li>
+            <li><a href="#公平非公平">公平、非公平</a>
+              <ul>
+                <li><a href="#什么是公平锁非公平锁">什么是公平锁、非公平锁？</a></li>
+                <li><a href="#synchronized-是公平的还是不公平的">synchronized 是公平的还是不公平的？</a></li>
+                <li><a href="#reentrantlock-公平性">ReentrantLock 公平性</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#cas">CAS</a>
+          <ul>
+            <li><a href="#什么是cas">什么是CAS</a></li>
+          </ul>
+        </li>
+        <li><a href="#aqs">AQS</a>
+          <ul>
+            <li><a href="#什么是aqs">什么是AQS</a></li>
+            <li><a href="#aqs的核心概念是什么">AQS的核心概念是什么？</a></li>
+            <li><a href="#aqs的模板方法有哪些">AQS的模板方法有哪些？</a></li>
+          </ul>
+        </li>
+        <li><a href="#aba-问题">ABA 问题</a>
+          <ul>
+            <li><a href="#aba问题产生的原因是什么">ABA问题产生的原因是什么？</a></li>
+            <li><a href="#如何解决aba问题">如何解决ABA问题？</a></li>
+            <li><a href="#jdk提供的原子变量类会存在aba问题吗">JDK提供的原子变量类会存在ABA问题吗？</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -2333,7 +2337,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/21d3722c34a1c4d34d72a1190641e2127a91c745" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d22cce5b375164ec5e27179ef6afa8ca7f3c00d" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
@@ -2371,72 +2375,76 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#synchronized">synchronized</a>
+    <li><a href="#concurrent">concurrent</a>
       <ul>
-        <li><a href="#synchronized-的底层原理是什么">synchronized 的底层原理是什么？</a></li>
-      </ul>
-    </li>
-    <li><a href="#concurrenthashmap">ConcurrentHashMap</a></li>
-    <li><a href="#concurrentlinkedhashmap">ConcurrentLinkedHashMap</a>
-      <ul>
-        <li><a href="#比较-concurrenthash-和-concurrentlinkedhashmap">比较 ConcurrentHash 和 ConcurrentLinkedHashMap</a></li>
-      </ul>
-    </li>
-    <li><a href="#线程池">线程池</a>
-      <ul>
-        <li><a href="#线程池的核心参数">线程池的核心参数</a></li>
-        <li><a href="#线程池的关键参数比如核心线程数等待队列拒绝策略在创建的时候做什么考虑">线程池的关键参数，比如核心线程数、等待队列、拒绝策略，在创建的时候做什么考虑</a></li>
-        <li><a href="#线程池拒绝策略有哪些你项目通常选用哪个遇到重要场景触发拒绝策略必须需要处理任务你如何处理">线程池拒绝策略有哪些，你项目通常选用哪个，遇到重要场景触发拒绝策略必须需要处理任务你如何处理</a></li>
-        <li><a href="#如何实现动态线程池">如何实现动态线程池？</a></li>
-        <li><a href="#jdk-创建线程池有哪些方式">JDK 创建线程池有哪些方式</a></li>
-      </ul>
-    </li>
-    <li><a href="#进程间通信">进程间通信</a></li>
-    <li><a href="#juc">JUC</a>
-      <ul>
-        <li><a href="#juc-包下的7大类">JUC 包下的7大类</a></li>
-      </ul>
-    </li>
-    <li><a href="#threadlocal">ThreadLocal</a>
-      <ul>
-        <li><a href="#threadlocal-原理">ThreadLocal 原理</a></li>
-      </ul>
-    </li>
-    <li><a href="#锁">锁</a>
-      <ul>
-        <li><a href="#java里的锁有哪些">Java里的锁有哪些</a></li>
-        <li><a href="#锁升级">锁升级</a>
+        <li><a href="#synchronized">synchronized</a>
           <ul>
-            <li><a href="#锁升级的过程">锁升级的过程</a></li>
-            <li><a href="#锁升级的4个阶段是什么">锁升级的4个阶段是什么？</a></li>
+            <li><a href="#synchronized-的底层原理是什么">synchronized 的底层原理是什么？</a></li>
           </ul>
         </li>
-        <li><a href="#公平非公平">公平、非公平</a>
+        <li><a href="#concurrenthashmap">ConcurrentHashMap</a></li>
+        <li><a href="#concurrentlinkedhashmap">ConcurrentLinkedHashMap</a>
           <ul>
-            <li><a href="#什么是公平锁非公平锁">什么是公平锁、非公平锁？</a></li>
-            <li><a href="#synchronized-是公平的还是不公平的">synchronized 是公平的还是不公平的？</a></li>
-            <li><a href="#reentrantlock-公平性">ReentrantLock 公平性</a></li>
+            <li><a href="#比较-concurrenthash-和-concurrentlinkedhashmap">比较 ConcurrentHash 和 ConcurrentLinkedHashMap</a></li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><a href="#cas">CAS</a>
-      <ul>
-        <li><a href="#什么是cas">什么是CAS</a></li>
-      </ul>
-    </li>
-    <li><a href="#aqs">AQS</a>
-      <ul>
-        <li><a href="#什么是aqs">什么是AQS</a></li>
-        <li><a href="#aqs的核心概念是什么">AQS的核心概念是什么？</a></li>
-        <li><a href="#aqs的模板方法有哪些">AQS的模板方法有哪些？</a></li>
-      </ul>
-    </li>
-    <li><a href="#aba-问题">ABA 问题</a>
-      <ul>
-        <li><a href="#aba问题产生的原因是什么">ABA问题产生的原因是什么？</a></li>
-        <li><a href="#如何解决aba问题">如何解决ABA问题？</a></li>
-        <li><a href="#jdk提供的原子变量类会存在aba问题吗">JDK提供的原子变量类会存在ABA问题吗？</a></li>
+        <li><a href="#线程池">线程池</a>
+          <ul>
+            <li><a href="#线程池的核心参数">线程池的核心参数</a></li>
+            <li><a href="#线程池的关键参数比如核心线程数等待队列拒绝策略在创建的时候做什么考虑">线程池的关键参数，比如核心线程数、等待队列、拒绝策略，在创建的时候做什么考虑</a></li>
+            <li><a href="#线程池拒绝策略有哪些你项目通常选用哪个遇到重要场景触发拒绝策略必须需要处理任务你如何处理">线程池拒绝策略有哪些，你项目通常选用哪个，遇到重要场景触发拒绝策略必须需要处理任务你如何处理</a></li>
+            <li><a href="#如何实现动态线程池">如何实现动态线程池？</a></li>
+            <li><a href="#jdk-创建线程池有哪些方式">JDK 创建线程池有哪些方式</a></li>
+          </ul>
+        </li>
+        <li><a href="#进程间通信">进程间通信</a></li>
+        <li><a href="#juc">JUC</a>
+          <ul>
+            <li><a href="#juc-包下的7大类">JUC 包下的7大类</a></li>
+          </ul>
+        </li>
+        <li><a href="#threadlocal">ThreadLocal</a>
+          <ul>
+            <li><a href="#threadlocal-原理">ThreadLocal 原理</a></li>
+          </ul>
+        </li>
+        <li><a href="#锁">锁</a>
+          <ul>
+            <li><a href="#java里的锁有哪些">Java里的锁有哪些</a></li>
+            <li><a href="#锁升级">锁升级</a>
+              <ul>
+                <li><a href="#锁升级的过程">锁升级的过程</a></li>
+                <li><a href="#锁升级的4个阶段是什么">锁升级的4个阶段是什么？</a></li>
+              </ul>
+            </li>
+            <li><a href="#公平非公平">公平、非公平</a>
+              <ul>
+                <li><a href="#什么是公平锁非公平锁">什么是公平锁、非公平锁？</a></li>
+                <li><a href="#synchronized-是公平的还是不公平的">synchronized 是公平的还是不公平的？</a></li>
+                <li><a href="#reentrantlock-公平性">ReentrantLock 公平性</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#cas">CAS</a>
+          <ul>
+            <li><a href="#什么是cas">什么是CAS</a></li>
+          </ul>
+        </li>
+        <li><a href="#aqs">AQS</a>
+          <ul>
+            <li><a href="#什么是aqs">什么是AQS</a></li>
+            <li><a href="#aqs的核心概念是什么">AQS的核心概念是什么？</a></li>
+            <li><a href="#aqs的模板方法有哪些">AQS的模板方法有哪些？</a></li>
+          </ul>
+        </li>
+        <li><a href="#aba-问题">ABA 问题</a>
+          <ul>
+            <li><a href="#aba问题产生的原因是什么">ABA问题产生的原因是什么？</a></li>
+            <li><a href="#如何解决aba问题">如何解决ABA问题？</a></li>
+            <li><a href="#jdk提供的原子变量类会存在aba问题吗">JDK提供的原子变量类会存在ABA问题吗？</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>

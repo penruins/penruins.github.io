@@ -50,7 +50,7 @@ import java.util.LinkedList; import java.util.List; public class Main { public s
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
     <meta property="article:published_time" content="2024-11-14T08:59:49+08:00">
-    <meta property="article:modified_time" content="2025-08-01T14:34:25+08:00">
+    <meta property="article:modified_time" content="2025-08-01T14:39:10+08:00">
 <title>Algorithm | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
@@ -1334,202 +1334,207 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#tips">Tips</a>
+    <li><a href="#algorithm">Algorithm</a>
       <ul>
-        <li><a href="#如果我要创建一个列表并且需要一直在列表的开头插入元素我要怎么实现代码保证效率">如果我要创建一个列表，并且需要一直在列表的开头插入元素，我要怎么实现代码保证效率</a></li>
-        <li><a href="#linkedlist-在任意位置插入和删除节点时间复杂度都是o1吗">LinkedList 在任意位置插入和删除节点，时间复杂度都是O(1)吗？</a></li>
-        <li><a href="#如果我要不断往list的末尾添加元素是使用linkedlist还是arraylist">如果我要不断往list的末尾添加元素，是使用LinkedList还是ArrayList？</a></li>
-        <li><a href="#如果我想要构造一个字符串我会不断往字符串头部添加字符我该怎么编码保证效率">如果我想要构造一个字符串，我会不断往字符串头部添加字符，我该怎么编码保证效率</a></li>
-      </ul>
-    </li>
-    <li><a href="#面试经典150题">面试经典150题</a>
-      <ul>
-        <li><a href="#数组字符串">数组/字符串</a>
+        <li><a href="#tips">Tips</a>
           <ul>
-            <li><a href="#移除元素">移除元素</a></li>
+            <li><a href="#如果我要创建一个列表并且需要一直在列表的开头插入元素我要怎么实现代码保证效率">如果我要创建一个列表，并且需要一直在列表的开头插入元素，我要怎么实现代码保证效率</a></li>
+            <li><a href="#linkedlist-在任意位置插入和删除节点时间复杂度都是o1吗">LinkedList 在任意位置插入和删除节点，时间复杂度都是O(1)吗？</a></li>
+            <li><a href="#如果我要不断往list的末尾添加元素是使用linkedlist还是arraylist">如果我要不断往list的末尾添加元素，是使用LinkedList还是ArrayList？</a></li>
+            <li><a href="#如果我想要构造一个字符串我会不断往字符串头部添加字符我该怎么编码保证效率">如果我想要构造一个字符串，我会不断往字符串头部添加字符，我该怎么编码保证效率</a></li>
           </ul>
         </li>
-        <li><a href="#一维动态规划">一维动态规划</a>
+        <li><a href="#面试经典150题">面试经典150题</a>
           <ul>
-            <li><a href="#爬楼梯">爬楼梯</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#面试经典150题-1">面试经典150题</a>
-      <ul>
-        <li><a href="#数组字符串-1">数组/字符串</a>
-          <ul>
-            <li><a href="#合并两个有序数组">合并两个有序数组</a></li>
-            <li><a href="#移除元素-1">移除元素</a></li>
-            <li><a href="#删除有序数组中的重复项">删除有序数组中的重复项</a></li>
-            <li><a href="#删除有序数组中的重复项-ii">删除有序数组中的重复项 II</a></li>
-            <li><a href="#多数元素">多数元素</a></li>
-            <li><a href="#轮转数组">轮转数组</a></li>
-            <li><a href="#买卖股票的最佳时机">买卖股票的最佳时机</a></li>
-            <li><a href="#买卖股票的最佳时机-ii">买卖股票的最佳时机 II</a></li>
-            <li><a href="#跳跃游戏">跳跃游戏</a></li>
-            <li><a href="#跳跃游戏-ii">跳跃游戏 II</a></li>
-            <li><a href="#h-指数">H 指数</a></li>
-          </ul>
-        </li>
-        <li><a href="#双指针">双指针</a>
-          <ul>
-            <li><a href="#验证回文串">验证回文串</a></li>
-            <li><a href="#判断子序列">判断子序列</a></li>
-            <li><a href="#两数之和-ii---输入有序数组">两数之和 II - 输入有序数组</a></li>
-          </ul>
-        </li>
-        <li><a href="#滑动窗口">滑动窗口</a>
-          <ul>
-            <li><a href="#长度最小的子数组">长度最小的子数组</a></li>
-            <li><a href="#无重复字符的最长子串">无重复字符的最长子串</a></li>
-            <li><a href="#串联所有单词的子串">串联所有单词的子串</a></li>
-            <li><a href="#最小覆盖子串">最小覆盖子串</a></li>
-          </ul>
-        </li>
-        <li><a href="#矩阵">矩阵</a>
-          <ul>
-            <li><a href="#有效的数独">有效的数独</a></li>
-            <li><a href="#螺旋矩阵">螺旋矩阵</a></li>
-            <li><a href="#旋转图像">旋转图像</a></li>
-            <li><a href="#矩阵置零">矩阵置零</a></li>
-            <li><a href="#生命游戏">生命游戏</a></li>
-          </ul>
-        </li>
-        <li><a href="#-哈希表">✅ 哈希表</a>
-          <ul>
-            <li><a href="#-赎金信">✅ 赎金信</a></li>
-            <li><a href="#-同构字符串">✅ 同构字符串</a></li>
-            <li><a href="#-单词规律">✅ 单词规律</a></li>
-            <li><a href="#-有效的字母异位词">✅ 有效的字母异位词</a></li>
-            <li><a href="#-字母异位词分组">✅ 字母异位词分组</a></li>
-            <li><a href="#-两数之和">✅ 两数之和</a></li>
-            <li><a href="#-快乐数">✅ 快乐数</a></li>
-            <li><a href="#-存在重复元素-ii">✅ 存在重复元素 II</a></li>
-            <li><a href="#-最长连续序列">✅ 最长连续序列</a></li>
-          </ul>
-        </li>
-        <li><a href="#区间">区间</a></li>
-        <li><a href="#栈">栈</a>
-          <ul>
-            <li><a href="#有效的括号">有效的括号</a></li>
-            <li><a href="#简化路径">简化路径</a></li>
-            <li><a href="#最小栈">最小栈</a></li>
-            <li><a href="#逆波兰表达式求值">逆波兰表达式求值</a></li>
-            <li><a href="#基本计算器">基本计算器</a></li>
-          </ul>
-        </li>
-        <li><a href="#链表">链表</a>
-          <ul>
-            <li><a href="#-环形链表">✅ 环形链表</a></li>
-            <li><a href="#-两数相加">✅ 两数相加</a></li>
-            <li><a href="#-合并两个有序链表">✅ 合并两个有序链表</a></li>
-            <li><a href="#-随机链表的复制">✅ 随机链表的复制</a></li>
-            <li><a href="#-反转链表-ii">✅ 反转链表 II</a></li>
-            <li><a href="#k-个一组翻转链表">K 个一组翻转链表</a></li>
-            <li><a href="#-删除链表的倒数第-n-个结点">✅ 删除链表的倒数第 N 个结点</a></li>
-            <li><a href="#-删除排序链表中的重复元素-ii">✅ 删除排序链表中的重复元素 II</a></li>
-            <li><a href="#-旋转链表">✅ 旋转链表</a></li>
-            <li><a href="#-分隔链表">✅ 分隔链表</a></li>
-            <li><a href="#-lru-缓存">✅ LRU 缓存</a></li>
-          </ul>
-        </li>
-        <li><a href="#二叉树">二叉树</a>
-          <ul>
-            <li><a href="#二叉树的最大深度">二叉树的最大深度</a></li>
-            <li><a href="#相同的树">相同的树</a></li>
-            <li><a href="#翻转二叉树">翻转二叉树</a></li>
-            <li><a href="#对称二叉树">对称二叉树</a></li>
-            <li><a href="#从前序与中序遍历序列构造二叉树">从前序与中序遍历序列构造二叉树</a></li>
-            <li><a href="#从中序与后序遍历序列构造二叉树">从中序与后序遍历序列构造二叉树</a></li>
-            <li><a href="#填充每个节点的下一个右侧节点指针-ii">填充每个节点的下一个右侧节点指针 II</a></li>
-            <li><a href="#二叉树展开为链表">二叉树展开为链表</a></li>
-            <li><a href="#路径总和">路径总和</a></li>
-            <li><a href="#求根节点到叶节点数字之和">求根节点到叶节点数字之和</a></li>
-            <li><a href="#二叉树中的最大路径和">二叉树中的最大路径和</a></li>
-            <li><a href="#二叉搜索树迭代器">二叉搜索树迭代器</a></li>
-            <li><a href="#完全二叉树的节点个数">完全二叉树的节点个数</a></li>
-            <li><a href="#二叉树的最近公共祖先">二叉树的最近公共祖先</a></li>
-          </ul>
-        </li>
-        <li><a href="#二叉树层次遍历">二叉树层次遍历</a></li>
-        <li><a href="#二叉搜索树">二叉搜索树</a></li>
-        <li><a href="#图">图</a></li>
-        <li><a href="#图的广度优先搜索">图的广度优先搜索</a></li>
-        <li><a href="#字典树">字典树</a></li>
-        <li><a href="#-回溯">✅ 回溯</a>
-          <ul>
-            <li><a href="#-电话号码的字母组合">✅ 电话号码的字母组合</a></li>
-            <li><a href="#-组合">✅ 组合</a></li>
-            <li><a href="#-全排列">✅ 全排列</a></li>
-            <li><a href="#-组合总和">✅ 组合总和</a></li>
-            <li><a href="#-n-皇后-ii">✅ N 皇后 II</a></li>
-            <li><a href="#-括号生成">✅ 括号生成</a></li>
-            <li><a href="#-单词搜索">✅ 单词搜索</a></li>
-          </ul>
-        </li>
-        <li><a href="#分治">分治</a></li>
-        <li><a href="#kadane算法">kadane算法</a></li>
-        <li><a href="#二分查找">二分查找</a></li>
-        <li><a href="#堆">堆</a></li>
-        <li><a href="#位运算">位运算</a>
-          <ul>
-            <li><a href="#二进制求和">二进制求和</a></li>
-            <li><a href="#颠倒二进制位">颠倒二进制位</a></li>
-            <li><a href="#位1的个数">位1的个数</a></li>
-            <li><a href="#只出现一次的数字">只出现一次的数字</a></li>
-            <li><a href="#只出现一次的数字-ii">只出现一次的数字 II</a></li>
-            <li><a href="#数字范围按位与">数字范围按位与</a></li>
-          </ul>
-        </li>
-        <li><a href="#数学">数学</a>
-          <ul>
-            <li><a href="#回文数">回文数</a></li>
-            <li><a href="#加一">加一</a></li>
-            <li><a href="#阶乘后的零">阶乘后的零</a>
+            <li><a href="#数组字符串">数组/字符串</a>
               <ul>
-                <li><a href="#version-1">version 1</a></li>
-                <li><a href="#version-2">version 2</a></li>
+                <li><a href="#移除元素">移除元素</a></li>
               </ul>
             </li>
-            <li><a href="#x-的平方根">x 的平方根</a></li>
-            <li><a href="#powx-n">Pow(x, n)</a></li>
-            <li><a href="#直线上最多的点数">直线上最多的点数</a></li>
+            <li><a href="#一维动态规划">一维动态规划</a>
+              <ul>
+                <li><a href="#爬楼梯">爬楼梯</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li><a href="#一维动态规划-1">一维动态规划</a></li>
-        <li><a href="#多维动态规划">多维动态规划</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#基础排序算法">基础排序算法</a>
-      <ul>
-        <li><a href="#冒泡排序-bubble-sort">冒泡排序 Bubble Sort</a></li>
-        <li><a href="#选择排序-selection-sort">选择排序 Selection Sort</a></li>
-        <li><a href="#插入排序-insertion-sort">插入排序 Insertion Sort</a></li>
-      </ul>
-    </li>
-    <li><a href="#高效排序算法">高效排序算法</a>
-      <ul>
-        <li><a href="#快速排序-quick-sort">快速排序 Quick Sort</a></li>
-        <li><a href="#归并排序-merge-sort">归并排序 Merge Sort</a>
+        <li><a href="#面试经典150题-1">面试经典150题</a>
           <ul>
-            <li><a href="#迭代实现">迭代实现</a></li>
-            <li><a href="#递归实现">递归实现</a></li>
+            <li><a href="#数组字符串-1">数组/字符串</a>
+              <ul>
+                <li><a href="#合并两个有序数组">合并两个有序数组</a></li>
+                <li><a href="#移除元素-1">移除元素</a></li>
+                <li><a href="#删除有序数组中的重复项">删除有序数组中的重复项</a></li>
+                <li><a href="#删除有序数组中的重复项-ii">删除有序数组中的重复项 II</a></li>
+                <li><a href="#多数元素">多数元素</a></li>
+                <li><a href="#轮转数组">轮转数组</a></li>
+                <li><a href="#买卖股票的最佳时机">买卖股票的最佳时机</a></li>
+                <li><a href="#买卖股票的最佳时机-ii">买卖股票的最佳时机 II</a></li>
+                <li><a href="#跳跃游戏">跳跃游戏</a></li>
+                <li><a href="#跳跃游戏-ii">跳跃游戏 II</a></li>
+                <li><a href="#h-指数">H 指数</a></li>
+              </ul>
+            </li>
+            <li><a href="#双指针">双指针</a>
+              <ul>
+                <li><a href="#验证回文串">验证回文串</a></li>
+                <li><a href="#判断子序列">判断子序列</a></li>
+                <li><a href="#两数之和-ii---输入有序数组">两数之和 II - 输入有序数组</a></li>
+              </ul>
+            </li>
+            <li><a href="#滑动窗口">滑动窗口</a>
+              <ul>
+                <li><a href="#长度最小的子数组">长度最小的子数组</a></li>
+                <li><a href="#无重复字符的最长子串">无重复字符的最长子串</a></li>
+                <li><a href="#串联所有单词的子串">串联所有单词的子串</a></li>
+                <li><a href="#最小覆盖子串">最小覆盖子串</a></li>
+              </ul>
+            </li>
+            <li><a href="#矩阵">矩阵</a>
+              <ul>
+                <li><a href="#有效的数独">有效的数独</a></li>
+                <li><a href="#螺旋矩阵">螺旋矩阵</a></li>
+                <li><a href="#旋转图像">旋转图像</a></li>
+                <li><a href="#矩阵置零">矩阵置零</a></li>
+                <li><a href="#生命游戏">生命游戏</a></li>
+              </ul>
+            </li>
+            <li><a href="#-哈希表">✅ 哈希表</a>
+              <ul>
+                <li><a href="#-赎金信">✅ 赎金信</a></li>
+                <li><a href="#-同构字符串">✅ 同构字符串</a></li>
+                <li><a href="#-单词规律">✅ 单词规律</a></li>
+                <li><a href="#-有效的字母异位词">✅ 有效的字母异位词</a></li>
+                <li><a href="#-字母异位词分组">✅ 字母异位词分组</a></li>
+                <li><a href="#-两数之和">✅ 两数之和</a></li>
+                <li><a href="#-快乐数">✅ 快乐数</a></li>
+                <li><a href="#-存在重复元素-ii">✅ 存在重复元素 II</a></li>
+                <li><a href="#-最长连续序列">✅ 最长连续序列</a></li>
+              </ul>
+            </li>
+            <li><a href="#区间">区间</a></li>
+            <li><a href="#栈">栈</a>
+              <ul>
+                <li><a href="#有效的括号">有效的括号</a></li>
+                <li><a href="#简化路径">简化路径</a></li>
+                <li><a href="#最小栈">最小栈</a></li>
+                <li><a href="#逆波兰表达式求值">逆波兰表达式求值</a></li>
+                <li><a href="#基本计算器">基本计算器</a></li>
+              </ul>
+            </li>
+            <li><a href="#链表">链表</a>
+              <ul>
+                <li><a href="#-环形链表">✅ 环形链表</a></li>
+                <li><a href="#-两数相加">✅ 两数相加</a></li>
+                <li><a href="#-合并两个有序链表">✅ 合并两个有序链表</a></li>
+                <li><a href="#-随机链表的复制">✅ 随机链表的复制</a></li>
+                <li><a href="#-反转链表-ii">✅ 反转链表 II</a></li>
+                <li><a href="#k-个一组翻转链表">K 个一组翻转链表</a></li>
+                <li><a href="#-删除链表的倒数第-n-个结点">✅ 删除链表的倒数第 N 个结点</a></li>
+                <li><a href="#-删除排序链表中的重复元素-ii">✅ 删除排序链表中的重复元素 II</a></li>
+                <li><a href="#-旋转链表">✅ 旋转链表</a></li>
+                <li><a href="#-分隔链表">✅ 分隔链表</a></li>
+                <li><a href="#-lru-缓存">✅ LRU 缓存</a></li>
+              </ul>
+            </li>
+            <li><a href="#二叉树">二叉树</a>
+              <ul>
+                <li><a href="#二叉树的最大深度">二叉树的最大深度</a></li>
+                <li><a href="#相同的树">相同的树</a></li>
+                <li><a href="#翻转二叉树">翻转二叉树</a></li>
+                <li><a href="#对称二叉树">对称二叉树</a></li>
+                <li><a href="#从前序与中序遍历序列构造二叉树">从前序与中序遍历序列构造二叉树</a></li>
+                <li><a href="#从中序与后序遍历序列构造二叉树">从中序与后序遍历序列构造二叉树</a></li>
+                <li><a href="#填充每个节点的下一个右侧节点指针-ii">填充每个节点的下一个右侧节点指针 II</a></li>
+                <li><a href="#二叉树展开为链表">二叉树展开为链表</a></li>
+                <li><a href="#路径总和">路径总和</a></li>
+                <li><a href="#求根节点到叶节点数字之和">求根节点到叶节点数字之和</a></li>
+                <li><a href="#二叉树中的最大路径和">二叉树中的最大路径和</a></li>
+                <li><a href="#二叉搜索树迭代器">二叉搜索树迭代器</a></li>
+                <li><a href="#完全二叉树的节点个数">完全二叉树的节点个数</a></li>
+                <li><a href="#二叉树的最近公共祖先">二叉树的最近公共祖先</a></li>
+              </ul>
+            </li>
+            <li><a href="#二叉树层次遍历">二叉树层次遍历</a></li>
+            <li><a href="#二叉搜索树">二叉搜索树</a></li>
+            <li><a href="#图">图</a></li>
+            <li><a href="#图的广度优先搜索">图的广度优先搜索</a></li>
+            <li><a href="#字典树">字典树</a></li>
+            <li><a href="#-回溯">✅ 回溯</a>
+              <ul>
+                <li><a href="#-电话号码的字母组合">✅ 电话号码的字母组合</a></li>
+                <li><a href="#-组合">✅ 组合</a></li>
+                <li><a href="#-全排列">✅ 全排列</a></li>
+                <li><a href="#-组合总和">✅ 组合总和</a></li>
+                <li><a href="#-n-皇后-ii">✅ N 皇后 II</a></li>
+                <li><a href="#-括号生成">✅ 括号生成</a></li>
+                <li><a href="#-单词搜索">✅ 单词搜索</a></li>
+              </ul>
+            </li>
+            <li><a href="#分治">分治</a></li>
+            <li><a href="#kadane算法">kadane算法</a></li>
+            <li><a href="#二分查找">二分查找</a></li>
+            <li><a href="#堆">堆</a></li>
+            <li><a href="#位运算">位运算</a>
+              <ul>
+                <li><a href="#二进制求和">二进制求和</a></li>
+                <li><a href="#颠倒二进制位">颠倒二进制位</a></li>
+                <li><a href="#位1的个数">位1的个数</a></li>
+                <li><a href="#只出现一次的数字">只出现一次的数字</a></li>
+                <li><a href="#只出现一次的数字-ii">只出现一次的数字 II</a></li>
+                <li><a href="#数字范围按位与">数字范围按位与</a></li>
+              </ul>
+            </li>
+            <li><a href="#数学">数学</a>
+              <ul>
+                <li><a href="#回文数">回文数</a></li>
+                <li><a href="#加一">加一</a></li>
+                <li><a href="#阶乘后的零">阶乘后的零</a>
+                  <ul>
+                    <li><a href="#version-1">version 1</a></li>
+                    <li><a href="#version-2">version 2</a></li>
+                  </ul>
+                </li>
+                <li><a href="#x-的平方根">x 的平方根</a></li>
+                <li><a href="#powx-n">Pow(x, n)</a></li>
+                <li><a href="#直线上最多的点数">直线上最多的点数</a></li>
+              </ul>
+            </li>
+            <li><a href="#一维动态规划-1">一维动态规划</a></li>
+            <li><a href="#多维动态规划">多维动态规划</a></li>
           </ul>
         </li>
-        <li><a href="#堆排序-heap-sort">堆排序 Heap Sort</a></li>
-        <li><a href="#希尔排序-shell-sort">希尔排序 Shell Sort</a></li>
       </ul>
     </li>
-    <li><a href="#特殊场景排序算法">特殊场景排序算法</a>
+    <li><a href="#排序-sort">排序 sort</a>
       <ul>
-        <li><a href="#基数排序-radix-sort">基数排序 Radix Sort</a></li>
-        <li><a href="#计数排序-counting-sort">计数排序 Counting Sort</a></li>
-        <li><a href="#桶排序-bucket-sort">桶排序 Bucket Sort</a></li>
+        <li><a href="#基础排序算法">基础排序算法</a>
+          <ul>
+            <li><a href="#冒泡排序-bubble-sort">冒泡排序 Bubble Sort</a></li>
+            <li><a href="#选择排序-selection-sort">选择排序 Selection Sort</a></li>
+            <li><a href="#插入排序-insertion-sort">插入排序 Insertion Sort</a></li>
+          </ul>
+        </li>
+        <li><a href="#高效排序算法">高效排序算法</a>
+          <ul>
+            <li><a href="#快速排序-quick-sort">快速排序 Quick Sort</a></li>
+            <li><a href="#归并排序-merge-sort">归并排序 Merge Sort</a>
+              <ul>
+                <li><a href="#迭代实现">迭代实现</a></li>
+                <li><a href="#递归实现">递归实现</a></li>
+              </ul>
+            </li>
+            <li><a href="#堆排序-heap-sort">堆排序 Heap Sort</a></li>
+            <li><a href="#希尔排序-shell-sort">希尔排序 Shell Sort</a></li>
+          </ul>
+        </li>
+        <li><a href="#特殊场景排序算法">特殊场景排序算法</a>
+          <ul>
+            <li><a href="#基数排序-radix-sort">基数排序 Radix Sort</a></li>
+            <li><a href="#计数排序-counting-sort">计数排序 Counting Sort</a></li>
+            <li><a href="#桶排序-bucket-sort">桶排序 Bucket Sort</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -3742,7 +3747,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/21d3722c34a1c4d34d72a1190641e2127a91c745" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d22cce5b375164ec5e27179ef6afa8ca7f3c00d" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
@@ -3780,202 +3785,207 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#tips">Tips</a>
+    <li><a href="#algorithm">Algorithm</a>
       <ul>
-        <li><a href="#如果我要创建一个列表并且需要一直在列表的开头插入元素我要怎么实现代码保证效率">如果我要创建一个列表，并且需要一直在列表的开头插入元素，我要怎么实现代码保证效率</a></li>
-        <li><a href="#linkedlist-在任意位置插入和删除节点时间复杂度都是o1吗">LinkedList 在任意位置插入和删除节点，时间复杂度都是O(1)吗？</a></li>
-        <li><a href="#如果我要不断往list的末尾添加元素是使用linkedlist还是arraylist">如果我要不断往list的末尾添加元素，是使用LinkedList还是ArrayList？</a></li>
-        <li><a href="#如果我想要构造一个字符串我会不断往字符串头部添加字符我该怎么编码保证效率">如果我想要构造一个字符串，我会不断往字符串头部添加字符，我该怎么编码保证效率</a></li>
-      </ul>
-    </li>
-    <li><a href="#面试经典150题">面试经典150题</a>
-      <ul>
-        <li><a href="#数组字符串">数组/字符串</a>
+        <li><a href="#tips">Tips</a>
           <ul>
-            <li><a href="#移除元素">移除元素</a></li>
+            <li><a href="#如果我要创建一个列表并且需要一直在列表的开头插入元素我要怎么实现代码保证效率">如果我要创建一个列表，并且需要一直在列表的开头插入元素，我要怎么实现代码保证效率</a></li>
+            <li><a href="#linkedlist-在任意位置插入和删除节点时间复杂度都是o1吗">LinkedList 在任意位置插入和删除节点，时间复杂度都是O(1)吗？</a></li>
+            <li><a href="#如果我要不断往list的末尾添加元素是使用linkedlist还是arraylist">如果我要不断往list的末尾添加元素，是使用LinkedList还是ArrayList？</a></li>
+            <li><a href="#如果我想要构造一个字符串我会不断往字符串头部添加字符我该怎么编码保证效率">如果我想要构造一个字符串，我会不断往字符串头部添加字符，我该怎么编码保证效率</a></li>
           </ul>
         </li>
-        <li><a href="#一维动态规划">一维动态规划</a>
+        <li><a href="#面试经典150题">面试经典150题</a>
           <ul>
-            <li><a href="#爬楼梯">爬楼梯</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#面试经典150题-1">面试经典150题</a>
-      <ul>
-        <li><a href="#数组字符串-1">数组/字符串</a>
-          <ul>
-            <li><a href="#合并两个有序数组">合并两个有序数组</a></li>
-            <li><a href="#移除元素-1">移除元素</a></li>
-            <li><a href="#删除有序数组中的重复项">删除有序数组中的重复项</a></li>
-            <li><a href="#删除有序数组中的重复项-ii">删除有序数组中的重复项 II</a></li>
-            <li><a href="#多数元素">多数元素</a></li>
-            <li><a href="#轮转数组">轮转数组</a></li>
-            <li><a href="#买卖股票的最佳时机">买卖股票的最佳时机</a></li>
-            <li><a href="#买卖股票的最佳时机-ii">买卖股票的最佳时机 II</a></li>
-            <li><a href="#跳跃游戏">跳跃游戏</a></li>
-            <li><a href="#跳跃游戏-ii">跳跃游戏 II</a></li>
-            <li><a href="#h-指数">H 指数</a></li>
-          </ul>
-        </li>
-        <li><a href="#双指针">双指针</a>
-          <ul>
-            <li><a href="#验证回文串">验证回文串</a></li>
-            <li><a href="#判断子序列">判断子序列</a></li>
-            <li><a href="#两数之和-ii---输入有序数组">两数之和 II - 输入有序数组</a></li>
-          </ul>
-        </li>
-        <li><a href="#滑动窗口">滑动窗口</a>
-          <ul>
-            <li><a href="#长度最小的子数组">长度最小的子数组</a></li>
-            <li><a href="#无重复字符的最长子串">无重复字符的最长子串</a></li>
-            <li><a href="#串联所有单词的子串">串联所有单词的子串</a></li>
-            <li><a href="#最小覆盖子串">最小覆盖子串</a></li>
-          </ul>
-        </li>
-        <li><a href="#矩阵">矩阵</a>
-          <ul>
-            <li><a href="#有效的数独">有效的数独</a></li>
-            <li><a href="#螺旋矩阵">螺旋矩阵</a></li>
-            <li><a href="#旋转图像">旋转图像</a></li>
-            <li><a href="#矩阵置零">矩阵置零</a></li>
-            <li><a href="#生命游戏">生命游戏</a></li>
-          </ul>
-        </li>
-        <li><a href="#-哈希表">✅ 哈希表</a>
-          <ul>
-            <li><a href="#-赎金信">✅ 赎金信</a></li>
-            <li><a href="#-同构字符串">✅ 同构字符串</a></li>
-            <li><a href="#-单词规律">✅ 单词规律</a></li>
-            <li><a href="#-有效的字母异位词">✅ 有效的字母异位词</a></li>
-            <li><a href="#-字母异位词分组">✅ 字母异位词分组</a></li>
-            <li><a href="#-两数之和">✅ 两数之和</a></li>
-            <li><a href="#-快乐数">✅ 快乐数</a></li>
-            <li><a href="#-存在重复元素-ii">✅ 存在重复元素 II</a></li>
-            <li><a href="#-最长连续序列">✅ 最长连续序列</a></li>
-          </ul>
-        </li>
-        <li><a href="#区间">区间</a></li>
-        <li><a href="#栈">栈</a>
-          <ul>
-            <li><a href="#有效的括号">有效的括号</a></li>
-            <li><a href="#简化路径">简化路径</a></li>
-            <li><a href="#最小栈">最小栈</a></li>
-            <li><a href="#逆波兰表达式求值">逆波兰表达式求值</a></li>
-            <li><a href="#基本计算器">基本计算器</a></li>
-          </ul>
-        </li>
-        <li><a href="#链表">链表</a>
-          <ul>
-            <li><a href="#-环形链表">✅ 环形链表</a></li>
-            <li><a href="#-两数相加">✅ 两数相加</a></li>
-            <li><a href="#-合并两个有序链表">✅ 合并两个有序链表</a></li>
-            <li><a href="#-随机链表的复制">✅ 随机链表的复制</a></li>
-            <li><a href="#-反转链表-ii">✅ 反转链表 II</a></li>
-            <li><a href="#k-个一组翻转链表">K 个一组翻转链表</a></li>
-            <li><a href="#-删除链表的倒数第-n-个结点">✅ 删除链表的倒数第 N 个结点</a></li>
-            <li><a href="#-删除排序链表中的重复元素-ii">✅ 删除排序链表中的重复元素 II</a></li>
-            <li><a href="#-旋转链表">✅ 旋转链表</a></li>
-            <li><a href="#-分隔链表">✅ 分隔链表</a></li>
-            <li><a href="#-lru-缓存">✅ LRU 缓存</a></li>
-          </ul>
-        </li>
-        <li><a href="#二叉树">二叉树</a>
-          <ul>
-            <li><a href="#二叉树的最大深度">二叉树的最大深度</a></li>
-            <li><a href="#相同的树">相同的树</a></li>
-            <li><a href="#翻转二叉树">翻转二叉树</a></li>
-            <li><a href="#对称二叉树">对称二叉树</a></li>
-            <li><a href="#从前序与中序遍历序列构造二叉树">从前序与中序遍历序列构造二叉树</a></li>
-            <li><a href="#从中序与后序遍历序列构造二叉树">从中序与后序遍历序列构造二叉树</a></li>
-            <li><a href="#填充每个节点的下一个右侧节点指针-ii">填充每个节点的下一个右侧节点指针 II</a></li>
-            <li><a href="#二叉树展开为链表">二叉树展开为链表</a></li>
-            <li><a href="#路径总和">路径总和</a></li>
-            <li><a href="#求根节点到叶节点数字之和">求根节点到叶节点数字之和</a></li>
-            <li><a href="#二叉树中的最大路径和">二叉树中的最大路径和</a></li>
-            <li><a href="#二叉搜索树迭代器">二叉搜索树迭代器</a></li>
-            <li><a href="#完全二叉树的节点个数">完全二叉树的节点个数</a></li>
-            <li><a href="#二叉树的最近公共祖先">二叉树的最近公共祖先</a></li>
-          </ul>
-        </li>
-        <li><a href="#二叉树层次遍历">二叉树层次遍历</a></li>
-        <li><a href="#二叉搜索树">二叉搜索树</a></li>
-        <li><a href="#图">图</a></li>
-        <li><a href="#图的广度优先搜索">图的广度优先搜索</a></li>
-        <li><a href="#字典树">字典树</a></li>
-        <li><a href="#-回溯">✅ 回溯</a>
-          <ul>
-            <li><a href="#-电话号码的字母组合">✅ 电话号码的字母组合</a></li>
-            <li><a href="#-组合">✅ 组合</a></li>
-            <li><a href="#-全排列">✅ 全排列</a></li>
-            <li><a href="#-组合总和">✅ 组合总和</a></li>
-            <li><a href="#-n-皇后-ii">✅ N 皇后 II</a></li>
-            <li><a href="#-括号生成">✅ 括号生成</a></li>
-            <li><a href="#-单词搜索">✅ 单词搜索</a></li>
-          </ul>
-        </li>
-        <li><a href="#分治">分治</a></li>
-        <li><a href="#kadane算法">kadane算法</a></li>
-        <li><a href="#二分查找">二分查找</a></li>
-        <li><a href="#堆">堆</a></li>
-        <li><a href="#位运算">位运算</a>
-          <ul>
-            <li><a href="#二进制求和">二进制求和</a></li>
-            <li><a href="#颠倒二进制位">颠倒二进制位</a></li>
-            <li><a href="#位1的个数">位1的个数</a></li>
-            <li><a href="#只出现一次的数字">只出现一次的数字</a></li>
-            <li><a href="#只出现一次的数字-ii">只出现一次的数字 II</a></li>
-            <li><a href="#数字范围按位与">数字范围按位与</a></li>
-          </ul>
-        </li>
-        <li><a href="#数学">数学</a>
-          <ul>
-            <li><a href="#回文数">回文数</a></li>
-            <li><a href="#加一">加一</a></li>
-            <li><a href="#阶乘后的零">阶乘后的零</a>
+            <li><a href="#数组字符串">数组/字符串</a>
               <ul>
-                <li><a href="#version-1">version 1</a></li>
-                <li><a href="#version-2">version 2</a></li>
+                <li><a href="#移除元素">移除元素</a></li>
               </ul>
             </li>
-            <li><a href="#x-的平方根">x 的平方根</a></li>
-            <li><a href="#powx-n">Pow(x, n)</a></li>
-            <li><a href="#直线上最多的点数">直线上最多的点数</a></li>
+            <li><a href="#一维动态规划">一维动态规划</a>
+              <ul>
+                <li><a href="#爬楼梯">爬楼梯</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li><a href="#一维动态规划-1">一维动态规划</a></li>
-        <li><a href="#多维动态规划">多维动态规划</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#基础排序算法">基础排序算法</a>
-      <ul>
-        <li><a href="#冒泡排序-bubble-sort">冒泡排序 Bubble Sort</a></li>
-        <li><a href="#选择排序-selection-sort">选择排序 Selection Sort</a></li>
-        <li><a href="#插入排序-insertion-sort">插入排序 Insertion Sort</a></li>
-      </ul>
-    </li>
-    <li><a href="#高效排序算法">高效排序算法</a>
-      <ul>
-        <li><a href="#快速排序-quick-sort">快速排序 Quick Sort</a></li>
-        <li><a href="#归并排序-merge-sort">归并排序 Merge Sort</a>
+        <li><a href="#面试经典150题-1">面试经典150题</a>
           <ul>
-            <li><a href="#迭代实现">迭代实现</a></li>
-            <li><a href="#递归实现">递归实现</a></li>
+            <li><a href="#数组字符串-1">数组/字符串</a>
+              <ul>
+                <li><a href="#合并两个有序数组">合并两个有序数组</a></li>
+                <li><a href="#移除元素-1">移除元素</a></li>
+                <li><a href="#删除有序数组中的重复项">删除有序数组中的重复项</a></li>
+                <li><a href="#删除有序数组中的重复项-ii">删除有序数组中的重复项 II</a></li>
+                <li><a href="#多数元素">多数元素</a></li>
+                <li><a href="#轮转数组">轮转数组</a></li>
+                <li><a href="#买卖股票的最佳时机">买卖股票的最佳时机</a></li>
+                <li><a href="#买卖股票的最佳时机-ii">买卖股票的最佳时机 II</a></li>
+                <li><a href="#跳跃游戏">跳跃游戏</a></li>
+                <li><a href="#跳跃游戏-ii">跳跃游戏 II</a></li>
+                <li><a href="#h-指数">H 指数</a></li>
+              </ul>
+            </li>
+            <li><a href="#双指针">双指针</a>
+              <ul>
+                <li><a href="#验证回文串">验证回文串</a></li>
+                <li><a href="#判断子序列">判断子序列</a></li>
+                <li><a href="#两数之和-ii---输入有序数组">两数之和 II - 输入有序数组</a></li>
+              </ul>
+            </li>
+            <li><a href="#滑动窗口">滑动窗口</a>
+              <ul>
+                <li><a href="#长度最小的子数组">长度最小的子数组</a></li>
+                <li><a href="#无重复字符的最长子串">无重复字符的最长子串</a></li>
+                <li><a href="#串联所有单词的子串">串联所有单词的子串</a></li>
+                <li><a href="#最小覆盖子串">最小覆盖子串</a></li>
+              </ul>
+            </li>
+            <li><a href="#矩阵">矩阵</a>
+              <ul>
+                <li><a href="#有效的数独">有效的数独</a></li>
+                <li><a href="#螺旋矩阵">螺旋矩阵</a></li>
+                <li><a href="#旋转图像">旋转图像</a></li>
+                <li><a href="#矩阵置零">矩阵置零</a></li>
+                <li><a href="#生命游戏">生命游戏</a></li>
+              </ul>
+            </li>
+            <li><a href="#-哈希表">✅ 哈希表</a>
+              <ul>
+                <li><a href="#-赎金信">✅ 赎金信</a></li>
+                <li><a href="#-同构字符串">✅ 同构字符串</a></li>
+                <li><a href="#-单词规律">✅ 单词规律</a></li>
+                <li><a href="#-有效的字母异位词">✅ 有效的字母异位词</a></li>
+                <li><a href="#-字母异位词分组">✅ 字母异位词分组</a></li>
+                <li><a href="#-两数之和">✅ 两数之和</a></li>
+                <li><a href="#-快乐数">✅ 快乐数</a></li>
+                <li><a href="#-存在重复元素-ii">✅ 存在重复元素 II</a></li>
+                <li><a href="#-最长连续序列">✅ 最长连续序列</a></li>
+              </ul>
+            </li>
+            <li><a href="#区间">区间</a></li>
+            <li><a href="#栈">栈</a>
+              <ul>
+                <li><a href="#有效的括号">有效的括号</a></li>
+                <li><a href="#简化路径">简化路径</a></li>
+                <li><a href="#最小栈">最小栈</a></li>
+                <li><a href="#逆波兰表达式求值">逆波兰表达式求值</a></li>
+                <li><a href="#基本计算器">基本计算器</a></li>
+              </ul>
+            </li>
+            <li><a href="#链表">链表</a>
+              <ul>
+                <li><a href="#-环形链表">✅ 环形链表</a></li>
+                <li><a href="#-两数相加">✅ 两数相加</a></li>
+                <li><a href="#-合并两个有序链表">✅ 合并两个有序链表</a></li>
+                <li><a href="#-随机链表的复制">✅ 随机链表的复制</a></li>
+                <li><a href="#-反转链表-ii">✅ 反转链表 II</a></li>
+                <li><a href="#k-个一组翻转链表">K 个一组翻转链表</a></li>
+                <li><a href="#-删除链表的倒数第-n-个结点">✅ 删除链表的倒数第 N 个结点</a></li>
+                <li><a href="#-删除排序链表中的重复元素-ii">✅ 删除排序链表中的重复元素 II</a></li>
+                <li><a href="#-旋转链表">✅ 旋转链表</a></li>
+                <li><a href="#-分隔链表">✅ 分隔链表</a></li>
+                <li><a href="#-lru-缓存">✅ LRU 缓存</a></li>
+              </ul>
+            </li>
+            <li><a href="#二叉树">二叉树</a>
+              <ul>
+                <li><a href="#二叉树的最大深度">二叉树的最大深度</a></li>
+                <li><a href="#相同的树">相同的树</a></li>
+                <li><a href="#翻转二叉树">翻转二叉树</a></li>
+                <li><a href="#对称二叉树">对称二叉树</a></li>
+                <li><a href="#从前序与中序遍历序列构造二叉树">从前序与中序遍历序列构造二叉树</a></li>
+                <li><a href="#从中序与后序遍历序列构造二叉树">从中序与后序遍历序列构造二叉树</a></li>
+                <li><a href="#填充每个节点的下一个右侧节点指针-ii">填充每个节点的下一个右侧节点指针 II</a></li>
+                <li><a href="#二叉树展开为链表">二叉树展开为链表</a></li>
+                <li><a href="#路径总和">路径总和</a></li>
+                <li><a href="#求根节点到叶节点数字之和">求根节点到叶节点数字之和</a></li>
+                <li><a href="#二叉树中的最大路径和">二叉树中的最大路径和</a></li>
+                <li><a href="#二叉搜索树迭代器">二叉搜索树迭代器</a></li>
+                <li><a href="#完全二叉树的节点个数">完全二叉树的节点个数</a></li>
+                <li><a href="#二叉树的最近公共祖先">二叉树的最近公共祖先</a></li>
+              </ul>
+            </li>
+            <li><a href="#二叉树层次遍历">二叉树层次遍历</a></li>
+            <li><a href="#二叉搜索树">二叉搜索树</a></li>
+            <li><a href="#图">图</a></li>
+            <li><a href="#图的广度优先搜索">图的广度优先搜索</a></li>
+            <li><a href="#字典树">字典树</a></li>
+            <li><a href="#-回溯">✅ 回溯</a>
+              <ul>
+                <li><a href="#-电话号码的字母组合">✅ 电话号码的字母组合</a></li>
+                <li><a href="#-组合">✅ 组合</a></li>
+                <li><a href="#-全排列">✅ 全排列</a></li>
+                <li><a href="#-组合总和">✅ 组合总和</a></li>
+                <li><a href="#-n-皇后-ii">✅ N 皇后 II</a></li>
+                <li><a href="#-括号生成">✅ 括号生成</a></li>
+                <li><a href="#-单词搜索">✅ 单词搜索</a></li>
+              </ul>
+            </li>
+            <li><a href="#分治">分治</a></li>
+            <li><a href="#kadane算法">kadane算法</a></li>
+            <li><a href="#二分查找">二分查找</a></li>
+            <li><a href="#堆">堆</a></li>
+            <li><a href="#位运算">位运算</a>
+              <ul>
+                <li><a href="#二进制求和">二进制求和</a></li>
+                <li><a href="#颠倒二进制位">颠倒二进制位</a></li>
+                <li><a href="#位1的个数">位1的个数</a></li>
+                <li><a href="#只出现一次的数字">只出现一次的数字</a></li>
+                <li><a href="#只出现一次的数字-ii">只出现一次的数字 II</a></li>
+                <li><a href="#数字范围按位与">数字范围按位与</a></li>
+              </ul>
+            </li>
+            <li><a href="#数学">数学</a>
+              <ul>
+                <li><a href="#回文数">回文数</a></li>
+                <li><a href="#加一">加一</a></li>
+                <li><a href="#阶乘后的零">阶乘后的零</a>
+                  <ul>
+                    <li><a href="#version-1">version 1</a></li>
+                    <li><a href="#version-2">version 2</a></li>
+                  </ul>
+                </li>
+                <li><a href="#x-的平方根">x 的平方根</a></li>
+                <li><a href="#powx-n">Pow(x, n)</a></li>
+                <li><a href="#直线上最多的点数">直线上最多的点数</a></li>
+              </ul>
+            </li>
+            <li><a href="#一维动态规划-1">一维动态规划</a></li>
+            <li><a href="#多维动态规划">多维动态规划</a></li>
           </ul>
         </li>
-        <li><a href="#堆排序-heap-sort">堆排序 Heap Sort</a></li>
-        <li><a href="#希尔排序-shell-sort">希尔排序 Shell Sort</a></li>
       </ul>
     </li>
-    <li><a href="#特殊场景排序算法">特殊场景排序算法</a>
+    <li><a href="#排序-sort">排序 sort</a>
       <ul>
-        <li><a href="#基数排序-radix-sort">基数排序 Radix Sort</a></li>
-        <li><a href="#计数排序-counting-sort">计数排序 Counting Sort</a></li>
-        <li><a href="#桶排序-bucket-sort">桶排序 Bucket Sort</a></li>
+        <li><a href="#基础排序算法">基础排序算法</a>
+          <ul>
+            <li><a href="#冒泡排序-bubble-sort">冒泡排序 Bubble Sort</a></li>
+            <li><a href="#选择排序-selection-sort">选择排序 Selection Sort</a></li>
+            <li><a href="#插入排序-insertion-sort">插入排序 Insertion Sort</a></li>
+          </ul>
+        </li>
+        <li><a href="#高效排序算法">高效排序算法</a>
+          <ul>
+            <li><a href="#快速排序-quick-sort">快速排序 Quick Sort</a></li>
+            <li><a href="#归并排序-merge-sort">归并排序 Merge Sort</a>
+              <ul>
+                <li><a href="#迭代实现">迭代实现</a></li>
+                <li><a href="#递归实现">递归实现</a></li>
+              </ul>
+            </li>
+            <li><a href="#堆排序-heap-sort">堆排序 Heap Sort</a></li>
+            <li><a href="#希尔排序-shell-sort">希尔排序 Shell Sort</a></li>
+          </ul>
+        </li>
+        <li><a href="#特殊场景排序算法">特殊场景排序算法</a>
+          <ul>
+            <li><a href="#基数排序-radix-sort">基数排序 Radix Sort</a></li>
+            <li><a href="#计数排序-counting-sort">计数排序 Counting Sort</a></li>
+            <li><a href="#桶排序-bucket-sort">桶排序 Bucket Sort</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>

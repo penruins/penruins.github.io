@@ -1346,22 +1346,27 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#一基本索引创建方法">一、基本索引创建方法</a>
+    <li><a href="#分区表的索引如何创建请以postgresql举例">分区表的索引如何创建，请以postgresql举例</a></li>
+    <li><a href="#postgresql分区表索引创建指南">PostgreSQL分区表索引创建指南</a>
       <ul>
-        <li><a href="#1-自动分区索引postgresql-11">1. 自动分区索引（PostgreSQL 11+）</a></li>
-        <li><a href="#2-手动创建分区索引postgresql-10及以下">2. 手动创建分区索引（PostgreSQL 10及以下）</a></li>
+        <li><a href="#一基本索引创建方法">一、基本索引创建方法</a>
+          <ul>
+            <li><a href="#1-自动分区索引postgresql-11">1. 自动分区索引（PostgreSQL 11+）</a></li>
+            <li><a href="#2-手动创建分区索引postgresql-10及以下">2. 手动创建分区索引（PostgreSQL 10及以下）</a></li>
+          </ul>
+        </li>
+        <li><a href="#二特殊索引类型">二、特殊索引类型</a>
+          <ul>
+            <li><a href="#1-唯一索引和主键">1. 唯一索引和主键</a></li>
+            <li><a href="#2-局部索引partial-index">2. 局部索引(Partial Index)</a></li>
+            <li><a href="#3-全局索引global-index">3. 全局索引(Global Index)</a></li>
+          </ul>
+        </li>
+        <li><a href="#三在线创建索引的注意事项">三、在线创建索引的注意事项</a></li>
+        <li><a href="#四索引类型选择">四、索引类型选择</a></li>
+        <li><a href="#五最佳实践建议">五、最佳实践建议</a></li>
       </ul>
     </li>
-    <li><a href="#二特殊索引类型">二、特殊索引类型</a>
-      <ul>
-        <li><a href="#1-唯一索引和主键">1. 唯一索引和主键</a></li>
-        <li><a href="#2-局部索引partial-index">2. 局部索引(Partial Index)</a></li>
-        <li><a href="#3-全局索引global-index">3. 全局索引(Global Index)</a></li>
-      </ul>
-    </li>
-    <li><a href="#三在线创建索引的注意事项">三、在线创建索引的注意事项</a></li>
-    <li><a href="#四索引类型选择">四、索引类型选择</a></li>
-    <li><a href="#五最佳实践建议">五、最佳实践建议</a></li>
   </ul>
 </nav>
 
@@ -1525,22 +1530,27 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#一基本索引创建方法">一、基本索引创建方法</a>
+    <li><a href="#分区表的索引如何创建请以postgresql举例">分区表的索引如何创建，请以postgresql举例</a></li>
+    <li><a href="#postgresql分区表索引创建指南">PostgreSQL分区表索引创建指南</a>
       <ul>
-        <li><a href="#1-自动分区索引postgresql-11">1. 自动分区索引（PostgreSQL 11+）</a></li>
-        <li><a href="#2-手动创建分区索引postgresql-10及以下">2. 手动创建分区索引（PostgreSQL 10及以下）</a></li>
+        <li><a href="#一基本索引创建方法">一、基本索引创建方法</a>
+          <ul>
+            <li><a href="#1-自动分区索引postgresql-11">1. 自动分区索引（PostgreSQL 11+）</a></li>
+            <li><a href="#2-手动创建分区索引postgresql-10及以下">2. 手动创建分区索引（PostgreSQL 10及以下）</a></li>
+          </ul>
+        </li>
+        <li><a href="#二特殊索引类型">二、特殊索引类型</a>
+          <ul>
+            <li><a href="#1-唯一索引和主键">1. 唯一索引和主键</a></li>
+            <li><a href="#2-局部索引partial-index">2. 局部索引(Partial Index)</a></li>
+            <li><a href="#3-全局索引global-index">3. 全局索引(Global Index)</a></li>
+          </ul>
+        </li>
+        <li><a href="#三在线创建索引的注意事项">三、在线创建索引的注意事项</a></li>
+        <li><a href="#四索引类型选择">四、索引类型选择</a></li>
+        <li><a href="#五最佳实践建议">五、最佳实践建议</a></li>
       </ul>
     </li>
-    <li><a href="#二特殊索引类型">二、特殊索引类型</a>
-      <ul>
-        <li><a href="#1-唯一索引和主键">1. 唯一索引和主键</a></li>
-        <li><a href="#2-局部索引partial-index">2. 局部索引(Partial Index)</a></li>
-        <li><a href="#3-全局索引global-index">3. 全局索引(Global Index)</a></li>
-      </ul>
-    </li>
-    <li><a href="#三在线创建索引的注意事项">三、在线创建索引的注意事项</a></li>
-    <li><a href="#四索引类型选择">四、索引类型选择</a></li>
-    <li><a href="#五最佳实践建议">五、最佳实践建议</a></li>
   </ul>
 </nav>
 

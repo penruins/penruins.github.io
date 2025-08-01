@@ -77,7 +77,7 @@ public HikariDataSource dataSource() {
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-01T14:34:25+08:00">
+    <meta property="article:modified_time" content="2025-08-01T14:39:10+08:00">
 <title>Nacos | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
@@ -1361,16 +1361,20 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#解决方案">解决方案</a>
+    <li><a href="#关于-nacos-配置更新后避免-hikaricp-连接断开的问题">关于 Nacos 配置更新后避免 HikariCP 连接断开的问题</a>
       <ul>
-        <li><a href="#使用-refreshscopeproxymode--scopedproxymodeno-排除数据源">使用 <code>@RefreshScope(proxyMode = ScopedProxyMode.NO)</code> 排除数据源</a></li>
-        <li><a href="#自定义-refreshscope-排除数据源相关配置">自定义 RefreshScope 排除数据源相关配置</a></li>
-        <li><a href="#在-bootstrapyml-中排除特定配置的刷新">在 bootstrap.yml 中排除特定配置的刷新</a></li>
-        <li><a href="#使用-refreshscope-但不刷新数据源">使用 <code>@RefreshScope</code> 但不刷新数据源</a></li>
+        <li><a href="#解决方案">解决方案</a>
+          <ul>
+            <li><a href="#使用-refreshscopeproxymode--scopedproxymodeno-排除数据源">使用 <code>@RefreshScope(proxyMode = ScopedProxyMode.NO)</code> 排除数据源</a></li>
+            <li><a href="#自定义-refreshscope-排除数据源相关配置">自定义 RefreshScope 排除数据源相关配置</a></li>
+            <li><a href="#在-bootstrapyml-中排除特定配置的刷新">在 bootstrap.yml 中排除特定配置的刷新</a></li>
+            <li><a href="#使用-refreshscope-但不刷新数据源">使用 <code>@RefreshScope</code> 但不刷新数据源</a></li>
+          </ul>
+        </li>
+        <li><a href="#最佳实践">最佳实践</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
       </ul>
     </li>
-    <li><a href="#最佳实践">最佳实践</a></li>
-    <li><a href="#注意事项">注意事项</a></li>
   </ul>
 </nav>
 
@@ -1457,7 +1461,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/21d3722c34a1c4d34d72a1190641e2127a91c745" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d22cce5b375164ec5e27179ef6afa8ca7f3c00d" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
@@ -1495,16 +1499,20 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#解决方案">解决方案</a>
+    <li><a href="#关于-nacos-配置更新后避免-hikaricp-连接断开的问题">关于 Nacos 配置更新后避免 HikariCP 连接断开的问题</a>
       <ul>
-        <li><a href="#使用-refreshscopeproxymode--scopedproxymodeno-排除数据源">使用 <code>@RefreshScope(proxyMode = ScopedProxyMode.NO)</code> 排除数据源</a></li>
-        <li><a href="#自定义-refreshscope-排除数据源相关配置">自定义 RefreshScope 排除数据源相关配置</a></li>
-        <li><a href="#在-bootstrapyml-中排除特定配置的刷新">在 bootstrap.yml 中排除特定配置的刷新</a></li>
-        <li><a href="#使用-refreshscope-但不刷新数据源">使用 <code>@RefreshScope</code> 但不刷新数据源</a></li>
+        <li><a href="#解决方案">解决方案</a>
+          <ul>
+            <li><a href="#使用-refreshscopeproxymode--scopedproxymodeno-排除数据源">使用 <code>@RefreshScope(proxyMode = ScopedProxyMode.NO)</code> 排除数据源</a></li>
+            <li><a href="#自定义-refreshscope-排除数据源相关配置">自定义 RefreshScope 排除数据源相关配置</a></li>
+            <li><a href="#在-bootstrapyml-中排除特定配置的刷新">在 bootstrap.yml 中排除特定配置的刷新</a></li>
+            <li><a href="#使用-refreshscope-但不刷新数据源">使用 <code>@RefreshScope</code> 但不刷新数据源</a></li>
+          </ul>
+        </li>
+        <li><a href="#最佳实践">最佳实践</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
       </ul>
     </li>
-    <li><a href="#最佳实践">最佳实践</a></li>
-    <li><a href="#注意事项">注意事项</a></li>
   </ul>
 </nav>
 

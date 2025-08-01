@@ -129,7 +129,7 @@ Reference">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-01T14:34:25+08:00">
+    <meta property="article:modified_time" content="2025-08-01T14:39:10+08:00">
 <title>jvm | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
@@ -1413,29 +1413,33 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#jmm">JMM</a>
+    <li><a href="#jvm">jvm</a>
       <ul>
-        <li><a href="#java的jvm内存模型-java-memory-model">Java的JVM内存模型 Java Memory Model</a></li>
-        <li><a href="#jmm-的核心问题">JMM 的核心问题</a></li>
-      </ul>
-    </li>
-    <li><a href="#内存机制">内存机制</a>
-      <ul>
-        <li><a href="#jvm的内存机制是怎样的"><code>JVM</code>的内存机制是怎样的？</a></li>
-        <li><a href="#jvm的内存模型中哪些是线程私有的">JVM的内存模型中哪些是线程私有的？</a></li>
-      </ul>
-    </li>
-    <li><a href="#垃圾回收">垃圾回收</a>
-      <ul>
-        <li><a href="#垃圾回收算法有哪些">垃圾回收算法有哪些</a></li>
-        <li><a href="#如何判断对象是否可以被回收">如何判断对象是否可以被回收</a></li>
-      </ul>
-    </li>
-    <li><a href="#类加载">类加载</a>
-      <ul>
-        <li><a href="#java类加载流程">java类加载流程</a></li>
-        <li><a href="#classloader-的种类">classloader 的种类</a></li>
-        <li><a href="#什么是双亲委派">什么是双亲委派？</a></li>
+        <li><a href="#jmm">JMM</a>
+          <ul>
+            <li><a href="#java的jvm内存模型-java-memory-model">Java的JVM内存模型 Java Memory Model</a></li>
+            <li><a href="#jmm-的核心问题">JMM 的核心问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#内存机制">内存机制</a>
+          <ul>
+            <li><a href="#jvm的内存机制是怎样的"><code>JVM</code>的内存机制是怎样的？</a></li>
+            <li><a href="#jvm的内存模型中哪些是线程私有的">JVM的内存模型中哪些是线程私有的？</a></li>
+          </ul>
+        </li>
+        <li><a href="#垃圾回收">垃圾回收</a>
+          <ul>
+            <li><a href="#垃圾回收算法有哪些">垃圾回收算法有哪些</a></li>
+            <li><a href="#如何判断对象是否可以被回收">如何判断对象是否可以被回收</a></li>
+          </ul>
+        </li>
+        <li><a href="#类加载">类加载</a>
+          <ul>
+            <li><a href="#java类加载流程">java类加载流程</a></li>
+            <li><a href="#classloader-的种类">classloader 的种类</a></li>
+            <li><a href="#什么是双亲委派">什么是双亲委派？</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -1651,7 +1655,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/21d3722c34a1c4d34d72a1190641e2127a91c745" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d22cce5b375164ec5e27179ef6afa8ca7f3c00d" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
@@ -1689,29 +1693,33 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#jmm">JMM</a>
+    <li><a href="#jvm">jvm</a>
       <ul>
-        <li><a href="#java的jvm内存模型-java-memory-model">Java的JVM内存模型 Java Memory Model</a></li>
-        <li><a href="#jmm-的核心问题">JMM 的核心问题</a></li>
-      </ul>
-    </li>
-    <li><a href="#内存机制">内存机制</a>
-      <ul>
-        <li><a href="#jvm的内存机制是怎样的"><code>JVM</code>的内存机制是怎样的？</a></li>
-        <li><a href="#jvm的内存模型中哪些是线程私有的">JVM的内存模型中哪些是线程私有的？</a></li>
-      </ul>
-    </li>
-    <li><a href="#垃圾回收">垃圾回收</a>
-      <ul>
-        <li><a href="#垃圾回收算法有哪些">垃圾回收算法有哪些</a></li>
-        <li><a href="#如何判断对象是否可以被回收">如何判断对象是否可以被回收</a></li>
-      </ul>
-    </li>
-    <li><a href="#类加载">类加载</a>
-      <ul>
-        <li><a href="#java类加载流程">java类加载流程</a></li>
-        <li><a href="#classloader-的种类">classloader 的种类</a></li>
-        <li><a href="#什么是双亲委派">什么是双亲委派？</a></li>
+        <li><a href="#jmm">JMM</a>
+          <ul>
+            <li><a href="#java的jvm内存模型-java-memory-model">Java的JVM内存模型 Java Memory Model</a></li>
+            <li><a href="#jmm-的核心问题">JMM 的核心问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#内存机制">内存机制</a>
+          <ul>
+            <li><a href="#jvm的内存机制是怎样的"><code>JVM</code>的内存机制是怎样的？</a></li>
+            <li><a href="#jvm的内存模型中哪些是线程私有的">JVM的内存模型中哪些是线程私有的？</a></li>
+          </ul>
+        </li>
+        <li><a href="#垃圾回收">垃圾回收</a>
+          <ul>
+            <li><a href="#垃圾回收算法有哪些">垃圾回收算法有哪些</a></li>
+            <li><a href="#如何判断对象是否可以被回收">如何判断对象是否可以被回收</a></li>
+          </ul>
+        </li>
+        <li><a href="#类加载">类加载</a>
+          <ul>
+            <li><a href="#java类加载流程">java类加载流程</a></li>
+            <li><a href="#classloader-的种类">classloader 的种类</a></li>
+            <li><a href="#什么是双亲委派">什么是双亲委派？</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>

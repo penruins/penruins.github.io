@@ -64,7 +64,7 @@ StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存�
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-01T14:34:25+08:00">
+    <meta property="article:modified_time" content="2025-08-01T14:39:10+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
@@ -1348,776 +1348,791 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？</a>
+    <li><a href="#string">String</a>
       <ul>
-        <li><a href="#1-同步方法">1. <strong>同步方法</strong></a></li>
-        <li><a href="#2-锁机制">2. <strong>锁机制</strong></a></li>
-        <li><a href="#3-性能影响">3. <strong>性能影响</strong></a></li>
-        <li><a href="#4-适用场景">4. <strong>适用场景</strong></a></li>
-        <li><a href="#总结">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的</a>
-      <ul>
-        <li><a href="#1-底层数据结构">1. <strong>底层数据结构</strong></a></li>
-        <li><a href="#2-初始容量">2. <strong>初始容量</strong></a></li>
-        <li><a href="#3-扩容机制">3. <strong>扩容机制</strong></a></li>
-        <li><a href="#4-示例代码">4. <strong>示例代码</strong></a></li>
-        <li><a href="#5-总结">5. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#什么是虚拟线程">什么是虚拟线程？</a>
-      <ul>
-        <li><a href="#虚拟线程的核心特点">虚拟线程的核心特点</a></li>
-        <li><a href="#虚拟线程的适用场景">虚拟线程的适用场景</a></li>
-        <li><a href="#虚拟线程的使用">虚拟线程的使用</a></li>
-        <li><a href="#虚拟线程的局限性">虚拟线程的局限性</a></li>
-        <li><a href="#总结-1">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么</a>
-      <ul>
-        <li><a href="#1-实现原理">1. <strong>实现原理</strong></a></li>
-        <li><a href="#2-编程模型">2. <strong>编程模型</strong></a></li>
-        <li><a href="#3-适用场景">3. <strong>适用场景</strong></a></li>
-        <li><a href="#4-开发体验">4. <strong>开发体验</strong></a></li>
-        <li><a href="#5-性能优化">5. <strong>性能优化</strong></a></li>
-        <li><a href="#总结-2">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#虚拟线程在jvm中的内存模型是怎样的">虚拟线程在jvm中的内存模型是怎样的</a>
-      <ul>
-        <li><a href="#1-虚拟线程的内存结构">1. <strong>虚拟线程的内存结构</strong></a></li>
-        <li><a href="#2-虚拟线程与jvm内存模型的关系">2. <strong>虚拟线程与JVM内存模型的关系</strong></a></li>
-        <li><a href="#3-虚拟线程的调度与内存使用">3. <strong>虚拟线程的调度与内存使用</strong></a></li>
-        <li><a href="#4-虚拟线程与垃圾回收">4. <strong>虚拟线程与垃圾回收</strong></a></li>
-        <li><a href="#5-虚拟线程的适用场景">5. <strong>虚拟线程的适用场景</strong></a></li>
-        <li><a href="#总结-3">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#虚拟线程会增加jvm的性能消耗吗">虚拟线程会增加jvm的性能消耗吗</a>
-      <ul>
-        <li><a href="#1-虚拟线程的资源消耗">1. <strong>虚拟线程的资源消耗</strong></a></li>
-        <li><a href="#2-性能优势">2. <strong>性能优势</strong></a></li>
-        <li><a href="#3-cpu密集型任务的限制">3. <strong>CPU密集型任务的限制</strong></a></li>
-        <li><a href="#4-jvm的性能消耗">4. <strong>JVM的性能消耗</strong></a></li>
-        <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
-        <li><a href="#总结-4">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#在-springboot-项目中虚拟线程可以怎么使用">在 springboot 项目中虚拟线程可以怎么使用</a>
-      <ul>
-        <li><a href="#1-启用虚拟线程处理-http-请求">1. <strong>启用虚拟线程处理 HTTP 请求</strong></a>
+        <li><a href="#stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？</a>
           <ul>
-            <li><a href="#配置代码">配置代码：</a></li>
-            <li><a href="#说明">说明：</a></li>
+            <li><a href="#1-同步方法">1. <strong>同步方法</strong></a></li>
+            <li><a href="#2-锁机制">2. <strong>锁机制</strong></a></li>
+            <li><a href="#3-性能影响">3. <strong>性能影响</strong></a></li>
+            <li><a href="#4-适用场景">4. <strong>适用场景</strong></a></li>
+            <li><a href="#总结">总结</a></li>
           </ul>
         </li>
-        <li><a href="#2-使用虚拟线程执行异步任务">2. <strong>使用虚拟线程执行异步任务</strong></a>
+        <li><a href="#stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的</a>
           <ul>
-            <li><a href="#配置代码-1">配置代码：</a></li>
-            <li><a href="#使用示例">使用示例：</a></li>
-            <li><a href="#说明-1">说明：</a></li>
-          </ul>
-        </li>
-        <li><a href="#3-使用虚拟线程执行定时任务">3. <strong>使用虚拟线程执行定时任务</strong></a>
-          <ul>
-            <li><a href="#配置代码-2">配置代码：</a></li>
-            <li><a href="#使用示例-1">使用示例：</a></li>
-            <li><a href="#说明-2">说明：</a></li>
-          </ul>
-        </li>
-        <li><a href="#4-使用虚拟线程执行自定义任务">4. <strong>使用虚拟线程执行自定义任务</strong></a>
-          <ul>
-            <li><a href="#示例代码">示例代码：</a></li>
-            <li><a href="#说明-3">说明：</a></li>
-          </ul>
-        </li>
-        <li><a href="#5-虚拟线程的最佳实践">5. <strong>虚拟线程的最佳实践</strong></a></li>
-        <li><a href="#6-环境要求">6. <strong>环境要求</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#虚拟线程的mn模型具体是如何工作的">虚拟线程的M:N模型具体是如何工作的？</a>
-      <ul>
-        <li><a href="#1-基本概念">1. <strong>基本概念</strong></a></li>
-        <li><a href="#2-mn-模型的核心思想">2. <strong>M:N 模型的核心思想</strong></a></li>
-        <li><a href="#3-具体工作流程">3. <strong>具体工作流程</strong></a></li>
-        <li><a href="#4-mn-模型的优势">4. <strong>M:N 模型的优势</strong></a></li>
-        <li><a href="#5-mn-模型的实现细节">5. <strong>M:N 模型的实现细节</strong></a></li>
-        <li><a href="#6-示例">6. <strong>示例</strong></a></li>
-        <li><a href="#7-与传统线程模型的对比">7. <strong>与传统线程模型的对比</strong></a></li>
-        <li><a href="#总结-5">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程和传统线程有什么区别">Java虚拟线程和传统线程有什么区别</a>
-      <ul>
-        <li><a href="#1-实现方式">1. <strong>实现方式</strong></a></li>
-        <li><a href="#2-线程模型">2. <strong>线程模型</strong></a></li>
-        <li><a href="#3-性能">3. <strong>性能</strong></a></li>
-        <li><a href="#4-适用场景-1">4. <strong>适用场景</strong></a></li>
-        <li><a href="#5-编程模型">5. <strong>编程模型</strong></a></li>
-        <li><a href="#6-资源占用">6. <strong>资源占用</strong></a></li>
-        <li><a href="#7-兼容性">7. <strong>兼容性</strong></a></li>
-        <li><a href="#8-示例对比">8. <strong>示例对比</strong></a></li>
-        <li><a href="#总结-6">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#可以生成一个java使用虚拟线程的例子吗">可以生成一个java使用虚拟线程的例子吗</a>
-      <ul>
-        <li><a href="#示例代码-1">示例代码</a></li>
-        <li><a href="#代码说明">代码说明</a></li>
-        <li><a href="#运行说明">运行说明</a></li>
-        <li><a href="#运行命令">运行命令</a></li>
-        <li><a href="#注意事项">注意事项</a></li>
-      </ul>
-    </li>
-    <li><a href="#java的虚拟线程是如何对io操作进行优化的">java的虚拟线程是如何对I/O操作进行优化的</a>
-      <ul>
-        <li><a href="#1-非阻塞-io-操作">1. <strong>非阻塞 I/O 操作</strong></a></li>
-        <li><a href="#2-轻量级线程调度">2. <strong>轻量级线程调度</strong></a></li>
-        <li><a href="#3-减少线程上下文切换">3. <strong>减少线程上下文切换</strong></a></li>
-        <li><a href="#4-与异步编程的结合">4. <strong>与异步编程的结合</strong></a></li>
-        <li><a href="#5-适用于高并发场景">5. <strong>适用于高并发场景</strong></a></li>
-        <li><a href="#总结-7">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程的forkjoinpool调度器是如何工作的">Java虚拟线程的ForkJoinPool调度器是如何工作的</a>
-      <ul>
-        <li><a href="#1-forkjoinpool-的基本原理"><strong>1. ForkJoinPool 的基本原理</strong></a></li>
-        <li><a href="#2-虚拟线程的调度器"><strong>2. 虚拟线程的调度器</strong></a>
-          <ul>
-            <li><a href="#1-虚拟线程的挂起与恢复"><strong>(1) 虚拟线程的挂起与恢复</strong></a></li>
-            <li><a href="#2-任务队列与工作窃取"><strong>(2) 任务队列与工作窃取</strong></a></li>
-            <li><a href="#3-轻量级调度"><strong>(3) 轻量级调度</strong></a></li>
-          </ul>
-        </li>
-        <li><a href="#3-调度器的配置"><strong>3. 调度器的配置</strong></a></li>
-        <li><a href="#4-虚拟线程与平台线程的关系"><strong>4. 虚拟线程与平台线程的关系</strong></a></li>
-        <li><a href="#5-示例"><strong>5. 示例</strong></a></li>
-        <li><a href="#总结-8"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程与其他编程语言的异步编程模型相比有什么优势">Java虚拟线程与其他编程语言的异步编程模型相比有什么优势</a>
-      <ul>
-        <li><a href="#1-轻量级与高并发"><strong>1. 轻量级与高并发</strong></a></li>
-        <li><a href="#2-非阻塞与高效-io-处理"><strong>2. 非阻塞与高效 I/O 处理</strong></a></li>
-        <li><a href="#3-简化异步编程"><strong>3. 简化异步编程</strong></a></li>
-        <li><a href="#4-与现有生态的无缝集成"><strong>4. 与现有生态的无缝集成</strong></a></li>
-        <li><a href="#5-高效的上下文切换"><strong>5. 高效的上下文切换</strong></a></li>
-        <li><a href="#6-结构化并发支持"><strong>6. 结构化并发支持</strong></a></li>
-        <li><a href="#总结-9"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程技术对现有应用程序的性能提升有多大影响">Java虚拟线程技术对现有应用程序的性能提升有多大影响</a>
-      <ul>
-        <li><a href="#1-性能提升的核心机制"><strong>1. 性能提升的核心机制</strong></a></li>
-        <li><a href="#2-性能提升的具体表现"><strong>2. 性能提升的具体表现</strong></a></li>
-        <li><a href="#3-实际应用案例"><strong>3. 实际应用案例</strong></a></li>
-        <li><a href="#4-适用场景与限制"><strong>4. 适用场景与限制</strong></a></li>
-        <li><a href="#5-总结-1"><strong>5. 总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程技术在实际项目中面临哪些挑战">Java虚拟线程技术在实际项目中面临哪些挑战</a>
-      <ul>
-        <li><a href="#1-兼容性问题"><strong>1. 兼容性问题</strong></a></li>
-        <li><a href="#2-调试与监控复杂性"><strong>2. 调试与监控复杂性</strong></a></li>
-        <li><a href="#3-资源管理挑战"><strong>3. 资源管理挑战</strong></a></li>
-        <li><a href="#4-性能瓶颈"><strong>4. 性能瓶颈</strong></a></li>
-        <li><a href="#5-学习曲线与最佳实践"><strong>5. 学习曲线与最佳实践</strong></a></li>
-        <li><a href="#6-与现有生态的集成"><strong>6. 与现有生态的集成</strong></a></li>
-        <li><a href="#7-线程安全问题"><strong>7. 线程安全问题</strong></a></li>
-        <li><a href="#总结-10"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程技术未来可能会带来哪些新的编程范式">Java虚拟线程技术未来可能会带来哪些新的编程范式</a>
-      <ul>
-        <li><a href="#1-结构化并发structured-concurrency"><strong>1. 结构化并发（Structured Concurrency）</strong></a></li>
-        <li><a href="#2-无回调的异步编程"><strong>2. 无回调的异步编程</strong></a></li>
-        <li><a href="#3-事件驱动与反应式编程的简化"><strong>3. 事件驱动与反应式编程的简化</strong></a></li>
-        <li><a href="#4-轻量级任务并发"><strong>4. 轻量级任务并发</strong></a></li>
-        <li><a href="#5-微服务与云原生架构的优化"><strong>5. 微服务与云原生架构的优化</strong></a></li>
-        <li><a href="#6-更高效的批处理与流处理"><strong>6. 更高效的批处理与流处理</strong></a></li>
-        <li><a href="#7-更友好的并发调试与监控"><strong>7. 更友好的并发调试与监控</strong></a></li>
-        <li><a href="#总结-11"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#学习资料">学习资料</a></li>
-    <li><a href="#basic">basic</a>
-      <ul>
-        <li><a href="#java-array-转-list">java array 转 list</a>
-          <ul>
-            <li><a href="#创建一个固定大小的列表">创建一个固定大小的列表</a></li>
-            <li><a href="#创建一个可变大小的列表">创建一个可变大小的列表</a></li>
-          </ul>
-        </li>
-        <li><a href="#java-怎么用二进制打印int">java， 怎么用二进制打印int</a>
-          <ul>
-            <li><a href="#使用-integertobinarystring">使用 <code>Integer.toBinaryString()</code></a></li>
-            <li><a href="#打印包含前导零的完整32位">打印包含前导零的完整32位</a></li>
-            <li><a href="#使用位运算手动构建二进制字符串">使用位运算手动构建二进制字符串</a></li>
+            <li><a href="#1-底层数据结构">1. <strong>底层数据结构</strong></a></li>
+            <li><a href="#2-初始容量">2. <strong>初始容量</strong></a></li>
+            <li><a href="#3-扩容机制">3. <strong>扩容机制</strong></a></li>
+            <li><a href="#4-示例代码">4. <strong>示例代码</strong></a></li>
+            <li><a href="#5-总结">5. <strong>总结</strong></a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#concurrent">concurrent</a></li>
-    <li><a href="#每一个java的版本的主要更新">每一个java的版本的主要更新</a>
+    <li><a href="#虚拟线程">虚拟线程</a>
       <ul>
-        <li><a href="#java-10-1996">Java 1.0 (1996)</a></li>
-        <li><a href="#java-11-1997">Java 1.1 (1997)</a></li>
-        <li><a href="#java-12-1998">Java 1.2 (1998)</a></li>
-        <li><a href="#java-13-2000">Java 1.3 (2000)</a></li>
-        <li><a href="#java-14-2002">Java 1.4 (2002)</a></li>
-        <li><a href="#java-5-2004">Java 5 (2004)</a></li>
-        <li><a href="#java-6-2006">Java 6 (2006)</a></li>
-        <li><a href="#java-7-2011">Java 7 (2011)</a></li>
-        <li><a href="#java-8-2014">Java 8 (2014)</a></li>
-        <li><a href="#java-9-2017">Java 9 (2017)</a></li>
-        <li><a href="#java-10-2018">Java 10 (2018)</a></li>
-        <li><a href="#java-11-2018">Java 11 (2018)</a></li>
-        <li><a href="#java-12-2019">Java 12 (2019)</a></li>
-        <li><a href="#java-13-2019">Java 13 (2019)</a></li>
-        <li><a href="#java-14-2020">Java 14 (2020)</a></li>
-        <li><a href="#java-15-2020">Java 15 (2020)</a></li>
-        <li><a href="#java-16-2021">Java 16 (2021)</a></li>
-        <li><a href="#java-17-2021">Java 17 (2021)</a></li>
-        <li><a href="#java-18-2022">Java 18 (2022)</a></li>
-        <li><a href="#java-19-2022">Java 19 (2022)</a></li>
-        <li><a href="#java-20-2023">Java 20 (2023)</a></li>
-        <li><a href="#java-21-2023">Java 21 (2023)</a></li>
-        <li><a href="#总结-12">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识</a>
-      <ul>
-        <li><a href="#1-java最新版本特性">1. <strong>Java最新版本特性</strong></a></li>
-        <li><a href="#2-微服务与云原生技术">2. <strong>微服务与云原生技术</strong></a></li>
-        <li><a href="#3-数据库与缓存技术">3. <strong>数据库与缓存技术</strong></a></li>
-        <li><a href="#4-性能优化与jvm调优">4. <strong>性能优化与JVM调优</strong></a></li>
-        <li><a href="#5-前沿技术与趋势">5. <strong>前沿技术与趋势</strong></a></li>
-        <li><a href="#6-实践与项目结合">6. <strong>实践与项目结合</strong></a></li>
-        <li><a href="#7-面试中的表达技巧">7. <strong>面试中的表达技巧</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#collection-和-collections-有什么区别">Collection 和 Collections 有什么区别？</a>
-      <ul>
-        <li><a href="#1-定义与性质"><strong>1. 定义与性质</strong></a></li>
-        <li><a href="#2-功能与使用"><strong>2. 功能与使用</strong></a></li>
-        <li><a href="#3-示例代码"><strong>3. 示例代码</strong></a></li>
-        <li><a href="#4-总结"><strong>4. 总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#arrayssort-和-collectionssort-的区别">Arrays.sort 和 Collections.sort 的区别</a>
-      <ul>
-        <li><a href="#1-适用对象"><strong>1. 适用对象</strong></a></li>
-        <li><a href="#2-底层实现"><strong>2. 底层实现</strong></a></li>
-        <li><a href="#3-排序规则"><strong>3. 排序规则</strong></a></li>
-        <li><a href="#4-性能与稳定性"><strong>4. 性能与稳定性</strong></a></li>
-        <li><a href="#5-使用场景"><strong>5. 使用场景</strong></a></li>
-        <li><a href="#总结-13"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#hashmap底层的数据结构是怎样的">HashMap底层的数据结构是怎样的</a>
-      <ul>
-        <li><a href="#jdk-17-及之前"><strong>JDK 1.7 及之前</strong></a></li>
-        <li><a href="#jdk-18-及之后"><strong>JDK 1.8 及之后</strong></a></li>
-        <li><a href="#核心机制"><strong>核心机制</strong></a></li>
-        <li><a href="#总结-14"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？</a>
-      <ul>
-        <li><a href="#一红黑树的特性优势">一、<strong>红黑树的特性优势</strong></a></li>
-        <li><a href="#二与其他树结构的对比">二、<strong>与其他树结构的对比</strong></a>
+        <li><a href="#什么是虚拟线程">什么是虚拟线程？</a>
           <ul>
-            <li><a href="#1-与-avl-树的对比">1. <strong>与 AVL 树的对比</strong></a></li>
-            <li><a href="#2-与普通二叉搜索树的对比">2. <strong>与普通二叉搜索树的对比</strong></a></li>
-            <li><a href="#3-与-b-树b-树的对比">3. <strong>与 B 树/B+ 树的对比</strong></a></li>
+            <li><a href="#虚拟线程的核心特点">虚拟线程的核心特点</a></li>
+            <li><a href="#虚拟线程的适用场景">虚拟线程的适用场景</a></li>
+            <li><a href="#虚拟线程的使用">虚拟线程的使用</a></li>
+            <li><a href="#虚拟线程的局限性">虚拟线程的局限性</a></li>
+            <li><a href="#总结-1">总结</a></li>
           </ul>
         </li>
-        <li><a href="#三hashmap-的特定需求">三、<strong>HashMap 的特定需求</strong></a></li>
-        <li><a href="#四总结">四、<strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#hashmap-get-的时间复杂度">HashMap get 的时间复杂度</a>
-      <ul>
-        <li><a href="#1-理想情况o1">1. <strong>理想情况（O(1)）</strong></a></li>
-        <li><a href="#2-最坏情况on">2. <strong>最坏情况（O(n)）</strong></a></li>
-        <li><a href="#3-总结">3. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#hashmap如何保证线程安全">HashMap如何保证线程安全</a>
-      <ul>
-        <li><a href="#1-使用"><strong>1. 使用 <code>Collections.synchronizedMap</code></strong></a></li>
-        <li><a href="#2-使用"><strong>2. 使用 <code>ConcurrentHashMap</code></strong></a></li>
-        <li><a href="#3-使用读写锁-"><strong>3. 使用读写锁 (<code>ReadWriteLock</code>)</strong></a></li>
-        <li><a href="#4-方法内部使用局部"><strong>4. 方法内部使用局部 <code>HashMap</code></strong></a></li>
-        <li><a href="#5-初始化写后续只读"><strong>5. 初始化写，后续只读</strong></a></li>
-        <li><a href="#总结-15"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？</a>
-      <ul>
-        <li><a href="#1-线程安全性"><strong>1. 线程安全性</strong></a></li>
-        <li><a href="#2-对-null-值的支持"><strong>2. 对 null 值的支持</strong></a></li>
-        <li><a href="#3-性能-1"><strong>3. 性能</strong></a></li>
-        <li><a href="#4-继承与实现"><strong>4. 继承与实现</strong></a></li>
-        <li><a href="#5-扩容机制"><strong>5. 扩容机制</strong></a></li>
-        <li><a href="#6-迭代器"><strong>6. 迭代器</strong></a></li>
-        <li><a href="#7-计算哈希值的方式"><strong>7. 计算哈希值的方式</strong></a></li>
-        <li><a href="#总结-16"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#当-hashmap-扩容时所有的红黑树或者链表都会重新构造吗">当 HashMap 扩容时，所有的红黑树或者链表都会重新构造吗</a>
-      <ul>
-        <li><a href="#1-链表重新构造"><strong>1. 链表重新构造</strong></a></li>
-        <li><a href="#2-红黑树重新构造"><strong>2. 红黑树重新构造</strong></a></li>
-        <li><a href="#3-重新哈希的原因"><strong>3. 重新哈希的原因</strong></a></li>
-        <li><a href="#总结-17"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#为什么hashmap选择红黑树而不选择b树">为什么HashMap选择红黑树而不选择B+树</a>
-      <ul>
-        <li><a href="#1-算法实现复杂度">1. <strong>算法实现复杂度</strong></a></li>
-        <li><a href="#2-底层数据结构匹配">2. <strong>底层数据结构匹配</strong></a></li>
-        <li><a href="#3-修改效率">3. <strong>修改效率</strong></a></li>
-        <li><a href="#4-内存占用">4. <strong>内存占用</strong></a></li>
-        <li><a href="#5-适用场景-1">5. <strong>适用场景</strong></a></li>
-        <li><a href="#6-维护成本">6. <strong>维护成本</strong></a></li>
-        <li><a href="#总结-18">总结</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#selectpoll和epoll的区别">select、poll和epoll的区别</a>
-      <ul>
-        <li><a href="#1-select">1. <strong>select</strong></a></li>
-        <li><a href="#2-poll">2. <strong>poll</strong></a></li>
-        <li><a href="#3-epoll">3. <strong>epoll</strong></a></li>
-        <li><a href="#对比总结">对比总结</a></li>
-        <li><a href="#总结-19">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#提供一个java异步io的例子">提供一个java异步I/O的例子</a>
-      <ul>
-        <li><a href="#示例代码异步文件读取">示例代码：异步文件读取</a></li>
-        <li><a href="#代码说明-1">代码说明</a></li>
-        <li><a href="#异步-io-的优势">异步 I/O 的优势</a></li>
-        <li><a href="#参考">参考</a></li>
-      </ul>
-    </li>
-    <li><a href="#在java中非阻塞io就是io多路复用吗">在java中非阻塞IO就是IO多路复用吗</a>
-      <ul>
-        <li><a href="#1-非阻塞-ionon-blocking-io">1. <strong>非阻塞 I/O（Non-blocking I/O）</strong></a></li>
-        <li><a href="#2-io-多路复用io-multiplexing">2. <strong>I/O 多路复用（I/O Multiplexing）</strong></a></li>
-        <li><a href="#3-非阻塞-io-与-io-多路复用的关系">3. <strong>非阻塞 I/O 与 I/O 多路复用的关系</strong></a></li>
-        <li><a href="#4-总结-1">4. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#在java中selector算非阻塞还是多路复用">在java中selector算非阻塞还是多路复用</a>
-      <ul>
-        <li><a href="#1-selector">1. <strong><code>Selector</code> 是非阻塞 I/O 的实现</strong></a></li>
-        <li><a href="#2-selector">2. <strong><code>Selector</code> 是 I/O 多路复用的核心</strong></a></li>
-        <li><a href="#3-selector">3. <strong><code>Selector</code> 的工作原理</strong></a></li>
-        <li><a href="#4-总结-2">4. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#我有这样一个开发场景服务端需要和多个客户端进行tcp连接服务端会发送指令给客户端客户端会返回指令执行结果客户端会定时返回心跳报文上报状态客户端会不定时上报事件报文我该怎么实现上述功能">我有这样一个开发场景，服务端需要和多个客户端进行tcp连接，服务端会发送指令给客户端，客户端会返回指令执行结果；客户端会定时返回心跳报文上报状态；客户端会不定时上报事件报文。我该怎么实现上述功能？</a>
-      <ul>
-        <li><a href="#1-服务端设计">1. 服务端设计</a>
+        <li><a href="#响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么</a>
           <ul>
-            <li><a href="#11-建立tcp连接">1.1 建立TCP连接</a></li>
-            <li><a href="#12-指令发送">1.2 指令发送</a></li>
-            <li><a href="#13-处理客户端返回">1.3 处理客户端返回</a></li>
-            <li><a href="#14-心跳处理">1.4 心跳处理</a></li>
-            <li><a href="#15-事件处理">1.5 事件处理</a></li>
+            <li><a href="#1-实现原理">1. <strong>实现原理</strong></a></li>
+            <li><a href="#2-编程模型">2. <strong>编程模型</strong></a></li>
+            <li><a href="#3-适用场景">3. <strong>适用场景</strong></a></li>
+            <li><a href="#4-开发体验">4. <strong>开发体验</strong></a></li>
+            <li><a href="#5-性能优化">5. <strong>性能优化</strong></a></li>
+            <li><a href="#总结-2">总结</a></li>
           </ul>
         </li>
-        <li><a href="#2-客户端设计">2. 客户端设计</a>
+        <li><a href="#虚拟线程在jvm中的内存模型是怎样的">虚拟线程在jvm中的内存模型是怎样的</a>
           <ul>
-            <li><a href="#21-连接服务端">2.1 连接服务端</a></li>
-            <li><a href="#22-指令执行">2.2 指令执行</a></li>
-            <li><a href="#23-心跳发送">2.3 心跳发送</a></li>
-            <li><a href="#24-事件上报">2.4 事件上报</a></li>
+            <li><a href="#1-虚拟线程的内存结构">1. <strong>虚拟线程的内存结构</strong></a></li>
+            <li><a href="#2-虚拟线程与jvm内存模型的关系">2. <strong>虚拟线程与JVM内存模型的关系</strong></a></li>
+            <li><a href="#3-虚拟线程的调度与内存使用">3. <strong>虚拟线程的调度与内存使用</strong></a></li>
+            <li><a href="#4-虚拟线程与垃圾回收">4. <strong>虚拟线程与垃圾回收</strong></a></li>
+            <li><a href="#5-虚拟线程的适用场景">5. <strong>虚拟线程的适用场景</strong></a></li>
+            <li><a href="#总结-3">总结</a></li>
           </ul>
         </li>
-        <li><a href="#3-协议设计">3. 协议设计</a></li>
-        <li><a href="#4-实现示例">4. 实现示例</a>
+        <li><a href="#虚拟线程会增加jvm的性能消耗吗">虚拟线程会增加jvm的性能消耗吗</a>
           <ul>
-            <li><a href="#服务端示例python伪代码">服务端示例（Python伪代码）</a></li>
-            <li><a href="#客户端示例python伪代码">客户端示例（Python伪代码）</a></li>
+            <li><a href="#1-虚拟线程的资源消耗">1. <strong>虚拟线程的资源消耗</strong></a></li>
+            <li><a href="#2-性能优势">2. <strong>性能优势</strong></a></li>
+            <li><a href="#3-cpu密集型任务的限制">3. <strong>CPU密集型任务的限制</strong></a></li>
+            <li><a href="#4-jvm的性能消耗">4. <strong>JVM的性能消耗</strong></a></li>
+            <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
+            <li><a href="#总结-4">总结</a></li>
           </ul>
         </li>
-        <li><a href="#5-注意事项">5. 注意事项</a></li>
-      </ul>
-    </li>
-    <li><a href="#如果我使用io多路复用来实现给我一个java版本代码示例">如果我使用IO多路复用来实现，给我一个java版本代码示例</a>
-      <ul>
-        <li><a href="#服务端代码示例">服务端代码示例</a></li>
-        <li><a href="#客户端代码示例">客户端代码示例</a></li>
-        <li><a href="#代码说明-2">代码说明</a></li>
-        <li><a href="#运行方式">运行方式</a></li>
-        <li><a href="#扩展建议">扩展建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#我有一个服务端需要连接多个服务端进行tcp连接给我一个java的代码示例">我有一个服务端，需要连接多个服务端进行tcp连接，给我一个java的代码示例</a>
-      <ul>
-        <li><a href="#代码示例">代码示例</a></li>
-        <li><a href="#代码说明-3">代码说明</a></li>
-        <li><a href="#运行方式-1">运行方式</a></li>
-        <li><a href="#参考-1">参考</a></li>
-        <li><a href="#扩展建议-1">扩展建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#我在tcp连接的过程中可能会新增连接修改连接信息ip或端口号或者删除连接这个该怎么实现">我在tcp连接的过程中，可能会新增连接，修改连接信息（ip或端口号）或者删除连接，这个该怎么实现</a>
-      <ul>
-        <li><a href="#设计思路">设计思路</a></li>
-        <li><a href="#代码实现">代码实现</a></li>
-        <li><a href="#代码说明-4">代码说明</a></li>
-        <li><a href="#运行方式-2">运行方式</a></li>
-        <li><a href="#扩展建议-2">扩展建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#使用-socketchannel-的-close-方法是否会导致tcp连接还在传输数据的时候意外断开的情况">使用 socketChannel 的 close 方法，是否会导致tcp连接还在传输数据的时候意外断开的情况</a>
-      <ul>
-        <li><a href="#1-socketchannelclose">1. <strong><code>SocketChannel.close</code> 的行为</strong></a></li>
-        <li><a href="#2-数据传输中的关闭">2. <strong>数据传输中的关闭</strong></a></li>
-        <li><a href="#3-异常情况">3. <strong>异常情况</strong></a></li>
-        <li><a href="#4-最佳实践">4. <strong>最佳实践</strong></a></li>
-        <li><a href="#总结-20">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
-      <ul>
-        <li><a href="#代码实现-1">代码实现</a></li>
-        <li><a href="#代码说明-5">代码说明</a></li>
-        <li><a href="#运行方式-3">运行方式</a></li>
-        <li><a href="#扩展建议-3">扩展建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#发送完命令之后我需要等待收到一个回复的报文命令执行才算完成">发送完命令之后我需要等待收到一个回复的报文，命令执行才算完成</a>
-      <ul>
-        <li><a href="#设计思路-1">设计思路</a></li>
-        <li><a href="#代码实现-2">代码实现</a></li>
-        <li><a href="#代码说明-6">代码说明</a></li>
-        <li><a href="#运行方式-4">运行方式</a></li>
-        <li><a href="#扩展建议-4">扩展建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#如果连接的tcp数量很多使用一个selector接收有点慢该怎么优化">如果连接的tcp数量很多，使用一个selector接收有点慢，该怎么优化</a>
-      <ul>
-        <li><a href="#1-优化思路">1. <strong>优化思路</strong></a>
+        <li><a href="#在-springboot-项目中虚拟线程可以怎么使用">在 springboot 项目中虚拟线程可以怎么使用</a>
           <ul>
-            <li><a href="#11-使用多个-selector">1.1 <strong>使用多个 Selector</strong></a></li>
-            <li><a href="#12-分离连接处理和数据处理">1.2 <strong>分离连接处理和数据处理</strong></a></li>
-            <li><a href="#13-调整缓冲区大小">1.3 <strong>调整缓冲区大小</strong></a></li>
-            <li><a href="#14-使用非阻塞-io">1.4 <strong>使用非阻塞 I/O</strong></a></li>
-            <li><a href="#15-减少事件处理的耗时">1.5 <strong>减少事件处理的耗时</strong></a></li>
+            <li><a href="#1-启用虚拟线程处理-http-请求">1. <strong>启用虚拟线程处理 HTTP 请求</strong></a>
+              <ul>
+                <li><a href="#配置代码">配置代码：</a></li>
+                <li><a href="#说明">说明：</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-使用虚拟线程执行异步任务">2. <strong>使用虚拟线程执行异步任务</strong></a>
+              <ul>
+                <li><a href="#配置代码-1">配置代码：</a></li>
+                <li><a href="#使用示例">使用示例：</a></li>
+                <li><a href="#说明-1">说明：</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-使用虚拟线程执行定时任务">3. <strong>使用虚拟线程执行定时任务</strong></a>
+              <ul>
+                <li><a href="#配置代码-2">配置代码：</a></li>
+                <li><a href="#使用示例-1">使用示例：</a></li>
+                <li><a href="#说明-2">说明：</a></li>
+              </ul>
+            </li>
+            <li><a href="#4-使用虚拟线程执行自定义任务">4. <strong>使用虚拟线程执行自定义任务</strong></a>
+              <ul>
+                <li><a href="#示例代码">示例代码：</a></li>
+                <li><a href="#说明-3">说明：</a></li>
+              </ul>
+            </li>
+            <li><a href="#5-虚拟线程的最佳实践">5. <strong>虚拟线程的最佳实践</strong></a></li>
+            <li><a href="#6-环境要求">6. <strong>环境要求</strong></a></li>
           </ul>
         </li>
-        <li><a href="#2-实现示例">2. <strong>实现示例</strong></a></li>
-        <li><a href="#3-优化建议">3. <strong>优化建议</strong></a></li>
-        <li><a href="#4-参考外部资料">4. <strong>参考外部资料</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#如果我需要维护100个tcp连接使用一个selector够吗">如果我需要维护100个tcp连接，使用一个selector够吗</a>
-      <ul>
-        <li><a href="#1-单个">1. <strong>单个 <code>Selector</code> 的局限性</strong></a></li>
-        <li><a href="#2-优化方案">2. <strong>优化方案</strong></a>
+        <li><a href="#虚拟线程的mn模型具体是如何工作的">虚拟线程的M:N模型具体是如何工作的？</a>
           <ul>
-            <li><a href="#21-使用多个">2.1 <strong>使用多个 <code>Selector</code></strong></a></li>
-            <li><a href="#22-分离连接处理和数据处理">2.2 <strong>分离连接处理和数据处理</strong></a></li>
-            <li><a href="#23-调整缓冲区大小">2.3 <strong>调整缓冲区大小</strong></a></li>
-            <li><a href="#24-使用非阻塞-io">2.4 <strong>使用非阻塞 I/O</strong></a></li>
-            <li><a href="#25-减少事件处理的耗时">2.5 <strong>减少事件处理的耗时</strong></a></li>
+            <li><a href="#1-基本概念">1. <strong>基本概念</strong></a></li>
+            <li><a href="#2-mn-模型的核心思想">2. <strong>M:N 模型的核心思想</strong></a></li>
+            <li><a href="#3-具体工作流程">3. <strong>具体工作流程</strong></a></li>
+            <li><a href="#4-mn-模型的优势">4. <strong>M:N 模型的优势</strong></a></li>
+            <li><a href="#5-mn-模型的实现细节">5. <strong>M:N 模型的实现细节</strong></a></li>
+            <li><a href="#6-示例">6. <strong>示例</strong></a></li>
+            <li><a href="#7-与传统线程模型的对比">7. <strong>与传统线程模型的对比</strong></a></li>
+            <li><a href="#总结-5">总结</a></li>
           </ul>
         </li>
-        <li><a href="#3-参考外部资料">3. <strong>参考外部资料</strong></a></li>
-        <li><a href="#4-示例代码-1">4. <strong>示例代码</strong></a></li>
-        <li><a href="#5-总结-2">5. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#在java中一个tcp连接使用一个socket连接多个tcp这样占用很多内存吗">在java中，一个tcp连接使用一个socket，连接多个tcp，这样占用很多内存吗</a></li>
-    <li><a href="#在java中创建线程的内存开销">在java中创建线程的内存开销</a>
-      <ul>
-        <li><a href="#1-线程栈的内存开销">1. <strong>线程栈的内存开销</strong></a></li>
-        <li><a href="#2-其他内存开销">2. <strong>其他内存开销</strong></a></li>
-        <li><a href="#3-线程创建和销毁的开销">3. <strong>线程创建和销毁的开销</strong></a></li>
-        <li><a href="#4-线程池的优化">4. <strong>线程池的优化</strong></a></li>
-        <li><a href="#5-如何减少线程内存开销">5. <strong>如何减少线程内存开销</strong></a></li>
-        <li><a href="#总结-21">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#java中的selector使用的是select还是epoll">java中的selector使用的是select还是epoll</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#java-selector-的原理">java selector 的原理</a>
-      <ul>
-        <li><a href="#1-selector-的核心功能">1. <strong>Selector 的核心功能</strong></a></li>
-        <li><a href="#2-selector-的工作流程">2. <strong>Selector 的工作流程</strong></a></li>
-        <li><a href="#3-selector-的底层实现">3. <strong>Selector 的底层实现</strong></a></li>
-        <li><a href="#4-selector-的优点">4. <strong>Selector 的优点</strong></a></li>
-        <li><a href="#5-selector-的注意事项">5. <strong>Selector 的注意事项</strong></a></li>
-        <li><a href="#6-与-selectpollepoll-的关系">6. <strong>与 select/poll/epoll 的关系</strong></a></li>
-        <li><a href="#7-示例代码">7. <strong>示例代码</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#selector中事件是由谁产生的">selector中事件是由谁产生的？</a>
-      <ul>
-        <li><a href="#1-事件的产生">1. <strong>事件的产生</strong></a></li>
-        <li><a href="#2-事件的检测">2. <strong>事件的检测</strong></a></li>
-        <li><a href="#3-事件的触发机制">3. <strong>事件的触发机制</strong></a></li>
-        <li><a href="#4-示例">4. <strong>示例</strong></a></li>
-        <li><a href="#总结-22">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#java的selector的使用过程中概念总结一下">java的selector的使用过程中概念总结一下</a>
-      <ul>
-        <li><a href="#1-selector-的作用">1. <strong>Selector 的作用</strong></a></li>
-        <li><a href="#2-核心概念">2. <strong>核心概念</strong></a></li>
-        <li><a href="#3-selector-的使用步骤">3. <strong>Selector 的使用步骤</strong></a></li>
-        <li><a href="#4-selector-的优势">4. <strong>Selector 的优势</strong></a></li>
-        <li><a href="#5-注意事项-1">5. <strong>注意事项</strong></a></li>
-        <li><a href="#6-与底层机制的关系">6. <strong>与底层机制的关系</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#在java中如何使用aes加密算法">在java中如何使用AES加密算法</a>
-      <ul>
-        <li><a href="#1-导入必要的包"><strong>1. 导入必要的包</strong></a></li>
-        <li><a href="#2-生成-aes-密钥"><strong>2. 生成 AES 密钥</strong></a></li>
-        <li><a href="#3-加密方法"><strong>3. 加密方法</strong></a></li>
-        <li><a href="#4-解密方法"><strong>4. 解密方法</strong></a></li>
-        <li><a href="#5-完整示例"><strong>5. 完整示例</strong></a></li>
-        <li><a href="#6-注意事项"><strong>6. 注意事项</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#在java中如何使用rsa算法进行加解密">在Java中如何使用RSA算法进行加解密</a>
-      <ul>
-        <li><a href="#1-生成-rsa-密钥对"><strong>1. 生成 RSA 密钥对</strong></a></li>
-        <li><a href="#2-使用公钥加密"><strong>2. 使用公钥加密</strong></a></li>
-        <li><a href="#3-使用私钥解密"><strong>3. 使用私钥解密</strong></a></li>
-        <li><a href="#4-注意事项"><strong>4. 注意事项</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#公钥只能用来加密私钥只能用来解密吗">公钥只能用来加密，私钥只能用来解密吗？</a>
-      <ul>
-        <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
-        <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
-        <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
-        <li><a href="#总结-23"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
-      <ul>
-        <li><a href="#1-ecbelectronic-code-book电子密码本模式"><strong>1. ECB（Electronic Code Book，电子密码本模式）</strong></a></li>
-        <li><a href="#2-cbccipher-block-chaining密码分组链接模式"><strong>2. CBC（Cipher Block Chaining，密码分组链接模式）</strong></a></li>
-        <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
-        <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
-        <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
-        <li><a href="#总结-24"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
-      <ul>
-        <li><a href="#1-pkcs7-padding">1. <strong>PKCS7 Padding</strong></a></li>
-        <li><a href="#2-pkcs5-padding">2. <strong>PKCS5 Padding</strong></a></li>
-        <li><a href="#3-no-padding">3. <strong>No Padding</strong></a></li>
-        <li><a href="#4-iso10126-padding">4. <strong>ISO10126 Padding</strong></a></li>
-        <li><a href="#5-iso7816-4-padding">5. <strong>ISO7816-4 Padding</strong></a></li>
-        <li><a href="#6-zero-byte-padding">6. <strong>Zero Byte Padding</strong></a></li>
-        <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
-        <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
-        <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
-        <li><a href="#总结-25">总结</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#reference">reference</a></li>
-    <li><a href="#给我举一个-reactor-模式的例子">给我举一个 reactor 模式的例子</a>
-      <ul>
-        <li><a href="#示例代码reactor-模式服务器">示例代码：Reactor 模式服务器</a></li>
-        <li><a href="#代码说明-7">代码说明</a></li>
-        <li><a href="#reactor-模式的核心组件12">Reactor 模式的核心组件<a href="@ref">1</a><a href="@ref">2</a></a></li>
-        <li><a href="#应用场景">应用场景</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#reference-1">reference</a></li>
-    <li><a href="#什么是响应式编程">什么是响应式编程</a>
-      <ul>
-        <li><a href="#核心概念">核心概念</a></li>
-        <li><a href="#响应式编程的特点">响应式编程的特点</a></li>
-        <li><a href="#应用场景-1">应用场景</a></li>
-        <li><a href="#优点">优点</a></li>
-        <li><a href="#缺点">缺点</a></li>
-        <li><a href="#示例">示例</a></li>
-        <li><a href="#总结-26">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#在springboot中有哪些响应式编程的运用">在springboot中有哪些响应式编程的运用</a>
-      <ul>
-        <li><a href="#1-响应式-web-开发spring-webflux">1. <strong>响应式 Web 开发（Spring WebFlux）</strong></a>
+        <li><a href="#java虚拟线程和传统线程有什么区别">Java虚拟线程和传统线程有什么区别</a>
           <ul>
-            <li><a href="#核心特性">核心特性：</a></li>
-            <li><a href="#示例代码-2">示例代码：</a></li>
+            <li><a href="#1-实现方式">1. <strong>实现方式</strong></a></li>
+            <li><a href="#2-线程模型">2. <strong>线程模型</strong></a></li>
+            <li><a href="#3-性能">3. <strong>性能</strong></a></li>
+            <li><a href="#4-适用场景-1">4. <strong>适用场景</strong></a></li>
+            <li><a href="#5-编程模型">5. <strong>编程模型</strong></a></li>
+            <li><a href="#6-资源占用">6. <strong>资源占用</strong></a></li>
+            <li><a href="#7-兼容性">7. <strong>兼容性</strong></a></li>
+            <li><a href="#8-示例对比">8. <strong>示例对比</strong></a></li>
+            <li><a href="#总结-6">总结</a></li>
           </ul>
         </li>
-        <li><a href="#2-响应式数据库访问">2. <strong>响应式数据库访问</strong></a>
+        <li><a href="#可以生成一个java使用虚拟线程的例子吗">可以生成一个java使用虚拟线程的例子吗</a>
           <ul>
-            <li><a href="#核心特性-1">核心特性：</a></li>
-            <li><a href="#示例代码-3">示例代码：</a></li>
+            <li><a href="#示例代码-1">示例代码</a></li>
+            <li><a href="#代码说明">代码说明</a></li>
+            <li><a href="#运行说明">运行说明</a></li>
+            <li><a href="#运行命令">运行命令</a></li>
+            <li><a href="#注意事项">注意事项</a></li>
           </ul>
         </li>
-        <li><a href="#3-响应式消息传递">3. <strong>响应式消息传递</strong></a>
+        <li><a href="#java的虚拟线程是如何对io操作进行优化的">java的虚拟线程是如何对I/O操作进行优化的</a>
           <ul>
-            <li><a href="#核心特性-2">核心特性：</a></li>
-            <li><a href="#示例代码-4">示例代码：</a></li>
+            <li><a href="#1-非阻塞-io-操作">1. <strong>非阻塞 I/O 操作</strong></a></li>
+            <li><a href="#2-轻量级线程调度">2. <strong>轻量级线程调度</strong></a></li>
+            <li><a href="#3-减少线程上下文切换">3. <strong>减少线程上下文切换</strong></a></li>
+            <li><a href="#4-与异步编程的结合">4. <strong>与异步编程的结合</strong></a></li>
+            <li><a href="#5-适用于高并发场景">5. <strong>适用于高并发场景</strong></a></li>
+            <li><a href="#总结-7">总结</a></li>
           </ul>
         </li>
-        <li><a href="#4-响应式安全spring-security-reactive">4. <strong>响应式安全（Spring Security Reactive）</strong></a>
+        <li><a href="#java虚拟线程的forkjoinpool调度器是如何工作的">Java虚拟线程的ForkJoinPool调度器是如何工作的</a>
           <ul>
-            <li><a href="#核心特性-3">核心特性：</a></li>
-            <li><a href="#示例代码-5">示例代码：</a></li>
+            <li><a href="#1-forkjoinpool-的基本原理"><strong>1. ForkJoinPool 的基本原理</strong></a></li>
+            <li><a href="#2-虚拟线程的调度器"><strong>2. 虚拟线程的调度器</strong></a>
+              <ul>
+                <li><a href="#1-虚拟线程的挂起与恢复"><strong>(1) 虚拟线程的挂起与恢复</strong></a></li>
+                <li><a href="#2-任务队列与工作窃取"><strong>(2) 任务队列与工作窃取</strong></a></li>
+                <li><a href="#3-轻量级调度"><strong>(3) 轻量级调度</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#3-调度器的配置"><strong>3. 调度器的配置</strong></a></li>
+            <li><a href="#4-虚拟线程与平台线程的关系"><strong>4. 虚拟线程与平台线程的关系</strong></a></li>
+            <li><a href="#5-示例"><strong>5. 示例</strong></a></li>
+            <li><a href="#总结-8"><strong>总结</strong></a></li>
           </ul>
         </li>
-        <li><a href="#5-响应式测试">5. <strong>响应式测试</strong></a>
+        <li><a href="#java虚拟线程与其他编程语言的异步编程模型相比有什么优势">Java虚拟线程与其他编程语言的异步编程模型相比有什么优势</a>
           <ul>
-            <li><a href="#示例代码-6">示例代码：</a></li>
+            <li><a href="#1-轻量级与高并发"><strong>1. 轻量级与高并发</strong></a></li>
+            <li><a href="#2-非阻塞与高效-io-处理"><strong>2. 非阻塞与高效 I/O 处理</strong></a></li>
+            <li><a href="#3-简化异步编程"><strong>3. 简化异步编程</strong></a></li>
+            <li><a href="#4-与现有生态的无缝集成"><strong>4. 与现有生态的无缝集成</strong></a></li>
+            <li><a href="#5-高效的上下文切换"><strong>5. 高效的上下文切换</strong></a></li>
+            <li><a href="#6-结构化并发支持"><strong>6. 结构化并发支持</strong></a></li>
+            <li><a href="#总结-9"><strong>总结</strong></a></li>
           </ul>
         </li>
-        <li><a href="#6-响应式流处理">6. <strong>响应式流处理</strong></a>
+        <li><a href="#java虚拟线程技术对现有应用程序的性能提升有多大影响">Java虚拟线程技术对现有应用程序的性能提升有多大影响</a>
           <ul>
-            <li><a href="#示例代码-7">示例代码：</a></li>
+            <li><a href="#1-性能提升的核心机制"><strong>1. 性能提升的核心机制</strong></a></li>
+            <li><a href="#2-性能提升的具体表现"><strong>2. 性能提升的具体表现</strong></a></li>
+            <li><a href="#3-实际应用案例"><strong>3. 实际应用案例</strong></a></li>
+            <li><a href="#4-适用场景与限制"><strong>4. 适用场景与限制</strong></a></li>
+            <li><a href="#5-总结-1"><strong>5. 总结</strong></a></li>
           </ul>
         </li>
-        <li><a href="#总结-27">总结</a></li>
+        <li><a href="#java虚拟线程技术在实际项目中面临哪些挑战">Java虚拟线程技术在实际项目中面临哪些挑战</a>
+          <ul>
+            <li><a href="#1-兼容性问题"><strong>1. 兼容性问题</strong></a></li>
+            <li><a href="#2-调试与监控复杂性"><strong>2. 调试与监控复杂性</strong></a></li>
+            <li><a href="#3-资源管理挑战"><strong>3. 资源管理挑战</strong></a></li>
+            <li><a href="#4-性能瓶颈"><strong>4. 性能瓶颈</strong></a></li>
+            <li><a href="#5-学习曲线与最佳实践"><strong>5. 学习曲线与最佳实践</strong></a></li>
+            <li><a href="#6-与现有生态的集成"><strong>6. 与现有生态的集成</strong></a></li>
+            <li><a href="#7-线程安全问题"><strong>7. 线程安全问题</strong></a></li>
+            <li><a href="#总结-10"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#java虚拟线程技术未来可能会带来哪些新的编程范式">Java虚拟线程技术未来可能会带来哪些新的编程范式</a>
+          <ul>
+            <li><a href="#1-结构化并发structured-concurrency"><strong>1. 结构化并发（Structured Concurrency）</strong></a></li>
+            <li><a href="#2-无回调的异步编程"><strong>2. 无回调的异步编程</strong></a></li>
+            <li><a href="#3-事件驱动与反应式编程的简化"><strong>3. 事件驱动与反应式编程的简化</strong></a></li>
+            <li><a href="#4-轻量级任务并发"><strong>4. 轻量级任务并发</strong></a></li>
+            <li><a href="#5-微服务与云原生架构的优化"><strong>5. 微服务与云原生架构的优化</strong></a></li>
+            <li><a href="#6-更高效的批处理与流处理"><strong>6. 更高效的批处理与流处理</strong></a></li>
+            <li><a href="#7-更友好的并发调试与监控"><strong>7. 更友好的并发调试与监控</strong></a></li>
+            <li><a href="#总结-11"><strong>总结</strong></a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><a href="#响应式数据库访问和传统的数据库访问有什么区别">响应式数据库访问和传统的数据库访问有什么区别</a>
+    <li><a href="#java">java</a>
       <ul>
-        <li><a href="#1-编程模型">1. <strong>编程模型</strong></a></li>
-        <li><a href="#2-性能特点">2. <strong>性能特点</strong></a></li>
-        <li><a href="#3-适用场景-1">3. <strong>适用场景</strong></a></li>
-        <li><a href="#4-技术实现">4. <strong>技术实现</strong></a></li>
-        <li><a href="#5-优缺点对比">5. <strong>优缺点对比</strong></a></li>
-        <li><a href="#总结-28">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较</a>
-      <ul>
-        <li><a href="#1-非响应式后端服务的处理过程">1. <strong>非响应式后端服务的处理过程</strong></a>
+        <li><a href="#学习资料">学习资料</a></li>
+        <li><a href="#basic">basic</a>
           <ul>
-            <li><a href="#处理流程">处理流程：</a></li>
-            <li><a href="#特点">特点：</a></li>
-            <li><a href="#示例-1">示例：</a></li>
+            <li><a href="#java-array-转-list">java array 转 list</a>
+              <ul>
+                <li><a href="#创建一个固定大小的列表">创建一个固定大小的列表</a></li>
+                <li><a href="#创建一个可变大小的列表">创建一个可变大小的列表</a></li>
+              </ul>
+            </li>
+            <li><a href="#java-怎么用二进制打印int">java， 怎么用二进制打印int</a>
+              <ul>
+                <li><a href="#使用-integertobinarystring">使用 <code>Integer.toBinaryString()</code></a></li>
+                <li><a href="#打印包含前导零的完整32位">打印包含前导零的完整32位</a></li>
+                <li><a href="#使用位运算手动构建二进制字符串">使用位运算手动构建二进制字符串</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li><a href="#2-响应式后端服务的处理过程">2. <strong>响应式后端服务的处理过程</strong></a>
+        <li><a href="#concurrent">concurrent</a></li>
+        <li><a href="#每一个java的版本的主要更新">每一个java的版本的主要更新</a>
           <ul>
-            <li><a href="#处理流程-1">处理流程：</a></li>
-            <li><a href="#特点-1">特点：</a></li>
-            <li><a href="#示例-2">示例：</a></li>
+            <li><a href="#java-10-1996">Java 1.0 (1996)</a></li>
+            <li><a href="#java-11-1997">Java 1.1 (1997)</a></li>
+            <li><a href="#java-12-1998">Java 1.2 (1998)</a></li>
+            <li><a href="#java-13-2000">Java 1.3 (2000)</a></li>
+            <li><a href="#java-14-2002">Java 1.4 (2002)</a></li>
+            <li><a href="#java-5-2004">Java 5 (2004)</a></li>
+            <li><a href="#java-6-2006">Java 6 (2006)</a></li>
+            <li><a href="#java-7-2011">Java 7 (2011)</a></li>
+            <li><a href="#java-8-2014">Java 8 (2014)</a></li>
+            <li><a href="#java-9-2017">Java 9 (2017)</a></li>
+            <li><a href="#java-10-2018">Java 10 (2018)</a></li>
+            <li><a href="#java-11-2018">Java 11 (2018)</a></li>
+            <li><a href="#java-12-2019">Java 12 (2019)</a></li>
+            <li><a href="#java-13-2019">Java 13 (2019)</a></li>
+            <li><a href="#java-14-2020">Java 14 (2020)</a></li>
+            <li><a href="#java-15-2020">Java 15 (2020)</a></li>
+            <li><a href="#java-16-2021">Java 16 (2021)</a></li>
+            <li><a href="#java-17-2021">Java 17 (2021)</a></li>
+            <li><a href="#java-18-2022">Java 18 (2022)</a></li>
+            <li><a href="#java-19-2022">Java 19 (2022)</a></li>
+            <li><a href="#java-20-2023">Java 20 (2023)</a></li>
+            <li><a href="#java-21-2023">Java 21 (2023)</a></li>
+            <li><a href="#总结-12">总结</a></li>
           </ul>
         </li>
-        <li><a href="#3-两者的比较">3. <strong>两者的比较</strong></a></li>
-        <li><a href="#4-总结-3">4. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#可以举一个具体的例子来详细说明吗一个线程在从处理开始到结束每个时刻所进行的任务">可以举一个具体的例子来详细说明吗？一个线程在从处理开始到结束，每个时刻所进行的任务</a>
-      <ul>
-        <li><a href="#场景描述"><strong>场景描述</strong></a></li>
-        <li><a href="#代码实现-3"><strong>代码实现</strong></a></li>
-        <li><a href="#线程执行过程"><strong>线程执行过程</strong></a>
+        <li><a href="#面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识</a>
           <ul>
-            <li><a href="#时刻-1接收请求"><strong>时刻 1：接收请求</strong></a></li>
-            <li><a href="#时刻-2发起异步数据库查询"><strong>时刻 2：发起异步数据库查询</strong></a></li>
-            <li><a href="#时刻-3线程释放"><strong>时刻 3：线程释放</strong></a></li>
-            <li><a href="#时刻-4数据库查询完成"><strong>时刻 4：数据库查询完成</strong></a></li>
-            <li><a href="#时刻-5返回结果"><strong>时刻 5：返回结果</strong></a></li>
+            <li><a href="#1-java最新版本特性">1. <strong>Java最新版本特性</strong></a></li>
+            <li><a href="#2-微服务与云原生技术">2. <strong>微服务与云原生技术</strong></a></li>
+            <li><a href="#3-数据库与缓存技术">3. <strong>数据库与缓存技术</strong></a></li>
+            <li><a href="#4-性能优化与jvm调优">4. <strong>性能优化与JVM调优</strong></a></li>
+            <li><a href="#5-前沿技术与趋势">5. <strong>前沿技术与趋势</strong></a></li>
+            <li><a href="#6-实践与项目结合">6. <strong>实践与项目结合</strong></a></li>
+            <li><a href="#7-面试中的表达技巧">7. <strong>面试中的表达技巧</strong></a></li>
           </ul>
         </li>
-        <li><a href="#线程任务总结"><strong>线程任务总结</strong></a></li>
-        <li><a href="#关键点"><strong>关键点</strong></a></li>
-        <li><a href="#总结-29"><strong>总结</strong></a></li>
       </ul>
     </li>
-    <li><a href="#在响应式编程中它的并发量会收到数据库连接池大小的限制那这不是和阻塞式的服务一样吗">在响应式编程中，它的并发量会收到数据库连接池大小的限制，那这不是和阻塞式的服务一样吗</a>
+    <li><a href="#collection">collection</a>
       <ul>
-        <li><a href="#1-响应式编程与阻塞式服务的区别"><strong>1. 响应式编程与阻塞式服务的区别</strong></a></li>
-        <li><a href="#2-数据库连接池的限制"><strong>2. 数据库连接池的限制</strong></a></li>
-        <li><a href="#3-如何优化连接池与响应式编程的结合"><strong>3. 如何优化连接池与响应式编程的结合</strong></a></li>
-        <li><a href="#4-总结-4"><strong>4. 总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#在阻塞式的io中数据库的处理线程就是处理请求的那个线程吗">在阻塞式的IO中，数据库的处理线程就是处理请求的那个线程吗</a>
-      <ul>
-        <li><a href="#1-阻塞式io的工作机制"><strong>1. 阻塞式IO的工作机制</strong></a></li>
-        <li><a href="#2-具体流程"><strong>2. 具体流程</strong></a></li>
-        <li><a href="#3-阻塞式io的线程模型"><strong>3. 阻塞式IO的线程模型</strong></a></li>
-        <li><a href="#4-与响应式模型的区别"><strong>4. 与响应式模型的区别</strong></a></li>
-        <li><a href="#总结-30"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#在使用-r2dbc-时处理数据库操作的线程如何设置">在使用 R2DBC 时，处理数据库操作的线程如何设置</a>
-      <ul>
-        <li><a href="#1-r2dbc-的线程模型"><strong>1. R2DBC 的线程模型</strong></a></li>
-        <li><a href="#2-如何设置线程"><strong>2. 如何设置线程</strong></a>
+        <li><a href="#collection-和-collections-有什么区别">Collection 和 Collections 有什么区别？</a>
           <ul>
-            <li><a href="#1-使用连接池配置"><strong>(1) 使用连接池配置</strong></a></li>
-            <li><a href="#2-使用异步-io-线程"><strong>(2) 使用异步 I/O 线程</strong></a></li>
+            <li><a href="#1-定义与性质"><strong>1. 定义与性质</strong></a></li>
+            <li><a href="#2-功能与使用"><strong>2. 功能与使用</strong></a></li>
+            <li><a href="#3-示例代码"><strong>3. 示例代码</strong></a></li>
+            <li><a href="#4-总结"><strong>4. 总结</strong></a></li>
           </ul>
         </li>
-        <li><a href="#3-线程处理的流程"><strong>3. 线程处理的流程</strong></a></li>
-        <li><a href="#4-与传统阻塞式模型的区别"><strong>4. 与传统阻塞式模型的区别</strong></a></li>
-        <li><a href="#5-优化建议"><strong>5. 优化建议</strong></a></li>
-        <li><a href="#总结-31"><strong>总结</strong></a></li>
+        <li><a href="#arrayssort-和-collectionssort-的区别">Arrays.sort 和 Collections.sort 的区别</a>
+          <ul>
+            <li><a href="#1-适用对象"><strong>1. 适用对象</strong></a></li>
+            <li><a href="#2-底层实现"><strong>2. 底层实现</strong></a></li>
+            <li><a href="#3-排序规则"><strong>3. 排序规则</strong></a></li>
+            <li><a href="#4-性能与稳定性"><strong>4. 性能与稳定性</strong></a></li>
+            <li><a href="#5-使用场景"><strong>5. 使用场景</strong></a></li>
+            <li><a href="#总结-13"><strong>总结</strong></a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-  </ul>
-
-  <ul>
-    <li><a href="#在java的响应式中mono是什么">在java的响应式中，mono是什么</a>
+    <li><a href="#hashmap">HashMap</a>
       <ul>
-        <li><a href="#mono-的主要特点"><strong>Mono 的主要特点</strong></a></li>
-        <li><a href="#mono-的常见使用场景"><strong>Mono 的常见使用场景</strong></a></li>
-        <li><a href="#mono-的示例代码"><strong>Mono 的示例代码</strong></a></li>
-        <li><a href="#mono-的操作符"><strong>Mono 的操作符</strong></a></li>
-        <li><a href="#mono-与-flux-的区别"><strong>Mono 与 Flux 的区别</strong></a></li>
-        <li><a href="#总结-32"><strong>总结</strong></a></li>
+        <li><a href="#hashmap底层的数据结构是怎样的">HashMap底层的数据结构是怎样的</a>
+          <ul>
+            <li><a href="#jdk-17-及之前"><strong>JDK 1.7 及之前</strong></a></li>
+            <li><a href="#jdk-18-及之后"><strong>JDK 1.8 及之后</strong></a></li>
+            <li><a href="#核心机制"><strong>核心机制</strong></a></li>
+            <li><a href="#总结-14"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？</a>
+          <ul>
+            <li><a href="#一红黑树的特性优势">一、<strong>红黑树的特性优势</strong></a></li>
+            <li><a href="#二与其他树结构的对比">二、<strong>与其他树结构的对比</strong></a>
+              <ul>
+                <li><a href="#1-与-avl-树的对比">1. <strong>与 AVL 树的对比</strong></a></li>
+                <li><a href="#2-与普通二叉搜索树的对比">2. <strong>与普通二叉搜索树的对比</strong></a></li>
+                <li><a href="#3-与-b-树b-树的对比">3. <strong>与 B 树/B+ 树的对比</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#三hashmap-的特定需求">三、<strong>HashMap 的特定需求</strong></a></li>
+            <li><a href="#四总结">四、<strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap-get-的时间复杂度">HashMap get 的时间复杂度</a>
+          <ul>
+            <li><a href="#1-理想情况o1">1. <strong>理想情况（O(1)）</strong></a></li>
+            <li><a href="#2-最坏情况on">2. <strong>最坏情况（O(n)）</strong></a></li>
+            <li><a href="#3-总结">3. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap如何保证线程安全">HashMap如何保证线程安全</a>
+          <ul>
+            <li><a href="#1-使用"><strong>1. 使用 <code>Collections.synchronizedMap</code></strong></a></li>
+            <li><a href="#2-使用"><strong>2. 使用 <code>ConcurrentHashMap</code></strong></a></li>
+            <li><a href="#3-使用读写锁-"><strong>3. 使用读写锁 (<code>ReadWriteLock</code>)</strong></a></li>
+            <li><a href="#4-方法内部使用局部"><strong>4. 方法内部使用局部 <code>HashMap</code></strong></a></li>
+            <li><a href="#5-初始化写后续只读"><strong>5. 初始化写，后续只读</strong></a></li>
+            <li><a href="#总结-15"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？</a>
+          <ul>
+            <li><a href="#1-线程安全性"><strong>1. 线程安全性</strong></a></li>
+            <li><a href="#2-对-null-值的支持"><strong>2. 对 null 值的支持</strong></a></li>
+            <li><a href="#3-性能-1"><strong>3. 性能</strong></a></li>
+            <li><a href="#4-继承与实现"><strong>4. 继承与实现</strong></a></li>
+            <li><a href="#5-扩容机制"><strong>5. 扩容机制</strong></a></li>
+            <li><a href="#6-迭代器"><strong>6. 迭代器</strong></a></li>
+            <li><a href="#7-计算哈希值的方式"><strong>7. 计算哈希值的方式</strong></a></li>
+            <li><a href="#总结-16"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#当-hashmap-扩容时所有的红黑树或者链表都会重新构造吗">当 HashMap 扩容时，所有的红黑树或者链表都会重新构造吗</a>
+          <ul>
+            <li><a href="#1-链表重新构造"><strong>1. 链表重新构造</strong></a></li>
+            <li><a href="#2-红黑树重新构造"><strong>2. 红黑树重新构造</strong></a></li>
+            <li><a href="#3-重新哈希的原因"><strong>3. 重新哈希的原因</strong></a></li>
+            <li><a href="#总结-17"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#为什么hashmap选择红黑树而不选择b树">为什么HashMap选择红黑树而不选择B+树</a>
+          <ul>
+            <li><a href="#1-算法实现复杂度">1. <strong>算法实现复杂度</strong></a></li>
+            <li><a href="#2-底层数据结构匹配">2. <strong>底层数据结构匹配</strong></a></li>
+            <li><a href="#3-修改效率">3. <strong>修改效率</strong></a></li>
+            <li><a href="#4-内存占用">4. <strong>内存占用</strong></a></li>
+            <li><a href="#5-适用场景-1">5. <strong>适用场景</strong></a></li>
+            <li><a href="#6-维护成本">6. <strong>维护成本</strong></a></li>
+            <li><a href="#总结-18">总结</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><a href="#mono-是如何实现非阻塞的">Mono 是如何实现非阻塞的</a>
+    <li><a href="#io模型">I/O模型</a>
       <ul>
-        <li><a href="#1-事件驱动模型">1. <strong>事件驱动模型</strong></a></li>
-        <li><a href="#2-回调机制">2. <strong>回调机制</strong></a></li>
-        <li><a href="#3-非阻塞-io">3. <strong>非阻塞 I/O</strong></a></li>
-        <li><a href="#4-线程调度">4. <strong>线程调度</strong></a></li>
-        <li><a href="#5-背压支持">5. <strong>背压支持</strong></a></li>
-        <li><a href="#6-示例代码">6. <strong>示例代码</strong></a></li>
-        <li><a href="#总结-33">总结</a></li>
+        <li><a href="#selectpoll和epoll的区别">select、poll和epoll的区别</a>
+          <ul>
+            <li><a href="#1-select">1. <strong>select</strong></a></li>
+            <li><a href="#2-poll">2. <strong>poll</strong></a></li>
+            <li><a href="#3-epoll">3. <strong>epoll</strong></a></li>
+            <li><a href="#对比总结">对比总结</a></li>
+            <li><a href="#总结-19">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#提供一个java异步io的例子">提供一个java异步I/O的例子</a>
+          <ul>
+            <li><a href="#示例代码异步文件读取">示例代码：异步文件读取</a></li>
+            <li><a href="#代码说明-1">代码说明</a></li>
+            <li><a href="#异步-io-的优势">异步 I/O 的优势</a></li>
+            <li><a href="#参考">参考</a></li>
+          </ul>
+        </li>
+        <li><a href="#在java中非阻塞io就是io多路复用吗">在java中非阻塞IO就是IO多路复用吗</a>
+          <ul>
+            <li><a href="#1-非阻塞-ionon-blocking-io">1. <strong>非阻塞 I/O（Non-blocking I/O）</strong></a></li>
+            <li><a href="#2-io-多路复用io-multiplexing">2. <strong>I/O 多路复用（I/O Multiplexing）</strong></a></li>
+            <li><a href="#3-非阻塞-io-与-io-多路复用的关系">3. <strong>非阻塞 I/O 与 I/O 多路复用的关系</strong></a></li>
+            <li><a href="#4-总结-1">4. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在java中selector算非阻塞还是多路复用">在java中selector算非阻塞还是多路复用</a>
+          <ul>
+            <li><a href="#1-selector">1. <strong><code>Selector</code> 是非阻塞 I/O 的实现</strong></a></li>
+            <li><a href="#2-selector">2. <strong><code>Selector</code> 是 I/O 多路复用的核心</strong></a></li>
+            <li><a href="#3-selector">3. <strong><code>Selector</code> 的工作原理</strong></a></li>
+            <li><a href="#4-总结-2">4. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#socket">socket</a>
+      <ul>
+        <li><a href="#我有这样一个开发场景服务端需要和多个客户端进行tcp连接服务端会发送指令给客户端客户端会返回指令执行结果客户端会定时返回心跳报文上报状态客户端会不定时上报事件报文我该怎么实现上述功能">我有这样一个开发场景，服务端需要和多个客户端进行tcp连接，服务端会发送指令给客户端，客户端会返回指令执行结果；客户端会定时返回心跳报文上报状态；客户端会不定时上报事件报文。我该怎么实现上述功能？</a>
+          <ul>
+            <li><a href="#1-服务端设计">1. 服务端设计</a>
+              <ul>
+                <li><a href="#11-建立tcp连接">1.1 建立TCP连接</a></li>
+                <li><a href="#12-指令发送">1.2 指令发送</a></li>
+                <li><a href="#13-处理客户端返回">1.3 处理客户端返回</a></li>
+                <li><a href="#14-心跳处理">1.4 心跳处理</a></li>
+                <li><a href="#15-事件处理">1.5 事件处理</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-客户端设计">2. 客户端设计</a>
+              <ul>
+                <li><a href="#21-连接服务端">2.1 连接服务端</a></li>
+                <li><a href="#22-指令执行">2.2 指令执行</a></li>
+                <li><a href="#23-心跳发送">2.3 心跳发送</a></li>
+                <li><a href="#24-事件上报">2.4 事件上报</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-协议设计">3. 协议设计</a></li>
+            <li><a href="#4-实现示例">4. 实现示例</a>
+              <ul>
+                <li><a href="#服务端示例python伪代码">服务端示例（Python伪代码）</a></li>
+                <li><a href="#客户端示例python伪代码">客户端示例（Python伪代码）</a></li>
+              </ul>
+            </li>
+            <li><a href="#5-注意事项">5. 注意事项</a></li>
+          </ul>
+        </li>
+        <li><a href="#如果我使用io多路复用来实现给我一个java版本代码示例">如果我使用IO多路复用来实现，给我一个java版本代码示例</a>
+          <ul>
+            <li><a href="#服务端代码示例">服务端代码示例</a></li>
+            <li><a href="#客户端代码示例">客户端代码示例</a></li>
+            <li><a href="#代码说明-2">代码说明</a></li>
+            <li><a href="#运行方式">运行方式</a></li>
+            <li><a href="#扩展建议">扩展建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#我有一个服务端需要连接多个服务端进行tcp连接给我一个java的代码示例">我有一个服务端，需要连接多个服务端进行tcp连接，给我一个java的代码示例</a>
+          <ul>
+            <li><a href="#代码示例">代码示例</a></li>
+            <li><a href="#代码说明-3">代码说明</a></li>
+            <li><a href="#运行方式-1">运行方式</a></li>
+            <li><a href="#参考-1">参考</a></li>
+            <li><a href="#扩展建议-1">扩展建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#我在tcp连接的过程中可能会新增连接修改连接信息ip或端口号或者删除连接这个该怎么实现">我在tcp连接的过程中，可能会新增连接，修改连接信息（ip或端口号）或者删除连接，这个该怎么实现</a>
+          <ul>
+            <li><a href="#设计思路">设计思路</a></li>
+            <li><a href="#代码实现">代码实现</a></li>
+            <li><a href="#代码说明-4">代码说明</a></li>
+            <li><a href="#运行方式-2">运行方式</a></li>
+            <li><a href="#扩展建议-2">扩展建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#使用-socketchannel-的-close-方法是否会导致tcp连接还在传输数据的时候意外断开的情况">使用 socketChannel 的 close 方法，是否会导致tcp连接还在传输数据的时候意外断开的情况</a>
+          <ul>
+            <li><a href="#1-socketchannelclose">1. <strong><code>SocketChannel.close</code> 的行为</strong></a></li>
+            <li><a href="#2-数据传输中的关闭">2. <strong>数据传输中的关闭</strong></a></li>
+            <li><a href="#3-异常情况">3. <strong>异常情况</strong></a></li>
+            <li><a href="#4-最佳实践">4. <strong>最佳实践</strong></a></li>
+            <li><a href="#总结-20">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
+          <ul>
+            <li><a href="#代码实现-1">代码实现</a></li>
+            <li><a href="#代码说明-5">代码说明</a></li>
+            <li><a href="#运行方式-3">运行方式</a></li>
+            <li><a href="#扩展建议-3">扩展建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#发送完命令之后我需要等待收到一个回复的报文命令执行才算完成">发送完命令之后我需要等待收到一个回复的报文，命令执行才算完成</a>
+          <ul>
+            <li><a href="#设计思路-1">设计思路</a></li>
+            <li><a href="#代码实现-2">代码实现</a></li>
+            <li><a href="#代码说明-6">代码说明</a></li>
+            <li><a href="#运行方式-4">运行方式</a></li>
+            <li><a href="#扩展建议-4">扩展建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#如果连接的tcp数量很多使用一个selector接收有点慢该怎么优化">如果连接的tcp数量很多，使用一个selector接收有点慢，该怎么优化</a>
+          <ul>
+            <li><a href="#1-优化思路">1. <strong>优化思路</strong></a>
+              <ul>
+                <li><a href="#11-使用多个-selector">1.1 <strong>使用多个 Selector</strong></a></li>
+                <li><a href="#12-分离连接处理和数据处理">1.2 <strong>分离连接处理和数据处理</strong></a></li>
+                <li><a href="#13-调整缓冲区大小">1.3 <strong>调整缓冲区大小</strong></a></li>
+                <li><a href="#14-使用非阻塞-io">1.4 <strong>使用非阻塞 I/O</strong></a></li>
+                <li><a href="#15-减少事件处理的耗时">1.5 <strong>减少事件处理的耗时</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#2-实现示例">2. <strong>实现示例</strong></a></li>
+            <li><a href="#3-优化建议">3. <strong>优化建议</strong></a></li>
+            <li><a href="#4-参考外部资料">4. <strong>参考外部资料</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#如果我需要维护100个tcp连接使用一个selector够吗">如果我需要维护100个tcp连接，使用一个selector够吗</a>
+          <ul>
+            <li><a href="#1-单个">1. <strong>单个 <code>Selector</code> 的局限性</strong></a></li>
+            <li><a href="#2-优化方案">2. <strong>优化方案</strong></a>
+              <ul>
+                <li><a href="#21-使用多个">2.1 <strong>使用多个 <code>Selector</code></strong></a></li>
+                <li><a href="#22-分离连接处理和数据处理">2.2 <strong>分离连接处理和数据处理</strong></a></li>
+                <li><a href="#23-调整缓冲区大小">2.3 <strong>调整缓冲区大小</strong></a></li>
+                <li><a href="#24-使用非阻塞-io">2.4 <strong>使用非阻塞 I/O</strong></a></li>
+                <li><a href="#25-减少事件处理的耗时">2.5 <strong>减少事件处理的耗时</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#3-参考外部资料">3. <strong>参考外部资料</strong></a></li>
+            <li><a href="#4-示例代码-1">4. <strong>示例代码</strong></a></li>
+            <li><a href="#5-总结-2">5. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在java中一个tcp连接使用一个socket连接多个tcp这样占用很多内存吗">在java中，一个tcp连接使用一个socket，连接多个tcp，这样占用很多内存吗</a></li>
+        <li><a href="#在java中创建线程的内存开销">在java中创建线程的内存开销</a>
+          <ul>
+            <li><a href="#1-线程栈的内存开销">1. <strong>线程栈的内存开销</strong></a></li>
+            <li><a href="#2-其他内存开销">2. <strong>其他内存开销</strong></a></li>
+            <li><a href="#3-线程创建和销毁的开销">3. <strong>线程创建和销毁的开销</strong></a></li>
+            <li><a href="#4-线程池的优化">4. <strong>线程池的优化</strong></a></li>
+            <li><a href="#5-如何减少线程内存开销">5. <strong>如何减少线程内存开销</strong></a></li>
+            <li><a href="#总结-21">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#java中的selector使用的是select还是epoll">java中的selector使用的是select还是epoll</a></li>
+      </ul>
+    </li>
+    <li><a href="#selector">selector</a>
+      <ul>
+        <li><a href="#java-selector-的原理">java selector 的原理</a>
+          <ul>
+            <li><a href="#1-selector-的核心功能">1. <strong>Selector 的核心功能</strong></a></li>
+            <li><a href="#2-selector-的工作流程">2. <strong>Selector 的工作流程</strong></a></li>
+            <li><a href="#3-selector-的底层实现">3. <strong>Selector 的底层实现</strong></a></li>
+            <li><a href="#4-selector-的优点">4. <strong>Selector 的优点</strong></a></li>
+            <li><a href="#5-selector-的注意事项">5. <strong>Selector 的注意事项</strong></a></li>
+            <li><a href="#6-与-selectpollepoll-的关系">6. <strong>与 select/poll/epoll 的关系</strong></a></li>
+            <li><a href="#7-示例代码">7. <strong>示例代码</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#selector中事件是由谁产生的">selector中事件是由谁产生的？</a>
+          <ul>
+            <li><a href="#1-事件的产生">1. <strong>事件的产生</strong></a></li>
+            <li><a href="#2-事件的检测">2. <strong>事件的检测</strong></a></li>
+            <li><a href="#3-事件的触发机制">3. <strong>事件的触发机制</strong></a></li>
+            <li><a href="#4-示例">4. <strong>示例</strong></a></li>
+            <li><a href="#总结-22">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#java的selector的使用过程中概念总结一下">java的selector的使用过程中概念总结一下</a>
+          <ul>
+            <li><a href="#1-selector-的作用">1. <strong>Selector 的作用</strong></a></li>
+            <li><a href="#2-核心概念">2. <strong>核心概念</strong></a></li>
+            <li><a href="#3-selector-的使用步骤">3. <strong>Selector 的使用步骤</strong></a></li>
+            <li><a href="#4-selector-的优势">4. <strong>Selector 的优势</strong></a></li>
+            <li><a href="#5-注意事项-1">5. <strong>注意事项</strong></a></li>
+            <li><a href="#6-与底层机制的关系">6. <strong>与底层机制的关系</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#密码学">密码学</a>
+      <ul>
+        <li><a href="#在java中如何使用aes加密算法">在java中如何使用AES加密算法</a>
+          <ul>
+            <li><a href="#1-导入必要的包"><strong>1. 导入必要的包</strong></a></li>
+            <li><a href="#2-生成-aes-密钥"><strong>2. 生成 AES 密钥</strong></a></li>
+            <li><a href="#3-加密方法"><strong>3. 加密方法</strong></a></li>
+            <li><a href="#4-解密方法"><strong>4. 解密方法</strong></a></li>
+            <li><a href="#5-完整示例"><strong>5. 完整示例</strong></a></li>
+            <li><a href="#6-注意事项"><strong>6. 注意事项</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在java中如何使用rsa算法进行加解密">在Java中如何使用RSA算法进行加解密</a>
+          <ul>
+            <li><a href="#1-生成-rsa-密钥对"><strong>1. 生成 RSA 密钥对</strong></a></li>
+            <li><a href="#2-使用公钥加密"><strong>2. 使用公钥加密</strong></a></li>
+            <li><a href="#3-使用私钥解密"><strong>3. 使用私钥解密</strong></a></li>
+            <li><a href="#4-注意事项"><strong>4. 注意事项</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#公钥只能用来加密私钥只能用来解密吗">公钥只能用来加密，私钥只能用来解密吗？</a>
+          <ul>
+            <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
+            <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
+            <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
+            <li><a href="#总结-23"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
+          <ul>
+            <li><a href="#1-ecbelectronic-code-book电子密码本模式"><strong>1. ECB（Electronic Code Book，电子密码本模式）</strong></a></li>
+            <li><a href="#2-cbccipher-block-chaining密码分组链接模式"><strong>2. CBC（Cipher Block Chaining，密码分组链接模式）</strong></a></li>
+            <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
+            <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
+            <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
+            <li><a href="#总结-24"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
+          <ul>
+            <li><a href="#1-pkcs7-padding">1. <strong>PKCS7 Padding</strong></a></li>
+            <li><a href="#2-pkcs5-padding">2. <strong>PKCS5 Padding</strong></a></li>
+            <li><a href="#3-no-padding">3. <strong>No Padding</strong></a></li>
+            <li><a href="#4-iso10126-padding">4. <strong>ISO10126 Padding</strong></a></li>
+            <li><a href="#5-iso7816-4-padding">5. <strong>ISO7816-4 Padding</strong></a></li>
+            <li><a href="#6-zero-byte-padding">6. <strong>Zero Byte Padding</strong></a></li>
+            <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
+            <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
+            <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
+            <li><a href="#总结-25">总结</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#reactor">reactor</a>
+      <ul>
+        <li><a href="#reference">reference</a></li>
+        <li><a href="#给我举一个-reactor-模式的例子">给我举一个 reactor 模式的例子</a>
+          <ul>
+            <li><a href="#示例代码reactor-模式服务器">示例代码：Reactor 模式服务器</a></li>
+            <li><a href="#代码说明-7">代码说明</a></li>
+            <li><a href="#reactor-模式的核心组件12">Reactor 模式的核心组件<a href="@ref">1</a><a href="@ref">2</a></a></li>
+            <li><a href="#应用场景">应用场景</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#响应式编程">响应式编程</a>
+      <ul>
+        <li><a href="#reference-1">reference</a></li>
+        <li><a href="#什么是响应式编程">什么是响应式编程</a>
+          <ul>
+            <li><a href="#核心概念">核心概念</a></li>
+            <li><a href="#响应式编程的特点">响应式编程的特点</a></li>
+            <li><a href="#应用场景-1">应用场景</a></li>
+            <li><a href="#优点">优点</a></li>
+            <li><a href="#缺点">缺点</a></li>
+            <li><a href="#示例">示例</a></li>
+            <li><a href="#总结-26">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#在springboot中有哪些响应式编程的运用">在springboot中有哪些响应式编程的运用</a>
+          <ul>
+            <li><a href="#1-响应式-web-开发spring-webflux">1. <strong>响应式 Web 开发（Spring WebFlux）</strong></a>
+              <ul>
+                <li><a href="#核心特性">核心特性：</a></li>
+                <li><a href="#示例代码-2">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-响应式数据库访问">2. <strong>响应式数据库访问</strong></a>
+              <ul>
+                <li><a href="#核心特性-1">核心特性：</a></li>
+                <li><a href="#示例代码-3">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-响应式消息传递">3. <strong>响应式消息传递</strong></a>
+              <ul>
+                <li><a href="#核心特性-2">核心特性：</a></li>
+                <li><a href="#示例代码-4">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#4-响应式安全spring-security-reactive">4. <strong>响应式安全（Spring Security Reactive）</strong></a>
+              <ul>
+                <li><a href="#核心特性-3">核心特性：</a></li>
+                <li><a href="#示例代码-5">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#5-响应式测试">5. <strong>响应式测试</strong></a>
+              <ul>
+                <li><a href="#示例代码-6">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#6-响应式流处理">6. <strong>响应式流处理</strong></a>
+              <ul>
+                <li><a href="#示例代码-7">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#总结-27">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#响应式数据库访问和传统的数据库访问有什么区别">响应式数据库访问和传统的数据库访问有什么区别</a>
+          <ul>
+            <li><a href="#1-编程模型">1. <strong>编程模型</strong></a></li>
+            <li><a href="#2-性能特点">2. <strong>性能特点</strong></a></li>
+            <li><a href="#3-适用场景-1">3. <strong>适用场景</strong></a></li>
+            <li><a href="#4-技术实现">4. <strong>技术实现</strong></a></li>
+            <li><a href="#5-优缺点对比">5. <strong>优缺点对比</strong></a></li>
+            <li><a href="#总结-28">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较</a>
+          <ul>
+            <li><a href="#1-非响应式后端服务的处理过程">1. <strong>非响应式后端服务的处理过程</strong></a>
+              <ul>
+                <li><a href="#处理流程">处理流程：</a></li>
+                <li><a href="#特点">特点：</a></li>
+                <li><a href="#示例-1">示例：</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-响应式后端服务的处理过程">2. <strong>响应式后端服务的处理过程</strong></a>
+              <ul>
+                <li><a href="#处理流程-1">处理流程：</a></li>
+                <li><a href="#特点-1">特点：</a></li>
+                <li><a href="#示例-2">示例：</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-两者的比较">3. <strong>两者的比较</strong></a></li>
+            <li><a href="#4-总结-3">4. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#可以举一个具体的例子来详细说明吗一个线程在从处理开始到结束每个时刻所进行的任务">可以举一个具体的例子来详细说明吗？一个线程在从处理开始到结束，每个时刻所进行的任务</a>
+          <ul>
+            <li><a href="#场景描述"><strong>场景描述</strong></a></li>
+            <li><a href="#代码实现-3"><strong>代码实现</strong></a></li>
+            <li><a href="#线程执行过程"><strong>线程执行过程</strong></a>
+              <ul>
+                <li><a href="#时刻-1接收请求"><strong>时刻 1：接收请求</strong></a></li>
+                <li><a href="#时刻-2发起异步数据库查询"><strong>时刻 2：发起异步数据库查询</strong></a></li>
+                <li><a href="#时刻-3线程释放"><strong>时刻 3：线程释放</strong></a></li>
+                <li><a href="#时刻-4数据库查询完成"><strong>时刻 4：数据库查询完成</strong></a></li>
+                <li><a href="#时刻-5返回结果"><strong>时刻 5：返回结果</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#线程任务总结"><strong>线程任务总结</strong></a></li>
+            <li><a href="#关键点"><strong>关键点</strong></a></li>
+            <li><a href="#总结-29"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在响应式编程中它的并发量会收到数据库连接池大小的限制那这不是和阻塞式的服务一样吗">在响应式编程中，它的并发量会收到数据库连接池大小的限制，那这不是和阻塞式的服务一样吗</a>
+          <ul>
+            <li><a href="#1-响应式编程与阻塞式服务的区别"><strong>1. 响应式编程与阻塞式服务的区别</strong></a></li>
+            <li><a href="#2-数据库连接池的限制"><strong>2. 数据库连接池的限制</strong></a></li>
+            <li><a href="#3-如何优化连接池与响应式编程的结合"><strong>3. 如何优化连接池与响应式编程的结合</strong></a></li>
+            <li><a href="#4-总结-4"><strong>4. 总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在阻塞式的io中数据库的处理线程就是处理请求的那个线程吗">在阻塞式的IO中，数据库的处理线程就是处理请求的那个线程吗</a>
+          <ul>
+            <li><a href="#1-阻塞式io的工作机制"><strong>1. 阻塞式IO的工作机制</strong></a></li>
+            <li><a href="#2-具体流程"><strong>2. 具体流程</strong></a></li>
+            <li><a href="#3-阻塞式io的线程模型"><strong>3. 阻塞式IO的线程模型</strong></a></li>
+            <li><a href="#4-与响应式模型的区别"><strong>4. 与响应式模型的区别</strong></a></li>
+            <li><a href="#总结-30"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在使用-r2dbc-时处理数据库操作的线程如何设置">在使用 R2DBC 时，处理数据库操作的线程如何设置</a>
+          <ul>
+            <li><a href="#1-r2dbc-的线程模型"><strong>1. R2DBC 的线程模型</strong></a></li>
+            <li><a href="#2-如何设置线程"><strong>2. 如何设置线程</strong></a>
+              <ul>
+                <li><a href="#1-使用连接池配置"><strong>(1) 使用连接池配置</strong></a></li>
+                <li><a href="#2-使用异步-io-线程"><strong>(2) 使用异步 I/O 线程</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#3-线程处理的流程"><strong>3. 线程处理的流程</strong></a></li>
+            <li><a href="#4-与传统阻塞式模型的区别"><strong>4. 与传统阻塞式模型的区别</strong></a></li>
+            <li><a href="#5-优化建议"><strong>5. 优化建议</strong></a></li>
+            <li><a href="#总结-31"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#mono">Mono</a>
+      <ul>
+        <li><a href="#在java的响应式中mono是什么">在java的响应式中，mono是什么</a>
+          <ul>
+            <li><a href="#mono-的主要特点"><strong>Mono 的主要特点</strong></a></li>
+            <li><a href="#mono-的常见使用场景"><strong>Mono 的常见使用场景</strong></a></li>
+            <li><a href="#mono-的示例代码"><strong>Mono 的示例代码</strong></a></li>
+            <li><a href="#mono-的操作符"><strong>Mono 的操作符</strong></a></li>
+            <li><a href="#mono-与-flux-的区别"><strong>Mono 与 Flux 的区别</strong></a></li>
+            <li><a href="#总结-32"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#mono-是如何实现非阻塞的">Mono 是如何实现非阻塞的</a>
+          <ul>
+            <li><a href="#1-事件驱动模型">1. <strong>事件驱动模型</strong></a></li>
+            <li><a href="#2-回调机制">2. <strong>回调机制</strong></a></li>
+            <li><a href="#3-非阻塞-io">3. <strong>非阻塞 I/O</strong></a></li>
+            <li><a href="#4-线程调度">4. <strong>线程调度</strong></a></li>
+            <li><a href="#5-背压支持">5. <strong>背压支持</strong></a></li>
+            <li><a href="#6-示例代码">6. <strong>示例代码</strong></a></li>
+            <li><a href="#总结-33">总结</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -9196,7 +9211,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/21d3722c34a1c4d34d72a1190641e2127a91c745" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d22cce5b375164ec5e27179ef6afa8ca7f3c00d" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
@@ -9234,776 +9249,791 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？</a>
+    <li><a href="#string">String</a>
       <ul>
-        <li><a href="#1-同步方法">1. <strong>同步方法</strong></a></li>
-        <li><a href="#2-锁机制">2. <strong>锁机制</strong></a></li>
-        <li><a href="#3-性能影响">3. <strong>性能影响</strong></a></li>
-        <li><a href="#4-适用场景">4. <strong>适用场景</strong></a></li>
-        <li><a href="#总结">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的</a>
-      <ul>
-        <li><a href="#1-底层数据结构">1. <strong>底层数据结构</strong></a></li>
-        <li><a href="#2-初始容量">2. <strong>初始容量</strong></a></li>
-        <li><a href="#3-扩容机制">3. <strong>扩容机制</strong></a></li>
-        <li><a href="#4-示例代码">4. <strong>示例代码</strong></a></li>
-        <li><a href="#5-总结">5. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#什么是虚拟线程">什么是虚拟线程？</a>
-      <ul>
-        <li><a href="#虚拟线程的核心特点">虚拟线程的核心特点</a></li>
-        <li><a href="#虚拟线程的适用场景">虚拟线程的适用场景</a></li>
-        <li><a href="#虚拟线程的使用">虚拟线程的使用</a></li>
-        <li><a href="#虚拟线程的局限性">虚拟线程的局限性</a></li>
-        <li><a href="#总结-1">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么</a>
-      <ul>
-        <li><a href="#1-实现原理">1. <strong>实现原理</strong></a></li>
-        <li><a href="#2-编程模型">2. <strong>编程模型</strong></a></li>
-        <li><a href="#3-适用场景">3. <strong>适用场景</strong></a></li>
-        <li><a href="#4-开发体验">4. <strong>开发体验</strong></a></li>
-        <li><a href="#5-性能优化">5. <strong>性能优化</strong></a></li>
-        <li><a href="#总结-2">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#虚拟线程在jvm中的内存模型是怎样的">虚拟线程在jvm中的内存模型是怎样的</a>
-      <ul>
-        <li><a href="#1-虚拟线程的内存结构">1. <strong>虚拟线程的内存结构</strong></a></li>
-        <li><a href="#2-虚拟线程与jvm内存模型的关系">2. <strong>虚拟线程与JVM内存模型的关系</strong></a></li>
-        <li><a href="#3-虚拟线程的调度与内存使用">3. <strong>虚拟线程的调度与内存使用</strong></a></li>
-        <li><a href="#4-虚拟线程与垃圾回收">4. <strong>虚拟线程与垃圾回收</strong></a></li>
-        <li><a href="#5-虚拟线程的适用场景">5. <strong>虚拟线程的适用场景</strong></a></li>
-        <li><a href="#总结-3">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#虚拟线程会增加jvm的性能消耗吗">虚拟线程会增加jvm的性能消耗吗</a>
-      <ul>
-        <li><a href="#1-虚拟线程的资源消耗">1. <strong>虚拟线程的资源消耗</strong></a></li>
-        <li><a href="#2-性能优势">2. <strong>性能优势</strong></a></li>
-        <li><a href="#3-cpu密集型任务的限制">3. <strong>CPU密集型任务的限制</strong></a></li>
-        <li><a href="#4-jvm的性能消耗">4. <strong>JVM的性能消耗</strong></a></li>
-        <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
-        <li><a href="#总结-4">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#在-springboot-项目中虚拟线程可以怎么使用">在 springboot 项目中虚拟线程可以怎么使用</a>
-      <ul>
-        <li><a href="#1-启用虚拟线程处理-http-请求">1. <strong>启用虚拟线程处理 HTTP 请求</strong></a>
+        <li><a href="#stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？</a>
           <ul>
-            <li><a href="#配置代码">配置代码：</a></li>
-            <li><a href="#说明">说明：</a></li>
+            <li><a href="#1-同步方法">1. <strong>同步方法</strong></a></li>
+            <li><a href="#2-锁机制">2. <strong>锁机制</strong></a></li>
+            <li><a href="#3-性能影响">3. <strong>性能影响</strong></a></li>
+            <li><a href="#4-适用场景">4. <strong>适用场景</strong></a></li>
+            <li><a href="#总结">总结</a></li>
           </ul>
         </li>
-        <li><a href="#2-使用虚拟线程执行异步任务">2. <strong>使用虚拟线程执行异步任务</strong></a>
+        <li><a href="#stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的</a>
           <ul>
-            <li><a href="#配置代码-1">配置代码：</a></li>
-            <li><a href="#使用示例">使用示例：</a></li>
-            <li><a href="#说明-1">说明：</a></li>
-          </ul>
-        </li>
-        <li><a href="#3-使用虚拟线程执行定时任务">3. <strong>使用虚拟线程执行定时任务</strong></a>
-          <ul>
-            <li><a href="#配置代码-2">配置代码：</a></li>
-            <li><a href="#使用示例-1">使用示例：</a></li>
-            <li><a href="#说明-2">说明：</a></li>
-          </ul>
-        </li>
-        <li><a href="#4-使用虚拟线程执行自定义任务">4. <strong>使用虚拟线程执行自定义任务</strong></a>
-          <ul>
-            <li><a href="#示例代码">示例代码：</a></li>
-            <li><a href="#说明-3">说明：</a></li>
-          </ul>
-        </li>
-        <li><a href="#5-虚拟线程的最佳实践">5. <strong>虚拟线程的最佳实践</strong></a></li>
-        <li><a href="#6-环境要求">6. <strong>环境要求</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#虚拟线程的mn模型具体是如何工作的">虚拟线程的M:N模型具体是如何工作的？</a>
-      <ul>
-        <li><a href="#1-基本概念">1. <strong>基本概念</strong></a></li>
-        <li><a href="#2-mn-模型的核心思想">2. <strong>M:N 模型的核心思想</strong></a></li>
-        <li><a href="#3-具体工作流程">3. <strong>具体工作流程</strong></a></li>
-        <li><a href="#4-mn-模型的优势">4. <strong>M:N 模型的优势</strong></a></li>
-        <li><a href="#5-mn-模型的实现细节">5. <strong>M:N 模型的实现细节</strong></a></li>
-        <li><a href="#6-示例">6. <strong>示例</strong></a></li>
-        <li><a href="#7-与传统线程模型的对比">7. <strong>与传统线程模型的对比</strong></a></li>
-        <li><a href="#总结-5">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程和传统线程有什么区别">Java虚拟线程和传统线程有什么区别</a>
-      <ul>
-        <li><a href="#1-实现方式">1. <strong>实现方式</strong></a></li>
-        <li><a href="#2-线程模型">2. <strong>线程模型</strong></a></li>
-        <li><a href="#3-性能">3. <strong>性能</strong></a></li>
-        <li><a href="#4-适用场景-1">4. <strong>适用场景</strong></a></li>
-        <li><a href="#5-编程模型">5. <strong>编程模型</strong></a></li>
-        <li><a href="#6-资源占用">6. <strong>资源占用</strong></a></li>
-        <li><a href="#7-兼容性">7. <strong>兼容性</strong></a></li>
-        <li><a href="#8-示例对比">8. <strong>示例对比</strong></a></li>
-        <li><a href="#总结-6">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#可以生成一个java使用虚拟线程的例子吗">可以生成一个java使用虚拟线程的例子吗</a>
-      <ul>
-        <li><a href="#示例代码-1">示例代码</a></li>
-        <li><a href="#代码说明">代码说明</a></li>
-        <li><a href="#运行说明">运行说明</a></li>
-        <li><a href="#运行命令">运行命令</a></li>
-        <li><a href="#注意事项">注意事项</a></li>
-      </ul>
-    </li>
-    <li><a href="#java的虚拟线程是如何对io操作进行优化的">java的虚拟线程是如何对I/O操作进行优化的</a>
-      <ul>
-        <li><a href="#1-非阻塞-io-操作">1. <strong>非阻塞 I/O 操作</strong></a></li>
-        <li><a href="#2-轻量级线程调度">2. <strong>轻量级线程调度</strong></a></li>
-        <li><a href="#3-减少线程上下文切换">3. <strong>减少线程上下文切换</strong></a></li>
-        <li><a href="#4-与异步编程的结合">4. <strong>与异步编程的结合</strong></a></li>
-        <li><a href="#5-适用于高并发场景">5. <strong>适用于高并发场景</strong></a></li>
-        <li><a href="#总结-7">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程的forkjoinpool调度器是如何工作的">Java虚拟线程的ForkJoinPool调度器是如何工作的</a>
-      <ul>
-        <li><a href="#1-forkjoinpool-的基本原理"><strong>1. ForkJoinPool 的基本原理</strong></a></li>
-        <li><a href="#2-虚拟线程的调度器"><strong>2. 虚拟线程的调度器</strong></a>
-          <ul>
-            <li><a href="#1-虚拟线程的挂起与恢复"><strong>(1) 虚拟线程的挂起与恢复</strong></a></li>
-            <li><a href="#2-任务队列与工作窃取"><strong>(2) 任务队列与工作窃取</strong></a></li>
-            <li><a href="#3-轻量级调度"><strong>(3) 轻量级调度</strong></a></li>
-          </ul>
-        </li>
-        <li><a href="#3-调度器的配置"><strong>3. 调度器的配置</strong></a></li>
-        <li><a href="#4-虚拟线程与平台线程的关系"><strong>4. 虚拟线程与平台线程的关系</strong></a></li>
-        <li><a href="#5-示例"><strong>5. 示例</strong></a></li>
-        <li><a href="#总结-8"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程与其他编程语言的异步编程模型相比有什么优势">Java虚拟线程与其他编程语言的异步编程模型相比有什么优势</a>
-      <ul>
-        <li><a href="#1-轻量级与高并发"><strong>1. 轻量级与高并发</strong></a></li>
-        <li><a href="#2-非阻塞与高效-io-处理"><strong>2. 非阻塞与高效 I/O 处理</strong></a></li>
-        <li><a href="#3-简化异步编程"><strong>3. 简化异步编程</strong></a></li>
-        <li><a href="#4-与现有生态的无缝集成"><strong>4. 与现有生态的无缝集成</strong></a></li>
-        <li><a href="#5-高效的上下文切换"><strong>5. 高效的上下文切换</strong></a></li>
-        <li><a href="#6-结构化并发支持"><strong>6. 结构化并发支持</strong></a></li>
-        <li><a href="#总结-9"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程技术对现有应用程序的性能提升有多大影响">Java虚拟线程技术对现有应用程序的性能提升有多大影响</a>
-      <ul>
-        <li><a href="#1-性能提升的核心机制"><strong>1. 性能提升的核心机制</strong></a></li>
-        <li><a href="#2-性能提升的具体表现"><strong>2. 性能提升的具体表现</strong></a></li>
-        <li><a href="#3-实际应用案例"><strong>3. 实际应用案例</strong></a></li>
-        <li><a href="#4-适用场景与限制"><strong>4. 适用场景与限制</strong></a></li>
-        <li><a href="#5-总结-1"><strong>5. 总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程技术在实际项目中面临哪些挑战">Java虚拟线程技术在实际项目中面临哪些挑战</a>
-      <ul>
-        <li><a href="#1-兼容性问题"><strong>1. 兼容性问题</strong></a></li>
-        <li><a href="#2-调试与监控复杂性"><strong>2. 调试与监控复杂性</strong></a></li>
-        <li><a href="#3-资源管理挑战"><strong>3. 资源管理挑战</strong></a></li>
-        <li><a href="#4-性能瓶颈"><strong>4. 性能瓶颈</strong></a></li>
-        <li><a href="#5-学习曲线与最佳实践"><strong>5. 学习曲线与最佳实践</strong></a></li>
-        <li><a href="#6-与现有生态的集成"><strong>6. 与现有生态的集成</strong></a></li>
-        <li><a href="#7-线程安全问题"><strong>7. 线程安全问题</strong></a></li>
-        <li><a href="#总结-10"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#java虚拟线程技术未来可能会带来哪些新的编程范式">Java虚拟线程技术未来可能会带来哪些新的编程范式</a>
-      <ul>
-        <li><a href="#1-结构化并发structured-concurrency"><strong>1. 结构化并发（Structured Concurrency）</strong></a></li>
-        <li><a href="#2-无回调的异步编程"><strong>2. 无回调的异步编程</strong></a></li>
-        <li><a href="#3-事件驱动与反应式编程的简化"><strong>3. 事件驱动与反应式编程的简化</strong></a></li>
-        <li><a href="#4-轻量级任务并发"><strong>4. 轻量级任务并发</strong></a></li>
-        <li><a href="#5-微服务与云原生架构的优化"><strong>5. 微服务与云原生架构的优化</strong></a></li>
-        <li><a href="#6-更高效的批处理与流处理"><strong>6. 更高效的批处理与流处理</strong></a></li>
-        <li><a href="#7-更友好的并发调试与监控"><strong>7. 更友好的并发调试与监控</strong></a></li>
-        <li><a href="#总结-11"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#学习资料">学习资料</a></li>
-    <li><a href="#basic">basic</a>
-      <ul>
-        <li><a href="#java-array-转-list">java array 转 list</a>
-          <ul>
-            <li><a href="#创建一个固定大小的列表">创建一个固定大小的列表</a></li>
-            <li><a href="#创建一个可变大小的列表">创建一个可变大小的列表</a></li>
-          </ul>
-        </li>
-        <li><a href="#java-怎么用二进制打印int">java， 怎么用二进制打印int</a>
-          <ul>
-            <li><a href="#使用-integertobinarystring">使用 <code>Integer.toBinaryString()</code></a></li>
-            <li><a href="#打印包含前导零的完整32位">打印包含前导零的完整32位</a></li>
-            <li><a href="#使用位运算手动构建二进制字符串">使用位运算手动构建二进制字符串</a></li>
+            <li><a href="#1-底层数据结构">1. <strong>底层数据结构</strong></a></li>
+            <li><a href="#2-初始容量">2. <strong>初始容量</strong></a></li>
+            <li><a href="#3-扩容机制">3. <strong>扩容机制</strong></a></li>
+            <li><a href="#4-示例代码">4. <strong>示例代码</strong></a></li>
+            <li><a href="#5-总结">5. <strong>总结</strong></a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#concurrent">concurrent</a></li>
-    <li><a href="#每一个java的版本的主要更新">每一个java的版本的主要更新</a>
+    <li><a href="#虚拟线程">虚拟线程</a>
       <ul>
-        <li><a href="#java-10-1996">Java 1.0 (1996)</a></li>
-        <li><a href="#java-11-1997">Java 1.1 (1997)</a></li>
-        <li><a href="#java-12-1998">Java 1.2 (1998)</a></li>
-        <li><a href="#java-13-2000">Java 1.3 (2000)</a></li>
-        <li><a href="#java-14-2002">Java 1.4 (2002)</a></li>
-        <li><a href="#java-5-2004">Java 5 (2004)</a></li>
-        <li><a href="#java-6-2006">Java 6 (2006)</a></li>
-        <li><a href="#java-7-2011">Java 7 (2011)</a></li>
-        <li><a href="#java-8-2014">Java 8 (2014)</a></li>
-        <li><a href="#java-9-2017">Java 9 (2017)</a></li>
-        <li><a href="#java-10-2018">Java 10 (2018)</a></li>
-        <li><a href="#java-11-2018">Java 11 (2018)</a></li>
-        <li><a href="#java-12-2019">Java 12 (2019)</a></li>
-        <li><a href="#java-13-2019">Java 13 (2019)</a></li>
-        <li><a href="#java-14-2020">Java 14 (2020)</a></li>
-        <li><a href="#java-15-2020">Java 15 (2020)</a></li>
-        <li><a href="#java-16-2021">Java 16 (2021)</a></li>
-        <li><a href="#java-17-2021">Java 17 (2021)</a></li>
-        <li><a href="#java-18-2022">Java 18 (2022)</a></li>
-        <li><a href="#java-19-2022">Java 19 (2022)</a></li>
-        <li><a href="#java-20-2023">Java 20 (2023)</a></li>
-        <li><a href="#java-21-2023">Java 21 (2023)</a></li>
-        <li><a href="#总结-12">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识</a>
-      <ul>
-        <li><a href="#1-java最新版本特性">1. <strong>Java最新版本特性</strong></a></li>
-        <li><a href="#2-微服务与云原生技术">2. <strong>微服务与云原生技术</strong></a></li>
-        <li><a href="#3-数据库与缓存技术">3. <strong>数据库与缓存技术</strong></a></li>
-        <li><a href="#4-性能优化与jvm调优">4. <strong>性能优化与JVM调优</strong></a></li>
-        <li><a href="#5-前沿技术与趋势">5. <strong>前沿技术与趋势</strong></a></li>
-        <li><a href="#6-实践与项目结合">6. <strong>实践与项目结合</strong></a></li>
-        <li><a href="#7-面试中的表达技巧">7. <strong>面试中的表达技巧</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#collection-和-collections-有什么区别">Collection 和 Collections 有什么区别？</a>
-      <ul>
-        <li><a href="#1-定义与性质"><strong>1. 定义与性质</strong></a></li>
-        <li><a href="#2-功能与使用"><strong>2. 功能与使用</strong></a></li>
-        <li><a href="#3-示例代码"><strong>3. 示例代码</strong></a></li>
-        <li><a href="#4-总结"><strong>4. 总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#arrayssort-和-collectionssort-的区别">Arrays.sort 和 Collections.sort 的区别</a>
-      <ul>
-        <li><a href="#1-适用对象"><strong>1. 适用对象</strong></a></li>
-        <li><a href="#2-底层实现"><strong>2. 底层实现</strong></a></li>
-        <li><a href="#3-排序规则"><strong>3. 排序规则</strong></a></li>
-        <li><a href="#4-性能与稳定性"><strong>4. 性能与稳定性</strong></a></li>
-        <li><a href="#5-使用场景"><strong>5. 使用场景</strong></a></li>
-        <li><a href="#总结-13"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#hashmap底层的数据结构是怎样的">HashMap底层的数据结构是怎样的</a>
-      <ul>
-        <li><a href="#jdk-17-及之前"><strong>JDK 1.7 及之前</strong></a></li>
-        <li><a href="#jdk-18-及之后"><strong>JDK 1.8 及之后</strong></a></li>
-        <li><a href="#核心机制"><strong>核心机制</strong></a></li>
-        <li><a href="#总结-14"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？</a>
-      <ul>
-        <li><a href="#一红黑树的特性优势">一、<strong>红黑树的特性优势</strong></a></li>
-        <li><a href="#二与其他树结构的对比">二、<strong>与其他树结构的对比</strong></a>
+        <li><a href="#什么是虚拟线程">什么是虚拟线程？</a>
           <ul>
-            <li><a href="#1-与-avl-树的对比">1. <strong>与 AVL 树的对比</strong></a></li>
-            <li><a href="#2-与普通二叉搜索树的对比">2. <strong>与普通二叉搜索树的对比</strong></a></li>
-            <li><a href="#3-与-b-树b-树的对比">3. <strong>与 B 树/B+ 树的对比</strong></a></li>
+            <li><a href="#虚拟线程的核心特点">虚拟线程的核心特点</a></li>
+            <li><a href="#虚拟线程的适用场景">虚拟线程的适用场景</a></li>
+            <li><a href="#虚拟线程的使用">虚拟线程的使用</a></li>
+            <li><a href="#虚拟线程的局限性">虚拟线程的局限性</a></li>
+            <li><a href="#总结-1">总结</a></li>
           </ul>
         </li>
-        <li><a href="#三hashmap-的特定需求">三、<strong>HashMap 的特定需求</strong></a></li>
-        <li><a href="#四总结">四、<strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#hashmap-get-的时间复杂度">HashMap get 的时间复杂度</a>
-      <ul>
-        <li><a href="#1-理想情况o1">1. <strong>理想情况（O(1)）</strong></a></li>
-        <li><a href="#2-最坏情况on">2. <strong>最坏情况（O(n)）</strong></a></li>
-        <li><a href="#3-总结">3. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#hashmap如何保证线程安全">HashMap如何保证线程安全</a>
-      <ul>
-        <li><a href="#1-使用"><strong>1. 使用 <code>Collections.synchronizedMap</code></strong></a></li>
-        <li><a href="#2-使用"><strong>2. 使用 <code>ConcurrentHashMap</code></strong></a></li>
-        <li><a href="#3-使用读写锁-"><strong>3. 使用读写锁 (<code>ReadWriteLock</code>)</strong></a></li>
-        <li><a href="#4-方法内部使用局部"><strong>4. 方法内部使用局部 <code>HashMap</code></strong></a></li>
-        <li><a href="#5-初始化写后续只读"><strong>5. 初始化写，后续只读</strong></a></li>
-        <li><a href="#总结-15"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？</a>
-      <ul>
-        <li><a href="#1-线程安全性"><strong>1. 线程安全性</strong></a></li>
-        <li><a href="#2-对-null-值的支持"><strong>2. 对 null 值的支持</strong></a></li>
-        <li><a href="#3-性能-1"><strong>3. 性能</strong></a></li>
-        <li><a href="#4-继承与实现"><strong>4. 继承与实现</strong></a></li>
-        <li><a href="#5-扩容机制"><strong>5. 扩容机制</strong></a></li>
-        <li><a href="#6-迭代器"><strong>6. 迭代器</strong></a></li>
-        <li><a href="#7-计算哈希值的方式"><strong>7. 计算哈希值的方式</strong></a></li>
-        <li><a href="#总结-16"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#当-hashmap-扩容时所有的红黑树或者链表都会重新构造吗">当 HashMap 扩容时，所有的红黑树或者链表都会重新构造吗</a>
-      <ul>
-        <li><a href="#1-链表重新构造"><strong>1. 链表重新构造</strong></a></li>
-        <li><a href="#2-红黑树重新构造"><strong>2. 红黑树重新构造</strong></a></li>
-        <li><a href="#3-重新哈希的原因"><strong>3. 重新哈希的原因</strong></a></li>
-        <li><a href="#总结-17"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#为什么hashmap选择红黑树而不选择b树">为什么HashMap选择红黑树而不选择B+树</a>
-      <ul>
-        <li><a href="#1-算法实现复杂度">1. <strong>算法实现复杂度</strong></a></li>
-        <li><a href="#2-底层数据结构匹配">2. <strong>底层数据结构匹配</strong></a></li>
-        <li><a href="#3-修改效率">3. <strong>修改效率</strong></a></li>
-        <li><a href="#4-内存占用">4. <strong>内存占用</strong></a></li>
-        <li><a href="#5-适用场景-1">5. <strong>适用场景</strong></a></li>
-        <li><a href="#6-维护成本">6. <strong>维护成本</strong></a></li>
-        <li><a href="#总结-18">总结</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#selectpoll和epoll的区别">select、poll和epoll的区别</a>
-      <ul>
-        <li><a href="#1-select">1. <strong>select</strong></a></li>
-        <li><a href="#2-poll">2. <strong>poll</strong></a></li>
-        <li><a href="#3-epoll">3. <strong>epoll</strong></a></li>
-        <li><a href="#对比总结">对比总结</a></li>
-        <li><a href="#总结-19">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#提供一个java异步io的例子">提供一个java异步I/O的例子</a>
-      <ul>
-        <li><a href="#示例代码异步文件读取">示例代码：异步文件读取</a></li>
-        <li><a href="#代码说明-1">代码说明</a></li>
-        <li><a href="#异步-io-的优势">异步 I/O 的优势</a></li>
-        <li><a href="#参考">参考</a></li>
-      </ul>
-    </li>
-    <li><a href="#在java中非阻塞io就是io多路复用吗">在java中非阻塞IO就是IO多路复用吗</a>
-      <ul>
-        <li><a href="#1-非阻塞-ionon-blocking-io">1. <strong>非阻塞 I/O（Non-blocking I/O）</strong></a></li>
-        <li><a href="#2-io-多路复用io-multiplexing">2. <strong>I/O 多路复用（I/O Multiplexing）</strong></a></li>
-        <li><a href="#3-非阻塞-io-与-io-多路复用的关系">3. <strong>非阻塞 I/O 与 I/O 多路复用的关系</strong></a></li>
-        <li><a href="#4-总结-1">4. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#在java中selector算非阻塞还是多路复用">在java中selector算非阻塞还是多路复用</a>
-      <ul>
-        <li><a href="#1-selector">1. <strong><code>Selector</code> 是非阻塞 I/O 的实现</strong></a></li>
-        <li><a href="#2-selector">2. <strong><code>Selector</code> 是 I/O 多路复用的核心</strong></a></li>
-        <li><a href="#3-selector">3. <strong><code>Selector</code> 的工作原理</strong></a></li>
-        <li><a href="#4-总结-2">4. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#我有这样一个开发场景服务端需要和多个客户端进行tcp连接服务端会发送指令给客户端客户端会返回指令执行结果客户端会定时返回心跳报文上报状态客户端会不定时上报事件报文我该怎么实现上述功能">我有这样一个开发场景，服务端需要和多个客户端进行tcp连接，服务端会发送指令给客户端，客户端会返回指令执行结果；客户端会定时返回心跳报文上报状态；客户端会不定时上报事件报文。我该怎么实现上述功能？</a>
-      <ul>
-        <li><a href="#1-服务端设计">1. 服务端设计</a>
+        <li><a href="#响应式编程和虚拟线程都能提高程序的并发量它们的差异是什么">响应式编程和虚拟线程都能提高程序的并发量，它们的差异是什么</a>
           <ul>
-            <li><a href="#11-建立tcp连接">1.1 建立TCP连接</a></li>
-            <li><a href="#12-指令发送">1.2 指令发送</a></li>
-            <li><a href="#13-处理客户端返回">1.3 处理客户端返回</a></li>
-            <li><a href="#14-心跳处理">1.4 心跳处理</a></li>
-            <li><a href="#15-事件处理">1.5 事件处理</a></li>
+            <li><a href="#1-实现原理">1. <strong>实现原理</strong></a></li>
+            <li><a href="#2-编程模型">2. <strong>编程模型</strong></a></li>
+            <li><a href="#3-适用场景">3. <strong>适用场景</strong></a></li>
+            <li><a href="#4-开发体验">4. <strong>开发体验</strong></a></li>
+            <li><a href="#5-性能优化">5. <strong>性能优化</strong></a></li>
+            <li><a href="#总结-2">总结</a></li>
           </ul>
         </li>
-        <li><a href="#2-客户端设计">2. 客户端设计</a>
+        <li><a href="#虚拟线程在jvm中的内存模型是怎样的">虚拟线程在jvm中的内存模型是怎样的</a>
           <ul>
-            <li><a href="#21-连接服务端">2.1 连接服务端</a></li>
-            <li><a href="#22-指令执行">2.2 指令执行</a></li>
-            <li><a href="#23-心跳发送">2.3 心跳发送</a></li>
-            <li><a href="#24-事件上报">2.4 事件上报</a></li>
+            <li><a href="#1-虚拟线程的内存结构">1. <strong>虚拟线程的内存结构</strong></a></li>
+            <li><a href="#2-虚拟线程与jvm内存模型的关系">2. <strong>虚拟线程与JVM内存模型的关系</strong></a></li>
+            <li><a href="#3-虚拟线程的调度与内存使用">3. <strong>虚拟线程的调度与内存使用</strong></a></li>
+            <li><a href="#4-虚拟线程与垃圾回收">4. <strong>虚拟线程与垃圾回收</strong></a></li>
+            <li><a href="#5-虚拟线程的适用场景">5. <strong>虚拟线程的适用场景</strong></a></li>
+            <li><a href="#总结-3">总结</a></li>
           </ul>
         </li>
-        <li><a href="#3-协议设计">3. 协议设计</a></li>
-        <li><a href="#4-实现示例">4. 实现示例</a>
+        <li><a href="#虚拟线程会增加jvm的性能消耗吗">虚拟线程会增加jvm的性能消耗吗</a>
           <ul>
-            <li><a href="#服务端示例python伪代码">服务端示例（Python伪代码）</a></li>
-            <li><a href="#客户端示例python伪代码">客户端示例（Python伪代码）</a></li>
+            <li><a href="#1-虚拟线程的资源消耗">1. <strong>虚拟线程的资源消耗</strong></a></li>
+            <li><a href="#2-性能优势">2. <strong>性能优势</strong></a></li>
+            <li><a href="#3-cpu密集型任务的限制">3. <strong>CPU密集型任务的限制</strong></a></li>
+            <li><a href="#4-jvm的性能消耗">4. <strong>JVM的性能消耗</strong></a></li>
+            <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
+            <li><a href="#总结-4">总结</a></li>
           </ul>
         </li>
-        <li><a href="#5-注意事项">5. 注意事项</a></li>
-      </ul>
-    </li>
-    <li><a href="#如果我使用io多路复用来实现给我一个java版本代码示例">如果我使用IO多路复用来实现，给我一个java版本代码示例</a>
-      <ul>
-        <li><a href="#服务端代码示例">服务端代码示例</a></li>
-        <li><a href="#客户端代码示例">客户端代码示例</a></li>
-        <li><a href="#代码说明-2">代码说明</a></li>
-        <li><a href="#运行方式">运行方式</a></li>
-        <li><a href="#扩展建议">扩展建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#我有一个服务端需要连接多个服务端进行tcp连接给我一个java的代码示例">我有一个服务端，需要连接多个服务端进行tcp连接，给我一个java的代码示例</a>
-      <ul>
-        <li><a href="#代码示例">代码示例</a></li>
-        <li><a href="#代码说明-3">代码说明</a></li>
-        <li><a href="#运行方式-1">运行方式</a></li>
-        <li><a href="#参考-1">参考</a></li>
-        <li><a href="#扩展建议-1">扩展建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#我在tcp连接的过程中可能会新增连接修改连接信息ip或端口号或者删除连接这个该怎么实现">我在tcp连接的过程中，可能会新增连接，修改连接信息（ip或端口号）或者删除连接，这个该怎么实现</a>
-      <ul>
-        <li><a href="#设计思路">设计思路</a></li>
-        <li><a href="#代码实现">代码实现</a></li>
-        <li><a href="#代码说明-4">代码说明</a></li>
-        <li><a href="#运行方式-2">运行方式</a></li>
-        <li><a href="#扩展建议-2">扩展建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#使用-socketchannel-的-close-方法是否会导致tcp连接还在传输数据的时候意外断开的情况">使用 socketChannel 的 close 方法，是否会导致tcp连接还在传输数据的时候意外断开的情况</a>
-      <ul>
-        <li><a href="#1-socketchannelclose">1. <strong><code>SocketChannel.close</code> 的行为</strong></a></li>
-        <li><a href="#2-数据传输中的关闭">2. <strong>数据传输中的关闭</strong></a></li>
-        <li><a href="#3-异常情况">3. <strong>异常情况</strong></a></li>
-        <li><a href="#4-最佳实践">4. <strong>最佳实践</strong></a></li>
-        <li><a href="#总结-20">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
-      <ul>
-        <li><a href="#代码实现-1">代码实现</a></li>
-        <li><a href="#代码说明-5">代码说明</a></li>
-        <li><a href="#运行方式-3">运行方式</a></li>
-        <li><a href="#扩展建议-3">扩展建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#发送完命令之后我需要等待收到一个回复的报文命令执行才算完成">发送完命令之后我需要等待收到一个回复的报文，命令执行才算完成</a>
-      <ul>
-        <li><a href="#设计思路-1">设计思路</a></li>
-        <li><a href="#代码实现-2">代码实现</a></li>
-        <li><a href="#代码说明-6">代码说明</a></li>
-        <li><a href="#运行方式-4">运行方式</a></li>
-        <li><a href="#扩展建议-4">扩展建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#如果连接的tcp数量很多使用一个selector接收有点慢该怎么优化">如果连接的tcp数量很多，使用一个selector接收有点慢，该怎么优化</a>
-      <ul>
-        <li><a href="#1-优化思路">1. <strong>优化思路</strong></a>
+        <li><a href="#在-springboot-项目中虚拟线程可以怎么使用">在 springboot 项目中虚拟线程可以怎么使用</a>
           <ul>
-            <li><a href="#11-使用多个-selector">1.1 <strong>使用多个 Selector</strong></a></li>
-            <li><a href="#12-分离连接处理和数据处理">1.2 <strong>分离连接处理和数据处理</strong></a></li>
-            <li><a href="#13-调整缓冲区大小">1.3 <strong>调整缓冲区大小</strong></a></li>
-            <li><a href="#14-使用非阻塞-io">1.4 <strong>使用非阻塞 I/O</strong></a></li>
-            <li><a href="#15-减少事件处理的耗时">1.5 <strong>减少事件处理的耗时</strong></a></li>
+            <li><a href="#1-启用虚拟线程处理-http-请求">1. <strong>启用虚拟线程处理 HTTP 请求</strong></a>
+              <ul>
+                <li><a href="#配置代码">配置代码：</a></li>
+                <li><a href="#说明">说明：</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-使用虚拟线程执行异步任务">2. <strong>使用虚拟线程执行异步任务</strong></a>
+              <ul>
+                <li><a href="#配置代码-1">配置代码：</a></li>
+                <li><a href="#使用示例">使用示例：</a></li>
+                <li><a href="#说明-1">说明：</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-使用虚拟线程执行定时任务">3. <strong>使用虚拟线程执行定时任务</strong></a>
+              <ul>
+                <li><a href="#配置代码-2">配置代码：</a></li>
+                <li><a href="#使用示例-1">使用示例：</a></li>
+                <li><a href="#说明-2">说明：</a></li>
+              </ul>
+            </li>
+            <li><a href="#4-使用虚拟线程执行自定义任务">4. <strong>使用虚拟线程执行自定义任务</strong></a>
+              <ul>
+                <li><a href="#示例代码">示例代码：</a></li>
+                <li><a href="#说明-3">说明：</a></li>
+              </ul>
+            </li>
+            <li><a href="#5-虚拟线程的最佳实践">5. <strong>虚拟线程的最佳实践</strong></a></li>
+            <li><a href="#6-环境要求">6. <strong>环境要求</strong></a></li>
           </ul>
         </li>
-        <li><a href="#2-实现示例">2. <strong>实现示例</strong></a></li>
-        <li><a href="#3-优化建议">3. <strong>优化建议</strong></a></li>
-        <li><a href="#4-参考外部资料">4. <strong>参考外部资料</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#如果我需要维护100个tcp连接使用一个selector够吗">如果我需要维护100个tcp连接，使用一个selector够吗</a>
-      <ul>
-        <li><a href="#1-单个">1. <strong>单个 <code>Selector</code> 的局限性</strong></a></li>
-        <li><a href="#2-优化方案">2. <strong>优化方案</strong></a>
+        <li><a href="#虚拟线程的mn模型具体是如何工作的">虚拟线程的M:N模型具体是如何工作的？</a>
           <ul>
-            <li><a href="#21-使用多个">2.1 <strong>使用多个 <code>Selector</code></strong></a></li>
-            <li><a href="#22-分离连接处理和数据处理">2.2 <strong>分离连接处理和数据处理</strong></a></li>
-            <li><a href="#23-调整缓冲区大小">2.3 <strong>调整缓冲区大小</strong></a></li>
-            <li><a href="#24-使用非阻塞-io">2.4 <strong>使用非阻塞 I/O</strong></a></li>
-            <li><a href="#25-减少事件处理的耗时">2.5 <strong>减少事件处理的耗时</strong></a></li>
+            <li><a href="#1-基本概念">1. <strong>基本概念</strong></a></li>
+            <li><a href="#2-mn-模型的核心思想">2. <strong>M:N 模型的核心思想</strong></a></li>
+            <li><a href="#3-具体工作流程">3. <strong>具体工作流程</strong></a></li>
+            <li><a href="#4-mn-模型的优势">4. <strong>M:N 模型的优势</strong></a></li>
+            <li><a href="#5-mn-模型的实现细节">5. <strong>M:N 模型的实现细节</strong></a></li>
+            <li><a href="#6-示例">6. <strong>示例</strong></a></li>
+            <li><a href="#7-与传统线程模型的对比">7. <strong>与传统线程模型的对比</strong></a></li>
+            <li><a href="#总结-5">总结</a></li>
           </ul>
         </li>
-        <li><a href="#3-参考外部资料">3. <strong>参考外部资料</strong></a></li>
-        <li><a href="#4-示例代码-1">4. <strong>示例代码</strong></a></li>
-        <li><a href="#5-总结-2">5. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#在java中一个tcp连接使用一个socket连接多个tcp这样占用很多内存吗">在java中，一个tcp连接使用一个socket，连接多个tcp，这样占用很多内存吗</a></li>
-    <li><a href="#在java中创建线程的内存开销">在java中创建线程的内存开销</a>
-      <ul>
-        <li><a href="#1-线程栈的内存开销">1. <strong>线程栈的内存开销</strong></a></li>
-        <li><a href="#2-其他内存开销">2. <strong>其他内存开销</strong></a></li>
-        <li><a href="#3-线程创建和销毁的开销">3. <strong>线程创建和销毁的开销</strong></a></li>
-        <li><a href="#4-线程池的优化">4. <strong>线程池的优化</strong></a></li>
-        <li><a href="#5-如何减少线程内存开销">5. <strong>如何减少线程内存开销</strong></a></li>
-        <li><a href="#总结-21">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#java中的selector使用的是select还是epoll">java中的selector使用的是select还是epoll</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#java-selector-的原理">java selector 的原理</a>
-      <ul>
-        <li><a href="#1-selector-的核心功能">1. <strong>Selector 的核心功能</strong></a></li>
-        <li><a href="#2-selector-的工作流程">2. <strong>Selector 的工作流程</strong></a></li>
-        <li><a href="#3-selector-的底层实现">3. <strong>Selector 的底层实现</strong></a></li>
-        <li><a href="#4-selector-的优点">4. <strong>Selector 的优点</strong></a></li>
-        <li><a href="#5-selector-的注意事项">5. <strong>Selector 的注意事项</strong></a></li>
-        <li><a href="#6-与-selectpollepoll-的关系">6. <strong>与 select/poll/epoll 的关系</strong></a></li>
-        <li><a href="#7-示例代码">7. <strong>示例代码</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#selector中事件是由谁产生的">selector中事件是由谁产生的？</a>
-      <ul>
-        <li><a href="#1-事件的产生">1. <strong>事件的产生</strong></a></li>
-        <li><a href="#2-事件的检测">2. <strong>事件的检测</strong></a></li>
-        <li><a href="#3-事件的触发机制">3. <strong>事件的触发机制</strong></a></li>
-        <li><a href="#4-示例">4. <strong>示例</strong></a></li>
-        <li><a href="#总结-22">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#java的selector的使用过程中概念总结一下">java的selector的使用过程中概念总结一下</a>
-      <ul>
-        <li><a href="#1-selector-的作用">1. <strong>Selector 的作用</strong></a></li>
-        <li><a href="#2-核心概念">2. <strong>核心概念</strong></a></li>
-        <li><a href="#3-selector-的使用步骤">3. <strong>Selector 的使用步骤</strong></a></li>
-        <li><a href="#4-selector-的优势">4. <strong>Selector 的优势</strong></a></li>
-        <li><a href="#5-注意事项-1">5. <strong>注意事项</strong></a></li>
-        <li><a href="#6-与底层机制的关系">6. <strong>与底层机制的关系</strong></a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#在java中如何使用aes加密算法">在java中如何使用AES加密算法</a>
-      <ul>
-        <li><a href="#1-导入必要的包"><strong>1. 导入必要的包</strong></a></li>
-        <li><a href="#2-生成-aes-密钥"><strong>2. 生成 AES 密钥</strong></a></li>
-        <li><a href="#3-加密方法"><strong>3. 加密方法</strong></a></li>
-        <li><a href="#4-解密方法"><strong>4. 解密方法</strong></a></li>
-        <li><a href="#5-完整示例"><strong>5. 完整示例</strong></a></li>
-        <li><a href="#6-注意事项"><strong>6. 注意事项</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#在java中如何使用rsa算法进行加解密">在Java中如何使用RSA算法进行加解密</a>
-      <ul>
-        <li><a href="#1-生成-rsa-密钥对"><strong>1. 生成 RSA 密钥对</strong></a></li>
-        <li><a href="#2-使用公钥加密"><strong>2. 使用公钥加密</strong></a></li>
-        <li><a href="#3-使用私钥解密"><strong>3. 使用私钥解密</strong></a></li>
-        <li><a href="#4-注意事项"><strong>4. 注意事项</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#公钥只能用来加密私钥只能用来解密吗">公钥只能用来加密，私钥只能用来解密吗？</a>
-      <ul>
-        <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
-        <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
-        <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
-        <li><a href="#总结-23"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
-      <ul>
-        <li><a href="#1-ecbelectronic-code-book电子密码本模式"><strong>1. ECB（Electronic Code Book，电子密码本模式）</strong></a></li>
-        <li><a href="#2-cbccipher-block-chaining密码分组链接模式"><strong>2. CBC（Cipher Block Chaining，密码分组链接模式）</strong></a></li>
-        <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
-        <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
-        <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
-        <li><a href="#总结-24"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
-      <ul>
-        <li><a href="#1-pkcs7-padding">1. <strong>PKCS7 Padding</strong></a></li>
-        <li><a href="#2-pkcs5-padding">2. <strong>PKCS5 Padding</strong></a></li>
-        <li><a href="#3-no-padding">3. <strong>No Padding</strong></a></li>
-        <li><a href="#4-iso10126-padding">4. <strong>ISO10126 Padding</strong></a></li>
-        <li><a href="#5-iso7816-4-padding">5. <strong>ISO7816-4 Padding</strong></a></li>
-        <li><a href="#6-zero-byte-padding">6. <strong>Zero Byte Padding</strong></a></li>
-        <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
-        <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
-        <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
-        <li><a href="#总结-25">总结</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#reference">reference</a></li>
-    <li><a href="#给我举一个-reactor-模式的例子">给我举一个 reactor 模式的例子</a>
-      <ul>
-        <li><a href="#示例代码reactor-模式服务器">示例代码：Reactor 模式服务器</a></li>
-        <li><a href="#代码说明-7">代码说明</a></li>
-        <li><a href="#reactor-模式的核心组件12">Reactor 模式的核心组件<a href="@ref">1</a><a href="@ref">2</a></a></li>
-        <li><a href="#应用场景">应用场景</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#reference-1">reference</a></li>
-    <li><a href="#什么是响应式编程">什么是响应式编程</a>
-      <ul>
-        <li><a href="#核心概念">核心概念</a></li>
-        <li><a href="#响应式编程的特点">响应式编程的特点</a></li>
-        <li><a href="#应用场景-1">应用场景</a></li>
-        <li><a href="#优点">优点</a></li>
-        <li><a href="#缺点">缺点</a></li>
-        <li><a href="#示例">示例</a></li>
-        <li><a href="#总结-26">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#在springboot中有哪些响应式编程的运用">在springboot中有哪些响应式编程的运用</a>
-      <ul>
-        <li><a href="#1-响应式-web-开发spring-webflux">1. <strong>响应式 Web 开发（Spring WebFlux）</strong></a>
+        <li><a href="#java虚拟线程和传统线程有什么区别">Java虚拟线程和传统线程有什么区别</a>
           <ul>
-            <li><a href="#核心特性">核心特性：</a></li>
-            <li><a href="#示例代码-2">示例代码：</a></li>
+            <li><a href="#1-实现方式">1. <strong>实现方式</strong></a></li>
+            <li><a href="#2-线程模型">2. <strong>线程模型</strong></a></li>
+            <li><a href="#3-性能">3. <strong>性能</strong></a></li>
+            <li><a href="#4-适用场景-1">4. <strong>适用场景</strong></a></li>
+            <li><a href="#5-编程模型">5. <strong>编程模型</strong></a></li>
+            <li><a href="#6-资源占用">6. <strong>资源占用</strong></a></li>
+            <li><a href="#7-兼容性">7. <strong>兼容性</strong></a></li>
+            <li><a href="#8-示例对比">8. <strong>示例对比</strong></a></li>
+            <li><a href="#总结-6">总结</a></li>
           </ul>
         </li>
-        <li><a href="#2-响应式数据库访问">2. <strong>响应式数据库访问</strong></a>
+        <li><a href="#可以生成一个java使用虚拟线程的例子吗">可以生成一个java使用虚拟线程的例子吗</a>
           <ul>
-            <li><a href="#核心特性-1">核心特性：</a></li>
-            <li><a href="#示例代码-3">示例代码：</a></li>
+            <li><a href="#示例代码-1">示例代码</a></li>
+            <li><a href="#代码说明">代码说明</a></li>
+            <li><a href="#运行说明">运行说明</a></li>
+            <li><a href="#运行命令">运行命令</a></li>
+            <li><a href="#注意事项">注意事项</a></li>
           </ul>
         </li>
-        <li><a href="#3-响应式消息传递">3. <strong>响应式消息传递</strong></a>
+        <li><a href="#java的虚拟线程是如何对io操作进行优化的">java的虚拟线程是如何对I/O操作进行优化的</a>
           <ul>
-            <li><a href="#核心特性-2">核心特性：</a></li>
-            <li><a href="#示例代码-4">示例代码：</a></li>
+            <li><a href="#1-非阻塞-io-操作">1. <strong>非阻塞 I/O 操作</strong></a></li>
+            <li><a href="#2-轻量级线程调度">2. <strong>轻量级线程调度</strong></a></li>
+            <li><a href="#3-减少线程上下文切换">3. <strong>减少线程上下文切换</strong></a></li>
+            <li><a href="#4-与异步编程的结合">4. <strong>与异步编程的结合</strong></a></li>
+            <li><a href="#5-适用于高并发场景">5. <strong>适用于高并发场景</strong></a></li>
+            <li><a href="#总结-7">总结</a></li>
           </ul>
         </li>
-        <li><a href="#4-响应式安全spring-security-reactive">4. <strong>响应式安全（Spring Security Reactive）</strong></a>
+        <li><a href="#java虚拟线程的forkjoinpool调度器是如何工作的">Java虚拟线程的ForkJoinPool调度器是如何工作的</a>
           <ul>
-            <li><a href="#核心特性-3">核心特性：</a></li>
-            <li><a href="#示例代码-5">示例代码：</a></li>
+            <li><a href="#1-forkjoinpool-的基本原理"><strong>1. ForkJoinPool 的基本原理</strong></a></li>
+            <li><a href="#2-虚拟线程的调度器"><strong>2. 虚拟线程的调度器</strong></a>
+              <ul>
+                <li><a href="#1-虚拟线程的挂起与恢复"><strong>(1) 虚拟线程的挂起与恢复</strong></a></li>
+                <li><a href="#2-任务队列与工作窃取"><strong>(2) 任务队列与工作窃取</strong></a></li>
+                <li><a href="#3-轻量级调度"><strong>(3) 轻量级调度</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#3-调度器的配置"><strong>3. 调度器的配置</strong></a></li>
+            <li><a href="#4-虚拟线程与平台线程的关系"><strong>4. 虚拟线程与平台线程的关系</strong></a></li>
+            <li><a href="#5-示例"><strong>5. 示例</strong></a></li>
+            <li><a href="#总结-8"><strong>总结</strong></a></li>
           </ul>
         </li>
-        <li><a href="#5-响应式测试">5. <strong>响应式测试</strong></a>
+        <li><a href="#java虚拟线程与其他编程语言的异步编程模型相比有什么优势">Java虚拟线程与其他编程语言的异步编程模型相比有什么优势</a>
           <ul>
-            <li><a href="#示例代码-6">示例代码：</a></li>
+            <li><a href="#1-轻量级与高并发"><strong>1. 轻量级与高并发</strong></a></li>
+            <li><a href="#2-非阻塞与高效-io-处理"><strong>2. 非阻塞与高效 I/O 处理</strong></a></li>
+            <li><a href="#3-简化异步编程"><strong>3. 简化异步编程</strong></a></li>
+            <li><a href="#4-与现有生态的无缝集成"><strong>4. 与现有生态的无缝集成</strong></a></li>
+            <li><a href="#5-高效的上下文切换"><strong>5. 高效的上下文切换</strong></a></li>
+            <li><a href="#6-结构化并发支持"><strong>6. 结构化并发支持</strong></a></li>
+            <li><a href="#总结-9"><strong>总结</strong></a></li>
           </ul>
         </li>
-        <li><a href="#6-响应式流处理">6. <strong>响应式流处理</strong></a>
+        <li><a href="#java虚拟线程技术对现有应用程序的性能提升有多大影响">Java虚拟线程技术对现有应用程序的性能提升有多大影响</a>
           <ul>
-            <li><a href="#示例代码-7">示例代码：</a></li>
+            <li><a href="#1-性能提升的核心机制"><strong>1. 性能提升的核心机制</strong></a></li>
+            <li><a href="#2-性能提升的具体表现"><strong>2. 性能提升的具体表现</strong></a></li>
+            <li><a href="#3-实际应用案例"><strong>3. 实际应用案例</strong></a></li>
+            <li><a href="#4-适用场景与限制"><strong>4. 适用场景与限制</strong></a></li>
+            <li><a href="#5-总结-1"><strong>5. 总结</strong></a></li>
           </ul>
         </li>
-        <li><a href="#总结-27">总结</a></li>
+        <li><a href="#java虚拟线程技术在实际项目中面临哪些挑战">Java虚拟线程技术在实际项目中面临哪些挑战</a>
+          <ul>
+            <li><a href="#1-兼容性问题"><strong>1. 兼容性问题</strong></a></li>
+            <li><a href="#2-调试与监控复杂性"><strong>2. 调试与监控复杂性</strong></a></li>
+            <li><a href="#3-资源管理挑战"><strong>3. 资源管理挑战</strong></a></li>
+            <li><a href="#4-性能瓶颈"><strong>4. 性能瓶颈</strong></a></li>
+            <li><a href="#5-学习曲线与最佳实践"><strong>5. 学习曲线与最佳实践</strong></a></li>
+            <li><a href="#6-与现有生态的集成"><strong>6. 与现有生态的集成</strong></a></li>
+            <li><a href="#7-线程安全问题"><strong>7. 线程安全问题</strong></a></li>
+            <li><a href="#总结-10"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#java虚拟线程技术未来可能会带来哪些新的编程范式">Java虚拟线程技术未来可能会带来哪些新的编程范式</a>
+          <ul>
+            <li><a href="#1-结构化并发structured-concurrency"><strong>1. 结构化并发（Structured Concurrency）</strong></a></li>
+            <li><a href="#2-无回调的异步编程"><strong>2. 无回调的异步编程</strong></a></li>
+            <li><a href="#3-事件驱动与反应式编程的简化"><strong>3. 事件驱动与反应式编程的简化</strong></a></li>
+            <li><a href="#4-轻量级任务并发"><strong>4. 轻量级任务并发</strong></a></li>
+            <li><a href="#5-微服务与云原生架构的优化"><strong>5. 微服务与云原生架构的优化</strong></a></li>
+            <li><a href="#6-更高效的批处理与流处理"><strong>6. 更高效的批处理与流处理</strong></a></li>
+            <li><a href="#7-更友好的并发调试与监控"><strong>7. 更友好的并发调试与监控</strong></a></li>
+            <li><a href="#总结-11"><strong>总结</strong></a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><a href="#响应式数据库访问和传统的数据库访问有什么区别">响应式数据库访问和传统的数据库访问有什么区别</a>
+    <li><a href="#java">java</a>
       <ul>
-        <li><a href="#1-编程模型">1. <strong>编程模型</strong></a></li>
-        <li><a href="#2-性能特点">2. <strong>性能特点</strong></a></li>
-        <li><a href="#3-适用场景-1">3. <strong>适用场景</strong></a></li>
-        <li><a href="#4-技术实现">4. <strong>技术实现</strong></a></li>
-        <li><a href="#5-优缺点对比">5. <strong>优缺点对比</strong></a></li>
-        <li><a href="#总结-28">总结</a></li>
-      </ul>
-    </li>
-    <li><a href="#一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较</a>
-      <ul>
-        <li><a href="#1-非响应式后端服务的处理过程">1. <strong>非响应式后端服务的处理过程</strong></a>
+        <li><a href="#学习资料">学习资料</a></li>
+        <li><a href="#basic">basic</a>
           <ul>
-            <li><a href="#处理流程">处理流程：</a></li>
-            <li><a href="#特点">特点：</a></li>
-            <li><a href="#示例-1">示例：</a></li>
+            <li><a href="#java-array-转-list">java array 转 list</a>
+              <ul>
+                <li><a href="#创建一个固定大小的列表">创建一个固定大小的列表</a></li>
+                <li><a href="#创建一个可变大小的列表">创建一个可变大小的列表</a></li>
+              </ul>
+            </li>
+            <li><a href="#java-怎么用二进制打印int">java， 怎么用二进制打印int</a>
+              <ul>
+                <li><a href="#使用-integertobinarystring">使用 <code>Integer.toBinaryString()</code></a></li>
+                <li><a href="#打印包含前导零的完整32位">打印包含前导零的完整32位</a></li>
+                <li><a href="#使用位运算手动构建二进制字符串">使用位运算手动构建二进制字符串</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li><a href="#2-响应式后端服务的处理过程">2. <strong>响应式后端服务的处理过程</strong></a>
+        <li><a href="#concurrent">concurrent</a></li>
+        <li><a href="#每一个java的版本的主要更新">每一个java的版本的主要更新</a>
           <ul>
-            <li><a href="#处理流程-1">处理流程：</a></li>
-            <li><a href="#特点-1">特点：</a></li>
-            <li><a href="#示例-2">示例：</a></li>
+            <li><a href="#java-10-1996">Java 1.0 (1996)</a></li>
+            <li><a href="#java-11-1997">Java 1.1 (1997)</a></li>
+            <li><a href="#java-12-1998">Java 1.2 (1998)</a></li>
+            <li><a href="#java-13-2000">Java 1.3 (2000)</a></li>
+            <li><a href="#java-14-2002">Java 1.4 (2002)</a></li>
+            <li><a href="#java-5-2004">Java 5 (2004)</a></li>
+            <li><a href="#java-6-2006">Java 6 (2006)</a></li>
+            <li><a href="#java-7-2011">Java 7 (2011)</a></li>
+            <li><a href="#java-8-2014">Java 8 (2014)</a></li>
+            <li><a href="#java-9-2017">Java 9 (2017)</a></li>
+            <li><a href="#java-10-2018">Java 10 (2018)</a></li>
+            <li><a href="#java-11-2018">Java 11 (2018)</a></li>
+            <li><a href="#java-12-2019">Java 12 (2019)</a></li>
+            <li><a href="#java-13-2019">Java 13 (2019)</a></li>
+            <li><a href="#java-14-2020">Java 14 (2020)</a></li>
+            <li><a href="#java-15-2020">Java 15 (2020)</a></li>
+            <li><a href="#java-16-2021">Java 16 (2021)</a></li>
+            <li><a href="#java-17-2021">Java 17 (2021)</a></li>
+            <li><a href="#java-18-2022">Java 18 (2022)</a></li>
+            <li><a href="#java-19-2022">Java 19 (2022)</a></li>
+            <li><a href="#java-20-2023">Java 20 (2023)</a></li>
+            <li><a href="#java-21-2023">Java 21 (2023)</a></li>
+            <li><a href="#总结-12">总结</a></li>
           </ul>
         </li>
-        <li><a href="#3-两者的比较">3. <strong>两者的比较</strong></a></li>
-        <li><a href="#4-总结-3">4. <strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#可以举一个具体的例子来详细说明吗一个线程在从处理开始到结束每个时刻所进行的任务">可以举一个具体的例子来详细说明吗？一个线程在从处理开始到结束，每个时刻所进行的任务</a>
-      <ul>
-        <li><a href="#场景描述"><strong>场景描述</strong></a></li>
-        <li><a href="#代码实现-3"><strong>代码实现</strong></a></li>
-        <li><a href="#线程执行过程"><strong>线程执行过程</strong></a>
+        <li><a href="#面试java的时候可能会问到有没有了解最新的技术这个我该怎么准备提前了解哪些知识">面试java的时候可能会问到有没有了解最新的技术，这个我该怎么准备，提前了解哪些知识</a>
           <ul>
-            <li><a href="#时刻-1接收请求"><strong>时刻 1：接收请求</strong></a></li>
-            <li><a href="#时刻-2发起异步数据库查询"><strong>时刻 2：发起异步数据库查询</strong></a></li>
-            <li><a href="#时刻-3线程释放"><strong>时刻 3：线程释放</strong></a></li>
-            <li><a href="#时刻-4数据库查询完成"><strong>时刻 4：数据库查询完成</strong></a></li>
-            <li><a href="#时刻-5返回结果"><strong>时刻 5：返回结果</strong></a></li>
+            <li><a href="#1-java最新版本特性">1. <strong>Java最新版本特性</strong></a></li>
+            <li><a href="#2-微服务与云原生技术">2. <strong>微服务与云原生技术</strong></a></li>
+            <li><a href="#3-数据库与缓存技术">3. <strong>数据库与缓存技术</strong></a></li>
+            <li><a href="#4-性能优化与jvm调优">4. <strong>性能优化与JVM调优</strong></a></li>
+            <li><a href="#5-前沿技术与趋势">5. <strong>前沿技术与趋势</strong></a></li>
+            <li><a href="#6-实践与项目结合">6. <strong>实践与项目结合</strong></a></li>
+            <li><a href="#7-面试中的表达技巧">7. <strong>面试中的表达技巧</strong></a></li>
           </ul>
         </li>
-        <li><a href="#线程任务总结"><strong>线程任务总结</strong></a></li>
-        <li><a href="#关键点"><strong>关键点</strong></a></li>
-        <li><a href="#总结-29"><strong>总结</strong></a></li>
       </ul>
     </li>
-    <li><a href="#在响应式编程中它的并发量会收到数据库连接池大小的限制那这不是和阻塞式的服务一样吗">在响应式编程中，它的并发量会收到数据库连接池大小的限制，那这不是和阻塞式的服务一样吗</a>
+    <li><a href="#collection">collection</a>
       <ul>
-        <li><a href="#1-响应式编程与阻塞式服务的区别"><strong>1. 响应式编程与阻塞式服务的区别</strong></a></li>
-        <li><a href="#2-数据库连接池的限制"><strong>2. 数据库连接池的限制</strong></a></li>
-        <li><a href="#3-如何优化连接池与响应式编程的结合"><strong>3. 如何优化连接池与响应式编程的结合</strong></a></li>
-        <li><a href="#4-总结-4"><strong>4. 总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#在阻塞式的io中数据库的处理线程就是处理请求的那个线程吗">在阻塞式的IO中，数据库的处理线程就是处理请求的那个线程吗</a>
-      <ul>
-        <li><a href="#1-阻塞式io的工作机制"><strong>1. 阻塞式IO的工作机制</strong></a></li>
-        <li><a href="#2-具体流程"><strong>2. 具体流程</strong></a></li>
-        <li><a href="#3-阻塞式io的线程模型"><strong>3. 阻塞式IO的线程模型</strong></a></li>
-        <li><a href="#4-与响应式模型的区别"><strong>4. 与响应式模型的区别</strong></a></li>
-        <li><a href="#总结-30"><strong>总结</strong></a></li>
-      </ul>
-    </li>
-    <li><a href="#在使用-r2dbc-时处理数据库操作的线程如何设置">在使用 R2DBC 时，处理数据库操作的线程如何设置</a>
-      <ul>
-        <li><a href="#1-r2dbc-的线程模型"><strong>1. R2DBC 的线程模型</strong></a></li>
-        <li><a href="#2-如何设置线程"><strong>2. 如何设置线程</strong></a>
+        <li><a href="#collection-和-collections-有什么区别">Collection 和 Collections 有什么区别？</a>
           <ul>
-            <li><a href="#1-使用连接池配置"><strong>(1) 使用连接池配置</strong></a></li>
-            <li><a href="#2-使用异步-io-线程"><strong>(2) 使用异步 I/O 线程</strong></a></li>
+            <li><a href="#1-定义与性质"><strong>1. 定义与性质</strong></a></li>
+            <li><a href="#2-功能与使用"><strong>2. 功能与使用</strong></a></li>
+            <li><a href="#3-示例代码"><strong>3. 示例代码</strong></a></li>
+            <li><a href="#4-总结"><strong>4. 总结</strong></a></li>
           </ul>
         </li>
-        <li><a href="#3-线程处理的流程"><strong>3. 线程处理的流程</strong></a></li>
-        <li><a href="#4-与传统阻塞式模型的区别"><strong>4. 与传统阻塞式模型的区别</strong></a></li>
-        <li><a href="#5-优化建议"><strong>5. 优化建议</strong></a></li>
-        <li><a href="#总结-31"><strong>总结</strong></a></li>
+        <li><a href="#arrayssort-和-collectionssort-的区别">Arrays.sort 和 Collections.sort 的区别</a>
+          <ul>
+            <li><a href="#1-适用对象"><strong>1. 适用对象</strong></a></li>
+            <li><a href="#2-底层实现"><strong>2. 底层实现</strong></a></li>
+            <li><a href="#3-排序规则"><strong>3. 排序规则</strong></a></li>
+            <li><a href="#4-性能与稳定性"><strong>4. 性能与稳定性</strong></a></li>
+            <li><a href="#5-使用场景"><strong>5. 使用场景</strong></a></li>
+            <li><a href="#总结-13"><strong>总结</strong></a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-  </ul>
-
-  <ul>
-    <li><a href="#在java的响应式中mono是什么">在java的响应式中，mono是什么</a>
+    <li><a href="#hashmap">HashMap</a>
       <ul>
-        <li><a href="#mono-的主要特点"><strong>Mono 的主要特点</strong></a></li>
-        <li><a href="#mono-的常见使用场景"><strong>Mono 的常见使用场景</strong></a></li>
-        <li><a href="#mono-的示例代码"><strong>Mono 的示例代码</strong></a></li>
-        <li><a href="#mono-的操作符"><strong>Mono 的操作符</strong></a></li>
-        <li><a href="#mono-与-flux-的区别"><strong>Mono 与 Flux 的区别</strong></a></li>
-        <li><a href="#总结-32"><strong>总结</strong></a></li>
+        <li><a href="#hashmap底层的数据结构是怎样的">HashMap底层的数据结构是怎样的</a>
+          <ul>
+            <li><a href="#jdk-17-及之前"><strong>JDK 1.7 及之前</strong></a></li>
+            <li><a href="#jdk-18-及之后"><strong>JDK 1.8 及之后</strong></a></li>
+            <li><a href="#核心机制"><strong>核心机制</strong></a></li>
+            <li><a href="#总结-14"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？</a>
+          <ul>
+            <li><a href="#一红黑树的特性优势">一、<strong>红黑树的特性优势</strong></a></li>
+            <li><a href="#二与其他树结构的对比">二、<strong>与其他树结构的对比</strong></a>
+              <ul>
+                <li><a href="#1-与-avl-树的对比">1. <strong>与 AVL 树的对比</strong></a></li>
+                <li><a href="#2-与普通二叉搜索树的对比">2. <strong>与普通二叉搜索树的对比</strong></a></li>
+                <li><a href="#3-与-b-树b-树的对比">3. <strong>与 B 树/B+ 树的对比</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#三hashmap-的特定需求">三、<strong>HashMap 的特定需求</strong></a></li>
+            <li><a href="#四总结">四、<strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap-get-的时间复杂度">HashMap get 的时间复杂度</a>
+          <ul>
+            <li><a href="#1-理想情况o1">1. <strong>理想情况（O(1)）</strong></a></li>
+            <li><a href="#2-最坏情况on">2. <strong>最坏情况（O(n)）</strong></a></li>
+            <li><a href="#3-总结">3. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap如何保证线程安全">HashMap如何保证线程安全</a>
+          <ul>
+            <li><a href="#1-使用"><strong>1. 使用 <code>Collections.synchronizedMap</code></strong></a></li>
+            <li><a href="#2-使用"><strong>2. 使用 <code>ConcurrentHashMap</code></strong></a></li>
+            <li><a href="#3-使用读写锁-"><strong>3. 使用读写锁 (<code>ReadWriteLock</code>)</strong></a></li>
+            <li><a href="#4-方法内部使用局部"><strong>4. 方法内部使用局部 <code>HashMap</code></strong></a></li>
+            <li><a href="#5-初始化写后续只读"><strong>5. 初始化写，后续只读</strong></a></li>
+            <li><a href="#总结-15"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？</a>
+          <ul>
+            <li><a href="#1-线程安全性"><strong>1. 线程安全性</strong></a></li>
+            <li><a href="#2-对-null-值的支持"><strong>2. 对 null 值的支持</strong></a></li>
+            <li><a href="#3-性能-1"><strong>3. 性能</strong></a></li>
+            <li><a href="#4-继承与实现"><strong>4. 继承与实现</strong></a></li>
+            <li><a href="#5-扩容机制"><strong>5. 扩容机制</strong></a></li>
+            <li><a href="#6-迭代器"><strong>6. 迭代器</strong></a></li>
+            <li><a href="#7-计算哈希值的方式"><strong>7. 计算哈希值的方式</strong></a></li>
+            <li><a href="#总结-16"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#当-hashmap-扩容时所有的红黑树或者链表都会重新构造吗">当 HashMap 扩容时，所有的红黑树或者链表都会重新构造吗</a>
+          <ul>
+            <li><a href="#1-链表重新构造"><strong>1. 链表重新构造</strong></a></li>
+            <li><a href="#2-红黑树重新构造"><strong>2. 红黑树重新构造</strong></a></li>
+            <li><a href="#3-重新哈希的原因"><strong>3. 重新哈希的原因</strong></a></li>
+            <li><a href="#总结-17"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#为什么hashmap选择红黑树而不选择b树">为什么HashMap选择红黑树而不选择B+树</a>
+          <ul>
+            <li><a href="#1-算法实现复杂度">1. <strong>算法实现复杂度</strong></a></li>
+            <li><a href="#2-底层数据结构匹配">2. <strong>底层数据结构匹配</strong></a></li>
+            <li><a href="#3-修改效率">3. <strong>修改效率</strong></a></li>
+            <li><a href="#4-内存占用">4. <strong>内存占用</strong></a></li>
+            <li><a href="#5-适用场景-1">5. <strong>适用场景</strong></a></li>
+            <li><a href="#6-维护成本">6. <strong>维护成本</strong></a></li>
+            <li><a href="#总结-18">总结</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><a href="#mono-是如何实现非阻塞的">Mono 是如何实现非阻塞的</a>
+    <li><a href="#io模型">I/O模型</a>
       <ul>
-        <li><a href="#1-事件驱动模型">1. <strong>事件驱动模型</strong></a></li>
-        <li><a href="#2-回调机制">2. <strong>回调机制</strong></a></li>
-        <li><a href="#3-非阻塞-io">3. <strong>非阻塞 I/O</strong></a></li>
-        <li><a href="#4-线程调度">4. <strong>线程调度</strong></a></li>
-        <li><a href="#5-背压支持">5. <strong>背压支持</strong></a></li>
-        <li><a href="#6-示例代码">6. <strong>示例代码</strong></a></li>
-        <li><a href="#总结-33">总结</a></li>
+        <li><a href="#selectpoll和epoll的区别">select、poll和epoll的区别</a>
+          <ul>
+            <li><a href="#1-select">1. <strong>select</strong></a></li>
+            <li><a href="#2-poll">2. <strong>poll</strong></a></li>
+            <li><a href="#3-epoll">3. <strong>epoll</strong></a></li>
+            <li><a href="#对比总结">对比总结</a></li>
+            <li><a href="#总结-19">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#提供一个java异步io的例子">提供一个java异步I/O的例子</a>
+          <ul>
+            <li><a href="#示例代码异步文件读取">示例代码：异步文件读取</a></li>
+            <li><a href="#代码说明-1">代码说明</a></li>
+            <li><a href="#异步-io-的优势">异步 I/O 的优势</a></li>
+            <li><a href="#参考">参考</a></li>
+          </ul>
+        </li>
+        <li><a href="#在java中非阻塞io就是io多路复用吗">在java中非阻塞IO就是IO多路复用吗</a>
+          <ul>
+            <li><a href="#1-非阻塞-ionon-blocking-io">1. <strong>非阻塞 I/O（Non-blocking I/O）</strong></a></li>
+            <li><a href="#2-io-多路复用io-multiplexing">2. <strong>I/O 多路复用（I/O Multiplexing）</strong></a></li>
+            <li><a href="#3-非阻塞-io-与-io-多路复用的关系">3. <strong>非阻塞 I/O 与 I/O 多路复用的关系</strong></a></li>
+            <li><a href="#4-总结-1">4. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在java中selector算非阻塞还是多路复用">在java中selector算非阻塞还是多路复用</a>
+          <ul>
+            <li><a href="#1-selector">1. <strong><code>Selector</code> 是非阻塞 I/O 的实现</strong></a></li>
+            <li><a href="#2-selector">2. <strong><code>Selector</code> 是 I/O 多路复用的核心</strong></a></li>
+            <li><a href="#3-selector">3. <strong><code>Selector</code> 的工作原理</strong></a></li>
+            <li><a href="#4-总结-2">4. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#socket">socket</a>
+      <ul>
+        <li><a href="#我有这样一个开发场景服务端需要和多个客户端进行tcp连接服务端会发送指令给客户端客户端会返回指令执行结果客户端会定时返回心跳报文上报状态客户端会不定时上报事件报文我该怎么实现上述功能">我有这样一个开发场景，服务端需要和多个客户端进行tcp连接，服务端会发送指令给客户端，客户端会返回指令执行结果；客户端会定时返回心跳报文上报状态；客户端会不定时上报事件报文。我该怎么实现上述功能？</a>
+          <ul>
+            <li><a href="#1-服务端设计">1. 服务端设计</a>
+              <ul>
+                <li><a href="#11-建立tcp连接">1.1 建立TCP连接</a></li>
+                <li><a href="#12-指令发送">1.2 指令发送</a></li>
+                <li><a href="#13-处理客户端返回">1.3 处理客户端返回</a></li>
+                <li><a href="#14-心跳处理">1.4 心跳处理</a></li>
+                <li><a href="#15-事件处理">1.5 事件处理</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-客户端设计">2. 客户端设计</a>
+              <ul>
+                <li><a href="#21-连接服务端">2.1 连接服务端</a></li>
+                <li><a href="#22-指令执行">2.2 指令执行</a></li>
+                <li><a href="#23-心跳发送">2.3 心跳发送</a></li>
+                <li><a href="#24-事件上报">2.4 事件上报</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-协议设计">3. 协议设计</a></li>
+            <li><a href="#4-实现示例">4. 实现示例</a>
+              <ul>
+                <li><a href="#服务端示例python伪代码">服务端示例（Python伪代码）</a></li>
+                <li><a href="#客户端示例python伪代码">客户端示例（Python伪代码）</a></li>
+              </ul>
+            </li>
+            <li><a href="#5-注意事项">5. 注意事项</a></li>
+          </ul>
+        </li>
+        <li><a href="#如果我使用io多路复用来实现给我一个java版本代码示例">如果我使用IO多路复用来实现，给我一个java版本代码示例</a>
+          <ul>
+            <li><a href="#服务端代码示例">服务端代码示例</a></li>
+            <li><a href="#客户端代码示例">客户端代码示例</a></li>
+            <li><a href="#代码说明-2">代码说明</a></li>
+            <li><a href="#运行方式">运行方式</a></li>
+            <li><a href="#扩展建议">扩展建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#我有一个服务端需要连接多个服务端进行tcp连接给我一个java的代码示例">我有一个服务端，需要连接多个服务端进行tcp连接，给我一个java的代码示例</a>
+          <ul>
+            <li><a href="#代码示例">代码示例</a></li>
+            <li><a href="#代码说明-3">代码说明</a></li>
+            <li><a href="#运行方式-1">运行方式</a></li>
+            <li><a href="#参考-1">参考</a></li>
+            <li><a href="#扩展建议-1">扩展建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#我在tcp连接的过程中可能会新增连接修改连接信息ip或端口号或者删除连接这个该怎么实现">我在tcp连接的过程中，可能会新增连接，修改连接信息（ip或端口号）或者删除连接，这个该怎么实现</a>
+          <ul>
+            <li><a href="#设计思路">设计思路</a></li>
+            <li><a href="#代码实现">代码实现</a></li>
+            <li><a href="#代码说明-4">代码说明</a></li>
+            <li><a href="#运行方式-2">运行方式</a></li>
+            <li><a href="#扩展建议-2">扩展建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#使用-socketchannel-的-close-方法是否会导致tcp连接还在传输数据的时候意外断开的情况">使用 socketChannel 的 close 方法，是否会导致tcp连接还在传输数据的时候意外断开的情况</a>
+          <ul>
+            <li><a href="#1-socketchannelclose">1. <strong><code>SocketChannel.close</code> 的行为</strong></a></li>
+            <li><a href="#2-数据传输中的关闭">2. <strong>数据传输中的关闭</strong></a></li>
+            <li><a href="#3-异常情况">3. <strong>异常情况</strong></a></li>
+            <li><a href="#4-最佳实践">4. <strong>最佳实践</strong></a></li>
+            <li><a href="#总结-20">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#我还需要实现对特定连接发送命令报文">我还需要实现对特定连接发送命令报文</a>
+          <ul>
+            <li><a href="#代码实现-1">代码实现</a></li>
+            <li><a href="#代码说明-5">代码说明</a></li>
+            <li><a href="#运行方式-3">运行方式</a></li>
+            <li><a href="#扩展建议-3">扩展建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#发送完命令之后我需要等待收到一个回复的报文命令执行才算完成">发送完命令之后我需要等待收到一个回复的报文，命令执行才算完成</a>
+          <ul>
+            <li><a href="#设计思路-1">设计思路</a></li>
+            <li><a href="#代码实现-2">代码实现</a></li>
+            <li><a href="#代码说明-6">代码说明</a></li>
+            <li><a href="#运行方式-4">运行方式</a></li>
+            <li><a href="#扩展建议-4">扩展建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#如果连接的tcp数量很多使用一个selector接收有点慢该怎么优化">如果连接的tcp数量很多，使用一个selector接收有点慢，该怎么优化</a>
+          <ul>
+            <li><a href="#1-优化思路">1. <strong>优化思路</strong></a>
+              <ul>
+                <li><a href="#11-使用多个-selector">1.1 <strong>使用多个 Selector</strong></a></li>
+                <li><a href="#12-分离连接处理和数据处理">1.2 <strong>分离连接处理和数据处理</strong></a></li>
+                <li><a href="#13-调整缓冲区大小">1.3 <strong>调整缓冲区大小</strong></a></li>
+                <li><a href="#14-使用非阻塞-io">1.4 <strong>使用非阻塞 I/O</strong></a></li>
+                <li><a href="#15-减少事件处理的耗时">1.5 <strong>减少事件处理的耗时</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#2-实现示例">2. <strong>实现示例</strong></a></li>
+            <li><a href="#3-优化建议">3. <strong>优化建议</strong></a></li>
+            <li><a href="#4-参考外部资料">4. <strong>参考外部资料</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#如果我需要维护100个tcp连接使用一个selector够吗">如果我需要维护100个tcp连接，使用一个selector够吗</a>
+          <ul>
+            <li><a href="#1-单个">1. <strong>单个 <code>Selector</code> 的局限性</strong></a></li>
+            <li><a href="#2-优化方案">2. <strong>优化方案</strong></a>
+              <ul>
+                <li><a href="#21-使用多个">2.1 <strong>使用多个 <code>Selector</code></strong></a></li>
+                <li><a href="#22-分离连接处理和数据处理">2.2 <strong>分离连接处理和数据处理</strong></a></li>
+                <li><a href="#23-调整缓冲区大小">2.3 <strong>调整缓冲区大小</strong></a></li>
+                <li><a href="#24-使用非阻塞-io">2.4 <strong>使用非阻塞 I/O</strong></a></li>
+                <li><a href="#25-减少事件处理的耗时">2.5 <strong>减少事件处理的耗时</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#3-参考外部资料">3. <strong>参考外部资料</strong></a></li>
+            <li><a href="#4-示例代码-1">4. <strong>示例代码</strong></a></li>
+            <li><a href="#5-总结-2">5. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在java中一个tcp连接使用一个socket连接多个tcp这样占用很多内存吗">在java中，一个tcp连接使用一个socket，连接多个tcp，这样占用很多内存吗</a></li>
+        <li><a href="#在java中创建线程的内存开销">在java中创建线程的内存开销</a>
+          <ul>
+            <li><a href="#1-线程栈的内存开销">1. <strong>线程栈的内存开销</strong></a></li>
+            <li><a href="#2-其他内存开销">2. <strong>其他内存开销</strong></a></li>
+            <li><a href="#3-线程创建和销毁的开销">3. <strong>线程创建和销毁的开销</strong></a></li>
+            <li><a href="#4-线程池的优化">4. <strong>线程池的优化</strong></a></li>
+            <li><a href="#5-如何减少线程内存开销">5. <strong>如何减少线程内存开销</strong></a></li>
+            <li><a href="#总结-21">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#java中的selector使用的是select还是epoll">java中的selector使用的是select还是epoll</a></li>
+      </ul>
+    </li>
+    <li><a href="#selector">selector</a>
+      <ul>
+        <li><a href="#java-selector-的原理">java selector 的原理</a>
+          <ul>
+            <li><a href="#1-selector-的核心功能">1. <strong>Selector 的核心功能</strong></a></li>
+            <li><a href="#2-selector-的工作流程">2. <strong>Selector 的工作流程</strong></a></li>
+            <li><a href="#3-selector-的底层实现">3. <strong>Selector 的底层实现</strong></a></li>
+            <li><a href="#4-selector-的优点">4. <strong>Selector 的优点</strong></a></li>
+            <li><a href="#5-selector-的注意事项">5. <strong>Selector 的注意事项</strong></a></li>
+            <li><a href="#6-与-selectpollepoll-的关系">6. <strong>与 select/poll/epoll 的关系</strong></a></li>
+            <li><a href="#7-示例代码">7. <strong>示例代码</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#selector中事件是由谁产生的">selector中事件是由谁产生的？</a>
+          <ul>
+            <li><a href="#1-事件的产生">1. <strong>事件的产生</strong></a></li>
+            <li><a href="#2-事件的检测">2. <strong>事件的检测</strong></a></li>
+            <li><a href="#3-事件的触发机制">3. <strong>事件的触发机制</strong></a></li>
+            <li><a href="#4-示例">4. <strong>示例</strong></a></li>
+            <li><a href="#总结-22">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#java的selector的使用过程中概念总结一下">java的selector的使用过程中概念总结一下</a>
+          <ul>
+            <li><a href="#1-selector-的作用">1. <strong>Selector 的作用</strong></a></li>
+            <li><a href="#2-核心概念">2. <strong>核心概念</strong></a></li>
+            <li><a href="#3-selector-的使用步骤">3. <strong>Selector 的使用步骤</strong></a></li>
+            <li><a href="#4-selector-的优势">4. <strong>Selector 的优势</strong></a></li>
+            <li><a href="#5-注意事项-1">5. <strong>注意事项</strong></a></li>
+            <li><a href="#6-与底层机制的关系">6. <strong>与底层机制的关系</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#密码学">密码学</a>
+      <ul>
+        <li><a href="#在java中如何使用aes加密算法">在java中如何使用AES加密算法</a>
+          <ul>
+            <li><a href="#1-导入必要的包"><strong>1. 导入必要的包</strong></a></li>
+            <li><a href="#2-生成-aes-密钥"><strong>2. 生成 AES 密钥</strong></a></li>
+            <li><a href="#3-加密方法"><strong>3. 加密方法</strong></a></li>
+            <li><a href="#4-解密方法"><strong>4. 解密方法</strong></a></li>
+            <li><a href="#5-完整示例"><strong>5. 完整示例</strong></a></li>
+            <li><a href="#6-注意事项"><strong>6. 注意事项</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在java中如何使用rsa算法进行加解密">在Java中如何使用RSA算法进行加解密</a>
+          <ul>
+            <li><a href="#1-生成-rsa-密钥对"><strong>1. 生成 RSA 密钥对</strong></a></li>
+            <li><a href="#2-使用公钥加密"><strong>2. 使用公钥加密</strong></a></li>
+            <li><a href="#3-使用私钥解密"><strong>3. 使用私钥解密</strong></a></li>
+            <li><a href="#4-注意事项"><strong>4. 注意事项</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#公钥只能用来加密私钥只能用来解密吗">公钥只能用来加密，私钥只能用来解密吗？</a>
+          <ul>
+            <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
+            <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
+            <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
+            <li><a href="#总结-23"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
+          <ul>
+            <li><a href="#1-ecbelectronic-code-book电子密码本模式"><strong>1. ECB（Electronic Code Book，电子密码本模式）</strong></a></li>
+            <li><a href="#2-cbccipher-block-chaining密码分组链接模式"><strong>2. CBC（Cipher Block Chaining，密码分组链接模式）</strong></a></li>
+            <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
+            <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
+            <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
+            <li><a href="#总结-24"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
+          <ul>
+            <li><a href="#1-pkcs7-padding">1. <strong>PKCS7 Padding</strong></a></li>
+            <li><a href="#2-pkcs5-padding">2. <strong>PKCS5 Padding</strong></a></li>
+            <li><a href="#3-no-padding">3. <strong>No Padding</strong></a></li>
+            <li><a href="#4-iso10126-padding">4. <strong>ISO10126 Padding</strong></a></li>
+            <li><a href="#5-iso7816-4-padding">5. <strong>ISO7816-4 Padding</strong></a></li>
+            <li><a href="#6-zero-byte-padding">6. <strong>Zero Byte Padding</strong></a></li>
+            <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
+            <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
+            <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
+            <li><a href="#总结-25">总结</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#reactor">reactor</a>
+      <ul>
+        <li><a href="#reference">reference</a></li>
+        <li><a href="#给我举一个-reactor-模式的例子">给我举一个 reactor 模式的例子</a>
+          <ul>
+            <li><a href="#示例代码reactor-模式服务器">示例代码：Reactor 模式服务器</a></li>
+            <li><a href="#代码说明-7">代码说明</a></li>
+            <li><a href="#reactor-模式的核心组件12">Reactor 模式的核心组件<a href="@ref">1</a><a href="@ref">2</a></a></li>
+            <li><a href="#应用场景">应用场景</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#响应式编程">响应式编程</a>
+      <ul>
+        <li><a href="#reference-1">reference</a></li>
+        <li><a href="#什么是响应式编程">什么是响应式编程</a>
+          <ul>
+            <li><a href="#核心概念">核心概念</a></li>
+            <li><a href="#响应式编程的特点">响应式编程的特点</a></li>
+            <li><a href="#应用场景-1">应用场景</a></li>
+            <li><a href="#优点">优点</a></li>
+            <li><a href="#缺点">缺点</a></li>
+            <li><a href="#示例">示例</a></li>
+            <li><a href="#总结-26">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#在springboot中有哪些响应式编程的运用">在springboot中有哪些响应式编程的运用</a>
+          <ul>
+            <li><a href="#1-响应式-web-开发spring-webflux">1. <strong>响应式 Web 开发（Spring WebFlux）</strong></a>
+              <ul>
+                <li><a href="#核心特性">核心特性：</a></li>
+                <li><a href="#示例代码-2">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-响应式数据库访问">2. <strong>响应式数据库访问</strong></a>
+              <ul>
+                <li><a href="#核心特性-1">核心特性：</a></li>
+                <li><a href="#示例代码-3">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-响应式消息传递">3. <strong>响应式消息传递</strong></a>
+              <ul>
+                <li><a href="#核心特性-2">核心特性：</a></li>
+                <li><a href="#示例代码-4">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#4-响应式安全spring-security-reactive">4. <strong>响应式安全（Spring Security Reactive）</strong></a>
+              <ul>
+                <li><a href="#核心特性-3">核心特性：</a></li>
+                <li><a href="#示例代码-5">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#5-响应式测试">5. <strong>响应式测试</strong></a>
+              <ul>
+                <li><a href="#示例代码-6">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#6-响应式流处理">6. <strong>响应式流处理</strong></a>
+              <ul>
+                <li><a href="#示例代码-7">示例代码：</a></li>
+              </ul>
+            </li>
+            <li><a href="#总结-27">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#响应式数据库访问和传统的数据库访问有什么区别">响应式数据库访问和传统的数据库访问有什么区别</a>
+          <ul>
+            <li><a href="#1-编程模型">1. <strong>编程模型</strong></a></li>
+            <li><a href="#2-性能特点">2. <strong>性能特点</strong></a></li>
+            <li><a href="#3-适用场景-1">3. <strong>适用场景</strong></a></li>
+            <li><a href="#4-技术实现">4. <strong>技术实现</strong></a></li>
+            <li><a href="#5-优缺点对比">5. <strong>优缺点对比</strong></a></li>
+            <li><a href="#总结-28">总结</a></li>
+          </ul>
+        </li>
+        <li><a href="#一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较</a>
+          <ul>
+            <li><a href="#1-非响应式后端服务的处理过程">1. <strong>非响应式后端服务的处理过程</strong></a>
+              <ul>
+                <li><a href="#处理流程">处理流程：</a></li>
+                <li><a href="#特点">特点：</a></li>
+                <li><a href="#示例-1">示例：</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-响应式后端服务的处理过程">2. <strong>响应式后端服务的处理过程</strong></a>
+              <ul>
+                <li><a href="#处理流程-1">处理流程：</a></li>
+                <li><a href="#特点-1">特点：</a></li>
+                <li><a href="#示例-2">示例：</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-两者的比较">3. <strong>两者的比较</strong></a></li>
+            <li><a href="#4-总结-3">4. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#可以举一个具体的例子来详细说明吗一个线程在从处理开始到结束每个时刻所进行的任务">可以举一个具体的例子来详细说明吗？一个线程在从处理开始到结束，每个时刻所进行的任务</a>
+          <ul>
+            <li><a href="#场景描述"><strong>场景描述</strong></a></li>
+            <li><a href="#代码实现-3"><strong>代码实现</strong></a></li>
+            <li><a href="#线程执行过程"><strong>线程执行过程</strong></a>
+              <ul>
+                <li><a href="#时刻-1接收请求"><strong>时刻 1：接收请求</strong></a></li>
+                <li><a href="#时刻-2发起异步数据库查询"><strong>时刻 2：发起异步数据库查询</strong></a></li>
+                <li><a href="#时刻-3线程释放"><strong>时刻 3：线程释放</strong></a></li>
+                <li><a href="#时刻-4数据库查询完成"><strong>时刻 4：数据库查询完成</strong></a></li>
+                <li><a href="#时刻-5返回结果"><strong>时刻 5：返回结果</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#线程任务总结"><strong>线程任务总结</strong></a></li>
+            <li><a href="#关键点"><strong>关键点</strong></a></li>
+            <li><a href="#总结-29"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在响应式编程中它的并发量会收到数据库连接池大小的限制那这不是和阻塞式的服务一样吗">在响应式编程中，它的并发量会收到数据库连接池大小的限制，那这不是和阻塞式的服务一样吗</a>
+          <ul>
+            <li><a href="#1-响应式编程与阻塞式服务的区别"><strong>1. 响应式编程与阻塞式服务的区别</strong></a></li>
+            <li><a href="#2-数据库连接池的限制"><strong>2. 数据库连接池的限制</strong></a></li>
+            <li><a href="#3-如何优化连接池与响应式编程的结合"><strong>3. 如何优化连接池与响应式编程的结合</strong></a></li>
+            <li><a href="#4-总结-4"><strong>4. 总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在阻塞式的io中数据库的处理线程就是处理请求的那个线程吗">在阻塞式的IO中，数据库的处理线程就是处理请求的那个线程吗</a>
+          <ul>
+            <li><a href="#1-阻塞式io的工作机制"><strong>1. 阻塞式IO的工作机制</strong></a></li>
+            <li><a href="#2-具体流程"><strong>2. 具体流程</strong></a></li>
+            <li><a href="#3-阻塞式io的线程模型"><strong>3. 阻塞式IO的线程模型</strong></a></li>
+            <li><a href="#4-与响应式模型的区别"><strong>4. 与响应式模型的区别</strong></a></li>
+            <li><a href="#总结-30"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在使用-r2dbc-时处理数据库操作的线程如何设置">在使用 R2DBC 时，处理数据库操作的线程如何设置</a>
+          <ul>
+            <li><a href="#1-r2dbc-的线程模型"><strong>1. R2DBC 的线程模型</strong></a></li>
+            <li><a href="#2-如何设置线程"><strong>2. 如何设置线程</strong></a>
+              <ul>
+                <li><a href="#1-使用连接池配置"><strong>(1) 使用连接池配置</strong></a></li>
+                <li><a href="#2-使用异步-io-线程"><strong>(2) 使用异步 I/O 线程</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#3-线程处理的流程"><strong>3. 线程处理的流程</strong></a></li>
+            <li><a href="#4-与传统阻塞式模型的区别"><strong>4. 与传统阻塞式模型的区别</strong></a></li>
+            <li><a href="#5-优化建议"><strong>5. 优化建议</strong></a></li>
+            <li><a href="#总结-31"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#mono">Mono</a>
+      <ul>
+        <li><a href="#在java的响应式中mono是什么">在java的响应式中，mono是什么</a>
+          <ul>
+            <li><a href="#mono-的主要特点"><strong>Mono 的主要特点</strong></a></li>
+            <li><a href="#mono-的常见使用场景"><strong>Mono 的常见使用场景</strong></a></li>
+            <li><a href="#mono-的示例代码"><strong>Mono 的示例代码</strong></a></li>
+            <li><a href="#mono-的操作符"><strong>Mono 的操作符</strong></a></li>
+            <li><a href="#mono-与-flux-的区别"><strong>Mono 与 Flux 的区别</strong></a></li>
+            <li><a href="#总结-32"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#mono-是如何实现非阻塞的">Mono 是如何实现非阻塞的</a>
+          <ul>
+            <li><a href="#1-事件驱动模型">1. <strong>事件驱动模型</strong></a></li>
+            <li><a href="#2-回调机制">2. <strong>回调机制</strong></a></li>
+            <li><a href="#3-非阻塞-io">3. <strong>非阻塞 I/O</strong></a></li>
+            <li><a href="#4-线程调度">4. <strong>线程调度</strong></a></li>
+            <li><a href="#5-背压支持">5. <strong>背压支持</strong></a></li>
+            <li><a href="#6-示例代码">6. <strong>示例代码</strong></a></li>
+            <li><a href="#总结-33">总结</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>

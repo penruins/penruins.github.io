@@ -422,7 +422,7 @@ PUBLISH
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-01T14:34:25+08:00">
+    <meta property="article:modified_time" content="2025-08-01T14:39:10+08:00">
 <title>redis | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
@@ -1706,42 +1706,46 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#redis基本数据类型-使用场景">redis基本数据类型, 使用场景</a></li>
-    <li><a href="#什么是缓存击穿-缓存穿透-缓存雪崩">什么是缓存击穿 缓存穿透 缓存雪崩</a></li>
-    <li><a href="#简单动态字符串">简单动态字符串</a></li>
-    <li><a href="#链表">链表</a></li>
-    <li><a href="#字典">字典</a></li>
-    <li><a href="#跳跃表">跳跃表</a></li>
-    <li><a href="#整数集合">整数集合</a></li>
-    <li><a href="#压缩列表">压缩列表</a></li>
-    <li><a href="#对象">对象</a></li>
-    <li><a href="#数据库">数据库</a></li>
-    <li><a href="#redis-集群">redis 集群</a>
+    <li><a href="#redis">redis</a>
       <ul>
-        <li><a href="#redis-的集群模式有哪些">redis 的集群模式有哪些？</a></li>
-        <li><a href="#redis-数据如何进行分片">redis 数据如何进行分片？</a></li>
-        <li><a href="#分片的实现方案有哪些">分片的实现方案有哪些？</a></li>
-        <li><a href="#主从">主从</a>
+        <li><a href="#redis基本数据类型-使用场景">redis基本数据类型, 使用场景</a></li>
+        <li><a href="#什么是缓存击穿-缓存穿透-缓存雪崩">什么是缓存击穿 缓存穿透 缓存雪崩</a></li>
+        <li><a href="#简单动态字符串">简单动态字符串</a></li>
+        <li><a href="#链表">链表</a></li>
+        <li><a href="#字典">字典</a></li>
+        <li><a href="#跳跃表">跳跃表</a></li>
+        <li><a href="#整数集合">整数集合</a></li>
+        <li><a href="#压缩列表">压缩列表</a></li>
+        <li><a href="#对象">对象</a></li>
+        <li><a href="#数据库">数据库</a></li>
+        <li><a href="#redis-集群">redis 集群</a>
           <ul>
-            <li><a href="#旧版复制功能的实现">旧版复制功能的实现</a></li>
-            <li><a href="#旧版复制功能的缺陷">旧版复制功能的缺陷</a></li>
-            <li><a href="#新版复制功能的实现">新版复制功能的实现</a></li>
-            <li><a href="#部分重同步的实现">部分重同步的实现</a></li>
-            <li><a href="#psync-命令的实现">PSYNC 命令的实现</a></li>
-            <li><a href="#复制的实现">复制的实现</a></li>
-            <li><a href="#心跳检测">心跳检测</a></li>
-          </ul>
-        </li>
-        <li><a href="#sentinel">Sentinel</a></li>
-        <li><a href="#集群">集群</a>
-          <ul>
-            <li><a href="#节点">节点</a></li>
-            <li><a href="#槽指派">槽指派</a></li>
-            <li><a href="#在集群中执行命令">在集群中执行命令</a></li>
-            <li><a href="#重新分片">重新分片</a></li>
-            <li><a href="#ask错误">ASK错误</a></li>
-            <li><a href="#复制与故障转移">复制与故障转移</a></li>
-            <li><a href="#消息">消息</a></li>
+            <li><a href="#redis-的集群模式有哪些">redis 的集群模式有哪些？</a></li>
+            <li><a href="#redis-数据如何进行分片">redis 数据如何进行分片？</a></li>
+            <li><a href="#分片的实现方案有哪些">分片的实现方案有哪些？</a></li>
+            <li><a href="#主从">主从</a>
+              <ul>
+                <li><a href="#旧版复制功能的实现">旧版复制功能的实现</a></li>
+                <li><a href="#旧版复制功能的缺陷">旧版复制功能的缺陷</a></li>
+                <li><a href="#新版复制功能的实现">新版复制功能的实现</a></li>
+                <li><a href="#部分重同步的实现">部分重同步的实现</a></li>
+                <li><a href="#psync-命令的实现">PSYNC 命令的实现</a></li>
+                <li><a href="#复制的实现">复制的实现</a></li>
+                <li><a href="#心跳检测">心跳检测</a></li>
+              </ul>
+            </li>
+            <li><a href="#sentinel">Sentinel</a></li>
+            <li><a href="#集群">集群</a>
+              <ul>
+                <li><a href="#节点">节点</a></li>
+                <li><a href="#槽指派">槽指派</a></li>
+                <li><a href="#在集群中执行命令">在集群中执行命令</a></li>
+                <li><a href="#重新分片">重新分片</a></li>
+                <li><a href="#ask错误">ASK错误</a></li>
+                <li><a href="#复制与故障转移">复制与故障转移</a></li>
+                <li><a href="#消息">消息</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -2177,7 +2181,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/21d3722c34a1c4d34d72a1190641e2127a91c745" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d22cce5b375164ec5e27179ef6afa8ca7f3c00d" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
@@ -2215,42 +2219,46 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#redis基本数据类型-使用场景">redis基本数据类型, 使用场景</a></li>
-    <li><a href="#什么是缓存击穿-缓存穿透-缓存雪崩">什么是缓存击穿 缓存穿透 缓存雪崩</a></li>
-    <li><a href="#简单动态字符串">简单动态字符串</a></li>
-    <li><a href="#链表">链表</a></li>
-    <li><a href="#字典">字典</a></li>
-    <li><a href="#跳跃表">跳跃表</a></li>
-    <li><a href="#整数集合">整数集合</a></li>
-    <li><a href="#压缩列表">压缩列表</a></li>
-    <li><a href="#对象">对象</a></li>
-    <li><a href="#数据库">数据库</a></li>
-    <li><a href="#redis-集群">redis 集群</a>
+    <li><a href="#redis">redis</a>
       <ul>
-        <li><a href="#redis-的集群模式有哪些">redis 的集群模式有哪些？</a></li>
-        <li><a href="#redis-数据如何进行分片">redis 数据如何进行分片？</a></li>
-        <li><a href="#分片的实现方案有哪些">分片的实现方案有哪些？</a></li>
-        <li><a href="#主从">主从</a>
+        <li><a href="#redis基本数据类型-使用场景">redis基本数据类型, 使用场景</a></li>
+        <li><a href="#什么是缓存击穿-缓存穿透-缓存雪崩">什么是缓存击穿 缓存穿透 缓存雪崩</a></li>
+        <li><a href="#简单动态字符串">简单动态字符串</a></li>
+        <li><a href="#链表">链表</a></li>
+        <li><a href="#字典">字典</a></li>
+        <li><a href="#跳跃表">跳跃表</a></li>
+        <li><a href="#整数集合">整数集合</a></li>
+        <li><a href="#压缩列表">压缩列表</a></li>
+        <li><a href="#对象">对象</a></li>
+        <li><a href="#数据库">数据库</a></li>
+        <li><a href="#redis-集群">redis 集群</a>
           <ul>
-            <li><a href="#旧版复制功能的实现">旧版复制功能的实现</a></li>
-            <li><a href="#旧版复制功能的缺陷">旧版复制功能的缺陷</a></li>
-            <li><a href="#新版复制功能的实现">新版复制功能的实现</a></li>
-            <li><a href="#部分重同步的实现">部分重同步的实现</a></li>
-            <li><a href="#psync-命令的实现">PSYNC 命令的实现</a></li>
-            <li><a href="#复制的实现">复制的实现</a></li>
-            <li><a href="#心跳检测">心跳检测</a></li>
-          </ul>
-        </li>
-        <li><a href="#sentinel">Sentinel</a></li>
-        <li><a href="#集群">集群</a>
-          <ul>
-            <li><a href="#节点">节点</a></li>
-            <li><a href="#槽指派">槽指派</a></li>
-            <li><a href="#在集群中执行命令">在集群中执行命令</a></li>
-            <li><a href="#重新分片">重新分片</a></li>
-            <li><a href="#ask错误">ASK错误</a></li>
-            <li><a href="#复制与故障转移">复制与故障转移</a></li>
-            <li><a href="#消息">消息</a></li>
+            <li><a href="#redis-的集群模式有哪些">redis 的集群模式有哪些？</a></li>
+            <li><a href="#redis-数据如何进行分片">redis 数据如何进行分片？</a></li>
+            <li><a href="#分片的实现方案有哪些">分片的实现方案有哪些？</a></li>
+            <li><a href="#主从">主从</a>
+              <ul>
+                <li><a href="#旧版复制功能的实现">旧版复制功能的实现</a></li>
+                <li><a href="#旧版复制功能的缺陷">旧版复制功能的缺陷</a></li>
+                <li><a href="#新版复制功能的实现">新版复制功能的实现</a></li>
+                <li><a href="#部分重同步的实现">部分重同步的实现</a></li>
+                <li><a href="#psync-命令的实现">PSYNC 命令的实现</a></li>
+                <li><a href="#复制的实现">复制的实现</a></li>
+                <li><a href="#心跳检测">心跳检测</a></li>
+              </ul>
+            </li>
+            <li><a href="#sentinel">Sentinel</a></li>
+            <li><a href="#集群">集群</a>
+              <ul>
+                <li><a href="#节点">节点</a></li>
+                <li><a href="#槽指派">槽指派</a></li>
+                <li><a href="#在集群中执行命令">在集群中执行命令</a></li>
+                <li><a href="#重新分片">重新分片</a></li>
+                <li><a href="#ask错误">ASK错误</a></li>
+                <li><a href="#复制与故障转移">复制与故障转移</a></li>
+                <li><a href="#消息">消息</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>

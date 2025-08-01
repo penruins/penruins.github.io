@@ -580,7 +580,7 @@ ShardingSphere学习（超详细）
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-01T14:34:25+08:00">
+    <meta property="article:modified_time" content="2025-08-01T14:39:10+08:00">
 <title>shardingsphere | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
@@ -1864,64 +1864,68 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#概览">概览</a>
+    <li><a href="#shardingsphere">shardingsphere</a>
       <ul>
-        <li><a href="#什么是-shardingsphere">什么是 shardingsphere</a></li>
-      </ul>
-    </li>
-    <li><a href="#shardingsphere-jdbc">ShardingSphere-JDBC</a></li>
-    <li><a href="#shardingsphere-proxy">ShardingSphere-Proxy</a></li>
-    <li><a href="#高性能数据库集群">高性能数据库集群</a>
-      <ul>
-        <li><a href="#第一种读写分离">第一种：读写分离</a></li>
-        <li><a href="#第二种数据库分片">第二种：数据库分片</a>
+        <li><a href="#概览">概览</a>
           <ul>
-            <li><a href="#垂直分片">垂直分片</a></li>
-            <li><a href="#水平分片">水平分片</a></li>
-            <li><a href="#数据分片的挑战">数据分片的挑战</a></li>
-            <li><a href="#目标">目标</a></li>
+            <li><a href="#什么是-shardingsphere">什么是 shardingsphere</a></li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><a href="#主从同步原理">主从同步原理</a></li>
-    <li><a href="#mycat与shardingsphere深度对比">MyCat与ShardingSphere深度对比</a></li>
-    <li><a href="#分布式事务">分布式事务</a>
-      <ul>
-        <li><a href="#挑战">挑战</a></li>
-        <li><a href="#原理介绍">原理介绍</a>
+        <li><a href="#shardingsphere-jdbc">ShardingSphere-JDBC</a></li>
+        <li><a href="#shardingsphere-proxy">ShardingSphere-Proxy</a></li>
+        <li><a href="#高性能数据库集群">高性能数据库集群</a>
           <ul>
-            <li><a href="#local事务">LOCAL事务</a></li>
-            <li><a href="#xa事务">XA事务</a></li>
-            <li><a href="#base事务">BASE事务</a></li>
-            <li><a href="#应用场景">应用场景</a></li>
-            <li><a href="#ymal配置">YMAL配置</a></li>
+            <li><a href="#第一种读写分离">第一种：读写分离</a></li>
+            <li><a href="#第二种数据库分片">第二种：数据库分片</a>
+              <ul>
+                <li><a href="#垂直分片">垂直分片</a></li>
+                <li><a href="#水平分片">水平分片</a></li>
+                <li><a href="#数据分片的挑战">数据分片的挑战</a></li>
+                <li><a href="#目标">目标</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
+        <li><a href="#主从同步原理">主从同步原理</a></li>
+        <li><a href="#mycat与shardingsphere深度对比">MyCat与ShardingSphere深度对比</a></li>
+        <li><a href="#分布式事务">分布式事务</a>
+          <ul>
+            <li><a href="#挑战">挑战</a></li>
+            <li><a href="#原理介绍">原理介绍</a>
+              <ul>
+                <li><a href="#local事务">LOCAL事务</a></li>
+                <li><a href="#xa事务">XA事务</a></li>
+                <li><a href="#base事务">BASE事务</a></li>
+                <li><a href="#应用场景">应用场景</a></li>
+                <li><a href="#ymal配置">YMAL配置</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#读写分离">读写分离</a>
+          <ul>
+            <li><a href="#核心概念">核心概念</a></li>
+          </ul>
+        </li>
+        <li><a href="#数据库网关">数据库网关</a></li>
+        <li><a href="#流量治理">流量治理</a></li>
+        <li><a href="#数据迁移">数据迁移</a></li>
+        <li><a href="#数据加密">数据加密</a></li>
+        <li><a href="#数据脱敏">数据脱敏</a></li>
+        <li><a href="#影子库">影子库</a></li>
+        <li><a href="#可观察性">可观察性</a></li>
+        <li><a href="#联邦查询">联邦查询</a></li>
+        <li><a href="#shardingsphere的分布式事务功能具体是如何实现的">ShardingSphere的分布式事务功能具体是如何实现的？</a>
+          <ul>
+            <li><a href="#xa事务强一致性">XA事务（强一致性）</a></li>
+            <li><a href="#seata事务柔性事务at模式"><code>Seata</code>事务（柔性事务/AT模式）</a></li>
+            <li><a href="#base事务saga模式">BASE事务（Saga模式）</a></li>
+            <li><a href="#生产实践建议">生产实践建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#reference">Reference</a></li>
       </ul>
     </li>
-    <li><a href="#读写分离">读写分离</a>
-      <ul>
-        <li><a href="#核心概念">核心概念</a></li>
-      </ul>
-    </li>
-    <li><a href="#数据库网关">数据库网关</a></li>
-    <li><a href="#流量治理">流量治理</a></li>
-    <li><a href="#数据迁移">数据迁移</a></li>
-    <li><a href="#数据加密">数据加密</a></li>
-    <li><a href="#数据脱敏">数据脱敏</a></li>
-    <li><a href="#影子库">影子库</a></li>
-    <li><a href="#可观察性">可观察性</a></li>
-    <li><a href="#联邦查询">联邦查询</a></li>
-    <li><a href="#shardingsphere的分布式事务功能具体是如何实现的">ShardingSphere的分布式事务功能具体是如何实现的？</a>
-      <ul>
-        <li><a href="#xa事务强一致性">XA事务（强一致性）</a></li>
-        <li><a href="#seata事务柔性事务at模式"><code>Seata</code>事务（柔性事务/AT模式）</a></li>
-        <li><a href="#base事务saga模式">BASE事务（Saga模式）</a></li>
-        <li><a href="#生产实践建议">生产实践建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#reference">Reference</a></li>
   </ul>
 </nav>
 
@@ -2511,7 +2515,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/21d3722c34a1c4d34d72a1190641e2127a91c745" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/0d22cce5b375164ec5e27179ef6afa8ca7f3c00d" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
@@ -2549,64 +2553,68 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#概览">概览</a>
+    <li><a href="#shardingsphere">shardingsphere</a>
       <ul>
-        <li><a href="#什么是-shardingsphere">什么是 shardingsphere</a></li>
-      </ul>
-    </li>
-    <li><a href="#shardingsphere-jdbc">ShardingSphere-JDBC</a></li>
-    <li><a href="#shardingsphere-proxy">ShardingSphere-Proxy</a></li>
-    <li><a href="#高性能数据库集群">高性能数据库集群</a>
-      <ul>
-        <li><a href="#第一种读写分离">第一种：读写分离</a></li>
-        <li><a href="#第二种数据库分片">第二种：数据库分片</a>
+        <li><a href="#概览">概览</a>
           <ul>
-            <li><a href="#垂直分片">垂直分片</a></li>
-            <li><a href="#水平分片">水平分片</a></li>
-            <li><a href="#数据分片的挑战">数据分片的挑战</a></li>
-            <li><a href="#目标">目标</a></li>
+            <li><a href="#什么是-shardingsphere">什么是 shardingsphere</a></li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li><a href="#主从同步原理">主从同步原理</a></li>
-    <li><a href="#mycat与shardingsphere深度对比">MyCat与ShardingSphere深度对比</a></li>
-    <li><a href="#分布式事务">分布式事务</a>
-      <ul>
-        <li><a href="#挑战">挑战</a></li>
-        <li><a href="#原理介绍">原理介绍</a>
+        <li><a href="#shardingsphere-jdbc">ShardingSphere-JDBC</a></li>
+        <li><a href="#shardingsphere-proxy">ShardingSphere-Proxy</a></li>
+        <li><a href="#高性能数据库集群">高性能数据库集群</a>
           <ul>
-            <li><a href="#local事务">LOCAL事务</a></li>
-            <li><a href="#xa事务">XA事务</a></li>
-            <li><a href="#base事务">BASE事务</a></li>
-            <li><a href="#应用场景">应用场景</a></li>
-            <li><a href="#ymal配置">YMAL配置</a></li>
+            <li><a href="#第一种读写分离">第一种：读写分离</a></li>
+            <li><a href="#第二种数据库分片">第二种：数据库分片</a>
+              <ul>
+                <li><a href="#垂直分片">垂直分片</a></li>
+                <li><a href="#水平分片">水平分片</a></li>
+                <li><a href="#数据分片的挑战">数据分片的挑战</a></li>
+                <li><a href="#目标">目标</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
+        <li><a href="#主从同步原理">主从同步原理</a></li>
+        <li><a href="#mycat与shardingsphere深度对比">MyCat与ShardingSphere深度对比</a></li>
+        <li><a href="#分布式事务">分布式事务</a>
+          <ul>
+            <li><a href="#挑战">挑战</a></li>
+            <li><a href="#原理介绍">原理介绍</a>
+              <ul>
+                <li><a href="#local事务">LOCAL事务</a></li>
+                <li><a href="#xa事务">XA事务</a></li>
+                <li><a href="#base事务">BASE事务</a></li>
+                <li><a href="#应用场景">应用场景</a></li>
+                <li><a href="#ymal配置">YMAL配置</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#读写分离">读写分离</a>
+          <ul>
+            <li><a href="#核心概念">核心概念</a></li>
+          </ul>
+        </li>
+        <li><a href="#数据库网关">数据库网关</a></li>
+        <li><a href="#流量治理">流量治理</a></li>
+        <li><a href="#数据迁移">数据迁移</a></li>
+        <li><a href="#数据加密">数据加密</a></li>
+        <li><a href="#数据脱敏">数据脱敏</a></li>
+        <li><a href="#影子库">影子库</a></li>
+        <li><a href="#可观察性">可观察性</a></li>
+        <li><a href="#联邦查询">联邦查询</a></li>
+        <li><a href="#shardingsphere的分布式事务功能具体是如何实现的">ShardingSphere的分布式事务功能具体是如何实现的？</a>
+          <ul>
+            <li><a href="#xa事务强一致性">XA事务（强一致性）</a></li>
+            <li><a href="#seata事务柔性事务at模式"><code>Seata</code>事务（柔性事务/AT模式）</a></li>
+            <li><a href="#base事务saga模式">BASE事务（Saga模式）</a></li>
+            <li><a href="#生产实践建议">生产实践建议</a></li>
+          </ul>
+        </li>
+        <li><a href="#reference">Reference</a></li>
       </ul>
     </li>
-    <li><a href="#读写分离">读写分离</a>
-      <ul>
-        <li><a href="#核心概念">核心概念</a></li>
-      </ul>
-    </li>
-    <li><a href="#数据库网关">数据库网关</a></li>
-    <li><a href="#流量治理">流量治理</a></li>
-    <li><a href="#数据迁移">数据迁移</a></li>
-    <li><a href="#数据加密">数据加密</a></li>
-    <li><a href="#数据脱敏">数据脱敏</a></li>
-    <li><a href="#影子库">影子库</a></li>
-    <li><a href="#可观察性">可观察性</a></li>
-    <li><a href="#联邦查询">联邦查询</a></li>
-    <li><a href="#shardingsphere的分布式事务功能具体是如何实现的">ShardingSphere的分布式事务功能具体是如何实现的？</a>
-      <ul>
-        <li><a href="#xa事务强一致性">XA事务（强一致性）</a></li>
-        <li><a href="#seata事务柔性事务at模式"><code>Seata</code>事务（柔性事务/AT模式）</a></li>
-        <li><a href="#base事务saga模式">BASE事务（Saga模式）</a></li>
-        <li><a href="#生产实践建议">生产实践建议</a></li>
-      </ul>
-    </li>
-    <li><a href="#reference">Reference</a></li>
   </ul>
 </nav>
 
