@@ -24,6 +24,7 @@ Spring中动态监听Nacos配置更新
 依赖里面没有 NacosConfigManager 这个类，是因为必须使用 spring cloud alibaba ?
 
 
+Nacos 融合 Spring，成为注册配置中心
 Nacos 融合 Spring Cloud，成为注册配置中心
 
 这个是最新的文档
@@ -52,7 +53,7 @@ public void handleEnvironmentChange(EnvironmentChangeEvent event) {
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="computer science # main # nacos # nacos 官方文档 配置更新监听 Spring中动态监听Nacos配置更新 依赖里面没有 NacosConfigManager 这个类，是因为必须使用 spring cloud alibaba ? Nacos 融合 Spring Cloud，成为注册配置中心 这个是最新的文档 2.x 的文档 事件驱动 最后配置变更是通过 spring 的框架的事件监听来实现的 @Autowired private Environment environment; @EventListener public void handleEnvironmentChange(EnvironmentChangeEvent event) { // TODO String key = event.getKeys().get(xxxx); String value = environment.getProperty(key) }">
+  <meta property="og:description" content="computer science # main # nacos # nacos 官方文档 配置更新监听 Spring中动态监听Nacos配置更新 依赖里面没有 NacosConfigManager 这个类，是因为必须使用 spring cloud alibaba ? Nacos 融合 Spring，成为注册配置中心 Nacos 融合 Spring Cloud，成为注册配置中心 这个是最新的文档 2.x 的文档 事件驱动 最后配置变更是通过 spring 的框架的事件监听来实现的 @Autowired private Environment environment; @EventListener public void handleEnvironmentChange(EnvironmentChangeEvent event) { // TODO String key = event.getKeys().get(xxxx); String value = environment.getProperty(key) }">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
 <title>Computer Science | Penruins</title>
@@ -61,7 +62,7 @@ public void handleEnvironmentChange(EnvironmentChangeEvent event) {
 <link rel="canonical" href="/post/computer-science/">
 <link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.30edc79e5d2af136d81412fa1ba36870ad8c26d33ad1fe80f1b9a268b2251883.js" ></script>
+  <script defer src="/en.search.min.0bdefdb8162676437436ae75b83e0fecef2340e2c51ac7cb461ab1ca94e15fe9.js" ></script>
 <link rel="alternate" type="application/rss+xml" href="/post/computer-science/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
@@ -1391,6 +1392,7 @@ https://github.com/alex-shpak/hugo-book
 <li>依赖里面没有 <code>NacosConfigManager</code> 这个类，是因为必须使用 <code>spring cloud alibaba</code> ?</li>
 </ul>
 </li>
+<li><a href="https://nacos.io/docs/v2/ecology/use-nacos-with-spring/?spm=5238cd80.723fb8c7.0.0.738c73c6cZGRyq">Nacos 融合 Spring，成为注册配置中心</a></li>
 <li><a href="https://nacos.io/docs/latest/ecology/use-nacos-with-spring-cloud/?spm=5238cd80.1f77ca18.0.0.4d31e37evrX5Qy">Nacos 融合 Spring Cloud，成为注册配置中心</a>
 <ul>
 <li>这个是最新的文档</li>
@@ -1423,7 +1425,7 @@ public void handleEnvironmentChange(EnvironmentChangeEvent event) {
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/4d2812c0ec58c7a0e875afaf88d0125bdba4ea49" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/4d0c0c42624f5ebe55e035e64c533cbb64a1e154" title='Last modified by penruins | August 1, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 1, 2025</span>
     </a>
