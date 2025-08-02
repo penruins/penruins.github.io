@@ -3,22 +3,75 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="
+  computer science
+  #
+
+
+  main
+  #
+
+
+  github
+  #
+
+
+yihong0618
+
+
+  nacos
+  #
+
+
+nacos 官方文档
+配置更新监听
+
+Spring中动态监听Nacos配置更新
+
+依赖里面没有 NacosConfigManager 这个类，是因为必须使用 spring cloud alibaba ?
+
+
+Nacos 融合 Spring，成为注册配置中心
+Nacos 融合 Spring Cloud，成为注册配置中心
+
+这个是最新的文档
+2.x 的文档
+
+事件驱动
+
+
+
+
+最后配置变更是通过 spring 的框架的事件监听来实现的
+
+@Autowired
+private Environment environment;
+
+@EventListener
+public void handleEnvironmentChange(EnvironmentChangeEvent event) {
+    // TODO
+    String key = event.getKeys().get(xxxx);
+    String value = environment.getProperty(key)
+}
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/tags/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/computer-science/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Tags">
+  <meta property="og:title" content="computer science">
+  <meta property="og:description" content="computer science # main # github # yihong0618 nacos # nacos 官方文档 配置更新监听 Spring中动态监听Nacos配置更新 依赖里面没有 NacosConfigManager 这个类，是因为必须使用 spring cloud alibaba ? Nacos 融合 Spring，成为注册配置中心 Nacos 融合 Spring Cloud，成为注册配置中心 这个是最新的文档 2.x 的文档 事件驱动 最后配置变更是通过 spring 的框架的事件监听来实现的 @Autowired private Environment environment; @EventListener public void handleEnvironmentChange(EnvironmentChangeEvent event) { // TODO String key = event.getKeys().get(xxxx); String value = environment.getProperty(key) }">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Tags | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-08-02T23:34:21+08:00">
+<title>computer science | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/tags/">
+<link rel="canonical" href="/post/computer-science/computer-science/">
 <link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.353c25b35f04562155bf7ad84c740108a4c81193681549b7c0f0b9b812d07c0b.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/tags/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -273,7 +326,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -289,7 +342,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/computer-science/" class="">computer science</a>
+    <a href="/post/computer-science/computer-science/" class="active">computer science</a>
   
 
         </li>
@@ -1391,7 +1444,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Tags</h3>
+  <h3>computer science</h3>
 
   <label for="toc-control">
     
@@ -1404,29 +1457,19 @@ https://github.com/alex-shpak/hugo-book
   
   <aside class="hidden clearfix">
     
-  <nav>
+  
+<nav id="TableOfContents">
   <ul>
-  
-    
-    <li class="book-section-flat">
-      <strong>Categories</strong>
+    <li><a href="#computer-science">computer science</a>
       <ul>
-      
+        <li><a href="#main">main</a></li>
+        <li><a href="#github">github</a></li>
+        <li><a href="#nacos">nacos</a></li>
       </ul>
     </li>
-    
-  
-    
-    <li class="book-section-flat">
-      <strong>Tags</strong>
-      <ul>
-      
-      </ul>
-    </li>
-    
-  
   </ul>
 </nav>
+
 
 
   </aside>
@@ -1436,9 +1479,59 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  
+  <article class="markdown book-article"><h1 id="computer-science">
+  computer science
+  <a class="anchor" href="#computer-science">#</a>
+</h1>
+<h2 id="main">
+  main
+  <a class="anchor" href="#main">#</a>
+</h2>
+<h2 id="github">
+  github
+  <a class="anchor" href="#github">#</a>
+</h2>
+<ul>
+<li><a href="https://github.com/yihong0618"><strong>yihong0618</strong></a></li>
+</ul>
+<h2 id="nacos">
+  nacos
+  <a class="anchor" href="#nacos">#</a>
+</h2>
+<ul>
+<li><a href="https://nacos.io/zh-cn/docs/what-is-nacos.html">nacos 官方文档</a></li>
+<li>配置更新监听
+<ul>
+<li><a href="https://juejin.cn/post/7198073902882177082">Spring中动态监听Nacos配置更新</a>
+<ul>
+<li>依赖里面没有 <code>NacosConfigManager</code> 这个类，是因为必须使用 <code>spring cloud alibaba</code> ?</li>
+</ul>
+</li>
+<li><a href="https://nacos.io/docs/v2/ecology/use-nacos-with-spring/?spm=5238cd80.723fb8c7.0.0.738c73c6cZGRyq">Nacos 融合 Spring，成为注册配置中心</a></li>
+<li><a href="https://nacos.io/docs/latest/ecology/use-nacos-with-spring-cloud/?spm=5238cd80.1f77ca18.0.0.4d31e37evrX5Qy">Nacos 融合 Spring Cloud，成为注册配置中心</a>
+<ul>
+<li>这个是最新的文档</li>
+<li><a href="https://nacos.io/docs/v2/ecology/use-nacos-with-spring/?spm=5238cd80.5e8a737d.0.0.47517e84j4hrrA">2.x 的文档</a>
+<ul>
+<li><a href="https://nacos.io/docs/v2/ecology/use-nacos-with-spring/?spm=5238cd80.5e8a737d.0.0.47517e84j4hrrA#4-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8">事件驱动</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最后配置变更是通过 spring 的框架的事件监听来实现的</li>
+</ul>
+<pre tabindex="0"><code>@Autowired
+private Environment environment;
 
-  
+@EventListener
+public void handleEnvironmentChange(EnvironmentChangeEvent event) {
+    // TODO
+    String key = event.getKeys().get(xxxx);
+    String value = environment.getProperty(key)
+}
+</code></pre></li>
+</ul>
+</article>
  
       
 
@@ -1446,6 +1539,12 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex flex-wrap justify-between">
 
+
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/80526640b6f3182247783f76fc106393b5ba98e2" title='Last modified by liuxiang | August 2, 2025' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="" />
+      <span>August 2, 2025</span>
+    </a>
+  </div>
 
 
 
@@ -1463,6 +1562,10 @@ https://github.com/alex-shpak/hugo-book
 
       
   
+  <div class="book-comments">
+
+</div>
+  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
@@ -1472,29 +1575,19 @@ https://github.com/alex-shpak/hugo-book
     <aside class="book-toc">
       <div class="book-toc-content">
         
-  <nav>
+  
+<nav id="TableOfContents">
   <ul>
-  
-    
-    <li class="book-section-flat">
-      <strong>Categories</strong>
+    <li><a href="#computer-science">computer science</a>
       <ul>
-      
+        <li><a href="#main">main</a></li>
+        <li><a href="#github">github</a></li>
+        <li><a href="#nacos">nacos</a></li>
       </ul>
     </li>
-    
-  
-    
-    <li class="book-section-flat">
-      <strong>Tags</strong>
-      <ul>
-      
-      </ul>
-    </li>
-    
-  
   </ul>
 </nav>
+
 
  
       </div>
