@@ -4,107 +4,106 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  kafka如何保障顺序消费
-  #
+ 简读中国史
 
-Kafka 通过其独特的分区机制和消费者组设计来保障消息的顺序消费，但需注意其仅能保证单分区内的顺序性，跨分区的全局顺序需额外设计。以下是具体实现方法和原理：
-
-
-  一、单分区顺序性保障
-  #
+从中华文化的起源开始读历史应该是初中了吧，高中也都没有好好看教材。以现在的认知来看又对一些概念有了更深的理解，例如礼乐是什么，青铜文化传入到中国之后发展的独特性，礼乐崩坏指的是什么，分封制和郡县制，周秦之变，法家思想的极端，罢黜百家。
 
 
+ 解构现代化 温铁军
 
-分区内消息严格有序
-
-Kafka 的每个分区（Partition）是一个有序的、不可变的日志序列，消息按生产者发送的顺序追加到分区末尾，消费者按相同顺序读取11825。
-关键设计：分区内的消息通过偏移量（Offset）标识顺序，消费者按 Offset 递增消费18。
+开了个头读不下去了，概念太多，后面再来吧（2025-07-30）
 
 
+ 台北人
 
-生产者配置
-
-相同 Key 路由到同一分区：生产者通过消息 Key 的哈希值确定分区，相同 Key 的消息始终进入同一分区，确保业务相关的消息顺序12539。
-// 示例：发送相同Key的消息到同一分区
-ProducerRecord&lt;String, String&gt; record = new ProducerRecord&lt;&gt;(&#34;topic&#34;, &#34;order-123&#34;, &#34;message&#34;);
-producer.send(record);
-
-限制并发请求：设置 max.in.flight.requests.per.connection=1，防止生产者因重试导致消息乱序3125。
+好久没有读到这样的文字了，读起来不流畅。我选的那个版本在正文故事之后有好几篇对台北人的书评和分析，看这些的时候感觉自己更投入一些，才理解了这本书的深层含义
 
 
+ 被讨厌的勇气
 
-消费者配置
-
-单线程消费：每个分区仅由一个消费者线程处理，避免并发消费破坏顺序18。
-手动提交 Offset：确保消息处理完成后再提交 Offset，防止重复消费或漏消费。
+以对话的方式来论述阿德勒（个体心理学）的一些主要观点。我觉得人生是连续的刹那，这个观点很有意思
 
 
+ 不止读书
+
+里面提到的书可以慢慢看
 
 
+ 读书的人
 
-  二、全局顺序性实现（跨分区）
-  #
-
-
-
-单分区策略
-
-将 Topic 设置为单分区，所有消息集中到一个分区，但会牺牲吞吐量和扩展性242532。
-适用场景：低吞吐但强顺序要求的场景（如金融交易流水）24。
+里面提到的书可以慢慢看
 
 
+ 看见
 
-基于 Key 的分区路由
-
-将需顺序处理的消息（如同一订单 ID）通过相同 Key 路由到固定分区，实现局部顺序139。
-局限性：若 Key 分布不均，可能导致分区负载倾斜24。
+柴静发了视频讲看见书里的故事，就想着就把书拿来看了吧。看完书也把一些第一个10年的一些重要的新闻事件回顾了一下，文字中有对新闻事件的陈述，社会问题的思考，作者本人的思考。
 
 
+ 简读日本史
+ 商业就是这样：不可不知的商业常识
+ 多谈谈问题
+ 倦怠社会
 
-应用层排序
-
-消费者拉取多分区消息后，通过优先级队列（如按时间戳或业务ID排序）实现全局顺序。
-示例：
-PriorityQueue&lt;ConsumerRecord&gt; queue = new PriorityQueue&lt;&gt;(Comparator.comparing(ConsumerRecord::timestamp));
-
-
+里面提出的绩效社会对人心理的影响很有新意，但是读起来很不流畅，很晦涩，概念太多，没有得出结论的过程。
 
 
+ 薄世宁医学通识讲义
+
+讲了医学的发展历程，医学的核心概念，挺好的科普书
 
 
-  三、高级配置与优化
-  #
+ 不被支配：为什么我们会被情感绑架
+
+西西弗高速的一期提到了这本书，就找来看了看。远离自恋型人格障碍的人。
 
 
+ 天朝的崩溃：鸦片战争再研究
 
-幂等生产者
-
-设置 enable.idempotence=true，避免重试导致消息重复或乱序，同时允许 max.in.flight.requests.per.connection&gt;1 提升吞吐31。
-
+宋哥推荐我看的。作者对结论的推理非常严谨认真，尤其是在军事实力的对比上，严谨细致程度是之前读历史相关的书所没有接触到的。书中的主要结论在绪论中就表述很清楚了。我看书有时候总喜欢把绪论或者推荐序跳了直接看正文，这本书是和宋哥聊起来这本书的时候他说绪论是对整本书的总结，肯定要读，后面才补上的。
 
 
-消费者组与分区数平衡">
+ 东京八平米
+
+找到工作之后读的第一本书，准备面试的时候一直在看技术书，读不动了，找了一本轻松一点的书来看看
+印象深的是那个三四点开门的咖啡店，专门给赶早去做工的人做咖啡。老板还专门把自己的咖啡送给临终的老顾客。
+
+
+ 黄仁勋：英伟达之芯
+
+英伟达那么火，就找来看看了。讲了黄仁勋与英伟达一开始建立到人工智能爆发中间的故事，以及后面的故事。人工智能的部分除了显卡，还讲了辛顿（反向传播算法），李飞飞（图片标注集）
+
+
+ 置身事内：中国政府与经济发展
+
+中国分税制改革的背景（第一次从这本书相对详细的了解具体是什么）；市场经济一开始政府对重点行业的扶持；分税制改革对中国房地产行业发展的影响。
+
+
+ 用地图看懂世界格局
+
+这本书豆瓣评分不高，但还是读了。对所谓的世界格局也没有任何的知识，能读下去就读了呗
+
+
+ 树莓派开始：玩转Linux
+
+看这本书主要是因为手上也有个树莓派，其次是可以以一个电脑的角度来输入命令行。看了多进程编程的代码，有了一些初步认识。复习了一些Linux的知识，例如进程间通信。
+
+
+ 重来3：跳出疯狂的忙碌
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/llm/2025-03-30-5-kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/life/books/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="kafka如何保障顺序消费">
-  <meta property="og:description" content="kafka如何保障顺序消费 # Kafka 通过其独特的分区机制和消费者组设计来保障消息的顺序消费，但需注意其仅能保证单分区内的顺序性，跨分区的全局顺序需额外设计。以下是具体实现方法和原理：
-一、单分区顺序性保障 # 分区内消息严格有序
-Kafka 的每个分区（Partition）是一个有序的、不可变的日志序列，消息按生产者发送的顺序追加到分区末尾，消费者按相同顺序读取11825。 关键设计：分区内的消息通过偏移量（Offset）标识顺序，消费者按 Offset 递增消费18。 生产者配置
-相同 Key 路由到同一分区：生产者通过消息 Key 的哈希值确定分区，相同 Key 的消息始终进入同一分区，确保业务相关的消息顺序12539。 // 示例：发送相同Key的消息到同一分区 ProducerRecord&lt;String, String&gt; record = new ProducerRecord&lt;&gt;(&#34;topic&#34;, &#34;order-123&#34;, &#34;message&#34;); producer.send(record); 限制并发请求：设置 max.in.flight.requests.per.connection=1，防止生产者因重试导致消息乱序3125。 消费者配置
-单线程消费：每个分区仅由一个消费者线程处理，避免并发消费破坏顺序18。 手动提交 Offset：确保消息处理完成后再提交 Offset，防止重复消费或漏消费。 二、全局顺序性实现（跨分区） # 单分区策略
-将 Topic 设置为单分区，所有消息集中到一个分区，但会牺牲吞吐量和扩展性242532。 适用场景：低吞吐但强顺序要求的场景（如金融交易流水）24。 基于 Key 的分区路由
-将需顺序处理的消息（如同一订单 ID）通过相同 Key 路由到固定分区，实现局部顺序139。 局限性：若 Key 分布不均，可能导致分区负载倾斜24。 应用层排序
-消费者拉取多分区消息后，通过优先级队列（如按时间戳或业务ID排序）实现全局顺序。 示例： PriorityQueue&lt;ConsumerRecord&gt; queue = new PriorityQueue&lt;&gt;(Comparator.comparing(ConsumerRecord::timestamp)); 三、高级配置与优化 # 幂等生产者
-设置 enable.idempotence=true，避免重试导致消息重复或乱序，同时允许 max.in.flight.requests.per.connection&gt;1 提升吞吐31。 消费者组与分区数平衡">
+  <meta property="og:title" content="books">
+  <meta property="og:description" content="简读中国史 从中华文化的起源开始读历史应该是初中了吧，高中也都没有好好看教材。以现在的认知来看又对一些概念有了更深的理解，例如礼乐是什么，青铜文化传入到中国之后发展的独特性，礼乐崩坏指的是什么，分封制和郡县制，周秦之变，法家思想的极端，罢黜百家。 解构现代化 温铁军 开了个头读不下去了，概念太多，后面再来吧（2025-07-30） 台北人 好久没有读到这样的文字了，读起来不流畅。我选的那个版本在正文故事之后有好几篇对台北人的书评和分析，看这些的时候感觉自己更投入一些，才理解了这本书的深层含义 被讨厌的勇气 以对话的方式来论述阿德勒（个体心理学）的一些主要观点。我觉得人生是连续的刹那，这个观点很有意思 不止读书 里面提到的书可以慢慢看 读书的人 里面提到的书可以慢慢看 看见 柴静发了视频讲看见书里的故事，就想着就把书拿来看了吧。看完书也把一些第一个10年的一些重要的新闻事件回顾了一下，文字中有对新闻事件的陈述，社会问题的思考，作者本人的思考。 简读日本史 商业就是这样：不可不知的商业常识 多谈谈问题 倦怠社会 里面提出的绩效社会对人心理的影响很有新意，但是读起来很不流畅，很晦涩，概念太多，没有得出结论的过程。 薄世宁医学通识讲义 讲了医学的发展历程，医学的核心概念，挺好的科普书 不被支配：为什么我们会被情感绑架 西西弗高速的一期提到了这本书，就找来看了看。远离自恋型人格障碍的人。 天朝的崩溃：鸦片战争再研究 宋哥推荐我看的。作者对结论的推理非常严谨认真，尤其是在军事实力的对比上，严谨细致程度是之前读历史相关的书所没有接触到的。书中的主要结论在绪论中就表述很清楚了。我看书有时候总喜欢把绪论或者推荐序跳了直接看正文，这本书是和宋哥聊起来这本书的时候他说绪论是对整本书的总结，肯定要读，后面才补上的。 东京八平米 找到工作之后读的第一本书，准备面试的时候一直在看技术书，读不动了，找了一本轻松一点的书来看看 印象深的是那个三四点开门的咖啡店，专门给赶早去做工的人做咖啡。老板还专门把自己的咖啡送给临终的老顾客。 黄仁勋：英伟达之芯 英伟达那么火，就找来看看了。讲了黄仁勋与英伟达一开始建立到人工智能爆发中间的故事，以及后面的故事。人工智能的部分除了显卡，还讲了辛顿（反向传播算法），李飞飞（图片标注集） 置身事内：中国政府与经济发展 中国分税制改革的背景（第一次从这本书相对详细的了解具体是什么）；市场经济一开始政府对重点行业的扶持；分税制改革对中国房地产行业发展的影响。 用地图看懂世界格局 这本书豆瓣评分不高，但还是读了。对所谓的世界格局也没有任何的知识，能读下去就读了呗 树莓派开始：玩转Linux 看这本书主要是因为手上也有个树莓派，其次是可以以一个电脑的角度来输入命令行。看了多进程编程的代码，有了一些初步认识。复习了一些Linux的知识，例如进程间通信。 重来3：跳出疯狂的忙碌">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-<title>kafka如何保障顺序消费 | Penruins</title>
+    <meta property="article:modified_time" content="2025-08-02T23:32:07+08:00">
+<title>books | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/llm/2025-03-30-5-kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9/">
+<link rel="canonical" href="/post/life/books/">
 <link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.14881a73a89101f75a579b85c9f2b7eac12e2885bba375c36a7edd64a40f4feb.js" ></script>
@@ -159,7 +158,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-1f044d5fe299e2a50ad480135136465e" class="toggle"  />
+    <input type="checkbox" id="section-1f044d5fe299e2a50ad480135136465e" class="toggle" checked />
     <label for="section-1f044d5fe299e2a50ad480135136465e" class="flex justify-between">
       <a role="button" class="">Life</a>
     </label>
@@ -344,7 +343,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/books/" class="">books</a>
+    <a href="/post/life/books/" class="active">books</a>
   
 
         </li>
@@ -362,7 +361,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a href="/post/computer-science/" class="">Computer Science</a>
     </label>
@@ -1467,7 +1466,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>kafka如何保障顺序消费</h3>
+  <h3>books</h3>
 
   <label for="toc-control">
     
@@ -1481,23 +1480,7 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#kafka如何保障顺序消费">kafka如何保障顺序消费</a>
-      <ul>
-        <li>
-          <ul>
-            <li><a href="#一单分区顺序性保障">一、<strong>单分区顺序性保障</strong></a></li>
-            <li><a href="#二全局顺序性实现跨分区">二、<strong>全局顺序性实现（跨分区）</strong></a></li>
-            <li><a href="#三高级配置与优化">三、<strong>高级配置与优化</strong></a></li>
-            <li><a href="#四适用场景与权衡">四、<strong>适用场景与权衡</strong></a></li>
-            <li><a href="#总结">总结</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
 
@@ -1508,124 +1491,93 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="kafka如何保障顺序消费">
-  kafka如何保障顺序消费
-  <a class="anchor" href="#kafka%e5%a6%82%e4%bd%95%e4%bf%9d%e9%9a%9c%e9%a1%ba%e5%ba%8f%e6%b6%88%e8%b4%b9">#</a>
-</h1>
-<p>Kafka 通过其独特的分区机制和消费者组设计来保障消息的顺序消费，但需注意其仅能保证<strong>单分区内的顺序性</strong>，跨分区的全局顺序需额外设计。以下是具体实现方法和原理：</p>
-<hr>
-<h3 id="一单分区顺序性保障">
-  一、<strong>单分区顺序性保障</strong>
-  <a class="anchor" href="#%e4%b8%80%e5%8d%95%e5%88%86%e5%8c%ba%e9%a1%ba%e5%ba%8f%e6%80%a7%e4%bf%9d%e9%9a%9c">#</a>
-</h3>
-<ol>
-<li>
-<p><strong>分区内消息严格有序</strong></p>
+  <article class="markdown book-article"><ul>
+<li><input checked="" disabled="" type="checkbox"> <strong>简读中国史</strong>
 <ul>
-<li>Kafka 的每个分区（Partition）是一个有序的、不可变的日志序列，消息按生产者发送的顺序追加到分区末尾，消费者按相同顺序读取<a href="@ref">1</a><a href="@ref">18</a><a href="@ref">25</a>。</li>
-<li><strong>关键设计</strong>：分区内的消息通过偏移量（Offset）标识顺序，消费者按 Offset 递增消费<a href="@ref">18</a>。</li>
+<li>从中华文化的起源开始读历史应该是初中了吧，高中也都没有好好看教材。以现在的认知来看又对一些概念有了更深的理解，例如礼乐是什么，青铜文化传入到中国之后发展的独特性，礼乐崩坏指的是什么，分封制和郡县制，周秦之变，法家思想的极端，罢黜百家。</li>
 </ul>
 </li>
-<li>
-<p><strong>生产者配置</strong></p>
+<li><input disabled="" type="checkbox"> <strong>解构现代化 温铁军</strong>
 <ul>
-<li><strong>相同 Key 路由到同一分区</strong>：生产者通过消息 Key 的哈希值确定分区，相同 Key 的消息始终进入同一分区，确保业务相关的消息顺序<a href="@ref">1</a><a href="@ref">25</a><a href="@ref">39</a>。
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 示例：发送相同Key的消息到同一分区</span>
-</span></span><span style="display:flex;"><span>ProducerRecord<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> record <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ProducerRecord<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#e6db74">&#34;topic&#34;</span>, <span style="color:#e6db74">&#34;order-123&#34;</span>, <span style="color:#e6db74">&#34;message&#34;</span>);
-</span></span><span style="display:flex;"><span>producer.<span style="color:#a6e22e">send</span>(record);
-</span></span></code></pre></div></li>
-<li><strong>限制并发请求</strong>：设置 <code>max.in.flight.requests.per.connection=1</code>，防止生产者因重试导致消息乱序<a href="@ref">31</a><a href="@ref">25</a>。</li>
+<li>开了个头读不下去了，概念太多，后面再来吧（2025-07-30）</li>
 </ul>
 </li>
-<li>
-<p><strong>消费者配置</strong></p>
+<li><input disabled="" type="checkbox"> <strong>台北人</strong>
 <ul>
-<li><strong>单线程消费</strong>：每个分区仅由一个消费者线程处理，避免并发消费破坏顺序<a href="@ref">18</a>。</li>
-<li><strong>手动提交 Offset</strong>：确保消息处理完成后再提交 Offset，防止重复消费或漏消费。</li>
+<li>好久没有读到这样的文字了，读起来不流畅。我选的那个版本在正文故事之后有好几篇对台北人的书评和分析，看这些的时候感觉自己更投入一些，才理解了这本书的深层含义</li>
 </ul>
 </li>
-</ol>
-<hr>
-<h3 id="二全局顺序性实现跨分区">
-  二、<strong>全局顺序性实现（跨分区）</strong>
-  <a class="anchor" href="#%e4%ba%8c%e5%85%a8%e5%b1%80%e9%a1%ba%e5%ba%8f%e6%80%a7%e5%ae%9e%e7%8e%b0%e8%b7%a8%e5%88%86%e5%8c%ba">#</a>
-</h3>
-<ol>
-<li>
-<p><strong>单分区策略</strong></p>
+<li><input checked="" disabled="" type="checkbox"> <strong>被讨厌的勇气</strong>
 <ul>
-<li>将 Topic 设置为单分区，所有消息集中到一个分区，但会牺牲吞吐量和扩展性<a href="@ref">24</a><a href="@ref">25</a><a href="@ref">32</a>。</li>
-<li><strong>适用场景</strong>：低吞吐但强顺序要求的场景（如金融交易流水）<a href="@ref">24</a>。</li>
+<li>以对话的方式来论述阿德勒（个体心理学）的一些主要观点。我觉得人生是连续的刹那，这个观点很有意思</li>
 </ul>
 </li>
-<li>
-<p><strong>基于 Key 的分区路由</strong></p>
+<li><input checked="" disabled="" type="checkbox"> <strong>不止读书</strong>
 <ul>
-<li>将需顺序处理的消息（如同一订单 ID）通过相同 Key 路由到固定分区，实现局部顺序<a href="@ref">1</a><a href="@ref">39</a>。</li>
-<li><strong>局限性</strong>：若 Key 分布不均，可能导致分区负载倾斜<a href="@ref">24</a>。</li>
+<li>里面提到的书可以慢慢看</li>
 </ul>
 </li>
-<li>
-<p><strong>应用层排序</strong></p>
+<li><input checked="" disabled="" type="checkbox"> <strong>读书的人</strong>
 <ul>
-<li>消费者拉取多分区消息后，通过优先级队列（如按时间戳或业务ID排序）实现全局顺序。</li>
-<li><strong>示例</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>PriorityQueue<span style="color:#f92672">&lt;</span>ConsumerRecord<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PriorityQueue<span style="color:#f92672">&lt;&gt;</span>(Comparator.<span style="color:#a6e22e">comparing</span>(ConsumerRecord::timestamp));
-</span></span></code></pre></div></li>
+<li>里面提到的书可以慢慢看</li>
 </ul>
 </li>
-</ol>
-<hr>
-<h3 id="三高级配置与优化">
-  三、<strong>高级配置与优化</strong>
-  <a class="anchor" href="#%e4%b8%89%e9%ab%98%e7%ba%a7%e9%85%8d%e7%bd%ae%e4%b8%8e%e4%bc%98%e5%8c%96">#</a>
-</h3>
-<ol>
-<li>
-<p><strong>幂等生产者</strong></p>
+<li><input checked="" disabled="" type="checkbox"> <strong>看见</strong>
 <ul>
-<li>设置 <code>enable.idempotence=true</code>，避免重试导致消息重复或乱序，同时允许 <code>max.in.flight.requests.per.connection&gt;1</code> 提升吞吐<a href="@ref">31</a>。</li>
+<li>柴静发了视频讲看见书里的故事，就想着就把书拿来看了吧。看完书也把一些第一个10年的一些重要的新闻事件回顾了一下，文字中有对新闻事件的陈述，社会问题的思考，作者本人的思考。</li>
 </ul>
 </li>
-<li>
-<p><strong>消费者组与分区数平衡</strong></p>
+<li><input checked="" disabled="" type="checkbox"> <strong>简读日本史</strong></li>
+<li><input disabled="" type="checkbox"> <strong>商业就是这样：不可不知的商业常识</strong></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>多谈谈问题</strong></li>
+<li><input checked="" disabled="" type="checkbox"> <strong>倦怠社会</strong>
 <ul>
-<li>消费者组内实例数 ≤ 分区数，确保每个分区仅由一个消费者处理<a href="@ref">18</a><a href="@ref">38</a>。</li>
-<li><strong>分区分配策略</strong>：
-<ul>
-<li><strong>RangeAssignor</strong>：按分区范围分配，适合分区数固定的场景<a href="@ref">38</a>。</li>
-<li><strong>RoundRobin</strong>：轮询分配，均衡负载但可能打乱业务顺序<a href="@ref">38</a>。</li>
+<li>里面提出的绩效社会对人心理的影响很有新意，但是读起来很不流畅，很晦涩，概念太多，没有得出结论的过程。</li>
 </ul>
 </li>
+<li><input checked="" disabled="" type="checkbox"> <strong>薄世宁医学通识讲义</strong>
+<ul>
+<li>讲了医学的发展历程，医学的核心概念，挺好的科普书</li>
 </ul>
 </li>
-<li>
-<p><strong>避免消费者重平衡</strong></p>
+<li><input checked="" disabled="" type="checkbox"> <strong>不被支配：为什么我们会被情感绑架</strong>
 <ul>
-<li>消费者频繁加入/退出会触发分区重分配，可能导致短暂乱序。可通过 <code>session.timeout.ms</code> 调整心跳检测时间。</li>
+<li>西西弗高速的一期提到了这本书，就找来看了看。远离自恋型人格障碍的人。</li>
 </ul>
 </li>
-</ol>
-<hr>
-<h3 id="四适用场景与权衡">
-  四、<strong>适用场景与权衡</strong>
-  <a class="anchor" href="#%e5%9b%9b%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af%e4%b8%8e%e6%9d%83%e8%a1%a1">#</a>
-</h3>
+<li><input checked="" disabled="" type="checkbox"> <strong>天朝的崩溃：鸦片战争再研究</strong>
 <ul>
-<li><strong>高吞吐 vs 顺序性</strong>：Kafka 默认优先保证吞吐，全局顺序需牺牲性能<a href="@ref">24</a><a href="@ref">31</a>。</li>
-<li><strong>推荐方案</strong>：
-<ul>
-<li><strong>局部顺序</strong>：Key 分区 + 单线程消费（如订单状态变更）<a href="@ref">1</a><a href="@ref">39</a>。</li>
-<li><strong>全局顺序</strong>：单分区或应用层排序（如日志时间序列）<a href="@ref">25</a>。</li>
+<li>宋哥推荐我看的。作者对结论的推理非常严谨认真，尤其是在军事实力的对比上，严谨细致程度是之前读历史相关的书所没有接触到的。书中的主要结论在绪论中就表述很清楚了。我看书有时候总喜欢把绪论或者推荐序跳了直接看正文，这本书是和宋哥聊起来这本书的时候他说绪论是对整本书的总结，肯定要读，后面才补上的。</li>
 </ul>
 </li>
+<li><input checked="" disabled="" type="checkbox"> <strong>东京八平米</strong>
+<ul>
+<li>找到工作之后读的第一本书，准备面试的时候一直在看技术书，读不动了，找了一本轻松一点的书来看看</li>
+<li>印象深的是那个三四点开门的咖啡店，专门给赶早去做工的人做咖啡。老板还专门把自己的咖啡送给临终的老顾客。</li>
 </ul>
-<hr>
-<h3 id="总结">
-  总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a>
-</h3>
-<p>Kafka 的顺序消费能力依赖于合理配置生产者的分区策略、消费者的并发控制及业务逻辑设计。单分区顺序是原生支持的，而全局顺序需结合业务需求权衡性能与一致性<a href="@ref">18</a><a href="@ref">24</a><a href="@ref">31</a>。</p>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <strong>黄仁勋：英伟达之芯</strong>
+<ul>
+<li>英伟达那么火，就找来看看了。讲了黄仁勋与英伟达一开始建立到人工智能爆发中间的故事，以及后面的故事。人工智能的部分除了显卡，还讲了辛顿（反向传播算法），李飞飞（图片标注集）</li>
+</ul>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <strong>置身事内：中国政府与经济发展</strong>
+<ul>
+<li>中国分税制改革的背景（第一次从这本书相对详细的了解具体是什么）；市场经济一开始政府对重点行业的扶持；分税制改革对中国房地产行业发展的影响。</li>
+</ul>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <strong>用地图看懂世界格局</strong>
+<ul>
+<li>这本书豆瓣评分不高，但还是读了。对所谓的世界格局也没有任何的知识，能读下去就读了呗</li>
+</ul>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <strong>树莓派开始：玩转Linux</strong>
+<ul>
+<li>看这本书主要是因为手上也有个树莓派，其次是可以以一个电脑的角度来输入命令行。看了多进程编程的代码，有了一些初步认识。复习了一些Linux的知识，例如进程间通信。</li>
+</ul>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <strong>重来3：跳出疯狂的忙碌</strong></li>
+</ul>
 </article>
  
       
@@ -1634,6 +1586,12 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex flex-wrap justify-between">
 
+
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/6b4563f3d3279e883ee59aef0054df1f6fcc8292" title='Last modified by liuxiang | August 2, 2025' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="" />
+      <span>August 2, 2025</span>
+    </a>
+  </div>
 
 
 
@@ -1665,23 +1623,7 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#kafka如何保障顺序消费">kafka如何保障顺序消费</a>
-      <ul>
-        <li>
-          <ul>
-            <li><a href="#一单分区顺序性保障">一、<strong>单分区顺序性保障</strong></a></li>
-            <li><a href="#二全局顺序性实现跨分区">二、<strong>全局顺序性实现（跨分区）</strong></a></li>
-            <li><a href="#三高级配置与优化">三、<strong>高级配置与优化</strong></a></li>
-            <li><a href="#四适用场景与权衡">四、<strong>适用场景与权衡</strong></a></li>
-            <li><a href="#总结">总结</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
  
