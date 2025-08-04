@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
+  github repository
+  #
+
+
+binarywang/qrcode-utils
+
+二维码生成工具
+
+
+
+
   String
   #
 
@@ -11,26 +22,29 @@
   StringBuffer 是怎么保证线程安全的？
   #
 
-StringBuffer 是通过 同步机制 来保证线程安全的。具体来说，它的所有关键方法（如 append()、insert()、delete()、reverse() 等）都使用了 synchronized 关键字进行修饰，确保同一时间只有一个线程可以执行这些方法127。
+StringBuffer 是通过 同步机制 来保证线程安全的。具体来说，它的所有关键方法（如 append()、insert()、delete()、reverse() 等）都使用了 synchronized
+关键字进行修饰，确保同一时间只有一个线程可以执行这些方法127。
 
   1. 同步方法
   #
 
 StringBuffer 的方法在设计时都加了 synchronized 关键字，例如：
-public synchronized StringBuffer append(String str) {
-    // 方法实现
+public synchronized StringBuffer append(String str){
+        // 方法实现
 }
 这种机制确保了在多线程环境下，只有一个线程可以访问和修改 StringBuffer 的内容，避免了竞态条件（Race Condition）和数据不一致的问题12。
 
   2. 锁机制
   #
 
-StringBuffer 内部使用了一个锁对象（即 this 锁），当一个线程调用 StringBuffer 的同步方法时，会获取这个锁，其他线程必须等待锁释放后才能继续执行。这种锁机制保证了线程间的同步17。
+StringBuffer 内部使用了一个锁对象（即 this 锁），当一个线程调用 StringBuffer
+的同步方法时，会获取这个锁，其他线程必须等待锁释放后才能继续执行。这种锁机制保证了线程间的同步17。
 
   3. 性能影响
   #
 
-虽然 StringBuffer 的同步机制确保了线程安全，但也带来了性能开销。因为在多线程环境下，每次只能有一个线程操作 StringBuffer，其他线程会被阻塞。因此，在单线程环境下，推荐使用性能更高的 StringBuilder，它没有同步机制158。
+虽然 StringBuffer 的同步机制确保了线程安全，但也带来了性能开销。因为在多线程环境下，每次只能有一个线程操作 StringBuffer
+，其他线程会被阻塞。因此，在单线程环境下，推荐使用性能更高的 StringBuilder，它没有同步机制158。
 
   4. 适用场景
   #
@@ -43,35 +57,30 @@ StringBuffer 内部使用了一个锁对象（即 this 锁），当一个线程�
   总结
   #
 
-StringBuffer 通过 synchronized 关键字实现的同步机制，确保了多线程环境下的线程安全性。虽然这种机制带来了性能开销，但在需要线程安全的场景下，它是一个可靠的选择127。
-
-  StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的
-  #
-
-StringBuffer 和 StringBuilder 在底层都是使用 字符数组（char[]） 来保存字符串数据的。具体来说，它们继承了 AbstractStringBuilder 类，而 AbstractStringBuilder 类中定义了一个 char[] value 数组，用于存储字符序列134。">
+StringBuffer 通过 synchronized
+关键字实现的同步机制，确保了多线程环境下的线程安全性。虽然这种机制带来了性能开销，但在需要线程安全的场景下，它是一个可靠的选择127。">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/java/java/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="java">
-  <meta property="og:description" content="String # StringBuffer 是怎么保证线程安全的？ # StringBuffer 是通过 同步机制 来保证线程安全的。具体来说，它的所有关键方法（如 append()、insert()、delete()、reverse() 等）都使用了 synchronized 关键字进行修饰，确保同一时间只有一个线程可以执行这些方法127。
+  <meta property="og:description" content="github repository # binarywang/qrcode-utils 二维码生成工具 String # StringBuffer 是怎么保证线程安全的？ # StringBuffer 是通过 同步机制 来保证线程安全的。具体来说，它的所有关键方法（如 append()、insert()、delete()、reverse() 等）都使用了 synchronized 关键字进行修饰，确保同一时间只有一个线程可以执行这些方法127。
 1. 同步方法 # StringBuffer 的方法在设计时都加了 synchronized 关键字，例如：
-public synchronized StringBuffer append(String str) { // 方法实现 } 这种机制确保了在多线程环境下，只有一个线程可以访问和修改 StringBuffer 的内容，避免了竞态条件（Race Condition）和数据不一致的问题12。
+public synchronized StringBuffer append(String str){ // 方法实现 } 这种机制确保了在多线程环境下，只有一个线程可以访问和修改 StringBuffer 的内容，避免了竞态条件（Race Condition）和数据不一致的问题12。
 2. 锁机制 # StringBuffer 内部使用了一个锁对象（即 this 锁），当一个线程调用 StringBuffer 的同步方法时，会获取这个锁，其他线程必须等待锁释放后才能继续执行。这种锁机制保证了线程间的同步17。
-3. 性能影响 # 虽然 StringBuffer 的同步机制确保了线程安全，但也带来了性能开销。因为在多线程环境下，每次只能有一个线程操作 StringBuffer，其他线程会被阻塞。因此，在单线程环境下，推荐使用性能更高的 StringBuilder，它没有同步机制158。
-4. 适用场景 # 多线程环境：如果需要在多线程环境下对字符串进行操作，StringBuffer 是合适的选择，因为它确保了线程安全29。 单线程环境：在单线程环境下，建议使用 StringBuilder，因为它没有同步开销，性能更高18。 总结 # StringBuffer 通过 synchronized 关键字实现的同步机制，确保了多线程环境下的线程安全性。虽然这种机制带来了性能开销，但在需要线程安全的场景下，它是一个可靠的选择127。
-StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的 # StringBuffer 和 StringBuilder 在底层都是使用 字符数组（char[]） 来保存字符串数据的。具体来说，它们继承了 AbstractStringBuilder 类，而 AbstractStringBuilder 类中定义了一个 char[] value 数组，用于存储字符序列134。">
+3. 性能影响 # 虽然 StringBuffer 的同步机制确保了线程安全，但也带来了性能开销。因为在多线程环境下，每次只能有一个线程操作 StringBuffer ，其他线程会被阻塞。因此，在单线程环境下，推荐使用性能更高的 StringBuilder，它没有同步机制158。
+4. 适用场景 # 多线程环境：如果需要在多线程环境下对字符串进行操作，StringBuffer 是合适的选择，因为它确保了线程安全29。 单线程环境：在单线程环境下，建议使用 StringBuilder，因为它没有同步开销，性能更高18。 总结 # StringBuffer 通过 synchronized 关键字实现的同步机制，确保了多线程环境下的线程安全性。虽然这种机制带来了性能开销，但在需要线程安全的场景下，它是一个可靠的选择127。">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-04T13:55:32+08:00">
+    <meta property="article:modified_time" content="2025-08-04T14:38:40+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/post/computer-science/java/java/">
 <link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.8726f5b7274c980857c94b8058ae8e746f8cada4b3d7ce7bd3df23d05d7cf78a.js" ></script>
+  <script defer src="/en.search.min.e2cf9183c033a87e2b3b0142d4bc91d0bab24d4d857e15e4ea23c8b2d19e2271.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1009,6 +1018,40 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <input type="checkbox" id="section-91cda33c3f083dc425de7b0831dd4a4b" class="toggle"  />
+    <label for="section-91cda33c3f083dc425de7b0831dd4a4b" class="flex justify-between">
+      <a role="button" class="">Ci Cd</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/gitlab/" class="">Gitlab</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/post/computer-science/cloud/" class="">Cloud</a>
   
 
@@ -1579,6 +1622,7 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#github-repository">github repository</a></li>
     <li><a href="#string">String</a>
       <ul>
         <li><a href="#stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？</a>
@@ -2378,7 +2422,18 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="string">
+  <article class="markdown book-article"><h1 id="github-repository">
+  github repository
+  <a class="anchor" href="#github-repository">#</a>
+</h1>
+<ul>
+<li><a href="https://github.com/binarywang/qrcode-utils">binarywang/qrcode-utils</a>
+<ul>
+<li>二维码生成工具</li>
+</ul>
+</li>
+</ul>
+<h1 id="string">
   String
   <a class="anchor" href="#string">#</a>
 </h1>
@@ -2386,26 +2441,29 @@ https://github.com/alex-shpak/hugo-book
   StringBuffer 是怎么保证线程安全的？
   <a class="anchor" href="#stringbuffer-%e6%98%af%e6%80%8e%e4%b9%88%e4%bf%9d%e8%af%81%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e7%9a%84">#</a>
 </h2>
-<p><code>StringBuffer</code> 是通过 <strong>同步机制</strong> 来保证线程安全的。具体来说，它的所有关键方法（如 <code>append()</code>、<code>insert()</code>、<code>delete()</code>、<code>reverse()</code> 等）都使用了 <code>synchronized</code> 关键字进行修饰，确保同一时间只有一个线程可以执行这些方法<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">7</a>。</p>
+<p><code>StringBuffer</code> 是通过 <strong>同步机制</strong> 来保证线程安全的。具体来说，它的所有关键方法（如 <code>append()</code>、<code>insert()</code>、<code>delete()</code>、<code>reverse()</code> 等）都使用了 <code>synchronized</code>
+关键字进行修饰，确保同一时间只有一个线程可以执行这些方法<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">7</a>。</p>
 <h3 id="1-同步方法">
   1. <strong>同步方法</strong>
   <a class="anchor" href="#1-%e5%90%8c%e6%ad%a5%e6%96%b9%e6%b3%95">#</a>
 </h3>
 <p><code>StringBuffer</code> 的方法在设计时都加了 <code>synchronized</code> 关键字，例如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> StringBuffer <span style="color:#a6e22e">append</span>(String str) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 方法实现</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> StringBuffer <span style="color:#a6e22e">append</span>(String str){
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 方法实现</span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>这种机制确保了在多线程环境下，只有一个线程可以访问和修改 <code>StringBuffer</code> 的内容，避免了竞态条件（Race Condition）和数据不一致的问题<a href="@ref">1</a><a href="@ref">2</a>。</p>
 <h3 id="2-锁机制">
   2. <strong>锁机制</strong>
   <a class="anchor" href="#2-%e9%94%81%e6%9c%ba%e5%88%b6">#</a>
 </h3>
-<p><code>StringBuffer</code> 内部使用了一个锁对象（即 <code>this</code> 锁），当一个线程调用 <code>StringBuffer</code> 的同步方法时，会获取这个锁，其他线程必须等待锁释放后才能继续执行。这种锁机制保证了线程间的同步<a href="@ref">1</a><a href="@ref">7</a>。</p>
+<p><code>StringBuffer</code> 内部使用了一个锁对象（即 <code>this</code> 锁），当一个线程调用 <code>StringBuffer</code>
+的同步方法时，会获取这个锁，其他线程必须等待锁释放后才能继续执行。这种锁机制保证了线程间的同步<a href="@ref">1</a><a href="@ref">7</a>。</p>
 <h3 id="3-性能影响">
   3. <strong>性能影响</strong>
   <a class="anchor" href="#3-%e6%80%a7%e8%83%bd%e5%bd%b1%e5%93%8d">#</a>
 </h3>
-<p>虽然 <code>StringBuffer</code> 的同步机制确保了线程安全，但也带来了性能开销。因为在多线程环境下，每次只能有一个线程操作 <code>StringBuffer</code>，其他线程会被阻塞。因此，在单线程环境下，推荐使用性能更高的 <code>StringBuilder</code>，它没有同步机制<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">8</a>。</p>
+<p>虽然 <code>StringBuffer</code> 的同步机制确保了线程安全，但也带来了性能开销。因为在多线程环境下，每次只能有一个线程操作 <code>StringBuffer</code>
+，其他线程会被阻塞。因此，在单线程环境下，推荐使用性能更高的 <code>StringBuilder</code>，它没有同步机制<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">8</a>。</p>
 <h3 id="4-适用场景">
   4. <strong>适用场景</strong>
   <a class="anchor" href="#4-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
@@ -2418,12 +2476,14 @@ https://github.com/alex-shpak/hugo-book
   总结
   <a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a>
 </h3>
-<p><code>StringBuffer</code> 通过 <code>synchronized</code> 关键字实现的同步机制，确保了多线程环境下的线程安全性。虽然这种机制带来了性能开销，但在需要线程安全的场景下，它是一个可靠的选择<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">7</a>。</p>
+<p><code>StringBuffer</code> 通过 <code>synchronized</code>
+关键字实现的同步机制，确保了多线程环境下的线程安全性。虽然这种机制带来了性能开销，但在需要线程安全的场景下，它是一个可靠的选择<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">7</a>。</p>
 <h2 id="stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">
   StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的
   <a class="anchor" href="#stringbuffer-%e5%92%8c-stringbuilder-%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%9c%a8%e5%ba%95%e5%b1%82%e6%98%af%e4%bb%a5%e4%bb%80%e4%b9%88%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e4%bf%9d%e5%ad%98%e7%9a%84">#</a>
 </h2>
-<p><code>StringBuffer</code> 和 <code>StringBuilder</code> 在底层都是使用 <strong>字符数组（<code>char[]</code>）</strong> 来保存字符串数据的。具体来说，它们继承了 <code>AbstractStringBuilder</code> 类，而 <code>AbstractStringBuilder</code> 类中定义了一个 <code>char[] value</code> 数组，用于存储字符序列<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</p>
+<p><code>StringBuffer</code> 和 <code>StringBuilder</code> 在底层都是使用 <strong>字符数组（<code>char[]</code>）</strong> 来保存字符串数据的。具体来说，它们继承了 <code>AbstractStringBuilder</code>
+类，而 <code>AbstractStringBuilder</code> 类中定义了一个 <code>char[] value</code> 数组，用于存储字符序列<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</p>
 <h3 id="1-底层数据结构">
   1. <strong>底层数据结构</strong>
   <a class="anchor" href="#1-%e5%ba%95%e5%b1%82%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84">#</a>
@@ -2475,7 +2535,8 @@ https://github.com/alex-shpak/hugo-book
   什么是虚拟线程？
   <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b">#</a>
 </h2>
-<p><strong>虚拟线程（Virtual Threads）</strong> 是 Java 19 引入的一种轻量级线程，旨在简化和增强并发编程，特别是在处理大量 I/O 密集型任务时<a href="@ref">1</a><a href="@ref">2</a>。它是由 JVM 管理的线程，与传统线程（平台线程）相比，虚拟线程具有更高的并发性和更低的资源开销<a href="@ref">1</a><a href="@ref">6</a>。</p>
+<p><strong>虚拟线程（Virtual Threads）</strong> 是 Java 19 引入的一种轻量级线程，旨在简化和增强并发编程，特别是在处理大量 I/O 密集型任务时<a href="@ref">1</a><a href="@ref">2</a>。它是由 JVM
+管理的线程，与传统线程（平台线程）相比，虚拟线程具有更高的并发性和更低的资源开销<a href="@ref">1</a><a href="@ref">6</a>。</p>
 <h3 id="虚拟线程的核心特点">
   虚拟线程的核心特点
   <a class="anchor" href="#%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e6%a0%b8%e5%bf%83%e7%89%b9%e7%82%b9">#</a>
@@ -2540,9 +2601,11 @@ https://github.com/alex-shpak/hugo-book
 </h3>
 <ul>
 <li><strong>响应式编程</strong>：<br>
-响应式编程基于异步数据流和事件驱动模型，使用发布/订阅模式（如 <code>Flux</code> 和 <code>Mono</code>）来处理异步任务。它通过非阻塞 I/O 和回调机制，确保线程在等待 I/O 操作时不会阻塞，而是继续处理其他任务。响应式编程的核心是“<strong>非阻塞</strong>”和“<strong>事件驱动</strong>”<a href="@ref">1</a><a href="@ref">2</a>。</li>
+响应式编程基于异步数据流和事件驱动模型，使用发布/订阅模式（如 <code>Flux</code> 和 <code>Mono</code>）来处理异步任务。它通过非阻塞 I/O 和回调机制，确保线程在等待 I/O 操作时不会阻塞，而是继续处理其他任务。响应式编程的核心是“**
+非阻塞**”和“<strong>事件驱动</strong>”<a href="@ref">1</a><a href="@ref">2</a>。</li>
 <li><strong>虚拟线程</strong>：<br>
-虚拟线程是 JVM 管理的轻量级线程，底层仍然依赖于操作系统的平台线程（内核线程），但虚拟线程的创建和切换开销远低于传统线程。当虚拟线程遇到阻塞操作时，JVM 会将其挂起并切换到其他虚拟线程，从而避免线程资源的浪费<a href="@ref">3</a><a href="@ref">7</a>。</li>
+虚拟线程是 JVM 管理的轻量级线程，底层仍然依赖于操作系统的平台线程（内核线程），但虚拟线程的创建和切换开销远低于传统线程。当虚拟线程遇到阻塞操作时，JVM
+会将其挂起并切换到其他虚拟线程，从而避免线程资源的浪费<a href="@ref">3</a><a href="@ref">7</a>。</li>
 </ul>
 <hr>
 <h3 id="2-编程模型">
@@ -2564,7 +2627,8 @@ https://github.com/alex-shpak/hugo-book
 <li><strong>响应式编程</strong>：<br>
 适用于 I/O 密集型任务，如网络请求、数据库操作等。它通过非阻塞 I/O 和事件驱动机制，最大化线程的利用率。但在 CPU 密集型任务中，响应式编程的性能提升有限，甚至可能适得其反<a href="@ref">2</a><a href="@ref">4</a>。</li>
 <li><strong>虚拟线程</strong>：<br>
-同样适用于 I/O 密集型任务，能够显著提高并发性能。虚拟线程的优势在于其轻量化和低开销，适合处理大量并发请求。但对于 CPU 密集型任务，虚拟线程的性能提升有限，因为虚拟线程的调度仍然依赖于平台线程<a href="@ref">3</a><a href="@ref">7</a>。</li>
+同样适用于 I/O 密集型任务，能够显著提高并发性能。虚拟线程的优势在于其轻量化和低开销，适合处理大量并发请求。但对于 CPU 密集型任务，虚拟线程的性能提升有限，因为虚拟线程的调度仍然依赖于平台线程<a href="@ref">3</a><a href="@ref">7</a>
+。</li>
 </ul>
 <hr>
 <h3 id="4-开发体验">
@@ -2608,7 +2672,8 @@ https://github.com/alex-shpak/hugo-book
   1. <strong>虚拟线程的内存结构</strong>
   <a class="anchor" href="#1-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e5%86%85%e5%ad%98%e7%bb%93%e6%9e%84">#</a>
 </h3>
-<p>虚拟线程由JVM管理，而不是操作系统，因此它们的内存占用远小于平台线程。每个虚拟线程通常只占用几KB的内存，而平台线程则需要1MB左右的内存<a href="@ref">4</a>。虚拟线程的轻量化设计使得JVM能够轻松支持数百万个虚拟线程，而不会显著增加内存负担。</p>
+<p>虚拟线程由JVM管理，而不是操作系统，因此它们的内存占用远小于平台线程。每个虚拟线程通常只占用几KB的内存，而平台线程则需要1MB左右的内存<a href="@ref">4</a>
+。虚拟线程的轻量化设计使得JVM能够轻松支持数百万个虚拟线程，而不会显著增加内存负担。</p>
 <h3 id="2-虚拟线程与jvm内存模型的关系">
   2. <strong>虚拟线程与JVM内存模型的关系</strong>
   <a class="anchor" href="#2-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e4%b8%8ejvm%e5%86%85%e5%ad%98%e6%a8%a1%e5%9e%8b%e7%9a%84%e5%85%b3%e7%b3%bb">#</a>
@@ -2638,7 +2703,8 @@ https://github.com/alex-shpak/hugo-book
   总结
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-3">#</a>
 </h3>
-<p>虚拟线程在JVM中的内存模型与传统平台线程类似，但由于其轻量化设计和由JVM管理的特性，虚拟线程的内存占用和调度开销显著降低。虚拟线程的内存模型仍然依赖于JVM的程序计数器、虚拟机栈、堆等结构，但其高效的调度机制和轻量化的内存占用使其在处理高并发任务时表现出色<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">4</a>。</p>
+<p>虚拟线程在JVM中的内存模型与传统平台线程类似，但由于其轻量化设计和由JVM管理的特性，虚拟线程的内存占用和调度开销显著降低。虚拟线程的内存模型仍然依赖于JVM的程序计数器、虚拟机栈、堆等结构，但其高效的调度机制和轻量化的内存占用使其在处理高并发任务时表现出色<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">4</a>
+。</p>
 <h2 id="虚拟线程会增加jvm的性能消耗吗">
   虚拟线程会增加jvm的性能消耗吗
   <a class="anchor" href="#%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e4%bc%9a%e5%a2%9e%e5%8a%a0jvm%e7%9a%84%e6%80%a7%e8%83%bd%e6%b6%88%e8%80%97%e5%90%97">#</a>
@@ -2648,7 +2714,8 @@ https://github.com/alex-shpak/hugo-book
   1. <strong>虚拟线程的资源消耗</strong>
   <a class="anchor" href="#1-%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84%e8%b5%84%e6%ba%90%e6%b6%88%e8%80%97">#</a>
 </h3>
-<p>虚拟线程由JVM管理，而不是操作系统，因此它们的创建和切换开销远低于传统的平台线程。每个虚拟线程仅占用几KB的内存，而平台线程通常需要1MB左右的内存<a href="@ref">5</a>。这种轻量化设计使得JVM能够轻松支持数百万个虚拟线程，而不会显著增加内存负担<a href="@ref">6</a>。</p>
+<p>虚拟线程由JVM管理，而不是操作系统，因此它们的创建和切换开销远低于传统的平台线程。每个虚拟线程仅占用几KB的内存，而平台线程通常需要1MB左右的内存<a href="@ref">5</a>
+。这种轻量化设计使得JVM能够轻松支持数百万个虚拟线程，而不会显著增加内存负担<a href="@ref">6</a>。</p>
 <h3 id="2-性能优势">
   2. <strong>性能优势</strong>
   <a class="anchor" href="#2-%e6%80%a7%e8%83%bd%e4%bc%98%e5%8a%bf">#</a>
@@ -3375,7 +3442,8 @@ https://github.com/alex-shpak/hugo-book
   1. <strong>非阻塞 I/O 操作</strong>
   <a class="anchor" href="#1-%e9%9d%9e%e9%98%bb%e5%a1%9e-io-%e6%93%8d%e4%bd%9c">#</a>
 </h3>
-<p>虚拟线程在执行 I/O 操作（如读写文件、网络请求、数据库查询）时，不会阻塞当前线程。当虚拟线程遇到 I/O 操作时，它会立即被<strong>挂起</strong>，并释放底层的平台线程（Platform Thread），以便该平台线程可以去执行其他虚拟线程的任务。当 I/O 操作完成后，虚拟线程会被重新调度并继续执行<a href="@ref">55</a><a href="@ref">56</a>。</p>
+<p>虚拟线程在执行 I/O 操作（如读写文件、网络请求、数据库查询）时，不会阻塞当前线程。当虚拟线程遇到 I/O 操作时，它会立即被<strong>挂起</strong>，并释放底层的平台线程（Platform
+Thread），以便该平台线程可以去执行其他虚拟线程的任务。当 I/O 操作完成后，虚拟线程会被重新调度并继续执行<a href="@ref">55</a><a href="@ref">56</a>。</p>
 <p>这种方式避免了传统线程模型中线程因等待 I/O 操作而阻塞的问题，从而显著提高了线程的利用率。</p>
 <hr>
 <h3 id="2-轻量级线程调度">
@@ -3389,18 +3457,20 @@ https://github.com/alex-shpak/hugo-book
   3. <strong>减少线程上下文切换</strong>
   <a class="anchor" href="#3-%e5%87%8f%e5%b0%91%e7%ba%bf%e7%a8%8b%e4%b8%8a%e4%b8%8b%e6%96%87%e5%88%87%e6%8d%a2">#</a>
 </h3>
-<p>在传统线程模型中，线程的上下文切换由操作系统负责，开销较大。而虚拟线程的上下文切换由 JVM 管理，切换成本极低。这使得虚拟线程在处理大量 I/O 密集型任务时，能够更高效地切换任务，减少 CPU 资源的浪费<a href="@ref">17</a><a href="@ref">55</a>。</p>
+<p>在传统线程模型中，线程的上下文切换由操作系统负责，开销较大。而虚拟线程的上下文切换由 JVM 管理，切换成本极低。这使得虚拟线程在处理大量 I/O 密集型任务时，能够更高效地切换任务，减少 CPU
+资源的浪费<a href="@ref">17</a><a href="@ref">55</a>。</p>
 <hr>
 <h3 id="4-与异步编程的结合">
   4. <strong>与异步编程的结合</strong>
   <a class="anchor" href="#4-%e4%b8%8e%e5%bc%82%e6%ad%a5%e7%bc%96%e7%a8%8b%e7%9a%84%e7%bb%93%e5%90%88">#</a>
 </h3>
-<p>虚拟线程的接口与传统线程完全一致，开发者可以像编写同步代码一样编写异步任务。当虚拟线程执行 I/O 操作时，代码看起来是同步的，但实际上是异步执行的。这种方式既简化了代码的编写，又避免了回调地狱的问题<a href="@ref">55</a><a href="@ref">56</a>。</p>
+<p>虚拟线程的接口与传统线程完全一致，开发者可以像编写同步代码一样编写异步任务。当虚拟线程执行 I/O 操作时，代码看起来是同步的，但实际上是异步执行的。这种方式既简化了代码的编写，又避免了回调地狱的问题<a href="@ref">55</a><a href="@ref">56</a>
+。</p>
 <p>例如，以下代码展示了虚拟线程如何处理 I/O 操作：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Thread.<span style="color:#a6e22e">startVirtualThread</span>(() <span style="color:#f92672">-&gt;</span> {
-</span></span><span style="display:flex;"><span>    String data <span style="color:#f92672">=</span> readFromDatabase(); <span style="color:#75715e">// I/O 操作，虚拟线程会被挂起</span>
-</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(data);
-</span></span><span style="display:flex;"><span>});
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Thread.<span style="color:#a6e22e">startVirtualThread</span>(()<span style="color:#f92672">-&gt;</span>{
+</span></span><span style="display:flex;"><span>        String data<span style="color:#f92672">=</span>readFromDatabase(); <span style="color:#75715e">// I/O 操作，虚拟线程会被挂起</span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(data);
+</span></span><span style="display:flex;"><span>        });
 </span></span></code></pre></div><p>在执行 <code>readFromDatabase()</code> 时，虚拟线程会被挂起，平台线程可以继续执行其他任务<a href="@ref">55</a>。</p>
 <hr>
 <h3 id="5-适用于高并发场景">
@@ -3413,7 +3483,8 @@ https://github.com/alex-shpak/hugo-book
   总结
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-7">#</a>
 </h3>
-<p>Java 的虚拟线程通过<strong>非阻塞 I/O</strong>、<strong>轻量级调度</strong>和<strong>减少上下文切换</strong>等机制，显著优化了 I/O 操作的性能。它使得开发者可以轻松编写高并发的 I/O 密集型应用，同时保持代码的简洁性和可维护性<a href="@ref">1</a><a href="@ref">55</a><a href="@ref">56</a>。</p>
+<p>Java 的虚拟线程通过<strong>非阻塞 I/O</strong>、<strong>轻量级调度</strong>和<strong>减少上下文切换</strong>等机制，显著优化了 I/O 操作的性能。它使得开发者可以轻松编写高并发的 I/O
+密集型应用，同时保持代码的简洁性和可维护性<a href="@ref">1</a><a href="@ref">55</a><a href="@ref">56</a>。</p>
 <h2 id="java虚拟线程的forkjoinpool调度器是如何工作的">
   Java虚拟线程的ForkJoinPool调度器是如何工作的
   <a class="anchor" href="#java%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e7%9a%84forkjoinpool%e8%b0%83%e5%ba%a6%e5%99%a8%e6%98%af%e5%a6%82%e4%bd%95%e5%b7%a5%e4%bd%9c%e7%9a%84">#</a>
@@ -3486,25 +3557,25 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#5-%e7%a4%ba%e4%be%8b">#</a>
 </h3>
 <p>以下是一个虚拟线程的示例，展示了虚拟线程的调度和执行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Thread.<span style="color:#a6e22e">startVirtualThread</span>(() <span style="color:#f92672">-&gt;</span> {
-</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Virtual Thread 1: Start&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Thread.<span style="color:#a6e22e">startVirtualThread</span>(()<span style="color:#f92672">-&gt;</span>{
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Virtual Thread 1: Start&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>{
 </span></span><span style="display:flex;"><span>        Thread.<span style="color:#a6e22e">sleep</span>(1000); <span style="color:#75715e">// 模拟 I/O 操作，虚拟线程会被挂起</span>
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">catch</span>(InterruptedException e){
 </span></span><span style="display:flex;"><span>        e.<span style="color:#a6e22e">printStackTrace</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Virtual Thread 1: End&#34;</span>);
-</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Virtual Thread 1: End&#34;</span>);
+</span></span><span style="display:flex;"><span>        });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Thread.<span style="color:#a6e22e">startVirtualThread</span>(() <span style="color:#f92672">-&gt;</span> {
-</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Virtual Thread 2: Start&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        Thread.<span style="color:#a6e22e">startVirtualThread</span>(()<span style="color:#f92672">-&gt;</span>{
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Virtual Thread 2: Start&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>{
 </span></span><span style="display:flex;"><span>        Thread.<span style="color:#a6e22e">sleep</span>(500); <span style="color:#75715e">// 模拟 I/O 操作，虚拟线程会被挂起</span>
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">catch</span>(InterruptedException e){
 </span></span><span style="display:flex;"><span>        e.<span style="color:#a6e22e">printStackTrace</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Virtual Thread 2: End&#34;</span>);
-</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Virtual Thread 2: End&#34;</span>);
+</span></span><span style="display:flex;"><span>        });
 </span></span></code></pre></div><p>在上述代码中：</p>
 <ul>
 <li>两个虚拟线程由 <code>ForkJoinPool</code> 调度器管理。</li>
@@ -3515,7 +3586,8 @@ https://github.com/alex-shpak/hugo-book
   <strong>总结</strong>
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-8">#</a>
 </h3>
-<p>Java 虚拟线程的调度器基于 <code>ForkJoinPool</code>，通过<strong>工作窃取</strong>和<strong>轻量级调度</strong>机制，高效地管理虚拟线程的执行。它使得虚拟线程在执行 I/O 操作时可以被挂起，从而释放平台线程资源，提高系统的并发性能和资源利用率。虚拟线程的引入为 Java 提供了更简洁、更高效的高并发编程模型。</p>
+<p>Java 虚拟线程的调度器基于 <code>ForkJoinPool</code>，通过<strong>工作窃取</strong>和<strong>轻量级调度</strong>机制，高效地管理虚拟线程的执行。它使得虚拟线程在执行 I/O
+操作时可以被挂起，从而释放平台线程资源，提高系统的并发性能和资源利用率。虚拟线程的引入为 Java 提供了更简洁、更高效的高并发编程模型。</p>
 <h2 id="java虚拟线程与其他编程语言的异步编程模型相比有什么优势">
   Java虚拟线程与其他编程语言的异步编程模型相比有什么优势
   <a class="anchor" href="#java%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e4%b8%8e%e5%85%b6%e4%bb%96%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80%e7%9a%84%e5%bc%82%e6%ad%a5%e7%bc%96%e7%a8%8b%e6%a8%a1%e5%9e%8b%e7%9b%b8%e6%af%94%e6%9c%89%e4%bb%80%e4%b9%88%e4%bc%98%e5%8a%bf">#</a>
@@ -3528,7 +3600,8 @@ https://github.com/alex-shpak/hugo-book
 </h3>
 <ul>
 <li><strong>虚拟线程的轻量级特性</strong>：虚拟线程由 JVM 管理，创建和销毁的成本极低，每个虚拟线程仅占用极少的内存资源。这使得 Java 应用程序可以轻松创建数百万个虚拟线程，而不会像传统线程那样消耗大量系统资源<a href="@ref">18</a>。</li>
-<li><strong>对比其他语言的异步模型</strong>：例如，Go 语言的协程（Goroutine）虽然也很轻量，但其调度器由 Go 运行时管理，而 Java 虚拟线程的调度器基于 <code>ForkJoinPool</code>，能够更好地与 JVM 生态集成<a href="@ref">41</a>。</li>
+<li><strong>对比其他语言的异步模型</strong>：例如，Go 语言的协程（Goroutine）虽然也很轻量，但其调度器由 Go 运行时管理，而 Java 虚拟线程的调度器基于 <code>ForkJoinPool</code>，能够更好地与 JVM
+生态集成<a href="@ref">41</a>。</li>
 </ul>
 <hr>
 <h3 id="2-非阻塞与高效-io-处理">
@@ -3536,8 +3609,10 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#2-%e9%9d%9e%e9%98%bb%e5%a1%9e%e4%b8%8e%e9%ab%98%e6%95%88-io-%e5%a4%84%e7%90%86">#</a>
 </h3>
 <ul>
-<li><strong>非阻塞 I/O 操作</strong>：虚拟线程在执行 I/O 操作时会被挂起，释放底层的平台线程，从而避免线程资源的浪费。当 I/O 操作完成后，虚拟线程会被重新调度，继续执行任务。这种方式显著提高了 CPU 利用率<a href="@ref">18</a><a href="@ref">24</a>。</li>
-<li><strong>对比其他语言的异步模型</strong>：例如，JavaScript 的异步模型依赖于事件循环和回调函数，代码结构复杂且容易陷入“回调地狱”。而 Java 虚拟线程的代码编写方式与传统同步代码一致，简化了开发逻辑<a href="@ref">1</a><a href="@ref">24</a>。</li>
+<li><strong>非阻塞 I/O 操作</strong>：虚拟线程在执行 I/O 操作时会被挂起，释放底层的平台线程，从而避免线程资源的浪费。当 I/O 操作完成后，虚拟线程会被重新调度，继续执行任务。这种方式显著提高了 CPU
+利用率<a href="@ref">18</a><a href="@ref">24</a>。</li>
+<li><strong>对比其他语言的异步模型</strong>：例如，JavaScript 的异步模型依赖于事件循环和回调函数，代码结构复杂且容易陷入“回调地狱”。而 Java
+虚拟线程的代码编写方式与传统同步代码一致，简化了开发逻辑<a href="@ref">1</a><a href="@ref">24</a>。</li>
 </ul>
 <hr>
 <h3 id="3-简化异步编程">
@@ -3546,7 +3621,8 @@ https://github.com/alex-shpak/hugo-book
 </h3>
 <ul>
 <li><strong>同步代码风格</strong>：虚拟线程允许开发者以同步的方式编写异步代码，无需使用复杂的回调或 <code>Future</code>/<code>Promise</code> 机制。这种方式不仅提高了代码的可读性，还降低了调试和维护的难度<a href="@ref">1</a><a href="@ref">24</a>。</li>
-<li><strong>对比其他语言的异步模型</strong>：例如，Python 的 <code>asyncio</code> 或 C# 的 <code>async/await</code> 虽然也提供了同步风格的异步编程，但其底层实现依赖于事件循环，而 Java 虚拟线程的调度器更高效且与 JVM 深度集成<a href="@ref">24</a><a href="@ref">41</a>。</li>
+<li><strong>对比其他语言的异步模型</strong>：例如，Python 的 <code>asyncio</code> 或 C# 的 <code>async/await</code> 虽然也提供了同步风格的异步编程，但其底层实现依赖于事件循环，而 Java 虚拟线程的调度器更高效且与 JVM
+深度集成<a href="@ref">24</a><a href="@ref">41</a>。</li>
 </ul>
 <hr>
 <h3 id="4-与现有生态的无缝集成">
@@ -3554,7 +3630,8 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#4-%e4%b8%8e%e7%8e%b0%e6%9c%89%e7%94%9f%e6%80%81%e7%9a%84%e6%97%a0%e7%bc%9d%e9%9b%86%e6%88%90">#</a>
 </h3>
 <ul>
-<li><strong>兼容现有 API</strong>：虚拟线程与 Java 现有的并发工具（如 <code>CompletableFuture</code>、<code>ExecutorService</code>）无缝集成，开发者无需重写代码即可享受虚拟线程带来的性能提升<a href="@ref">1</a><a href="@ref">18</a>。</li>
+<li><strong>兼容现有 API</strong>：虚拟线程与 Java 现有的并发工具（如 <code>CompletableFuture</code>、<code>ExecutorService</code>
+）无缝集成，开发者无需重写代码即可享受虚拟线程带来的性能提升<a href="@ref">1</a><a href="@ref">18</a>。</li>
 <li><strong>对比其他语言的异步模型</strong>：例如，Rust 的异步编程模型需要依赖特定的运行时（如 <code>tokio</code>），而 Java 虚拟线程直接由 JVM 支持，无需额外的运行时环境<a href="@ref">41</a>。</li>
 </ul>
 <hr>
@@ -3572,7 +3649,8 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#6-%e7%bb%93%e6%9e%84%e5%8c%96%e5%b9%b6%e5%8f%91%e6%94%af%e6%8c%81">#</a>
 </h3>
 <ul>
-<li><strong>结构化并发</strong>：JDK 21 引入了结构化并发（Structured Concurrency），使得多线程编程更加清晰和易于管理。虚拟线程与结构化并发结合，可以更好地控制线程的生命周期，避免资源泄漏<a href="@ref">18</a><a href="@ref">38</a>。</li>
+<li><strong>结构化并发</strong>：JDK 21 引入了结构化并发（Structured
+Concurrency），使得多线程编程更加清晰和易于管理。虚拟线程与结构化并发结合，可以更好地控制线程的生命周期，避免资源泄漏<a href="@ref">18</a><a href="@ref">38</a>。</li>
 <li><strong>对比其他语言的异步模型</strong>：例如，C++ 的异步编程模型缺乏类似的结构化并发支持，开发者需要手动管理线程和任务的生命周期<a href="@ref">38</a>。</li>
 </ul>
 <hr>
@@ -3580,7 +3658,8 @@ https://github.com/alex-shpak/hugo-book
   <strong>总结</strong>
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-9">#</a>
 </h3>
-<p>Java 虚拟线程在轻量级、非阻塞 I/O、简化异步编程、与现有生态集成、上下文切换效率和结构化并发等方面具有显著优势。与其他编程语言的异步模型相比，虚拟线程不仅提供了更高的并发性能，还简化了开发流程，降低了代码复杂性，特别适合处理 I/O 密集型任务和高并发场景<a href="@ref">1</a><a href="@ref">18</a><a href="@ref">24</a><a href="@ref">41</a>。</p>
+<p>Java 虚拟线程在轻量级、非阻塞 I/O、简化异步编程、与现有生态集成、上下文切换效率和结构化并发等方面具有显著优势。与其他编程语言的异步模型相比，虚拟线程不仅提供了更高的并发性能，还简化了开发流程，降低了代码复杂性，特别适合处理 I/O
+密集型任务和高并发场景<a href="@ref">1</a><a href="@ref">18</a><a href="@ref">24</a><a href="@ref">41</a>。</p>
 <h2 id="java虚拟线程技术对现有应用程序的性能提升有多大影响">
   Java虚拟线程技术对现有应用程序的性能提升有多大影响
   <a class="anchor" href="#java%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e6%8a%80%e6%9c%af%e5%af%b9%e7%8e%b0%e6%9c%89%e5%ba%94%e7%94%a8%e7%a8%8b%e5%ba%8f%e7%9a%84%e6%80%a7%e8%83%bd%e6%8f%90%e5%8d%87%e6%9c%89%e5%a4%9a%e5%a4%a7%e5%bd%b1%e5%93%8d">#</a>
@@ -3594,7 +3673,8 @@ https://github.com/alex-shpak/hugo-book
 <p>虚拟线程通过以下机制提升性能：</p>
 <ul>
 <li><strong>轻量级线程</strong>：虚拟线程由 JVM 管理，创建和销毁的开销极低，允许应用程序轻松创建数百万个线程，而不会像传统线程那样消耗大量系统资源<a href="@ref">1</a><a href="@ref">11</a>。</li>
-<li><strong>非阻塞 I/O</strong>：虚拟线程在执行 I/O 操作时会被挂起，释放底层平台线程，从而避免线程资源的浪费。当 I/O 操作完成后，虚拟线程会被重新调度，继续执行任务。这种方式显著提高了 CPU 利用率<a href="@ref">1</a><a href="@ref">18</a>。</li>
+<li><strong>非阻塞 I/O</strong>：虚拟线程在执行 I/O 操作时会被挂起，释放底层平台线程，从而避免线程资源的浪费。当 I/O 操作完成后，虚拟线程会被重新调度，继续执行任务。这种方式显著提高了 CPU
+利用率<a href="@ref">1</a><a href="@ref">18</a>。</li>
 <li><strong>高效调度</strong>：虚拟线程的调度器基于 <code>ForkJoinPool</code>，采用 FIFO 模式，能够高效地管理虚拟线程的挂起和恢复，减少上下文切换的开销<a href="@ref">18</a>。</li>
 </ul>
 <hr>
@@ -3603,7 +3683,8 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#2-%e6%80%a7%e8%83%bd%e6%8f%90%e5%8d%87%e7%9a%84%e5%85%b7%e4%bd%93%e8%a1%a8%e7%8e%b0">#</a>
 </h3>
 <ul>
-<li><strong>I/O 密集型任务</strong>：虚拟线程特别适合处理大量 I/O 阻塞任务，如网络请求、文件读写和数据库查询。在这些场景中，虚拟线程的性能提升尤为显著。例如，在测试中，虚拟线程处理 100,000 个任务的耗时仅为传统线程池的一半<a href="@ref">1</a><a href="@ref">59</a>。</li>
+<li><strong>I/O 密集型任务</strong>：虚拟线程特别适合处理大量 I/O 阻塞任务，如网络请求、文件读写和数据库查询。在这些场景中，虚拟线程的性能提升尤为显著。例如，在测试中，虚拟线程处理 100,000
+个任务的耗时仅为传统线程池的一半<a href="@ref">1</a><a href="@ref">59</a>。</li>
 <li><strong>高并发场景</strong>：虚拟线程允许应用程序同时处理大量并发请求，而不会因为线程数量限制而出现性能瓶颈。这对于 Web 服务器、微服务等需要处理大量并发请求的应用场景非常有利<a href="@ref">11</a><a href="@ref">18</a>。</li>
 <li><strong>资源利用率</strong>：虚拟线程通过减少线程阻塞和上下文切换，提高了 CPU 和内存的利用率，从而提升了整体系统的吞吐量<a href="@ref">11</a><a href="@ref">18</a>。</li>
 </ul>
@@ -3642,7 +3723,8 @@ https://github.com/alex-shpak/hugo-book
   <strong>5. 总结</strong>
   <a class="anchor" href="#5-%e6%80%bb%e7%bb%93-1">#</a>
 </h3>
-<p>Java 虚拟线程技术通过轻量级线程、非阻塞 I/O 和高效调度机制，显著提升了现有应用程序的性能，特别是在 I/O 密集型和高并发场景下。实际应用案例表明，虚拟线程可以将任务处理时间减少 50% 以上，并大幅提高系统的吞吐量和资源利用率<a href="@ref">1</a><a href="@ref">11</a><a href="@ref">18</a>。然而，在计算密集型任务中，虚拟线程的性能提升有限，开发者需要根据具体应用场景合理选择使用虚拟线程。</p>
+<p>Java 虚拟线程技术通过轻量级线程、非阻塞 I/O 和高效调度机制，显著提升了现有应用程序的性能，特别是在 I/O 密集型和高并发场景下。实际应用案例表明，虚拟线程可以将任务处理时间减少 50%
+以上，并大幅提高系统的吞吐量和资源利用率<a href="@ref">1</a><a href="@ref">11</a><a href="@ref">18</a>。然而，在计算密集型任务中，虚拟线程的性能提升有限，开发者需要根据具体应用场景合理选择使用虚拟线程。</p>
 <h2 id="java虚拟线程技术在实际项目中面临哪些挑战">
   Java虚拟线程技术在实际项目中面临哪些挑战
   <a class="anchor" href="#java%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e6%8a%80%e6%9c%af%e5%9c%a8%e5%ae%9e%e9%99%85%e9%a1%b9%e7%9b%ae%e4%b8%ad%e9%9d%a2%e4%b8%b4%e5%93%aa%e4%ba%9b%e6%8c%91%e6%88%98">#</a>
@@ -3716,7 +3798,9 @@ https://github.com/alex-shpak/hugo-book
   <strong>总结</strong>
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-10">#</a>
 </h3>
-<p>Java 虚拟线程技术在实际项目中面临兼容性、调试、资源管理、性能瓶颈、学习曲线、生态集成和线程安全等多方面的挑战。尽管它显著提升了并发性能，但开发者需要根据具体场景进行优化和调整，以充分发挥其潜力。随着技术的成熟和生态的完善，这些挑战将逐步得到解决<a href="@ref">1</a><a href="@ref">2</a>。</p>
+<p>Java
+虚拟线程技术在实际项目中面临兼容性、调试、资源管理、性能瓶颈、学习曲线、生态集成和线程安全等多方面的挑战。尽管它显著提升了并发性能，但开发者需要根据具体场景进行优化和调整，以充分发挥其潜力。随着技术的成熟和生态的完善，这些挑战将逐步得到解决<a href="@ref">1</a><a href="@ref">2</a>
+。</p>
 <h2 id="java虚拟线程技术未来可能会带来哪些新的编程范式">
   Java虚拟线程技术未来可能会带来哪些新的编程范式
   <a class="anchor" href="#java%e8%99%9a%e6%8b%9f%e7%ba%bf%e7%a8%8b%e6%8a%80%e6%9c%af%e6%9c%aa%e6%9d%a5%e5%8f%af%e8%83%bd%e4%bc%9a%e5%b8%a6%e6%9d%a5%e5%93%aa%e4%ba%9b%e6%96%b0%e7%9a%84%e7%bc%96%e7%a8%8b%e8%8c%83%e5%bc%8f">#</a>
@@ -3882,7 +3966,9 @@ https://github.com/alex-shpak/hugo-book
   <strong>总结</strong>
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-11">#</a>
 </h3>
-<p>Java 虚拟线程技术的引入不仅提升了并发性能，还可能催生多种新的编程范式，如结构化并发、无回调的异步编程、事件驱动与反应式编程的简化、轻量级任务并发等。这些范式将显著简化并发编程，提高代码的可读性、可维护性和性能，同时为微服务、云原生架构和批处理等场景提供更高效的解决方案。随着虚拟线程技术的普及，Java 生态将迎来更多创新和优化。</p>
+<p>Java
+虚拟线程技术的引入不仅提升了并发性能，还可能催生多种新的编程范式，如结构化并发、无回调的异步编程、事件驱动与反应式编程的简化、轻量级任务并发等。这些范式将显著简化并发编程，提高代码的可读性、可维护性和性能，同时为微服务、云原生架构和批处理等场景提供更高效的解决方案。随着虚拟线程技术的普及，Java
+生态将迎来更多创新和优化。</p>
 <h1 id="java">
   java
   <a class="anchor" href="#java">#</a>
@@ -3903,7 +3989,8 @@ https://github.com/alex-shpak/hugo-book
   java array 转 list
   <a class="anchor" href="#java-array-%e8%bd%ac-list">#</a>
 </h3>
-<p>在Java中，你可以使用<code>Arrays.asList()</code>方法将数组转换为列表。这是一个简单的方法来创建一个固定大小的<code>List</code>。如果你需要一个能够改变大小的<code>List</code>，你需要使用<code>new ArrayList&lt;&gt;(Arrays.asList(array))</code>来创建一个新的<code>ArrayList</code>实例。</p>
+<p>在Java中，你可以使用<code>Arrays.asList()</code>方法将数组转换为列表。这是一个简单的方法来创建一个固定大小的<code>List</code>。如果你需要一个能够改变大小的<code>List</code>
+，你需要使用<code>new ArrayList&lt;&gt;(Arrays.asList(array))</code>来创建一个新的<code>ArrayList</code>实例。</p>
 <p>以下是两种情况的代码示例：</p>
 <h4 id="创建一个固定大小的列表">
   创建一个固定大小的列表
@@ -3936,12 +4023,14 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(arrayList); <span style="color:#75715e">// 输出: [a, b, c, d]</span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>请注意，当你使用<code>Arrays.asList()</code>时，它返回的是一个受数组支持的固定大小的列表。这意味着你不能添加或移除元素（除非你将其转换为像<code>ArrayList</code>这样的可调整大小的列表），但是你可以修改已经存在的元素。如果你尝试对固定大小的列表执行添加或移除操作，将会抛出<code>UnsupportedOperationException</code>异常。</p>
+</span></span></code></pre></div><p>请注意，当你使用<code>Arrays.asList()</code>时，它返回的是一个受数组支持的固定大小的列表。这意味着你不能添加或移除元素（除非你将其转换为像<code>ArrayList</code>
+这样的可调整大小的列表），但是你可以修改已经存在的元素。如果你尝试对固定大小的列表执行添加或移除操作，将会抛出<code>UnsupportedOperationException</code>异常。</p>
 <h3 id="java-怎么用二进制打印int">
   java， 怎么用二进制打印int
   <a class="anchor" href="#java-%e6%80%8e%e4%b9%88%e7%94%a8%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%89%93%e5%8d%b0int">#</a>
 </h3>
-<p>在Java中，可以使用<code>Integer.toBinaryString()</code>方法来将一个<code>int</code>类型的数值转换为二进制字符串表示。此方法返回的是一个不带前导零的字符串，也就是说它不会打印出完整的32位（对于<code>int</code>类型），如果需要显示所有位，包括前导零，则需要额外处理。</p>
+<p>在Java中，可以使用<code>Integer.toBinaryString()</code>方法来将一个<code>int</code>类型的数值转换为二进制字符串表示。此方法返回的是一个不带前导零的字符串，也就是说它不会打印出完整的32位（对于<code>int</code>
+类型），如果需要显示所有位，包括前导零，则需要额外处理。</p>
 <p>以下是一些例子：</p>
 <h4 id="使用-integertobinarystring">
   使用 <code>Integer.toBinaryString()</code>
@@ -4300,7 +4389,8 @@ https://github.com/alex-shpak/hugo-book
 <p><strong>Collection</strong></p>
 <ul>
 <li><strong>定义</strong>：<code>Collection</code> 是 Java 集合框架中的一个接口，表示一组对象的集合。它是所有集合类的父接口，为集合操作提供了基本的规范。</li>
-<li><strong>性质</strong>：<code>Collection</code> 是一个抽象的概念，定义了集合的基本操作，如添加（<code>add</code>）、删除（<code>remove</code>）、遍历（<code>iterator</code>）等。常见的实现类包括 <code>List</code>、<code>Set</code> 等<a href="@ref">1</a><a href="@ref">2</a>。</li>
+<li><strong>性质</strong>：<code>Collection</code> 是一个抽象的概念，定义了集合的基本操作，如添加（<code>add</code>）、删除（<code>remove</code>）、遍历（<code>iterator</code>）等。常见的实现类包括 <code>List</code>、<code>Set</code>
+等<a href="@ref">1</a><a href="@ref">2</a>。</li>
 </ul>
 </li>
 <li>
@@ -4327,8 +4417,10 @@ https://github.com/alex-shpak/hugo-book
 <li>
 <p><strong>Collections</strong></p>
 <ul>
-<li><strong>功能</strong>：<code>Collections</code> 类提供了许多实用的静态方法，如排序（<code>sort</code>）、查找（<code>max</code>、<code>min</code>）、替换（<code>replaceAll</code>）、复制（<code>copy</code>）、同步（<code>synchronizedCollection</code>）等<a href="@ref">2</a><a href="@ref">3</a>。</li>
-<li><strong>使用</strong>：由于 <code>Collections</code> 是一个工具类，其方法都是静态的，因此可以直接通过类名调用。例如，<code>Collections.sort(list)</code> 可以对列表进行排序，<code>Collections.max(list)</code> 可以查找集合中的最大值<a href="@ref">2</a><a href="@ref">3</a>。</li>
+<li><strong>功能</strong>：<code>Collections</code> 类提供了许多实用的静态方法，如排序（<code>sort</code>）、查找（<code>max</code>、<code>min</code>）、替换（<code>replaceAll</code>）、复制（<code>copy</code>
+）、同步（<code>synchronizedCollection</code>）等<a href="@ref">2</a><a href="@ref">3</a>。</li>
+<li><strong>使用</strong>：由于 <code>Collections</code> 是一个工具类，其方法都是静态的，因此可以直接通过类名调用。例如，<code>Collections.sort(list)</code> 可以对列表进行排序，<code>Collections.max(list)</code>
+可以查找集合中的最大值<a href="@ref">2</a><a href="@ref">3</a>。</li>
 </ul>
 </li>
 </ul>
@@ -4376,7 +4468,8 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><strong>Collection 是一个接口</strong>：它定义了集合的基本操作和行为规范，是 Java 集合框架的基础<a href="@ref">1</a><a href="@ref">2</a>。</li>
 <li><strong>Collections 是一个工具类</strong>：它提供了许多实用的静态方法，用于对集合进行各种操作<a href="@ref">2</a><a href="@ref">3</a>。<br>
-在实际开发中，应根据具体需求选择合适的集合类或接口。如果需要定义一个自定义的集合类，可以继承或实现 <code>Collection</code> 接口；如果需要对集合进行排序、查找等操作，可以使用 <code>Collections</code> 类提供的静态方法<a href="@ref">2</a>。</li>
+在实际开发中，应根据具体需求选择合适的集合类或接口。如果需要定义一个自定义的集合类，可以继承或实现 <code>Collection</code> 接口；如果需要对集合进行排序、查找等操作，可以使用 <code>Collections</code>
+类提供的静态方法<a href="@ref">2</a>。</li>
 </ul>
 <h2 id="arrayssort-和-collectionssort-的区别">
   Arrays.sort 和 Collections.sort 的区别
@@ -4656,12 +4749,14 @@ https://github.com/alex-shpak/hugo-book
 <ol>
 <li>
 <p><strong>近似平衡</strong><br>
-红黑树通过约束条件（如红色节点不能连续、从根到叶子的黑节点数相同）保证最长路径不超过最短路径的两倍<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">9</a>。这种“非严格平衡”使得维护成本低于 AVL 树，同时仍能保证对数级时间复杂度（O(log n)）的查找效率。</p>
+红黑树通过约束条件（如红色节点不能连续、从根到叶子的黑节点数相同）保证最长路径不超过最短路径的两倍<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">9</a>。这种“非严格平衡”使得维护成本低于 AVL
+树，同时仍能保证对数级时间复杂度（O(log n)）的查找效率。</p>
 </li>
 <li>
 <p><strong>高效的增删操作</strong></p>
 <ul>
-<li><strong>插入/删除性能</strong>：红黑树在调整平衡时最多需要<strong>3次旋转</strong>即可完成，而 AVL 树可能需要多次旋转甚至 O(log n) 次调整<a href="@ref">6</a><a href="@ref">8</a>。例如，删除节点时，AVL 需维护从删除节点到根的路径平衡，而红黑树只需局部调整<a href="@ref">8</a>。</li>
+<li><strong>插入/删除性能</strong>：红黑树在调整平衡时最多需要<strong>3次旋转</strong>即可完成，而 AVL 树可能需要多次旋转甚至 O(log n) 次调整<a href="@ref">6</a><a href="@ref">8</a>。例如，删除节点时，AVL
+需维护从删除节点到根的路径平衡，而红黑树只需局部调整<a href="@ref">8</a>。</li>
 <li><strong>时间复杂度</strong>：红黑树的插入、删除和查找均为 O(log n)，且实际性能稳定，适合频繁修改的场景<a href="@ref">7</a><a href="@ref">12</a>。</li>
 </ul>
 </li>
@@ -4752,7 +4847,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>哈希冲突严重</strong>：当多个键的哈希值相同（哈希冲突），且这些键被存储在同一个桶中时，<code>HashMap</code> 会使用链表或红黑树来存储这些键值对。在这种情况下，<code>get</code> 操作需要遍历链表或红黑树来查找目标键。
 <ul>
 <li><strong>链表</strong>：如果桶中的元素以链表形式存储，时间复杂度为 O(n)，其中n是链表的长度。</li>
-<li><strong>红黑树</strong>：在 JDK 1.8 及之后，当链表长度超过一定阈值（默认是 8）且桶数组长度大于等于 64 时，链表会转换为红黑树。此时，<code>get</code> 操作的时间复杂度为 O(log n)，其中 n 是树中节点的数量<a href="@ref">3</a><a href="@ref">4</a>。</li>
+<li><strong>红黑树</strong>：在 JDK 1.8 及之后，当链表长度超过一定阈值（默认是 8）且桶数组长度大于等于 64 时，链表会转换为红黑树。此时，<code>get</code> 操作的时间复杂度为 O(log n)，其中 n
+是树中节点的数量<a href="@ref">3</a><a href="@ref">4</a>。</li>
 </ul>
 </li>
 </ul>
@@ -4778,7 +4874,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <p><code>Collections.synchronizedMap</code> 方法可以将普通的 <code>HashMap</code> 包装为一个线程安全的 <code>Map</code>。它通过在 <code>HashMap</code> 的所有操作方法上加锁（<code>synchronized</code>）来保证线程安全。<br>
 <strong>示例代码</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> Collections.<span style="color:#a6e22e">synchronizedMap</span>(<span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>());
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map<span style="color:#f92672">=</span>Collections.<span style="color:#a6e22e">synchronizedMap</span>(<span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>());
 </span></span></code></pre></div><p><strong>特点</strong>：</p>
 <ul>
 <li><strong>优点</strong>：使用简单，适合低并发场景。</li>
@@ -4791,7 +4887,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <p><code>ConcurrentHashMap</code> 是 Java 并发包中提供的线程安全的 <code>Map</code> 实现。它通过 <strong>分段锁</strong>（JDK 1.7）或 <strong>CAS + <code>synchronized</code></strong>（JDK 1.8 及之后）来保证线程安全。<br>
 <strong>示例代码</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ConcurrentHashMap<span style="color:#f92672">&lt;&gt;</span>();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ConcurrentHashMap<span style="color:#f92672">&lt;&gt;</span>();
 </span></span></code></pre></div><p><strong>特点</strong>：</p>
 <ul>
 <li><strong>优点</strong>：锁粒度更细，性能更高，适合高并发场景。</li>
@@ -4804,42 +4900,42 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <p>读写锁将锁分为 <strong>读锁</strong> 和 <strong>写锁</strong>，允许多个线程同时读取数据，但写操作是独占的。<br>
 <strong>示例代码</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ReadWriteLock lock <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ReentrantReadWriteLock();
-</span></span><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ReadWriteLock lock<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ReentrantReadWriteLock();
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 写操作</span>
-</span></span><span style="display:flex;"><span>lock.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">writeLock</span>().
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>lock();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>{
-</span></span><span style="display:flex;"><span>        map.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>,<span style="color:#e6db74">&#34;value&#34;</span>);
-</span></span><span style="display:flex;"><span>}<span style="color:#66d9ef">finally</span>{
 </span></span><span style="display:flex;"><span>        lock.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">writeLock</span>().
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">writeLock</span>().
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>unlock();
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>        lock();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>{
+</span></span><span style="display:flex;"><span>        map.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>,<span style="color:#e6db74">&#34;value&#34;</span>);
+</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">finally</span>{
+</span></span><span style="display:flex;"><span>        lock.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">writeLock</span>().
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        unlock();
+</span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 读操作</span>
 </span></span><span style="display:flex;"><span>        lock.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">readLock</span>().
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">readLock</span>().
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>lock();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>{
-</span></span><span style="display:flex;"><span>String value <span style="color:#f92672">=</span> map.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;key&#34;</span>);
-</span></span><span style="display:flex;"><span>}<span style="color:#66d9ef">finally</span>{
+</span></span><span style="display:flex;"><span>        lock();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>{
+</span></span><span style="display:flex;"><span>        String value<span style="color:#f92672">=</span>map.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;key&#34;</span>);
+</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">finally</span>{
 </span></span><span style="display:flex;"><span>        lock.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">readLock</span>().
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">readLock</span>().
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>unlock();
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>        unlock();
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><p><strong>特点</strong>：</p>
 <ul>
 <li><strong>优点</strong>：适合读多写少的场景，性能较好。</li>
@@ -4852,11 +4948,11 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <p>如果 <code>HashMap</code> 只在方法内部使用，且每个线程都有自己的实例，则无需额外同步。<br>
 <strong>示例代码</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">process</span>() {
-</span></span><span style="display:flex;"><span>    Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> localMap <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
-</span></span><span style="display:flex;"><span>    localMap.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>, <span style="color:#e6db74">&#34;value&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 其他操作</span>
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">process</span>(){
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> localMap<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        localMap.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>,<span style="color:#e6db74">&#34;value&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 其他操作</span>
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><p><strong>特点</strong>：</p>
 <ul>
 <li><strong>优点</strong>：简单且线程安全。</li>
@@ -4869,14 +4965,14 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <p>如果 <code>HashMap</code> 在初始化后不再修改，可以将其设为只读，从而避免线程安全问题。<br>
 <strong>示例代码</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
-</span></span><span style="display:flex;"><span>map.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        map.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>,<span style="color:#e6db74">&#34;value&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>,<span style="color:#e6db74">&#34;value&#34;</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>map <span style="color:#f92672">=</span>Collections.
+</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">=</span>Collections.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">unmodifiableMap</span>(map);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">unmodifiableMap</span>(map);
 </span></span></code></pre></div><p><strong>特点</strong>：</p>
 <ul>
 <li><strong>优点</strong>：简单且线程安全。</li>
@@ -4942,7 +5038,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <ul>
 <li><strong><code>Hashtable</code></strong>：是线程安全的，其所有公共方法都使用了 <code>synchronized</code> 关键字进行同步，因此在多线程环境下可以直接使用，但性能较低<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
-<li><strong><code>HashMap</code></strong>：是非线程安全的，多线程环境下可能导致数据不一致。如果需要在多线程环境中使用，可以通过 <code>Collections.synchronizedMap</code> 方法将其包装为线程安全的 <code>Map</code>，或者使用 <code>ConcurrentHashMap</code><a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
+<li><strong><code>HashMap</code></strong>：是非线程安全的，多线程环境下可能导致数据不一致。如果需要在多线程环境中使用，可以通过 <code>Collections.synchronizedMap</code> 方法将其包装为线程安全的 <code>Map</code>
+，或者使用 <code>ConcurrentHashMap</code><a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
 </ul>
 <hr>
 <h3 id="2-对-null-值的支持">
@@ -4987,7 +5084,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <ul>
 <li><strong><code>Hashtable</code></strong>：使用 <code>Enumeration</code> 进行遍历，不支持 <code>fail-fast</code> 机制<a href="@ref">1</a><a href="@ref">3</a>。</li>
-<li><strong><code>HashMap</code></strong>：使用 <code>Iterator</code> 进行遍历，支持 <code>fail-fast</code> 机制。如果在迭代过程中修改了 <code>HashMap</code> 的结构（如添加或删除元素），会抛出 <code>ConcurrentModificationException</code><a href="@ref">1</a><a href="@ref">3</a>。</li>
+<li><strong><code>HashMap</code></strong>：使用 <code>Iterator</code> 进行遍历，支持 <code>fail-fast</code> 机制。如果在迭代过程中修改了 <code>HashMap</code>
+的结构（如添加或删除元素），会抛出 <code>ConcurrentModificationException</code><a href="@ref">1</a><a href="@ref">3</a>。</li>
 </ul>
 <hr>
 <h3 id="7-计算哈希值的方式">
@@ -5049,7 +5147,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
       </tr>
   </tbody>
 </table>
-<p>在实际开发中，<strong><code>HashMap</code></strong> 是更常用的选择，尤其是在单线程环境下。如果需要线程安全，推荐使用 <strong><code>ConcurrentHashMap</code></strong>，而不是 <code>Hashtable</code><a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</p>
+<p>在实际开发中，<strong><code>HashMap</code></strong> 是更常用的选择，尤其是在单线程环境下。如果需要线程安全，推荐使用 <strong><code>ConcurrentHashMap</code></strong>，而不是 <code>Hashtable</code><a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>
+。</p>
 <h2 id="当-hashmap-扩容时所有的红黑树或者链表都会重新构造吗">
   当 HashMap 扩容时，所有的红黑树或者链表都会重新构造吗
   <a class="anchor" href="#%e5%bd%93-hashmap-%e6%89%a9%e5%ae%b9%e6%97%b6%e6%89%80%e6%9c%89%e7%9a%84%e7%ba%a2%e9%bb%91%e6%a0%91%e6%88%96%e8%80%85%e9%93%be%e8%a1%a8%e9%83%bd%e4%bc%9a%e9%87%8d%e6%96%b0%e6%9e%84%e9%80%a0%e5%90%97">#</a>
@@ -5093,13 +5192,15 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <strong>3. 重新哈希的原因</strong>
   <a class="anchor" href="#3-%e9%87%8d%e6%96%b0%e5%93%88%e5%b8%8c%e7%9a%84%e5%8e%9f%e5%9b%a0">#</a>
 </h3>
-<p>扩容后，数组的长度变为原来的两倍（例如从 16 变为 32），哈希值的计算方式从 <code>(n - 1) &amp; hash</code> 变为 <code>(2n - 1) &amp; hash</code>。因此，原有的哈希值可能会映射到不同的位置，需要重新计算和分配<a href="@ref">1</a><a href="@ref">3</a>。</p>
+<p>扩容后，数组的长度变为原来的两倍（例如从 16 变为 32），哈希值的计算方式从 <code>(n - 1) &amp; hash</code> 变为 <code>(2n - 1) &amp; hash</code>
+。因此，原有的哈希值可能会映射到不同的位置，需要重新计算和分配<a href="@ref">1</a><a href="@ref">3</a>。</p>
 <hr>
 <h3 id="总结-17">
   <strong>总结</strong>
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-17">#</a>
 </h3>
-<p>当 HashMap 扩容时，所有的链表和红黑树都会重新构造。链表会被拆分为高位和低位链表，红黑树会被拆分为高位和低位树，并根据节点数决定是否转换为链表。这一过程确保了扩容后元素的分布依然均匀，维持了 HashMap 的高效性<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">5</a>。</p>
+<p>当 HashMap 扩容时，所有的链表和红黑树都会重新构造。链表会被拆分为高位和低位链表，红黑树会被拆分为高位和低位树，并根据节点数决定是否转换为链表。这一过程确保了扩容后元素的分布依然均匀，维持了 HashMap
+的高效性<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">5</a>。</p>
 <h2 id="为什么hashmap选择红黑树而不选择b树">
   为什么HashMap选择红黑树而不选择B+树
   <a class="anchor" href="#%e4%b8%ba%e4%bb%80%e4%b9%88hashmap%e9%80%89%e6%8b%a9%e7%ba%a2%e9%bb%91%e6%a0%91%e8%80%8c%e4%b8%8d%e9%80%89%e6%8b%a9b%e6%a0%91">#</a>
@@ -5164,7 +5265,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   总结
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-18">#</a>
 </h3>
-<p><code>HashMap</code> 选择红黑树而不是 B+ 树的主要原因在于红黑树更适合内存中的动态数据管理，实现简单、修改效率高、内存占用少，且维护成本低。而 B+ 树更适合磁盘存储，其优势在内存中无法充分发挥<a href="@ref">22</a><a href="@ref">55</a><a href="@ref">56</a>。</p>
+<p><code>HashMap</code> 选择红黑树而不是 B+ 树的主要原因在于红黑树更适合内存中的动态数据管理，实现简单、修改效率高、内存占用少，且维护成本低。而 B+
+树更适合磁盘存储，其优势在内存中无法充分发挥<a href="@ref">22</a><a href="@ref">55</a><a href="@ref">56</a>。</p>
 <h1 id="io模型">
   I/O模型
   <a class="anchor" href="#io%e6%a8%a1%e5%9e%8b">#</a>
@@ -5173,7 +5275,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   select、poll和epoll的区别
   <a class="anchor" href="#selectpoll%e5%92%8cepoll%e7%9a%84%e5%8c%ba%e5%88%ab">#</a>
 </h2>
-<p><code>select</code>、<code>poll</code> 和 <code>epoll</code> 都是用于实现 I/O 多路复用的机制，允许单个进程或线程同时监控多个文件描述符（如套接字），并在其中任何一个就绪时通知程序进行读写操作。尽管它们的功能相似，但在实现方式、性能和适用场景上有显著区别。以下是它们的详细对比：</p>
+<p><code>select</code>、<code>poll</code> 和 <code>epoll</code> 都是用于实现 I/O
+多路复用的机制，允许单个进程或线程同时监控多个文件描述符（如套接字），并在其中任何一个就绪时通知程序进行读写操作。尽管它们的功能相似，但在实现方式、性能和适用场景上有显著区别。以下是它们的详细对比：</p>
 <hr>
 <h3 id="1-select">
   1. <strong>select</strong>
@@ -5508,7 +5611,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <ul>
 <li><strong>非阻塞 I/O 是 I/O 多路复用的基础</strong>：I/O 多路复用依赖于通道的非阻塞模式。只有将通道设置为非阻塞模式，<code>Selector</code> 才能有效地监控多个通道的 I/O 事件。</li>
-<li><strong>I/O 多路复用是对非阻塞 I/O 的优化</strong>：非阻塞 I/O 需要不断轮询检查 I/O 操作是否完成，而 I/O 多路复用通过 <code>Selector</code> 实现了事件驱动机制，避免了轮询的开销<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</li>
+<li><strong>I/O 多路复用是对非阻塞 I/O 的优化</strong>：非阻塞 I/O 需要不断轮询检查 I/O 操作是否完成，而 I/O 多路复用通过 <code>Selector</code>
+实现了事件驱动机制，避免了轮询的开销<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</li>
 </ul>
 <hr>
 <h3 id="4-总结-1">
@@ -5544,7 +5648,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <p>I/O 多路复用是一种机制，通过一个线程同时监控多个 I/O 通道，当某个通道有事件就绪时，通知应用程序进行处理。<code>Selector</code> 是 Java 中实现 I/O 多路复用的核心组件。</p>
 <ul>
-<li><strong>多路复用机制</strong>：<code>Selector</code> 使用底层的系统调用（如 Linux 的 <code>epoll</code>、Windows 的 <code>IOCP</code>）监控多个 <code>Channel</code>。当某个 <code>Channel</code> 的 I/O 事件就绪时，<code>Selector</code> 会将其标记为“就绪状态”，并通过 <code>selectedKeys()</code> 返回这些 <code>Channel</code> 的集合。</li>
+<li><strong>多路复用机制</strong>：<code>Selector</code> 使用底层的系统调用（如 Linux 的 <code>epoll</code>、Windows 的 <code>IOCP</code>）监控多个 <code>Channel</code>。当某个 <code>Channel</code> 的 I/O 事件就绪时，<code>Selector</code>
+会将其标记为“就绪状态”，并通过 <code>selectedKeys()</code> 返回这些 <code>Channel</code> 的集合。</li>
 <li><strong>单线程管理多通道</strong>：通过 <code>Selector</code>，单线程可以同时管理成千上万的 <code>Channel</code>，避免了传统阻塞 I/O 中每个连接需要一个线程的开销。</li>
 </ul>
 <hr>
@@ -5721,6 +5826,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> socket
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> threading
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_client</span>(conn, addr):
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
 </span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
@@ -5730,6 +5836,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 发送响应</span>
 </span></span><span style="display:flex;"><span>        conn<span style="color:#f92672">.</span>send(response)
 </span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>server <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
 </span></span><span style="display:flex;"><span>server<span style="color:#f92672">.</span>bind((<span style="color:#e6db74">&#39;0.0.0.0&#39;</span>, <span style="color:#ae81ff">12345</span>))
@@ -5748,16 +5855,19 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>client <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
 </span></span><span style="display:flex;"><span>client<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#39;server_ip&#39;</span>, <span style="color:#ae81ff">12345</span>))
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_heartbeat</span>():
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
 </span></span><span style="display:flex;"><span>        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">30</span>)
 </span></span><span style="display:flex;"><span>        client<span style="color:#f92672">.</span>send(heartbeat_message)
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">monitor_events</span>():
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
 </span></span><span style="display:flex;"><span>        event <span style="color:#f92672">=</span> detect_event()
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> event:
 </span></span><span style="display:flex;"><span>            client<span style="color:#f92672">.</span>send(event_message)
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 启动心跳和事件监控线程</span>
 </span></span><span style="display:flex;"><span>threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>send_heartbeat)<span style="color:#f92672">.</span>start()
@@ -6459,7 +6569,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   总结
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-20">#</a>
 </h3>
-<p><code>SocketChannel.close</code> 方法会按照 TCP 协议的正常流程关闭连接，<strong>不会</strong>导致数据传输时意外断开。但在网络故障或进程崩溃等异常情况下，可能会导致连接异常关闭。因此，建议在关闭连接前确保数据传输完成，并遵循 TCP 关闭的最佳实践<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</p>
+<p><code>SocketChannel.close</code> 方法会按照 TCP 协议的正常流程关闭连接，<strong>不会</strong>导致数据传输时意外断开。但在网络故障或进程崩溃等异常情况下，可能会导致连接异常关闭。因此，建议在关闭连接前确保数据传输完成，并遵循 TCP
+关闭的最佳实践<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</p>
 <h2 id="我还需要实现对特定连接发送命令报文">
   我还需要实现对特定连接发送命令报文
   <a class="anchor" href="#%e6%88%91%e8%bf%98%e9%9c%80%e8%a6%81%e5%ae%9e%e7%8e%b0%e5%af%b9%e7%89%b9%e5%ae%9a%e8%bf%9e%e6%8e%a5%e5%8f%91%e9%80%81%e5%91%bd%e4%bb%a4%e6%8a%a5%e6%96%87">#</a>
@@ -7315,10 +7426,13 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#%e5%9c%a8java%e4%b8%ad%e4%b8%80%e4%b8%aatcp%e8%bf%9e%e6%8e%a5%e4%bd%bf%e7%94%a8%e4%b8%80%e4%b8%aasocket%e8%bf%9e%e6%8e%a5%e5%a4%9a%e4%b8%aatcp%e8%bf%99%e6%a0%b7%e5%8d%a0%e7%94%a8%e5%be%88%e5%a4%9a%e5%86%85%e5%ad%98%e5%90%97">#</a>
 </h2>
 <p>在Java中，每个TCP连接确实会使用一个Socket，而每个Socket都会占用一定的内存。具体的内存消耗取决于多个因素，包括操作系统内核的实现、缓冲区的大小以及其他相关的数据结构。</p>
-<p>根据搜索结果，每个TCP连接（即一个Socket）在内核中会涉及多个数据结构，例如 <code>struct tcp_sock</code>、<code>struct file</code>、<code>struct dentry</code> 等。这些结构的内存占用总和大约在3KB左右。此外，如果使用了 <code>epoll</code> 等事件处理机制，每个连接还会额外占用一些内存（例如 <code>epitem</code> 对象，大小为128字节）<a href="@ref">3</a>。</p>
+<p>根据搜索结果，每个TCP连接（即一个Socket）在内核中会涉及多个数据结构，例如 <code>struct tcp_sock</code>、<code>struct file</code>、<code>struct dentry</code>
+等。这些结构的内存占用总和大约在3KB左右。此外，如果使用了 <code>epoll</code> 等事件处理机制，每个连接还会额外占用一些内存（例如 <code>epitem</code> 对象，大小为128字节）<a href="@ref">3</a>。</p>
 <p>对于接收和发送缓冲区，如果没有数据传输，它们不会占用内存。只有当有数据在缓冲区中等待处理时，才会占用内存。默认情况下，接收和发送缓冲区的最小大小各为4KB，因此每个连接在数据传输时可能会额外占用8KB的内存<a href="@ref">3</a>。</p>
-<p>总的来说，一个TCP连接在不传输数据时，占用的内存大约为3KB左右；在传输数据时，可能会增加到10KB以上。因此，连接多个TCP连接确实会占用较多的内存，尤其是在高并发的情况下。例如，10万个TCP连接在不传输数据时，大约会占用300MB的内存；在传输数据时，可能会占用超过1GB的内存<a href="@ref">3</a>。</p>
-<p>如果需要支持大量并发连接，可以通过调整内核参数（如 <code>tcp_rmem</code>、<code>tcp_wmem</code> 和 <code>tcp_mem</code>）来优化内存使用<a href="@ref">3</a>。此外，在Java中，可以通过优化代码和合理设置缓冲区大小来减少内存占用<a href="@ref">1</a>。</p>
+<p>总的来说，一个TCP连接在不传输数据时，占用的内存大约为3KB左右；在传输数据时，可能会增加到10KB以上。因此，连接多个TCP连接确实会占用较多的内存，尤其是在高并发的情况下。例如，10万个TCP连接在不传输数据时，大约会占用300MB的内存；在传输数据时，可能会占用超过1GB的内存<a href="@ref">3</a>
+。</p>
+<p>如果需要支持大量并发连接，可以通过调整内核参数（如 <code>tcp_rmem</code>、<code>tcp_wmem</code> 和 <code>tcp_mem</code>）来优化内存使用<a href="@ref">3</a>
+。此外，在Java中，可以通过优化代码和合理设置缓冲区大小来减少内存占用<a href="@ref">1</a>。</p>
 <p>综上所述，连接多个TCP连接确实会占用较多内存，特别是在高并发场景下。通过优化系统和代码，可以有效地管理和减少内存消耗。</p>
 <h2 id="在java中创建线程的内存开销">
   在java中创建线程的内存开销
@@ -7329,7 +7443,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   1. <strong>线程栈的内存开销</strong>
   <a class="anchor" href="#1-%e7%ba%bf%e7%a8%8b%e6%a0%88%e7%9a%84%e5%86%85%e5%ad%98%e5%bc%80%e9%94%80">#</a>
 </h3>
-<p>Java线程的线程栈区别于堆，它不受Java程序直接控制，而是由操作系统管理。默认情况下，每个线程的线程栈大小为1MB。这意味着如果创建了1024个线程，仅线程栈就会占用1GB的内存。这种内存消耗在高并发场景下可能会迅速耗尽系统资源，导致程序崩溃<a href="@ref">1</a><a href="@ref">4</a>。</p>
+<p>Java线程的线程栈区别于堆，它不受Java程序直接控制，而是由操作系统管理。默认情况下，每个线程的线程栈大小为1MB。这意味着如果创建了1024个线程，仅线程栈就会占用1GB的内存。这种内存消耗在高并发场景下可能会迅速耗尽系统资源，导致程序崩溃<a href="@ref">1</a><a href="@ref">4</a>
+。</p>
 <p>然而，实际内存占用可能比默认值低，因为操作系统会以延迟分配的方式分配内存页面（例如在第一次使用时分配），因此每个线程栈实际占用的内存可能在80KB到200KB之间<a href="@ref">2</a>。</p>
 <h3 id="2-其他内存开销">
   2. <strong>其他内存开销</strong>
@@ -7371,14 +7486,17 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   总结
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-21">#</a>
 </h3>
-<p>在Java中，每个线程默认会占用1MB的线程栈内存（实际可能为80KB到200KB），加上其他内存开销，创建大量线程可能会导致内存耗尽。通过使用线程池和优化线程栈大小，可以有效减少内存开销，提升系统性能<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</p>
+<p>在Java中，每个线程默认会占用1MB的线程栈内存（实际可能为80KB到200KB），加上其他内存开销，创建大量线程可能会导致内存耗尽。通过使用线程池和优化线程栈大小，可以有效减少内存开销，提升系统性能<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>
+。</p>
 <h2 id="java中的selector使用的是select还是epoll">
   java中的selector使用的是select还是epoll
   <a class="anchor" href="#java%e4%b8%ad%e7%9a%84selector%e4%bd%bf%e7%94%a8%e7%9a%84%e6%98%afselect%e8%bf%98%e6%98%afepoll">#</a>
 </h2>
 <p>在Java中，<code>Selector</code>的实现依赖于底层操作系统的支持，具体使用的是<code>select</code>还是<code>epoll</code>取决于操作系统和JDK的实现。</p>
-<p>在Linux系统中，Java NIO的<code>Selector</code>通常使用的是<code>epoll</code>模型。这是因为<code>epoll</code>在处理大量连接时性能优于<code>select</code>，尤其是在高并发场景下。<code>epoll</code>基于事件驱动，能够高效地管理大量文件描述符，而不会像<code>select</code>那样随着文件描述符数量的增加而性能下降<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">6</a>。</p>
-<p>具体来说，Java的<code>Selector</code>是通过<code>SelectorProvider</code>来创建的。在Linux系统中，<code>SelectorProvider</code>会返回一个<code>EPollSelectorProvider</code>，这意味着<code>Selector</code>的底层实现是基于<code>epoll</code>的。而在Windows系统中，<code>Selector</code>的实现则是基于<code>select</code>的，因为Windows不支持<code>epoll</code><a href="@ref">6</a>。</p>
+<p>在Linux系统中，Java NIO的<code>Selector</code>通常使用的是<code>epoll</code>模型。这是因为<code>epoll</code>在处理大量连接时性能优于<code>select</code>，尤其是在高并发场景下。<code>epoll</code>
+基于事件驱动，能够高效地管理大量文件描述符，而不会像<code>select</code>那样随着文件描述符数量的增加而性能下降<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">6</a>。</p>
+<p>具体来说，Java的<code>Selector</code>是通过<code>SelectorProvider</code>来创建的。在Linux系统中，<code>SelectorProvider</code>会返回一个<code>EPollSelectorProvider</code>，这意味着<code>Selector</code>
+的底层实现是基于<code>epoll</code>的。而在Windows系统中，<code>Selector</code>的实现则是基于<code>select</code>的，因为Windows不支持<code>epoll</code><a href="@ref">6</a>。</p>
 <p>总结：</p>
 <ul>
 <li><strong>Linux系统</strong>：Java的<code>Selector</code>使用的是<code>epoll</code>模型，性能更优<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">6</a>。</li>
@@ -7393,13 +7511,15 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   java selector 的原理
   <a class="anchor" href="#java-selector-%e7%9a%84%e5%8e%9f%e7%90%86">#</a>
 </h2>
-<p>Java 中的 <code>Selector</code> 是 Java NIO（非阻塞 I/O）的核心组件之一，用于实现 I/O 多路复用。它的主要作用是通过单个线程管理多个 <code>Channel</code>，监控这些 <code>Channel</code> 上的 I/O 事件（如读、写、连接等），从而提高系统的并发性能。以下是 <code>Selector</code> 的工作原理和关键点：</p>
+<p>Java 中的 <code>Selector</code> 是 Java NIO（非阻塞 I/O）的核心组件之一，用于实现 I/O 多路复用。它的主要作用是通过单个线程管理多个 <code>Channel</code>，监控这些 <code>Channel</code> 上的 I/O
+事件（如读、写、连接等），从而提高系统的并发性能。以下是 <code>Selector</code> 的工作原理和关键点：</p>
 <hr>
 <h3 id="1-selector-的核心功能">
   1. <strong>Selector 的核心功能</strong>
   <a class="anchor" href="#1-selector-%e7%9a%84%e6%a0%b8%e5%bf%83%e5%8a%9f%e8%83%bd">#</a>
 </h3>
-<p><code>Selector</code> 允许单个线程同时监控多个 <code>Channel</code> 的 I/O 事件。通过注册 <code>Channel</code> 到 <code>Selector</code> 并指定感兴趣的事件（如 <code>OP_READ</code>、<code>OP_WRITE</code>、<code>OP_ACCEPT</code> 等），程序可以在事件就绪时进行处理，而不需要为每个 <code>Channel</code> 创建单独的线程<a href="@ref">1</a>。</p>
+<p><code>Selector</code> 允许单个线程同时监控多个 <code>Channel</code> 的 I/O 事件。通过注册 <code>Channel</code> 到 <code>Selector</code> 并指定感兴趣的事件（如 <code>OP_READ</code>、<code>OP_WRITE</code>、<code>OP_ACCEPT</code>
+等），程序可以在事件就绪时进行处理，而不需要为每个 <code>Channel</code> 创建单独的线程<a href="@ref">1</a>。</p>
 <hr>
 <h3 id="2-selector-的工作流程">
   2. <strong>Selector 的工作流程</strong>
@@ -7408,7 +7528,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <ol>
 <li>
 <p><strong>创建 Selector</strong><br>
-通过 <code>Selector.open()</code> 方法创建一个 <code>Selector</code> 实例。底层会根据操作系统的不同选择适当的实现（如 Linux 使用 <code>epoll</code>，Windows 使用 <code>select</code>）<a href="@ref">2</a><a href="@ref">6</a>。</p>
+通过 <code>Selector.open()</code> 方法创建一个 <code>Selector</code> 实例。底层会根据操作系统的不同选择适当的实现（如 Linux 使用 <code>epoll</code>，Windows 使用 <code>select</code>
+）<a href="@ref">2</a><a href="@ref">6</a>。</p>
 </li>
 <li>
 <p><strong>注册 Channel</strong><br>
@@ -7419,11 +7540,13 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </li>
 <li>
 <p><strong>事件监听</strong><br>
-调用 <code>Selector.select()</code> 方法，该方法会阻塞，直到至少有一个 <code>Channel</code> 的事件就绪。返回后，可以通过 <code>selectedKeys()</code> 获取就绪的 <code>SelectionKey</code> 集合<a href="@ref">1</a><a href="@ref">2</a>。</p>
+调用 <code>Selector.select()</code> 方法，该方法会阻塞，直到至少有一个 <code>Channel</code> 的事件就绪。返回后，可以通过 <code>selectedKeys()</code> 获取就绪的 <code>SelectionKey</code>
+集合<a href="@ref">1</a><a href="@ref">2</a>。</p>
 </li>
 <li>
 <p><strong>事件处理</strong><br>
-遍历 <code>selectedKeys()</code>，根据事件类型（如 <code>OP_READ</code>、<code>OP_WRITE</code>）进行相应的 I/O 操作。处理完成后，需要手动移除 <code>SelectionKey</code>，否则下次 <code>select()</code> 会重复处理<a href="@ref">1</a>。</p>
+遍历 <code>selectedKeys()</code>，根据事件类型（如 <code>OP_READ</code>、<code>OP_WRITE</code>）进行相应的 I/O 操作。处理完成后，需要手动移除 <code>SelectionKey</code>，否则下次 <code>select()</code>
+会重复处理<a href="@ref">1</a>。</p>
 </li>
 <li>
 <p><strong>关闭资源</strong><br>
@@ -7483,50 +7606,51 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   7. <strong>示例代码</strong>
   <a class="anchor" href="#7-%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Selector selector <span style="color:#f92672">=</span> Selector.<span style="color:#a6e22e">open</span>();
-</span></span><span style="display:flex;"><span>ServerSocketChannel serverChannel <span style="color:#f92672">=</span> ServerSocketChannel.<span style="color:#a6e22e">open</span>();
-</span></span><span style="display:flex;"><span>serverChannel.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">new</span> InetSocketAddress(8080));
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Selector selector<span style="color:#f92672">=</span>Selector.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>        ServerSocketChannel serverChannel<span style="color:#f92672">=</span>ServerSocketChannel.<span style="color:#a6e22e">open</span>();
 </span></span><span style="display:flex;"><span>        serverChannel.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>);
-</span></span><span style="display:flex;"><span>serverChannel.
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">new</span> InetSocketAddress(8080));
+</span></span><span style="display:flex;"><span>        serverChannel.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">register</span>(selector, SelectionKey.<span style="color:#a6e22e">OP_ACCEPT</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>        serverChannel.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#66d9ef">true</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">register</span>(selector,SelectionKey.<span style="color:#a6e22e">OP_ACCEPT</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#66d9ef">true</span>){
 </span></span><span style="display:flex;"><span>        selector.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">select</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">select</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Set<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> selectedKeys <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">selectedKeys</span>();
-</span></span><span style="display:flex;"><span>Iterator<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> iter <span style="color:#f92672">=</span> selectedKeys.<span style="color:#a6e22e">iterator</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(iter.
+</span></span><span style="display:flex;"><span>        Set<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span>selectedKeys<span style="color:#f92672">=</span>selector.<span style="color:#a6e22e">selectedKeys</span>();
+</span></span><span style="display:flex;"><span>        Iterator<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span>iter<span style="color:#f92672">=</span>selectedKeys.<span style="color:#a6e22e">iterator</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(iter.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">hasNext</span>()){
-</span></span><span style="display:flex;"><span>SelectionKey key <span style="color:#f92672">=</span> iter.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">hasNext</span>()){
+</span></span><span style="display:flex;"><span>        SelectionKey key<span style="color:#f92672">=</span>iter.<span style="color:#a6e22e">next</span>();
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(key.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">isAcceptable</span>()){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">isAcceptable</span>()){
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 处理连接事件</span>
 </span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(key.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">isReadable</span>()){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">isReadable</span>()){
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 处理读事件</span>
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        iter.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">remove</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">remove</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><hr>
 <p>通过上述机制，<code>Selector</code> 能够高效地管理多个 <code>Channel</code>，提升 I/O 操作的性能，特别适合高并发的网络应用<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">6</a>。</p>
 <h2 id="selector中事件是由谁产生的">
   selector中事件是由谁产生的？
   <a class="anchor" href="#selector%e4%b8%ad%e4%ba%8b%e4%bb%b6%e6%98%af%e7%94%b1%e8%b0%81%e4%ba%a7%e7%94%9f%e7%9a%84">#</a>
 </h2>
-<p>在 Java 的 <code>Selector</code> 机制中，事件是由 <strong>注册到 <code>Selector</code> 的 <code>Channel</code></strong> 产生的。具体来说，当 <code>Channel</code> 上发生了与注册事件相关的 I/O 操作时，<code>Selector</code> 会检测到这些事件并将其标记为就绪状态。以下是详细说明：</p>
+<p>在 Java 的 <code>Selector</code> 机制中，事件是由 <strong>注册到 <code>Selector</code> 的 <code>Channel</code></strong> 产生的。具体来说，当 <code>Channel</code> 上发生了与注册事件相关的 I/O 操作时，<code>Selector</code>
+会检测到这些事件并将其标记为就绪状态。以下是详细说明：</p>
 <hr>
 <h3 id="1-事件的产生">
   1. <strong>事件的产生</strong>
@@ -7534,7 +7658,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <ul>
 <li><strong><code>Channel</code> 是事件的来源</strong><br>
-每个 <code>Channel</code>（如 <code>SocketChannel</code>、<code>ServerSocketChannel</code>）都可以注册到 <code>Selector</code>，并指定感兴趣的事件类型（如 <code>OP_READ</code>、<code>OP_WRITE</code>、<code>OP_ACCEPT</code>、<code>OP_CONNECT</code>）。当 <code>Channel</code> 上发生了这些事件时，<code>Selector</code> 会将其标记为就绪状态。</li>
+每个 <code>Channel</code>（如 <code>SocketChannel</code>、<code>ServerSocketChannel</code>）都可以注册到 <code>Selector</code>，并指定感兴趣的事件类型（如 <code>OP_READ</code>、<code>OP_WRITE</code>、<code>OP_ACCEPT</code>
+、<code>OP_CONNECT</code>）。当 <code>Channel</code> 上发生了这些事件时，<code>Selector</code> 会将其标记为就绪状态。</li>
 <li><strong>事件类型</strong>
 <ul>
 <li><code>OP_ACCEPT</code>：由 <code>ServerSocketChannel</code> 产生，表示有新的客户端连接请求。</li>
@@ -7562,7 +7687,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h3>
 <ul>
 <li><strong>底层操作系统通知</strong><br>
-<code>Selector</code> 的底层实现依赖于操作系统的 I/O 多路复用机制（如 Linux 的 <code>epoll</code> 或 Windows 的 <code>select</code>）。当 <code>Channel</code> 上的 I/O 操作就绪时，操作系统会通知 <code>Selector</code>，<code>Selector</code> 再将事件传递给应用程序。</li>
+<code>Selector</code> 的底层实现依赖于操作系统的 I/O 多路复用机制（如 Linux 的 <code>epoll</code> 或 Windows 的 <code>select</code>）。当 <code>Channel</code> 上的 I/O
+操作就绪时，操作系统会通知 <code>Selector</code>，<code>Selector</code> 再将事件传递给应用程序。</li>
 <li><strong>非阻塞模式</strong><br>
 注册到 <code>Selector</code> 的 <code>Channel</code> 必须设置为非阻塞模式，否则无法正常工作。非阻塞模式确保了 <code>Channel</code> 在 I/O 操作未就绪时不会阻塞，而是由 <code>Selector</code> 统一管理。</li>
 </ul>
@@ -7572,49 +7698,50 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#4-%e7%a4%ba%e4%be%8b">#</a>
 </h3>
 <p>以下代码展示了 <code>Selector</code> 如何检测和处理事件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Selector selector <span style="color:#f92672">=</span> Selector.<span style="color:#a6e22e">open</span>();
-</span></span><span style="display:flex;"><span>ServerSocketChannel serverChannel <span style="color:#f92672">=</span> ServerSocketChannel.<span style="color:#a6e22e">open</span>();
-</span></span><span style="display:flex;"><span>serverChannel.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">new</span> InetSocketAddress(8080));
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Selector selector<span style="color:#f92672">=</span>Selector.<span style="color:#a6e22e">open</span>();
+</span></span><span style="display:flex;"><span>        ServerSocketChannel serverChannel<span style="color:#f92672">=</span>ServerSocketChannel.<span style="color:#a6e22e">open</span>();
 </span></span><span style="display:flex;"><span>        serverChannel.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>);
-</span></span><span style="display:flex;"><span>serverChannel.
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">new</span> InetSocketAddress(8080));
+</span></span><span style="display:flex;"><span>        serverChannel.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">register</span>(selector, SelectionKey.<span style="color:#a6e22e">OP_ACCEPT</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">configureBlocking</span>(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>        serverChannel.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#66d9ef">true</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">register</span>(selector,SelectionKey.<span style="color:#a6e22e">OP_ACCEPT</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#66d9ef">true</span>){
 </span></span><span style="display:flex;"><span>        selector.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">select</span>(); <span style="color:#75715e">// 检测事件</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">select</span>(); <span style="color:#75715e">// 检测事件</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Set<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> selectedKeys <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">selectedKeys</span>();
-</span></span><span style="display:flex;"><span>Iterator<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> iter <span style="color:#f92672">=</span> selectedKeys.<span style="color:#a6e22e">iterator</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(iter.
+</span></span><span style="display:flex;"><span>        Set<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span>selectedKeys<span style="color:#f92672">=</span>selector.<span style="color:#a6e22e">selectedKeys</span>();
+</span></span><span style="display:flex;"><span>        Iterator<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span>iter<span style="color:#f92672">=</span>selectedKeys.<span style="color:#a6e22e">iterator</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(iter.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">hasNext</span>()){
-</span></span><span style="display:flex;"><span>SelectionKey key <span style="color:#f92672">=</span> iter.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">hasNext</span>()){
+</span></span><span style="display:flex;"><span>        SelectionKey key<span style="color:#f92672">=</span>iter.<span style="color:#a6e22e">next</span>();
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(key.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">isAcceptable</span>()){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">isAcceptable</span>()){
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 处理连接事件</span>
 </span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(key.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">isReadable</span>()){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">isReadable</span>()){
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 处理读事件</span>
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        iter.
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">remove</span>(); <span style="color:#75715e">// 移除已处理的事件</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">remove</span>(); <span style="color:#75715e">// 移除已处理的事件</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><hr>
 <h3 id="总结-22">
   总结
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-22">#</a>
 </h3>
-<p><code>Selector</code> 中的事件是由 <strong>注册到 <code>Selector</code> 的 <code>Channel</code></strong> 产生的，<code>Selector</code> 负责检测这些事件并将其传递给应用程序进行处理。底层操作系统的 I/O 多路复用机制（如 <code>epoll</code> 或 <code>select</code>）是事件通知的关键<a href="@ref">1</a><a href="@ref">4</a>。</p>
+<p><code>Selector</code> 中的事件是由 <strong>注册到 <code>Selector</code> 的 <code>Channel</code></strong> 产生的，<code>Selector</code> 负责检测这些事件并将其传递给应用程序进行处理。底层操作系统的 I/O 多路复用机制（如 <code>epoll</code>
+或 <code>select</code>）是事件通知的关键<a href="@ref">1</a><a href="@ref">4</a>。</p>
 <h2 id="java的selector的使用过程中概念总结一下">
   java的selector的使用过程中概念总结一下
   <a class="anchor" href="#java%e7%9a%84selector%e7%9a%84%e4%bd%bf%e7%94%a8%e8%bf%87%e7%a8%8b%e4%b8%ad%e6%a6%82%e5%bf%b5%e6%80%bb%e7%bb%93%e4%b8%80%e4%b8%8b">#</a>
@@ -7635,7 +7762,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#2-%e6%a0%b8%e5%bf%83%e6%a6%82%e5%bf%b5">#</a>
 </h3>
 <ul>
-<li><strong>Channel</strong>：表示一个 I/O 操作的通道，如 <code>SocketChannel</code>（用于客户端）和 <code>ServerSocketChannel</code>（用于服务器端）。必须设置为非阻塞模式才能与 <code>Selector</code> 一起使用<a href="@ref">1</a><a href="@ref">3</a>。</li>
+<li><strong>Channel</strong>：表示一个 I/O 操作的通道，如 <code>SocketChannel</code>（用于客户端）和 <code>ServerSocketChannel</code>（用于服务器端）。必须设置为非阻塞模式才能与 <code>Selector</code>
+一起使用<a href="@ref">1</a><a href="@ref">3</a>。</li>
 <li><strong>SelectionKey</strong>：当 <code>Channel</code> 注册到 <code>Selector</code> 时，会返回一个 <code>SelectionKey</code>，它包含了以下信息：
 <ul>
 <li><strong>Interest Set</strong>：表示 <code>Channel</code> 感兴趣的事件（如 <code>OP_READ</code>、<code>OP_WRITE</code> 等）。</li>
@@ -7671,7 +7799,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </li>
 <li>
 <p><strong>事件监听</strong><br>
-调用 <code>Selector.select()</code> 方法，该方法会阻塞，直到至少有一个 <code>Channel</code> 的事件就绪。返回后，可以通过 <code>selectedKeys()</code> 获取就绪的 <code>SelectionKey</code> 集合<a href="@ref">1</a><a href="@ref">3</a>：</p>
+调用 <code>Selector.select()</code> 方法，该方法会阻塞，直到至少有一个 <code>Channel</code> 的事件就绪。返回后，可以通过 <code>selectedKeys()</code> 获取就绪的 <code>SelectionKey</code>
+集合<a href="@ref">1</a><a href="@ref">3</a>：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> readyChannels <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">select</span>();
 </span></span><span style="display:flex;"><span>Set<span style="color:#f92672">&lt;</span>SelectionKey<span style="color:#f92672">&gt;</span> selectedKeys <span style="color:#f92672">=</span> selector.<span style="color:#a6e22e">selectedKeys</span>();
 </span></span></code></pre></div></li>
@@ -7752,36 +7881,36 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#2-%e7%94%9f%e6%88%90-aes-%e5%af%86%e9%92%a5">#</a>
 </h3>
 <p>AES 密钥可以通过 <code>KeyGenerator</code> 生成，支持 128 位、192 位和 256 位密钥长度。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> SecretKey <span style="color:#a6e22e">generateKey</span>(<span style="color:#66d9ef">int</span> keySize) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>    KeyGenerator keyGen <span style="color:#f92672">=</span> KeyGenerator.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES&#34;</span>);
-</span></span><span style="display:flex;"><span>    keyGen.<span style="color:#a6e22e">init</span>(keySize); <span style="color:#75715e">// 128, 192, 或 256</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> keyGen.<span style="color:#a6e22e">generateKey</span>();
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> SecretKey <span style="color:#a6e22e">generateKey</span>(<span style="color:#66d9ef">int</span> keySize)<span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        KeyGenerator keyGen<span style="color:#f92672">=</span>KeyGenerator.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES&#34;</span>);
+</span></span><span style="display:flex;"><span>        keyGen.<span style="color:#a6e22e">init</span>(keySize); <span style="color:#75715e">// 128, 192, 或 256</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> keyGen.<span style="color:#a6e22e">generateKey</span>();
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><hr>
 <h3 id="3-加密方法">
   <strong>3. 加密方法</strong>
   <a class="anchor" href="#3-%e5%8a%a0%e5%af%86%e6%96%b9%e6%b3%95">#</a>
 </h3>
 <p>使用 <code>Cipher</code> 类进行加密，并指定加密模式和填充方式（如 <code>AES/CBC/PKCS5Padding</code>）。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">encrypt</span>(String data, SecretKey secretKey) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>    Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>); <span style="color:#75715e">// 默认模式</span>
-</span></span><span style="display:flex;"><span>    cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">ENCRYPT_MODE</span>, secretKey);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> encryptedBytes <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(data.<span style="color:#a6e22e">getBytes</span>());
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(encryptedBytes); <span style="color:#75715e">// 返回 Base64 编码的密文</span>
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">encrypt</span>(String data,SecretKey secretKey)<span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        Cipher cipher<span style="color:#f92672">=</span>Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>); <span style="color:#75715e">// 默认模式</span>
+</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">ENCRYPT_MODE</span>,secretKey);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span>encryptedBytes<span style="color:#f92672">=</span>cipher.<span style="color:#a6e22e">doFinal</span>(data.<span style="color:#a6e22e">getBytes</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(encryptedBytes); <span style="color:#75715e">// 返回 Base64 编码的密文</span>
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><hr>
 <h3 id="4-解密方法">
   <strong>4. 解密方法</strong>
   <a class="anchor" href="#4-%e8%a7%a3%e5%af%86%e6%96%b9%e6%b3%95">#</a>
 </h3>
 <p>使用相同的密钥和模式进行解密。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">decrypt</span>(String encryptedData, SecretKey secretKey) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>    Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>);
-</span></span><span style="display:flex;"><span>    cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">DECRYPT_MODE</span>, secretKey);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decodedBytes <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(encryptedData);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decryptedBytes <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(decodedBytes);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(decryptedBytes); <span style="color:#75715e">// 返回解密后的明文</span>
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">decrypt</span>(String encryptedData,SecretKey secretKey)<span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        Cipher cipher<span style="color:#f92672">=</span>Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>);
+</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">DECRYPT_MODE</span>,secretKey);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span>decodedBytes<span style="color:#f92672">=</span>Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(encryptedData);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span>decryptedBytes<span style="color:#f92672">=</span>cipher.<span style="color:#a6e22e">doFinal</span>(decodedBytes);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(decryptedBytes); <span style="color:#75715e">// 返回解密后的明文</span>
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><hr>
 <h3 id="5-完整示例">
   <strong>5. 完整示例</strong>
@@ -8246,7 +8375,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   给我举一个 reactor 模式的例子
   <a class="anchor" href="#%e7%bb%99%e6%88%91%e4%b8%be%e4%b8%80%e4%b8%aa-reactor-%e6%a8%a1%e5%bc%8f%e7%9a%84%e4%be%8b%e5%ad%90">#</a>
 </h2>
-<p>以下是一个基于 <strong>Reactor 模式</strong> 的简单示例，使用 Java NIO 实现了一个非阻塞的服务器。这个示例展示了 Reactor 模式的核心思想：通过事件驱动机制，使用一个主线程（Reactor）监听多个 I/O 事件，并将事件分发给对应的处理器（Handler）进行处理。</p>
+<p>以下是一个基于 <strong>Reactor 模式</strong> 的简单示例，使用 Java NIO 实现了一个非阻塞的服务器。这个示例展示了 Reactor 模式的核心思想：通过事件驱动机制，使用一个主线程（Reactor）监听多个 I/O
+事件，并将事件分发给对应的处理器（Handler）进行处理。</p>
 <hr>
 <h3 id="示例代码reactor-模式服务器">
   示例代码：Reactor 模式服务器
@@ -8394,7 +8524,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   什么是响应式编程
   <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af%e5%93%8d%e5%ba%94%e5%bc%8f%e7%bc%96%e7%a8%8b">#</a>
 </h2>
-<p><strong>响应式编程（Reactive Programming）<strong>是一种面向</strong>数据流</strong>和<strong>变化传播</strong>的声明式编程范式。它允许开发者方便地表达静态或动态的数据流，并自动将数据流中的变化传播到相关计算模型中<a href="@ref">3</a><a href="@ref">4</a>。</p>
+<p><strong>响应式编程（Reactive Programming）<strong>是一种面向</strong>数据流</strong>和<strong>变化传播</strong>
+的声明式编程范式。它允许开发者方便地表达静态或动态的数据流，并自动将数据流中的变化传播到相关计算模型中<a href="@ref">3</a><a href="@ref">4</a>。</p>
 <h3 id="核心概念">
   核心概念
   <a class="anchor" href="#%e6%a0%b8%e5%bf%83%e6%a6%82%e5%bf%b5">#</a>
@@ -8474,13 +8605,14 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   示例代码：
   <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-2">#</a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserController</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Flux<span style="color:#f92672">&lt;</span>User<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getAllUsers</span>() {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Flux.<span style="color:#a6e22e">just</span>(
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> User(<span style="color:#e6db74">&#34;John&#34;</span>, 30),
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> User(<span style="color:#e6db74">&#34;Jane&#34;</span>, 25)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> User(<span style="color:#e6db74">&#34;John&#34;</span>, 30),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> User(<span style="color:#e6db74">&#34;Jane&#34;</span>, 25)
 </span></span><span style="display:flex;"><span>        );
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
@@ -8503,7 +8635,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   示例代码：
   <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-3">#</a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Repository</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Repository</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">UserRepository</span> <span style="color:#66d9ef">extends</span> ReactiveCrudRepository<span style="color:#f92672">&lt;</span>User, Long<span style="color:#f92672">&gt;</span> {
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -8536,11 +8669,11 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-4">#</a>
 </h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Bean</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> Consumer<span style="color:#f92672">&lt;</span>Flux<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">processMessage</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> messages <span style="color:#f92672">-&gt;</span> messages
-</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">doOnNext</span>(message <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Received: &#34;</span> <span style="color:#f92672">+</span> message))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> Consumer<span style="color:#f92672">&lt;</span>Flux<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;</span>processMessage(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> messages<span style="color:#f92672">-&gt;</span>messages
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">doOnNext</span>(message<span style="color:#f92672">-&gt;</span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Received: &#34;</span><span style="color:#f92672">+</span>message))
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">subscribe</span>();
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><p>在这个示例中，<code>Flux</code> 用于处理消息流<a href="@ref">5</a>。</p>
 <hr>
 <h3 id="4-响应式安全spring-security-reactive">
@@ -8561,12 +8694,12 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-5">#</a>
 </h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Bean</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> SecurityWebFilterChain <span style="color:#a6e22e">securityWebFilterChain</span>(ServerHttpSecurity http) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> http
-</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">authorizeExchange</span>(exchanges <span style="color:#f92672">-&gt;</span> exchanges.<span style="color:#a6e22e">anyExchange</span>().<span style="color:#a6e22e">authenticated</span>())
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> SecurityWebFilterChain <span style="color:#a6e22e">securityWebFilterChain</span>(ServerHttpSecurity http){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> http
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">authorizeExchange</span>(exchanges<span style="color:#f92672">-&gt;</span>exchanges.<span style="color:#a6e22e">anyExchange</span>().<span style="color:#a6e22e">authenticated</span>())
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">httpBasic</span>(withDefaults())
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">build</span>();
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><p>在这个示例中，<code>ServerHttpSecurity</code> 用于配置响应式安全规则<a href="@ref">5</a>。</p>
 <hr>
 <h3 id="5-响应式测试">
@@ -8579,12 +8712,12 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-6">#</a>
 </h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Test</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testGetAllUsers</span>() {
-</span></span><span style="display:flex;"><span>    webTestClient.<span style="color:#a6e22e">get</span>().<span style="color:#a6e22e">uri</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testGetAllUsers</span>(){
+</span></span><span style="display:flex;"><span>        webTestClient.<span style="color:#a6e22e">get</span>().<span style="color:#a6e22e">uri</span>(<span style="color:#e6db74">&#34;/users&#34;</span>)
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">exchange</span>()
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">expectStatus</span>().<span style="color:#a6e22e">isOk</span>()
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">expectBodyList</span>(User.<span style="color:#a6e22e">class</span>).<span style="color:#a6e22e">hasSize</span>(2);
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><p>在这个示例中，<code>WebTestClient</code> 用于测试响应式 Web 接口<a href="@ref">5</a>。</p>
 <hr>
 <h3 id="6-响应式流处理">
@@ -8596,9 +8729,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   示例代码：
   <a class="anchor" href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81-7">#</a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Flux<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> numbers <span style="color:#f92672">=</span> Flux.<span style="color:#a6e22e">just</span>(1, 2, 3, 4, 5)
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">filter</span>(n <span style="color:#f92672">-&gt;</span> n <span style="color:#f92672">%</span> 2 <span style="color:#f92672">==</span> 0)
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">map</span>(n <span style="color:#f92672">-&gt;</span> n <span style="color:#f92672">*</span> 2);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Flux<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> numbers<span style="color:#f92672">=</span>Flux.<span style="color:#a6e22e">just</span>(1,2,3,4,5)
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">filter</span>(n<span style="color:#f92672">-&gt;</span>n<span style="color:#f92672">%</span>2<span style="color:#f92672">==</span>0)
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">map</span>(n<span style="color:#f92672">-&gt;</span>n<span style="color:#f92672">*</span>2);
 </span></span></code></pre></div><p>在这个示例中，<code>Flux</code> 用于对数据流进行过滤和转换<a href="@ref">3</a>。</p>
 <hr>
 <h3 id="总结-27">
@@ -8799,7 +8932,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   示例：
   <a class="anchor" href="#%e7%a4%ba%e4%be%8b-1">#</a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NonReactiveController</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/data&#34;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getData</span>() {
@@ -8838,7 +8972,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   示例：
   <a class="anchor" href="#%e7%a4%ba%e4%be%8b-2">#</a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReactiveController</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/data&#34;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Mono<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getData</span>() {
@@ -8924,7 +9059,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <strong>代码实现</strong>
   <a class="anchor" href="#%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0-3">#</a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserController</span> {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
@@ -9056,7 +9192,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <strong>总结</strong>
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-29">#</a>
 </h3>
-<p>在这个例子中，一个线程（<code>Thread-1</code>）在接收到请求后，发起异步数据库查询并立即释放，继续处理其他请求。数据库查询完成后，由另一个线程（<code>nioEventLoopGroup-2-1</code>）处理结果并返回给客户端。通过这种非阻塞和事件驱动的方式，一个线程可以高效地处理多个请求，显著提升了系统的并发能力。</p>
+<p>在这个例子中，一个线程（<code>Thread-1</code>）在接收到请求后，发起异步数据库查询并立即释放，继续处理其他请求。数据库查询完成后，由另一个线程（<code>nioEventLoopGroup-2-1</code>
+）处理结果并返回给客户端。通过这种非阻塞和事件驱动的方式，一个线程可以高效地处理多个请求，显著提升了系统的并发能力。</p>
 <h2 id="在响应式编程中它的并发量会收到数据库连接池大小的限制那这不是和阻塞式的服务一样吗">
   在响应式编程中，它的并发量会收到数据库连接池大小的限制，那这不是和阻塞式的服务一样吗
   <a class="anchor" href="#%e5%9c%a8%e5%93%8d%e5%ba%94%e5%bc%8f%e7%bc%96%e7%a8%8b%e4%b8%ad%e5%ae%83%e7%9a%84%e5%b9%b6%e5%8f%91%e9%87%8f%e4%bc%9a%e6%94%b6%e5%88%b0%e6%95%b0%e6%8d%ae%e5%ba%93%e8%bf%9e%e6%8e%a5%e6%b1%a0%e5%a4%a7%e5%b0%8f%e7%9a%84%e9%99%90%e5%88%b6%e9%82%a3%e8%bf%99%e4%b8%8d%e6%98%af%e5%92%8c%e9%98%bb%e5%a1%9e%e5%bc%8f%e7%9a%84%e6%9c%8d%e5%8a%a1%e4%b8%80%e6%a0%b7%e5%90%97">#</a>
@@ -9130,7 +9267,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <strong>4. 总结</strong>
   <a class="anchor" href="#4-%e6%80%bb%e7%bb%93-4">#</a>
 </h3>
-<p>虽然响应式编程中数据库连接池的大小限制了并发量，但由于其<strong>非阻塞</strong>和<strong>事件驱动</strong>的特性，系统仍然能够高效利用资源，避免线程浪费。这与阻塞式服务的同步等待有本质区别。通过合理配置连接池、使用异步数据库驱动以及引入缓存和负载均衡，可以进一步优化响应式服务的并发性能<a href="@ref">1</a><a href="@ref">11</a><a href="@ref">27</a><a href="@ref">38</a>。</p>
+<p>虽然响应式编程中数据库连接池的大小限制了并发量，但由于其<strong>非阻塞</strong>和<strong>事件驱动</strong>
+的特性，系统仍然能够高效利用资源，避免线程浪费。这与阻塞式服务的同步等待有本质区别。通过合理配置连接池、使用异步数据库驱动以及引入缓存和负载均衡，可以进一步优化响应式服务的并发性能<a href="@ref">1</a><a href="@ref">11</a><a href="@ref">27</a><a href="@ref">38</a>
+。</p>
 <h2 id="在阻塞式的io中数据库的处理线程就是处理请求的那个线程吗">
   在阻塞式的IO中，数据库的处理线程就是处理请求的那个线程吗
   <a class="anchor" href="#%e5%9c%a8%e9%98%bb%e5%a1%9e%e5%bc%8f%e7%9a%84io%e4%b8%ad%e6%95%b0%e6%8d%ae%e5%ba%93%e7%9a%84%e5%a4%84%e7%90%86%e7%ba%bf%e7%a8%8b%e5%b0%b1%e6%98%af%e5%a4%84%e7%90%86%e8%af%b7%e6%b1%82%e7%9a%84%e9%82%a3%e4%b8%aa%e7%ba%bf%e7%a8%8b%e5%90%97">#</a>
@@ -9189,12 +9328,14 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <strong>总结</strong>
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-30">#</a>
 </h3>
-<p>在阻塞式IO中，<strong>数据库的处理线程就是处理请求的那个线程</strong>。这种模型虽然简单，但在高并发场景下效率较低，因为线程会因等待IO操作而阻塞，无法充分利用系统资源。相比之下，响应式编程模型通过非阻塞和事件驱动的方式，能够更好地处理高并发请求<a href="@ref">1</a><a href="@ref">34</a><a href="@ref">41</a>。</p>
+<p>在阻塞式IO中，<strong>数据库的处理线程就是处理请求的那个线程</strong>
+。这种模型虽然简单，但在高并发场景下效率较低，因为线程会因等待IO操作而阻塞，无法充分利用系统资源。相比之下，响应式编程模型通过非阻塞和事件驱动的方式，能够更好地处理高并发请求<a href="@ref">1</a><a href="@ref">34</a><a href="@ref">41</a>。</p>
 <h2 id="在使用-r2dbc-时处理数据库操作的线程如何设置">
   在使用 R2DBC 时，处理数据库操作的线程如何设置
   <a class="anchor" href="#%e5%9c%a8%e4%bd%bf%e7%94%a8-r2dbc-%e6%97%b6%e5%a4%84%e7%90%86%e6%95%b0%e6%8d%ae%e5%ba%93%e6%93%8d%e4%bd%9c%e7%9a%84%e7%ba%bf%e7%a8%8b%e5%a6%82%e4%bd%95%e8%ae%be%e7%bd%ae">#</a>
 </h2>
-<p>在使用 R2DBC（Reactive Relational Database Connectivity）时，处理数据库操作的线程设置主要依赖于<strong>非阻塞</strong>和<strong>事件驱动</strong>的机制，而不是传统的线程池模型。以下是关于如何设置和处理线程的详细说明：</p>
+<p>在使用 R2DBC（Reactive Relational Database Connectivity）时，处理数据库操作的线程设置主要依赖于<strong>非阻塞</strong>和<strong>事件驱动</strong>
+的机制，而不是传统的线程池模型。以下是关于如何设置和处理线程的详细说明：</p>
 <hr>
 <h3 id="1-r2dbc-的线程模型">
   <strong>1. R2DBC 的线程模型</strong>
@@ -9223,13 +9364,13 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>获取连接超时时间</strong>：<code>maxAcquireTime</code>，设置从连接池获取连接的最大等待时间。</li>
 </ul>
 <p>示例配置：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ConnectionPoolConfiguration poolConfiguration <span style="color:#f92672">=</span> ConnectionPoolConfiguration.<span style="color:#a6e22e">builder</span>(connectionFactory)
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">initialSize</span>(5) <span style="color:#75715e">// 初始连接数</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">maxSize</span>(20) <span style="color:#75715e">// 最大连接数</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">maxIdleTime</span>(Duration.<span style="color:#a6e22e">ofMinutes</span>(30)) <span style="color:#75715e">// 最大空闲时间</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">maxAcquireTime</span>(Duration.<span style="color:#a6e22e">ofSeconds</span>(10)) <span style="color:#75715e">// 获取连接超时时间</span>
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">build</span>();
-</span></span><span style="display:flex;"><span>ConnectionPool connectionPool <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ConnectionPool(poolConfiguration);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ConnectionPoolConfiguration poolConfiguration<span style="color:#f92672">=</span>ConnectionPoolConfiguration.<span style="color:#a6e22e">builder</span>(connectionFactory)
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">initialSize</span>(5) <span style="color:#75715e">// 初始连接数</span>
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">maxSize</span>(20) <span style="color:#75715e">// 最大连接数</span>
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">maxIdleTime</span>(Duration.<span style="color:#a6e22e">ofMinutes</span>(30)) <span style="color:#75715e">// 最大空闲时间</span>
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">maxAcquireTime</span>(Duration.<span style="color:#a6e22e">ofSeconds</span>(10)) <span style="color:#75715e">// 获取连接超时时间</span>
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>        ConnectionPool connectionPool<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ConnectionPool(poolConfiguration);
 </span></span></code></pre></div><p><a href="@ref">1</a></p>
 <h4 id="2-使用异步-io-线程">
   <strong>(2) 使用异步 I/O 线程</strong>
@@ -9237,10 +9378,10 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </h4>
 <p>R2DBC 依赖于底层的异步 I/O 框架（如 Netty），默认情况下，数据库操作由 Netty 的 <code>EventLoopGroup</code> 线程处理。这些线程是非阻塞的，能够高效处理多个并发请求。</p>
 <p>如果需要调整 Netty 的线程池大小，可以通过以下方式配置：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>EventLoopGroup eventLoopGroup <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> NioEventLoopGroup(4); <span style="color:#75715e">// 设置线程数为 4</span>
-</span></span><span style="display:flex;"><span>ConnectionFactoryOptions options <span style="color:#f92672">=</span> ConnectionFactoryOptions.<span style="color:#a6e22e">builder</span>()
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">option</span>(EventLoopGroup.<span style="color:#a6e22e">class</span>, eventLoopGroup)
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">build</span>();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>EventLoopGroup eventLoopGroup<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> NioEventLoopGroup(4); <span style="color:#75715e">// 设置线程数为 4</span>
+</span></span><span style="display:flex;"><span>        ConnectionFactoryOptions options<span style="color:#f92672">=</span>ConnectionFactoryOptions.<span style="color:#a6e22e">builder</span>()
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">option</span>(EventLoopGroup.<span style="color:#a6e22e">class</span>,eventLoopGroup)
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">build</span>();
 </span></span></code></pre></div><hr>
 <h3 id="3-线程处理的流程">
   <strong>3. 线程处理的流程</strong>
@@ -9277,7 +9418,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <strong>总结</strong>
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-31">#</a>
 </h3>
-<p>在 R2DBC 中，处理数据库操作的线程主要由底层的异步 I/O 线程（如 Netty 的 <code>EventLoopGroup</code>）负责，而不是传统的阻塞式线程池。通过合理配置连接池和优化异步 I/O 线程，可以显著提升系统的并发性能和资源利用率。</p>
+<p>在 R2DBC 中，处理数据库操作的线程主要由底层的异步 I/O 线程（如 Netty 的 <code>EventLoopGroup</code>）负责，而不是传统的阻塞式线程池。通过合理配置连接池和优化异步 I/O
+线程，可以显著提升系统的并发性能和资源利用率。</p>
 <h1 id="mono">
   Mono
   <a class="anchor" href="#mono">#</a>
@@ -9334,9 +9476,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong><code>filter</code></strong>：过滤 Mono 中的值。</li>
 </ul>
 <p>示例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Mono<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> mono <span style="color:#f92672">=</span> Mono.<span style="color:#a6e22e">just</span>(10);
-</span></span><span style="display:flex;"><span>mono.<span style="color:#a6e22e">map</span>(value <span style="color:#f92672">-&gt;</span> value <span style="color:#f92672">*</span> 2)
-</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">subscribe</span>(result <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Result: &#34;</span> <span style="color:#f92672">+</span> result));
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Mono<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> mono<span style="color:#f92672">=</span>Mono.<span style="color:#a6e22e">just</span>(10);
+</span></span><span style="display:flex;"><span>        mono.<span style="color:#a6e22e">map</span>(value<span style="color:#f92672">-&gt;</span>value<span style="color:#f92672">*</span>2)
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">subscribe</span>(result<span style="color:#f92672">-&gt;</span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Result: &#34;</span><span style="color:#f92672">+</span>result));
 </span></span></code></pre></div><h3 id="mono-与-flux-的区别">
   <strong>Mono 与 Flux 的区别</strong>
   <a class="anchor" href="#mono-%e4%b8%8e-flux-%e7%9a%84%e5%8c%ba%e5%88%ab">#</a>
@@ -9349,7 +9491,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <strong>总结</strong>
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-32">#</a>
 </h3>
-<p>Mono 是 Java 响应式编程中用于处理 <strong>单值异步操作</strong> 的核心类，适合处理单个结果或空值的场景。它通过异步非阻塞的机制和丰富的操作符，能够高效地处理 I/O 密集型任务，并支持背压机制，确保系统的稳定性<a href="@ref">1</a><a href="@ref">4</a>。</p>
+<p>Mono 是 Java 响应式编程中用于处理 <strong>单值异步操作</strong> 的核心类，适合处理单个结果或空值的场景。它通过异步非阻塞的机制和丰富的操作符，能够高效地处理 I/O
+密集型任务，并支持背压机制，确保系统的稳定性<a href="@ref">1</a><a href="@ref">4</a>。</p>
 <h2 id="mono-是如何实现非阻塞的">
   Mono 是如何实现非阻塞的
   <a class="anchor" href="#mono-%e6%98%af%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e9%9d%9e%e9%98%bb%e5%a1%9e%e7%9a%84">#</a>
@@ -9415,12 +9558,12 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#6-%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81">#</a>
 </h3>
 <p>以下是一个简单的 Mono 非阻塞示例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Mono.<span style="color:#a6e22e">fromCallable</span>(() <span style="color:#f92672">-&gt;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 模拟一个耗时操作</span>
-</span></span><span style="display:flex;"><span>    Thread.<span style="color:#a6e22e">sleep</span>(1000);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Result&#34;</span>;
-</span></span><span style="display:flex;"><span>}).<span style="color:#a6e22e">subscribeOn</span>(Schedulers.<span style="color:#a6e22e">parallel</span>()) <span style="color:#75715e">// 指定线程池</span>
-</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">subscribe</span>(result <span style="color:#f92672">-&gt;</span> System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Received: &#34;</span> <span style="color:#f92672">+</span> result));
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Mono.<span style="color:#a6e22e">fromCallable</span>(()<span style="color:#f92672">-&gt;</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 模拟一个耗时操作</span>
+</span></span><span style="display:flex;"><span>        Thread.<span style="color:#a6e22e">sleep</span>(1000);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span><span style="color:#e6db74">&#34;Result&#34;</span>;
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">subscribeOn</span>(Schedulers.<span style="color:#a6e22e">parallel</span>()) <span style="color:#75715e">// 指定线程池</span>
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">subscribe</span>(result<span style="color:#f92672">-&gt;</span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Received: &#34;</span><span style="color:#f92672">+</span>result));
 </span></span></code></pre></div><p>在这个示例中：</p>
 <ul>
 <li><code>fromCallable</code> 封装了一个耗时操作，但不会阻塞线程。</li>
@@ -9432,7 +9575,8 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   总结
   <a class="anchor" href="#%e6%80%bb%e7%bb%93-33">#</a>
 </h3>
-<p>Mono 通过 <strong>事件驱动模型</strong>、<strong>回调机制</strong>、<strong>非阻塞 I/O</strong> 和 <strong>线程调度</strong> 实现了非阻塞的特性。它的核心设计使得线程不会阻塞在异步操作上，从而高效处理高并发请求，适合 I/O 密集型任务<a href="@ref">1</a><a href="@ref">2</a>。</p>
+<p>Mono 通过 <strong>事件驱动模型</strong>、<strong>回调机制</strong>、<strong>非阻塞 I/O</strong> 和 <strong>线程调度</strong> 实现了非阻塞的特性。它的核心设计使得线程不会阻塞在异步操作上，从而高效处理高并发请求，适合 I/O
+密集型任务<a href="@ref">1</a><a href="@ref">2</a>。</p>
 </article>
  
       
@@ -9442,7 +9586,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/ff029f50e432eaf9b1448fe78a40501490c7db29" title='Last modified by penruins | August 4, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/ef15467f22ffc6b9ee9b28ca9e10ae680ef8a492" title='Last modified by penruins | August 4, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 4, 2025</span>
     </a>
@@ -9480,6 +9624,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#github-repository">github repository</a></li>
     <li><a href="#string">String</a>
       <ul>
         <li><a href="#stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？</a>
