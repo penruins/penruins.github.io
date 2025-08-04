@@ -3,22 +3,90 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="
+xuxueli/xxl-job
+
+文档
+
+
+
+
+  什么情况下使用 springboot自带的schedule，什么时候应该使用 xxl job
+  #
+
+在分布式系统和定时任务调度场景中，选择 Spring Boot 自带的 @Scheduled 还是分布式任务调度框架（如 XXL-JOB）取决于业务需求和技术架构。以下是详细的对比和决策建议：
+
+
+  1. Spring Boot 自带的 @Scheduled
+  #
+
+适用场景：
+
+单机环境：任务只需在单个节点运行，无需分布式协调。
+简单任务：轻量级、短时间执行的定时任务（如本地缓存刷新、日志清理）。
+开发效率：快速集成，无需额外部署中间件。
+强一致性要求低：任务重复执行或偶尔遗漏对业务影响较小（如非关键统计报表）。
+
+优势：
+
+零依赖，与 Spring 生态无缝集成。
+注解驱动（@Scheduled），配置简单（支持 cron 表达式、固定速率/延迟）。
+
+局限性：
+
+无分布式协调：多实例部署时任务会重复执行（需自行加锁，如 @SchedulerLock）。
+无可视化管控：任务状态、日志需自行实现。
+缺乏弹性调度：不支持动态调整、故障转移、分片等高级特性。
+
+示例代码：
+@Scheduled(cron = &#34;0 0/5 * * * ?&#34;)
+public void refreshCache() {
+    // 单机任务逻辑
+}
+
+
+  2. XXL-JOB
+  #
+
+适用场景：
+
+分布式环境：需要任务在多个节点间协调（如唯一执行、分片处理）。
+复杂任务：长耗时任务（需超时控制）、需动态启停或修改调度策略。
+高可靠性：要求任务失败重试、故障自动转移、报警通知。
+运维需求：需要可视化任务管理、执行日志追踪、用户权限控制。
+
+优势：
+
+分布式调度：通过中心化调度器（如数据库、Redis）避免任务重复执行。
+任务分片：将大数据任务拆分到多个节点并行处理（如批量处理百万条数据）。
+运维友好：提供管理界面，支持动态配置、日志查看、报警推送。
+扩展性：支持 GLUE 脚本（动态修改代码）、跨语言任务（通过 HTTP 调用）。
+
+局限性：">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/life/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/java/xxl-job/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
+  <meta property="og:title" content="xxl job">
+  <meta property="og:description" content="xuxueli/xxl-job 文档 什么情况下使用 springboot自带的schedule，什么时候应该使用 xxl job # 在分布式系统和定时任务调度场景中，选择 Spring Boot 自带的 @Scheduled 还是分布式任务调度框架（如 XXL-JOB）取决于业务需求和技术架构。以下是详细的对比和决策建议：
+1. Spring Boot 自带的 @Scheduled # 适用场景：
+单机环境：任务只需在单个节点运行，无需分布式协调。 简单任务：轻量级、短时间执行的定时任务（如本地缓存刷新、日志清理）。 开发效率：快速集成，无需额外部署中间件。 强一致性要求低：任务重复执行或偶尔遗漏对业务影响较小（如非关键统计报表）。 优势：
+零依赖，与 Spring 生态无缝集成。 注解驱动（@Scheduled），配置简单（支持 cron 表达式、固定速率/延迟）。 局限性：
+无分布式协调：多实例部署时任务会重复执行（需自行加锁，如 @SchedulerLock）。 无可视化管控：任务状态、日志需自行实现。 缺乏弹性调度：不支持动态调整、故障转移、分片等高级特性。 示例代码：
+@Scheduled(cron = &#34;0 0/5 * * * ?&#34;) public void refreshCache() { // 单机任务逻辑 } 2. XXL-JOB # 适用场景：
+分布式环境：需要任务在多个节点间协调（如唯一执行、分片处理）。 复杂任务：长耗时任务（需超时控制）、需动态启停或修改调度策略。 高可靠性：要求任务失败重试、故障自动转移、报警通知。 运维需求：需要可视化任务管理、执行日志追踪、用户权限控制。 优势：
+分布式调度：通过中心化调度器（如数据库、Redis）避免任务重复执行。 任务分片：将大数据任务拆分到多个节点并行处理（如批量处理百万条数据）。 运维友好：提供管理界面，支持动态配置、日志查看、报警推送。 扩展性：支持 GLUE 脚本（动态修改代码）、跨语言任务（通过 HTTP 调用）。 局限性：">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Life | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-08-04T13:39:28+08:00">
+<title>xxl job | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/life/">
+<link rel="canonical" href="/post/computer-science/java/xxl-job/">
 <link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.47d366ffce7c000da69315c08133a1542fa01b2a30eb664771bbb209ad3986f6.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/post/life/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -70,9 +138,9 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-1f044d5fe299e2a50ad480135136465e" class="toggle" checked />
+    <input type="checkbox" id="section-1f044d5fe299e2a50ad480135136465e" class="toggle"  />
     <label for="section-1f044d5fe299e2a50ad480135136465e" class="flex justify-between">
-      <a role="button" class="active">Life</a>
+      <a role="button" class="">Life</a>
     </label>
   
 
@@ -273,7 +341,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -633,7 +701,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-ca0677f03580f20779b09f474723b113" class="toggle"  />
+    <input type="checkbox" id="section-ca0677f03580f20779b09f474723b113" class="toggle" checked />
     <label for="section-ca0677f03580f20779b09f474723b113" class="flex justify-between">
       <a role="button" class="">Java</a>
     </label>
@@ -753,7 +821,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/xxl-job/" class="">xxl job</a>
+    <a href="/post/computer-science/java/xxl-job/" class="active">xxl job</a>
   
 
         </li>
@@ -1447,7 +1515,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Life</h3>
+  <h3>xxl job</h3>
 
   <label for="toc-control">
     
@@ -1461,7 +1529,23 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么情况下使用-springboot自带的schedule什么时候应该使用-xxl-job">什么情况下使用 springboot自带的schedule，什么时候应该使用 xxl job</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-spring-boot-自带的"><strong>1. Spring Boot 自带的 <code>@Scheduled</code></strong></a></li>
+            <li><a href="#2-xxl-job"><strong>2. XXL-JOB</strong></a></li>
+            <li><a href="#决策树如何选择"><strong>决策树：如何选择？</strong></a></li>
+            <li><a href="#3-其他替代方案"><strong>3. 其他替代方案</strong></a></li>
+            <li><a href="#总结"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -1472,7 +1556,133 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"></article>
+  <article class="markdown book-article"><ul>
+<li><a href="https://github.com/xuxueli/xxl-job?tab=readme-ov-file">xuxueli/xxl-job</a>
+<ul>
+<li><a href="https://www.xuxueli.com/xxl-job/">文档</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="什么情况下使用-springboot自带的schedule什么时候应该使用-xxl-job">
+  什么情况下使用 springboot自带的schedule，什么时候应该使用 xxl job
+  <a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%83%85%e5%86%b5%e4%b8%8b%e4%bd%bf%e7%94%a8-springboot%e8%87%aa%e5%b8%a6%e7%9a%84schedule%e4%bb%80%e4%b9%88%e6%97%b6%e5%80%99%e5%ba%94%e8%af%a5%e4%bd%bf%e7%94%a8-xxl-job">#</a>
+</h1>
+<p>在分布式系统和定时任务调度场景中，选择 Spring Boot 自带的 <code>@Scheduled</code> 还是分布式任务调度框架（如 XXL-JOB）取决于业务需求和技术架构。以下是详细的对比和决策建议：</p>
+<hr>
+<h3 id="1-spring-boot-自带的">
+  <strong>1. Spring Boot 自带的 <code>@Scheduled</code></strong>
+  <a class="anchor" href="#1-spring-boot-%e8%87%aa%e5%b8%a6%e7%9a%84">#</a>
+</h3>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li><strong>单机环境</strong>：任务只需在单个节点运行，无需分布式协调。</li>
+<li><strong>简单任务</strong>：轻量级、短时间执行的定时任务（如本地缓存刷新、日志清理）。</li>
+<li><strong>开发效率</strong>：快速集成，无需额外部署中间件。</li>
+<li><strong>强一致性要求低</strong>：任务重复执行或偶尔遗漏对业务影响较小（如非关键统计报表）。</li>
+</ul>
+<p><strong>优势</strong>：</p>
+<ul>
+<li>零依赖，与 Spring 生态无缝集成。</li>
+<li>注解驱动（<code>@Scheduled</code>），配置简单（支持 cron 表达式、固定速率/延迟）。</li>
+</ul>
+<p><strong>局限性</strong>：</p>
+<ul>
+<li><strong>无分布式协调</strong>：多实例部署时任务会重复执行（需自行加锁，如 <code>@SchedulerLock</code>）。</li>
+<li><strong>无可视化管控</strong>：任务状态、日志需自行实现。</li>
+<li><strong>缺乏弹性调度</strong>：不支持动态调整、故障转移、分片等高级特性。</li>
+</ul>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Scheduled</span>(cron <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0 0/5 * * * ?&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">refreshCache</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 单机任务逻辑</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="2-xxl-job">
+  <strong>2. XXL-JOB</strong>
+  <a class="anchor" href="#2-xxl-job">#</a>
+</h3>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li><strong>分布式环境</strong>：需要任务在多个节点间协调（如唯一执行、分片处理）。</li>
+<li><strong>复杂任务</strong>：长耗时任务（需超时控制）、需动态启停或修改调度策略。</li>
+<li><strong>高可靠性</strong>：要求任务失败重试、故障自动转移、报警通知。</li>
+<li><strong>运维需求</strong>：需要可视化任务管理、执行日志追踪、用户权限控制。</li>
+</ul>
+<p><strong>优势</strong>：</p>
+<ul>
+<li><strong>分布式调度</strong>：通过中心化调度器（如数据库、Redis）避免任务重复执行。</li>
+<li><strong>任务分片</strong>：将大数据任务拆分到多个节点并行处理（如批量处理百万条数据）。</li>
+<li><strong>运维友好</strong>：提供管理界面，支持动态配置、日志查看、报警推送。</li>
+<li><strong>扩展性</strong>：支持 GLUE 脚本（动态修改代码）、跨语言任务（通过 HTTP 调用）。</li>
+</ul>
+<p><strong>局限性</strong>：</p>
+<ul>
+<li>需要额外部署调度中心（Admin）和执行器（Executor），增加架构复杂度。</li>
+<li>依赖中间件（如 MySQL），存在性能瓶颈风险（高频任务需优化）。</li>
+</ul>
+<p><strong>示例配置</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@XxlJob</span>(<span style="color:#e6db74">&#34;demoJobHandler&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 分布式任务逻辑（支持分片参数）</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> shardIndex <span style="color:#f92672">=</span> XxlJobHelper.<span style="color:#a6e22e">getShardIndex</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> shardTotal <span style="color:#f92672">=</span> XxlJobHelper.<span style="color:#a6e22e">getShardTotal</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h3 id="决策树如何选择">
+  <strong>决策树：如何选择？</strong>
+  <a class="anchor" href="#%e5%86%b3%e7%ad%96%e6%a0%91%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9">#</a>
+</h3>
+<ol>
+<li>
+<p><strong>是否多实例部署？</strong></p>
+<ul>
+<li>是 → 选择 XXL-JOB（避免任务重复）。</li>
+<li>否 → 考虑 <code>@Scheduled</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>是否需要任务高可用/弹性？</strong></p>
+<ul>
+<li>是（如支付对账、订单补单）→ XXL-JOB。</li>
+<li>否（如本地日志清理）→ <code>@Scheduled</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>是否需要动态管理？</strong></p>
+<ul>
+<li>是（如频繁调整 cron 表达式）→ XXL-JOB。</li>
+<li>否（固定任务）→ <code>@Scheduled</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>任务是否分片/并行？</strong></p>
+<ul>
+<li>是（如大数据处理）→ XXL-JOB。</li>
+<li>否 → <code>@Scheduled</code>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="3-其他替代方案">
+  <strong>3. 其他替代方案</strong>
+  <a class="anchor" href="#3-%e5%85%b6%e4%bb%96%e6%9b%bf%e4%bb%a3%e6%96%b9%e6%a1%88">#</a>
+</h3>
+<ul>
+<li><strong>Quartz</strong>：适合需要数据库持久化但无需复杂管理的场景（需自行封装分布式锁）。</li>
+<li><strong>Elastic-Job</strong>：基于 ZooKeeper 的分布式调度，适合分片需求高的场景（已停更，可考虑 ShedLock）。</li>
+<li><strong>Kubernetes CronJob</strong>：若应用部署在 K8s 中，可直接使用原生 CronJob 实现单次任务调度。</li>
+</ul>
+<hr>
+<h3 id="总结">
+  <strong>总结</strong>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a>
+</h3>
+<ul>
+<li><strong>Spring Boot <code>@Scheduled</code></strong>：简单、单机、轻量级任务。</li>
+<li><strong>XXL-JOB</strong>：分布式、高可靠、需运维管控的复杂任务。</li>
+</ul>
+<p>根据团队规模、运维能力和业务需求权衡，避免为简单场景过度设计，也不要在分布式环境下强用单机方案。</p>
+</article>
  
       
 
@@ -1503,6 +1713,10 @@ https://github.com/alex-shpak/hugo-book
 
       
   
+  <div class="book-comments">
+
+</div>
+  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
@@ -1513,7 +1727,23 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么情况下使用-springboot自带的schedule什么时候应该使用-xxl-job">什么情况下使用 springboot自带的schedule，什么时候应该使用 xxl job</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-spring-boot-自带的"><strong>1. Spring Boot 自带的 <code>@Scheduled</code></strong></a></li>
+            <li><a href="#2-xxl-job"><strong>2. XXL-JOB</strong></a></li>
+            <li><a href="#决策树如何选择"><strong>决策树：如何选择？</strong></a></li>
+            <li><a href="#3-其他替代方案"><strong>3. 其他替代方案</strong></a></li>
+            <li><a href="#总结"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
  
