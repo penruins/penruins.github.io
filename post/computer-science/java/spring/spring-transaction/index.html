@@ -3,22 +3,77 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="
+  @Transaction的底层原理是什么？
+  #
+
+
+spring的事务管理机制，结合AOP和动态代理技术实现事务的控制和管理
+事务管理核心组件
+
+事务管理器
+事务拦截器
+事务属性源
+事务代理对象
+
+
+实现流程
+
+代理对象的创建
+事务拦截器的应用 TransactionInterceptor
+事务的开启与提交
+事务的传播行为
+
+
+
+
+  @Transactional 事务传播机制
+  #
+
+
+当一个事务方法调用另一个事务方法时，事务应该如何传递或处理
+
+REQUIRED
+
+如果当前存在事务，则加入该事务；如果不存在事务，则创建一个新事务
+
+
+SUPPORTS
+
+如果当前存在事务，则加入该事务；如果不存在事务，则以非事务方式执行
+场景：适用于查询操作，是否在事务中执行均可
+
+
+MANDATORY
+
+如果当前存在事务，则加入该事务；如果不存在事务，则抛出异常
+场景：强制要求调用方必须在事务中调用该方法
+
+
+REQUIRES_NEW
+NOT_SUPPORTED
+NEVER
+NESTED
+
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/java/spring/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/java/spring/spring-transaction/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
+  <meta property="og:title" content="spring transaction">
+  <meta property="og:description" content="@Transaction的底层原理是什么？ # spring的事务管理机制，结合AOP和动态代理技术实现事务的控制和管理 事务管理核心组件 事务管理器 事务拦截器 事务属性源 事务代理对象 实现流程 代理对象的创建 事务拦截器的应用 TransactionInterceptor 事务的开启与提交 事务的传播行为 @Transactional 事务传播机制 # 当一个事务方法调用另一个事务方法时，事务应该如何传递或处理 REQUIRED 如果当前存在事务，则加入该事务；如果不存在事务，则创建一个新事务 SUPPORTS 如果当前存在事务，则加入该事务；如果不存在事务，则以非事务方式执行 场景：适用于查询操作，是否在事务中执行均可 MANDATORY 如果当前存在事务，则加入该事务；如果不存在事务，则抛出异常 场景：强制要求调用方必须在事务中调用该方法 REQUIRES_NEW NOT_SUPPORTED NEVER NESTED">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Spring | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-08-06T14:28:36+08:00">
+<title>spring transaction | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/java/spring/">
+<link rel="canonical" href="/post/computer-science/java/spring/spring-transaction/">
 <link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.aafcc50217099e0b2d2219be76adce09495b7976286ce3aef878d4d4c945195b.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/post/computer-science/java/spring/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -677,7 +732,7 @@ https://github.com/alex-shpak/hugo-book
   
     <input type="checkbox" id="section-0881ddd207cd479aab0cacb25e32a397" class="toggle" checked />
     <label for="section-0881ddd207cd479aab0cacb25e32a397" class="flex justify-between">
-      <a role="button" class="active">Spring</a>
+      <a role="button" class="">Spring</a>
     </label>
   
 
@@ -704,7 +759,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/spring/spring-transaction/" class="">spring transaction</a>
+    <a href="/post/computer-science/java/spring/spring-transaction/" class="active">spring transaction</a>
   
 
         </li>
@@ -1658,7 +1713,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Spring</h3>
+  <h3>spring transaction</h3>
 
   <label for="toc-control">
     
@@ -1672,7 +1727,12 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#transaction的底层原理是什么">@Transaction的底层原理是什么？</a></li>
+    <li><a href="#transactional-事务传播机制">@Transactional 事务传播机制</a></li>
+  </ul>
+</nav>
 
 
 
@@ -1683,7 +1743,61 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"></article>
+  <article class="markdown book-article"><h1 id="transaction的底层原理是什么">
+  @Transaction的底层原理是什么？
+  <a class="anchor" href="#transaction%e7%9a%84%e5%ba%95%e5%b1%82%e5%8e%9f%e7%90%86%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h1>
+<ul>
+<li>spring的事务管理机制，结合AOP和动态代理技术实现事务的控制和管理</li>
+<li>事务管理核心组件
+<ul>
+<li>事务管理器</li>
+<li>事务拦截器</li>
+<li>事务属性源</li>
+<li>事务代理对象</li>
+</ul>
+</li>
+<li>实现流程
+<ul>
+<li>代理对象的创建</li>
+<li>事务拦截器的应用 TransactionInterceptor</li>
+<li>事务的开启与提交</li>
+<li>事务的传播行为</li>
+</ul>
+</li>
+</ul>
+<h1 id="transactional-事务传播机制">
+  @Transactional 事务传播机制
+  <a class="anchor" href="#transactional-%e4%ba%8b%e5%8a%a1%e4%bc%a0%e6%92%ad%e6%9c%ba%e5%88%b6">#</a>
+</h1>
+<ul>
+<li>当一个事务方法调用另一个事务方法时，事务应该如何传递或处理
+<ul>
+<li>REQUIRED
+<ul>
+<li>如果当前存在事务，则加入该事务；如果不存在事务，则创建一个新事务</li>
+</ul>
+</li>
+<li>SUPPORTS
+<ul>
+<li>如果当前存在事务，则加入该事务；如果不存在事务，则以非事务方式执行</li>
+<li>场景：适用于查询操作，是否在事务中执行均可</li>
+</ul>
+</li>
+<li>MANDATORY
+<ul>
+<li>如果当前存在事务，则加入该事务；如果不存在事务，则抛出异常</li>
+<li>场景：强制要求调用方必须在事务中调用该方法</li>
+</ul>
+</li>
+<li>REQUIRES_NEW</li>
+<li>NOT_SUPPORTED</li>
+<li>NEVER</li>
+<li>NESTED</li>
+</ul>
+</li>
+</ul>
+</article>
  
       
 
@@ -1714,6 +1828,10 @@ https://github.com/alex-shpak/hugo-book
 
       
   
+  <div class="book-comments">
+
+</div>
+  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
@@ -1724,7 +1842,12 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#transaction的底层原理是什么">@Transaction的底层原理是什么？</a></li>
+    <li><a href="#transactional-事务传播机制">@Transactional 事务传播机制</a></li>
+  </ul>
+</nav>
 
 
  
