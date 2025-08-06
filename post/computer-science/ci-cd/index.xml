@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Penruins</title>
+    <title>CI/CD on Penruins</title>
     <link>/post/computer-science/ci-cd/</link>
-    <description>Recent content on Penruins</description>
+    <description>Recent content in CI/CD on Penruins</description>
     <generator>Hugo</generator>
     <language>en</language>
     <atom:link href="/post/computer-science/ci-cd/index.xml" rel="self" type="application/rss+xml" />
