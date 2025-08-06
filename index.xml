@@ -6,7 +6,7 @@
     <description>Recent content on Penruins</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 06 Aug 2025 13:59:28 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 Aug 2025 14:01:12 +0800</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>about me</title>
@@ -616,6 +616,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/post/life/law/</guid>
       <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s/O3jdmtRKJZGhZfPp72G-Jw&#34;&gt;最高法举行《最高人民法院关于审理劳动争议案件适用法律问题的解释（二）》新闻发布会&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://sspai.com/post/101564&#34;&gt;01新劳动争议司法解释回应竞业等热点问题&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>maven</title>
+      <link>/post/computer-science/ci-cd/maven/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/post/computer-science/ci-cd/maven/</guid>
+      <description>&lt;h1 id=&#34;plugin&#34;&gt;&#xA;  plugin&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#plugin&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://cloud.tencent.com/developer/ask/sof/111436212&#34;&gt;从Maven中的命令行参数跳过exec-Maven插件&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;reference&#34;&gt;&#xA;  reference&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#reference&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/u011747754/article/details/78574026&#34;&gt;利用码云gitee搭建个人maven仓库&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>Nexus</title>
