@@ -4,63 +4,33 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Jenkins
+  Nexus
   #
 
 
-docs
+docker sonatype/nexus3
 
-docker
-macOS
-
-macOS Installer for Jenkins LTS
-
-Install the latest LTS version: brew install jenkins-lts
-Start the Jenkins service: brew services start jenkins-lts
-Restart the Jenkins service: brew services restart jenkins-lts
-Update the Jenkins version: brew upgrade jenkins-lts
+install docker run -d -p 8081:8081 --name nexus sonatype/nexus3
 
 
-
-
-Using Jenkins
-
-
-
-
-  password
-  #
-
-
-jenkins publish over SSH中SSH sever密码存放位置
-记录 从jenkins配置文件中解密密码
-
-
-  reference
-  #
-
-
-在Jenkins中拉取GitHub上的代码包（超详细)
-jenkins配置全局凭据 结合gitlab
-jenkins部署github项目
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/jenkins/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/ci-cd/nexus/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Jenkins">
-  <meta property="og:description" content="Jenkins # docs docker macOS macOS Installer for Jenkins LTS Install the latest LTS version: brew install jenkins-lts Start the Jenkins service: brew services start jenkins-lts Restart the Jenkins service: brew services restart jenkins-lts Update the Jenkins version: brew upgrade jenkins-lts Using Jenkins password # jenkins publish over SSH中SSH sever密码存放位置 记录 从jenkins配置文件中解密密码 reference # 在Jenkins中拉取GitHub上的代码包（超详细) jenkins配置全局凭据 结合gitlab jenkins部署github项目">
+  <meta property="og:title" content="Nexus">
+  <meta property="og:description" content="Nexus # docker sonatype/nexus3 install docker run -d -p 8081:8081 --name nexus sonatype/nexus3">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-06T10:46:38+08:00">
-<title>Jenkins | Penruins</title>
+    <meta property="article:modified_time" content="2025-08-06T11:12:38+08:00">
+<title>Nexus | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/jenkins/">
+<link rel="canonical" href="/post/computer-science/ci-cd/nexus/">
 <link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.8265bffd70a40cf2c911f512816963ccbc5a25f81938026800e3c1eb697c0b61.js" ></script>
+  <script defer src="/en.search.min.528a4b4697b3ef72b4b1a24221f42ab057cf690071d2638f64ce8de0737d932e.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -920,19 +890,6 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/echarts/" class="">echarts</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <a href="/post/computer-science/github/" class="">github</a>
   
 
@@ -1019,6 +976,19 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/echarts/" class="">echarts</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -1191,7 +1161,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-91cda33c3f083dc425de7b0831dd4a4b" class="toggle"  />
+    <input type="checkbox" id="section-91cda33c3f083dc425de7b0831dd4a4b" class="toggle" checked />
     <label for="section-91cda33c3f083dc425de7b0831dd4a4b" class="flex justify-between">
       <a role="button" class="">CI/CD</a>
     </label>
@@ -1213,6 +1183,32 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/jenkins/" class="">Jenkins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/nexus/" class="active">Nexus</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -1226,32 +1222,6 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/post/computer-science/crawler/" class="">crawler</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/post/computer-science/jenkins/" class="active">Jenkins</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/post/computer-science/nexus/" class="">Nexus</a>
   
 
         </li>
@@ -1326,7 +1296,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/history/%E4%B8%AD%E5%9B%BD%E5%8E%86%E5%8F%B2/" class="">中国历史</a>
+    <a href="/post/history/chinese-history/" class="">Chinese History</a>
   
 
         </li>
@@ -1614,7 +1584,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Jenkins</h3>
+  <h3>Nexus</h3>
 
   <label for="toc-control">
     
@@ -1628,46 +1598,16 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="jenkins">
-  Jenkins
-  <a class="anchor" href="#jenkins">#</a>
+  <article class="markdown book-article"><h1 id="nexus">
+  Nexus
+  <a class="anchor" href="#nexus">#</a>
 </h1>
 <ul>
-<li><a href="https://www.jenkins.io/doc/book/installing/">docs</a>
+<li><a href="https://hub.docker.com/r/sonatype/nexus3/tags">docker sonatype/nexus3</a>
 <ul>
-<li><a href="https://www.jenkins.io/doc/book/installing/docker/">docker</a></li>
-<li><a href="https://www.jenkins.io/doc/book/installing/macos/">macOS</a>
-<ul>
-<li><a href="https://www.jenkins.io/download/lts/macos/">macOS Installer for Jenkins LTS</a>
-<ul>
-<li>Install the latest LTS version: <code>brew install jenkins-lts</code></li>
-<li>Start the Jenkins service: <code>brew services start jenkins-lts</code></li>
-<li>Restart the Jenkins service: <code>brew services restart jenkins-lts</code></li>
-<li>Update the Jenkins version: <code>brew upgrade jenkins-lts</code></li>
+<li>install <code>docker run -d -p 8081:8081 --name nexus sonatype/nexus3</code></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="https://www.jenkins.io/doc/book/using/">Using Jenkins</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="password">
-  password
-  <a class="anchor" href="#password">#</a>
-</h2>
-<ul>
-<li><a href="https://ask.csdn.net/questions/4645065">jenkins publish over SSH中SSH sever密码存放位置</a></li>
-<li><a href="https://blog.csdn.net/qq_27156945/article/details/108083342">记录 从jenkins配置文件中解密密码</a></li>
-</ul>
-<h2 id="reference">
-  reference
-  <a class="anchor" href="#reference">#</a>
-</h2>
-<ul>
-<li><a href="https://blog.csdn.net/shuang_waiwai/article/details/121124203">在Jenkins中拉取GitHub上的代码包（超详细)</a></li>
-<li><a href="https://blog.csdn.net/u012045045/article/details/107126372">jenkins配置全局凭据 结合gitlab</a></li>
-<li><a href="https://www.cnblogs.com/dingshaohua/p/16458325.html">jenkins部署github项目</a></li>
 </ul>
 </article>
  
@@ -1678,7 +1618,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/2cffda390d4231f913985e97f1a88673dc86798b" title='Last modified by penruins | August 6, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/831538e3d76918e2033b0548bf3fabddeb87ece1" title='Last modified by penruins | August 6, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 6, 2025</span>
     </a>
