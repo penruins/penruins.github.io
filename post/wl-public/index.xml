@@ -7,5 +7,12 @@
     <generator>Hugo</generator>
     <language>en</language>
     <atom:link href="/post/wl-public/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>广州</title>
+      <link>/post/wl-public/%E5%B9%BF%E5%B7%9E/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/post/wl-public/%E5%B9%BF%E5%B7%9E/</guid>
+      <description>&lt;p&gt;test test test&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
