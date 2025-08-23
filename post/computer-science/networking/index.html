@@ -4,107 +4,22 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  kafka如何保障顺序消费
-  #
-
-Kafka 通过其独特的分区机制和消费者组设计来保障消息的顺序消费，但需注意其仅能保证单分区内的顺序性，跨分区的全局顺序需额外设计。以下是具体实现方法和原理：
-
-
-  一、单分区顺序性保障
-  #
-
-
-
-分区内消息严格有序
-
-Kafka 的每个分区（Partition）是一个有序的、不可变的日志序列，消息按生产者发送的顺序追加到分区末尾，消费者按相同顺序读取11825。
-关键设计：分区内的消息通过偏移量（Offset）标识顺序，消费者按 Offset 递增消费18。
-
-
-
-生产者配置
-
-相同 Key 路由到同一分区：生产者通过消息 Key 的哈希值确定分区，相同 Key 的消息始终进入同一分区，确保业务相关的消息顺序12539。
-// 示例：发送相同Key的消息到同一分区
-ProducerRecord&lt;String, String&gt; record = new ProducerRecord&lt;&gt;(&#34;topic&#34;, &#34;order-123&#34;, &#34;message&#34;);
-producer.send(record);
-
-限制并发请求：设置 max.in.flight.requests.per.connection=1，防止生产者因重试导致消息乱序3125。
-
-
-
-消费者配置
-
-单线程消费：每个分区仅由一个消费者线程处理，避免并发消费破坏顺序18。
-手动提交 Offset：确保消息处理完成后再提交 Offset，防止重复消费或漏消费。
-
-
-
-
-
-  二、全局顺序性实现（跨分区）
-  #
-
-
-
-单分区策略
-
-将 Topic 设置为单分区，所有消息集中到一个分区，但会牺牲吞吐量和扩展性242532。
-适用场景：低吞吐但强顺序要求的场景（如金融交易流水）24。
-
-
-
-基于 Key 的分区路由
-
-将需顺序处理的消息（如同一订单 ID）通过相同 Key 路由到固定分区，实现局部顺序139。
-局限性：若 Key 分布不均，可能导致分区负载倾斜24。
-
-
-
-应用层排序
-
-消费者拉取多分区消息后，通过优先级队列（如按时间戳或业务ID排序）实现全局顺序。
-示例：
-PriorityQueue&lt;ConsumerRecord&gt; queue = new PriorityQueue&lt;&gt;(Comparator.comparing(ConsumerRecord::timestamp));
-
-
-
-
-
-
-  三、高级配置与优化
-  #
-
-
-
-幂等生产者
-
-设置 enable.idempotence=true，避免重试导致消息重复或乱序，同时允许 max.in.flight.requests.per.connection&gt;1 提升吞吐31。
-
-
-
-消费者组与分区数平衡">
+通过Cloudflare tunnel访问内网端口
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/llm/2025-03-30-5-kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/networking/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="kafka如何保障顺序消费">
-  <meta property="og:description" content="kafka如何保障顺序消费 # Kafka 通过其独特的分区机制和消费者组设计来保障消息的顺序消费，但需注意其仅能保证单分区内的顺序性，跨分区的全局顺序需额外设计。以下是具体实现方法和原理：
-一、单分区顺序性保障 # 分区内消息严格有序
-Kafka 的每个分区（Partition）是一个有序的、不可变的日志序列，消息按生产者发送的顺序追加到分区末尾，消费者按相同顺序读取11825。 关键设计：分区内的消息通过偏移量（Offset）标识顺序，消费者按 Offset 递增消费18。 生产者配置
-相同 Key 路由到同一分区：生产者通过消息 Key 的哈希值确定分区，相同 Key 的消息始终进入同一分区，确保业务相关的消息顺序12539。 // 示例：发送相同Key的消息到同一分区 ProducerRecord&lt;String, String&gt; record = new ProducerRecord&lt;&gt;(&#34;topic&#34;, &#34;order-123&#34;, &#34;message&#34;); producer.send(record); 限制并发请求：设置 max.in.flight.requests.per.connection=1，防止生产者因重试导致消息乱序3125。 消费者配置
-单线程消费：每个分区仅由一个消费者线程处理，避免并发消费破坏顺序18。 手动提交 Offset：确保消息处理完成后再提交 Offset，防止重复消费或漏消费。 二、全局顺序性实现（跨分区） # 单分区策略
-将 Topic 设置为单分区，所有消息集中到一个分区，但会牺牲吞吐量和扩展性242532。 适用场景：低吞吐但强顺序要求的场景（如金融交易流水）24。 基于 Key 的分区路由
-将需顺序处理的消息（如同一订单 ID）通过相同 Key 路由到固定分区，实现局部顺序139。 局限性：若 Key 分布不均，可能导致分区负载倾斜24。 应用层排序
-消费者拉取多分区消息后，通过优先级队列（如按时间戳或业务ID排序）实现全局顺序。 示例： PriorityQueue&lt;ConsumerRecord&gt; queue = new PriorityQueue&lt;&gt;(Comparator.comparing(ConsumerRecord::timestamp)); 三、高级配置与优化 # 幂等生产者
-设置 enable.idempotence=true，避免重试导致消息重复或乱序，同时允许 max.in.flight.requests.per.connection&gt;1 提升吞吐31。 消费者组与分区数平衡">
+  <meta property="og:title" content="networking">
+  <meta property="og:description" content="通过Cloudflare tunnel访问内网端口">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-<title>kafka如何保障顺序消费 | Penruins</title>
+    <meta property="article:modified_time" content="2025-08-23T17:52:54+08:00">
+<title>networking | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/llm/2025-03-30-5-kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E9%9A%9C%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9/">
+<link rel="canonical" href="/post/computer-science/networking/">
 <link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.17b5b317f11dfc24d2d76687c00c99ed263f496f40877c219c00481319ab3d7e.js" ></script>
@@ -1494,7 +1409,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/networking/" class="">networking</a>
+    <a href="/post/computer-science/networking/" class="active">networking</a>
   
 
         </li>
@@ -1944,7 +1859,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>kafka如何保障顺序消费</h3>
+  <h3>networking</h3>
 
   <label for="toc-control">
     
@@ -1958,23 +1873,7 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#kafka如何保障顺序消费">kafka如何保障顺序消费</a>
-      <ul>
-        <li>
-          <ul>
-            <li><a href="#一单分区顺序性保障">一、<strong>单分区顺序性保障</strong></a></li>
-            <li><a href="#二全局顺序性实现跨分区">二、<strong>全局顺序性实现（跨分区）</strong></a></li>
-            <li><a href="#三高级配置与优化">三、<strong>高级配置与优化</strong></a></li>
-            <li><a href="#四适用场景与权衡">四、<strong>适用场景与权衡</strong></a></li>
-            <li><a href="#总结">总结</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
 
@@ -1985,124 +1884,9 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="kafka如何保障顺序消费">
-  kafka如何保障顺序消费
-  <a class="anchor" href="#kafka%e5%a6%82%e4%bd%95%e4%bf%9d%e9%9a%9c%e9%a1%ba%e5%ba%8f%e6%b6%88%e8%b4%b9">#</a>
-</h1>
-<p>Kafka 通过其独特的分区机制和消费者组设计来保障消息的顺序消费，但需注意其仅能保证<strong>单分区内的顺序性</strong>，跨分区的全局顺序需额外设计。以下是具体实现方法和原理：</p>
-<hr>
-<h3 id="一单分区顺序性保障">
-  一、<strong>单分区顺序性保障</strong>
-  <a class="anchor" href="#%e4%b8%80%e5%8d%95%e5%88%86%e5%8c%ba%e9%a1%ba%e5%ba%8f%e6%80%a7%e4%bf%9d%e9%9a%9c">#</a>
-</h3>
-<ol>
-<li>
-<p><strong>分区内消息严格有序</strong></p>
-<ul>
-<li>Kafka 的每个分区（Partition）是一个有序的、不可变的日志序列，消息按生产者发送的顺序追加到分区末尾，消费者按相同顺序读取<a href="@ref">1</a><a href="@ref">18</a><a href="@ref">25</a>。</li>
-<li><strong>关键设计</strong>：分区内的消息通过偏移量（Offset）标识顺序，消费者按 Offset 递增消费<a href="@ref">18</a>。</li>
+  <article class="markdown book-article"><ul>
+<li><a href="https://www.haoyep.com/posts/access-intranet-ports-via-cloudflare-tunnel/">通过Cloudflare tunnel访问内网端口</a></li>
 </ul>
-</li>
-<li>
-<p><strong>生产者配置</strong></p>
-<ul>
-<li><strong>相同 Key 路由到同一分区</strong>：生产者通过消息 Key 的哈希值确定分区，相同 Key 的消息始终进入同一分区，确保业务相关的消息顺序<a href="@ref">1</a><a href="@ref">25</a><a href="@ref">39</a>。
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 示例：发送相同Key的消息到同一分区</span>
-</span></span><span style="display:flex;"><span>ProducerRecord<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> record <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ProducerRecord<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#e6db74">&#34;topic&#34;</span>, <span style="color:#e6db74">&#34;order-123&#34;</span>, <span style="color:#e6db74">&#34;message&#34;</span>);
-</span></span><span style="display:flex;"><span>producer.<span style="color:#a6e22e">send</span>(record);
-</span></span></code></pre></div></li>
-<li><strong>限制并发请求</strong>：设置 <code>max.in.flight.requests.per.connection=1</code>，防止生产者因重试导致消息乱序<a href="@ref">31</a><a href="@ref">25</a>。</li>
-</ul>
-</li>
-<li>
-<p><strong>消费者配置</strong></p>
-<ul>
-<li><strong>单线程消费</strong>：每个分区仅由一个消费者线程处理，避免并发消费破坏顺序<a href="@ref">18</a>。</li>
-<li><strong>手动提交 Offset</strong>：确保消息处理完成后再提交 Offset，防止重复消费或漏消费。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3 id="二全局顺序性实现跨分区">
-  二、<strong>全局顺序性实现（跨分区）</strong>
-  <a class="anchor" href="#%e4%ba%8c%e5%85%a8%e5%b1%80%e9%a1%ba%e5%ba%8f%e6%80%a7%e5%ae%9e%e7%8e%b0%e8%b7%a8%e5%88%86%e5%8c%ba">#</a>
-</h3>
-<ol>
-<li>
-<p><strong>单分区策略</strong></p>
-<ul>
-<li>将 Topic 设置为单分区，所有消息集中到一个分区，但会牺牲吞吐量和扩展性<a href="@ref">24</a><a href="@ref">25</a><a href="@ref">32</a>。</li>
-<li><strong>适用场景</strong>：低吞吐但强顺序要求的场景（如金融交易流水）<a href="@ref">24</a>。</li>
-</ul>
-</li>
-<li>
-<p><strong>基于 Key 的分区路由</strong></p>
-<ul>
-<li>将需顺序处理的消息（如同一订单 ID）通过相同 Key 路由到固定分区，实现局部顺序<a href="@ref">1</a><a href="@ref">39</a>。</li>
-<li><strong>局限性</strong>：若 Key 分布不均，可能导致分区负载倾斜<a href="@ref">24</a>。</li>
-</ul>
-</li>
-<li>
-<p><strong>应用层排序</strong></p>
-<ul>
-<li>消费者拉取多分区消息后，通过优先级队列（如按时间戳或业务ID排序）实现全局顺序。</li>
-<li><strong>示例</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>PriorityQueue<span style="color:#f92672">&lt;</span>ConsumerRecord<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PriorityQueue<span style="color:#f92672">&lt;&gt;</span>(Comparator.<span style="color:#a6e22e">comparing</span>(ConsumerRecord::timestamp));
-</span></span></code></pre></div></li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3 id="三高级配置与优化">
-  三、<strong>高级配置与优化</strong>
-  <a class="anchor" href="#%e4%b8%89%e9%ab%98%e7%ba%a7%e9%85%8d%e7%bd%ae%e4%b8%8e%e4%bc%98%e5%8c%96">#</a>
-</h3>
-<ol>
-<li>
-<p><strong>幂等生产者</strong></p>
-<ul>
-<li>设置 <code>enable.idempotence=true</code>，避免重试导致消息重复或乱序，同时允许 <code>max.in.flight.requests.per.connection&gt;1</code> 提升吞吐<a href="@ref">31</a>。</li>
-</ul>
-</li>
-<li>
-<p><strong>消费者组与分区数平衡</strong></p>
-<ul>
-<li>消费者组内实例数 ≤ 分区数，确保每个分区仅由一个消费者处理<a href="@ref">18</a><a href="@ref">38</a>。</li>
-<li><strong>分区分配策略</strong>：
-<ul>
-<li><strong>RangeAssignor</strong>：按分区范围分配，适合分区数固定的场景<a href="@ref">38</a>。</li>
-<li><strong>RoundRobin</strong>：轮询分配，均衡负载但可能打乱业务顺序<a href="@ref">38</a>。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>避免消费者重平衡</strong></p>
-<ul>
-<li>消费者频繁加入/退出会触发分区重分配，可能导致短暂乱序。可通过 <code>session.timeout.ms</code> 调整心跳检测时间。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3 id="四适用场景与权衡">
-  四、<strong>适用场景与权衡</strong>
-  <a class="anchor" href="#%e5%9b%9b%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af%e4%b8%8e%e6%9d%83%e8%a1%a1">#</a>
-</h3>
-<ul>
-<li><strong>高吞吐 vs 顺序性</strong>：Kafka 默认优先保证吞吐，全局顺序需牺牲性能<a href="@ref">24</a><a href="@ref">31</a>。</li>
-<li><strong>推荐方案</strong>：
-<ul>
-<li><strong>局部顺序</strong>：Key 分区 + 单线程消费（如订单状态变更）<a href="@ref">1</a><a href="@ref">39</a>。</li>
-<li><strong>全局顺序</strong>：单分区或应用层排序（如日志时间序列）<a href="@ref">25</a>。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="总结">
-  总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a>
-</h3>
-<p>Kafka 的顺序消费能力依赖于合理配置生产者的分区策略、消费者的并发控制及业务逻辑设计。单分区顺序是原生支持的，而全局顺序需结合业务需求权衡性能与一致性<a href="@ref">18</a><a href="@ref">24</a><a href="@ref">31</a>。</p>
 </article>
  
       
@@ -2111,6 +1895,12 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex flex-wrap justify-between">
 
+
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/589b528fe71329e58f5b1107f1e09cd2ee1c4ba5" title='Last modified by liuxiang | August 23, 2025' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="" />
+      <span>August 23, 2025</span>
+    </a>
+  </div>
 
 
 
@@ -2142,23 +1932,7 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#kafka如何保障顺序消费">kafka如何保障顺序消费</a>
-      <ul>
-        <li>
-          <ul>
-            <li><a href="#一单分区顺序性保障">一、<strong>单分区顺序性保障</strong></a></li>
-            <li><a href="#二全局顺序性实现跨分区">二、<strong>全局顺序性实现（跨分区）</strong></a></li>
-            <li><a href="#三高级配置与优化">三、<strong>高级配置与优化</strong></a></li>
-            <li><a href="#四适用场景与权衡">四、<strong>适用场景与权衡</strong></a></li>
-            <li><a href="#总结">总结</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
  
