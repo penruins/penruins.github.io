@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
 alex-shpak/hugo-book
+Hexo, Hugo, Vitepress，Vuepress博客框架比较
 
 
   在 Hugo 中配置 TOC 从一级标题开始显示
@@ -45,46 +46,30 @@ markup:
   方法四：使用 Goldmark 配置
   #
 
-如果你使用的是 Goldmark 渲染器(默认)，确保配置正确：
-[markup.goldmark]
-  [markup.goldmark.parser]
-    [markup.goldmark.parser.attribute]
-      block = true
-      title = true
-
-  注意事项
-  #
-
-
-确保你的内容中确实有一级标题(# 或 &lt;h1&gt;)
-某些主题可能会覆盖默认的 TOC 行为，你可能需要检查主题文档
-清除缓存(hugo --gc)有时能解决显示问题
-
-如果你使用的是特定主题，可能需要查看该主题的文档，因为有些主题会提供自己的 TOC 配置选项。">
+如果你使用的是 Goldmark 渲染器(默认)，确保配置正确：">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/hugo/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/blog/hugo/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Hugo">
-  <meta property="og:description" content="alex-shpak/hugo-book 在 Hugo 中配置 TOC 从一级标题开始显示 # 要在 Hugo 中让侧边栏的目录(TOC)从一级标题(h1)开始显示，你可以通过以下几种方法实现：
+  <meta property="og:description" content="alex-shpak/hugo-book Hexo, Hugo, Vitepress，Vuepress博客框架比较 在 Hugo 中配置 TOC 从一级标题开始显示 # 要在 Hugo 中让侧边栏的目录(TOC)从一级标题(h1)开始显示，你可以通过以下几种方法实现：
 方法一：修改 config.toml # 在你的 Hugo 配置文件(通常是 config.toml 或 config.yaml)中添加或修改以下设置：
 [markup] [markup.tableOfContents] startLevel = 1 endLevel = 6 或者对于 YAML 格式：
 markup: tableOfContents: startLevel: 1 endLevel: 6 方法二：模板中指定 # 如果你在模板中调用 TOC，可以这样指定：
 {{ .TableOfContents }} 默认情况下，Hugo 会从二级标题(h2)开始显示 TOC。要修改这个行为，你需要使用方法一中的配置。
 方法三：使用自定义 CSS # 如果配置修改后仍然不符合预期，你可以添加自定义 CSS 来隐藏不需要的层级：
-/* 隐藏除一级标题外的其他层级 */ #TableOfContents ul ul { display: none; } 方法四：使用 Goldmark 配置 # 如果你使用的是 Goldmark 渲染器(默认)，确保配置正确：
-[markup.goldmark] [markup.goldmark.parser] [markup.goldmark.parser.attribute] block = true title = true 注意事项 # 确保你的内容中确实有一级标题(# 或 &lt;h1&gt;) 某些主题可能会覆盖默认的 TOC 行为，你可能需要检查主题文档 清除缓存(hugo --gc)有时能解决显示问题 如果你使用的是特定主题，可能需要查看该主题的文档，因为有些主题会提供自己的 TOC 配置选项。">
+/* 隐藏除一级标题外的其他层级 */ #TableOfContents ul ul { display: none; } 方法四：使用 Goldmark 配置 # 如果你使用的是 Goldmark 渲染器(默认)，确保配置正确：">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-23T16:06:21+08:00">
+    <meta property="article:modified_time" content="2025-08-23T16:26:58+08:00">
 <title>Hugo | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/hugo/">
+<link rel="canonical" href="/post/computer-science/blog/hugo/">
 <link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.305c34a87a0a050126e8d40db088e3f8f43f73e98831967039505985fab38b28.js" ></script>
+  <script defer src="/en.search.min.2b5f9d124dedac7a9cbb70d5249b93910e2f75216a242e1868acd42037e8d785.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -371,6 +356,19 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/post/computer-science/blog/blog/" class="">blog</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/post/computer-science/computer-science/" class="">computer science</a>
   
 
@@ -384,7 +382,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/hugo/" class="active">Hugo</a>
+    <a href="/post/computer-science/blog/hugo/" class="active">Hugo</a>
   
 
         </li>
@@ -1900,6 +1898,7 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown book-article"><ul>
 <li><a href="https://github.com/alex-shpak/hugo-book">alex-shpak/hugo-book</a></li>
+<li><a href="https://www.fuling.me/posts/51220/">Hexo, Hugo, Vitepress，Vuepress博客框架比较</a></li>
 </ul>
 <h1 id="在-hugo-中配置-toc-从一级标题开始显示">
   在 Hugo 中配置 TOC 从一级标题开始显示
@@ -1965,7 +1964,7 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/3de9fb79b417b2dd610b2eaed4dd936ddf0c7f23" title='Last modified by liuxiang | August 23, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/9671ce990de6af64964229dacfe7cc9308bf087b" title='Last modified by liuxiang | August 23, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 23, 2025</span>
     </a>
