@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Penruins</title>
+    <link>https://penruins.github.io/hugo/post/sports/</link>
+    <description>Recent content on Penruins</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="https://penruins.github.io/hugo/post/sports/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cycling</title>
+      <link>https://penruins.github.io/hugo/post/sports/cycling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://penruins.github.io/hugo/post/sports/cycling/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.procyclingstats.com/index.php&#34;&gt;pro cycling stats&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;自行车职业赛数据及积分排行查询&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;videos&#34;&gt;&#xA;  videos&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#videos&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://b23.tv/0AeBids&#34;&gt;【2025 Donostia San Sebastian Klasikoa（圣塞巴斯蒂安）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>table tennis</title>
+      <link>https://penruins.github.io/hugo/post/sports/table-tennis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://penruins.github.io/hugo/post/sports/table-tennis/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1EcgqzCEmu&#34;&gt;张继科（日）原片&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>
