@@ -45,21 +45,21 @@
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/database/elasticsearch/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://penruins.github.io/hugo/post/computer-science/database/elasticsearch/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="elasticsearch">
   <meta property="og:description" content="ElasticSearch # 使用场景 # 场景1 全文搜索Elasticsearch 凭借其强大、可扩展和快速的搜索功能，在全文搜索场景中表现出色。它允许用户以近乎实时的响应执行复杂的查询 场景2 实时分析Elasticsearch 能够实时执行分析，因此适用于跟踪实时数据（如用户活动、交易或传感器输出）的仪表板 场景3 机器学习通过在 X-Pack 中添加机器学习功能，Elasticsearch 可以自动检测数据中的异常、模式和趋势 场景4 地理数据应用程序Elasticsearch 通过地理空间索引和搜索功能支持地理数据。这对于需要管理和可视化地理信息的应用程序（如地图和基于位置的服务）非常有用 场景5 日志和事件数据分析组织使用 Elasticsearch 来聚合、监控和分析来自各种来源的日志和事件数据。它是 ELK 堆栈（Elasticsearch、Logstash、Kibana）的关键组件，用于管理系统和应用程序日志以识别问题和监控系统运行状况 场景6 安全信息和事件管理 （SIEM）Elasticsearch 可用作 SIEM 工具，帮助组织实时分析安全事件">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-24T16:00:14+08:00">
+    <meta property="article:modified_time" content="2025-08-24T16:48:42+08:00">
 <title>elasticsearch | Penruins</title>
-<link rel="icon" href="/favicon.png" >
-<link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/database/elasticsearch/">
-<link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
-  <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.7a7e3a4112f13ca84be389559cc73163e994204b5abcb37825dee9dafc0e5b66.js" ></script>
+<link rel="icon" href="/hugo/favicon.png" >
+<link rel="manifest" href="/hugo/manifest.json">
+<link rel="canonical" href="https://penruins.github.io/hugo/post/computer-science/database/elasticsearch/">
+<link rel="stylesheet" href="/hugo/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" integrity="sha256-kG40&#43;MAi8LhKGWrcypsBAzj4U4Y1Bnx7gQpG1t2ByAw=" crossorigin="anonymous">
+  <script defer src="/hugo/fuse.min.js"></script>
+  <script defer src="/hugo/en.search.min.457aed47729b3abce559662bef9c405bc8e4b9cb8b64263202e23bb32d32cb70.js" integrity="sha256-RXrtR3KbOrzlWWYr75xAW8jkucuLZCYyAuI7sy0yy3A=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -76,7 +76,7 @@ https://github.com/alex-shpak/hugo-book
   
 <nav>
     <h2 class="book-brand">
-  <a class="flex align-center" href="/"><span>Penruins</span>
+  <a class="flex align-center" href="/hugo/"><span>Penruins</span>
   </a>
 </h2>
 
@@ -128,7 +128,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/books/" class="">books</a>
+    <a href="/hugo/post/life/books/" class="">books</a>
   
 
         </li>
@@ -141,7 +141,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">摘抄分享</a>
+    <a href="/hugo/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">摘抄分享</a>
   
 
         </li>
@@ -154,7 +154,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/%E6%96%B0%E7%9F%A5/" class="">新知</a>
+    <a href="/hugo/post/life/%E6%96%B0%E7%9F%A5/" class="">新知</a>
   
 
         </li>
@@ -167,7 +167,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/movies-log/" class="">观影记录</a>
+    <a href="/hugo/post/life/movies-log/" class="">观影记录</a>
   
 
         </li>
@@ -180,7 +180,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/bilibili/" class="">bilibili</a>
+    <a href="/hugo/post/life/bilibili/" class="">bilibili</a>
   
 
         </li>
@@ -193,7 +193,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/cycling/" class="">cycling</a>
+    <a href="/hugo/post/life/cycling/" class="">cycling</a>
   
 
         </li>
@@ -206,7 +206,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/hiking/" class="">hiking</a>
+    <a href="/hugo/post/life/hiking/" class="">hiking</a>
   
 
         </li>
@@ -219,7 +219,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/life/" class="">life</a>
+    <a href="/hugo/post/life/life/" class="">life</a>
   
 
         </li>
@@ -232,7 +232,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/life-recommend/" class="">life recommand</a>
+    <a href="/hugo/post/life/life-recommend/" class="">life recommand</a>
   
 
         </li>
@@ -245,7 +245,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/learning-others-log/" class="">other learning</a>
+    <a href="/hugo/post/life/learning-others-log/" class="">other learning</a>
   
 
         </li>
@@ -258,7 +258,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/podcast/" class="">podcast</a>
+    <a href="/hugo/post/life/podcast/" class="">podcast</a>
   
 
         </li>
@@ -271,7 +271,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/politics/" class="">politics</a>
+    <a href="/hugo/post/life/politics/" class="">politics</a>
   
 
         </li>
@@ -284,7 +284,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/goal/" class="">goal</a>
+    <a href="/hugo/post/life/goal/" class="">goal</a>
   
 
         </li>
@@ -297,7 +297,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/coffee/" class="">coffee</a>
+    <a href="/hugo/post/life/coffee/" class="">coffee</a>
   
 
         </li>
@@ -310,7 +310,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/article/" class="">article</a>
+    <a href="/hugo/post/life/article/" class="">article</a>
   
 
         </li>
@@ -323,7 +323,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/law/" class="">law</a>
+    <a href="/hugo/post/life/law/" class="">law</a>
   
 
         </li>
@@ -359,7 +359,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/computer-science/" class="">computer science</a>
+    <a href="/hugo/post/computer-science/computer-science/" class="">computer science</a>
   
 
         </li>
@@ -388,7 +388,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/algorithm/algorithm/" class="">Algorithm</a>
+    <a href="/hugo/post/computer-science/algorithm/algorithm/" class="">Algorithm</a>
   
 
         </li>
@@ -401,7 +401,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">algorithm practice 剑指 offer</a>
+    <a href="/hugo/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">algorithm practice 剑指 offer</a>
   
 
         </li>
@@ -414,7 +414,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">剑指offer题目对应</a>
+    <a href="/hugo/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">剑指offer题目对应</a>
   
 
         </li>
@@ -427,7 +427,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">面试经典 150 题</a>
+    <a href="/hugo/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">面试经典 150 题</a>
   
 
         </li>
@@ -461,7 +461,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/big-data/hadoop/" class="">hadoop</a>
+    <a href="/hugo/post/computer-science/big-data/hadoop/" class="">hadoop</a>
   
 
         </li>
@@ -474,7 +474,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/big-data/hbase/" class="">hbase</a>
+    <a href="/hugo/post/computer-science/big-data/hbase/" class="">hbase</a>
   
 
         </li>
@@ -487,7 +487,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/big-data/hive/" class="">hive</a>
+    <a href="/hugo/post/computer-science/big-data/hive/" class="">hive</a>
   
 
         </li>
@@ -521,7 +521,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/database/" class="">database</a>
+    <a href="/hugo/post/computer-science/database/database/" class="">database</a>
   
 
         </li>
@@ -534,7 +534,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/druid/" class="">druid</a>
+    <a href="/hugo/post/computer-science/database/druid/" class="">druid</a>
   
 
         </li>
@@ -547,7 +547,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/elasticsearch/" class="active">elasticsearch</a>
+    <a href="/hugo/post/computer-science/database/elasticsearch/" class="active">elasticsearch</a>
   
 
         </li>
@@ -560,7 +560,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/mycat/" class="">mycat</a>
+    <a href="/hugo/post/computer-science/database/mycat/" class="">mycat</a>
   
 
         </li>
@@ -573,7 +573,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/mysql/" class="">mysql</a>
+    <a href="/hugo/post/computer-science/database/mysql/" class="">mysql</a>
   
 
         </li>
@@ -586,7 +586,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/postgresql/" class="">postgresql</a>
+    <a href="/hugo/post/computer-science/database/postgresql/" class="">postgresql</a>
   
 
         </li>
@@ -599,7 +599,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/shardingsphere/" class="">shardingsphere</a>
+    <a href="/hugo/post/computer-science/database/shardingsphere/" class="">shardingsphere</a>
   
 
         </li>
@@ -612,7 +612,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/sql/" class="">SQL</a>
+    <a href="/hugo/post/computer-science/database/sql/" class="">SQL</a>
   
 
         </li>
@@ -625,7 +625,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/mongodb/" class="">Penruins</a>
+    <a href="/hugo/post/computer-science/database/mongodb/" class="">Penruins</a>
   
 
         </li>
@@ -675,7 +675,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/message-queue/kafka/" class="">kafka</a>
+    <a href="/hugo/post/computer-science/distributed-system/message-queue/kafka/" class="">kafka</a>
   
 
         </li>
@@ -688,7 +688,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/message-queue/message-queue/" class="">Message Queue</a>
+    <a href="/hugo/post/computer-science/distributed-system/message-queue/message-queue/" class="">Message Queue</a>
   
 
         </li>
@@ -701,7 +701,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">rabbitmq</a>
+    <a href="/hugo/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">rabbitmq</a>
   
 
         </li>
@@ -719,7 +719,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/distributed-system/" class="">distributed system</a>
+    <a href="/hugo/post/computer-science/distributed-system/distributed-system/" class="">distributed system</a>
   
 
         </li>
@@ -732,7 +732,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/sentinel/" class="">Sentinel</a>
+    <a href="/hugo/post/computer-science/distributed-system/sentinel/" class="">Sentinel</a>
   
 
         </li>
@@ -745,7 +745,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/spring-cloud/" class="">Spring Cloud</a>
+    <a href="/hugo/post/computer-science/distributed-system/spring-cloud/" class="">Spring Cloud</a>
   
 
         </li>
@@ -758,7 +758,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">Spring Cloud Alibaba</a>
+    <a href="/hugo/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">Spring Cloud Alibaba</a>
   
 
         </li>
@@ -792,7 +792,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/java-basic/" class="">java basic</a>
+    <a href="/hugo/post/computer-science/java/java-basic/" class="">java basic</a>
   
 
         </li>
@@ -821,7 +821,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/spring/spring/" class="">spring</a>
+    <a href="/hugo/post/computer-science/java/spring/spring/" class="">spring</a>
   
 
         </li>
@@ -834,7 +834,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/spring/spring-transaction/" class="">spring transaction</a>
+    <a href="/hugo/post/computer-science/java/spring/spring-transaction/" class="">spring transaction</a>
   
 
         </li>
@@ -847,7 +847,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/spring/unit-test/" class="">unit test</a>
+    <a href="/hugo/post/computer-science/java/spring/unit-test/" class="">unit test</a>
   
 
         </li>
@@ -865,7 +865,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/java/" class="">java</a>
+    <a href="/hugo/post/computer-science/java/java/" class="">java</a>
   
 
         </li>
@@ -878,7 +878,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/concurrent/" class="">concurrent</a>
+    <a href="/hugo/post/computer-science/java/concurrent/" class="">concurrent</a>
   
 
         </li>
@@ -891,7 +891,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/jvm/" class="">jvm</a>
+    <a href="/hugo/post/computer-science/java/jvm/" class="">jvm</a>
   
 
         </li>
@@ -904,7 +904,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/mybatis/" class="">Mybatis</a>
+    <a href="/hugo/post/computer-science/java/mybatis/" class="">Mybatis</a>
   
 
         </li>
@@ -917,7 +917,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/mybatis-plus/" class="">Mybatis Plus</a>
+    <a href="/hugo/post/computer-science/java/mybatis-plus/" class="">Mybatis Plus</a>
   
 
         </li>
@@ -930,7 +930,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/springboot/" class="">spring boot</a>
+    <a href="/hugo/post/computer-science/java/springboot/" class="">spring boot</a>
   
 
         </li>
@@ -943,7 +943,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/xxl-job/" class="">xxl job</a>
+    <a href="/hugo/post/computer-science/java/xxl-job/" class="">xxl job</a>
   
 
         </li>
@@ -977,7 +977,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/monitor/prometheus/" class="">prometheus</a>
+    <a href="/hugo/post/computer-science/monitor/prometheus/" class="">prometheus</a>
   
 
         </li>
@@ -1011,7 +1011,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/tools/idea/" class="">IDEA</a>
+    <a href="/hugo/post/computer-science/tools/idea/" class="">IDEA</a>
   
 
         </li>
@@ -1029,7 +1029,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/computer-science-recommend/" class="">推荐</a>
+    <a href="/hugo/post/computer-science/computer-science-recommend/" class="">推荐</a>
   
 
         </li>
@@ -1042,7 +1042,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/computer-science-learning-log/" class="">学习记录</a>
+    <a href="/hugo/post/computer-science/computer-science-learning-log/" class="">学习记录</a>
   
 
         </li>
@@ -1055,7 +1055,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/github/" class="">github</a>
+    <a href="/hugo/post/computer-science/github/" class="">github</a>
   
 
         </li>
@@ -1068,7 +1068,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/job/" class="">job</a>
+    <a href="/hugo/post/computer-science/job/" class="">job</a>
   
 
         </li>
@@ -1081,7 +1081,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/redis/" class="">redis</a>
+    <a href="/hugo/post/computer-science/redis/" class="">redis</a>
   
 
         </li>
@@ -1094,7 +1094,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/security/" class="">security</a>
+    <a href="/hugo/post/computer-science/security/" class="">security</a>
   
 
         </li>
@@ -1123,7 +1123,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/blog/blog/" class="">blog</a>
+    <a href="/hugo/post/computer-science/blog/blog/" class="">blog</a>
   
 
         </li>
@@ -1136,7 +1136,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/blog/hugo/" class="">Hugo</a>
+    <a href="/hugo/post/computer-science/blog/hugo/" class="">Hugo</a>
   
 
         </li>
@@ -1154,7 +1154,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/cloud/" class="">Cloud</a>
+    <a href="/hugo/post/computer-science/cloud/" class="">Cloud</a>
   
 
         </li>
@@ -1183,7 +1183,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/front-end/echarts/" class="">echarts</a>
+    <a href="/hugo/post/computer-science/front-end/echarts/" class="">echarts</a>
   
 
         </li>
@@ -1196,7 +1196,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/front-end/vue/" class="">vue</a>
+    <a href="/hugo/post/computer-science/front-end/vue/" class="">vue</a>
   
 
         </li>
@@ -1230,7 +1230,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/micro-service/nacos/" class="">Nacos</a>
+    <a href="/hugo/post/computer-science/micro-service/nacos/" class="">Nacos</a>
   
 
         </li>
@@ -1264,7 +1264,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/ios/" class="">ios</a>
+    <a href="/hugo/post/computer-science/operating-system/ios/" class="">ios</a>
   
 
         </li>
@@ -1277,7 +1277,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/linux/" class="">linux</a>
+    <a href="/hugo/post/computer-science/operating-system/linux/" class="">linux</a>
   
 
         </li>
@@ -1290,7 +1290,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/mac/" class="">mac</a>
+    <a href="/hugo/post/computer-science/operating-system/mac/" class="">mac</a>
   
 
         </li>
@@ -1303,7 +1303,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/raspberrypi/" class="">raspberry pi</a>
+    <a href="/hugo/post/computer-science/operating-system/raspberrypi/" class="">raspberry pi</a>
   
 
         </li>
@@ -1316,7 +1316,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/windows/" class="">windows</a>
+    <a href="/hugo/post/computer-science/operating-system/windows/" class="">windows</a>
   
 
         </li>
@@ -1334,7 +1334,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/artificial-intelligence/" class="">Artificial Intelligence</a>
+    <a href="/hugo/post/computer-science/artificial-intelligence/" class="">Artificial Intelligence</a>
   
 
         </li>
@@ -1363,7 +1363,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/gitlab/" class="">Gitlab</a>
+    <a href="/hugo/post/computer-science/ci-cd/gitlab/" class="">Gitlab</a>
   
 
         </li>
@@ -1376,7 +1376,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/jenkins/" class="">Jenkins</a>
+    <a href="/hugo/post/computer-science/ci-cd/jenkins/" class="">Jenkins</a>
   
 
         </li>
@@ -1389,7 +1389,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/maven/" class="">maven</a>
+    <a href="/hugo/post/computer-science/ci-cd/maven/" class="">maven</a>
   
 
         </li>
@@ -1402,7 +1402,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/nexus/" class="">Nexus</a>
+    <a href="/hugo/post/computer-science/ci-cd/nexus/" class="">Nexus</a>
   
 
         </li>
@@ -1420,7 +1420,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/crawler/" class="">crawler</a>
+    <a href="/hugo/post/computer-science/crawler/" class="">crawler</a>
   
 
         </li>
@@ -1433,7 +1433,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/git/" class="">git</a>
+    <a href="/hugo/post/computer-science/git/" class="">git</a>
   
 
         </li>
@@ -1446,7 +1446,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/networking/" class="">networking</a>
+    <a href="/hugo/post/computer-science/networking/" class="">networking</a>
   
 
         </li>
@@ -1459,7 +1459,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/python/" class="">Python</a>
+    <a href="/hugo/post/computer-science/python/" class="">Python</a>
   
 
         </li>
@@ -1472,7 +1472,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/reddison/" class="">reddison</a>
+    <a href="/hugo/post/computer-science/reddison/" class="">reddison</a>
   
 
         </li>
@@ -1485,7 +1485,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/vim/" class="">vim</a>
+    <a href="/hugo/post/computer-science/vim/" class="">vim</a>
   
 
         </li>
@@ -1498,7 +1498,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">系统设计</a>
+    <a href="/hugo/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">系统设计</a>
   
 
         </li>
@@ -1511,7 +1511,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">运维</a>
+    <a href="/hugo/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">运维</a>
   
 
         </li>
@@ -1545,7 +1545,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/history/chinese-history/" class="">Chinese History</a>
+    <a href="/hugo/post/history/chinese-history/" class="">Chinese History</a>
   
 
         </li>
@@ -1579,7 +1579,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/others/about-me/" class="">about me</a>
+    <a href="/hugo/post/others/about-me/" class="">about me</a>
   
 
         </li>
@@ -1592,7 +1592,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/others/english-learning/" class="">English Learning</a>
+    <a href="/hugo/post/others/english-learning/" class="">English Learning</a>
   
 
         </li>
@@ -1607,7 +1607,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/others/economy/" class="">Economy</a>
+    <a href="/hugo/post/others/economy/" class="">Economy</a>
   
 
         </li>
@@ -1620,7 +1620,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/others/f1/" class="">F1</a>
+    <a href="/hugo/post/others/f1/" class="">F1</a>
   
 
         </li>
@@ -1654,7 +1654,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/science/biology/" class="">biology</a>
+    <a href="/hugo/post/science/biology/" class="">biology</a>
   
 
         </li>
@@ -1688,7 +1688,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/sports/cycling/" class="">cycling</a>
+    <a href="/hugo/post/sports/cycling/" class="">cycling</a>
   
 
         </li>
@@ -1701,7 +1701,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/sports/table-tennis/" class="">table tennis</a>
+    <a href="/hugo/post/sports/table-tennis/" class="">table tennis</a>
   
 
         </li>
@@ -1737,7 +1737,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/wl-public/movies-log/" class="">movies log</a>
+    <a href="/hugo/post/wl-public/movies-log/" class="">movies log</a>
   
 
         </li>
@@ -1750,7 +1750,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/wl-public/%E5%B9%BF%E5%B7%9E/" class="">广州</a>
+    <a href="/hugo/post/wl-public/%E5%B9%BF%E5%B7%9E/" class="">广州</a>
   
 
         </li>
@@ -1800,7 +1800,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">Java并发编程实战</a>
+    <a href="/hugo/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">Java并发编程实战</a>
   
 
         </li>
@@ -1813,7 +1813,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">Python神经网络编程</a>
+    <a href="/hugo/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">Python神经网络编程</a>
   
 
         </li>
@@ -1826,7 +1826,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">Redis设计与实现</a>
+    <a href="/hugo/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">Redis设计与实现</a>
   
 
         </li>
@@ -1839,7 +1839,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">Spring Cloud微服务：入门、实战与进阶</a>
+    <a href="/hugo/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">Spring Cloud微服务：入门、实战与进阶</a>
   
 
         </li>
@@ -1852,7 +1852,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+    <a href="/hugo/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
   
 
         </li>
@@ -1870,7 +1870,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">宏观经济学 第三版</a>
+    <a href="/hugo/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">宏观经济学 第三版</a>
   
 
         </li>
@@ -1883,7 +1883,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">英伟达-黄仁勋之芯</a>
+    <a href="/hugo/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">英伟达-黄仁勋之芯</a>
   
 
         </li>
@@ -1927,14 +1927,14 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+    <img src="/hugo/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
   <h3>elasticsearch</h3>
 
   <label for="toc-control">
     
-    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="/hugo/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
@@ -2012,8 +2012,8 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/b1ec5ab1fa979fac6e20243ca41e5739b681fa48" title='Last modified by penruins | August 24, 2025' target="_blank" rel="noopener">
-      <img src="/svg/calendar.svg" class="book-icon" alt="" />
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/e6c77069c48c3c9794a92c6efd532b7dffbf7a01" title='Last modified by liuxiang | August 24, 2025' target="_blank" rel="noopener">
+      <img src="/hugo/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 24, 2025</span>
     </a>
   </div>

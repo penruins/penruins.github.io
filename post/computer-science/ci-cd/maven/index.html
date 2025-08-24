@@ -23,21 +23,21 @@ mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prod
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/ci-cd/maven/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://penruins.github.io/hugo/post/computer-science/ci-cd/maven/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="maven">
   <meta property="og:description" content="# 加上多线程的参数 -T 可以加快构建速度 数量就设置为CPU的核心数就行了 # 这个参数要和实际并行构建的任务综合考虑，如果同时构建的任务太多，那么这个参数不宜设置为CPU的核心数 # 如果经常是单个任务进行构建，那么可以直接配置为CPU的核心数 mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prod plugin # 从Maven中的命令行参数跳过exec-Maven插件 reference # 利用码云gitee搭建个人maven仓库">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-08-24T16:00:14+08:00">
+    <meta property="article:modified_time" content="2025-08-24T16:48:42+08:00">
 <title>maven | Penruins</title>
-<link rel="icon" href="/favicon.png" >
-<link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/ci-cd/maven/">
-<link rel="stylesheet" href="/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" >
-  <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.7a7e3a4112f13ca84be389559cc73163e994204b5abcb37825dee9dafc0e5b66.js" ></script>
+<link rel="icon" href="/hugo/favicon.png" >
+<link rel="manifest" href="/hugo/manifest.json">
+<link rel="canonical" href="https://penruins.github.io/hugo/post/computer-science/ci-cd/maven/">
+<link rel="stylesheet" href="/hugo/book.min.906e34f8c022f0b84a196adcca9b010338f8538635067c7b810a46d6dd81c80c.css" integrity="sha256-kG40&#43;MAi8LhKGWrcypsBAzj4U4Y1Bnx7gQpG1t2ByAw=" crossorigin="anonymous">
+  <script defer src="/hugo/fuse.min.js"></script>
+  <script defer src="/hugo/en.search.min.457aed47729b3abce559662bef9c405bc8e4b9cb8b64263202e23bb32d32cb70.js" integrity="sha256-RXrtR3KbOrzlWWYr75xAW8jkucuLZCYyAuI7sy0yy3A=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -68,14 +68,14 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+    <img src="/hugo/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
   <h3>maven</h3>
 
   <label for="toc-control">
     
-    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="/hugo/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
@@ -128,8 +128,8 @@ mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prod
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/b1ec5ab1fa979fac6e20243ca41e5739b681fa48" title='Last modified by penruins | August 24, 2025' target="_blank" rel="noopener">
-      <img src="/svg/calendar.svg" class="book-icon" alt="" />
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/e6c77069c48c3c9794a92c6efd532b7dffbf7a01" title='Last modified by liuxiang | August 24, 2025' target="_blank" rel="noopener">
+      <img src="/hugo/svg/calendar.svg" class="book-icon" alt="" />
       <span>August 24, 2025</span>
     </a>
   </div>
