@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Penruins</title>
-    <link>https://penruins.github.io/hugo/post/computer-science/tools/</link>
+    <link>https://penruins.github.io/my-hugo/post/computer-science/tools/</link>
     <description>Recent content on Penruins</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="https://penruins.github.io/hugo/post/computer-science/tools/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://penruins.github.io/my-hugo/post/computer-science/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>IDEA</title>
-      <link>https://penruins.github.io/hugo/post/computer-science/tools/idea/</link>
+      <link>https://penruins.github.io/my-hugo/post/computer-science/tools/idea/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://penruins.github.io/hugo/post/computer-science/tools/idea/</guid>
+      <guid>https://penruins.github.io/my-hugo/post/computer-science/tools/idea/</guid>
       <description>&lt;h1 id=&#34;idea&#34;&gt;&#xA;  IDEA&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#idea&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;索引&#34;&gt;&#xA;  索引&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e7%b4%a2%e5%bc%95&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如果IDE一直对构建目录(例如target)进行索引，可以将这个目录设置为 Excluded，这样就不会对这个目录进行索引了&#xA;&lt;ul&gt;&#xA;&lt;li&gt;右键目录 &lt;code&gt;Mark Directory as&lt;/code&gt; -&amp;gt; &lt;code&gt;Excluded&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
   </channel>

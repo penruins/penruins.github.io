@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CI/CD on Penruins</title>
-    <link>https://penruins.github.io/hugo/post/computer-science/ci-cd/</link>
+    <link>https://penruins.github.io/my-hugo/post/computer-science/ci-cd/</link>
     <description>Recent content in CI/CD on Penruins</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="https://penruins.github.io/hugo/post/computer-science/ci-cd/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://penruins.github.io/my-hugo/post/computer-science/ci-cd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gitlab</title>
-      <link>https://penruins.github.io/hugo/post/computer-science/ci-cd/gitlab/</link>
+      <link>https://penruins.github.io/my-hugo/post/computer-science/ci-cd/gitlab/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://penruins.github.io/hugo/post/computer-science/ci-cd/gitlab/</guid>
+      <guid>https://penruins.github.io/my-hugo/post/computer-science/ci-cd/gitlab/</guid>
       <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/binarywang/Linux-Tutorial/blob/master/Gitlab-Install-And-Settings.md&#34;&gt;Gitlab 安装和配置&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>Jenkins</title>
-      <link>https://penruins.github.io/hugo/post/computer-science/ci-cd/jenkins/</link>
+      <link>https://penruins.github.io/my-hugo/post/computer-science/ci-cd/jenkins/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://penruins.github.io/hugo/post/computer-science/ci-cd/jenkins/</guid>
+      <guid>https://penruins.github.io/my-hugo/post/computer-science/ci-cd/jenkins/</guid>
       <description>&lt;h1 id=&#34;jenkins&#34;&gt;&#xA;  Jenkins&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#jenkins&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.jenkins.io/doc/book/installing/&#34;&gt;docs&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.jenkins.io/doc/book/installing/docker/&#34;&gt;docker&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.jenkins.io/doc/book/installing/macos/&#34;&gt;macOS&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.jenkins.io/download/lts/macos/&#34;&gt;macOS Installer for Jenkins LTS&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Install the latest LTS version: &lt;code&gt;brew install jenkins-lts&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Start the Jenkins service: &lt;code&gt;brew services start jenkins-lts&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Restart the Jenkins service: &lt;code&gt;brew services restart jenkins-lts&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Update the Jenkins version: &lt;code&gt;brew upgrade jenkins-lts&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.jenkins.io/doc/book/using/&#34;&gt;Using Jenkins&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;password&#34;&gt;&#xA;  password&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#password&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://ask.csdn.net/questions/4645065&#34;&gt;jenkins publish over SSH中SSH sever密码存放位置&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qq_27156945/article/details/108083342&#34;&gt;记录 从jenkins配置文件中解密密码&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;reference&#34;&gt;&#xA;  reference&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#reference&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/shuang_waiwai/article/details/121124203&#34;&gt;在Jenkins中拉取GitHub上的代码包（超详细)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/u012045045/article/details/107126372&#34;&gt;jenkins配置全局凭据 结合gitlab&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/dingshaohua/p/16458325.html&#34;&gt;jenkins部署github项目&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>maven</title>
-      <link>https://penruins.github.io/hugo/post/computer-science/ci-cd/maven/</link>
+      <link>https://penruins.github.io/my-hugo/post/computer-science/ci-cd/maven/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://penruins.github.io/hugo/post/computer-science/ci-cd/maven/</guid>
+      <guid>https://penruins.github.io/my-hugo/post/computer-science/ci-cd/maven/</guid>
       <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 加上多线程的参数 -T 可以加快构建速度 数量就设置为CPU的核心数就行了&#xA;# 这个参数要和实际并行构建的任务综合考虑，如果同时构建的任务太多，那么这个参数不宜设置为CPU的核心数&#xA;# 如果经常是单个任务进行构建，那么可以直接配置为CPU的核心数&#xA;mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prod&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;plugin&#34;&gt;&#xA;  plugin&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#plugin&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://cloud.tencent.com/developer/ask/sof/111436212&#34;&gt;从Maven中的命令行参数跳过exec-Maven插件&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;reference&#34;&gt;&#xA;  reference&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#reference&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/u011747754/article/details/78574026&#34;&gt;利用码云gitee搭建个人maven仓库&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>Nexus</title>
-      <link>https://penruins.github.io/hugo/post/computer-science/ci-cd/nexus/</link>
+      <link>https://penruins.github.io/my-hugo/post/computer-science/ci-cd/nexus/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://penruins.github.io/hugo/post/computer-science/ci-cd/nexus/</guid>
+      <guid>https://penruins.github.io/my-hugo/post/computer-science/ci-cd/nexus/</guid>
       <description>&lt;h1 id=&#34;nexus&#34;&gt;&#xA;  Nexus&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#nexus&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://hub.docker.com/r/sonatype/nexus3/tags&#34;&gt;docker sonatype/nexus3&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;install &lt;code&gt;docker run -d -p 8081:8081 --name nexus sonatype/nexus3&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
   </channel>

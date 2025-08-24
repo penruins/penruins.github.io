@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Penruins</title>
-    <link>https://penruins.github.io/hugo/post/computer-science/monitor/</link>
+    <link>https://penruins.github.io/my-hugo/post/computer-science/monitor/</link>
     <description>Recent content on Penruins</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="https://penruins.github.io/hugo/post/computer-science/monitor/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://penruins.github.io/my-hugo/post/computer-science/monitor/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>prometheus</title>
-      <link>https://penruins.github.io/hugo/post/computer-science/monitor/prometheus/</link>
+      <link>https://penruins.github.io/my-hugo/post/computer-science/monitor/prometheus/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://penruins.github.io/hugo/post/computer-science/monitor/prometheus/</guid>
+      <guid>https://penruins.github.io/my-hugo/post/computer-science/monitor/prometheus/</guid>
       <description>&lt;h1 id=&#34;prometheus&#34;&gt;&#xA;  prometheus&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#prometheus&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;brew&#34;&gt;&#xA;  brew&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#brew&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;如果是使用 brew 安装的话，配置文件在这个位置 &lt;code&gt;/opt/homebrew/etc/prometheus.yml&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;grafana&#34;&gt;&#xA;  grafana&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#grafana&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://grafana.com/grafana/dashboards/&#34;&gt;grafana dashboard&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;springboot&#34;&gt;&#xA;  springboot&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#springboot&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/qq_37958845/article/details/118024020&#34;&gt;SpringBoot + Prometheus + Grafana 实现自定义监控&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;database&#34;&gt;&#xA;  database&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#database&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://gitee.com/x5y22r/druid-prometheus-monitor&#34;&gt;x5y22r/druid-prometheus-monitor&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
   </channel>
