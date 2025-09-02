@@ -6,7 +6,7 @@
     <description>Recent content on Penruins</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 02 Sep 2025 00:14:55 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 02 Sep 2025 18:05:09 +0800</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Algorithm</title>
@@ -608,7 +608,7 @@
       <link>/post/computer-science/artificial-intelligence/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/post/computer-science/artificial-intelligence/</guid>
-      <description>&lt;h1 id=&#34;artificial-intelligence&#34;&gt;&#xA;  Artificial Intelligence&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#artificial-intelligence&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;cherry-studio&#34;&gt;&#xA;  Cherry Studio&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#cherry-studio&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://linux.do/t/topic/503051&#34;&gt;面向新手的MCP使用教程：在Cherry Studio中配置和使用模型上下文协议&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+      <description>&lt;h1 id=&#34;prompt&#34;&gt;&#xA;  prompt&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#prompt&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/xiaobaiysf/p/18910051&#34;&gt;Prompt 生产级提示词案例（含完整提示词）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;mcp&#34;&gt;&#xA;  MCP&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#mcp&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://mcp-docs.apifox.cn/&#34;&gt;模型上下文协议 (MCP) 入门&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://sspai.com/post/94360&#34;&gt;Claude 的 MCP (模型上下文协议）有啥用？&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;maxkb&#34;&gt;&#xA;  MaxKB&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#maxkb&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://maxkb.cn/docs/v2/&#34;&gt;maxkb&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/xiaobaiysf/p/18849683&#34;&gt;干货分享｜MaxKB + MCP 智能问数方案及步骤详解&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;学生考试成绩管理系统&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/xiaobaiysf/p/18826466&#34;&gt;让 AI 对接 MySQL 数据库实现快速问答对话&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/xiaobaiysf/p/18803726&#34;&gt;如何优化和提高MaxKB回答的质量和准确性？&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;cherry-studio&#34;&gt;&#xA;  Cherry Studio&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#cherry-studio&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://linux.do/t/topic/503051&#34;&gt;面向新手的MCP使用教程：在Cherry Studio中配置和使用模型上下文协议&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>biology</title>
