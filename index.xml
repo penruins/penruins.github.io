@@ -6,7 +6,7 @@
     <description>Recent content on Penruins</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 04 Sep 2025 13:40:09 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 04 Sep 2025 16:34:51 +0800</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Algorithm</title>
@@ -681,6 +681,13 @@
       <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 加上多线程的参数 -T 可以加快构建速度 数量就设置为CPU的核心数就行了&#xA;# 这个参数要和实际并行构建的任务综合考虑，如果同时构建的任务太多，那么这个参数不宜设置为CPU的核心数&#xA;# 如果经常是单个任务进行构建，那么可以直接配置为CPU的核心数&#xA;mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prod&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;plugin&#34;&gt;&#xA;  plugin&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#plugin&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://cloud.tencent.com/developer/ask/sof/111436212&#34;&gt;从Maven中的命令行参数跳过exec-Maven插件&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;reference&#34;&gt;&#xA;  reference&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#reference&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/u011747754/article/details/78574026&#34;&gt;利用码云gitee搭建个人maven仓库&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
+      <title>micro service</title>
+      <link>/post/computer-science/micro-service/micro-service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/post/computer-science/micro-service/micro-service/</guid>
+      <description>&lt;h1 id=&#34;监控&#34;&gt;&#xA;  监控&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e7%9b%91%e6%8e%a7&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://skywalking.apache.org/zh/2020-04-19-skywalking-quick-start/&#34;&gt;SkyWalking 极简入门&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
       <title>movies log</title>
       <link>/post/wl-public/movies-log/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -706,7 +713,7 @@
       <link>/post/computer-science/operating-system/powershell/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/post/computer-science/operating-system/powershell/</guid>
-      <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/fleschutz/PowerShell&#34;&gt;fleschutz/PowerShell&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Mega Collection of PowerShell Scripts&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://sspai.com/post/81787&#34;&gt;一句话完成繁琐操作：你可以试试的 8 个 Windows 命令行工具&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;systeminfo&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;列出当前电脑的ip&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;Get-CimInstance -Class Win32_NetworkAdapterConfiguration -Filter IPEnabled=$true | Select-Object -ExpandProperty IPAddress&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;定时任务&#34;&gt;&#xA;  定时任务&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/saneri/p/18740324&#34;&gt;windows用任务计划定时执行powershell脚本&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/fleschutz/PowerShell&#34;&gt;fleschutz/PowerShell&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Mega Collection of PowerShell Scripts&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://sspai.com/post/81787&#34;&gt;一句话完成繁琐操作：你可以试试的 8 个 Windows 命令行工具&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;systeminfo&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;列出当前电脑的ip&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;Get-CimInstance -Class Win32_NetworkAdapterConfiguration -Filter IPEnabled=$true | Select-Object -ExpandProperty IPAddress&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;定时任务&#34;&gt;&#xA;  定时任务&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/saneri/p/18740324&#34;&gt;windows用任务计划定时执行powershell脚本&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;字符问题&#34;&gt;&#xA;  字符问题&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e5%ad%97%e7%ac%a6%e9%97%ae%e9%a2%98&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/54724102/answer/380875686&#34;&gt;win10下,cmd,power shell设置默认编码为‘UTF-8’? - 马甲的回答&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>Python</title>
