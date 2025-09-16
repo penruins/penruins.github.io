@@ -6,7 +6,7 @@
     <description>Recent content on Penruins</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 16 Sep 2025 10:38:13 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 16 Sep 2025 10:42:57 +0800</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Algorithm</title>
@@ -651,6 +651,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/post/computer-science/ci-cd/gitlab/</guid>
       <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/binarywang/Linux-Tutorial/blob/master/Gitlab-Install-And-Settings.md&#34;&gt;Gitlab 安装和配置&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>java HashMap</title>
+      <link>/post/computer-science/java/java-hashmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/post/computer-science/java/java-hashmap/</guid>
+      <description>&lt;h1 id=&#34;hashmap&#34;&gt;&#xA;  HashMap&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#hashmap&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;hashmap底层的数据结构是怎样的&#34;&gt;&#xA;  HashMap底层的数据结构是怎样的&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#hashmap%e5%ba%95%e5%b1%82%e7%9a%84%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e6%98%af%e6%80%8e%e6%a0%b7%e7%9a%84&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;HashMap 底层的数据结构在 &lt;strong&gt;JDK 1.7&lt;/strong&gt; 和 &lt;strong&gt;JDK 1.8&lt;/strong&gt; 中有显著的不同，主要体现在如何处理哈希冲突和存储数据的方式上。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;jdk-17-及之前&#34;&gt;&#xA;  &lt;strong&gt;JDK 1.7 及之前&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#jdk-17-%e5%8f%8a%e4%b9%8b%e5%89%8d&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;数据结构&lt;/strong&gt;：&lt;code&gt;数组 + 链表&lt;/code&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;数组&lt;/strong&gt;：是 HashMap 的主体，用于存储键值对（&lt;code&gt;Entry&lt;/code&gt; 对象）。数组的每个位置称为一个 &lt;strong&gt;桶&lt;/strong&gt;（bucket）。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;链表&lt;/strong&gt;：用于解决哈希冲突。当多个键的哈希值相同（即计算出的数组索引相同）时，这些键值对会以链表的形式存储在同一个桶中。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;哈希冲突解决&lt;/strong&gt;：通过 &lt;strong&gt;拉链法&lt;/strong&gt;（Chaining）解决哈希冲突，即链表的形式。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;性能问题&lt;/strong&gt;：当链表过长时，查询效率会降低，时间复杂度退化为 O(n)。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;jdk-18-及之后&#34;&gt;&#xA;  &lt;strong&gt;JDK 1.8 及之后&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#jdk-18-%e5%8f%8a%e4%b9%8b%e5%90%8e&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;数据结构&lt;/strong&gt;：&lt;code&gt;数组 + 链表 + 红黑树&lt;/code&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;数组&lt;/strong&gt;：仍然是 HashMap 的主体，用于存储键值对（&lt;code&gt;Node&lt;/code&gt; 对象）。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;链表&lt;/strong&gt;：当哈希冲突时，键值对首先以链表的形式存储。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;红黑树&lt;/strong&gt;：当链表长度超过 &lt;strong&gt;阈值（默认是 8）&lt;/strong&gt; 且 &lt;strong&gt;数组长度大于 64&lt;/strong&gt; 时，链表会转换为 &lt;strong&gt;红黑树&lt;/strong&gt;，以提高查询效率。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;哈希冲突解决&lt;/strong&gt;：仍然使用 &lt;strong&gt;拉链法&lt;/strong&gt;，但当链表过长时会转换为红黑树，时间复杂度优化为 O(log n)。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;性能优化&lt;/strong&gt;：红黑树的引入大大减少了哈希冲突严重时的查询时间。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;核心机制&#34;&gt;&#xA;  &lt;strong&gt;核心机制&lt;/strong&gt;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#%e6%a0%b8%e5%bf%83%e6%9c%ba%e5%88%b6&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;哈希计算&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;通过 &lt;code&gt;key.hashCode()&lt;/code&gt; 计算哈希值，再通过 &lt;code&gt;(n - 1) &amp;amp; hash&lt;/code&gt; 计算数组索引（&lt;code&gt;n&lt;/code&gt; 是数组长度）。&lt;/li&gt;&#xA;&lt;li&gt;为了减少哈希冲突，JDK 1.8 对哈希值进行了优化，将高 16 位与低 16 位进行异或运算，使哈希分布更均匀&lt;a href=&#34;@ref&#34;&gt;1&lt;/a&gt;&lt;a href=&#34;@ref&#34;&gt;3&lt;/a&gt;。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;扩容机制&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Java Utils</title>
