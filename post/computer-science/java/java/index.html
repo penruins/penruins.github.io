@@ -73,14 +73,14 @@ public synchronized StringBuffer append(String str){ // 方法实现 } 这种机
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-09-16T10:09:47+08:00">
+    <meta property="article:modified_time" content="2025-09-16T10:38:13+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/post/computer-science/java/java/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.9a4657696d43a302c6abe892ea9f9fa3659805ba5518194f6ed126ca43701d4e.js" ></script>
+  <script defer src="/en.search.min.77ee95d1f65559180f5328bb9d79875afa442bb6c791af862a56f07f9a2e7d8e.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -991,6 +991,19 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/post/computer-science/java/java-utils/" class="">Java Utils</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">java 密码学</a>
   
 
         </li>
@@ -2614,60 +2627,6 @@ https://github.com/alex-shpak/hugo-book
         </li>
       </ul>
     </li>
-    <li><a href="#密码学">密码学</a>
-      <ul>
-        <li><a href="#在java中如何使用aes加密算法">在java中如何使用AES加密算法</a>
-          <ul>
-            <li><a href="#1-导入必要的包"><strong>1. 导入必要的包</strong></a></li>
-            <li><a href="#2-生成-aes-密钥"><strong>2. 生成 AES 密钥</strong></a></li>
-            <li><a href="#3-加密方法"><strong>3. 加密方法</strong></a></li>
-            <li><a href="#4-解密方法"><strong>4. 解密方法</strong></a></li>
-            <li><a href="#5-完整示例"><strong>5. 完整示例</strong></a></li>
-            <li><a href="#6-注意事项"><strong>6. 注意事项</strong></a></li>
-          </ul>
-        </li>
-        <li><a href="#在java中如何使用rsa算法进行加解密">在Java中如何使用RSA算法进行加解密</a>
-          <ul>
-            <li><a href="#1-生成-rsa-密钥对"><strong>1. 生成 RSA 密钥对</strong></a></li>
-            <li><a href="#2-使用公钥加密"><strong>2. 使用公钥加密</strong></a></li>
-            <li><a href="#3-使用私钥解密"><strong>3. 使用私钥解密</strong></a></li>
-            <li><a href="#4-注意事项"><strong>4. 注意事项</strong></a></li>
-          </ul>
-        </li>
-        <li><a href="#公钥只能用来加密私钥只能用来解密吗">公钥只能用来加密，私钥只能用来解密吗？</a>
-          <ul>
-            <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
-            <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
-            <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
-            <li><a href="#总结-23"><strong>总结</strong></a></li>
-          </ul>
-        </li>
-        <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
-          <ul>
-            <li><a href="#1-ecbelectronic-code-book电子密码本模式"><strong>1. ECB（Electronic Code Book，电子密码本模式）</strong></a></li>
-            <li><a href="#2-cbccipher-block-chaining密码分组链接模式"><strong>2. CBC（Cipher Block Chaining，密码分组链接模式）</strong></a></li>
-            <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
-            <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
-            <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
-            <li><a href="#总结-24"><strong>总结</strong></a></li>
-          </ul>
-        </li>
-        <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
-          <ul>
-            <li><a href="#1-pkcs7-padding">1. <strong>PKCS7 Padding</strong></a></li>
-            <li><a href="#2-pkcs5-padding">2. <strong>PKCS5 Padding</strong></a></li>
-            <li><a href="#3-no-padding">3. <strong>No Padding</strong></a></li>
-            <li><a href="#4-iso10126-padding">4. <strong>ISO10126 Padding</strong></a></li>
-            <li><a href="#5-iso7816-4-padding">5. <strong>ISO7816-4 Padding</strong></a></li>
-            <li><a href="#6-zero-byte-padding">6. <strong>Zero Byte Padding</strong></a></li>
-            <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
-            <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
-            <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
-            <li><a href="#总结-25">总结</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
     <li><a href="#reactor">reactor</a>
       <ul>
         <li><a href="#reference">reference</a></li>
@@ -2692,7 +2651,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#优点">优点</a></li>
             <li><a href="#缺点">缺点</a></li>
             <li><a href="#示例">示例</a></li>
-            <li><a href="#总结-26">总结</a></li>
+            <li><a href="#总结-23">总结</a></li>
           </ul>
         </li>
         <li><a href="#在springboot中有哪些响应式编程的运用">在springboot中有哪些响应式编程的运用</a>
@@ -2731,7 +2690,7 @@ https://github.com/alex-shpak/hugo-book
                 <li><a href="#示例代码-7">示例代码：</a></li>
               </ul>
             </li>
-            <li><a href="#总结-27">总结</a></li>
+            <li><a href="#总结-24">总结</a></li>
           </ul>
         </li>
         <li><a href="#响应式数据库访问和传统的数据库访问有什么区别">响应式数据库访问和传统的数据库访问有什么区别</a>
@@ -2741,7 +2700,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#3-适用场景-1">3. <strong>适用场景</strong></a></li>
             <li><a href="#4-技术实现">4. <strong>技术实现</strong></a></li>
             <li><a href="#5-优缺点对比">5. <strong>优缺点对比</strong></a></li>
-            <li><a href="#总结-28">总结</a></li>
+            <li><a href="#总结-25">总结</a></li>
           </ul>
         </li>
         <li><a href="#一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较</a>
@@ -2779,7 +2738,7 @@ https://github.com/alex-shpak/hugo-book
             </li>
             <li><a href="#线程任务总结"><strong>线程任务总结</strong></a></li>
             <li><a href="#关键点"><strong>关键点</strong></a></li>
-            <li><a href="#总结-29"><strong>总结</strong></a></li>
+            <li><a href="#总结-26"><strong>总结</strong></a></li>
           </ul>
         </li>
         <li><a href="#在响应式编程中它的并发量会收到数据库连接池大小的限制那这不是和阻塞式的服务一样吗">在响应式编程中，它的并发量会收到数据库连接池大小的限制，那这不是和阻塞式的服务一样吗</a>
@@ -2796,7 +2755,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#2-具体流程"><strong>2. 具体流程</strong></a></li>
             <li><a href="#3-阻塞式io的线程模型"><strong>3. 阻塞式IO的线程模型</strong></a></li>
             <li><a href="#4-与响应式模型的区别"><strong>4. 与响应式模型的区别</strong></a></li>
-            <li><a href="#总结-30"><strong>总结</strong></a></li>
+            <li><a href="#总结-27"><strong>总结</strong></a></li>
           </ul>
         </li>
         <li><a href="#在使用-r2dbc-时处理数据库操作的线程如何设置">在使用 R2DBC 时，处理数据库操作的线程如何设置</a>
@@ -2811,7 +2770,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#3-线程处理的流程"><strong>3. 线程处理的流程</strong></a></li>
             <li><a href="#4-与传统阻塞式模型的区别"><strong>4. 与传统阻塞式模型的区别</strong></a></li>
             <li><a href="#5-优化建议"><strong>5. 优化建议</strong></a></li>
-            <li><a href="#总结-31"><strong>总结</strong></a></li>
+            <li><a href="#总结-28"><strong>总结</strong></a></li>
           </ul>
         </li>
       </ul>
@@ -2825,7 +2784,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#mono-的示例代码"><strong>Mono 的示例代码</strong></a></li>
             <li><a href="#mono-的操作符"><strong>Mono 的操作符</strong></a></li>
             <li><a href="#mono-与-flux-的区别"><strong>Mono 与 Flux 的区别</strong></a></li>
-            <li><a href="#总结-32"><strong>总结</strong></a></li>
+            <li><a href="#总结-29"><strong>总结</strong></a></li>
           </ul>
         </li>
         <li><a href="#mono-是如何实现非阻塞的">Mono 是如何实现非阻塞的</a>
@@ -2836,7 +2795,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#4-线程调度">4. <strong>线程调度</strong></a></li>
             <li><a href="#5-背压支持">5. <strong>背压支持</strong></a></li>
             <li><a href="#6-示例代码">6. <strong>示例代码</strong></a></li>
-            <li><a href="#总结-33">总结</a></li>
+            <li><a href="#总结-30">总结</a></li>
           </ul>
         </li>
       </ul>
@@ -8287,488 +8246,6 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </ul>
 <hr>
 <p>通过以上机制，<code>Selector</code> 能够高效地管理多个 <code>Channel</code>，提升 I/O 操作的性能，特别适合高并发的网络应用<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</p>
-<h1 id="密码学">
-  密码学
-  <a class="anchor" href="#%e5%af%86%e7%a0%81%e5%ad%a6">#</a>
-</h1>
-<h2 id="在java中如何使用aes加密算法">
-  在java中如何使用AES加密算法
-  <a class="anchor" href="#%e5%9c%a8java%e4%b8%ad%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8aes%e5%8a%a0%e5%af%86%e7%ae%97%e6%b3%95">#</a>
-</h2>
-<p>在 Java 中使用 AES 加密算法可以通过 <code>javax.crypto</code> 包中的类实现。以下是详细的步骤和示例代码：</p>
-<hr>
-<h3 id="1-导入必要的包">
-  <strong>1. 导入必要的包</strong>
-  <a class="anchor" href="#1-%e5%af%bc%e5%85%a5%e5%bf%85%e8%a6%81%e7%9a%84%e5%8c%85">#</a>
-</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.Cipher;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.KeyGenerator;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.SecretKey;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.spec.SecretKeySpec;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
-</span></span></code></pre></div><hr>
-<h3 id="2-生成-aes-密钥">
-  <strong>2. 生成 AES 密钥</strong>
-  <a class="anchor" href="#2-%e7%94%9f%e6%88%90-aes-%e5%af%86%e9%92%a5">#</a>
-</h3>
-<p>AES 密钥可以通过 <code>KeyGenerator</code> 生成，支持 128 位、192 位和 256 位密钥长度。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> SecretKey <span style="color:#a6e22e">generateKey</span>(<span style="color:#66d9ef">int</span> keySize)<span style="color:#66d9ef">throws</span> Exception{
-</span></span><span style="display:flex;"><span>        KeyGenerator keyGen<span style="color:#f92672">=</span>KeyGenerator.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES&#34;</span>);
-</span></span><span style="display:flex;"><span>        keyGen.<span style="color:#a6e22e">init</span>(keySize); <span style="color:#75715e">// 128, 192, 或 256</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> keyGen.<span style="color:#a6e22e">generateKey</span>();
-</span></span><span style="display:flex;"><span>        }
-</span></span></code></pre></div><hr>
-<h3 id="3-加密方法">
-  <strong>3. 加密方法</strong>
-  <a class="anchor" href="#3-%e5%8a%a0%e5%af%86%e6%96%b9%e6%b3%95">#</a>
-</h3>
-<p>使用 <code>Cipher</code> 类进行加密，并指定加密模式和填充方式（如 <code>AES/CBC/PKCS5Padding</code>）。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">encrypt</span>(String data,SecretKey secretKey)<span style="color:#66d9ef">throws</span> Exception{
-</span></span><span style="display:flex;"><span>        Cipher cipher<span style="color:#f92672">=</span>Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>); <span style="color:#75715e">// 默认模式</span>
-</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">ENCRYPT_MODE</span>,secretKey);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span>encryptedBytes<span style="color:#f92672">=</span>cipher.<span style="color:#a6e22e">doFinal</span>(data.<span style="color:#a6e22e">getBytes</span>());
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(encryptedBytes); <span style="color:#75715e">// 返回 Base64 编码的密文</span>
-</span></span><span style="display:flex;"><span>        }
-</span></span></code></pre></div><hr>
-<h3 id="4-解密方法">
-  <strong>4. 解密方法</strong>
-  <a class="anchor" href="#4-%e8%a7%a3%e5%af%86%e6%96%b9%e6%b3%95">#</a>
-</h3>
-<p>使用相同的密钥和模式进行解密。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">decrypt</span>(String encryptedData,SecretKey secretKey)<span style="color:#66d9ef">throws</span> Exception{
-</span></span><span style="display:flex;"><span>        Cipher cipher<span style="color:#f92672">=</span>Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>);
-</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">DECRYPT_MODE</span>,secretKey);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span>decodedBytes<span style="color:#f92672">=</span>Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(encryptedData);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span>decryptedBytes<span style="color:#f92672">=</span>cipher.<span style="color:#a6e22e">doFinal</span>(decodedBytes);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(decryptedBytes); <span style="color:#75715e">// 返回解密后的明文</span>
-</span></span><span style="display:flex;"><span>        }
-</span></span></code></pre></div><hr>
-<h3 id="5-完整示例">
-  <strong>5. 完整示例</strong>
-  <a class="anchor" href="#5-%e5%ae%8c%e6%95%b4%e7%a4%ba%e4%be%8b">#</a>
-</h3>
-<p>以下是一个完整的示例，包括生成密钥、加密和解密：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AESExample</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>        SecretKey secretKey <span style="color:#f92672">=</span> generateKey(128); <span style="color:#75715e">// 生成 128 位密钥</span>
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Secret Key (Base64): &#34;</span> <span style="color:#f92672">+</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(secretKey.<span style="color:#a6e22e">getEncoded</span>()));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        String originalText <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, AES!&#34;</span>;
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Original Text: &#34;</span> <span style="color:#f92672">+</span> originalText);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        String encryptedText <span style="color:#f92672">=</span> encrypt(originalText, secretKey);
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Encrypted Text: &#34;</span> <span style="color:#f92672">+</span> encryptedText);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        String decryptedText <span style="color:#f92672">=</span> decrypt(encryptedText, secretKey);
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Decrypted Text: &#34;</span> <span style="color:#f92672">+</span> decryptedText);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> SecretKey <span style="color:#a6e22e">generateKey</span>(<span style="color:#66d9ef">int</span> keySize) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>        KeyGenerator keyGen <span style="color:#f92672">=</span> KeyGenerator.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES&#34;</span>);
-</span></span><span style="display:flex;"><span>        keyGen.<span style="color:#a6e22e">init</span>(keySize);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> keyGen.<span style="color:#a6e22e">generateKey</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">encrypt</span>(String data, SecretKey secretKey) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>        Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>);
-</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">ENCRYPT_MODE</span>, secretKey);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> encryptedBytes <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(data.<span style="color:#a6e22e">getBytes</span>());
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(encryptedBytes);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">decrypt</span>(String encryptedData, SecretKey secretKey) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>        Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>);
-</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">DECRYPT_MODE</span>, secretKey);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decodedBytes <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(encryptedData);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decryptedBytes <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(decodedBytes);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(decryptedBytes);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h3 id="6-注意事项">
-  <strong>6. 注意事项</strong>
-  <a class="anchor" href="#6-%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a>
-</h3>
-<ol>
-<li><strong>密钥管理</strong>：密钥应安全存储，避免硬编码在代码中。</li>
-<li><strong>加密模式</strong>：默认使用 <code>ECB</code> 模式，但安全性较低，建议使用 <code>CBC</code> 模式并指定初始化向量（IV）。</li>
-<li><strong>填充方式</strong>：常用 <code>PKCS5Padding</code>，确保明文长度符合 AES 分组要求。</li>
-<li><strong>异常处理</strong>：在实际应用中，应妥善处理可能抛出的异常（如 <code>NoSuchAlgorithmException</code>、<code>InvalidKeyException</code> 等）。</li>
-</ol>
-<hr>
-<p>通过以上步骤，你可以在 Java 中轻松实现 AES 加密和解密。如果需要更安全的模式（如 <code>CBC</code>），请参考相关文档<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</p>
-<h2 id="在java中如何使用rsa算法进行加解密">
-  在Java中如何使用RSA算法进行加解密
-  <a class="anchor" href="#%e5%9c%a8java%e4%b8%ad%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8rsa%e7%ae%97%e6%b3%95%e8%bf%9b%e8%a1%8c%e5%8a%a0%e8%a7%a3%e5%af%86">#</a>
-</h2>
-<p>在 Java 中使用 RSA 算法进行加解密可以通过 <code>java.security</code> 和 <code>javax.crypto</code> 包中的类实现。以下是详细的步骤和示例代码：</p>
-<hr>
-<h3 id="1-生成-rsa-密钥对">
-  <strong>1. 生成 RSA 密钥对</strong>
-  <a class="anchor" href="#1-%e7%94%9f%e6%88%90-rsa-%e5%af%86%e9%92%a5%e5%af%b9">#</a>
-</h3>
-<p>首先，需要生成 RSA 的公钥和私钥对：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.KeyPair;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.KeyPairGenerator;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.NoSuchAlgorithmException;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.interfaces.RSAPrivateKey;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.interfaces.RSAPublicKey;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RSAKeyGenerator</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> NoSuchAlgorithmException {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 创建 KeyPairGenerator 实例，指定算法为 RSA</span>
-</span></span><span style="display:flex;"><span>        KeyPairGenerator keyPairGenerator <span style="color:#f92672">=</span> KeyPairGenerator.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;RSA&#34;</span>);
-</span></span><span style="display:flex;"><span>        keyPairGenerator.<span style="color:#a6e22e">initialize</span>(2048); <span style="color:#75715e">// 设置密钥长度为 2048 位</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 生成密钥对</span>
-</span></span><span style="display:flex;"><span>        KeyPair keyPair <span style="color:#f92672">=</span> keyPairGenerator.<span style="color:#a6e22e">generateKeyPair</span>();
-</span></span><span style="display:flex;"><span>        RSAPublicKey publicKey <span style="color:#f92672">=</span> (RSAPublicKey) keyPair.<span style="color:#a6e22e">getPublic</span>();
-</span></span><span style="display:flex;"><span>        RSAPrivateKey privateKey <span style="color:#f92672">=</span> (RSAPrivateKey) keyPair.<span style="color:#a6e22e">getPrivate</span>();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 将密钥转换为 Base64 编码的字符串</span>
-</span></span><span style="display:flex;"><span>        String publicKeyStr <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(publicKey.<span style="color:#a6e22e">getEncoded</span>());
-</span></span><span style="display:flex;"><span>        String privateKeyStr <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(privateKey.<span style="color:#a6e22e">getEncoded</span>());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;公钥: &#34;</span> <span style="color:#f92672">+</span> publicKeyStr);
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;私钥: &#34;</span> <span style="color:#f92672">+</span> privateKeyStr);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h3 id="2-使用公钥加密">
-  <strong>2. 使用公钥加密</strong>
-  <a class="anchor" href="#2-%e4%bd%bf%e7%94%a8%e5%85%ac%e9%92%a5%e5%8a%a0%e5%af%86">#</a>
-</h3>
-<p>使用公钥对数据进行加密：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.Cipher;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.KeyFactory;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.PublicKey;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.spec.X509EncodedKeySpec;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RSAEncryptor</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">encrypt</span>(String data, String publicKeyStr) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 将 Base64 编码的公钥字符串转换为 PublicKey 对象</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> publicKeyBytes <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(publicKeyStr);
-</span></span><span style="display:flex;"><span>        X509EncodedKeySpec keySpec <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> X509EncodedKeySpec(publicKeyBytes);
-</span></span><span style="display:flex;"><span>        KeyFactory keyFactory <span style="color:#f92672">=</span> KeyFactory.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;RSA&#34;</span>);
-</span></span><span style="display:flex;"><span>        PublicKey publicKey <span style="color:#f92672">=</span> keyFactory.<span style="color:#a6e22e">generatePublic</span>(keySpec);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 使用公钥初始化 Cipher 对象进行加密</span>
-</span></span><span style="display:flex;"><span>        Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;RSA&#34;</span>);
-</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">ENCRYPT_MODE</span>, publicKey);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 加密数据并返回 Base64 编码的密文</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> encryptedBytes <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(data.<span style="color:#a6e22e">getBytes</span>());
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(encryptedBytes);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>        String publicKeyStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...&#34;</span>; <span style="color:#75715e">// 替换为生成的公钥</span>
-</span></span><span style="display:flex;"><span>        String data <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, RSA!&#34;</span>;
-</span></span><span style="display:flex;"><span>        String encryptedData <span style="color:#f92672">=</span> encrypt(data, publicKeyStr);
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;加密后的数据: &#34;</span> <span style="color:#f92672">+</span> encryptedData);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h3 id="3-使用私钥解密">
-  <strong>3. 使用私钥解密</strong>
-  <a class="anchor" href="#3-%e4%bd%bf%e7%94%a8%e7%a7%81%e9%92%a5%e8%a7%a3%e5%af%86">#</a>
-</h3>
-<p>使用私钥对加密数据进行解密：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.Cipher;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.KeyFactory;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.PrivateKey;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.spec.PKCS8EncodedKeySpec;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RSADecryptor</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">decrypt</span>(String encryptedData, String privateKeyStr) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 将 Base64 编码的私钥字符串转换为 PrivateKey 对象</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> privateKeyBytes <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(privateKeyStr);
-</span></span><span style="display:flex;"><span>        PKCS8EncodedKeySpec keySpec <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PKCS8EncodedKeySpec(privateKeyBytes);
-</span></span><span style="display:flex;"><span>        KeyFactory keyFactory <span style="color:#f92672">=</span> KeyFactory.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;RSA&#34;</span>);
-</span></span><span style="display:flex;"><span>        PrivateKey privateKey <span style="color:#f92672">=</span> keyFactory.<span style="color:#a6e22e">generatePrivate</span>(keySpec);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 使用私钥初始化 Cipher 对象进行解密</span>
-</span></span><span style="display:flex;"><span>        Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;RSA&#34;</span>);
-</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">DECRYPT_MODE</span>, privateKey);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 解密数据并返回明文</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decryptedBytes <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(encryptedData));
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(decryptedBytes);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
-</span></span><span style="display:flex;"><span>        String privateKeyStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgE...&#34;</span>; <span style="color:#75715e">// 替换为生成的私钥</span>
-</span></span><span style="display:flex;"><span>        String encryptedData <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;加密后的数据&#34;</span>; <span style="color:#75715e">// 替换为加密后的数据</span>
-</span></span><span style="display:flex;"><span>        String decryptedData <span style="color:#f92672">=</span> decrypt(encryptedData, privateKeyStr);
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;解密后的数据: &#34;</span> <span style="color:#f92672">+</span> decryptedData);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h3 id="4-注意事项">
-  <strong>4. 注意事项</strong>
-  <a class="anchor" href="#4-%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a>
-</h3>
-<ol>
-<li><strong>密钥长度</strong>：建议使用 2048 位或更长的密钥，以确保安全性<a href="@ref">1</a>。</li>
-<li><strong>加密数据大小</strong>：RSA 加密的数据长度受密钥长度限制，通常用于加密对称密钥或小数据块<a href="@ref">3</a>。</li>
-<li><strong>填充模式</strong>：默认使用 <code>PKCS1Padding</code>，也可以选择 <code>OAEPPadding</code> 等更安全的填充模式<a href="@ref">3</a>。</li>
-</ol>
-<p>通过以上步骤，你可以在 Java 中实现 RSA 算法的加解密功能。</p>
-<h2 id="公钥只能用来加密私钥只能用来解密吗">
-  公钥只能用来加密，私钥只能用来解密吗？
-  <a class="anchor" href="#%e5%85%ac%e9%92%a5%e5%8f%aa%e8%83%bd%e7%94%a8%e6%9d%a5%e5%8a%a0%e5%af%86%e7%a7%81%e9%92%a5%e5%8f%aa%e8%83%bd%e7%94%a8%e6%9d%a5%e8%a7%a3%e5%af%86%e5%90%97">#</a>
-</h2>
-<p>公钥和私钥的使用不仅仅是“公钥加密，私钥解密”，它们的功能取决于具体的应用场景。以下是公钥和私钥的主要用途：</p>
-<hr>
-<h3 id="1-公钥加密私钥解密">
-  <strong>1. 公钥加密，私钥解密</strong>
-  <a class="anchor" href="#1-%e5%85%ac%e9%92%a5%e5%8a%a0%e5%af%86%e7%a7%81%e9%92%a5%e8%a7%a3%e5%af%86">#</a>
-</h3>
-<ul>
-<li><strong>用途</strong>：用于数据加密，确保数据的机密性。</li>
-<li><strong>场景</strong>：当A想向B发送加密消息时，A使用B的公钥加密数据，B收到后用自己的私钥解密。由于只有B持有私钥，因此只有B能解密消息，确保了消息的安全性<a href="@ref">1</a><a href="@ref">2</a>。</li>
-</ul>
-<hr>
-<h3 id="2-私钥签名公钥验签">
-  <strong>2. 私钥签名，公钥验签</strong>
-  <a class="anchor" href="#2-%e7%a7%81%e9%92%a5%e7%ad%be%e5%90%8d%e5%85%ac%e9%92%a5%e9%aa%8c%e7%ad%be">#</a>
-</h3>
-<ul>
-<li><strong>用途</strong>：用于数字签名，确保数据的完整性和身份认证。</li>
-<li><strong>场景</strong>：当A想向B发送一条消息并证明消息确实来自A时，A会用私钥对消息进行签名，B收到后用A的公钥验证签名。由于只有A持有私钥，因此B可以确认消息确实来自A，且未被篡改<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</li>
-</ul>
-<hr>
-<h3 id="3-私钥加密公钥解密">
-  <strong>3. 私钥加密，公钥解密</strong>
-  <a class="anchor" href="#3-%e7%a7%81%e9%92%a5%e5%8a%a0%e5%af%86%e5%85%ac%e9%92%a5%e8%a7%a3%e5%af%86">#</a>
-</h3>
-<ul>
-<li><strong>用途</strong>：用于身份认证或特定场景的加密。</li>
-<li><strong>场景</strong>：在某些特殊情况下（如密钥交换），私钥也可以用于加密，公钥用于解密。例如，在TLS/SSL协议中，服务器可能会用私钥加密某些信息，客户端用公钥解密以验证服务器的身份<a href="@ref">5</a>。</li>
-</ul>
-<hr>
-<h3 id="总结-23">
-  <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-23">#</a>
-</h3>
-<p>公钥和私钥的功能是灵活的，具体使用方式取决于应用场景：</p>
-<ul>
-<li><strong>公钥加密，私钥解密</strong>：确保数据机密性。</li>
-<li><strong>私钥签名，公钥验签</strong>：确保数据完整性和身份认证。</li>
-<li><strong>私钥加密，公钥解密</strong>：用于特定场景的身份认证或密钥交换。</li>
-</ul>
-<p>因此，公钥和私钥的使用并不仅限于“公钥加密，私钥解密”，而是根据需求灵活应用的<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</p>
-<h2 id="对称加密中的加密模式是什么">
-  对称加密中的加密模式是什么
-  <a class="anchor" href="#%e5%af%b9%e7%a7%b0%e5%8a%a0%e5%af%86%e4%b8%ad%e7%9a%84%e5%8a%a0%e5%af%86%e6%a8%a1%e5%bc%8f%e6%98%af%e4%bb%80%e4%b9%88">#</a>
-</h2>
-<p>对称加密中的加密模式是指将明文分组加密的方式，用于处理长度不固定的明文数据。常见的加密模式包括以下五种：</p>
-<hr>
-<h3 id="1-ecbelectronic-code-book电子密码本模式">
-  <strong>1. ECB（Electronic Code Book，电子密码本模式）</strong>
-  <a class="anchor" href="#1-ecbelectronic-code-book%e7%94%b5%e5%ad%90%e5%af%86%e7%a0%81%e6%9c%ac%e6%a8%a1%e5%bc%8f">#</a>
-</h3>
-<ul>
-<li><strong>特点</strong>：
-<ul>
-<li>简单快速，支持并行计算。</li>
-<li>相同的明文会生成相同的密文，容易被破解。</li>
-<li>最后一个分组需要填充。</li>
-</ul>
-</li>
-<li><strong>缺点</strong>：
-<ul>
-<li>安全性较低，容易受到密码本重放攻击。</li>
-<li>不推荐使用<a href="@ref">1</a><a href="@ref">3</a>。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="2-cbccipher-block-chaining密码分组链接模式">
-  <strong>2. CBC（Cipher Block Chaining，密码分组链接模式）</strong>
-  <a class="anchor" href="#2-cbccipher-block-chaining%e5%af%86%e7%a0%81%e5%88%86%e7%bb%84%e9%93%be%e6%8e%a5%e6%a8%a1%e5%bc%8f">#</a>
-</h3>
-<ul>
-<li><strong>特点</strong>：
-<ul>
-<li>每个明文分组在加密前会与前一个密文分组进行异或操作。</li>
-<li>需要初始化向量（IV），且加解密时 IV 必须相同。</li>
-<li>最后一个分组需要填充。</li>
-</ul>
-</li>
-<li><strong>优点</strong>：
-<ul>
-<li>安全性较高，密文无规律。</li>
-</ul>
-</li>
-<li><strong>缺点</strong>：
-<ul>
-<li>不支持并行加密，解密支持并行<a href="@ref">1</a><a href="@ref">3</a>。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="3-cfbcipher-feedback密文反馈模式">
-  <strong>3. CFB（Cipher Feedback，密文反馈模式）</strong>
-  <a class="anchor" href="#3-cfbcipher-feedback%e5%af%86%e6%96%87%e5%8f%8d%e9%a6%88%e6%a8%a1%e5%bc%8f">#</a>
-</h3>
-<ul>
-<li><strong>特点</strong>：
-<ul>
-<li>将分组密码转换为流密码，按位或按字节加密。</li>
-<li>需要初始化向量（IV），且加解密时 IV 必须相同。</li>
-<li>不需要填充。</li>
-</ul>
-</li>
-<li><strong>优点</strong>：
-<ul>
-<li>支持并行解密。</li>
-</ul>
-</li>
-<li><strong>缺点</strong>：
-<ul>
-<li>不支持并行加密，存在错误扩散<a href="@ref">1</a><a href="@ref">3</a>。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="4-ofboutput-feedback输出反馈模式">
-  <strong>4. OFB（Output Feedback，输出反馈模式）</strong>
-  <a class="anchor" href="#4-ofboutput-feedback%e8%be%93%e5%87%ba%e5%8f%8d%e9%a6%88%e6%a8%a1%e5%bc%8f">#</a>
-</h3>
-<ul>
-<li><strong>特点</strong>：
-<ul>
-<li>将分组密码转换为流密码，按位或按字节加密。</li>
-<li>需要初始化向量（IV），且加解密时 IV 必须相同。</li>
-<li>不需要填充。</li>
-</ul>
-</li>
-<li><strong>优点</strong>：
-<ul>
-<li>加密和解密使用相同结构。</li>
-</ul>
-</li>
-<li><strong>缺点</strong>：
-<ul>
-<li>不支持并行运算，存在错误扩散<a href="@ref">1</a><a href="@ref">3</a>。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="5-ctrcounter计数器模式">
-  <strong>5. CTR（Counter，计数器模式）</strong>
-  <a class="anchor" href="#5-ctrcounter%e8%ae%a1%e6%95%b0%e5%99%a8%e6%a8%a1%e5%bc%8f">#</a>
-</h3>
-<ul>
-<li><strong>特点</strong>：
-<ul>
-<li>将分组密码转换为流密码，按位或按字节加密。</li>
-<li>不需要初始化向量（IV），使用计数器生成密钥流。</li>
-<li>不需要填充。</li>
-</ul>
-</li>
-<li><strong>优点</strong>：
-<ul>
-<li>支持并行加密和解密，效率高。</li>
-<li>安全性高，推荐使用<a href="@ref">1</a><a href="@ref">3</a>。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="总结-24">
-  <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-24">#</a>
-</h3>
-<ul>
-<li><strong>推荐模式</strong>：CBC 和 CTR 模式，尤其是 CTR 模式，因其高效性和安全性<a href="@ref">1</a><a href="@ref">3</a>。</li>
-<li><strong>不推荐模式</strong>：ECB 模式，因其安全性较低<a href="@ref">1</a><a href="@ref">3</a>。</li>
-</ul>
-<p>以上五种模式各有特点，具体选择应根据应用场景和安全需求决定<a href="@ref">1</a><a href="@ref">3</a>。</p>
-<h2 id="aes中的填充方式有哪些">
-  AES中的填充方式有哪些？
-  <a class="anchor" href="#aes%e4%b8%ad%e7%9a%84%e5%a1%ab%e5%85%85%e6%96%b9%e5%bc%8f%e6%9c%89%e5%93%aa%e4%ba%9b">#</a>
-</h2>
-<p>AES（Advanced Encryption Standard）中的填充方式主要用于将明文数据填充到符合AES分组长度（128位）的整数倍，以便进行加密。以下是常见的填充方式：</p>
-<h3 id="1-pkcs7-padding">
-  1. <strong>PKCS7 Padding</strong>
-  <a class="anchor" href="#1-pkcs7-padding">#</a>
-</h3>
-<ul>
-<li><strong>描述</strong>：在明文末尾添加填充字节，填充字节的值等于需要填充的字节数。例如，如果需要填充5个字节，则填充值为<code>05 05 05 05 05</code>。</li>
-<li><strong>特点</strong>：适用于任意块大小（1~255字节），是AES中最常用的填充方式<a href="@ref">1</a><a href="@ref">2</a>。</li>
-</ul>
-<h3 id="2-pkcs5-padding">
-  2. <strong>PKCS5 Padding</strong>
-  <a class="anchor" href="#2-pkcs5-padding">#</a>
-</h3>
-<ul>
-<li><strong>描述</strong>：与PKCS7类似，但块大小固定为8字节。在AES中，由于块大小为16字节，PKCS5与PKCS7的效果相同<a href="@ref">1</a><a href="@ref">2</a>。</li>
-</ul>
-<h3 id="3-no-padding">
-  3. <strong>No Padding</strong>
-  <a class="anchor" href="#3-no-padding">#</a>
-</h3>
-<ul>
-<li><strong>描述</strong>：不进行任何填充，要求明文长度必须是分组长度的整数倍。如果明文长度不符合要求，则会抛出异常。</li>
-<li><strong>特点</strong>：适用于明文长度已知且为分组大小整数倍的场景<a href="@ref">1</a><a href="@ref">2</a>。</li>
-</ul>
-<h3 id="4-iso10126-padding">
-  4. <strong>ISO10126 Padding</strong>
-  <a class="anchor" href="#4-iso10126-padding">#</a>
-</h3>
-<ul>
-<li><strong>描述</strong>：在明文末尾填充随机字节，最后一个字节为填充的数量数。例如，如果需要填充5个字节，则填充格式为<code>XX XX XX XX 05</code>，其中<code>XX</code>为随机字节。</li>
-<li><strong>特点</strong>：填充值随机，安全性较高<a href="@ref">1</a><a href="@ref">2</a>。</li>
-</ul>
-<h3 id="5-iso7816-4-padding">
-  5. <strong>ISO7816-4 Padding</strong>
-  <a class="anchor" href="#5-iso7816-4-padding">#</a>
-</h3>
-<ul>
-<li><strong>描述</strong>：在明文末尾填充<code>0x80</code>，后面补<code>0x00</code>，直到分组长度。例如，如果需要填充5个字节，则填充格式为<code>80 00 00 00 00</code>。</li>
-<li><strong>特点</strong>：适用于特定场景，如智能卡应用<a href="@ref">1</a><a href="@ref">2</a>。</li>
-</ul>
-<h3 id="6-zero-byte-padding">
-  6. <strong>Zero Byte Padding</strong>
-  <a class="anchor" href="#6-zero-byte-padding">#</a>
-</h3>
-<ul>
-<li><strong>描述</strong>：在明文末尾填充<code>0x00</code>，直到分组长度。例如，如果需要填充5个字节，则填充格式为<code>00 00 00 00 00</code>。</li>
-<li><strong>特点</strong>：简单易用，但无法区分填充和原始数据<a href="@ref">1</a><a href="@ref">2</a>。</li>
-</ul>
-<h3 id="7-x923-padding">
-  7. <strong>X923 Padding</strong>
-  <a class="anchor" href="#7-x923-padding">#</a>
-</h3>
-<ul>
-<li><strong>描述</strong>：在明文末尾填充<code>0x00</code>，最后一个字节为填充的数量数。例如，如果需要填充5个字节，则填充格式为<code>00 00 00 00 05</code>。</li>
-<li><strong>特点</strong>：与PKCS7类似，但填充值为<code>0x00</code><a href="@ref">1</a><a href="@ref">2</a>。</li>
-</ul>
-<h3 id="8-tbc-padding-trailing-bit-compliment">
-  8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong>
-  <a class="anchor" href="#8-tbc-padding-trailing-bit-compliment">#</a>
-</h3>
-<ul>
-<li><strong>描述</strong>：根据明文的最后一位进行填充。如果最后一位为<code>1</code>，则填充<code>0x00</code>；如果最后一位为<code>0</code>，则填充<code>0xFF</code>。</li>
-<li><strong>特点</strong>：适用于特定场景，如某些协议要求<a href="@ref">1</a><a href="@ref">2</a>。</li>
-</ul>
-<h3 id="9-pkcs1-padding">
-  9. <strong>PKCS1 Padding</strong>
-  <a class="anchor" href="#9-pkcs1-padding">#</a>
-</h3>
-<ul>
-<li><strong>描述</strong>：主要用于RSA加密，填充格式为<code>00 + BT + PS + 00 + D</code>，其中<code>BT</code>为处理模式，<code>PS</code>为填充字节。</li>
-<li><strong>特点</strong>：适用于RSA加密，不常用于AES<a href="@ref">2</a>。</li>
-</ul>
-<h3 id="总结-25">
-  总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-25">#</a>
-</h3>
-<p>AES中的填充方式多样，常见的包括 <strong>PKCS7</strong>、<strong>PKCS5</strong>、<strong>No Padding</strong>、<strong>ISO10126</strong> 等。选择填充方式时需根据具体应用场景和安全性需求进行权衡<a href="@ref">1</a><a href="@ref">2</a>。</p>
 <h1 id="reactor">
   reactor
   <a class="anchor" href="#reactor">#</a>
@@ -9007,9 +8484,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <a class="anchor" href="#%e7%a4%ba%e4%be%8b">#</a>
 </h3>
 <p>在命令式编程中，表达式 <code>a = b + c</code> 只会计算一次，而在响应式编程中，<code>a</code> 的值会随着 <code>b</code> 和 <code>c</code> 的变化而自动更新<a href="@ref">3</a><a href="@ref">4</a>。</p>
-<h3 id="总结-26">
+<h3 id="总结-23">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-26">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-23">#</a>
 </h3>
 <p>响应式编程是一种以数据流为核心的编程范式，适合处理高并发、实时性和动态变化的场景。尽管它具有一定的复杂性，但在现代高并发和实时系统中，响应式编程提供了高效且灵活的解决方案<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">4</a>。</p>
 <h2 id="在springboot中有哪些响应式编程的运用">
@@ -9165,9 +8642,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 </span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">map</span>(n<span style="color:#f92672">-&gt;</span>n<span style="color:#f92672">*</span>2);
 </span></span></code></pre></div><p>在这个示例中，<code>Flux</code> 用于对数据流进行过滤和转换<a href="@ref">3</a>。</p>
 <hr>
-<h3 id="总结-27">
+<h3 id="总结-24">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-27">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-24">#</a>
 </h3>
 <p>在 Spring Boot 中，响应式编程的应用主要包括：</p>
 <ol>
@@ -9317,9 +8794,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   </tbody>
 </table>
 <hr>
-<h3 id="总结-28">
+<h3 id="总结-25">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-28">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-25">#</a>
 </h3>
 <p>响应式数据库访问和传统数据库访问的主要区别在于：</p>
 <ol>
@@ -9619,9 +9096,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>事件驱动</strong>：通过事件循环机制，任务完成后会自动触发回调，无需线程主动轮询。</li>
 </ol>
 <hr>
-<h3 id="总结-29">
+<h3 id="总结-26">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-29">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-26">#</a>
 </h3>
 <p>在这个例子中，一个线程（<code>Thread-1</code>）在接收到请求后，发起异步数据库查询并立即释放，继续处理其他请求。数据库查询完成后，由另一个线程（<code>nioEventLoopGroup-2-1</code>
 ）处理结果并返回给客户端。通过这种非阻塞和事件驱动的方式，一个线程可以高效地处理多个请求，显著提升了系统的并发能力。</p>
@@ -9755,9 +9232,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li>数据库操作完成后，通过回调机制通知线程处理结果<a href="@ref">34</a><a href="@ref">41</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-30">
+<h3 id="总结-27">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-30">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-27">#</a>
 </h3>
 <p>在阻塞式IO中，<strong>数据库的处理线程就是处理请求的那个线程</strong>
 。这种模型虽然简单，但在高并发场景下效率较低，因为线程会因等待IO操作而阻塞，无法充分利用系统资源。相比之下，响应式编程模型通过非阻塞和事件驱动的方式，能够更好地处理高并发请求<a href="@ref">1</a><a href="@ref">34</a><a href="@ref">41</a>。</p>
@@ -9845,9 +9322,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>监控线程池性能</strong>：通过监控工具（如 Micrometer）观察线程池的使用情况，及时调整配置<a href="@ref">39</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-31">
+<h3 id="总结-28">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-31">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-28">#</a>
 </h3>
 <p>在 R2DBC 中，处理数据库操作的线程主要由底层的异步 I/O 线程（如 Netty 的 <code>EventLoopGroup</code>）负责，而不是传统的阻塞式线程池。通过合理配置连接池和优化异步 I/O
 线程，可以显著提升系统的并发性能和资源利用率。</p>
@@ -9918,9 +9395,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><strong>Mono</strong>：用于处理 <strong>单个值或空值</strong> 的异步序列。</li>
 <li><strong>Flux</strong>：用于处理 <strong>多个值</strong> 的异步序列，适合流式数据或集合操作<a href="@ref">4</a>。</li>
 </ul>
-<h3 id="总结-32">
+<h3 id="总结-29">
   <strong>总结</strong>
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-32">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-29">#</a>
 </h3>
 <p>Mono 是 Java 响应式编程中用于处理 <strong>单值异步操作</strong> 的核心类，适合处理单个结果或空值的场景。它通过异步非阻塞的机制和丰富的操作符，能够高效地处理 I/O
 密集型任务，并支持背压机制，确保系统的稳定性<a href="@ref">1</a><a href="@ref">4</a>。</p>
@@ -10002,9 +9479,9 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
 <li><code>subscribe</code> 触发任务执行，并通过回调处理结果<a href="@ref">1</a><a href="@ref">2</a>。</li>
 </ul>
 <hr>
-<h3 id="总结-33">
+<h3 id="总结-30">
   总结
-  <a class="anchor" href="#%e6%80%bb%e7%bb%93-33">#</a>
+  <a class="anchor" href="#%e6%80%bb%e7%bb%93-30">#</a>
 </h3>
 <p>Mono 通过 <strong>事件驱动模型</strong>、<strong>回调机制</strong>、<strong>非阻塞 I/O</strong> 和 <strong>线程调度</strong> 实现了非阻塞的特性。它的核心设计使得线程不会阻塞在异步操作上，从而高效处理高并发请求，适合 I/O
 密集型任务<a href="@ref">1</a><a href="@ref">2</a>。</p>
@@ -10017,7 +9494,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/98ae22ad76fcc3f4a91e376b2f87206e6a23e06c" title='Last modified by liuxiang | September 16, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/65df0fb48e8d4cf5669614cbffafcb4c2791846e" title='Last modified by liuxiang | September 16, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>September 16, 2025</span>
     </a>
@@ -10616,60 +10093,6 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
         </li>
       </ul>
     </li>
-    <li><a href="#密码学">密码学</a>
-      <ul>
-        <li><a href="#在java中如何使用aes加密算法">在java中如何使用AES加密算法</a>
-          <ul>
-            <li><a href="#1-导入必要的包"><strong>1. 导入必要的包</strong></a></li>
-            <li><a href="#2-生成-aes-密钥"><strong>2. 生成 AES 密钥</strong></a></li>
-            <li><a href="#3-加密方法"><strong>3. 加密方法</strong></a></li>
-            <li><a href="#4-解密方法"><strong>4. 解密方法</strong></a></li>
-            <li><a href="#5-完整示例"><strong>5. 完整示例</strong></a></li>
-            <li><a href="#6-注意事项"><strong>6. 注意事项</strong></a></li>
-          </ul>
-        </li>
-        <li><a href="#在java中如何使用rsa算法进行加解密">在Java中如何使用RSA算法进行加解密</a>
-          <ul>
-            <li><a href="#1-生成-rsa-密钥对"><strong>1. 生成 RSA 密钥对</strong></a></li>
-            <li><a href="#2-使用公钥加密"><strong>2. 使用公钥加密</strong></a></li>
-            <li><a href="#3-使用私钥解密"><strong>3. 使用私钥解密</strong></a></li>
-            <li><a href="#4-注意事项"><strong>4. 注意事项</strong></a></li>
-          </ul>
-        </li>
-        <li><a href="#公钥只能用来加密私钥只能用来解密吗">公钥只能用来加密，私钥只能用来解密吗？</a>
-          <ul>
-            <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
-            <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
-            <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
-            <li><a href="#总结-23"><strong>总结</strong></a></li>
-          </ul>
-        </li>
-        <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
-          <ul>
-            <li><a href="#1-ecbelectronic-code-book电子密码本模式"><strong>1. ECB（Electronic Code Book，电子密码本模式）</strong></a></li>
-            <li><a href="#2-cbccipher-block-chaining密码分组链接模式"><strong>2. CBC（Cipher Block Chaining，密码分组链接模式）</strong></a></li>
-            <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
-            <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
-            <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
-            <li><a href="#总结-24"><strong>总结</strong></a></li>
-          </ul>
-        </li>
-        <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
-          <ul>
-            <li><a href="#1-pkcs7-padding">1. <strong>PKCS7 Padding</strong></a></li>
-            <li><a href="#2-pkcs5-padding">2. <strong>PKCS5 Padding</strong></a></li>
-            <li><a href="#3-no-padding">3. <strong>No Padding</strong></a></li>
-            <li><a href="#4-iso10126-padding">4. <strong>ISO10126 Padding</strong></a></li>
-            <li><a href="#5-iso7816-4-padding">5. <strong>ISO7816-4 Padding</strong></a></li>
-            <li><a href="#6-zero-byte-padding">6. <strong>Zero Byte Padding</strong></a></li>
-            <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
-            <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
-            <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
-            <li><a href="#总结-25">总结</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
     <li><a href="#reactor">reactor</a>
       <ul>
         <li><a href="#reference">reference</a></li>
@@ -10694,7 +10117,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
             <li><a href="#优点">优点</a></li>
             <li><a href="#缺点">缺点</a></li>
             <li><a href="#示例">示例</a></li>
-            <li><a href="#总结-26">总结</a></li>
+            <li><a href="#总结-23">总结</a></li>
           </ul>
         </li>
         <li><a href="#在springboot中有哪些响应式编程的运用">在springboot中有哪些响应式编程的运用</a>
@@ -10733,7 +10156,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
                 <li><a href="#示例代码-7">示例代码：</a></li>
               </ul>
             </li>
-            <li><a href="#总结-27">总结</a></li>
+            <li><a href="#总结-24">总结</a></li>
           </ul>
         </li>
         <li><a href="#响应式数据库访问和传统的数据库访问有什么区别">响应式数据库访问和传统的数据库访问有什么区别</a>
@@ -10743,7 +10166,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
             <li><a href="#3-适用场景-1">3. <strong>适用场景</strong></a></li>
             <li><a href="#4-技术实现">4. <strong>技术实现</strong></a></li>
             <li><a href="#5-优缺点对比">5. <strong>优缺点对比</strong></a></li>
-            <li><a href="#总结-28">总结</a></li>
+            <li><a href="#总结-25">总结</a></li>
           </ul>
         </li>
         <li><a href="#一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较">一个请求在非响应式的后端服务中的处理响应和响应式的后端服务中的处理的过程比较</a>
@@ -10781,7 +10204,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
             </li>
             <li><a href="#线程任务总结"><strong>线程任务总结</strong></a></li>
             <li><a href="#关键点"><strong>关键点</strong></a></li>
-            <li><a href="#总结-29"><strong>总结</strong></a></li>
+            <li><a href="#总结-26"><strong>总结</strong></a></li>
           </ul>
         </li>
         <li><a href="#在响应式编程中它的并发量会收到数据库连接池大小的限制那这不是和阻塞式的服务一样吗">在响应式编程中，它的并发量会收到数据库连接池大小的限制，那这不是和阻塞式的服务一样吗</a>
@@ -10798,7 +10221,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
             <li><a href="#2-具体流程"><strong>2. 具体流程</strong></a></li>
             <li><a href="#3-阻塞式io的线程模型"><strong>3. 阻塞式IO的线程模型</strong></a></li>
             <li><a href="#4-与响应式模型的区别"><strong>4. 与响应式模型的区别</strong></a></li>
-            <li><a href="#总结-30"><strong>总结</strong></a></li>
+            <li><a href="#总结-27"><strong>总结</strong></a></li>
           </ul>
         </li>
         <li><a href="#在使用-r2dbc-时处理数据库操作的线程如何设置">在使用 R2DBC 时，处理数据库操作的线程如何设置</a>
@@ -10813,7 +10236,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
             <li><a href="#3-线程处理的流程"><strong>3. 线程处理的流程</strong></a></li>
             <li><a href="#4-与传统阻塞式模型的区别"><strong>4. 与传统阻塞式模型的区别</strong></a></li>
             <li><a href="#5-优化建议"><strong>5. 优化建议</strong></a></li>
-            <li><a href="#总结-31"><strong>总结</strong></a></li>
+            <li><a href="#总结-28"><strong>总结</strong></a></li>
           </ul>
         </li>
       </ul>
@@ -10827,7 +10250,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
             <li><a href="#mono-的示例代码"><strong>Mono 的示例代码</strong></a></li>
             <li><a href="#mono-的操作符"><strong>Mono 的操作符</strong></a></li>
             <li><a href="#mono-与-flux-的区别"><strong>Mono 与 Flux 的区别</strong></a></li>
-            <li><a href="#总结-32"><strong>总结</strong></a></li>
+            <li><a href="#总结-29"><strong>总结</strong></a></li>
           </ul>
         </li>
         <li><a href="#mono-是如何实现非阻塞的">Mono 是如何实现非阻塞的</a>
@@ -10838,7 +10261,7 @@ HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小
             <li><a href="#4-线程调度">4. <strong>线程调度</strong></a></li>
             <li><a href="#5-背压支持">5. <strong>背压支持</strong></a></li>
             <li><a href="#6-示例代码">6. <strong>示例代码</strong></a></li>
-            <li><a href="#总结-33">总结</a></li>
+            <li><a href="#总结-30">总结</a></li>
           </ul>
         </li>
       </ul>
