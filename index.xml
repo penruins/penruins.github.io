@@ -6,7 +6,7 @@
     <description>Recent content on Penruins</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 15 Sep 2025 18:28:29 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 16 Sep 2025 10:09:47 +0800</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Algorithm</title>
@@ -651,6 +651,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/post/computer-science/ci-cd/gitlab/</guid>
       <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/binarywang/Linux-Tutorial/blob/master/Gitlab-Install-And-Settings.md&#34;&gt;Gitlab 安装和配置&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Java Utils</title>
+      <link>/post/computer-science/java/java-utils/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/post/computer-science/java/java-utils/</guid>
+      <description>&lt;h1 id=&#34;excel&#34;&gt;&#xA;  excel&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#excel&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Easy Excel&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://easyexcel.opensource.alibaba.com/&#34;&gt;官网&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/alibaba/easyexcel&#34;&gt;alibaba/easyexcel&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>Java并发编程实战</title>
