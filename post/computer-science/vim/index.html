@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  vim
-  #
+Just Vim It
 
 
   nvim
@@ -99,19 +98,19 @@ hedyhli/outline.nvim
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/vim/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="vim">
-  <meta property="og:description" content="vim # nvim # neovim.io 直接用brew安装就行 brew install neovim 第一步肯定是要把插件管理工具安装一下 junegunn/vim-plug 直接运行文档中linux的安装命令 indent # How can I make (Neo)Vim wrap lines in respect to indentation? 这个可以解决缩进换行的问题，很棒！ clipboard 剪贴板 # 直接在配置文件中添加这两行，就可以了
+  <meta property="og:description" content="Just Vim It nvim # neovim.io 直接用brew安装就行 brew install neovim 第一步肯定是要把插件管理工具安装一下 junegunn/vim-plug 直接运行文档中linux的安装命令 indent # How can I make (Neo)Vim wrap lines in respect to indentation? 这个可以解决缩进换行的问题，很棒！ clipboard 剪贴板 # 直接在配置文件中添加这两行，就可以了
 vnoremap y &#34;&#43;y set clipboard&#43;=unnamedplus quickfix # VIM学习笔记 QuickFix LazyVim # lazyvim org 用 neovim 写 markdown 是一种什么样的体验(含技巧) markdown # theCW 不影响听课的高效率记笔记方法：Vim &#43; Markdown - 教学与配置 iamcco/markdown-preview.nvim My neovim markdown setup in 2024 tadmccorkle/markdown.nvim cnshsliu/smp.nvim MeanderingProgrammer/render-markdown.nvim 这个插件可以直接在 neovim 中直接 render markdown 文件 但是安装只提供了 lua 的安装方式 outline.nvim # hedyhli/outline.nvim 这个插件太优秀了！ 解决 outline 左箭头和下箭头乱码的问题">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-09-17T11:05:05+08:00">
+    <meta property="article:modified_time" content="2025-09-17T18:27:20+08:00">
 <title>vim | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/post/computer-science/vim/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.0a8ebfeb6d2a8245d10b57869b4fbcd3920871d40d693b734862c07a4ce42c02.js" ></script>
+  <script defer src="/en.search.min.1fd2054a799fc1e9652b561ba33542e83511c099ffaeaa6c02e8d106c982305c.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -2110,38 +2109,34 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#vim">vim</a>
+    <li><a href="#nvim">nvim</a>
       <ul>
-        <li><a href="#nvim">nvim</a>
+        <li><a href="#indent">indent</a></li>
+        <li><a href="#clipboard-剪贴板">clipboard 剪贴板</a></li>
+        <li><a href="#quickfix">quickfix</a></li>
+        <li><a href="#lazyvim">LazyVim</a></li>
+        <li><a href="#markdown">markdown</a>
           <ul>
-            <li><a href="#indent">indent</a></li>
-            <li><a href="#clipboard-剪贴板">clipboard 剪贴板</a></li>
-            <li><a href="#quickfix">quickfix</a></li>
-            <li><a href="#lazyvim">LazyVim</a></li>
-            <li><a href="#markdown">markdown</a>
-              <ul>
-                <li><a href="#outlinenvim">outline.nvim</a></li>
-              </ul>
-            </li>
-            <li><a href="#搜索插件">搜索插件</a>
-              <ul>
-                <li><a href="#fzf">fzf</a></li>
-                <li><a href="#telescope">telescope</a></li>
-              </ul>
-            </li>
-            <li><a href="#美化">美化</a>
-              <ul>
-                <li><a href="#buffer">buffer</a></li>
-              </ul>
-            </li>
-            <li><a href="#dropbarnvim">dropbar.nvim</a></li>
-            <li><a href="#cellularautomation">cellular.automation</a></li>
+            <li><a href="#outlinenvim">outline.nvim</a></li>
           </ul>
         </li>
-        <li><a href="#vimscript">vimscript</a></li>
-        <li><a href="#lua">lua</a></li>
+        <li><a href="#搜索插件">搜索插件</a>
+          <ul>
+            <li><a href="#fzf">fzf</a></li>
+            <li><a href="#telescope">telescope</a></li>
+          </ul>
+        </li>
+        <li><a href="#美化">美化</a>
+          <ul>
+            <li><a href="#buffer">buffer</a></li>
+          </ul>
+        </li>
+        <li><a href="#dropbarnvim">dropbar.nvim</a></li>
+        <li><a href="#cellularautomation">cellular.automation</a></li>
       </ul>
     </li>
+    <li><a href="#vimscript">vimscript</a></li>
+    <li><a href="#lua">lua</a></li>
   </ul>
 </nav>
 
@@ -2154,14 +2149,13 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="vim">
-  vim
-  <a class="anchor" href="#vim">#</a>
-</h1>
-<h2 id="nvim">
+  <article class="markdown book-article"><ul>
+<li><a href="https://vim.nauxscript.com/">Just Vim It</a></li>
+</ul>
+<h1 id="nvim">
   nvim
   <a class="anchor" href="#nvim">#</a>
-</h2>
+</h1>
 <ul>
 <li><a href="https://neovim.io/">neovim.io</a>
 <ul>
@@ -2178,10 +2172,10 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="indent">
+<h2 id="indent">
   indent
   <a class="anchor" href="#indent">#</a>
-</h3>
+</h2>
 <ul>
 <li><a href="https://vi.stackexchange.com/questions/42406/how-can-i-make-neovim-wrap-lines-in-respect-to-indentation">How can I make (Neo)Vim wrap lines in respect to indentation?</a>
 <ul>
@@ -2189,32 +2183,32 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<h3 id="clipboard-剪贴板">
+<h2 id="clipboard-剪贴板">
   clipboard 剪贴板
   <a class="anchor" href="#clipboard-%e5%89%aa%e8%b4%b4%e6%9d%bf">#</a>
-</h3>
+</h2>
 <p>直接在配置文件中添加这两行，就可以了</p>
 <pre tabindex="0"><code>vnoremap y &#34;+y
 set clipboard+=unnamedplus
-</code></pre><h3 id="quickfix">
+</code></pre><h2 id="quickfix">
   quickfix
   <a class="anchor" href="#quickfix">#</a>
-</h3>
+</h2>
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/71778294">VIM学习笔记 QuickFix</a></li>
 </ul>
-<h3 id="lazyvim">
+<h2 id="lazyvim">
   LazyVim
   <a class="anchor" href="#lazyvim">#</a>
-</h3>
+</h2>
 <ul>
 <li><a href="https://www.lazyvim.org/">lazyvim org</a></li>
 <li><a href="https://yelog.org/2024/08/02/write-markdown-in-neovim-experience-and-tips/">用 neovim 写 markdown 是一种什么样的体验(含技巧)</a></li>
 </ul>
-<h3 id="markdown">
+<h2 id="markdown">
   markdown
   <a class="anchor" href="#markdown">#</a>
-</h3>
+</h2>
 <ul>
 <li>theCW
 <ul>
@@ -2232,10 +2226,10 @@ set clipboard+=unnamedplus
 </ul>
 </li>
 </ul>
-<h4 id="outlinenvim">
+<h3 id="outlinenvim">
   outline.nvim
   <a class="anchor" href="#outlinenvim">#</a>
-</h4>
+</h3>
 <ul>
 <li><a href="https://github.com/hedyhli/outline.nvim">hedyhli/outline.nvim</a>
 <ul>
@@ -2275,14 +2269,14 @@ set clipboard+=unnamedplus
 endfunction
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
 au BufEnter *.md setlocal foldmethod=expr 
-</code></pre><h3 id="搜索插件">
+</code></pre><h2 id="搜索插件">
   搜索插件
   <a class="anchor" href="#%e6%90%9c%e7%b4%a2%e6%8f%92%e4%bb%b6">#</a>
-</h3>
-<h4 id="fzf">
+</h2>
+<h3 id="fzf">
   fzf
   <a class="anchor" href="#fzf">#</a>
-</h4>
+</h3>
 <ul>
 <li>note
 只能搜索文件，不能进行全文搜索</li>
@@ -2302,10 +2296,10 @@ au BufEnter *.md setlocal foldmethod=expr
 </ul>
 </li>
 </ul>
-<h4 id="telescope">
+<h3 id="telescope">
   telescope
   <a class="anchor" href="#telescope">#</a>
-</h4>
+</h3>
 <ul>
 <li><a href="https://github.com/nvim-telescope/telescope.nvim">nvim-telescope/telescope.nvim</a></li>
 <li>支持全文搜索需要额外安装这个插件
@@ -2328,18 +2322,18 @@ require(&#34;telescope&#34;).setup {
   }
 }
 EOF
-</code></pre><h3 id="美化">
+</code></pre><h2 id="美化">
   美化
   <a class="anchor" href="#%e7%be%8e%e5%8c%96">#</a>
-</h3>
+</h2>
 <ul>
 <li><a href="https://www.reddit.com/r/neovim/comments/q8uvpa/looking_for_airline_replacement/">Looking for airline replacement</a></li>
 <li><a href="https://github.com/famiu/feline.nvim">famiu/feline.nvim</a></li>
 </ul>
-<h4 id="buffer">
+<h3 id="buffer">
   buffer
   <a class="anchor" href="#buffer">#</a>
-</h4>
+</h3>
 <ul>
 <li><a href="https://github.com/akinsho/bufferline.nvim">akinsho/bufferline.nvim</a>
 <ul>
@@ -2360,25 +2354,25 @@ EOF
 </ul>
 </li>
 </ul>
-<h3 id="dropbarnvim">
+<h2 id="dropbarnvim">
   dropbar.nvim
   <a class="anchor" href="#dropbarnvim">#</a>
-</h3>
-<h3 id="cellularautomation">
+</h2>
+<h2 id="cellularautomation">
   cellular.automation
   <a class="anchor" href="#cellularautomation">#</a>
-</h3>
-<h2 id="vimscript">
+</h2>
+<h1 id="vimscript">
   vimscript
   <a class="anchor" href="#vimscript">#</a>
-</h2>
+</h1>
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/37352209">VimScript 五分钟入门（翻译）</a></li>
 </ul>
-<h2 id="lua">
+<h1 id="lua">
   lua
   <a class="anchor" href="#lua">#</a>
-</h2>
+</h1>
 <ul>
 <li>theCW
 <ul>
@@ -2398,7 +2392,7 @@ EOF
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/4bb3b4df159056c9845880c56066e409b345f154" title='Last modified by penruins | September 17, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/7305fb7514e2e0f9a68d970f6225ece3517ca70f" title='Last modified by liuxiang | September 17, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>September 17, 2025</span>
     </a>
@@ -2436,38 +2430,34 @@ EOF
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#vim">vim</a>
+    <li><a href="#nvim">nvim</a>
       <ul>
-        <li><a href="#nvim">nvim</a>
+        <li><a href="#indent">indent</a></li>
+        <li><a href="#clipboard-剪贴板">clipboard 剪贴板</a></li>
+        <li><a href="#quickfix">quickfix</a></li>
+        <li><a href="#lazyvim">LazyVim</a></li>
+        <li><a href="#markdown">markdown</a>
           <ul>
-            <li><a href="#indent">indent</a></li>
-            <li><a href="#clipboard-剪贴板">clipboard 剪贴板</a></li>
-            <li><a href="#quickfix">quickfix</a></li>
-            <li><a href="#lazyvim">LazyVim</a></li>
-            <li><a href="#markdown">markdown</a>
-              <ul>
-                <li><a href="#outlinenvim">outline.nvim</a></li>
-              </ul>
-            </li>
-            <li><a href="#搜索插件">搜索插件</a>
-              <ul>
-                <li><a href="#fzf">fzf</a></li>
-                <li><a href="#telescope">telescope</a></li>
-              </ul>
-            </li>
-            <li><a href="#美化">美化</a>
-              <ul>
-                <li><a href="#buffer">buffer</a></li>
-              </ul>
-            </li>
-            <li><a href="#dropbarnvim">dropbar.nvim</a></li>
-            <li><a href="#cellularautomation">cellular.automation</a></li>
+            <li><a href="#outlinenvim">outline.nvim</a></li>
           </ul>
         </li>
-        <li><a href="#vimscript">vimscript</a></li>
-        <li><a href="#lua">lua</a></li>
+        <li><a href="#搜索插件">搜索插件</a>
+          <ul>
+            <li><a href="#fzf">fzf</a></li>
+            <li><a href="#telescope">telescope</a></li>
+          </ul>
+        </li>
+        <li><a href="#美化">美化</a>
+          <ul>
+            <li><a href="#buffer">buffer</a></li>
+          </ul>
+        </li>
+        <li><a href="#dropbarnvim">dropbar.nvim</a></li>
+        <li><a href="#cellularautomation">cellular.automation</a></li>
       </ul>
     </li>
+    <li><a href="#vimscript">vimscript</a></li>
+    <li><a href="#lua">lua</a></li>
   </ul>
 </nav>
 
