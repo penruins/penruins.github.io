@@ -4,195 +4,15 @@
     <meta charset="UTF-8">
     <title>index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入目录功能 -->
+    <script src="./js/toc.js"></script>
+    <script src="./js/English-toggle.js"></script>
 
-    <style>
-        /* 目录按钮样式 */
-        #toc-button {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            width: 50px;
-            height: 50px;
-            background: #007bff;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            font-size: 20px;
-        }
-
-        /* 目录容器样式 - 默认隐藏 */
-        #toc-container {
-            position: fixed;
-            right: 20px;
-            bottom: 80px;
-            width: 250px;
-            height: 90%;
-            background: #fff8e1;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-            transform: scale(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s ease;
-            z-index: 999;
-        }
-
-        /* 展开状态 */
-        #toc-container.show {
-            transform: scale(1);
-        }
-
-        /* 目录内容样式 */
-        #toc-content {
-            padding: 15px;
-            max-height: 100%;
-            overflow-y: auto;
-        }
-
-        #toc-content h3 {
-            margin-top: 0;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        #toc-content ul {
-            list-style: none;
-            padding-left: 15px;
-            margin: 0;
-        }
-
-        #toc-content li {
-            margin: 5px 0;
-        }
-
-        #toc-content a {
-            text-decoration: none;
-            display: block;
-            padding: 0;
-        }
-
-        #toc-content a:hover {
-            colortoc-content a:hover {
-                color: #007bff;
-            }
-        }
-
-        /* 响应式调整 */
-        @media (max-width: 600px) {
-            #toc-container {
-                width: 90%;
-                right: 5%;
-                bottom: 10px;
-            }
-        }
-    </style>
-    <style>
-        /* typography */
-        body {
-            font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", Consolas, "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Droid Sans Mono", "Lucida Console", "Courier New", monospace;
-            line-height: 1.5;
-            /* 米黄色: #fff8e1 - 温和的米黄色，接近纸张颜色*/
-            /* 暖白色: #fefefe - 带有轻微暖色调的白色*/
-            /* 淡奶油色: #fffde7 - 柔和的奶油色调*/
-            /* 护眼黄: #fff9c4 - 经典的护眼黄色背景*/
-            background-color: #fff8e1
-        }
-
-        /* 深色模式下的背景 */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #343a40;
-            }
-            #toc-container {
-                background: #343a40;
-            }
-        }
-
-        ul {
-            margin: 0px;
-            /*padding-inline-start: 10%;*/
-        }
-
-        li {
-            padding-left: 10px;
-        }
-
-        body {
-            /*font-size: 15px;*/
-            font-size: 1rem;
-        }
-
-        /*@media only screen and (max-width: 1284px) {*/
-        /*    body {*/
-        /*        font-size: 2.6rem;*/
-        /*    }*/
-        /*}*/
-
-        /* 当系统启用了夜间模式时应用的样式 */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #343a40;
-                color: #e9ecef;
-            }
-
-            a {
-                text-decoration: none;
-                color: #84b2ff;
-            }
-        }
-
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        /* 默认情况下隐藏气泡 */
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 500px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            padding: 5px 0;
-            border-radius: 6px;
-
-            /* 定位气泡 */
-            position: absolute;
-            z-index: 1;
-            top: 120%; /* 气泡位于元素上方 */
-            left: 50%;
-            transform: translateX(-50%);
-            margin-left: 0px; /* 使用margin自动调整水平居中 */
-
-            /* 添加小三角形 */
-
-            &::before {
-                content: '';
-                position: absolute;
-                bottom: 100%;
-                left: 50%;
-                margin-left: -5px;
-                border-width: 5px;
-                border-style: solid;
-                border-color: transparent transparent #555 transparent;
-            }
-        }
-
-        /* 当鼠标悬停在工具提示上时显示气泡 */
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-        }
-    </style>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="element-ui/index.css">
     <!-- 引入组件库 -->
     <script src="element-ui/index.js"></script>
+    <link rel="stylesheet" href="./style/toc.css">
 
 </head>
 <body>
@@ -455,21 +275,21 @@
     Indian international students in the US outnumber Chinese for the first time in 15 years</a>
     <span id="contentDiv" data-content="在美国的印度国际学生人数 15 年来首次超过中国学生人数"
           onclick="toggleContent(this)">
-        translate
+        [translate]
     </span>
 </li>
 <li><a href="https://lite.cnn.com/2024/11/20/uk/cambridge-word-of-year-2024-scli-intl-gbr/index.html">
     Cambridge Dictionary’s word of the year 2024 is all about thinking positive</a>
     <span id="contentDiv" data-content="剑桥词典 2024 年度词汇的主题是积极思考"
           onclick="toggleContent(this)">
-        translate
+        [translate]
     </span>
     <ul>
         <li>Cambridge Dictionary has put it out to the universe, naming “manifest” as its word of the year for 2024.
             <span id="contentDiv"
                   data-content="剑桥词典 （Cambridge Dictionary） 已将其推向宇宙，将 “manifest” 命名为 2024 年的年度词汇。"
                   onclick="toggleContent(this)">
-                translate
+                [translate]
             </span>
         </li>
     </ul>
@@ -479,7 +299,7 @@
     <span id="contentDiv"
           data-content="2024 年是 21 世纪的罕见之年：几乎所有人都认为选举结果是合法的"
           onclick="toggleContent(this)">
-        translate
+        [translate]
     </span>
 </li>
 <li><a href="https://lite.cnn.com/2024/11/20/science/solar-orbiter-sun-surface-images/index.html">
@@ -487,7 +307,7 @@
     <span id="contentDiv"
           data-content="Solar Orbiter 捕捉到迄今为止最高分辨率的太阳表面图像"
           onclick="toggleContent(this)">
-        translate
+        [translate]
     </span>
 </li>
 <li><a href="https://www.bbc.com/news/articles/ce9gpdrx829o">
@@ -495,7 +315,7 @@
     <span id="contentDiv"
           data-content="英国禁止 16 岁以下青少年使用社交媒体"
           onclick="toggleContent(this)">
-        translate
+        [translate]
     </span>
 </li>
 <li><a href="https://restofworld.org/2024/mobile-internet-users-growth-rate/">
@@ -503,28 +323,28 @@
     <span id="contentDiv"
           data-content="新数据显示移动互联网新用户数量停滞不前"
           onclick="toggleContent(this)">
-        translate
+        [translate]
     </span>
     <ul>
         <li>57% of the population is already connected to mobile internet.
             <span id="contentDiv"
                   data-content="57% 的人口已经连接到移动互联网。"
                   onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
         </li>
         <li>In Pakistan, Nigeria, and Mexico, the rate of new mobile internet subscriber growth is slowing.
             <span id="contentDiv"
                   data-content="在巴基斯坦、尼日利亚和墨西哥，新移动互联网用户的增长速度正在放缓。"
                   onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
         </li>
         <li>The remaining populations will be harder, and more expensive, to get online.
             <span id="contentDiv"
                   data-content="其余人群将更难上网，成本也更高。"
                   onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
         </li>
     </ul>
@@ -534,7 +354,7 @@
     <span id="contentDiv"
           data-content="可交互式的 HTML 笔记"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
     <ul>
         <li><a href="https://github.com/MaxwellBo/celine">
@@ -546,7 +366,7 @@
     <span id="contentDiv"
           data-content="AMD 现在在前 500 名中的计算能力比 Nvidia 还多"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 <li>
@@ -555,7 +375,7 @@
     <span id="contentDiv"
           data-content="俏皮、错综复杂的日本树叶艺术 – 图片 – 艺术与设计"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 <li><a href="">
@@ -563,7 +383,7 @@
     <span id="contentDiv"
           data-content=""
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -575,7 +395,7 @@
     <span id="contentDiv"
           data-content="中国拒绝与美国国防部长会面"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 <li><a href="https://lite.cnn.com/2024/11/19/sport/rafael-nadal-botic-van-de-zandschulp-spt-intl/index.html">
@@ -583,7 +403,7 @@
     <span id="contentDiv"
           data-content="拉斐尔·纳达尔在西班牙在戴维斯杯中被荷兰击败后退役"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
     <ul>
         <li>
@@ -592,7 +412,7 @@
             <span id="contentDiv"
                   data-content="拉斐尔·纳达尔（Rafael Nadal）：告别“红土之王”"
                   onclick="toggleContent(this)">
-                    translate
+                    [translate]
             </span>
         </li>
     </ul>
@@ -602,7 +422,7 @@
     <span id="contentDiv"
           data-content="联合国表示，伊朗正在增加其接近武器级的铀库存"
           onclick="toggleContent(this)">
-            translate
+            [translate]
     </span>
 </li>
 <li><a href="https://restofworld.org/2024/microsoft-google-chinese-startup-incubator-police-surveillance/">
@@ -610,7 +430,7 @@
     <span id="contentDiv"
           data-content="由 Microsoft 和 Google 孵化器计划支持的中国初创公司与警方合作"
           onclick="toggleContent(this)">
-            translate
+            [translate]
     </span>
     <ul>
         <li>Documents reviewed by Rest of World show several companies backed by U.S. tech giants provided policing or
@@ -618,7 +438,7 @@
             <span id="contentDiv"
                   data-content="世界其他地区查阅的文件显示，几家由美国科技巨头支持的公司向中国执法部门提供警务或审查工具。"
                   onclick="toggleContent(this)">
-                    translate
+                    [translate]
             </span>
         </li>
         <li>
@@ -627,7 +447,7 @@
             <span id="contentDiv"
                   data-content="初创公司的技术可以打击电话诈骗并找到失踪儿童，但软件也在在线审查和监视人口方面发挥了作用。"
                   onclick="toggleContent(this)">
-                    translate
+                    [translate]
             </span>
         </li>
     </ul>
@@ -637,7 +457,7 @@
     <span id="contentDiv"
           data-content="Lush 我最喜欢的小型编程语言"
           onclick="toggleContent(this)">
-            translate
+            [translate]
     </span>
 </li>
 <li><a href="https://www.ypson.com/">
@@ -645,7 +465,7 @@
     <span id="contentDiv"
           data-content="我将我的网站设计成看起来像聊天记录"
           onclick="toggleContent(this)">
-            translate
+            [translate]
     </span>
 </li>
 <li><a href="https://math-gpt.org/">
@@ -653,7 +473,7 @@
     <span id="contentDiv"
           data-content="Show HN： MathGPT – 为任何问题创建数学动画"
           onclick="toggleContent(this)">
-            translate
+            [translate]
     </span>
 </li>
 <li>
@@ -662,7 +482,7 @@
     <span id="contentDiv"
           data-content="英国正在建设世界上最昂贵的铁路之一。许多人现在认为这毫无意义"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 <li>
@@ -671,7 +491,7 @@
     <span id="contentDiv"
           data-content="您为什么不移居国外呢？"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 <li><a href="https://lite.cnn.com/2024/11/18/business/wegovy-weight-loss-drug-china-intl/index.html">
@@ -679,7 +499,7 @@
     <span id="contentDiv"
           data-content="减肥药 Wegovy 在中国上市"
           onclick="toggleContent(this)">
-            translate
+            [translate]
     </span>
     <ul>
         <li>Wegovy will not be reimbursed by China’s national healthcare insurance, which provides basic coverage for
@@ -687,7 +507,7 @@
             <span id="contentDiv"
                   data-content="Wegovy 不会得到中国国民医疗保险的报销，该保险为该国 14 亿人口中的大多数人提供基本保险。"
                   onclick="toggleContent(this)">
-                    translate
+                    [translate]
             </span>
         </li>
     </ul>
@@ -701,7 +521,7 @@
     <span id="contentDiv"
           data-content="中国东部学校刺伤 8 人死亡"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -713,7 +533,7 @@
     <span id="contentDiv"
           data-content="“我非常想你”：中国社交媒体宠儿回归"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -726,7 +546,7 @@
     <span id="contentDiv"
           data-content="司机在体育中心将汽车撞向人群后，造成 35 人死亡，这是中国十年来已知的最致命的袭击事件"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -739,7 +559,7 @@
     <span id="contentDiv"
           data-content="中国的道路被成千上万的骑自行车者封锁，他们正在夜间寻找饺子"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -751,7 +571,7 @@
     <span id="contentDiv"
           data-content="中国数学“神童”如何在作弊风暴中瓦解"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -764,7 +584,7 @@
     <span id="contentDiv"
           data-content="中国比亚迪收入首次超过特斯拉"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -777,7 +597,7 @@
     <span id="contentDiv"
           data-content="TikTok 创始人成为中国首富"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -789,7 +609,7 @@
     <span id="contentDiv"
           data-content="中国儿童贩运者 17 名受害者被判处死刑"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -801,7 +621,7 @@
     <span id="contentDiv"
           data-content="一名日本男孩在中国被杀害。网络民族主义是罪魁祸首吗？"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -813,7 +633,7 @@
     <span id="contentDiv"
           data-content="中国的打压如何将金融界的雄心勃勃的人变成“老鼠”"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -825,7 +645,7 @@
     <span id="contentDiv"
           data-content="欧盟在电动汽车销售战中对中国征收高额税收"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -837,7 +657,7 @@
     <span id="contentDiv"
           data-content="小红书彻底改变了中国在东南亚的旅游业"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -849,7 +669,7 @@
     <span id="contentDiv"
           data-content="上海沃尔玛刺伤案 3 死 15 伤"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
     <ul>
         <li>
@@ -858,7 +678,7 @@
             <span id="contentDiv"
                   data-content="尖叫和混乱：目击者描述上海购物中心被刺事件"
                   onclick="toggleContent(this)">
-                    translate
+                    [translate]
                 </span>
         </li>
     </ul>
@@ -869,7 +689,7 @@
     <span id="contentDiv"
           data-content="苹果制造商从中国转移到越南。现在他们急需工人"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -882,7 +702,7 @@
     <span id="contentDiv"
           data-content="芬兰因成本问题提前将大熊猫送回中国"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -894,7 +714,7 @@
     <span id="contentDiv"
           data-content="中国最大的 AI 模型正在挑战美国的主导地位"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -906,7 +726,7 @@
     <span id="contentDiv"
           data-content="10 岁日本男孩在中国被刺后死亡"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -918,7 +738,7 @@
     <span id="contentDiv"
           data-content="新工具可让您准确跟踪中国政府何时阻止网站"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -930,7 +750,7 @@
     <span id="contentDiv"
           data-content="上海遭受 75 年来最强台风袭击"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -942,7 +762,7 @@
     <span id="contentDiv"
           data-content="中国自 1950 年代以来首次提高退休年龄"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 <li>
@@ -951,7 +771,7 @@
     <span id="contentDiv"
           data-content="N Korea 发布 Kim 在铀设施的罕见照片"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -964,7 +784,7 @@
     <span id="contentDiv"
           data-content="中国结束外国收养给家庭带来的不确定性"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -976,7 +796,7 @@
     <span id="contentDiv"
           data-content="中国校车撞向人群 造成 11 人死亡"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -988,7 +808,7 @@
     <span id="contentDiv"
           data-content="当电动汽车初创公司倒闭时，他们的汽车还能工作吗？"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -1000,7 +820,7 @@
     <span id="contentDiv"
           data-content="迫于搬迁压力，Microsoft 在中国的 AI 工程师必须在祖国和职业之间做出选择"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -1012,7 +832,7 @@
     <span id="contentDiv"
           data-content="独家：Microsoft Bing 在中国的审查制度甚至比中国公司“更极端”"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -1025,7 +845,7 @@
     <span id="contentDiv"
           data-content="为什么中国仍在 Windows 上运行"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -1036,7 +856,7 @@
     <span id="contentDiv"
           data-content="在 12 月的联合国气候变化会议上，近 200 个国家同意从化石燃料过渡。满怀希望的人群为这一宣布欢呼"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -1047,7 +867,7 @@
     <span id="contentDiv"
           data-content="8 月，野火席卷夏威夷毛伊岛，造成 100 人死亡"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -1058,7 +878,7 @@
     <span id="contentDiv"
           data-content="三月，前总统唐纳德·特朗普在纽约被起诉，这是他去年四次刑事起诉中的第一项"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
@@ -1069,136 +889,12 @@
     <span id="contentDiv"
           data-content="今年 2 月，美国空军击落了一个漂浮在北美领空的中国间谍气球。官员们后来非常肯定地得出结论，这个气球从未向中国传递过任何情报。"
           onclick="toggleContent(this)">
-            translate
+            [translate]
         </span>
 </li>
 
 
 </body>
-
-<script>
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     var tooltip = document.querySelector('.tooltip');
-    //     var tooltiptext = document.getElementById('myTooltip');
-    //
-    //     tooltip.addEventListener('click', function () {
-    //         if (tooltiptext.style.visibility === 'hidden') {
-    //             tooltiptext.style.visibility = 'visible';
-    //         } else {
-    //             tooltiptext.style.visibility = 'hidden';
-    //         }
-    //     });
-    // });
-
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     // 获取所有带有 .tooltip 类的元素
-    //     var tooltips = document.querySelectorAll('.tooltip');
-    //
-    //     // 为每个 tooltip 元素添加点击事件监听器
-    //     tooltips.forEach(function (tooltip) {
-    //         tooltip.addEventListener('click', function () {
-    //             // 获取当前 tooltip 下的 .tooltiptext 元素
-    //             var tooltiptext = this.querySelector('.tooltiptext');
-    //             // 切换 'show' 类来控制气泡的显示
-    //             tooltiptext.classList.toggle('show');
-    //         });
-    //     });
-    // });
-    function toggleContent(element) {
-        // 获取data-content属性中的内容
-        var content = element.getAttribute('data-content');
-        // 检查元素是否已经包含了内容
-        if (element.innerText === content) {
-            // 如果元素内容与data-content相同，则清空元素内容
-            element.innerText = 'translate';
-        } else {
-            // 否则，设置元素内容为data-content中的内容
-            element.innerText = content;
-        }
-    }
-
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tocButton = document.getElementById('toc-button');
-        const tocContainer = document.getElementById('toc-container');
-        const tocContent = document.getElementById('toc-content');
-        const headings = document.querySelectorAll('h1, h2, h3');
-
-        // 生成目录内容
-        if (headings.length) {
-            let tocHTML = '<h3>页面目录</h3><ul>';
-            let lastLevel = 1;
-
-            headings.forEach((heading, index) => {
-                if (!heading.id) {
-                    heading.id = 'section-' + index;
-                }
-
-                const level = parseInt(heading.tagName.substring(1));
-                const indent = (level - 1) * 15;
-
-                tocHTML += `
-                        <li style="margin-left: ${indent}px">
-                            <a href="#${heading.id}">${heading.textContent}</a>
-                        </li>
-                    `;
-            });
-
-            tocHTML += '</ul>';
-            tocContent.innerHTML = tocHTML;
-        }
-
-        // 切换目录显示/隐藏
-        tocButton.addEventListener('click', function () {
-            tocContainer.classList.toggle('show');
-
-            // 点击目录外区域关闭目录
-            if (tocContainer.classList.contains('show')) {
-                setTimeout(() => {
-                    document.addEventListener('click', closeTocOnClickOutside);
-                }, 10);
-            } else {
-                document.removeEventListener('click', closeTocOnClickOutside);
-            }
-        });
-
-        // 点击目录链接后关闭目录
-        // tocContent.addEventListener('click', function (e) {
-        //     if (e.target.tagName === 'A') {
-        //         setTimeout(() => {
-        //             tocContainer.classList.remove('show');
-        //             document.removeEventListener('click', closeTocOnClickOutside);
-        //         }, 300); // 等待平滑滚动完成
-        //     }
-        // });
-
-        // 点击目录外区域关闭目录
-        // function closeTocOnClickOutside(e) {
-        //     if (!tocContainer.contains(e.target) && e.target !== tocButton) {
-        //         tocContainer.classList.remove('show');
-        //         document.removeEventListener('click', closeTocOnClickOutside);
-        //     }
-        // }
-
-        // 平滑滚动
-        tocContent.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 20,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    });
-</script>
 
 </html>
 
