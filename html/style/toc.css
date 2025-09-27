@@ -85,7 +85,7 @@
 
 /* typography */
 body {
-    font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", Consolas, "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Droid Sans Mono", "Lucida Console", "Courier New", monospace;
+    font-family: ui-monospace, Menlo, Monaco,"Cascadia Mono", "Segoe UI Mono", Consolas, "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Droid Sans Mono", "Lucida Console", "Courier New", monospace;
     line-height: 1.5;
     /* 米黄色: #fff8e1 - 温和的米黄色，接近纸张颜色*/
     /* 暖白色: #fefefe - 带有轻微暖色调的白色*/
