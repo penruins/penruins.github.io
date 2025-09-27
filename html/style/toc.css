@@ -22,7 +22,7 @@
     position: fixed;
     right: 20px;
     bottom: 80px;
-    width: 250px;
+    width: 25rem;
     height: 90%;
     background: #fff8e1;
     border-radius: 8px;
@@ -107,7 +107,7 @@ body {
 
 ul {
     margin: 0px;
-    /*padding-inline-start: 10%;*/
+    padding-inline-start: 10px;
 }
 
 li {
