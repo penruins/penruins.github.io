@@ -24,6 +24,8 @@ ifconfig | grep 192
 mvn clean compile -T 6
 #
 mvn package "-Dmaven.test.skip=true"
+#
+mvn source:jar deploy -T 6 "-Dmaven.test.skip=true"
 </code>
 </pre>
 
