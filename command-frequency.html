@@ -22,9 +22,9 @@ ifconfig | grep 192
 <code>
 # mvn 编译程序
 mvn clean compile -T 6
-#
+# maven 打包跳过测试
 mvn package "-Dmaven.test.skip=true"
-#
+# 把 maven 打好的 jar 包推送到仓库中
 mvn source:jar deploy -T 6 "-Dmaven.test.skip=true"
 </code>
 </pre>
