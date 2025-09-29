@@ -11,12 +11,17 @@
 </head>
 <body>
 
-<pre>
-<code>
-# 查询当前主机的ip地址
-ifconfig | grep 192
-</code>
-</pre>
+<!-- 目录按钮 -->
+<div id="toc-button">≡</div>
+
+<!-- 目录容器 -->
+<div id="toc-container">
+    <div id="toc-content">
+        <!-- 目录内容将由JS生成 -->
+    </div>
+</div>
+
+<h1>maven</h1>
 
 <pre>
 <code>
@@ -29,19 +34,36 @@ mvn source:jar deploy -T 6 "-Dmaven.test.skip=true"
 </code>
 </pre>
 
+<h1>linux</h1>
+
 <pre>
 <code>
 # ssh 配置文件
 vim ~/.ssh/config
+
 # 查看 CentOS 版本
 cat /etc/centos-release
+
+# 查询当前主机的ip地址
+ifconfig | grep 192
 </code>
 </pre>
+
+<h1>MySQL</h1>
 
 <pre>
 <code>
 # mysql 查看版本
 select version()
+</code>
+</pre>
+
+<h1>vim</h1>
+
+<pre>
+<code>
+# easymotion/vim-easymotion
+# 忘了快捷键看一下这个文档 https://vim.nauxscript.com/vim/day-9.html
 </code>
 </pre>
 
