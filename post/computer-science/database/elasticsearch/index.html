@@ -1,30 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  ElasticSearch
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+  使用场景
+  #
+
+
+场景1
+
+全文搜索Elasticsearch 凭借其强大、可扩展和快速的搜索功能，在全文搜索场景中表现出色。它允许用户以近乎实时的响应执行复杂的查询
+
+
+场景2
+
+实时分析Elasticsearch 能够实时执行分析，因此适用于跟踪实时数据（如用户活动、交易或传感器输出）的仪表板
+
+
+场景3
+
+机器学习通过在 X-Pack 中添加机器学习功能，Elasticsearch 可以自动检测数据中的异常、模式和趋势
+
+
+场景4
+
+地理数据应用程序Elasticsearch 通过地理空间索引和搜索功能支持地理数据。这对于需要管理和可视化地理信息的应用程序（如地图和基于位置的服务）非常有用
+
+
+场景5
+
+日志和事件数据分析组织使用 Elasticsearch 来聚合、监控和分析来自各种来源的日志和事件数据。它是 ELK 堆栈（Elasticsearch、Logstash、Kibana）的关键组件，用于管理系统和应用程序日志以识别问题和监控系统运行状况
+
+
+场景6
+
+安全信息和事件管理 （SIEM）Elasticsearch 可用作 SIEM 工具，帮助组织实时分析安全事件
+
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/database/elasticsearch/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="elasticsearch">
+  <meta property="og:description" content="ElasticSearch # 使用场景 # 场景1 全文搜索Elasticsearch 凭借其强大、可扩展和快速的搜索功能，在全文搜索场景中表现出色。它允许用户以近乎实时的响应执行复杂的查询 场景2 实时分析Elasticsearch 能够实时执行分析，因此适用于跟踪实时数据（如用户活动、交易或传感器输出）的仪表板 场景3 机器学习通过在 X-Pack 中添加机器学习功能，Elasticsearch 可以自动检测数据中的异常、模式和趋势 场景4 地理数据应用程序Elasticsearch 通过地理空间索引和搜索功能支持地理数据。这对于需要管理和可视化地理信息的应用程序（如地图和基于位置的服务）非常有用 场景5 日志和事件数据分析组织使用 Elasticsearch 来聚合、监控和分析来自各种来源的日志和事件数据。它是 ELK 堆栈（Elasticsearch、Logstash、Kibana）的关键组件，用于管理系统和应用程序日志以识别问题和监控系统运行状况 场景6 安全信息和事件管理 （SIEM）Elasticsearch 可用作 SIEM 工具，帮助组织实时分析安全事件">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>elasticsearch | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/database/elasticsearch/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +356,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -483,7 +518,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-859fd182f99952efd6ae86320529c63d" class="toggle"  />
+    <input type="checkbox" id="section-859fd182f99952efd6ae86320529c63d" class="toggle" checked />
     <label for="section-859fd182f99952efd6ae86320529c63d" class="flex justify-between">
       <a role="button" class="">Database</a>
     </label>
@@ -525,7 +560,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/elasticsearch/" class="">elasticsearch</a>
+    <a href="/post/computer-science/database/elasticsearch/" class="active">elasticsearch</a>
   
 
         </li>
@@ -2056,7 +2091,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>elasticsearch</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2107,11 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#elasticsearch">ElasticSearch</a>
+      <ul>
+        <li><a href="#使用场景">使用场景</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2124,46 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><h1 id="elasticsearch">
+  ElasticSearch
+  <a class="anchor" href="#elasticsearch">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<h2 id="使用场景">
+  使用场景
+  <a class="anchor" href="#%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af">#</a>
+</h2>
+<ul>
+<li>场景1
+<ul>
+<li>全文搜索Elasticsearch 凭借其强大、可扩展和快速的搜索功能，在全文搜索场景中表现出色。它允许用户以近乎实时的响应执行复杂的查询</li>
+</ul>
+</li>
+<li>场景2
+<ul>
+<li>实时分析Elasticsearch 能够实时执行分析，因此适用于跟踪实时数据（如用户活动、交易或传感器输出）的仪表板</li>
+</ul>
+</li>
+<li>场景3
+<ul>
+<li>机器学习通过在 X-Pack 中添加机器学习功能，Elasticsearch 可以自动检测数据中的异常、模式和趋势</li>
+</ul>
+</li>
+<li>场景4
+<ul>
+<li>地理数据应用程序Elasticsearch 通过地理空间索引和搜索功能支持地理数据。这对于需要管理和可视化地理信息的应用程序（如地图和基于位置的服务）非常有用</li>
+</ul>
+</li>
+<li>场景5
+<ul>
+<li>日志和事件数据分析组织使用 Elasticsearch 来聚合、监控和分析来自各种来源的日志和事件数据。它是 ELK 堆栈（Elasticsearch、Logstash、Kibana）的关键组件，用于管理系统和应用程序日志以识别问题和监控系统运行状况</li>
+</ul>
+</li>
+<li>场景6
+<ul>
+<li>安全信息和事件管理 （SIEM）Elasticsearch 可用作 SIEM 工具，帮助组织实时分析安全事件</li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -2137,7 +2211,11 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#elasticsearch">ElasticSearch</a>
+      <ul>
+        <li><a href="#使用场景">使用场景</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

@@ -1,30 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  linux
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+  resources
+  #
+
+
+鸟哥的Linux私房菜：基础学习篇 第四版
+快乐的Linux命令行
+
+
+  tail
+  #
+
+tail -f xxxx
+
+  sed
+  #
+
+
+sed命令详解
+
+
+  nmon
+  #
+
+
+nmon 系统性能监控工具的使用
+HomePage
+
+
+  yazi
+  #
+
+
+sxyazi/yazi
+
+官方仓库
+docs
+
+
+【命令行必备】Yazi：最强文件管理器
+
+TheCW
+
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/operating-system/linux/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="linux">
+  <meta property="og:description" content="linux # resources # 鸟哥的Linux私房菜：基础学习篇 第四版 快乐的Linux命令行 tail # tail -f xxxx sed # sed命令详解 nmon # nmon 系统性能监控工具的使用 HomePage yazi # sxyazi/yazi 官方仓库 docs 【命令行必备】Yazi：最强文件管理器 TheCW">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>linux | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/operating-system/linux/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +365,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1304,7 +1348,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-08034345c59b2d801c96d3235471b850" class="toggle"  />
+    <input type="checkbox" id="section-08034345c59b2d801c96d3235471b850" class="toggle" checked />
     <label for="section-08034345c59b2d801c96d3235471b850" class="flex justify-between">
       <a role="button" class="">Operating System</a>
     </label>
@@ -1333,7 +1377,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/linux/" class="">linux</a>
+    <a href="/post/computer-science/operating-system/linux/" class="active">linux</a>
   
 
         </li>
@@ -2056,7 +2100,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>linux</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2116,15 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#linux">linux</a>
+      <ul>
+        <li><a href="#resources">resources</a></li>
+        <li><a href="#tail">tail</a></li>
+        <li><a href="#sed">sed</a></li>
+        <li><a href="#nmon">nmon</a></li>
+        <li><a href="#yazi">yazi</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2137,55 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><h1 id="linux">
+  linux
+  <a class="anchor" href="#linux">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<h2 id="resources">
+  resources
+  <a class="anchor" href="#resources">#</a>
+</h2>
+<ul>
+<li><a href="https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/index.html">鸟哥的Linux私房菜：基础学习篇 第四版</a></li>
+<li><a href="https://billie66.github.io/TLCL/book/">快乐的Linux命令行</a></li>
+</ul>
+<h2 id="tail">
+  tail
+  <a class="anchor" href="#tail">#</a>
+</h2>
+<pre tabindex="0"><code>tail -f xxxx
+</code></pre><h2 id="sed">
+  sed
+  <a class="anchor" href="#sed">#</a>
+</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/edwardlost/archive/2010/09/17/1829145.html">sed命令详解</a></li>
+</ul>
+<h2 id="nmon">
+  nmon
+  <a class="anchor" href="#nmon">#</a>
+</h2>
+<ul>
+<li><a href="https://github.com/binarywang/Linux-Tutorial/blob/master/Nmon.md">nmon 系统性能监控工具的使用</a></li>
+<li><a href="https://nmon.sourceforge.io/pmwiki.php">HomePage</a></li>
+</ul>
+<h2 id="yazi">
+  yazi
+  <a class="anchor" href="#yazi">#</a>
+</h2>
+<ul>
+<li><a href="https://github.com/sxyazi/yazi">sxyazi/yazi</a>
+<ul>
+<li>官方仓库</li>
+<li><a href="https://yazi-rs.github.io/docs/installation/">docs</a></li>
+</ul>
+</li>
+<li><a href="https://www.bilibili.com/video/BV1yRkCYVEUT">【命令行必备】Yazi：最强文件管理器</a>
+<ul>
+<li>TheCW</li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -2137,7 +2233,15 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#linux">linux</a>
+      <ul>
+        <li><a href="#resources">resources</a></li>
+        <li><a href="#tail">tail</a></li>
+        <li><a href="#sed">sed</a></li>
+        <li><a href="#nmon">nmon</a></li>
+        <li><a href="#yazi">yazi</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

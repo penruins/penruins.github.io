@@ -1,30 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  raspberry pi
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+  reference
+  #
+
+
+树莓派文档
+
+
+  clash
+  #
+
+
+reference
+
+为什么全局代理后， CMD 依然 Ping 不通 Google？
+树莓派 Clash 透明代理(TProxy)
+在 Raspberry Pi 上运行 Clash 作为透明代理
+解决 Clash Meta 中TUN模式无法上网的问题：正确配置DNS设置
+解决 树莓派ping: baidu.com: 域名解析暂时失败
+树莓派安装clash，实现科学上网
+
+在 Raspberry Pi 上运行 Clash 作为透明代理
+http://yacd.haishan.me
+
+
+
+
+
+
+  yt-dlp
+  #
+
+使用这个工具，可以下载 youtube 视频
+
+后台下载命令
+
+nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp;
+
+
+实时查看后台下载进度 tail -f nohup.out
+停止下载
+
+查询后台进程号 ps -aux | grep yt-dlp
+杀死进程 kill -9 {{进程号}}
+
+
+
+
+  tomcat
+  #
+
+
+树莓派安装Tomcat
+
+wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36.tar.gz
+tar zxvf apache-tomcat-9.0.36.tar.gz
+
+cd ~/apache-tomcat-9.0.36/bin
+sudo ./startup.sh
+
+  dd
+  #
+
+dd 命令是一个非常强大的工具，可以用来复制和转换文件。通过创建一个临时文件并测量其读写速度，可以测试存储介质的性能。">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/operating-system/raspberrypi/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="raspberry pi">
+  <meta property="og:description" content="raspberry pi # reference # 树莓派文档 clash # reference 为什么全局代理后， CMD 依然 Ping 不通 Google？ 树莓派 Clash 透明代理(TProxy) 在 Raspberry Pi 上运行 Clash 作为透明代理 解决 Clash Meta 中TUN模式无法上网的问题：正确配置DNS设置 解决 树莓派ping: baidu.com: 域名解析暂时失败 树莓派安装clash，实现科学上网 在 Raspberry Pi 上运行 Clash 作为透明代理 http://yacd.haishan.me yt-dlp # 使用这个工具，可以下载 youtube 视频
+后台下载命令 nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp; 实时查看后台下载进度 tail -f nohup.out 停止下载 查询后台进程号 ps -aux | grep yt-dlp 杀死进程 kill -9 {{进程号}} tomcat # 树莓派安装Tomcat wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36.tar.gz tar zxvf apache-tomcat-9.0.36.tar.gz cd ~/apache-tomcat-9.0.36/bin sudo ./startup.sh dd # dd 命令是一个非常强大的工具，可以用来复制和转换文件。通过创建一个临时文件并测量其读写速度，可以测试存储介质的性能。">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>raspberry pi | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/operating-system/raspberrypi/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +385,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1304,7 +1368,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-08034345c59b2d801c96d3235471b850" class="toggle"  />
+    <input type="checkbox" id="section-08034345c59b2d801c96d3235471b850" class="toggle" checked />
     <label for="section-08034345c59b2d801c96d3235471b850" class="flex justify-between">
       <a role="button" class="">Operating System</a>
     </label>
@@ -1359,7 +1423,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/raspberrypi/" class="">raspberry pi</a>
+    <a href="/post/computer-science/operating-system/raspberrypi/" class="active">raspberry pi</a>
   
 
         </li>
@@ -2056,7 +2120,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>raspberry pi</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2136,23 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#raspberry-pi">raspberry pi</a>
+      <ul>
+        <li><a href="#reference">reference</a></li>
+        <li><a href="#clash">clash</a></li>
+        <li><a href="#yt-dlp">yt-dlp</a></li>
+        <li><a href="#tomcat">tomcat</a></li>
+        <li><a href="#dd">dd</a></li>
+        <li><a href="#iwlist">iwlist</a></li>
+        <li><a href="#定时任务">定时任务</a></li>
+        <li><a href="#外网登录">外网登录</a>
+          <ul>
+            <li><a href="#cpolar">cpolar</a></li>
+          </ul>
+        </li>
+        <li><a href="#zsh-corrupt-history-file-homemezsh_history">zsh: corrupt history file /home/me/.zsh_history</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,12 +2165,179 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><h1 id="raspberry-pi">
+  raspberry pi
+  <a class="anchor" href="#raspberry-pi">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
-</article>
+<h2 id="reference">
+  reference
+  <a class="anchor" href="#reference">#</a>
+</h2>
+<ul>
+<li><a href="https://pidoc.cn">树莓派文档</a></li>
+</ul>
+<h2 id="clash">
+  clash
+  <a class="anchor" href="#clash">#</a>
+</h2>
+<ul>
+<li>reference
+<ul>
+<li><a href="https://www.v2ex.com/t/877527">为什么全局代理后， CMD 依然 Ping 不通 Google？</a></li>
+<li><a href="https://mritd.com/2022/02/06/clash-tproxy/">树莓派 Clash 透明代理(TProxy)</a></li>
+<li><a href="https://cherysunzhang.com/2020/05/deploy-clash-as-transparent-proxy-on-raspberry-pi/">在 Raspberry Pi 上运行 Clash 作为透明代理</a></li>
+<li><a href="https://atlassc.net/2023/07/01/fixing-tun-mode-in-clash-the-essential-dns-configuration-guide">解决 Clash Meta 中TUN模式无法上网的问题：正确配置DNS设置</a></li>
+<li><a href="https://blog.csdn.net/frdevolcqzyxynjds/article/details/120123906">解决 树莓派ping: baidu.com: 域名解析暂时失败</a></li>
+<li><a href="https://blog.panda74.fun/blog/practice/raspi/clash">树莓派安装clash，实现科学上网</a>
+<ul>
+<li><a href="https://cherysunzhang.com/2020/05/deploy-clash-as-transparent-proxy-on-raspberry-pi/">在 Raspberry Pi 上运行 Clash 作为透明代理</a></li>
+<li><a href="http://yacd.haishan.me">http://yacd.haishan.me</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="yt-dlp">
+  yt-dlp
+  <a class="anchor" href="#yt-dlp">#</a>
+</h2>
+<p>使用这个工具，可以下载 youtube 视频</p>
+<ul>
+<li>后台下载命令
+<ul>
+<li><code>nohup yt-dlp -N 20 {{video_url}} --merge-output-format mp4 &amp;</code></li>
+</ul>
+</li>
+<li>实时查看后台下载进度 <code>tail -f nohup.out</code></li>
+<li>停止下载
+<ul>
+<li>查询后台进程号 <code>ps -aux | grep yt-dlp</code></li>
+<li>杀死进程 <code>kill -9 {{进程号}}</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="tomcat">
+  tomcat
+  <a class="anchor" href="#tomcat">#</a>
+</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/aeolian/p/15306739.html">树莓派安装Tomcat</a></li>
+</ul>
+<pre tabindex="0"><code>wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.36/bin/apache-tomcat-9.0.36.tar.gz
+tar zxvf apache-tomcat-9.0.36.tar.gz
+
+cd ~/apache-tomcat-9.0.36/bin
+sudo ./startup.sh
+</code></pre><h2 id="dd">
+  dd
+  <a class="anchor" href="#dd">#</a>
+</h2>
+<p><code>dd</code> 命令是一个非常强大的工具，可以用来复制和转换文件。通过创建一个临时文件并测量其读写速度，可以测试存储介质的性能。</p>
+<ol>
+<li>
+<p><strong>打开终端</strong>：您可以通过SSH连接到您的树莓派，或者直接在树莓派上打开终端。</p>
+</li>
+<li>
+<p><strong>测试写入速度</strong>：</p>
+<ul>
+<li>创建一个 1GB 的临时文件，并测量写入速度：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>testfile bs<span style="color:#f92672">=</span>1M count<span style="color:#f92672">=</span><span style="color:#ae81ff">1024</span> conv<span style="color:#f92672">=</span>fdatasync
+</span></span></code></pre></div></li>
+<li>解释：
+<ul>
+<li><code>if=/dev/zero</code>：从 <code>/dev/zero</code> 读取数据（这是一个无限的零流）。</li>
+<li><code>of=testfile</code>：将数据写入名为 <code>testfile</code> 的文件。</li>
+<li><code>bs=1M</code>：每次读写 1MB 的数据块。</li>
+<li><code>count=1024</code>：写入 1024 个 1MB 的数据块，总共 1GB。</li>
+<li><code>conv=fdatasync</code>：确保所有数据都写入磁盘后再结束命令。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>测试读取速度</strong>：</p>
+<ul>
+<li>读取刚刚创建的文件，并测量读取速度：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>testfile of<span style="color:#f92672">=</span>/dev/null bs<span style="color:#f92672">=</span>1M
+</span></span></code></pre></div></li>
+<li>解释：
+<ul>
+<li><code>if=testfile</code>：从 <code>testfile</code> 文件读取数据。</li>
+<li><code>of=/dev/null</code>：将数据写入 <code>/dev/null</code>（丢弃数据）。</li>
+<li><code>bs=1M</code>：每次读取 1MB 的数据块。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>删除测试文件</strong>：</p>
+<ul>
+<li>测试完成后，删除 <code>testfile</code> 以释放空间：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo rm testfile
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<h2 id="iwlist">
+  iwlist
+  <a class="anchor" href="#iwlist">#</a>
+</h2>
+<pre tabindex="0"><code>
+sudo iwlist wlan0 scan
+
+sudo iwlist wlan0 scan | grep SSID
+</code></pre><h2 id="定时任务">
+  定时任务
+  <a class="anchor" href="#%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1">#</a>
+</h2>
+<ul>
+<li>查看当前的定时任务 <code>crontab -l</code></li>
+<li>编辑定时任务 <code>crontab -e</code></li>
+</ul>
+<h2 id="外网登录">
+  外网登录
+  <a class="anchor" href="#%e5%a4%96%e7%bd%91%e7%99%bb%e5%bd%95">#</a>
+</h2>
+<ul>
+<li><a href="https://developer.aliyun.com/article/673396#:~:text=%e5%9c%a8ssh%e5%ae%a2%e6%88%b7%e7%ab%af%e4%b8%8a%e8%be%93%e5%85%a5%20%e4%b8%bb%e6%9c%ba%e5%90%8d%ef%bc%9a%20holer.org%20%e7%ab%af%e5%8f%a3%e5%8f%b7%ef%bc%9a%2065014%20%e6%88%96%e8%80%85%e7%9b%b4%e6%8e%a5%e6%89%a7%e8%a1%8c%e5%91%bd%e4%bb%a4%ef%bc%9a,ssh%20root%40holer.org%20-p%2065014%20%e8%bf%99%e6%a0%b7%e5%b0%b1%e5%8f%af%e4%bb%a5%e4%bb%8e%e5%85%ac%e7%bd%91%e7%99%bb%e5%bd%95%e8%ae%bf%e9%97%ae%e6%a0%91%e8%8e%93%e6%b4%be%20Raspberry%20Pi%e7%b3%bb%e7%bb%9f%e4%ba%86%E3%80%82">如何从外网登录访问树莓派Raspberry Pi</a>
+<ul>
+<li>holer</li>
+<li><a href="http://wdom.net/?spm=a2c6h.12873639.article-detail.8.34313bf6f5zLfQ">Wisdom</a></li>
+<li><a href="https://github.com/wisdom-projects/holer">wisdom-projects/holer</a>
+<ul>
+<li>方式一：使用公开的holer映射或者开通holer服务，通过holer客户端软件经holer服务器实现公网访问</li>
+<li>方式二：使用holer服务端软件搭建holer服务，通过holer客户端软件经自己服务器实现公网访问，</li>
+</ul>
+</li>
+<li><a href="http://blog.wdom.net/article/28#directory020017775808006130">Holer端口映射软件使用教程</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="cpolar">
+  cpolar
+  <a class="anchor" href="#cpolar">#</a>
+</h3>
+<ul>
+<li><a href="https://www.cpolar.com/">cpolar</a>
+<ul>
+<li>3.3 将隧道配置为后台服务</li>
+</ul>
+</li>
+<li><a href="https://www.cpolar.com/blog/cpolar-quick-start-tutorial-raspberry-pi-series">Cpolar快速入门教程：树莓派系列</a></li>
+<li>后台管理页面 <code>http://localhost:9200</code></li>
+</ul>
+<h2 id="zsh-corrupt-history-file-homemezsh_history">
+  zsh: corrupt history file /home/me/.zsh_history
+  <a class="anchor" href="#zsh-corrupt-history-file-homemezsh_history">#</a>
+</h2>
+<ul>
+<li><a href="https://blog.csdn.net/henryhu712/article/details/123836534">怎样修复zsh历史记录错误：zsh: corrupt history file /home/me/.zsh_history</a></li>
+</ul>
+<pre tabindex="0"><code>cd ~
+mv .zsh_history .zsh_history_bad
+strings -eS .zsh_history_bad &gt; .zsh_history
+fc -R .zsh_history
+</code></pre></article>
  
       
 
@@ -2137,7 +2384,23 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#raspberry-pi">raspberry pi</a>
+      <ul>
+        <li><a href="#reference">reference</a></li>
+        <li><a href="#clash">clash</a></li>
+        <li><a href="#yt-dlp">yt-dlp</a></li>
+        <li><a href="#tomcat">tomcat</a></li>
+        <li><a href="#dd">dd</a></li>
+        <li><a href="#iwlist">iwlist</a></li>
+        <li><a href="#定时任务">定时任务</a></li>
+        <li><a href="#外网登录">外网登录</a>
+          <ul>
+            <li><a href="#cpolar">cpolar</a></li>
+          </ul>
+        </li>
+        <li><a href="#zsh-corrupt-history-file-homemezsh_history">zsh: corrupt history file /home/me/.zsh_history</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

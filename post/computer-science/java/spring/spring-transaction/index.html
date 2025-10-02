@@ -1,30 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+@Transactional详解（作用、失效场景与解决方法）| 事务注解实际原理（AOP）解析
+
+
+  Spring Boot &#43; MyBatis-Plus 使用事务
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+MyBatis-Plus 是基于 MyBatis 的增强工具，在 Spring Boot 中使用事务的方式与原生 MyBatis 类似。以下是详细的使用方法：
+
+  1. 添加必要依赖
+  #
+
+首先确保你的项目中包含以下依赖：
+
+&lt;dependency&gt;
+    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;最新版本&lt;/version&gt;
+&lt;/dependency&gt;
+
+  2. 配置事务管理器
+  #
+
+Spring Boot 会自动配置事务管理器，但如果你想自定义，可以在配置类中添加：
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+
+import javax.sql.DataSource;
+
+@Configuration
+public class MyBatisPlusConfig {
+
+    @Bean
+    public DataSourceTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+}
+
+  3. 使用事务
+  #
+
+
+  3.1 声明式事务（推荐）
+  #
+
+在 Service 层方法上添加 @Transactional 注解：">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/java/spring/spring-transaction/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="spring transaction">
+  <meta property="og:description" content="@Transactional详解（作用、失效场景与解决方法）| 事务注解实际原理（AOP）解析 Spring Boot &#43; MyBatis-Plus 使用事务 # MyBatis-Plus 是基于 MyBatis 的增强工具，在 Spring Boot 中使用事务的方式与原生 MyBatis 类似。以下是详细的使用方法：
+1. 添加必要依赖 # 首先确保你的项目中包含以下依赖：
+&lt;dependency&gt; &lt;groupId&gt;com.baomidou&lt;/groupId&gt; &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt; &lt;version&gt;最新版本&lt;/version&gt; &lt;/dependency&gt; 2. 配置事务管理器 # Spring Boot 会自动配置事务管理器，但如果你想自定义，可以在配置类中添加：
+import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.jdbc.datasource.DataSourceTransactionManager; import javax.sql.DataSource; @Configuration public class MyBatisPlusConfig { @Bean public DataSourceTransactionManager transactionManager(DataSource dataSource) { return new DataSourceTransactionManager(dataSource); } } 3. 使用事务 # 3.1 声明式事务（推荐） # 在 Service 层方法上添加 @Transactional 注解：">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>spring transaction | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/java/spring/spring-transaction/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +366,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -754,7 +799,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-ca0677f03580f20779b09f474723b113" class="toggle"  />
+    <input type="checkbox" id="section-ca0677f03580f20779b09f474723b113" class="toggle" checked />
     <label for="section-ca0677f03580f20779b09f474723b113" class="flex justify-between">
       <a role="button" class="">Java</a>
     </label>
@@ -783,7 +828,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0881ddd207cd479aab0cacb25e32a397" class="toggle"  />
+    <input type="checkbox" id="section-0881ddd207cd479aab0cacb25e32a397" class="toggle" checked />
     <label for="section-0881ddd207cd479aab0cacb25e32a397" class="flex justify-between">
       <a role="button" class="">Spring</a>
     </label>
@@ -812,7 +857,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/spring/spring-transaction/" class="">spring transaction</a>
+    <a href="/post/computer-science/java/spring/spring-transaction/" class="active">spring transaction</a>
   
 
         </li>
@@ -2056,7 +2101,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>spring transaction</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2117,26 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#spring-boot--mybatis-plus-使用事务">Spring Boot + MyBatis-Plus 使用事务</a>
+      <ul>
+        <li><a href="#1-添加必要依赖">1. 添加必要依赖</a></li>
+        <li><a href="#2-配置事务管理器">2. 配置事务管理器</a></li>
+        <li><a href="#3-使用事务">3. 使用事务</a>
+          <ul>
+            <li><a href="#31-声明式事务推荐">3.1 声明式事务（推荐）</a></li>
+            <li><a href="#32-编程式事务">3.2 编程式事务</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-事务传播行为">4. 事务传播行为</a></li>
+        <li><a href="#5-事务隔离级别">5. 事务隔离级别</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
+        <li><a href="#常见问题解决">常见问题解决</a></li>
+      </ul>
+    </li>
+    <li><a href="#transaction的底层原理是什么">@Transaction的底层原理是什么？</a></li>
+    <li><a href="#transactional-事务传播机制">@Transactional 事务传播机制</a></li>
+    <li><a href="#transactional注解可以作用于哪些地方">@Transactional注解可以作用于哪些地方？</a></li>
+    <li><a href="#transactional失效场景与解决办法">@Transactional失效场景与解决办法</a></li>
   </ul>
 </nav>
 
@@ -2085,11 +2149,274 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><ul>
+<li><a href="https://www.cnblogs.com/isme-zjh/p/18106598">@Transactional详解（作用、失效场景与解决方法）| 事务注解实际原理（AOP）解析</a></li>
+</ul>
+<h1 id="spring-boot--mybatis-plus-使用事务">
+  Spring Boot + MyBatis-Plus 使用事务
+  <a class="anchor" href="#spring-boot--mybatis-plus-%e4%bd%bf%e7%94%a8%e4%ba%8b%e5%8a%a1">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<p>MyBatis-Plus 是基于 MyBatis 的增强工具，在 Spring Boot 中使用事务的方式与原生 MyBatis 类似。以下是详细的使用方法：</p>
+<h2 id="1-添加必要依赖">
+  1. 添加必要依赖
+  <a class="anchor" href="#1-%e6%b7%bb%e5%8a%a0%e5%bf%85%e8%a6%81%e4%be%9d%e8%b5%96">#</a>
+</h2>
+<p>首先确保你的项目中包含以下依赖：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>com.baomidou<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>mybatis-plus-boot-starter<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>最新版本<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><h2 id="2-配置事务管理器">
+  2. 配置事务管理器
+  <a class="anchor" href="#2-%e9%85%8d%e7%bd%ae%e4%ba%8b%e5%8a%a1%e7%ae%a1%e7%90%86%e5%99%a8">#</a>
+</h2>
+<p>Spring Boot 会自动配置事务管理器，但如果你想自定义，可以在配置类中添加：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Bean;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.context.annotation.Configuration;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.jdbc.datasource.DataSourceTransactionManager;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.sql.DataSource;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyBatisPlusConfig</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> DataSourceTransactionManager <span style="color:#a6e22e">transactionManager</span>(DataSource dataSource) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> DataSourceTransactionManager(dataSource);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="3-使用事务">
+  3. 使用事务
+  <a class="anchor" href="#3-%e4%bd%bf%e7%94%a8%e4%ba%8b%e5%8a%a1">#</a>
+</h2>
+<h3 id="31-声明式事务推荐">
+  3.1 声明式事务（推荐）
+  <a class="anchor" href="#31-%e5%a3%b0%e6%98%8e%e5%bc%8f%e4%ba%8b%e5%8a%a1%e6%8e%a8%e8%8d%90">#</a>
+</h3>
+<p>在 Service 层方法上添加 <code>@Transactional</code> 注解：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.stereotype.Service;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.transaction.annotation.Transactional;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserServiceImpl</span> <span style="color:#66d9ef">implements</span> UserService {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> UserMapper userMapper;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> OrderMapper orderMapper;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Transactional</span>  <span style="color:#75715e">// 默认遇到RuntimeException时回滚</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createUserWithOrder</span>(User user, Order order) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 插入用户</span>
+</span></span><span style="display:flex;"><span>        userMapper.<span style="color:#a6e22e">insert</span>(user);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 设置订单用户ID</span>
+</span></span><span style="display:flex;"><span>        order.<span style="color:#a6e22e">setUserId</span>(user.<span style="color:#a6e22e">getId</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 插入订单</span>
+</span></span><span style="display:flex;"><span>        orderMapper.<span style="color:#a6e22e">insert</span>(order);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 如果此处抛出异常，上面两个操作都会回滚</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Transactional</span>(rollbackFor <span style="color:#f92672">=</span> Exception.<span style="color:#a6e22e">class</span>)  <span style="color:#75715e">// 遇到所有异常都回滚</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">updateUserWithOrder</span>(User user, Order order) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        userMapper.<span style="color:#a6e22e">updateById</span>(user);
+</span></span><span style="display:flex;"><span>        orderMapper.<span style="color:#a6e22e">updateById</span>(order);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 即使抛出非RuntimeException也会回滚</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="32-编程式事务">
+  3.2 编程式事务
+  <a class="anchor" href="#32-%e7%bc%96%e7%a8%8b%e5%bc%8f%e4%ba%8b%e5%8a%a1">#</a>
+</h3>
+<p>如果需要更精细的控制，可以使用编程式事务：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.stereotype.Service;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.transaction.support.TransactionTemplate;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OrderService</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> TransactionTemplate transactionTemplate;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> OrderMapper orderMapper;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processOrder</span>(Order order) {
+</span></span><span style="display:flex;"><span>        transactionTemplate.<span style="color:#a6e22e">execute</span>(status <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 业务逻辑</span>
+</span></span><span style="display:flex;"><span>                orderMapper.<span style="color:#a6e22e">insert</span>(order);
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 其他数据库操作...</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> Boolean.<span style="color:#a6e22e">TRUE</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>                status.<span style="color:#a6e22e">setRollbackOnly</span>();  <span style="color:#75715e">// 标记回滚</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> Boolean.<span style="color:#a6e22e">FALSE</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="4-事务传播行为">
+  4. 事务传播行为
+  <a class="anchor" href="#4-%e4%ba%8b%e5%8a%a1%e4%bc%a0%e6%92%ad%e8%a1%8c%e4%b8%ba">#</a>
+</h2>
+<p>可以指定事务的传播行为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Transactional</span>(propagation <span style="color:#f92672">=</span> Propagation.<span style="color:#a6e22e">REQUIRED</span>)  <span style="color:#75715e">// 默认值，如果当前没有事务，就新建一个事务</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">methodA</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Transactional</span>(propagation <span style="color:#f92672">=</span> Propagation.<span style="color:#a6e22e">REQUIRES_NEW</span>)  <span style="color:#75715e">// 总是新建事务</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">methodB</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><h2 id="5-事务隔离级别">
+  5. 事务隔离级别
+  <a class="anchor" href="#5-%e4%ba%8b%e5%8a%a1%e9%9a%94%e7%a6%bb%e7%ba%a7%e5%88%ab">#</a>
+</h2>
+<p>可以设置事务隔离级别：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Transactional</span>(isolation <span style="color:#f92672">=</span> Isolation.<span style="color:#a6e22e">READ_COMMITTED</span>)  <span style="color:#75715e">// 读已提交</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">updateData</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><h2 id="注意事项">
+  注意事项
+  <a class="anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a>
+</h2>
+<ol>
+<li><code>@Transactional</code> 注解应该加在 Service 层，而不是 DAO/Mapper 层</li>
+<li>默认只对 RuntimeException 回滚，检查异常不会触发回滚</li>
+<li>确保调用的方法来自外部类（Spring 代理机制要求）</li>
+<li>私有方法上的 <code>@Transactional</code> 注解无效</li>
+<li>同一个类中方法调用带有 <code>@Transactional</code> 的方法时，事务不会生效</li>
+</ol>
+<h2 id="常见问题解决">
+  常见问题解决
+  <a class="anchor" href="#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3">#</a>
+</h2>
+<p>如果事务不生效，检查以下方面：</p>
+<ul>
+<li>是否使用了 <code>@EnableTransactionManagement</code>（Spring Boot 默认已启用）</li>
+<li>方法是否为 public</li>
+<li>是否在同一个类中调用了带 <code>@Transactional</code> 的方法</li>
+<li>异常是否被捕获而未抛出</li>
+</ul>
+<p>通过以上配置和使用方式，你可以在 Spring Boot + MyBatis-Plus 项目中有效地使用事务管理。</p>
+<h1 id="transaction的底层原理是什么">
+  @Transaction的底层原理是什么？
+  <a class="anchor" href="#transaction%e7%9a%84%e5%ba%95%e5%b1%82%e5%8e%9f%e7%90%86%e6%98%af%e4%bb%80%e4%b9%88">#</a>
+</h1>
+<ul>
+<li>spring的事务管理机制，结合AOP和动态代理技术实现事务的控制和管理</li>
+<li>事务管理核心组件
+<ul>
+<li>事务管理器</li>
+<li>事务拦截器</li>
+<li>事务属性源</li>
+<li>事务代理对象</li>
+</ul>
+</li>
+<li>实现流程
+<ul>
+<li>代理对象的创建</li>
+<li>事务拦截器的应用 TransactionInterceptor</li>
+<li>事务的开启与提交</li>
+<li>事务的传播行为</li>
+</ul>
+</li>
+</ul>
+<h1 id="transactional-事务传播机制">
+  @Transactional 事务传播机制
+  <a class="anchor" href="#transactional-%e4%ba%8b%e5%8a%a1%e4%bc%a0%e6%92%ad%e6%9c%ba%e5%88%b6">#</a>
+</h1>
+<ul>
+<li>事务传播机制：<strong>当一个事务方法调用另一个事务方法时，事务应该如何传递或处理</strong>
+<ul>
+<li><code>REQUIRED</code>
+<ul>
+<li>如果当前存在事务，则加入该事务；如果不存在事务，则创建一个新事务</li>
+</ul>
+</li>
+<li><code>SUPPORTS</code>
+<ul>
+<li>如果当前存在事务，则加入该事务；如果不存在事务，则以非事务方式执行</li>
+<li>场景：适用于查询操作，是否在事务中执行均可</li>
+</ul>
+</li>
+<li><code>MANDATORY</code>
+<ul>
+<li>如果当前存在事务，则加入该事务；如果不存在事务，则抛出异常</li>
+<li>场景：强制要求调用方必须在事务中调用该方法</li>
+</ul>
+</li>
+<li><code>REQUIRES_NEW</code>
+<ul>
+<li>重新创建一个新的事务，如果当前存在事务，暂停当前的事务。(当类A中的 a 方法用默认Propagation.REQUIRED模式，类B中的 b方法加上采用 Propagation.REQUIRES_NEW模式，然后在 a 方法中调用 b方法操作数据库，然而 a方法抛出异常后，b方法并没有进行回滚，因为Propagation.REQUIRES_NEW会暂停 a方法的事务)</li>
+</ul>
+</li>
+<li><code>NOT_SUPPORTED</code></li>
+<li><code>NEVER</code></li>
+<li><code>NESTED</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="transactional注解可以作用于哪些地方">
+  @Transactional注解可以作用于哪些地方？
+  <a class="anchor" href="#transactional%e6%b3%a8%e8%a7%a3%e5%8f%af%e4%bb%a5%e4%bd%9c%e7%94%a8%e4%ba%8e%e5%93%aa%e4%ba%9b%e5%9c%b0%e6%96%b9">#</a>
+</h1>
+<ul>
+<li>作用于类：当把@Transactional 注解放在类上时，表示所有该类的public方法都配置相同的事务属性信息。</li>
+<li>作用于方法：当类配置了@Transactional，方法也配置了@Transactional，方法的事务会覆盖类的事务配置信息。</li>
+<li>作用于接口：不推荐这种使用方法，因为一旦标注在Interface上并且配置了Spring AOP 使用CGLib动态代理，将会导致@Transactional注解失效</li>
+</ul>
+<h1 id="transactional失效场景与解决办法">
+  @Transactional失效场景与解决办法
+  <a class="anchor" href="#transactional%e5%a4%b1%e6%95%88%e5%9c%ba%e6%99%af%e4%b8%8e%e8%a7%a3%e5%86%b3%e5%8a%9e%e6%b3%95">#</a>
+</h1>
+<ul>
+<li>@Transactional 应用在非 public 修饰的方法上</li>
+<li>@Transactional 注解属性 propagation 设置错误
+<ul>
+<li>这种失效是由于配置错误，若是错误的配置以下三种 propagation，事务将不会发生回滚。
+<ul>
+<li>TransactionDefinition.PROPAGATION_SUPPORTS：如果当前存在事务，则加入该事务；如果当前没有事务，则以非事务的方式继续运行。</li>
+<li>TransactionDefinition.PROPAGATION_NOT_SUPPORTED：以非事务方式运行，如果当前存在事务，则把当前事务挂起。</li>
+<li>TransactionDefinition.PROPAGATION_NEVER：以非事务方式运行，如果当前存在事务，则抛出异常。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>@Transactional 注解属性 rollbackFor 设置错误
+<ul>
+<li>rollbackFor 可以指定能够触发事务回滚的异常类型。Spring默认抛出了未检查unchecked异常（继承自 RuntimeException 的异常）或者
+Error才回滚事务；其他异常不会触发回滚事务。如果在事务中抛出其他类型的异常，但却期望 Spring 能够回滚事务，就需要指定 rollbackFor属性。</li>
+<li>一般使用 @Transactional(rollbackFor = Exception.class) 就可以了，但可以根据业务自定义异常类</li>
+</ul>
+</li>
+<li>同一个类中方法调用，导致@Transactional失效
+<ul>
+<li>开发中避免不了会对同一个类里面的方法调用，比如有一个类Test，它的一个方法A，A再调用本类的方法B（不论方法B是用public还是private修饰），但方法A没有声明注解事务，而B方法有。则外部调用方法A之后，方法B的事务是不会起作用的。这也是经常犯错误的一个地方。</li>
+<li>那为啥会出现这种情况？其实这还是由于使用Spring AOP代理造成的，因为只有当事务方法被当前类以外的代码调用时，才会由Spring生成的代理对象来管理。</li>
+<li><code> ((TestController) AopContext.currentProxy()).transactionalTest();</code></li>
+</ul>
+</li>
+<li>异常被你的 catch“吃了”导致@Transactional失效
+<ul>
+<li>AOP 可以说是生成一个代理类(其实可以理解对这个类中的某个方法外面再包装了一层)，可以在这个方法的头和尾添加代码，比如代理类使用一个try、catch把这个方法给套起来了，只有这个方法抛出异常之后，调用了代理类中catch的事务回滚代码才能回滚，所以你没抛出异常的话，@Transactional认为你是正常运行的代码所以不回滚</li>
+</ul>
+</li>
+<li>数据库引擎不支持事务
+<ul>
+<li>这种情况出现的概率并不高，事务能否生效数据库引擎是否支持事务是关键。常用的MySQL数据库默认使用支持事务的innodb引擎。一旦数据库引擎切换成不支持事务的myisam，那事务就从根本上失效了</li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -2137,7 +2464,26 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#spring-boot--mybatis-plus-使用事务">Spring Boot + MyBatis-Plus 使用事务</a>
+      <ul>
+        <li><a href="#1-添加必要依赖">1. 添加必要依赖</a></li>
+        <li><a href="#2-配置事务管理器">2. 配置事务管理器</a></li>
+        <li><a href="#3-使用事务">3. 使用事务</a>
+          <ul>
+            <li><a href="#31-声明式事务推荐">3.1 声明式事务（推荐）</a></li>
+            <li><a href="#32-编程式事务">3.2 编程式事务</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-事务传播行为">4. 事务传播行为</a></li>
+        <li><a href="#5-事务隔离级别">5. 事务隔离级别</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
+        <li><a href="#常见问题解决">常见问题解决</a></li>
+      </ul>
+    </li>
+    <li><a href="#transaction的底层原理是什么">@Transaction的底层原理是什么？</a></li>
+    <li><a href="#transactional-事务传播机制">@Transactional 事务传播机制</a></li>
+    <li><a href="#transactional注解可以作用于哪些地方">@Transactional注解可以作用于哪些地方？</a></li>
+    <li><a href="#transactional失效场景与解决办法">@Transactional失效场景与解决办法</a></li>
   </ul>
 </nav>
 

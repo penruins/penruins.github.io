@@ -1,30 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  第2章 简单动态字符串
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+  第3章 链表
+  #
+
+
+  第4章 字典
+  #
+
+
+  第5章 跳跃表
+  #
+
+
+  第6章 整数集合
+  #
+
+
+  第7章 压缩列表
+  #
+
+
+  第8章 对象
+  #
+
+
+Redis使用对象来表示数据库中的键和值，每次当我们在Redis的数据库中新创建一个键值对时，我们至少会创建两个对象，一个对象用作键值对的键（键对象），另一个对象用作键值对的值（值对象）
+对象的类型
+
+字符串对象 REDIS_STRING
+列表对象 REDIS_LIST
+哈希对象 REDIS_HASH
+集合对象 REDIS_SET
+有序集合对象 REDIS_ZSET
+
+
+对于Redis数据库保存的键值对来说，键总是一个字符串对象，而值则可以是字符串对象、列表对象、哈希对象、集合对象或者有序集合对象的其中一种
+
+当我们称呼一个数据库键为“字符串键”时，我们指的是“这个数据库键所对应的值为字符串对象”
+当我们称呼一个键为“列表键”时，我们指的是“这个数据库键所对应的值为列表对象”
+
+
+TYPE命令的实现方式也与此类似，当我们对一个数据库键执行TYPE命令时，命令返回的结果为数据库键对应的值对象的类型，而不是键对象的类型
+
+因为键的类型始终为字符串
+
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="Redis设计与实现">
+  <meta property="og:description" content="第2章 简单动态字符串 # 第3章 链表 # 第4章 字典 # 第5章 跳跃表 # 第6章 整数集合 # 第7章 压缩列表 # 第8章 对象 # Redis使用对象来表示数据库中的键和值，每次当我们在Redis的数据库中新创建一个键值对时，我们至少会创建两个对象，一个对象用作键值对的键（键对象），另一个对象用作键值对的值（值对象） 对象的类型 字符串对象 REDIS_STRING 列表对象 REDIS_LIST 哈希对象 REDIS_HASH 集合对象 REDIS_SET 有序集合对象 REDIS_ZSET 对于Redis数据库保存的键值对来说，键总是一个字符串对象，而值则可以是字符串对象、列表对象、哈希对象、集合对象或者有序集合对象的其中一种 当我们称呼一个数据库键为“字符串键”时，我们指的是“这个数据库键所对应的值为字符串对象” 当我们称呼一个键为“列表键”时，我们指的是“这个数据库键所对应的值为列表对象” TYPE命令的实现方式也与此类似，当我们对一个数据库键执行TYPE命令时，命令返回的结果为数据库键对应的值对象的类型，而不是键对象的类型 因为键的类型始终为字符串">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+<title>Redis设计与实现 | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -1860,7 +1905,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-b03f134e351d6516fb4925d3cccc721f" class="toggle"  />
+    <input type="checkbox" id="section-b03f134e351d6516fb4925d3cccc721f" class="toggle" checked />
     <label for="section-b03f134e351d6516fb4925d3cccc721f" class="flex justify-between">
       <a role="button" class="">Books</a>
     </label>
@@ -1876,7 +1921,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-3045b94b25ef0b17b04a92aba83672b7" class="toggle"  />
+    <input type="checkbox" id="section-3045b94b25ef0b17b04a92aba83672b7" class="toggle" checked />
     <label for="section-3045b94b25ef0b17b04a92aba83672b7" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1918,7 +1963,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">Redis设计与实现</a>
+    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="active">Redis设计与实现</a>
   
 
         </li>
@@ -2056,7 +2101,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>Redis设计与实现</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2117,17 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li>
+      <ul>
+        <li><a href="#第2章-简单动态字符串">第2章 简单动态字符串</a></li>
+        <li><a href="#第3章-链表">第3章 链表</a></li>
+        <li><a href="#第4章-字典">第4章 字典</a></li>
+        <li><a href="#第5章-跳跃表">第5章 跳跃表</a></li>
+        <li><a href="#第6章-整数集合">第6章 整数集合</a></li>
+        <li><a href="#第7章-压缩列表">第7章 压缩列表</a></li>
+        <li><a href="#第8章-对象">第8章 对象</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2140,57 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
-</h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+  <article class="markdown book-article"><h2 id="第2章-简单动态字符串">
+  第2章 简单动态字符串
+  <a class="anchor" href="#%e7%ac%ac2%e7%ab%a0-%e7%ae%80%e5%8d%95%e5%8a%a8%e6%80%81%e5%ad%97%e7%ac%a6%e4%b8%b2">#</a>
+</h2>
+<h2 id="第3章-链表">
+  第3章 链表
+  <a class="anchor" href="#%e7%ac%ac3%e7%ab%a0-%e9%93%be%e8%a1%a8">#</a>
+</h2>
+<h2 id="第4章-字典">
+  第4章 字典
+  <a class="anchor" href="#%e7%ac%ac4%e7%ab%a0-%e5%ad%97%e5%85%b8">#</a>
+</h2>
+<h2 id="第5章-跳跃表">
+  第5章 跳跃表
+  <a class="anchor" href="#%e7%ac%ac5%e7%ab%a0-%e8%b7%b3%e8%b7%83%e8%a1%a8">#</a>
+</h2>
+<h2 id="第6章-整数集合">
+  第6章 整数集合
+  <a class="anchor" href="#%e7%ac%ac6%e7%ab%a0-%e6%95%b4%e6%95%b0%e9%9b%86%e5%90%88">#</a>
+</h2>
+<h2 id="第7章-压缩列表">
+  第7章 压缩列表
+  <a class="anchor" href="#%e7%ac%ac7%e7%ab%a0-%e5%8e%8b%e7%bc%a9%e5%88%97%e8%a1%a8">#</a>
+</h2>
+<h2 id="第8章-对象">
+  第8章 对象
+  <a class="anchor" href="#%e7%ac%ac8%e7%ab%a0-%e5%af%b9%e8%b1%a1">#</a>
+</h2>
+<ul>
+<li>Redis使用对象来表示数据库中的键和值，每次当我们在Redis的数据库中新创建一个键值对时，我们至少会创建两个对象，一个对象用作键值对的键（键对象），另一个对象用作键值对的值（值对象）</li>
+<li>对象的类型
+<ul>
+<li>字符串对象 <code>REDIS_STRING</code></li>
+<li>列表对象 <code>REDIS_LIST</code></li>
+<li>哈希对象 <code>REDIS_HASH</code></li>
+<li>集合对象 <code>REDIS_SET</code></li>
+<li>有序集合对象 <code>REDIS_ZSET</code></li>
+</ul>
+</li>
+<li>对于Redis数据库保存的键值对来说，键总是一个字符串对象，而值则可以是字符串对象、列表对象、哈希对象、集合对象或者有序集合对象的其中一种
+<ul>
+<li>当我们称呼一个数据库键为“字符串键”时，我们指的是“这个数据库键所对应的值为字符串对象”</li>
+<li>当我们称呼一个键为“列表键”时，我们指的是“这个数据库键所对应的值为列表对象”</li>
+</ul>
+</li>
+<li>TYPE命令的实现方式也与此类似，当我们对一个数据库键执行TYPE命令时，命令返回的结果为数据库键对应的值对象的类型，而不是键对象的类型
+<ul>
+<li>因为键的类型始终为字符串</li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -2098,12 +2199,6 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex flex-wrap justify-between">
 
-
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/eabc2f02d21d027c6d724b503a7ad98e923c63fb" title='Last modified by liuxiang | October 2, 2025' target="_blank" rel="noopener">
-      <img src="/svg/calendar.svg" class="book-icon" alt="" />
-      <span>October 2, 2025</span>
-    </a>
-  </div>
 
 
 
@@ -2137,7 +2232,17 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li>
+      <ul>
+        <li><a href="#第2章-简单动态字符串">第2章 简单动态字符串</a></li>
+        <li><a href="#第3章-链表">第3章 链表</a></li>
+        <li><a href="#第4章-字典">第4章 字典</a></li>
+        <li><a href="#第5章-跳跃表">第5章 跳跃表</a></li>
+        <li><a href="#第6章-整数集合">第6章 整数集合</a></li>
+        <li><a href="#第7章-压缩列表">第7章 压缩列表</a></li>
+        <li><a href="#第8章-对象">第8章 对象</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

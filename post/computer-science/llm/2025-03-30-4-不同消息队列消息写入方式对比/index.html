@@ -1,30 +1,179 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  不同消息队列消息写入方式对比
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+以下是主流消息队列（Kafka、RocketMQ、RabbitMQ、Pulsar、ActiveMQ）在消息写入方式上的对比，结合性能、可靠性和适用场景进行综合分析：
+
+
+  1. Kafka
+  #
+
+
+写入方式：
+
+顺序追加写入：消息以追加（Append-only）方式写入分区日志文件，利用磁盘顺序I/O的高性能特性11528。
+批量发送：生产者（Producer）将消息累积到批次（如1MB或100ms阈值）后批量发送，减少网络和磁盘I/O次数28。
+异步刷盘：默认异步刷盘（依赖页缓存），通过参数可配置同步刷盘（牺牲性能换可靠性）28。
+
+
+特点：
+
+高吞吐（10万级/秒），适合日志、大数据场景115。
+不支持延迟消息，仅保证分区内有序1628。
+
+
+
+
+
+  2. RocketMQ
+  #
+
+
+写入方式：
+
+顺序写&#43;索引：消息追加到CommitLog文件（顺序写），同时构建索引文件（ConsumeQueue）加速查询42。
+同步/异步刷盘：支持同步刷盘（强一致性）和异步刷盘（高性能）4243。
+事务消息：通过“半消息”机制实现分布式事务，先暂存消息，本地事务提交后再确认写入42。
+
+
+特点：
+
+兼顾高吞吐（10万级/秒）和功能完备性（延迟消息、事务支持）1628。
+适合电商、金融等业务场景142。
+
+
+
+
+
+  3. RabbitMQ
+  #
+
+
+写入方式：
+
+内存&#43;磁盘混合：默认优先写入内存，通过持久化队列（Durable Queue）将消息同步到磁盘128。
+Exchange路由：消息通过Exchange根据路由规则（Direct/Topic/Fanout）分发到队列116。
+
+
+特点：
+
+实时性高（微秒级延迟），但吞吐量较低（万级/秒）28。
+支持复杂路由和消息确认机制，适合中小规模业务116。
+
+
+
+
+
+  4. Pulsar
+  #
+
+
+写入方式：
+
+分层存储：消息先写入Broker的内存层，再异步持久化到BookKeeper集群（计算与存储分离）116。
+分片（Segment）存储：Topic分区划分为Segment，分散存储提高扩展性1。
+
+
+特点：
+
+支持秒级延迟消息和多租户，适合云原生和异地容灾场景116。
+吞吐量接近Kafka，但架构更复杂1。
+
+
+
+
+
+  5. ActiveMQ
+  #
+
+
+写入方式：
+
+内存/KahaDB/JDBC：默认KahaDB（基于日志的存储），支持JDBC持久化到数据库。
+同步刷盘可选：通过配置选择是否同步刷盘。
+
+
+特点：
+
+功能全面但吞吐量最低（万级/秒），适合传统企业应用28。
+社区活跃度低，逐渐被替代28。
+
+
+
+
+
+  对比总结
+  #
+
+
+  
+      
+          特性
+          Kafka
+          RocketMQ
+          RabbitMQ
+          Pulsar
+          ActiveMQ
+      
+  
+  
+      
+          写入性能
+          最高（顺序I/O&#43;批量）
+          高（顺序写&#43;索引）
+          低（内存优先）
+          高（分层存储）
+          最低
+      
+      
+          可靠性
+          异步刷盘可能丢数据
+          支持同步刷盘
+          依赖持久化配置
+          高（BookKeeper）
+          依赖配置
+      
+      
+          延迟消息
+          不支持
+          支持
+          支持（插件）
+          支持秒级
+          支持
+      
+      
+          适用场景
+          日志/大数据
+          电商/金融
+          中小规模业务
+          云原生/异地容灾
+          传统企业应用
+      
+  
+
+参考资料：115162842">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/llm/2025-03-30-4-%E4%B8%8D%E5%90%8C%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%B6%88%E6%81%AF%E5%86%99%E5%85%A5%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="不同消息队列消息写入方式对比">
+  <meta property="og:description" content="不同消息队列消息写入方式对比 # 以下是主流消息队列（Kafka、RocketMQ、RabbitMQ、Pulsar、ActiveMQ）在消息写入方式上的对比，结合性能、可靠性和适用场景进行综合分析：
+1. Kafka # 写入方式： 顺序追加写入：消息以追加（Append-only）方式写入分区日志文件，利用磁盘顺序I/O的高性能特性11528。 批量发送：生产者（Producer）将消息累积到批次（如1MB或100ms阈值）后批量发送，减少网络和磁盘I/O次数28。 异步刷盘：默认异步刷盘（依赖页缓存），通过参数可配置同步刷盘（牺牲性能换可靠性）28。 特点： 高吞吐（10万级/秒），适合日志、大数据场景115。 不支持延迟消息，仅保证分区内有序1628。 2. RocketMQ # 写入方式： 顺序写&#43;索引：消息追加到CommitLog文件（顺序写），同时构建索引文件（ConsumeQueue）加速查询42。 同步/异步刷盘：支持同步刷盘（强一致性）和异步刷盘（高性能）4243。 事务消息：通过“半消息”机制实现分布式事务，先暂存消息，本地事务提交后再确认写入42。 特点： 兼顾高吞吐（10万级/秒）和功能完备性（延迟消息、事务支持）1628。 适合电商、金融等业务场景142。 3. RabbitMQ # 写入方式： 内存&#43;磁盘混合：默认优先写入内存，通过持久化队列（Durable Queue）将消息同步到磁盘128。 Exchange路由：消息通过Exchange根据路由规则（Direct/Topic/Fanout）分发到队列116。 特点： 实时性高（微秒级延迟），但吞吐量较低（万级/秒）28。 支持复杂路由和消息确认机制，适合中小规模业务116。 4. Pulsar # 写入方式： 分层存储：消息先写入Broker的内存层，再异步持久化到BookKeeper集群（计算与存储分离）116。 分片（Segment）存储：Topic分区划分为Segment，分散存储提高扩展性1。 特点： 支持秒级延迟消息和多租户，适合云原生和异地容灾场景116。 吞吐量接近Kafka，但架构更复杂1。 5. ActiveMQ # 写入方式： 内存/KahaDB/JDBC：默认KahaDB（基于日志的存储），支持JDBC持久化到数据库。 同步刷盘可选：通过配置选择是否同步刷盘。 特点： 功能全面但吞吐量最低（万级/秒），适合传统企业应用28。 社区活跃度低，逐渐被替代28。 对比总结 # 特性 Kafka RocketMQ RabbitMQ Pulsar ActiveMQ 写入性能 最高（顺序I/O&#43;批量） 高（顺序写&#43;索引） 低（内存优先） 高（分层存储） 最低 可靠性 异步刷盘可能丢数据 支持同步刷盘 依赖持久化配置 高（BookKeeper） 依赖配置 延迟消息 不支持 支持 支持（插件） 支持秒级 支持 适用场景 日志/大数据 电商/金融 中小规模业务 云原生/异地容灾 传统企业应用 参考资料：115162842">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+<title>不同消息队列消息写入方式对比 | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/llm/2025-03-30-4-%E4%B8%8D%E5%90%8C%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%B6%88%E6%81%AF%E5%86%99%E5%85%A5%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +470,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -2056,7 +2205,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>不同消息队列消息写入方式对比</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2221,20 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#不同消息队列消息写入方式对比">不同消息队列消息写入方式对比</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-kafka">1. <strong>Kafka</strong></a></li>
+            <li><a href="#2-rocketmq">2. <strong>RocketMQ</strong></a></li>
+            <li><a href="#3-rabbitmq">3. <strong>RabbitMQ</strong></a></li>
+            <li><a href="#4-pulsar">4. <strong>Pulsar</strong></a></li>
+            <li><a href="#5-activemq">5. <strong>ActiveMQ</strong></a></li>
+            <li><a href="#对比总结"><strong>对比总结</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2247,160 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><h1 id="不同消息队列消息写入方式对比">
+  不同消息队列消息写入方式对比
+  <a class="anchor" href="#%e4%b8%8d%e5%90%8c%e6%b6%88%e6%81%af%e9%98%9f%e5%88%97%e6%b6%88%e6%81%af%e5%86%99%e5%85%a5%e6%96%b9%e5%bc%8f%e5%af%b9%e6%af%94">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<p>以下是主流消息队列（Kafka、RocketMQ、RabbitMQ、Pulsar、ActiveMQ）在消息写入方式上的对比，结合性能、可靠性和适用场景进行综合分析：</p>
+<hr>
+<h3 id="1-kafka">
+  1. <strong>Kafka</strong>
+  <a class="anchor" href="#1-kafka">#</a>
+</h3>
+<ul>
+<li><strong>写入方式</strong>：
+<ul>
+<li><strong>顺序追加写入</strong>：消息以追加（Append-only）方式写入分区日志文件，利用磁盘顺序I/O的高性能特性<a href="@ref">1</a><a href="@ref">15</a><a href="@ref">28</a>。</li>
+<li><strong>批量发送</strong>：生产者（Producer）将消息累积到批次（如1MB或100ms阈值）后批量发送，减少网络和磁盘I/O次数<a href="@ref">28</a>。</li>
+<li><strong>异步刷盘</strong>：默认异步刷盘（依赖页缓存），通过参数可配置同步刷盘（牺牲性能换可靠性）<a href="@ref">28</a>。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>高吞吐（10万级/秒），适合日志、大数据场景<a href="@ref">1</a><a href="@ref">15</a>。</li>
+<li>不支持延迟消息，仅保证分区内有序<a href="@ref">16</a><a href="@ref">28</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-rocketmq">
+  2. <strong>RocketMQ</strong>
+  <a class="anchor" href="#2-rocketmq">#</a>
+</h3>
+<ul>
+<li><strong>写入方式</strong>：
+<ul>
+<li><strong>顺序写+索引</strong>：消息追加到CommitLog文件（顺序写），同时构建索引文件（ConsumeQueue）加速查询<a href="@ref">42</a>。</li>
+<li><strong>同步/异步刷盘</strong>：支持同步刷盘（强一致性）和异步刷盘（高性能）<a href="@ref">42</a><a href="@ref">43</a>。</li>
+<li><strong>事务消息</strong>：通过“半消息”机制实现分布式事务，先暂存消息，本地事务提交后再确认写入<a href="@ref">42</a>。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>兼顾高吞吐（10万级/秒）和功能完备性（延迟消息、事务支持）<a href="@ref">16</a><a href="@ref">28</a>。</li>
+<li>适合电商、金融等业务场景<a href="@ref">1</a><a href="@ref">42</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-rabbitmq">
+  3. <strong>RabbitMQ</strong>
+  <a class="anchor" href="#3-rabbitmq">#</a>
+</h3>
+<ul>
+<li><strong>写入方式</strong>：
+<ul>
+<li><strong>内存+磁盘混合</strong>：默认优先写入内存，通过持久化队列（Durable Queue）将消息同步到磁盘<a href="@ref">1</a><a href="@ref">28</a>。</li>
+<li><strong>Exchange路由</strong>：消息通过Exchange根据路由规则（Direct/Topic/Fanout）分发到队列<a href="@ref">1</a><a href="@ref">16</a>。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>实时性高（微秒级延迟），但吞吐量较低（万级/秒）<a href="@ref">28</a>。</li>
+<li>支持复杂路由和消息确认机制，适合中小规模业务<a href="@ref">1</a><a href="@ref">16</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-pulsar">
+  4. <strong>Pulsar</strong>
+  <a class="anchor" href="#4-pulsar">#</a>
+</h3>
+<ul>
+<li><strong>写入方式</strong>：
+<ul>
+<li><strong>分层存储</strong>：消息先写入Broker的内存层，再异步持久化到BookKeeper集群（计算与存储分离）<a href="@ref">1</a><a href="@ref">16</a>。</li>
+<li><strong>分片（Segment）存储</strong>：Topic分区划分为Segment，分散存储提高扩展性<a href="@ref">1</a>。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>支持秒级延迟消息和多租户，适合云原生和异地容灾场景<a href="@ref">1</a><a href="@ref">16</a>。</li>
+<li>吞吐量接近Kafka，但架构更复杂<a href="@ref">1</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-activemq">
+  5. <strong>ActiveMQ</strong>
+  <a class="anchor" href="#5-activemq">#</a>
+</h3>
+<ul>
+<li><strong>写入方式</strong>：
+<ul>
+<li><strong>内存/KahaDB/JDBC</strong>：默认KahaDB（基于日志的存储），支持JDBC持久化到数据库。</li>
+<li><strong>同步刷盘可选</strong>：通过配置选择是否同步刷盘。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>功能全面但吞吐量最低（万级/秒），适合传统企业应用<a href="@ref">28</a>。</li>
+<li>社区活跃度低，逐渐被替代<a href="@ref">28</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="对比总结">
+  <strong>对比总结</strong>
+  <a class="anchor" href="#%e5%af%b9%e6%af%94%e6%80%bb%e7%bb%93">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>Kafka</th>
+          <th>RocketMQ</th>
+          <th>RabbitMQ</th>
+          <th>Pulsar</th>
+          <th>ActiveMQ</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>写入性能</strong></td>
+          <td>最高（顺序I/O+批量）</td>
+          <td>高（顺序写+索引）</td>
+          <td>低（内存优先）</td>
+          <td>高（分层存储）</td>
+          <td>最低</td>
+      </tr>
+      <tr>
+          <td><strong>可靠性</strong></td>
+          <td>异步刷盘可能丢数据</td>
+          <td>支持同步刷盘</td>
+          <td>依赖持久化配置</td>
+          <td>高（BookKeeper）</td>
+          <td>依赖配置</td>
+      </tr>
+      <tr>
+          <td><strong>延迟消息</strong></td>
+          <td>不支持</td>
+          <td>支持</td>
+          <td>支持（插件）</td>
+          <td>支持秒级</td>
+          <td>支持</td>
+      </tr>
+      <tr>
+          <td><strong>适用场景</strong></td>
+          <td>日志/大数据</td>
+          <td>电商/金融</td>
+          <td>中小规模业务</td>
+          <td>云原生/异地容灾</td>
+          <td>传统企业应用</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>参考资料</strong>：<a href="@ref">1</a><a href="@ref">15</a><a href="@ref">16</a><a href="@ref">28</a><a href="@ref">42</a></p>
 </article>
  
       
@@ -2098,12 +2409,6 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex flex-wrap justify-between">
 
-
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/eabc2f02d21d027c6d724b503a7ad98e923c63fb" title='Last modified by liuxiang | October 2, 2025' target="_blank" rel="noopener">
-      <img src="/svg/calendar.svg" class="book-icon" alt="" />
-      <span>October 2, 2025</span>
-    </a>
-  </div>
 
 
 
@@ -2137,7 +2442,20 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#不同消息队列消息写入方式对比">不同消息队列消息写入方式对比</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-kafka">1. <strong>Kafka</strong></a></li>
+            <li><a href="#2-rocketmq">2. <strong>RocketMQ</strong></a></li>
+            <li><a href="#3-rabbitmq">3. <strong>RabbitMQ</strong></a></li>
+            <li><a href="#4-pulsar">4. <strong>Pulsar</strong></a></li>
+            <li><a href="#5-activemq">5. <strong>ActiveMQ</strong></a></li>
+            <li><a href="#对比总结"><strong>对比总结</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

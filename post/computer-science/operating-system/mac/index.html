@@ -1,30 +1,279 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  mac
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+如何像极客一样使用你的Mac？分享下我的Mac工作流
+Setapp 车门焊死，你用的 app「平替」有哪些？
+
+
+  icloud
+  #
+
+
+文件APP不同步-iCloud云盘延迟同步解决方法
+
+killall bird
+killall cloudd
+
+
+
+
+  brew
+  #
+
+
+查看 brew 服务运行状态 brew services list
+
+
+  mysql
+  #
+
+
+启动 brew services start mysql@8.0
+使用命令行连接 mysql mysql -u root
+reference
+
+Macbook通过brew安装mysql8.0
+
+
+
+
+  mongodb
+  #
+
+
+mongodb 安装
+
+brew tap mongodb/brew
+brew update
+brew install mongodb-community@8.0
+
+
+启动 mongodb brew services start mongodb-community@8.0
+停止 mongodb brew services stop mongodb-community@8.0
+mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf
+
+
+  窗口管理
+  #
+
+
+  AltTab
+  #
+
+
+官网
+相比起系统自带的 command &#43; tab 它提供相同应用的窗口切换（例如浏览器打开了多个窗口，系统自带的是不能指定某一个窗口进行切换的）
+可以设置UI的样式，用列表的方式来展示窗口，文字设置的小一点
+
+
+  Yabai
+  #
+
+
+用Mac不用它，你的Mac白买了 —— 平铺式窗口管理器yabai
+
+
+  ffmpeg
+  #
+
+
+安装 brew install ffmpeg
+
+
+  postgresql
+  #
+
+
+Homebrew 安装 postgresql
+
+
+  yazi
+  #
+
+
+docs
+
+
+  git
+  #
+
+
+  lazygit
+  #
+
+
+jesseduffield/lazygit
+zen·工作环境搭建之git篇之Lazygit
+LazyGit 使用教程：简化 Git 操作的终端工具
+
+
+  yt-dlp
+  #
+
+
+yt-dlp/yt-dlp
+
+安装 brew install yt-dlp
+output-template
+
+
+
+yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4
+# 后台下载
+nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp;
+# 加上日期前缀
+yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4
+
+  player
+  #
+
+
+Mac下最好的视频播放器
+
+IINA
+
+
+
+
+  orbstack
+  #
+
+
+orbstack
+
+
+  skechybar
+  #
+
+
+skechybar
+
+install
+
+
+
+
+  homerow
+  #
+
+
+模拟点击
+
+
+  Hammerspoon
+  #
+
+
+脚本工具
+免费又强大的 macOS 自动化工具，Hammerspoon 可以让你少买很多 App
+HomePage
+
+
+  arc
+  #
+
+
+  dia
+  #
+
+
+  folo
+  #
+
+
+Folo: 你的一站式信息订阅平台（可同时订阅B站、油管、X等多个平台的博主）
+
+
+  reference
+  #
+
+
+如何评价Orbstack（在Mac上低开销地运行容器和Linux）？
+
+
+  登录虚拟机
+  #
+
+
+orb -m ubuntu -u xiangliu
+
+
+  disk
+  #
+
+
+DaisyDisk
+
+Hidden space 隐藏空间
+
+
+如何用命令弹出硬盘
+
+查询硬盘挂载路径 df -h
+取消挂载 diskutil unmount xxxxx
+
+
+transmit 文件传输工具
+
+
+  Raycast
+  #
+
+
+最强macOS生产力软件：Raycast
+
+
+  AeroSpace
+  #
+
+
+我用AeroSpace替代了yabai&#43;skhd
+
+
+  Apple Music
+  #
+
+
+一日一技 | 如何用命令行将音乐转码到 iTunes Plus AAC
+
+
+  battery
+  #
+
+
+Powerflow：轻巧好用的 macOS 电源与充电状态监控神器
+vladkens/macmon
+altente
+
+
+  mac 上抓取应用的https的包
+  #
+
+在Mac上抓取应用的HTTPS流量，你需要使用网络分析工具，如Wireshark、Charles Proxy或MITMproxy。由于HTTPS加密了数据传输，直接抓包无法查看具体内容，因此通常需要设置一个代理服务器来进行中间人攻击（Man-in-the-Middle, MITM）来解密和检查HTTPS流量。">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/operating-system/mac/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="mac">
+  <meta property="og:description" content="mac # 如何像极客一样使用你的Mac？分享下我的Mac工作流 Setapp 车门焊死，你用的 app「平替」有哪些？ icloud # 文件APP不同步-iCloud云盘延迟同步解决方法 killall bird killall cloudd brew # 查看 brew 服务运行状态 brew services list mysql # 启动 brew services start mysql@8.0 使用命令行连接 mysql mysql -u root reference Macbook通过brew安装mysql8.0 mongodb # mongodb 安装 brew tap mongodb/brew brew update brew install mongodb-community@8.0 启动 mongodb brew services start mongodb-community@8.0 停止 mongodb brew services stop mongodb-community@8.0 mongodb 配置文件位置 vim /opt/homebrew/etc/mongod.conf 窗口管理 # AltTab # 官网 相比起系统自带的 command &#43; tab 它提供相同应用的窗口切换（例如浏览器打开了多个窗口，系统自带的是不能指定某一个窗口进行切换的） 可以设置UI的样式，用列表的方式来展示窗口，文字设置的小一点 Yabai # 用Mac不用它，你的Mac白买了 —— 平铺式窗口管理器yabai ffmpeg # 安装 brew install ffmpeg postgresql # Homebrew 安装 postgresql yazi # docs git # lazygit # jesseduffield/lazygit zen·工作环境搭建之git篇之Lazygit LazyGit 使用教程：简化 Git 操作的终端工具 yt-dlp # yt-dlp/yt-dlp 安装 brew install yt-dlp output-template yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 # 后台下载 nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp; # 加上日期前缀 yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 player # Mac下最好的视频播放器 IINA orbstack # orbstack skechybar # skechybar install homerow # 模拟点击 Hammerspoon # 脚本工具 免费又强大的 macOS 自动化工具，Hammerspoon 可以让你少买很多 App HomePage arc # dia # folo # Folo: 你的一站式信息订阅平台（可同时订阅B站、油管、X等多个平台的博主） reference # 如何评价Orbstack（在Mac上低开销地运行容器和Linux）？ 登录虚拟机 # orb -m ubuntu -u xiangliu disk # DaisyDisk Hidden space 隐藏空间 如何用命令弹出硬盘 查询硬盘挂载路径 df -h 取消挂载 diskutil unmount xxxxx transmit 文件传输工具 Raycast # 最强macOS生产力软件：Raycast AeroSpace # 我用AeroSpace替代了yabai&#43;skhd Apple Music # 一日一技 | 如何用命令行将音乐转码到 iTunes Plus AAC battery # Powerflow：轻巧好用的 macOS 电源与充电状态监控神器 vladkens/macmon altente mac 上抓取应用的https的包 # 在Mac上抓取应用的HTTPS流量，你需要使用网络分析工具，如Wireshark、Charles Proxy或MITMproxy。由于HTTPS加密了数据传输，直接抓包无法查看具体内容，因此通常需要设置一个代理服务器来进行中间人攻击（Man-in-the-Middle, MITM）来解密和检查HTTPS流量。">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>mac | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/operating-system/mac/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +570,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1304,7 +1553,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-08034345c59b2d801c96d3235471b850" class="toggle"  />
+    <input type="checkbox" id="section-08034345c59b2d801c96d3235471b850" class="toggle" checked />
     <label for="section-08034345c59b2d801c96d3235471b850" class="flex justify-between">
       <a role="button" class="">Operating System</a>
     </label>
@@ -1346,7 +1595,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/mac/" class="">mac</a>
+    <a href="/post/computer-science/operating-system/mac/" class="active">mac</a>
   
 
         </li>
@@ -2056,7 +2305,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>mac</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2321,59 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#mac">mac</a>
+      <ul>
+        <li><a href="#icloud">icloud</a></li>
+        <li><a href="#brew">brew</a></li>
+        <li><a href="#mysql">mysql</a></li>
+        <li><a href="#mongodb">mongodb</a></li>
+        <li><a href="#窗口管理">窗口管理</a>
+          <ul>
+            <li><a href="#alttab">AltTab</a></li>
+            <li><a href="#yabai">Yabai</a></li>
+          </ul>
+        </li>
+        <li><a href="#ffmpeg">ffmpeg</a></li>
+        <li><a href="#postgresql">postgresql</a></li>
+        <li><a href="#yazi">yazi</a></li>
+        <li><a href="#git">git</a>
+          <ul>
+            <li><a href="#lazygit">lazygit</a></li>
+          </ul>
+        </li>
+        <li><a href="#yt-dlp">yt-dlp</a></li>
+        <li><a href="#player">player</a></li>
+        <li><a href="#orbstack">orbstack</a></li>
+        <li><a href="#skechybar">skechybar</a></li>
+        <li><a href="#homerow">homerow</a></li>
+        <li><a href="#hammerspoon">Hammerspoon</a></li>
+        <li><a href="#arc">arc</a></li>
+        <li><a href="#dia">dia</a></li>
+        <li><a href="#folo">folo</a></li>
+        <li><a href="#reference">reference</a>
+          <ul>
+            <li><a href="#登录虚拟机">登录虚拟机</a></li>
+          </ul>
+        </li>
+        <li><a href="#disk">disk</a></li>
+        <li><a href="#raycast">Raycast</a></li>
+        <li><a href="#aerospace">AeroSpace</a></li>
+        <li><a href="#apple-music">Apple Music</a></li>
+        <li><a href="#battery">battery</a></li>
+        <li><a href="#mac-上抓取应用的https的包">mac 上抓取应用的https的包</a>
+          <ul>
+            <li><a href="#charles">charles</a></li>
+          </ul>
+        </li>
+        <li><a href="#tools">tools</a>
+          <ul>
+            <li><a href="#neofetch">neofetch</a></li>
+          </ul>
+        </li>
+        <li><a href="#mess">mess</a></li>
+        <li><a href="#questions">questions</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2386,373 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><h1 id="mac">
+  mac
+  <a class="anchor" href="#mac">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1Yq8tzdEPU">如何像极客一样使用你的Mac？分享下我的Mac工作流</a></li>
+<li><a href="https://sspai.com/post/101914">Setapp 车门焊死，你用的 app「平替」有哪些？</a></li>
+</ul>
+<h2 id="icloud">
+  icloud
+  <a class="anchor" href="#icloud">#</a>
+</h2>
+<ul>
+<li><a href="https://discussionschinese.apple.com/docs/DOC-250005778">文件APP不同步-iCloud云盘延迟同步解决方法</a>
+<ul>
+<li><code>killall bird</code></li>
+<li><code>killall cloudd</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="brew">
+  brew
+  <a class="anchor" href="#brew">#</a>
+</h2>
+<ul>
+<li>查看 brew 服务运行状态 <code>brew services list</code></li>
+</ul>
+<h2 id="mysql">
+  mysql
+  <a class="anchor" href="#mysql">#</a>
+</h2>
+<ul>
+<li>启动 <code>brew services start mysql@8.0</code></li>
+<li>使用命令行连接 mysql <code>mysql -u root</code></li>
+<li>reference
+<ul>
+<li><a href="https://cloud.tencent.com/developer/article/2433053">Macbook通过brew安装mysql8.0</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="mongodb">
+  mongodb
+  <a class="anchor" href="#mongodb">#</a>
+</h2>
+<ul>
+<li>mongodb 安装
+<ul>
+<li><code>brew tap mongodb/brew</code></li>
+<li><code>brew update</code></li>
+<li><code>brew install mongodb-community@8.0</code></li>
+</ul>
+</li>
+<li>启动 mongodb <code>brew services start mongodb-community@8.0</code></li>
+<li>停止 mongodb <code>brew services stop mongodb-community@8.0</code></li>
+<li>mongodb 配置文件位置 <code>vim /opt/homebrew/etc/mongod.conf</code></li>
+</ul>
+<h2 id="窗口管理">
+  窗口管理
+  <a class="anchor" href="#%e7%aa%97%e5%8f%a3%e7%ae%a1%e7%90%86">#</a>
+</h2>
+<h3 id="alttab">
+  AltTab
+  <a class="anchor" href="#alttab">#</a>
+</h3>
+<ul>
+<li><a href="https://alt-tab-macos.netlify.app/">官网</a></li>
+<li>相比起系统自带的 <code>command + tab</code> 它提供相同应用的窗口切换（例如浏览器打开了多个窗口，系统自带的是不能指定某一个窗口进行切换的）</li>
+<li>可以设置UI的样式，用列表的方式来展示窗口，文字设置的小一点</li>
+</ul>
+<h3 id="yabai">
+  Yabai
+  <a class="anchor" href="#yabai">#</a>
+</h3>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1sW4y1R7yJ">用Mac不用它，你的Mac白买了 —— 平铺式窗口管理器yabai</a></li>
+</ul>
+<h2 id="ffmpeg">
+  ffmpeg
+  <a class="anchor" href="#ffmpeg">#</a>
+</h2>
+<ul>
+<li>安装 <code>brew install ffmpeg</code></li>
+</ul>
+<h2 id="postgresql">
+  postgresql
+  <a class="anchor" href="#postgresql">#</a>
+</h2>
+<ul>
+<li><a href="https://wiki.postgresql.org/wiki/Homebrew">Homebrew 安装 postgresql</a></li>
+</ul>
+<h2 id="yazi">
+  yazi
+  <a class="anchor" href="#yazi">#</a>
+</h2>
+<ul>
+<li><a href="https://yazi-rs.github.io/docs/installation/">docs</a></li>
+</ul>
+<h2 id="git">
+  git
+  <a class="anchor" href="#git">#</a>
+</h2>
+<h3 id="lazygit">
+  lazygit
+  <a class="anchor" href="#lazygit">#</a>
+</h3>
+<ul>
+<li><a href="https://github.com/jesseduffield/lazygit">jesseduffield/lazygit</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/586776869">zen·工作环境搭建之git篇之Lazygit</a></li>
+<li><a href="https://awesometop.cn/posts/2e318106490149a49c02268da48dd370">LazyGit 使用教程：简化 Git 操作的终端工具</a></li>
+</ul>
+<h2 id="yt-dlp">
+  yt-dlp
+  <a class="anchor" href="#yt-dlp">#</a>
+</h2>
+<ul>
+<li><a href="https://github.com/yt-dlp/yt-dlp">yt-dlp/yt-dlp</a>
+<ul>
+<li>安装 <code>brew install yt-dlp</code></li>
+<li><a href="https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#output-template">output-template</a></li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code>yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4
+# 后台下载
+nohup yt-dlp -N 20 https://www.youtube.com/@xiaodaodalang --merge-output-format mp4 &amp;
+# 加上日期前缀
+yt-dlp -N 20 -o &#34;%(upload_date&gt;%Y-%m-%d)s-%(title)s.%(ext)s&#34; https://www.youtube.com/@xiaodaodalang --merge-output-format mp4
+</code></pre><h2 id="player">
+  player
+  <a class="anchor" href="#player">#</a>
+</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/402743090">Mac下最好的视频播放器</a>
+<ul>
+<li><a href="https://iina.io">IINA</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="orbstack">
+  orbstack
+  <a class="anchor" href="#orbstack">#</a>
+</h2>
+<ul>
+<li><a href="https://orbstack.dev/">orbstack</a></li>
+</ul>
+<h2 id="skechybar">
+  skechybar
+  <a class="anchor" href="#skechybar">#</a>
+</h2>
+<ul>
+<li><a href="https://github.com/FelixKratz/SketchyBar">skechybar</a>
+<ul>
+<li><a href="https://felixkratz.github.io/SketchyBar/setup">install</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="homerow">
+  homerow
+  <a class="anchor" href="#homerow">#</a>
+</h2>
+<ul>
+<li>模拟点击</li>
+</ul>
+<h2 id="hammerspoon">
+  Hammerspoon
+  <a class="anchor" href="#hammerspoon">#</a>
+</h2>
+<ul>
+<li>脚本工具</li>
+<li><a href="https://sspai.com/post/53992">免费又强大的 macOS 自动化工具，Hammerspoon 可以让你少买很多 App</a></li>
+<li><a href="http://www.hammerspoon.org/">HomePage</a></li>
+</ul>
+<h2 id="arc">
+  arc
+  <a class="anchor" href="#arc">#</a>
+</h2>
+<h2 id="dia">
+  dia
+  <a class="anchor" href="#dia">#</a>
+</h2>
+<h2 id="folo">
+  folo
+  <a class="anchor" href="#folo">#</a>
+</h2>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1jvNnzmEin">Folo: 你的一站式信息订阅平台（可同时订阅B站、油管、X等多个平台的博主）</a></li>
+</ul>
+<h2 id="reference">
+  reference
+  <a class="anchor" href="#reference">#</a>
+</h2>
+<ul>
+<li><a href="https://www.zhihu.com/question/589301822">如何评价Orbstack（在Mac上低开销地运行容器和Linux）？</a></li>
+</ul>
+<h3 id="登录虚拟机">
+  登录虚拟机
+  <a class="anchor" href="#%e7%99%bb%e5%bd%95%e8%99%9a%e6%8b%9f%e6%9c%ba">#</a>
+</h3>
+<ul>
+<li><code>orb -m ubuntu -u xiangliu</code></li>
+</ul>
+<h2 id="disk">
+  disk
+  <a class="anchor" href="#disk">#</a>
+</h2>
+<ul>
+<li><a href="https://www.mac618.com/795.html#J_DLIPPCont">DaisyDisk</a>
+<ul>
+<li><a href="https://daisydiskapp.com/manual?source=HiddenSpace&amp;appVersion=4.26.1&amp;lang=en&amp;subtopic=StillHiddenSpace&amp;osVersion=14.6.0&amp;topic=HiddenSpace&amp;appEdition=Standard">Hidden space 隐藏空间</a></li>
+</ul>
+</li>
+<li>如何用命令弹出硬盘
+<ul>
+<li>查询硬盘挂载路径 <code>df -h</code></li>
+<li>取消挂载 <code>diskutil unmount xxxxx</code></li>
+</ul>
+</li>
+<li>transmit 文件传输工具</li>
+</ul>
+<h2 id="raycast">
+  Raycast
+  <a class="anchor" href="#raycast">#</a>
+</h2>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1Uo4y137XH">最强macOS生产力软件：Raycast</a></li>
+</ul>
+<h2 id="aerospace">
+  AeroSpace
+  <a class="anchor" href="#aerospace">#</a>
+</h2>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1kBqFYqEzo">我用AeroSpace替代了yabai+skhd</a></li>
+</ul>
+<h2 id="apple-music">
+  Apple Music
+  <a class="anchor" href="#apple-music">#</a>
+</h2>
+<ul>
+<li><a href="https://sspai.com/post/101340">一日一技 | 如何用命令行将音乐转码到 iTunes Plus AAC</a></li>
+</ul>
+<h2 id="battery">
+  battery
+  <a class="anchor" href="#battery">#</a>
+</h2>
+<ul>
+<li><a href="https://www.sysgeek.cn/powerflow-for-mac/#google_vignette">Powerflow：轻巧好用的 macOS 电源与充电状态监控神器</a></li>
+<li><a href="https://github.com/vladkens/macmon">vladkens/macmon</a></li>
+<li><a href="https://apphousekitchen.com/aldente-overview">altente</a></li>
+</ul>
+<h2 id="mac-上抓取应用的https的包">
+  mac 上抓取应用的https的包
+  <a class="anchor" href="#mac-%e4%b8%8a%e6%8a%93%e5%8f%96%e5%ba%94%e7%94%a8%e7%9a%84https%e7%9a%84%e5%8c%85">#</a>
+</h2>
+<p>在Mac上抓取应用的HTTPS流量，你需要使用网络分析工具，如Wireshark、Charles Proxy或MITMproxy。由于HTTPS加密了数据传输，直接抓包无法查看具体内容，因此通常需要设置一个代理服务器来进行中间人攻击（Man-in-the-Middle, MITM）来解密和检查HTTPS流量。</p>
+<p>以下是使用Charles Proxy作为例子来说明如何进行HTTPS流量的抓取：</p>
+<ol>
+<li>
+<p><strong>安装Charles Proxy</strong>:</p>
+<ul>
+<li>下载并安装Charles Proxy应用程序到你的Mac电脑上。</li>
+</ul>
+</li>
+<li>
+<p><strong>配置Charles SSL代理</strong>:</p>
+<ul>
+<li>打开Charles，前往<code>Proxy</code> -&gt; <code>SSL Proxying Settings</code>。</li>
+<li>在<code>SSL Proxying</code>标签中点击<code>Enable SSL Proxying</code>。</li>
+<li>添加你想要监控的应用程序使用的域名端口对，例如对于大多数Web流量是443端口。</li>
+</ul>
+</li>
+<li>
+<p><strong>安装Charles的SSL证书</strong>:</p>
+<ul>
+<li>为了让Charles能够解密HTTPS流量，你需要信任它的SSL证书。</li>
+<li>在Charles中前往<code>Help</code> -&gt; <code>SSL Proxying</code> -&gt; <code>Install Charles Root Certificate</code>。</li>
+<li>按照提示完成证书安装，并确保系统信任此证书。</li>
+</ul>
+</li>
+<li>
+<p><strong>配置设备或应用以使用Charles代理</strong>:</p>
+<ul>
+<li>如果你想抓取的是Mac本地应用的流量，你需要配置该应用使用Charles作为HTTP/HTTPS代理。</li>
+<li>对于某些应用程序，这可能需要更改系统的网络设置，或者在应用内部设置代理服务器地址为<code>localhost</code>或<code>127.0.0.1</code>，端口号通常是8888（默认的Charles监听端口）。</li>
+<li>如果是移动设备上的应用，你需要设置设备的Wi-Fi连接使用手动HTTP代理指向运行Charles的Mac的局域网IP地址和端口。</li>
+</ul>
+</li>
+<li>
+<p><strong>开始抓包</strong>:</p>
+<ul>
+<li>现在你可以启动目标应用程序并开始与它交互，所有的HTTPS流量应该会通过Charles被截获，并且如果你正确设置了SSL代理，你应该能看到解密后的流量。</li>
+</ul>
+</li>
+<li>
+<p><strong>过滤和分析流量</strong>:</p>
+<ul>
+<li>使用Charles提供的过滤器和搜索功能来定位你感兴趣的特定请求和响应。</li>
+</ul>
+</li>
+</ol>
+<p>请注意，抓取和解密HTTPS流量可能涉及到隐私问题以及违反服务条款的风险。务必确保你有合法的权利去监视和分析这些流量。如果你是在测试自己的应用，确保遵循公司的政策和法律要求。如果你试图分析第三方应用的流量，请确保你有权这样做。</p>
+<h3 id="charles">
+  charles
+  <a class="anchor" href="#charles">#</a>
+</h3>
+<ul>
+<li><a href="https://cloud.tencent.com/developer/article/1731184">Mac使用Charles进行HTTPS抓包</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/2016392">高颜值抓包工具Charles，实现Mac和IOS端抓取https请求</a></li>
+<li><a href="https://charlesdocsy.com/2020/05/05/configure-charles-proxy-root-certificate-on-mac/">Configure Charles Root certificate on Mac</a>
+<ul>
+<li>需要在keychains里信任证书</li>
+</ul>
+</li>
+<li><a href="https://stackoverflow.com/questions/52862256/charles-proxy-for-mobile-apps-that-use-ssl-pinning">Charles Proxy for Mobile apps that use SSL Pinning</a></li>
+<li><a href="https://www.appknox.com/blog/bypass-ssl-pinning-in-ios-app">8 Ways to Bypass SSL Pinning in iOS</a></li>
+</ul>
+<h2 id="tools">
+  tools
+  <a class="anchor" href="#tools">#</a>
+</h2>
+<h3 id="neofetch">
+  neofetch
+  <a class="anchor" href="#neofetch">#</a>
+</h3>
+<ul>
+<li>mac 安装 <code>brew install neofetch</code></li>
+<li>ubuntu 安装 <code>sudo apt install neofetch</code></li>
+</ul>
+<h2 id="mess">
+  mess
+  <a class="anchor" href="#mess">#</a>
+</h2>
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1jWwhe1Ekw">我的Mac效率设置和软件（2024）</a></li>
+<li><a href="https://www.v1tx.com/post/best-mac-system-monitor/">10款好用的Mac系统监控软件推荐</a></li>
+<li><a href="https://www.bilibili.com/video/BV17PgNzHERm">建模太阳磁场、运行本地大模型！为什么学生都爱用Macbook Air？</a></li>
+<li><a href="https://github.com/Lakr233/MobileTransfer">Lakr233/MobileTransfer</a>
+<ul>
+<li>MobileTransfer is an app operating on MobileBackup (idevicebackup2). It offers a way to backup and restore data on iOS devices.</li>
+</ul>
+</li>
+<li><a href="https://github.com/Lakr233/BBackupp">Lakr233/BBackupp</a>
+<ul>
+<li>Back up your iOS devices the way it&rsquo;s meant to be done.</li>
+</ul>
+</li>
+</ul>
+<h2 id="questions">
+  questions
+  <a class="anchor" href="#questions">#</a>
+</h2>
+<ul>
+<li>2024-11-15 指纹识别及录入问题
+<ul>
+<li><a href="https://discussionschinese.apple.com/thread/252333633?sortBy=rank">M1 macbookPro 指纹不是识别及其慢就是识别不了，没有反应</a></li>
+<li>电脑插电会有影响，不插电指纹功能是正常的</li>
+</ul>
+</li>
+<li>2025-02-08
+<ul>
+<li><a href="https://apple.stackexchange.com/questions/346091/is-there-a-way-to-download-screen-time-data-from-iphone-or-other-apple-devices">Is there a way to download Screen Time data from iPhone or other Apple devices?</a>
+<ul>
+<li><a href="https://timingapp.com">Timing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -2137,7 +2800,59 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#mac">mac</a>
+      <ul>
+        <li><a href="#icloud">icloud</a></li>
+        <li><a href="#brew">brew</a></li>
+        <li><a href="#mysql">mysql</a></li>
+        <li><a href="#mongodb">mongodb</a></li>
+        <li><a href="#窗口管理">窗口管理</a>
+          <ul>
+            <li><a href="#alttab">AltTab</a></li>
+            <li><a href="#yabai">Yabai</a></li>
+          </ul>
+        </li>
+        <li><a href="#ffmpeg">ffmpeg</a></li>
+        <li><a href="#postgresql">postgresql</a></li>
+        <li><a href="#yazi">yazi</a></li>
+        <li><a href="#git">git</a>
+          <ul>
+            <li><a href="#lazygit">lazygit</a></li>
+          </ul>
+        </li>
+        <li><a href="#yt-dlp">yt-dlp</a></li>
+        <li><a href="#player">player</a></li>
+        <li><a href="#orbstack">orbstack</a></li>
+        <li><a href="#skechybar">skechybar</a></li>
+        <li><a href="#homerow">homerow</a></li>
+        <li><a href="#hammerspoon">Hammerspoon</a></li>
+        <li><a href="#arc">arc</a></li>
+        <li><a href="#dia">dia</a></li>
+        <li><a href="#folo">folo</a></li>
+        <li><a href="#reference">reference</a>
+          <ul>
+            <li><a href="#登录虚拟机">登录虚拟机</a></li>
+          </ul>
+        </li>
+        <li><a href="#disk">disk</a></li>
+        <li><a href="#raycast">Raycast</a></li>
+        <li><a href="#aerospace">AeroSpace</a></li>
+        <li><a href="#apple-music">Apple Music</a></li>
+        <li><a href="#battery">battery</a></li>
+        <li><a href="#mac-上抓取应用的https的包">mac 上抓取应用的https的包</a>
+          <ul>
+            <li><a href="#charles">charles</a></li>
+          </ul>
+        </li>
+        <li><a href="#tools">tools</a>
+          <ul>
+            <li><a href="#neofetch">neofetch</a></li>
+          </ul>
+        </li>
+        <li><a href="#mess">mess</a></li>
+        <li><a href="#questions">questions</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

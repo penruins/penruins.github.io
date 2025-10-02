@@ -1,30 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  Jenkins
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+docs
+
+docker
+macOS
+
+macOS Installer for Jenkins LTS
+
+Install the latest LTS version: brew install jenkins-lts
+Start the Jenkins service: brew services start jenkins-lts
+Restart the Jenkins service: brew services restart jenkins-lts
+Update the Jenkins version: brew upgrade jenkins-lts
+
+
+
+
+Using Jenkins
+
+
+
+
+  password
+  #
+
+
+jenkins publish over SSH中SSH sever密码存放位置
+记录 从jenkins配置文件中解密密码
+
+
+  reference
+  #
+
+
+在Jenkins中拉取GitHub上的代码包（超详细)
+jenkins配置全局凭据 结合gitlab
+jenkins部署github项目
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/ci-cd/jenkins/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="Jenkins">
+  <meta property="og:description" content="Jenkins # docs docker macOS macOS Installer for Jenkins LTS Install the latest LTS version: brew install jenkins-lts Start the Jenkins service: brew services start jenkins-lts Restart the Jenkins service: brew services restart jenkins-lts Update the Jenkins version: brew upgrade jenkins-lts Using Jenkins password # jenkins publish over SSH中SSH sever密码存放位置 记录 从jenkins配置文件中解密密码 reference # 在Jenkins中拉取GitHub上的代码包（超详细) jenkins配置全局凭据 结合gitlab jenkins部署github项目">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>Jenkins | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/ci-cd/jenkins/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +357,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1439,7 +1475,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-91cda33c3f083dc425de7b0831dd4a4b" class="toggle"  />
+    <input type="checkbox" id="section-91cda33c3f083dc425de7b0831dd4a4b" class="toggle" checked />
     <label for="section-91cda33c3f083dc425de7b0831dd4a4b" class="flex justify-between">
       <a role="button" class="">CI/CD</a>
     </label>
@@ -1468,7 +1504,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/jenkins/" class="">Jenkins</a>
+    <a href="/post/computer-science/ci-cd/jenkins/" class="active">Jenkins</a>
   
 
         </li>
@@ -2056,7 +2092,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>Jenkins</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2108,12 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#jenkins">Jenkins</a>
+      <ul>
+        <li><a href="#password">password</a></li>
+        <li><a href="#reference">reference</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2126,47 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><h1 id="jenkins">
+  Jenkins
+  <a class="anchor" href="#jenkins">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<ul>
+<li><a href="https://www.jenkins.io/doc/book/installing/">docs</a>
+<ul>
+<li><a href="https://www.jenkins.io/doc/book/installing/docker/">docker</a></li>
+<li><a href="https://www.jenkins.io/doc/book/installing/macos/">macOS</a>
+<ul>
+<li><a href="https://www.jenkins.io/download/lts/macos/">macOS Installer for Jenkins LTS</a>
+<ul>
+<li>Install the latest LTS version: <code>brew install jenkins-lts</code></li>
+<li>Start the Jenkins service: <code>brew services start jenkins-lts</code></li>
+<li>Restart the Jenkins service: <code>brew services restart jenkins-lts</code></li>
+<li>Update the Jenkins version: <code>brew upgrade jenkins-lts</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://www.jenkins.io/doc/book/using/">Using Jenkins</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="password">
+  password
+  <a class="anchor" href="#password">#</a>
+</h2>
+<ul>
+<li><a href="https://ask.csdn.net/questions/4645065">jenkins publish over SSH中SSH sever密码存放位置</a></li>
+<li><a href="https://blog.csdn.net/qq_27156945/article/details/108083342">记录 从jenkins配置文件中解密密码</a></li>
+</ul>
+<h2 id="reference">
+  reference
+  <a class="anchor" href="#reference">#</a>
+</h2>
+<ul>
+<li><a href="https://blog.csdn.net/shuang_waiwai/article/details/121124203">在Jenkins中拉取GitHub上的代码包（超详细)</a></li>
+<li><a href="https://blog.csdn.net/u012045045/article/details/107126372">jenkins配置全局凭据 结合gitlab</a></li>
+<li><a href="https://www.cnblogs.com/dingshaohua/p/16458325.html">jenkins部署github项目</a></li>
+</ul>
 </article>
  
       
@@ -2137,7 +2214,12 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#jenkins">Jenkins</a>
+      <ul>
+        <li><a href="#password">password</a></li>
+        <li><a href="#reference">reference</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

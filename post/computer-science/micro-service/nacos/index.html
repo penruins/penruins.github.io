@@ -1,30 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  关于 Nacos 配置更新后避免 HikariCP 连接断开的问题
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+  解决方案
+  #
+
+
+  使用 @RefreshScope(proxyMode = ScopedProxyMode.NO) 排除数据源
+  #
+
+@Configuration
+@RefreshScope(proxyMode = ScopedProxyMode.NO)
+public class DataSourceConfig {
+    // 数据源配置
+}
+
+  自定义 RefreshScope 排除数据源相关配置
+  #
+
+@Bean
+public RefreshScope refreshScope() {
+    RefreshScope scope = new RefreshScope();
+    scope.setExcludeNames(new String[]{&#34;dataSource&#34;, &#34;hikariDataSource&#34;});
+    return scope;
+}
+
+  在 bootstrap.yml 中排除特定配置的刷新
+  #
+
+spring:
+  cloud:
+    nacos:
+      config:
+        refresh-enabled: true
+        refreshable-data-sources: none # 不刷新数据源配置
+
+  使用 @RefreshScope 但不刷新数据源
+  #
+
+@Bean
+@ConfigurationProperties(prefix = &#34;spring.datasource.hikari&#34;)
+@RefreshScope(proxyMode = ScopedProxyMode.NO)
+public HikariDataSource dataSource() {
+    return DataSourceBuilder.create().type(HikariDataSource.class).build();
+}
+
+  最佳实践
+  #
+
+
+分离配置：将数据库配置和其他频繁变动的配置分开，放在不同的配置文件中
+版本控制：对数据库配置的修改应该通过版本控制和应用重启来完成，而不是热更新
+监控：即使解决了这个问题，也应该监控数据库连接池状态
+
+
+  注意事项
+  #
+
+
+这些解决方案可能会因 Spring Boot/Cloud 版本不同而有所差异
+在生产环境实施前应在测试环境充分验证
+如果确实需要动态修改数据库配置，建议使用更优雅的方式如多数据源切换
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/micro-service/nacos/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:description" content="关于 Nacos 配置更新后避免 HikariCP 连接断开的问题 # 解决方案 # 使用 @RefreshScope(proxyMode = ScopedProxyMode.NO) 排除数据源 # @Configuration @RefreshScope(proxyMode = ScopedProxyMode.NO) public class DataSourceConfig { // 数据源配置 } 自定义 RefreshScope 排除数据源相关配置 # @Bean public RefreshScope refreshScope() { RefreshScope scope = new RefreshScope(); scope.setExcludeNames(new String[]{&#34;dataSource&#34;, &#34;hikariDataSource&#34;}); return scope; } 在 bootstrap.yml 中排除特定配置的刷新 # spring: cloud: nacos: config: refresh-enabled: true refreshable-data-sources: none # 不刷新数据源配置 使用 @RefreshScope 但不刷新数据源 # @Bean @ConfigurationProperties(prefix = &#34;spring.datasource.hikari&#34;) @RefreshScope(proxyMode = ScopedProxyMode.NO) public HikariDataSource dataSource() { return DataSourceBuilder.create().type(HikariDataSource.class).build(); } 最佳实践 # 分离配置：将数据库配置和其他频繁变动的配置分开，放在不同的配置文件中 版本控制：对数据库配置的修改应该通过版本控制和应用重启来完成，而不是热更新 监控：即使解决了这个问题，也应该监控数据库连接池状态 注意事项 # 这些解决方案可能会因 Spring Boot/Cloud 版本不同而有所差异 在生产环境实施前应在测试环境充分验证 如果确实需要动态修改数据库配置，建议使用更优雅的方式如多数据源切换">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>Nacos | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/micro-service/nacos/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +381,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1257,7 +1317,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-268cb37854ca4d21d8c728981f1239bc" class="toggle"  />
+    <input type="checkbox" id="section-268cb37854ca4d21d8c728981f1239bc" class="toggle" checked />
     <label for="section-268cb37854ca4d21d8c728981f1239bc" class="flex justify-between">
       <a role="button" class="">Micro Service</a>
     </label>
@@ -1273,7 +1333,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/micro-service/nacos/" class="">Nacos</a>
+    <a href="/post/computer-science/micro-service/nacos/" class="active">Nacos</a>
   
 
         </li>
@@ -2056,7 +2116,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>Nacos</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2132,20 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#关于-nacos-配置更新后避免-hikaricp-连接断开的问题">关于 Nacos 配置更新后避免 HikariCP 连接断开的问题</a>
+      <ul>
+        <li><a href="#解决方案">解决方案</a>
+          <ul>
+            <li><a href="#使用-refreshscopeproxymode--scopedproxymodeno-排除数据源">使用 <code>@RefreshScope(proxyMode = ScopedProxyMode.NO)</code> 排除数据源</a></li>
+            <li><a href="#自定义-refreshscope-排除数据源相关配置">自定义 RefreshScope 排除数据源相关配置</a></li>
+            <li><a href="#在-bootstrapyml-中排除特定配置的刷新">在 bootstrap.yml 中排除特定配置的刷新</a></li>
+            <li><a href="#使用-refreshscope-但不刷新数据源">使用 <code>@RefreshScope</code> 但不刷新数据源</a></li>
+          </ul>
+        </li>
+        <li><a href="#最佳实践">最佳实践</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2158,71 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><h1 id="关于-nacos-配置更新后避免-hikaricp-连接断开的问题">
+  关于 Nacos 配置更新后避免 HikariCP 连接断开的问题
+  <a class="anchor" href="#%e5%85%b3%e4%ba%8e-nacos-%e9%85%8d%e7%bd%ae%e6%9b%b4%e6%96%b0%e5%90%8e%e9%81%bf%e5%85%8d-hikaricp-%e8%bf%9e%e6%8e%a5%e6%96%ad%e5%bc%80%e7%9a%84%e9%97%ae%e9%a2%98">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<h2 id="解决方案">
+  解决方案
+  <a class="anchor" href="#%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88">#</a>
+</h2>
+<h3 id="使用-refreshscopeproxymode--scopedproxymodeno-排除数据源">
+  使用 <code>@RefreshScope(proxyMode = ScopedProxyMode.NO)</code> 排除数据源
+  <a class="anchor" href="#%e4%bd%bf%e7%94%a8-refreshscopeproxymode--scopedproxymodeno-%e6%8e%92%e9%99%a4%e6%95%b0%e6%8d%ae%e6%ba%90">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RefreshScope</span>(proxyMode <span style="color:#f92672">=</span> ScopedProxyMode.<span style="color:#a6e22e">NO</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DataSourceConfig</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 数据源配置</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="自定义-refreshscope-排除数据源相关配置">
+  自定义 RefreshScope 排除数据源相关配置
+  <a class="anchor" href="#%e8%87%aa%e5%ae%9a%e4%b9%89-refreshscope-%e6%8e%92%e9%99%a4%e6%95%b0%e6%8d%ae%e6%ba%90%e7%9b%b8%e5%85%b3%e9%85%8d%e7%bd%ae">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> RefreshScope <span style="color:#a6e22e">refreshScope</span>() {
+</span></span><span style="display:flex;"><span>    RefreshScope scope <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RefreshScope();
+</span></span><span style="display:flex;"><span>    scope.<span style="color:#a6e22e">setExcludeNames</span>(<span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;dataSource&#34;</span>, <span style="color:#e6db74">&#34;hikariDataSource&#34;</span>});
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> scope;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="在-bootstrapyml-中排除特定配置的刷新">
+  在 bootstrap.yml 中排除特定配置的刷新
+  <a class="anchor" href="#%e5%9c%a8-bootstrapyml-%e4%b8%ad%e6%8e%92%e9%99%a4%e7%89%b9%e5%ae%9a%e9%85%8d%e7%bd%ae%e7%9a%84%e5%88%b7%e6%96%b0">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spring</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">cloud</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">nacos</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">config</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">refresh-enabled</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">refreshable-data-sources</span>: <span style="color:#ae81ff">none</span> <span style="color:#75715e"># 不刷新数据源配置</span>
+</span></span></code></pre></div><h3 id="使用-refreshscope-但不刷新数据源">
+  使用 <code>@RefreshScope</code> 但不刷新数据源
+  <a class="anchor" href="#%e4%bd%bf%e7%94%a8-refreshscope-%e4%bd%86%e4%b8%8d%e5%88%b7%e6%96%b0%e6%95%b0%e6%8d%ae%e6%ba%90">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Bean</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@ConfigurationProperties</span>(prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;spring.datasource.hikari&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RefreshScope</span>(proxyMode <span style="color:#f92672">=</span> ScopedProxyMode.<span style="color:#a6e22e">NO</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> HikariDataSource <span style="color:#a6e22e">dataSource</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> DataSourceBuilder.<span style="color:#a6e22e">create</span>().<span style="color:#a6e22e">type</span>(HikariDataSource.<span style="color:#a6e22e">class</span>).<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="最佳实践">
+  最佳实践
+  <a class="anchor" href="#%e6%9c%80%e4%bd%b3%e5%ae%9e%e8%b7%b5">#</a>
+</h2>
+<ol>
+<li><strong>分离配置</strong>：将数据库配置和其他频繁变动的配置分开，放在不同的配置文件中</li>
+<li><strong>版本控制</strong>：对数据库配置的修改应该通过版本控制和应用重启来完成，而不是热更新</li>
+<li><strong>监控</strong>：即使解决了这个问题，也应该监控数据库连接池状态</li>
+</ol>
+<h2 id="注意事项">
+  注意事项
+  <a class="anchor" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a>
+</h2>
+<ul>
+<li>这些解决方案可能会因 Spring Boot/Cloud 版本不同而有所差异</li>
+<li>在生产环境实施前应在测试环境充分验证</li>
+<li>如果确实需要动态修改数据库配置，建议使用更优雅的方式如多数据源切换</li>
+</ul>
 </article>
  
       
@@ -2137,7 +2270,20 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#关于-nacos-配置更新后避免-hikaricp-连接断开的问题">关于 Nacos 配置更新后避免 HikariCP 连接断开的问题</a>
+      <ul>
+        <li><a href="#解决方案">解决方案</a>
+          <ul>
+            <li><a href="#使用-refreshscopeproxymode--scopedproxymodeno-排除数据源">使用 <code>@RefreshScope(proxyMode = ScopedProxyMode.NO)</code> 排除数据源</a></li>
+            <li><a href="#自定义-refreshscope-排除数据源相关配置">自定义 RefreshScope 排除数据源相关配置</a></li>
+            <li><a href="#在-bootstrapyml-中排除特定配置的刷新">在 bootstrap.yml 中排除特定配置的刷新</a></li>
+            <li><a href="#使用-refreshscope-但不刷新数据源">使用 <code>@RefreshScope</code> 但不刷新数据源</a></li>
+          </ul>
+        </li>
+        <li><a href="#最佳实践">最佳实践</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

@@ -1,30 +1,142 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+2025-08-12 移动端创建issue的时候要等issue的页面加载完成之后再返回到列表，如果没加载完就返回到列表，issue会丢失（列表显示不出来），但是issue的数量是已经累加了的
+
+
+  常用命令
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+# 查看远程仓库列表，需要指定 git fetch 哪一个远程仓库的时候会用到
+# 因为可能有些仓库网络不通，直接 git fetch 会一直不响应
+git remote
+
+  profile
+  #
+
+
+官方文档
+
+如果你新建一个和你的用户名一样名字的仓库，这个仓库的 Readme 就会展示在你的个人主页上 ref: 玩了一下 Github 个人首页的 Profile （使用 Action 自动更新）
+
+
+
+
+  Github Action
+  #
+
+
+GitHub Actions 入门教程
+
+
+  repository
+  #
+
+
+torvalds/linux
+CesiumGS/cesium
+
+CesiumJS is a JavaScript library for creating 3D globes and 2D maps in a web browser without a plugin. It uses
+WebGL for hardware-accelerated graphics, and is cross-platform, cross-browser, and tuned for dynamic-data
+visualization.
+
+
+ohmyzsh/ohmyzsh
+
+Oh My Zsh is an open source, community-driven framework for managing your zsh configuration.
+
+
+duanluan/zutil
+
+追求更快更全的 Java 工具类
+文档
+
+
+binarywang/Linux-Tutorial
+
+Java 程序员眼中的 Linux
+
+
+yihong0618
+
+
+  algorithm-practice
+  #
+
+
+algorithm-practice
+
+
+  dataStructure
+  #
+
+
+com.penruins.dataStructure
+
+
+  PriorityQueueDemo
+  #
+
+
+demo1
+
+PriorityQueue 默认为最小堆
+如果 PriorityQueue 中没有元素了，则返回 null
+
+
+demo2
+
+自定义一个比较器实现最大堆
+
+
+
+
+  follow
+  #
+
+
+oldratlee
+
+
+  graph(com.penruins.graph)
+  #
+
+
+com.penruins.graph
+
+
+  广度优先搜索(com.penruins.graph.GraphSearch.bfs)
+  #
+
+
+com.penruins.graph.GraphSearch.bfs
+
+二维图的广度优先搜索
+8个方向
+从标志数组的打印可以看出来是广度优先搜索
+
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/github/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="github">
+  <meta property="og:description" content="2025-08-12 移动端创建issue的时候要等issue的页面加载完成之后再返回到列表，如果没加载完就返回到列表，issue会丢失（列表显示不出来），但是issue的数量是已经累加了的 常用命令 # # 查看远程仓库列表，需要指定 git fetch 哪一个远程仓库的时候会用到 # 因为可能有些仓库网络不通，直接 git fetch 会一直不响应 git remote profile # 官方文档 如果你新建一个和你的用户名一样名字的仓库，这个仓库的 Readme 就会展示在你的个人主页上 ref: 玩了一下 Github 个人首页的 Profile （使用 Action 自动更新） Github Action # GitHub Actions 入门教程 repository # torvalds/linux CesiumGS/cesium CesiumJS is a JavaScript library for creating 3D globes and 2D maps in a web browser without a plugin. It uses WebGL for hardware-accelerated graphics, and is cross-platform, cross-browser, and tuned for dynamic-data visualization. ohmyzsh/ohmyzsh Oh My Zsh is an open source, community-driven framework for managing your zsh configuration. duanluan/zutil 追求更快更全的 Java 工具类 文档 binarywang/Linux-Tutorial Java 程序员眼中的 Linux yihong0618 algorithm-practice # algorithm-practice dataStructure # com.penruins.dataStructure PriorityQueueDemo # demo1 PriorityQueue 默认为最小堆 如果 PriorityQueue 中没有元素了，则返回 null demo2 自定义一个比较器实现最大堆 follow # oldratlee graph(com.penruins.graph) # com.penruins.graph 广度优先搜索(com.penruins.graph.GraphSearch.bfs) # com.penruins.graph.GraphSearch.bfs 二维图的广度优先搜索 8个方向 从标志数组的打印可以看出来是广度优先搜索">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>github | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/github/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +433,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1098,7 +1210,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/github/" class="">github</a>
+    <a href="/post/computer-science/github/" class="active">github</a>
   
 
         </li>
@@ -2056,7 +2168,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>github</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2184,28 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#常用命令">常用命令</a></li>
+    <li><a href="#profile">profile</a></li>
+    <li><a href="#github-action">Github Action</a></li>
+    <li><a href="#repository">repository</a>
+      <ul>
+        <li><a href="#algorithm-practice">algorithm-practice</a>
+          <ul>
+            <li><a href="#datastructure">dataStructure</a>
+              <ul>
+                <li><a href="#priorityqueuedemo">PriorityQueueDemo</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#follow">follow</a></li>
+    <li><a href="#graphcompenruinsgraph">graph(com.penruins.graph)</a>
+      <ul>
+        <li><a href="#广度优先搜索compenruinsgraphgraphsearchbfs">广度优先搜索(com.penruins.graph.GraphSearch.bfs)</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2218,123 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><ul>
+<li>2025-08-12 移动端创建issue的时候要等issue的页面加载完成之后再返回到列表，如果没加载完就返回到列表，issue会丢失（列表显示不出来），但是issue的数量是已经累加了的</li>
+</ul>
+<h1 id="常用命令">
+  常用命令
+  <a class="anchor" href="#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<pre tabindex="0"><code># 查看远程仓库列表，需要指定 git fetch 哪一个远程仓库的时候会用到
+# 因为可能有些仓库网络不通，直接 git fetch 会一直不响应
+git remote
+</code></pre><h1 id="profile">
+  profile
+  <a class="anchor" href="#profile">#</a>
+</h1>
+<ul>
+<li><a href="https://docs.github.com/en/account-and-profile/concepts/about-your-profile">官方文档</a>
+<ul>
+<li>如果你新建一个和你的用户名一样名字的仓库，这个仓库的 Readme 就会展示在你的个人主页上 ref: <a href="https://www.kawabangga.com/posts/4117">玩了一下 Github 个人首页的 Profile （使用 Action 自动更新）</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="github-action">
+  Github Action
+  <a class="anchor" href="#github-action">#</a>
+</h1>
+<ul>
+<li><a href="https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">GitHub Actions 入门教程</a></li>
+</ul>
+<h1 id="repository">
+  repository
+  <a class="anchor" href="#repository">#</a>
+</h1>
+<ul>
+<li><a href="https://github.com/torvalds/linux">torvalds/linux</a></li>
+<li><a href="https://github.com/CesiumGS/cesium">CesiumGS/cesium</a>
+<ul>
+<li>CesiumJS is a JavaScript library for creating 3D globes and 2D maps in a web browser without a plugin. It uses
+WebGL for hardware-accelerated graphics, and is cross-platform, cross-browser, and tuned for dynamic-data
+visualization.</li>
+</ul>
+</li>
+<li><a href="https://github.com/ohmyzsh/ohmyzsh">ohmyzsh/ohmyzsh</a>
+<ul>
+<li>Oh My Zsh is an open source, community-driven framework for managing your zsh configuration.</li>
+</ul>
+</li>
+<li><a href="https://github.com/duanluan/zutil">duanluan/zutil</a>
+<ul>
+<li>追求更快更全的 Java 工具类</li>
+<li><a href="https://duanluan.github.io/zutil/">文档</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/binarywang/Linux-Tutorial">binarywang/Linux-Tutorial</a>
+<ul>
+<li>Java 程序员眼中的 Linux</li>
+</ul>
+</li>
+<li><a href="https://github.com/yihong0618"><strong>yihong0618</strong></a></li>
+</ul>
+<h2 id="algorithm-practice">
+  algorithm-practice
+  <a class="anchor" href="#algorithm-practice">#</a>
+</h2>
+<ul>
+<li><a href="https://github.com/penruins/algorithm-practice">algorithm-practice</a></li>
+</ul>
+<h3 id="datastructure">
+  dataStructure
+  <a class="anchor" href="#datastructure">#</a>
+</h3>
+<ul>
+<li><code>com.penruins.dataStructure</code></li>
+</ul>
+<h4 id="priorityqueuedemo">
+  PriorityQueueDemo
+  <a class="anchor" href="#priorityqueuedemo">#</a>
+</h4>
+<ul>
+<li>demo1
+<ul>
+<li>PriorityQueue 默认为最小堆</li>
+<li>如果 PriorityQueue 中没有元素了，则返回 null</li>
+</ul>
+</li>
+<li>demo2
+<ul>
+<li>自定义一个比较器实现最大堆</li>
+</ul>
+</li>
+</ul>
+<h1 id="follow">
+  follow
+  <a class="anchor" href="#follow">#</a>
+</h1>
+<ul>
+<li><a href="https://github.com/oldratlee">oldratlee</a></li>
+</ul>
+<h1 id="graphcompenruinsgraph">
+  graph(com.penruins.graph)
+  <a class="anchor" href="#graphcompenruinsgraph">#</a>
+</h1>
+<ul>
+<li><code>com.penruins.graph</code></li>
+</ul>
+<h2 id="广度优先搜索compenruinsgraphgraphsearchbfs">
+  广度优先搜索(com.penruins.graph.GraphSearch.bfs)
+  <a class="anchor" href="#%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2compenruinsgraphgraphsearchbfs">#</a>
+</h2>
+<ul>
+<li><code>com.penruins.graph.GraphSearch.bfs</code>
+<ul>
+<li>二维图的广度优先搜索</li>
+<li>8个方向</li>
+<li>从标志数组的打印可以看出来是广度优先搜索</li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -2137,7 +2382,28 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#常用命令">常用命令</a></li>
+    <li><a href="#profile">profile</a></li>
+    <li><a href="#github-action">Github Action</a></li>
+    <li><a href="#repository">repository</a>
+      <ul>
+        <li><a href="#algorithm-practice">algorithm-practice</a>
+          <ul>
+            <li><a href="#datastructure">dataStructure</a>
+              <ul>
+                <li><a href="#priorityqueuedemo">PriorityQueueDemo</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#follow">follow</a></li>
+    <li><a href="#graphcompenruinsgraph">graph(com.penruins.graph)</a>
+      <ul>
+        <li><a href="#广度优先搜索compenruinsgraphgraphsearchbfs">广度优先搜索(com.penruins.graph.GraphSearch.bfs)</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

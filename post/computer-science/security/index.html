@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  security
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+  man-in-the-middle attack 中间人攻击
+  #
+
+SSL Pinning is a technique we use on the client side to avoid a man-in-the-middle attack by validating the server certificates. The developers embed (or pin) a list of trustful certificates in the client application during development and use them to compare against the server certificates during runtime.
+If there is a mismatch between the server and the local copy of certificates, the connection will be disrupted, and no further user data will be sent to that server. This enforcement ensures that user devices communicate only with dedicated, trustful servers.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/security/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="security">
+  <meta property="og:description" content="security # man-in-the-middle attack 中间人攻击 # SSL Pinning is a technique we use on the client side to avoid a man-in-the-middle attack by validating the server certificates. The developers embed (or pin) a list of trustful certificates in the client application during development and use them to compare against the server certificates during runtime.
+If there is a mismatch between the server and the local copy of certificates, the connection will be disrupted, and no further user data will be sent to that server. This enforcement ensures that user devices communicate only with dedicated, trustful servers.">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>security | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/security/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +327,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1137,7 +1143,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/security/" class="">security</a>
+    <a href="/post/computer-science/security/" class="active">security</a>
   
 
         </li>
@@ -2056,7 +2062,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>security</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2078,15 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#security">security</a>
+      <ul>
+        <li><a href="#man-in-the-middle-attack-中间人攻击">man-in-the-middle attack 中间人攻击</a>
+          <ul>
+            <li><a href="#ssl-pinning">SSL pinning</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2099,29 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><h1 id="security">
+  security
+  <a class="anchor" href="#security">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<h2 id="man-in-the-middle-attack-中间人攻击">
+  man-in-the-middle attack 中间人攻击
+  <a class="anchor" href="#man-in-the-middle-attack-%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb">#</a>
+</h2>
+<p>SSL Pinning is a technique we use on the client side to avoid a man-in-the-middle attack by validating the server certificates. The developers embed (or pin) a list of trustful certificates in the client application during development and use them to compare against the server certificates during runtime.</p>
+<p>If there is a mismatch between the server and the local copy of certificates, the connection will be disrupted, and no further user data will be sent to that server. This enforcement ensures that user devices communicate only with dedicated, trustful servers.</p>
+<p>SSL Pinning prevents a man-in-the-middle attack, which means an attacker can not intercept the traffic and modify the data. If an attacker can not intercept the traffic, the application automatically prevents many server-side vulnerabilities. Because an attacker can not perform API-level test cases, implementing SSL is very important.</p>
+<h3 id="ssl-pinning">
+  SSL pinning
+  <a class="anchor" href="#ssl-pinning">#</a>
+</h3>
+<ul>
+<li>reference
+<ul>
+<li><a href="https://stackoverflow.com/questions/52862256/charles-proxy-for-mobile-apps-that-use-ssl-pinning">Charles Proxy for Mobile apps that use SSL Pinning</a></li>
+<li><a href="https://www.appknox.com/blog/bypass-ssl-pinning-in-ios-app">8 Ways to Bypass SSL Pinning in iOS</a></li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -2137,7 +2169,15 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#security">security</a>
+      <ul>
+        <li><a href="#man-in-the-middle-attack-中间人攻击">man-in-the-middle attack 中间人攻击</a>
+          <ul>
+            <li><a href="#ssl-pinning">SSL pinning</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

@@ -1,30 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  Spring Cloud Alibaba
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+Spring Cloud Alibaba
+
+
+  Spring Cloud VS Spring Cloud Alibaba
+  #
+
+
+现在学spring cloud alibaba 还是spring cloud?
+
+以下是 Spring Cloud 和 Spring Cloud Alibaba 的详细对比，从技术定位、核心组件、适用场景等维度综合分析，并结合实际应用场景提供选型建议：
+
+
+  
+      
+          功能
+          Spring Cloud
+          Spring Cloud Alibaba
+          优势对比
+      
+  
+  
+      
+          服务注册与发现
+          Eureka（AP，已停更）
+          Nacos（AP/CP 双模，高性能）
+          Nacos 支持动态配置管理，性能提升 50%&#43;
+      
+      
+          配置中心
+          Config Server（基于 Git）
+          Nacos Config（可视化界面）
+          Nacos 支持实时推送和多环境配置
+      
+      
+          流量控制与熔断
+          Hystrix（维护模式）
+          Sentinel（动态规则、实时监控）
+          Sentinel 支持精细化流量控制和系统保护
+      
+      
+          分布式事务
+          无官方方案（依赖第三方）
+          Seata（原生集成 AT/TCC 模式）
+          Seata 简化分布式事务开发
+      
+      
+          消息队列
+          无（依赖 RabbitMQ）
+          RocketMQ（高吞吐、事务消息）
+          RocketMQ 适合高并发和削峰填谷场景
+      
+  
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/distributed-system/spring-cloud-alibaba/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="Spring Cloud Alibaba">
+  <meta property="og:description" content="Spring Cloud Alibaba # Spring Cloud Alibaba Spring Cloud VS Spring Cloud Alibaba # 现在学spring cloud alibaba 还是spring cloud? 以下是 Spring Cloud 和 Spring Cloud Alibaba 的详细对比，从技术定位、核心组件、适用场景等维度综合分析，并结合实际应用场景提供选型建议：
+功能 Spring Cloud Spring Cloud Alibaba 优势对比 服务注册与发现 Eureka（AP，已停更） Nacos（AP/CP 双模，高性能） Nacos 支持动态配置管理，性能提升 50%&#43; 配置中心 Config Server（基于 Git） Nacos Config（可视化界面） Nacos 支持实时推送和多环境配置 流量控制与熔断 Hystrix（维护模式） Sentinel（动态规则、实时监控） Sentinel 支持精细化流量控制和系统保护 分布式事务 无官方方案（依赖第三方） Seata（原生集成 AT/TCC 模式） Seata 简化分布式事务开发 消息队列 无（依赖 RabbitMQ） RocketMQ（高吞吐、事务消息） RocketMQ 适合高并发和削峰填谷场景">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>Spring Cloud Alibaba | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/distributed-system/spring-cloud-alibaba/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +375,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -621,7 +675,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-08231b363489d85c9f808700d743ce65" class="toggle"  />
+    <input type="checkbox" id="section-08231b363489d85c9f808700d743ce65" class="toggle" checked />
     <label for="section-08231b363489d85c9f808700d743ce65" class="flex justify-between">
       <a role="button" class="">Distributed System</a>
     </label>
@@ -736,7 +790,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">Spring Cloud Alibaba</a>
+    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="active">Spring Cloud Alibaba</a>
   
 
         </li>
@@ -2056,7 +2110,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>Spring Cloud Alibaba</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2126,11 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#spring-cloud-alibaba">Spring Cloud Alibaba</a>
+      <ul>
+        <li><a href="#spring-cloud-vs-spring-cloud-alibaba">Spring Cloud VS Spring Cloud Alibaba</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2143,64 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><h1 id="spring-cloud-alibaba">
+  Spring Cloud Alibaba
+  <a class="anchor" href="#spring-cloud-alibaba">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<ul>
+<li><a href="https://sca.aliyun.com/?spm=5176.29160081.0.0.74805c72yMce7l">Spring Cloud Alibaba</a></li>
+</ul>
+<h2 id="spring-cloud-vs-spring-cloud-alibaba">
+  Spring Cloud VS Spring Cloud Alibaba
+  <a class="anchor" href="#spring-cloud-vs-spring-cloud-alibaba">#</a>
+</h2>
+<ul>
+<li><a href="https://www.zhihu.com/question/619919250/answer/49672760478">现在学spring cloud alibaba 还是spring cloud?</a></li>
+</ul>
+<p>以下是 <strong>Spring Cloud</strong> 和 <strong>Spring Cloud Alibaba</strong> 的详细对比，从技术定位、核心组件、适用场景等维度综合分析，并结合实际应用场景提供选型建议：</p>
+<hr>
+<table>
+  <thead>
+      <tr>
+          <th><strong>功能</strong></th>
+          <th><strong>Spring Cloud</strong></th>
+          <th><strong>Spring Cloud Alibaba</strong></th>
+          <th><strong>优势对比</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>服务注册与发现</strong></td>
+          <td>Eureka（AP，已停更）</td>
+          <td>Nacos（AP/CP 双模，高性能）</td>
+          <td>Nacos 支持动态配置管理，性能提升 50%+</td>
+      </tr>
+      <tr>
+          <td><strong>配置中心</strong></td>
+          <td>Config Server（基于 Git）</td>
+          <td>Nacos Config（可视化界面）</td>
+          <td>Nacos 支持实时推送和多环境配置</td>
+      </tr>
+      <tr>
+          <td><strong>流量控制与熔断</strong></td>
+          <td>Hystrix（维护模式）</td>
+          <td>Sentinel（动态规则、实时监控）</td>
+          <td>Sentinel 支持精细化流量控制和系统保护</td>
+      </tr>
+      <tr>
+          <td><strong>分布式事务</strong></td>
+          <td>无官方方案（依赖第三方）</td>
+          <td>Seata（原生集成 AT/TCC 模式）</td>
+          <td>Seata 简化分布式事务开发</td>
+      </tr>
+      <tr>
+          <td><strong>消息队列</strong></td>
+          <td>无（依赖 RabbitMQ）</td>
+          <td>RocketMQ（高吞吐、事务消息）</td>
+          <td>RocketMQ 适合高并发和削峰填谷场景</td>
+      </tr>
+  </tbody>
+</table>
 </article>
  
       
@@ -2137,7 +2248,11 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#spring-cloud-alibaba">Spring Cloud Alibaba</a>
+      <ul>
+        <li><a href="#spring-cloud-vs-spring-cloud-alibaba">Spring Cloud VS Spring Cloud Alibaba</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

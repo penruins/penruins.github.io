@@ -1,30 +1,137 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+一日一技：iOS抓包最简单方案
+Charles 有 iOS 版本，app store 上就能下载，使用下来还不错
+Open-Source iOS Apps
+
+A collaborative list of open-source iOS, iPadOS, watchOS, tvOS and visionOS apps, your contribution is welcome 😄
+
+
+dkhamsing/news
+
+
+  IOS26
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+Liquid Glass 继续调整，iOS 26 Beta 近期更新值得关注的变化
+
+
+  APPS
+  #
+
+
+轻听英语
+Kiwix
+众山小笔记
+微信输入法
+
+很清爽，但是输入的体验不太好（自动补全不智能，这点还是搜狗输入法好用。。）
+
+
+Picsew
+
+长截图工具
+
+
+Net
+Shadowrocket
+Strides
+Charles
+Caenets - Jupyter
+Actions
+
+Shortcuts 的拓展 app，它封装了很多新的动作
+
+
+文件传输
+
+LocalSend
+Blip
+
+Blip
+据说比 LocalSend 更稳定，而且支持互联网传输文件
+
+
+
+
+Data Jar
+
+2025-08-12 不知道为啥，icloud数据同步会报错，之前iPhone上的数据还同步到iPad那边了。app store 上好久没更新了。同步不了就当本地用了
+
+
+HashPhotos
+a-Shell
+GitHub
+
+大陆的 App Store 已经下载不到了
+下载好了之后可以不用 magic 就能使用，比web 的网络稳定性更好
+可以查看action的执行情况
+
+
+working copy
+
+目前用下来最好的 git 客户端
+现在在中国大陆的 app store 上架的app要备案，因为这个app的开发者是国外大哥，不要因为政策下架呀。。
+
+
+Freeform
+
+苹果原生的白板应用，很流畅，添加很多图片也不会卡顿。现在还没有创建文件夹的功能，希望尽快有这个功能，白板多了不好管理文件。2025-07-30
+
+
+bark
+
+Finb/Bark
+
+Bark is a push notification tool app. It&rsquo;s free, simple, and secure, leveraging APNs without draining device battery.
+document
+Bark-Java-SDK
+
+
+
+
+Day One
+Obsidian
+
+ios 端最好用的 markdown 编辑器，可以把笔记存到 obsidian 的云服务上，也可以存到 icloud上。我是配合 working copy push到github，然后配合github的action，自动构建更新我的博客（比如这段话我就是在手机上用obsidian编辑的）
+实在受不了都 ios 18，apple notes还是那么极简，没有目录，不支持markdown，还是坚持不下来使用
+
+
+IFTTT
+
+3 个非常规 Day One 使用场景
+触发你的智能生活：IFTTT 入门
+
+
+RSS
+
+Inoreader
+Feedly
+
+
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/operating-system/ios/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="IOS">
+  <meta property="og:description" content="一日一技：iOS抓包最简单方案 Charles 有 iOS 版本，app store 上就能下载，使用下来还不错 Open-Source iOS Apps A collaborative list of open-source iOS, iPadOS, watchOS, tvOS and visionOS apps, your contribution is welcome 😄 dkhamsing/news IOS26 # Liquid Glass 继续调整，iOS 26 Beta 近期更新值得关注的变化 APPS # 轻听英语 Kiwix 众山小笔记 微信输入法 很清爽，但是输入的体验不太好（自动补全不智能，这点还是搜狗输入法好用。。） Picsew 长截图工具 Net Shadowrocket Strides Charles Caenets - Jupyter Actions Shortcuts 的拓展 app，它封装了很多新的动作 文件传输 LocalSend Blip Blip 据说比 LocalSend 更稳定，而且支持互联网传输文件 Data Jar 2025-08-12 不知道为啥，icloud数据同步会报错，之前iPhone上的数据还同步到iPad那边了。app store 上好久没更新了。同步不了就当本地用了 HashPhotos a-Shell GitHub 大陆的 App Store 已经下载不到了 下载好了之后可以不用 magic 就能使用，比web 的网络稳定性更好 可以查看action的执行情况 working copy 目前用下来最好的 git 客户端 现在在中国大陆的 app store 上架的app要备案，因为这个app的开发者是国外大哥，不要因为政策下架呀。。 Freeform 苹果原生的白板应用，很流畅，添加很多图片也不会卡顿。现在还没有创建文件夹的功能，希望尽快有这个功能，白板多了不好管理文件。2025-07-30 bark Finb/Bark Bark is a push notification tool app. It’s free, simple, and secure, leveraging APNs without draining device battery. document Bark-Java-SDK Day One Obsidian ios 端最好用的 markdown 编辑器，可以把笔记存到 obsidian 的云服务上，也可以存到 icloud上。我是配合 working copy push到github，然后配合github的action，自动构建更新我的博客（比如这段话我就是在手机上用obsidian编辑的） 实在受不了都 ios 18，apple notes还是那么极简，没有目录，不支持markdown，还是坚持不下来使用 IFTTT 3 个非常规 Day One 使用场景 触发你的智能生活：IFTTT 入门 RSS Inoreader Feedly">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>IOS | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/operating-system/ios/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +428,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1304,7 +1411,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-08034345c59b2d801c96d3235471b850" class="toggle"  />
+    <input type="checkbox" id="section-08034345c59b2d801c96d3235471b850" class="toggle" checked />
     <label for="section-08034345c59b2d801c96d3235471b850" class="flex justify-between">
       <a role="button" class="">Operating System</a>
     </label>
@@ -1320,7 +1427,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/ios/" class="">IOS</a>
+    <a href="/post/computer-science/operating-system/ios/" class="active">IOS</a>
   
 
         </li>
@@ -2056,7 +2163,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>IOS</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2179,8 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#ios26">IOS26</a></li>
+    <li><a href="#apps">APPS</a></li>
   </ul>
 </nav>
 
@@ -2085,11 +2193,118 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><ul>
+<li><a href="https://cloud.tencent.com/developer/article/2314725">一日一技：iOS抓包最简单方案</a></li>
+<li>Charles 有 iOS 版本，app store 上就能下载，使用下来还不错</li>
+<li><a href="https://github.com/dkhamsing/open-source-ios-apps">Open-Source iOS Apps</a>
+<ul>
+<li>A collaborative list of open-source iOS, iPadOS, watchOS, tvOS and visionOS apps, your contribution is welcome 😄</li>
+</ul>
+</li>
+<li><a href="https://github.com/dkhamsing/news">dkhamsing/news</a></li>
+</ul>
+<h1 id="ios26">
+  IOS26
+  <a class="anchor" href="#ios26">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<ul>
+<li><a href="https://sspai.com/post/101792">Liquid Glass 继续调整，iOS 26 Beta 近期更新值得关注的变化</a></li>
+</ul>
+<h1 id="apps">
+  APPS
+  <a class="anchor" href="#apps">#</a>
+</h1>
+<ul>
+<li>轻听英语</li>
+<li>Kiwix</li>
+<li>众山小笔记</li>
+<li>微信输入法
+<ul>
+<li>很清爽，但是输入的体验不太好（自动补全不智能，这点还是搜狗输入法好用。。）</li>
+</ul>
+</li>
+<li>Picsew
+<ul>
+<li>长截图工具</li>
+</ul>
+</li>
+<li>Net</li>
+<li>Shadowrocket</li>
+<li>Strides</li>
+<li>Charles</li>
+<li>Caenets - Jupyter</li>
+<li>Actions
+<ul>
+<li>Shortcuts 的拓展 app，它封装了很多新的动作</li>
+</ul>
+</li>
+<li>文件传输
+<ul>
+<li>LocalSend</li>
+<li>Blip
+<ul>
+<li><a href="https://blip.net/">Blip</a></li>
+<li>据说比 LocalSend 更稳定，而且支持互联网传输文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Data Jar
+<ul>
+<li>2025-08-12 不知道为啥，icloud数据同步会报错，之前iPhone上的数据还同步到iPad那边了。app store 上好久没更新了。同步不了就当本地用了</li>
+</ul>
+</li>
+<li>HashPhotos</li>
+<li>a-Shell</li>
+<li>GitHub
+<ul>
+<li>大陆的 App Store 已经下载不到了</li>
+<li>下载好了之后可以不用 magic 就能使用，比web 的网络稳定性更好</li>
+<li>可以查看action的执行情况</li>
+</ul>
+</li>
+<li>working copy
+<ul>
+<li><a href="https://apps.apple.com/cn/app/working-copy-git-client/id896694807?l=en-GB">目前用下来最好的 git 客户端</a></li>
+<li>现在在中国大陆的 app store 上架的app要备案，因为这个app的开发者是国外大哥，不要因为政策下架呀。。</li>
+</ul>
+</li>
+<li>Freeform
+<ul>
+<li>苹果原生的白板应用，很流畅，添加很多图片也不会卡顿。现在还没有创建文件夹的功能，希望尽快有这个功能，白板多了不好管理文件。2025-07-30</li>
+</ul>
+</li>
+<li>bark
+<ul>
+<li><a href="https://github.com/Finb/Bark">Finb/Bark</a>
+<ul>
+<li>Bark is a push notification tool app. It&rsquo;s free, simple, and secure, leveraging APNs without draining device battery.</li>
+<li><a href="https://bark.day.app/#/?id=bark">document</a></li>
+<li><a href="https://github.com/MoshiCoCo/bark-java-sdk">Bark-Java-SDK</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Day One</li>
+<li>Obsidian
+<ul>
+<li>ios 端最好用的 markdown 编辑器，可以把笔记存到 obsidian 的云服务上，也可以存到 icloud上。我是配合 working copy push到github，然后配合github的action，自动构建更新我的博客（比如这段话我就是在手机上用obsidian编辑的）</li>
+<li>实在受不了都 ios 18，apple notes还是那么极简，没有目录，不支持markdown，还是坚持不下来使用</li>
+</ul>
+</li>
+<li>IFTTT
+<ul>
+<li><a href="https://sspai.com/post/81200">3 个非常规 Day One 使用场景</a></li>
+<li><a href="https://sspai.com/post/25270">触发你的智能生活：IFTTT 入门</a></li>
+</ul>
+</li>
+<li>RSS
+<ul>
+<li>Inoreader</li>
+<li>Feedly</li>
+</ul>
+</li>
+</ul>
 </article>
  
       
@@ -2137,7 +2352,8 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#ios26">IOS26</a></li>
+    <li><a href="#apps">APPS</a></li>
   </ul>
 </nav>
 

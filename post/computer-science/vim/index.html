@@ -1,30 +1,116 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+Just Vim It
+
+
+  nvim
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+
+neovim.io
+
+直接用brew安装就行 brew install neovim
+
+
+第一步肯定是要把插件管理工具安装一下
+
+junegunn/vim-plug
+
+直接运行文档中linux的安装命令
+
+
+
+
+
+
+  indent
+  #
+
+
+How can I make (Neo)Vim wrap lines in respect to indentation?
+
+这个可以解决缩进换行的问题，很棒！
+
+
+
+
+  clipboard 剪贴板
+  #
+
+直接在配置文件中添加这两行，就可以了
+vnoremap y &#34;&#43;y
+set clipboard&#43;=unnamedplus
+
+  quickfix
+  #
+
+
+VIM学习笔记 QuickFix
+
+
+  LazyVim
+  #
+
+
+lazyvim org
+用 neovim 写 markdown 是一种什么样的体验(含技巧)
+
+
+  markdown
+  #
+
+
+theCW
+
+不影响听课的高效率记笔记方法：Vim &#43; Markdown - 教学与配置
+
+
+iamcco/markdown-preview.nvim
+My neovim markdown setup in 2024
+tadmccorkle/markdown.nvim
+cnshsliu/smp.nvim
+MeanderingProgrammer/render-markdown.nvim
+
+这个插件可以直接在 neovim 中直接 render markdown 文件
+但是安装只提供了 lua 的安装方式
+
+
+
+
+  outline.nvim
+  #
+
+
+hedyhli/outline.nvim
+
+这个插件太优秀了！
+
+
+
+
+解决 outline 左箭头和下箭头乱码的问题">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/vim/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:title" content="vim">
+  <meta property="og:description" content="Just Vim It nvim # neovim.io 直接用brew安装就行 brew install neovim 第一步肯定是要把插件管理工具安装一下 junegunn/vim-plug 直接运行文档中linux的安装命令 indent # How can I make (Neo)Vim wrap lines in respect to indentation? 这个可以解决缩进换行的问题，很棒！ clipboard 剪贴板 # 直接在配置文件中添加这两行，就可以了
+vnoremap y &#34;&#43;y set clipboard&#43;=unnamedplus quickfix # VIM学习笔记 QuickFix LazyVim # lazyvim org 用 neovim 写 markdown 是一种什么样的体验(含技巧) markdown # theCW 不影响听课的高效率记笔记方法：Vim &#43; Markdown - 教学与配置 iamcco/markdown-preview.nvim My neovim markdown setup in 2024 tadmccorkle/markdown.nvim cnshsliu/smp.nvim MeanderingProgrammer/render-markdown.nvim 这个插件可以直接在 neovim 中直接 render markdown 文件 但是安装只提供了 lua 的安装方式 outline.nvim # hedyhli/outline.nvim 这个插件太优秀了！ 解决 outline 左箭头和下箭头乱码的问题">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-02T22:03:58+08:00">
+<title>vim | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/computer-science/vim/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -321,7 +407,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1577,7 +1663,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/vim/" class="">vim</a>
+    <a href="/post/computer-science/vim/" class="active">vim</a>
   
 
         </li>
@@ -2056,7 +2142,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>vim</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2158,34 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#nvim">nvim</a>
+      <ul>
+        <li><a href="#indent">indent</a></li>
+        <li><a href="#clipboard-剪贴板">clipboard 剪贴板</a></li>
+        <li><a href="#quickfix">quickfix</a></li>
+        <li><a href="#lazyvim">LazyVim</a></li>
+        <li><a href="#markdown">markdown</a>
+          <ul>
+            <li><a href="#outlinenvim">outline.nvim</a></li>
+          </ul>
+        </li>
+        <li><a href="#搜索插件">搜索插件</a>
+          <ul>
+            <li><a href="#fzf">fzf</a></li>
+            <li><a href="#telescope">telescope</a></li>
+          </ul>
+        </li>
+        <li><a href="#美化">美化</a>
+          <ul>
+            <li><a href="#buffer">buffer</a></li>
+          </ul>
+        </li>
+        <li><a href="#dropbarnvim">dropbar.nvim</a></li>
+        <li><a href="#cellularautomation">cellular.automation</a></li>
+      </ul>
+    </li>
+    <li><a href="#vimscript">vimscript</a></li>
+    <li><a href="#lua">lua</a></li>
   </ul>
 </nav>
 
@@ -2085,11 +2198,240 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><ul>
+<li><a href="https://vim.nauxscript.com/">Just Vim It</a></li>
+</ul>
+<h1 id="nvim">
+  nvim
+  <a class="anchor" href="#nvim">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<ul>
+<li><a href="https://neovim.io/">neovim.io</a>
+<ul>
+<li>直接用brew安装就行 <code>brew install neovim</code></li>
+</ul>
+</li>
+<li>第一步肯定是要把插件管理工具安装一下
+<ul>
+<li><a href="https://github.com/junegunn/vim-plug">junegunn/vim-plug</a>
+<ul>
+<li>直接运行文档中linux的安装命令</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="indent">
+  indent
+  <a class="anchor" href="#indent">#</a>
+</h2>
+<ul>
+<li><a href="https://vi.stackexchange.com/questions/42406/how-can-i-make-neovim-wrap-lines-in-respect-to-indentation">How can I make (Neo)Vim wrap lines in respect to indentation?</a>
+<ul>
+<li>这个可以解决缩进换行的问题，很棒！</li>
+</ul>
+</li>
+</ul>
+<h2 id="clipboard-剪贴板">
+  clipboard 剪贴板
+  <a class="anchor" href="#clipboard-%e5%89%aa%e8%b4%b4%e6%9d%bf">#</a>
+</h2>
+<p>直接在配置文件中添加这两行，就可以了</p>
+<pre tabindex="0"><code>vnoremap y &#34;+y
+set clipboard+=unnamedplus
+</code></pre><h2 id="quickfix">
+  quickfix
+  <a class="anchor" href="#quickfix">#</a>
+</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/71778294">VIM学习笔记 QuickFix</a></li>
+</ul>
+<h2 id="lazyvim">
+  LazyVim
+  <a class="anchor" href="#lazyvim">#</a>
+</h2>
+<ul>
+<li><a href="https://www.lazyvim.org/">lazyvim org</a></li>
+<li><a href="https://yelog.org/2024/08/02/write-markdown-in-neovim-experience-and-tips/">用 neovim 写 markdown 是一种什么样的体验(含技巧)</a></li>
+</ul>
+<h2 id="markdown">
+  markdown
+  <a class="anchor" href="#markdown">#</a>
+</h2>
+<ul>
+<li>theCW
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1ox411R7bo">不影响听课的高效率记笔记方法：Vim + Markdown - 教学与配置</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/iamcco/markdown-preview.nvim">iamcco/markdown-preview.nvim</a></li>
+<li><a href="https://linkarzu.com/posts/neovim/markdown-setup-2024/">My neovim markdown setup in 2024</a></li>
+<li><a href="https://github.com/tadmccorkle/markdown.nvim">tadmccorkle/markdown.nvim</a></li>
+<li><a href="https://github.com/cnshsliu/smp.nvim">cnshsliu/smp.nvim</a></li>
+<li><a href="https://github.com/MeanderingProgrammer/render-markdown.nvim">MeanderingProgrammer/render-markdown.nvim</a>
+<ul>
+<li>这个插件可以直接在 neovim 中直接 render markdown 文件</li>
+<li>但是安装只提供了 lua 的安装方式</li>
+</ul>
+</li>
+</ul>
+<h3 id="outlinenvim">
+  outline.nvim
+  <a class="anchor" href="#outlinenvim">#</a>
+</h3>
+<ul>
+<li><a href="https://github.com/hedyhli/outline.nvim">hedyhli/outline.nvim</a>
+<ul>
+<li>这个插件太优秀了！</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>解决 outline 左箭头和下箭头乱码的问题</p>
+<pre tabindex="0"><code>symbol_folding = {
+  autofold_depth = false,
+  markers = { &#39;&gt;&#39;, &#39;∨&#39; },
+}
+</code></pre><hr>
+<p><a href="https://stackoverflow.com/questions/3828606/vim-markdown-folding">Vim Markdown Folding?</a></p>
+<p>直接在配置文件中加上下面这段</p>
+<pre tabindex="0"><code>function! MarkdownLevel()
+    if getline(v:lnum) =~ &#39;^# .*$&#39;
+        return &#34;&gt;1&#34;
+    endif
+    if getline(v:lnum) =~ &#39;^## .*$&#39;
+        return &#34;&gt;2&#34;
+    endif
+    if getline(v:lnum) =~ &#39;^### .*$&#39;
+        return &#34;&gt;3&#34;
+    endif
+    if getline(v:lnum) =~ &#39;^#### .*$&#39;
+        return &#34;&gt;4&#34;
+    endif
+    if getline(v:lnum) =~ &#39;^##### .*$&#39;
+        return &#34;&gt;5&#34;
+    endif
+    if getline(v:lnum) =~ &#39;^###### .*$&#39;
+        return &#34;&gt;6&#34;
+    endif
+    return &#34;=&#34; 
+endfunction
+au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
+au BufEnter *.md setlocal foldmethod=expr 
+</code></pre><h2 id="搜索插件">
+  搜索插件
+  <a class="anchor" href="#%e6%90%9c%e7%b4%a2%e6%8f%92%e4%bb%b6">#</a>
+</h2>
+<h3 id="fzf">
+  fzf
+  <a class="anchor" href="#fzf">#</a>
+</h3>
+<ul>
+<li>note
+只能搜索文件，不能进行全文搜索</li>
+<li>安装<code>fzf</code>
+<ul>
+<li><code>brew install fzf</code></li>
+</ul>
+</li>
+<li>安装 fzf 的vim的插件
+<ul>
+<li><a href="https://github.com/junegunn/fzf.vim">junegunn/fzf.vim</a></li>
+</ul>
+</li>
+<li>Reference
+<ul>
+<li><a href="https://www.bilibili.com/video/BV1bJ411s74r">FZF：终端下的文件查找器【猛男必备233333】</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="telescope">
+  telescope
+  <a class="anchor" href="#telescope">#</a>
+</h3>
+<ul>
+<li><a href="https://github.com/nvim-telescope/telescope.nvim">nvim-telescope/telescope.nvim</a></li>
+<li>支持全文搜索需要额外安装这个插件
+<ul>
+<li><a href="https://github.com/BurntSushi/ripgrep">BurntSushi/ripgrep</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>搜索结果换行的配置，vimscript 版本</p>
+<pre tabindex="0"><code>lua &lt;&lt;EOF
+require(&#34;telescope&#34;).setup {
+  defaults = {
+    wrap_results = true,
+  },
+  pickers = {
+    oldfiles = {
+      initial_mode = &#34;normal&#34;
+    }
+  }
+}
+EOF
+</code></pre><h2 id="美化">
+  美化
+  <a class="anchor" href="#%e7%be%8e%e5%8c%96">#</a>
+</h2>
+<ul>
+<li><a href="https://www.reddit.com/r/neovim/comments/q8uvpa/looking_for_airline_replacement/">Looking for airline replacement</a></li>
+<li><a href="https://github.com/famiu/feline.nvim">famiu/feline.nvim</a></li>
+</ul>
+<h3 id="buffer">
+  buffer
+  <a class="anchor" href="#buffer">#</a>
+</h3>
+<ul>
+<li><a href="https://github.com/akinsho/bufferline.nvim">akinsho/bufferline.nvim</a>
+<ul>
+<li>需要安装一个字体，不然图标显示不出来很丑
+<ul>
+<li><a href="https://github.com/ryanoasis/nerd-fonts">ryanoasis/nerd-fonts</a>
+<ul>
+<li><code>brew install font-hack-nerd-font</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/ap/vim-buftabline">ap/vim-buftabline</a>
+<ul>
+<li>这个 repository 里面讲了一些和 buffer 有关的只是和维护者对 buffer 的一些思考</li>
+</ul>
+</li>
+</ul>
+<h2 id="dropbarnvim">
+  dropbar.nvim
+  <a class="anchor" href="#dropbarnvim">#</a>
+</h2>
+<h2 id="cellularautomation">
+  cellular.automation
+  <a class="anchor" href="#cellularautomation">#</a>
+</h2>
+<h1 id="vimscript">
+  vimscript
+  <a class="anchor" href="#vimscript">#</a>
+</h1>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/37352209">VimScript 五分钟入门（翻译）</a></li>
+</ul>
+<h1 id="lua">
+  lua
+  <a class="anchor" href="#lua">#</a>
+</h1>
+<ul>
+<li>theCW
+<ul>
+<li><a href="https://www.bilibili.com/video/BV14z4y1E7o5">用Lua重新配置Neovim，我一周就干了个这。｜ Neovim Vlog[0]</a></li>
+<li><a href="https://www.bilibili.com/video/BV13k4y1V7v3">Lua实战：加强Neovim｜Neovim Vlog[1]</a></li>
+<li><a href="https://github.com/theniceboy/nvim/tree/lua-migration">theCW的lua 配置</a></li>
+</ul>
+</li>
+<li><a href="https://wsdjeg.net/from-vimscript-to-lua/">从 VimScipt 切换至 Lua</a></li>
+</ul>
 </article>
  
       
@@ -2137,7 +2479,34 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#nvim">nvim</a>
+      <ul>
+        <li><a href="#indent">indent</a></li>
+        <li><a href="#clipboard-剪贴板">clipboard 剪贴板</a></li>
+        <li><a href="#quickfix">quickfix</a></li>
+        <li><a href="#lazyvim">LazyVim</a></li>
+        <li><a href="#markdown">markdown</a>
+          <ul>
+            <li><a href="#outlinenvim">outline.nvim</a></li>
+          </ul>
+        </li>
+        <li><a href="#搜索插件">搜索插件</a>
+          <ul>
+            <li><a href="#fzf">fzf</a></li>
+            <li><a href="#telescope">telescope</a></li>
+          </ul>
+        </li>
+        <li><a href="#美化">美化</a>
+          <ul>
+            <li><a href="#buffer">buffer</a></li>
+          </ul>
+        </li>
+        <li><a href="#dropbarnvim">dropbar.nvim</a></li>
+        <li><a href="#cellularautomation">cellular.automation</a></li>
+      </ul>
+    </li>
+    <li><a href="#vimscript">vimscript</a></li>
+    <li><a href="#lua">lua</a></li>
   </ul>
 </nav>
 

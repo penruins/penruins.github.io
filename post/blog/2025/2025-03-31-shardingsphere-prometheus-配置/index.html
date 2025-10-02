@@ -1,30 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="generator" content="Hugo 0.150.1">
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Penruins
+  2025-03-31-Shardingsphere-prometheus-配置
   #
 
-penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+把 shardingsphere proxy 搭建好之后，想要把监测数据放到 grafana里面进行监测，但是按照找到的资料来配置好像都不太行，自己研究了一下启动脚本，现在可以正常获取到指标数据了，所以花点时间把这个问题记录一下
+下载了官网提供的 shardingsphere-proxy 的包之后，里面其实已经包含了 agent 相关的 jar 包以及插件相关的 jar 包，其实不需要再下载一个 shardingsphere-agent
+我们需要配置一下agent.yaml里面的内容，文件的位置在 apache-shardingsphere-5.5.2-shardingsphere-proxy-bin/agent/conf/agent.yaml，现在只需要配置 prometheus，所以如下所示
+plugins:
+  metrics:
+    Prometheus:
+      host: &#34;localhost&#34;
+      port: 9000
+      props:
+        jvm-information-collector-enabled: &#34;true&#34;
+在 prometheus 的配置文件中需要加上 9000 的指标接口（如果是使用 brew 安装的话，配置文件在这个位置 /opt/homebrew/etc/prometheus.yml）
+scrape_configs:
+  - job_name: &#39;shardingsphere&#39;
+    static_configs:
+      - targets: [&#39;localhost:9000&#39;]
+网上查到的这篇文章 Apache ShardingSphere Agent 可观察性实用指南 提到需要修改脚本文件，其实是不用修改的，只需要夹一个参数 --agent 就可以
+需要注意的是运行的目录需要在 shardingsphere-proxy 的根目录下，因此命令如下所示
+sh bin/start.sh 5555 --agent
+查看日志 vim logs/stdout.log 打印的应该如下所示
+Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load
+INFO: Loaded jar: shardingsphere-agent-metrics-prometheus-5.5.2.jar
+Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load
+INFO: Loaded jar: shardingsphere-agent-tracing-opentelemetry-5.5.2.jar
+Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load
+INFO: Loaded jar: shardingsphere-agent-metrics-core-5.5.2.jar
+Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load
+INFO: Loaded jar: shardingsphere-agent-plugin-core-5.5.2.jar
+Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load
+INFO: Loaded jar: shardingsphere-agent-logging-file-5.5.2.jar
+[INFO ] 2025-03-31 18:07:38.772 [main] o.a.s.d.p.c.l.PipelineContextManagerLifecycleListener - mode type is not Cluster, mode type=&#39;Standalone&#39;, ignore
+[INFO ] 2025-03-31 18:07:38.786 [main] o.a.s.p.v.ShardingSphereProxyVersion - Database type is `MySQL`, version is `8.0.41`, database name is `sharding_db`
+[INFO ] 2025-03-31 18:07:38.786 [main] o.a.s.p.frontend.ssl.ProxySSLContext - Proxy frontend SSL/TLS is not enabled.
+[INFO ] 2025-03-31 18:07:38.836 [main] o.a.s.p.frontend.ShardingSphereProxy - ShardingSphere-Proxy Standalone mode started successfully
+这个时候需要查询一下数据库，agent才会把服务启起来">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/blog/2025/2025-03-31-shardingsphere-prometheus-%E9%85%8D%E7%BD%AE/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="Penruins # penruins 的博客，分享技术🤖，生活🤹🏻，电影🎬，骑行🚴🏽‍♂️，English和其他一些有趣的东西(📖学习记录, ⛰️爬山)">
+  <meta property="og:description" content="2025-03-31-Shardingsphere-prometheus-配置 # 把 shardingsphere proxy 搭建好之后，想要把监测数据放到 grafana里面进行监测，但是按照找到的资料来配置好像都不太行，自己研究了一下启动脚本，现在可以正常获取到指标数据了，所以花点时间把这个问题记录一下
+下载了官网提供的 shardingsphere-proxy 的包之后，里面其实已经包含了 agent 相关的 jar 包以及插件相关的 jar 包，其实不需要再下载一个 shardingsphere-agent
+我们需要配置一下agent.yaml里面的内容，文件的位置在 apache-shardingsphere-5.5.2-shardingsphere-proxy-bin/agent/conf/agent.yaml，现在只需要配置 prometheus，所以如下所示
+plugins: metrics: Prometheus: host: &#34;localhost&#34; port: 9000 props: jvm-information-collector-enabled: &#34;true&#34; 在 prometheus 的配置文件中需要加上 9000 的指标接口（如果是使用 brew 安装的话，配置文件在这个位置 /opt/homebrew/etc/prometheus.yml）
+scrape_configs: - job_name: &#39;shardingsphere&#39; static_configs: - targets: [&#39;localhost:9000&#39;] 网上查到的这篇文章 Apache ShardingSphere Agent 可观察性实用指南 提到需要修改脚本文件，其实是不用修改的，只需要夹一个参数 --agent 就可以
+需要注意的是运行的目录需要在 shardingsphere-proxy 的根目录下，因此命令如下所示
+sh bin/start.sh 5555 --agent 查看日志 vim logs/stdout.log 打印的应该如下所示
+Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-metrics-prometheus-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-tracing-opentelemetry-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-metrics-core-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-plugin-core-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-logging-file-5.5.2.jar [INFO ] 2025-03-31 18:07:38.772 [main] o.a.s.d.p.c.l.PipelineContextManagerLifecycleListener - mode type is not Cluster, mode type=&#39;Standalone&#39;, ignore [INFO ] 2025-03-31 18:07:38.786 [main] o.a.s.p.v.ShardingSphereProxyVersion - Database type is `MySQL`, version is `8.0.41`, database name is `sharding_db` [INFO ] 2025-03-31 18:07:38.786 [main] o.a.s.p.frontend.ssl.ProxySSLContext - Proxy frontend SSL/TLS is not enabled. [INFO ] 2025-03-31 18:07:38.836 [main] o.a.s.p.frontend.ShardingSphereProxy - ShardingSphere-Proxy Standalone mode started successfully 这个时候需要查询一下数据库，agent才会把服务启起来">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="website">
-<title>Penruins | Penruins</title>
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+<title>2025 03 31 Shardingsphere Prometheus 配置 | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/">
+<link rel="canonical" href="/post/blog/2025/2025-03-31-shardingsphere-prometheus-%E9%85%8D%E7%BD%AE/">
 <link rel="stylesheet" href="/book.min.26e661cf8028ea69ebe162050990c3a07de74e5bfe9389e880f2d6a7e5fa587c.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.d5326c57b48b5c2852645a6de4351e247f8b512b67fded33858de85ba53f2556.js" ></script>
-<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Penruins" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -2056,7 +2095,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Penruins</h3>
+  <h3>2025 03 31 Shardingsphere Prometheus 配置</h3>
 
   <label for="toc-control">
     
@@ -2072,7 +2111,11 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#2025-03-31-shardingsphere-prometheus-配置">2025-03-31-Shardingsphere-prometheus-配置</a>
+      <ul>
+        <li><a href="#reference">Reference</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -2085,11 +2128,59 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="penruins">
-  Penruins
-  <a class="anchor" href="#penruins">#</a>
+  <article class="markdown book-article"><h1 id="2025-03-31-shardingsphere-prometheus-配置">
+  2025-03-31-Shardingsphere-prometheus-配置
+  <a class="anchor" href="#2025-03-31-shardingsphere-prometheus-%e9%85%8d%e7%bd%ae">#</a>
 </h1>
-<p>penruins 的博客，分享<a href="/post/computer-science/computer-science-recommend">技术🤖</a>，<a href="/post/life/life-recommend">生活🤹🏻</a>，<a href="/post/life/movies-log">电影🎬</a>，<a href="/post/life/cycling/">骑行🚴🏽‍♂️</a>，<a href="/post/others/english-learning/">English</a>和其他一些有趣的东西(<a href="/post/computer-science/computer-science-learning-log">📖学习记录</a>, <a href="/post/life/hiking/">⛰️爬山</a>)</p>
+<p>把 shardingsphere proxy 搭建好之后，想要把监测数据放到 grafana里面进行监测，但是按照找到的资料来配置好像都不太行，自己研究了一下启动脚本，现在可以正常获取到指标数据了，所以花点时间把这个问题记录一下</p>
+<p>下载了官网提供的 shardingsphere-proxy 的包之后，里面其实已经包含了 agent 相关的 jar 包以及插件相关的 jar 包，其实不需要再下载一个 shardingsphere-agent</p>
+<p>我们需要配置一下<code>agent.yaml</code>里面的内容，文件的位置在 <code>apache-shardingsphere-5.5.2-shardingsphere-proxy-bin/agent/conf/agent.yaml</code>，现在只需要配置 prometheus，所以如下所示</p>
+<pre tabindex="0"><code>plugins:
+  metrics:
+    Prometheus:
+      host: &#34;localhost&#34;
+      port: 9000
+      props:
+        jvm-information-collector-enabled: &#34;true&#34;
+</code></pre><p>在 prometheus 的配置文件中需要加上 9000 的指标接口（如果是使用 brew 安装的话，配置文件在这个位置 <code>/opt/homebrew/etc/prometheus.yml</code>）</p>
+<pre tabindex="0"><code>scrape_configs:
+  - job_name: &#39;shardingsphere&#39;
+    static_configs:
+      - targets: [&#39;localhost:9000&#39;]
+</code></pre><p>网上查到的这篇文章 <a href="https://xie.infoq.cn/article/37c5c2380ce7f3c495b6841c7">Apache ShardingSphere Agent 可观察性实用指南</a> 提到需要修改脚本文件，其实是不用修改的，只需要夹一个参数 <code>--agent</code> 就可以</p>
+<p>需要注意的是运行的目录需要在 shardingsphere-proxy 的根目录下，因此命令如下所示</p>
+<pre tabindex="0"><code>sh bin/start.sh 5555 --agent
+</code></pre><p>查看日志 <code>vim logs/stdout.log</code> 打印的应该如下所示</p>
+<pre tabindex="0"><code>Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load
+INFO: Loaded jar: shardingsphere-agent-metrics-prometheus-5.5.2.jar
+Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load
+INFO: Loaded jar: shardingsphere-agent-tracing-opentelemetry-5.5.2.jar
+Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load
+INFO: Loaded jar: shardingsphere-agent-metrics-core-5.5.2.jar
+Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load
+INFO: Loaded jar: shardingsphere-agent-plugin-core-5.5.2.jar
+Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load
+INFO: Loaded jar: shardingsphere-agent-logging-file-5.5.2.jar
+[INFO ] 2025-03-31 18:07:38.772 [main] o.a.s.d.p.c.l.PipelineContextManagerLifecycleListener - mode type is not Cluster, mode type=&#39;Standalone&#39;, ignore
+[INFO ] 2025-03-31 18:07:38.786 [main] o.a.s.p.v.ShardingSphereProxyVersion - Database type is `MySQL`, version is `8.0.41`, database name is `sharding_db`
+[INFO ] 2025-03-31 18:07:38.786 [main] o.a.s.p.frontend.ssl.ProxySSLContext - Proxy frontend SSL/TLS is not enabled.
+[INFO ] 2025-03-31 18:07:38.836 [main] o.a.s.p.frontend.ShardingSphereProxy - ShardingSphere-Proxy Standalone mode started successfully
+</code></pre><p>这个时候需要查询一下数据库，agent才会把服务启起来</p>
+<pre tabindex="0"><code>[INFO ] 2025-03-31 18:08:14.258 [nioEventLoopGroup-3-1] o.a.s.a.c.p.PluginLifecycleServiceManager - Start plugin: Prometheus
+[INFO ] 2025-03-31 18:08:14.290 [nioEventLoopGroup-3-1] o.a.s.a.p.m.p.PrometheusPluginLifecycleService - Prometheus metrics HTTP server `localhost:9000` start success.
+</code></pre><p>日志如上打印之后，agent就真正启动了。访问 <code>http://localhost:9000/metrics</code> 可以看到返回了指标数据</p>
+<h2 id="reference">
+  Reference
+  <a class="anchor" href="#reference">#</a>
+</h2>
+<ul>
+<li><a href="https://shardingsphere.apache.org/document/current/cn/user-manual/shardingsphere-proxy/observability/">可观察性的使用</a>
+<ul>
+<li>官方文档</li>
+</ul>
+</li>
+<li><a href="https://xie.infoq.cn/article/37c5c2380ce7f3c495b6841c7">Apache ShardingSphere Agent 可观察性实用指南</a></li>
+</ul>
 </article>
  
       
@@ -2098,12 +2189,6 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex flex-wrap justify-between">
 
-
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/eabc2f02d21d027c6d724b503a7ad98e923c63fb" title='Last modified by liuxiang | October 2, 2025' target="_blank" rel="noopener">
-      <img src="/svg/calendar.svg" class="book-icon" alt="" />
-      <span>October 2, 2025</span>
-    </a>
-  </div>
 
 
 
@@ -2137,7 +2222,11 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#penruins">Penruins</a></li>
+    <li><a href="#2025-03-31-shardingsphere-prometheus-配置">2025-03-31-Shardingsphere-prometheus-配置</a>
+      <ul>
+        <li><a href="#reference">Reference</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
