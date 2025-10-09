@@ -10,6 +10,10 @@ systemctl start docker
 systemctl restart docker
 # docker 停止
 systemctl stop docker
+# docker 运行状态
+systemctl status docker
+# 进入容器中
+docker exec -it &lt;container-name&gt; /bin/bash
 
   如何开启 debug 模式
   #
@@ -31,7 +35,7 @@ sudo systemctl restart docker
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/blog/2025/2025-10-09-docker-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="# centos 操作系统环境下 # docker 启动 systemctl start docker # docker 重启 systemctl restart docker # docker 停止 systemctl stop docker 如何开启 debug 模式 # # 编辑文件 sudo vim /etc/systemd/system/docker.service.d/debug.conf # 添加或修改以下内容 [Service] ExecStart= ExecStart=/usr/bin/dockerd --debug # 重新加载 systemd 配置并重启 Docker sudo systemctl daemon-reload sudo systemctl restart docker">
+  <meta property="og:description" content="# centos 操作系统环境下 # docker 启动 systemctl start docker # docker 重启 systemctl restart docker # docker 停止 systemctl stop docker # docker 运行状态 systemctl status docker # 进入容器中 docker exec -it &lt;container-name&gt; /bin/bash 如何开启 debug 模式 # # 编辑文件 sudo vim /etc/systemd/system/docker.service.d/debug.conf # 添加或修改以下内容 [Service] ExecStart= ExecStart=/usr/bin/dockerd --debug # 重新加载 systemd 配置并重启 Docker sudo systemctl daemon-reload sudo systemctl restart docker">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
@@ -41,7 +45,7 @@ sudo systemctl restart docker
 <link rel="canonical" href="/post/blog/2025/2025-10-09-docker-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
 <link rel="stylesheet" href="/book.min.9dde1a21547d5064afe2096fb76cbe1f445fbfcd272ec32a22736c403bb1c1ab.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.7d859b64bac77ee7d5d2237cbefac16719d5890d52cbbef632dfe43087700886.js" ></script>
+  <script defer src="/en.search.min.c72f211dd76b27e8bbbc754c1a7968ded127dcde16c5a93e3ce609eeb409eea9.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -2122,6 +2126,10 @@ systemctl start docker
 systemctl restart docker
 # docker 停止
 systemctl stop docker
+# docker 运行状态
+systemctl status docker
+# 进入容器中
+docker exec -it &lt;container-name&gt; /bin/bash
 </code></pre><h1 id="如何开启-debug-模式">
   如何开启 debug 模式
   <a class="anchor" href="#%e5%a6%82%e4%bd%95%e5%bc%80%e5%90%af-debug-%e6%a8%a1%e5%bc%8f">#</a>
