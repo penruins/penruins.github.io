@@ -3,196 +3,19 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="
-  系统设计
-  #
-
-
-  数据持久化
-  #
-
-
-  冷热分离
-  #
-
-
-冷热分离之 OTS 表格存储实战
-数据架构：数据冷热分离实践思考
-数据架构：概念与冷热分离
-
-
-  查询分离
-  #
-
-
-  分表分库
-  #
-
-
-  服务发现
-  #
-
-
-  事务处理
-  #
-
-
-  本地事务
-  #
-
-
-  全局事务
-  #
-
-
-  共享事务
-  #
-
-
-  分布式事务
-  #
-
-
-  缓存
-  #
-
-
-  客户端缓存
-  #
-
-
-  系统是否真的需要缓存？
-  #
-
-
-软件开发中引入缓存的负面作用要明显大于硬件缓存带来的负面作用
-
-从开发角度来说
-
-你要考虑缓存的失效、更新、一致性等问题（硬件缓存也有这些问题，只是不需要由你去考虑，主流的ISA也都没有提供任何直接操作缓存的指令）
-
-
-从运维角度来说
-
-缓存会掩盖一些缺陷，让问题在更久的时间以后，出现在距离发生现场更远的位置上
-
-
-从安全角度来说
-
-缓存可能会泄漏某些保密数据，也是容易受到攻击的薄弱点
-
-
-
-
-引入缓存的理由
-
-为缓解CPU压力而引入缓存
-
-譬如把方法运行结果存储起来、把原本要实时计算的内容提前算好、对一些公用的数据进行复用，这可以节省CPU算力，顺带提升响应性能
-
-
-为缓解I/O压力而引入缓存
-
-譬如把原本对网络、磁盘等较慢介质的读写访问变为对内存等较快介质的访问，
-将原本对单点部件（如数据库）的读写访问变为对可扩缩部件（如缓存中间件）的访问，顺带提升响应性能
-
-
-
-
-
-
-  服务端缓存
-  #
-
-
-  读缓存
-  #
-
-
-  写缓存
-  #
-
-
-  负载均衡
-  #
-
-
-  流量治理
-  #
-
-
-  服务容错
-  #
-
-
-  流量控制
-  #
-
-
-  可观测性
-  #
-
-
-  时间日志
-  #
-
-
-  链路追踪
-  #
-
-
-  聚合度量
-  #
-
-
-  架构安全性
-  #
-
-
-  认证
-  #
-
-
-  授权
-  #
-
-
-  凭证
-  #
-
-
-  保密
-  #
-
-
-  传输
-  #
-
-
-  分布式共识
-  #
-
-
-  Reference
-  #
-
-
-凤凰架构 构建可靠的大型分布式系统
-搞定系统设计 面试敲开大厂的门
-">
+<meta name="description" content="">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/blog/2025/2025-10-09-docker-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="系统设计">
-  <meta property="og:description" content="系统设计 # 数据持久化 # 冷热分离 # 冷热分离之 OTS 表格存储实战 数据架构：数据冷热分离实践思考 数据架构：概念与冷热分离 查询分离 # 分表分库 # 服务发现 # 事务处理 # 本地事务 # 全局事务 # 共享事务 # 分布式事务 # 缓存 # 客户端缓存 # 系统是否真的需要缓存？ # 软件开发中引入缓存的负面作用要明显大于硬件缓存带来的负面作用 从开发角度来说 你要考虑缓存的失效、更新、一致性等问题（硬件缓存也有这些问题，只是不需要由你去考虑，主流的ISA也都没有提供任何直接操作缓存的指令） 从运维角度来说 缓存会掩盖一些缺陷，让问题在更久的时间以后，出现在距离发生现场更远的位置上 从安全角度来说 缓存可能会泄漏某些保密数据，也是容易受到攻击的薄弱点 引入缓存的理由 为缓解CPU压力而引入缓存 譬如把方法运行结果存储起来、把原本要实时计算的内容提前算好、对一些公用的数据进行复用，这可以节省CPU算力，顺带提升响应性能 为缓解I/O压力而引入缓存 譬如把原本对网络、磁盘等较慢介质的读写访问变为对内存等较快介质的访问， 将原本对单点部件（如数据库）的读写访问变为对可扩缩部件（如缓存中间件）的访问，顺带提升响应性能 服务端缓存 # 读缓存 # 写缓存 # 负载均衡 # 流量治理 # 服务容错 # 流量控制 # 可观测性 # 时间日志 # 链路追踪 # 聚合度量 # 架构安全性 # 认证 # 授权 # 凭证 # 保密 # 传输 # 分布式共识 # Reference # 凤凰架构 构建可靠的大型分布式系统 搞定系统设计 面试敲开大厂的门">
+  <meta property="og:title" content="Penruins">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-<title>系统设计 | Penruins</title>
+<title>2025 10 09 Docker 常用操作 | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+<link rel="canonical" href="/post/blog/2025/2025-10-09-docker-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
 <link rel="stylesheet" href="/book.min.9dde1a21547d5064afe2096fb76cbe1f445fbfcd272ec32a22736c403bb1c1ab.css" >
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.4193dcbc876b5199f178a8cd1765ef11ec0df59cb31423c12d0a7789217a53bb.js" ></script>
@@ -505,7 +328,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex justify-between">
       <a role="button" class="">Computer Science</a>
     </label>
@@ -1774,7 +1597,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="active">系统设计</a>
+    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">系统设计</a>
   
 
         </li>
@@ -2240,7 +2063,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>系统设计</h3>
+  <h3>2025 10 09 Docker 常用操作</h3>
 
   <label for="toc-control">
     
@@ -2254,70 +2077,7 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#系统设计">系统设计</a>
-      <ul>
-        <li><a href="#数据持久化">数据持久化</a>
-          <ul>
-            <li><a href="#冷热分离">冷热分离</a></li>
-            <li><a href="#查询分离">查询分离</a></li>
-            <li><a href="#分表分库">分表分库</a></li>
-          </ul>
-        </li>
-        <li><a href="#服务发现">服务发现</a></li>
-        <li><a href="#事务处理">事务处理</a>
-          <ul>
-            <li><a href="#本地事务">本地事务</a></li>
-            <li><a href="#全局事务">全局事务</a></li>
-            <li><a href="#共享事务">共享事务</a></li>
-            <li><a href="#分布式事务">分布式事务</a></li>
-          </ul>
-        </li>
-        <li><a href="#缓存">缓存</a>
-          <ul>
-            <li><a href="#客户端缓存">客户端缓存</a>
-              <ul>
-                <li><a href="#系统是否真的需要缓存">系统是否真的需要缓存？</a></li>
-              </ul>
-            </li>
-            <li><a href="#服务端缓存">服务端缓存</a>
-              <ul>
-                <li><a href="#读缓存">读缓存</a></li>
-                <li><a href="#写缓存">写缓存</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="#负载均衡">负载均衡</a></li>
-        <li><a href="#流量治理">流量治理</a>
-          <ul>
-            <li><a href="#服务容错">服务容错</a></li>
-            <li><a href="#流量控制">流量控制</a></li>
-          </ul>
-        </li>
-        <li><a href="#可观测性">可观测性</a>
-          <ul>
-            <li><a href="#时间日志">时间日志</a></li>
-            <li><a href="#链路追踪">链路追踪</a></li>
-            <li><a href="#聚合度量">聚合度量</a></li>
-          </ul>
-        </li>
-        <li><a href="#架构安全性">架构安全性</a>
-          <ul>
-            <li><a href="#认证">认证</a></li>
-            <li><a href="#授权">授权</a></li>
-            <li><a href="#凭证">凭证</a></li>
-            <li><a href="#保密">保密</a></li>
-            <li><a href="#传输">传输</a></li>
-          </ul>
-        </li>
-        <li><a href="#分布式共识">分布式共识</a></li>
-        <li><a href="#reference">Reference</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
 
@@ -2328,184 +2088,7 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="系统设计">
-  系统设计
-  <a class="anchor" href="#%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1">#</a>
-</h1>
-<h2 id="数据持久化">
-  数据持久化
-  <a class="anchor" href="#%e6%95%b0%e6%8d%ae%e6%8c%81%e4%b9%85%e5%8c%96">#</a>
-</h2>
-<h3 id="冷热分离">
-  冷热分离
-  <a class="anchor" href="#%e5%86%b7%e7%83%ad%e5%88%86%e7%a6%bb">#</a>
-</h3>
-<ul>
-<li><a href="https://zhuanlan.zhihu.com/p/370031862">冷热分离之 OTS 表格存储实战</a></li>
-<li><a href="https://developer.aliyun.com/article/1321304">数据架构：数据冷热分离实践思考</a></li>
-<li><a href="https://xie.infoq.cn/article/8cb17c785305b9228bc92fea1">数据架构：概念与冷热分离</a></li>
-</ul>
-<h3 id="查询分离">
-  查询分离
-  <a class="anchor" href="#%e6%9f%a5%e8%af%a2%e5%88%86%e7%a6%bb">#</a>
-</h3>
-<h3 id="分表分库">
-  分表分库
-  <a class="anchor" href="#%e5%88%86%e8%a1%a8%e5%88%86%e5%ba%93">#</a>
-</h3>
-<h2 id="服务发现">
-  服务发现
-  <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e5%8f%91%e7%8e%b0">#</a>
-</h2>
-<h2 id="事务处理">
-  事务处理
-  <a class="anchor" href="#%e4%ba%8b%e5%8a%a1%e5%a4%84%e7%90%86">#</a>
-</h2>
-<h3 id="本地事务">
-  本地事务
-  <a class="anchor" href="#%e6%9c%ac%e5%9c%b0%e4%ba%8b%e5%8a%a1">#</a>
-</h3>
-<h3 id="全局事务">
-  全局事务
-  <a class="anchor" href="#%e5%85%a8%e5%b1%80%e4%ba%8b%e5%8a%a1">#</a>
-</h3>
-<h3 id="共享事务">
-  共享事务
-  <a class="anchor" href="#%e5%85%b1%e4%ba%ab%e4%ba%8b%e5%8a%a1">#</a>
-</h3>
-<h3 id="分布式事务">
-  分布式事务
-  <a class="anchor" href="#%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1">#</a>
-</h3>
-<h2 id="缓存">
-  缓存
-  <a class="anchor" href="#%e7%bc%93%e5%ad%98">#</a>
-</h2>
-<h3 id="客户端缓存">
-  客户端缓存
-  <a class="anchor" href="#%e5%ae%a2%e6%88%b7%e7%ab%af%e7%bc%93%e5%ad%98">#</a>
-</h3>
-<h4 id="系统是否真的需要缓存">
-  系统是否真的需要缓存？
-  <a class="anchor" href="#%e7%b3%bb%e7%bb%9f%e6%98%af%e5%90%a6%e7%9c%9f%e7%9a%84%e9%9c%80%e8%a6%81%e7%bc%93%e5%ad%98">#</a>
-</h4>
-<ul>
-<li>软件开发中引入缓存的负面作用要明显大于硬件缓存带来的负面作用
-<ul>
-<li>从开发角度来说
-<ul>
-<li>你要考虑缓存的失效、更新、一致性等问题（硬件缓存也有这些问题，只是不需要由你去考虑，主流的ISA也都没有提供任何直接操作缓存的指令）</li>
-</ul>
-</li>
-<li>从运维角度来说
-<ul>
-<li>缓存会掩盖一些缺陷，让问题在更久的时间以后，出现在距离发生现场更远的位置上</li>
-</ul>
-</li>
-<li>从安全角度来说
-<ul>
-<li>缓存可能会泄漏某些保密数据，也是容易受到攻击的薄弱点</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>引入缓存的理由
-<ul>
-<li>为缓解CPU压力而引入缓存
-<ul>
-<li>譬如把方法运行结果存储起来、把原本要实时计算的内容提前算好、对一些公用的数据进行复用，这可以节省CPU算力，顺带提升响应性能</li>
-</ul>
-</li>
-<li>为缓解I/O压力而引入缓存
-<ul>
-<li>譬如把原本对网络、磁盘等较慢介质的读写访问变为对内存等较快介质的访问，</li>
-<li>将原本对单点部件（如数据库）的读写访问变为对可扩缩部件（如缓存中间件）的访问，顺带提升响应性能</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="服务端缓存">
-  服务端缓存
-  <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e7%ab%af%e7%bc%93%e5%ad%98">#</a>
-</h3>
-<h4 id="读缓存">
-  读缓存
-  <a class="anchor" href="#%e8%af%bb%e7%bc%93%e5%ad%98">#</a>
-</h4>
-<h4 id="写缓存">
-  写缓存
-  <a class="anchor" href="#%e5%86%99%e7%bc%93%e5%ad%98">#</a>
-</h4>
-<h2 id="负载均衡">
-  负载均衡
-  <a class="anchor" href="#%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1">#</a>
-</h2>
-<h2 id="流量治理">
-  流量治理
-  <a class="anchor" href="#%e6%b5%81%e9%87%8f%e6%b2%bb%e7%90%86">#</a>
-</h2>
-<h3 id="服务容错">
-  服务容错
-  <a class="anchor" href="#%e6%9c%8d%e5%8a%a1%e5%ae%b9%e9%94%99">#</a>
-</h3>
-<h3 id="流量控制">
-  流量控制
-  <a class="anchor" href="#%e6%b5%81%e9%87%8f%e6%8e%a7%e5%88%b6">#</a>
-</h3>
-<h2 id="可观测性">
-  可观测性
-  <a class="anchor" href="#%e5%8f%af%e8%a7%82%e6%b5%8b%e6%80%a7">#</a>
-</h2>
-<h3 id="时间日志">
-  时间日志
-  <a class="anchor" href="#%e6%97%b6%e9%97%b4%e6%97%a5%e5%bf%97">#</a>
-</h3>
-<h3 id="链路追踪">
-  链路追踪
-  <a class="anchor" href="#%e9%93%be%e8%b7%af%e8%bf%bd%e8%b8%aa">#</a>
-</h3>
-<h3 id="聚合度量">
-  聚合度量
-  <a class="anchor" href="#%e8%81%9a%e5%90%88%e5%ba%a6%e9%87%8f">#</a>
-</h3>
-<h2 id="架构安全性">
-  架构安全性
-  <a class="anchor" href="#%e6%9e%b6%e6%9e%84%e5%ae%89%e5%85%a8%e6%80%a7">#</a>
-</h2>
-<h3 id="认证">
-  认证
-  <a class="anchor" href="#%e8%ae%a4%e8%af%81">#</a>
-</h3>
-<h3 id="授权">
-  授权
-  <a class="anchor" href="#%e6%8e%88%e6%9d%83">#</a>
-</h3>
-<h3 id="凭证">
-  凭证
-  <a class="anchor" href="#%e5%87%ad%e8%af%81">#</a>
-</h3>
-<h3 id="保密">
-  保密
-  <a class="anchor" href="#%e4%bf%9d%e5%af%86">#</a>
-</h3>
-<h3 id="传输">
-  传输
-  <a class="anchor" href="#%e4%bc%a0%e8%be%93">#</a>
-</h3>
-<h2 id="分布式共识">
-  分布式共识
-  <a class="anchor" href="#%e5%88%86%e5%b8%83%e5%bc%8f%e5%85%b1%e8%af%86">#</a>
-</h2>
-<h2 id="reference">
-  Reference
-  <a class="anchor" href="#reference">#</a>
-</h2>
-<ul>
-<li><a href="https://book.douban.com/subject/35492898/">凤凰架构 构建可靠的大型分布式系统</a></li>
-<li><a href="https://book.douban.com/subject/36661336/">搞定系统设计 面试敲开大厂的门</a></li>
-</ul>
-</article>
+  <article class="markdown book-article"><pre tabindex="0"><code></code></pre></article>
  
       
 
@@ -2544,70 +2127,7 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#系统设计">系统设计</a>
-      <ul>
-        <li><a href="#数据持久化">数据持久化</a>
-          <ul>
-            <li><a href="#冷热分离">冷热分离</a></li>
-            <li><a href="#查询分离">查询分离</a></li>
-            <li><a href="#分表分库">分表分库</a></li>
-          </ul>
-        </li>
-        <li><a href="#服务发现">服务发现</a></li>
-        <li><a href="#事务处理">事务处理</a>
-          <ul>
-            <li><a href="#本地事务">本地事务</a></li>
-            <li><a href="#全局事务">全局事务</a></li>
-            <li><a href="#共享事务">共享事务</a></li>
-            <li><a href="#分布式事务">分布式事务</a></li>
-          </ul>
-        </li>
-        <li><a href="#缓存">缓存</a>
-          <ul>
-            <li><a href="#客户端缓存">客户端缓存</a>
-              <ul>
-                <li><a href="#系统是否真的需要缓存">系统是否真的需要缓存？</a></li>
-              </ul>
-            </li>
-            <li><a href="#服务端缓存">服务端缓存</a>
-              <ul>
-                <li><a href="#读缓存">读缓存</a></li>
-                <li><a href="#写缓存">写缓存</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="#负载均衡">负载均衡</a></li>
-        <li><a href="#流量治理">流量治理</a>
-          <ul>
-            <li><a href="#服务容错">服务容错</a></li>
-            <li><a href="#流量控制">流量控制</a></li>
-          </ul>
-        </li>
-        <li><a href="#可观测性">可观测性</a>
-          <ul>
-            <li><a href="#时间日志">时间日志</a></li>
-            <li><a href="#链路追踪">链路追踪</a></li>
-            <li><a href="#聚合度量">聚合度量</a></li>
-          </ul>
-        </li>
-        <li><a href="#架构安全性">架构安全性</a>
-          <ul>
-            <li><a href="#认证">认证</a></li>
-            <li><a href="#授权">授权</a></li>
-            <li><a href="#凭证">凭证</a></li>
-            <li><a href="#保密">保密</a></li>
-            <li><a href="#传输">传输</a></li>
-          </ul>
-        </li>
-        <li><a href="#分布式共识">分布式共识</a></li>
-        <li><a href="#reference">Reference</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
 
 
  
