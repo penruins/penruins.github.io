@@ -13,6 +13,7 @@ binarywang/qrcode-utils
 二维码生成工具
 
 
+Tio Boot Docs
 
 
   String
@@ -64,7 +65,7 @@ StringBuffer 通过 synchronized
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/java/java/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="java">
-  <meta property="og:description" content="github repository # binarywang/qrcode-utils 二维码生成工具 String # StringBuffer 是怎么保证线程安全的？ # StringBuffer 是通过 同步机制 来保证线程安全的。具体来说，它的所有关键方法（如 append()、insert()、delete()、reverse() 等）都使用了 synchronized 关键字进行修饰，确保同一时间只有一个线程可以执行这些方法127。
+  <meta property="og:description" content="github repository # binarywang/qrcode-utils 二维码生成工具 Tio Boot Docs String # StringBuffer 是怎么保证线程安全的？ # StringBuffer 是通过 同步机制 来保证线程安全的。具体来说，它的所有关键方法（如 append()、insert()、delete()、reverse() 等）都使用了 synchronized 关键字进行修饰，确保同一时间只有一个线程可以执行这些方法127。
 1. 同步方法 # StringBuffer 的方法在设计时都加了 synchronized 关键字，例如：
 public synchronized StringBuffer append(String str){ // 方法实现 } 这种机制确保了在多线程环境下，只有一个线程可以访问和修改 StringBuffer 的内容，避免了竞态条件（Race Condition）和数据不一致的问题12。
 2. 锁机制 # StringBuffer 内部使用了一个锁对象（即 this 锁），当一个线程调用 StringBuffer 的同步方法时，会获取这个锁，其他线程必须等待锁释放后才能继续执行。这种锁机制保证了线程间的同步17。
@@ -73,14 +74,14 @@ public synchronized StringBuffer append(String str){ // 方法实现 } 这种机
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-11T14:27:08+08:00">
+    <meta property="article:modified_time" content="2025-10-11T17:25:48+08:00">
 <title>java | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
 <link rel="canonical" href="/post/computer-science/java/java/">
 <link rel="stylesheet" href="/book.min.9dde1a21547d5064afe2096fb76cbe1f445fbfcd272ec32a22736c403bb1c1ab.css" >
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.499e8c893beb4f489dacd8cbaabaa4a8689ca8a8be64be7885c2d341eba1f898.js" ></script>
+  <script defer src="/en.search.min.0bb4253841b597266c5f432a98808e2f7f1422b7d5fe9948ce208dbdfd1d24d6.js" ></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -2823,6 +2824,7 @@ https://github.com/alex-shpak/hugo-book
 <li>二维码生成工具</li>
 </ul>
 </li>
+<li><a href="https://www.tio-boot.com/">Tio Boot Docs</a></li>
 </ul>
 <h1 id="string">
   String
@@ -8868,7 +8870,7 @@ Concurrency），使得多线程编程更加清晰和易于管理。虚拟线程
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/5d465c8084af7e66751c761d814b915a016161f9" title='Last modified by liuxiang | October 11, 2025' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/penruins/penruins.github.io/commit/11fcf06691f02e99f1aa517a14112490513a0004" title='Last modified by liuxiang | October 11, 2025' target="_blank" rel="noopener">
       <img src="/svg/calendar.svg" class="book-icon" alt="" />
       <span>October 11, 2025</span>
     </a>
