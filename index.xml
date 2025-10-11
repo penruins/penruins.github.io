@@ -6,7 +6,7 @@
     <description>Recent content on Penruins</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 11 Oct 2025 11:06:01 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 11 Oct 2025 11:16:10 +0800</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Algorithm</title>
@@ -602,6 +602,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/post/computer-science/software/idea/</guid>
       <description></description>
+    </item>
+    <item>
+      <title></title>
+      <link>/post/life/article-recommand/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/post/life/article-recommand/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/yihong0618/gitblog/issues/186&#34;&gt;我转行程序员的经历 #186 (yihong0618)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.yinwang.org/blog-cn/2019/09/11/talk-is-not-cheap&#34;&gt;Talk is not cheap (王垠)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.yinwang.org/blog-cn/2020/02/05/how-to-read-code&#34;&gt;如何阅读别人的代码 (王垠)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.yinwang.org/blog-cn/2015/03/03/how-to-respect-a-programmer&#34;&gt;怎样尊重一个程序员&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.yinwang.org/blog-cn/2015/02/20/other-peoples-bug&#34;&gt;其他人的BUG&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.yinwang.org/blog-cn/2014/02/18/dijkstra-interview&#34;&gt;一个对 Dijkstra 的采访视频&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.yinwang.org/blog-cn/2012/07/12/google-story&#34;&gt;我和 Google 的故事（2012 年原版）&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.yinwang.org/blog-cn/2014/01/04/authority&#34;&gt;我和权威的故事&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/zwblog/articles/5322423.html&#34;&gt;怎样花两年时间去面试一个人 - 刘未鹏&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.seangoedecke.com/good-system-design/&#34;&gt;Everything I know about good system design&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title></title>
