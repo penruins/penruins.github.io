@@ -19,12 +19,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-19T19:59:16+08:00">
+    <meta property="article:modified_time" content="2025-10-19T20:04:38+08:00">
 
 
   <meta itemprop="name" content="java basic">
   <meta itemprop="description" content="java basic# mess# 八大数据类型# byte char boolean short int long float double transient 关键字的作用是什么？# 在一个类中如果变量被 transient 关键字修饰，在对类的对象进行序列化的时候就会忽略这个变量 什么是深拷贝？什么是浅拷贝？# 深拷贝：递归地复制对象及其所有嵌套的子对象，生成一个完全独立的新对象。两个对象之间不共享引用 浅拷贝：创建一个新的对象，但只复制对象的最外层属性的引用 String# equals与 == 区别# equals 比较的是两个字符串的内容是否是相等的 == 比较的是两个变量指向的引用是否是相等的 StringBuilder StringBuffer区别# StringBuilder 线程不安全 StringBuffer 线程安全 StringBuffer 是怎么保证线程安全的？# 对字符串操作的方法都通过 synchronized 关键字修饰，保证线程安全 StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的# 两个类都继承子 AbstractStringBuilder 均使用 char[] value 保存字符串数据 HashMap# HashMap底层的数据结构是怎样的？# java 1.8 之前 数组 &#43; 链表 java 1.8 之后 数组 &#43; 链表/红黑树 HashMap 是否线程安全，如何保证线程安全# 不是线程安全的 如何保证线程安全 Collections.synchronizedMap() ConcurrentHashMap 读写锁 ReadWriteLock 局部使用 HashMap 初始化写，后续只读 HashMap get 时间复杂度# 最好的情况是O(1) 若发生哈希碰撞，对应到桶之后还需要查询链表或红黑树，时间复杂度下降到O(N)或O(logN) HashMap 和 Hashtable 有什么区别？# 线程安全性 HashMap是线程不安全的，HashTable是线程安全的 对空值的支持 HashMap的key和value都支持空值，HashTable不支持key或value为空值 List# Collection 和 Collections 有什么区别？# Collection 是集合类的一个接口 Collections 是集合的一个工具类 LinkedList 删除时间复杂度# 删除头和尾的时间复杂度为O(1)，因为在LinkedList中维护了头和尾2个指针 其他位置的时间复杂度为O(n) 函数式编程# java的函数式编程包含哪些内容？# java的函数式编程的概念中将只包含一个方法的接口称为函数式接口，可以通过Lambda表达式简化匿名类的定义 提供流操作了API，可以将集合的迭代操作变为链式操作，提供了并行处理集合的方法 提供了Optional类用来处理空指针的情况 I/O# 网络io分为哪几种# 网络 I/O 模型主要分为以下五种：">
-  <meta itemprop="dateModified" content="2025-10-19T19:59:16+08:00">
+  <meta itemprop="dateModified" content="2025-10-19T20:04:38+08:00">
   <meta itemprop="wordCount" content="236">
 
 <title>java basic | Penruins</title>
@@ -2448,6 +2448,7 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
+<blockquote class="book-hint info">
 <p><strong>Reference</strong><br>
 所以当发生一次网络请求时，将会按顺序经历“等待数据从远程主机到达缓冲区”和“将数据从缓冲区复制到应用程序地址空间”两个阶段</p>
 <p>根据实现这两个阶段的不同方法，人们把网络I/O模型总结为两类、五种模型：两类是指同步I/O与异步I/O，五种是指在同步I/O中又划分出阻塞I/O、非阻塞I/O、多路复用I/O、信号驱动I/O四种细分模型以及异步I/O模型</p>
@@ -2458,6 +2459,7 @@ https://github.com/alex-shpak/hugo-book
 <p>信号驱动I/O(Signal-Driven I/O)：你去到饭堂，发现饭还没做好，但你跟厨师很熟，跟他说饭做好了叫你，然后你就回去了，等收到厨师通知后，你再去饭堂把饭拿回宿舍。这里厨师的通知就是那个“信号”，<strong>信号驱动I/O与异步I/O的区别是“从缓冲区获取数据”这个步骤的处理，前者收到的通知是可以开始进行复制操作了，即要你自己从饭堂拿回宿舍，在复制完成之前线程处于阻塞状态，所以它仍属于同步I/O操作，而后者收到的通知是复制操作已经完成，即外卖小哥已经把饭送到了。</strong></p>
 <p>显然，异步I/O模型是最方便的，但前提是系统支持异步操作。异步I/O受限于操作系统，Windows NT内核早在3.5以后，就通过IOCP实现了真正的异步I/O模型。而Linux系统是在Linux Kernel 2.6才首次引入，目前还不算很完善，因此在Linux系统下实现高并发网络编程时仍以多路复用I/O模型模式为主。</p>
 <p>《凤凰架构》 7.2.2 网络I/O 模型</p>
+</blockquote>
 <h3 id="java支持的io模型">Java支持的IO模型<a class="anchor" href="#java%e6%94%af%e6%8c%81%e7%9a%84io%e6%a8%a1%e5%9e%8b">#</a></h3>
 <ul>
 <li><strong>阻塞 I/O（Blocking I/O, BIO）</strong>
