@@ -25,7 +25,7 @@ https://github.com/alex-shpak/hugo-book
   <meta itemprop="name" content="Penruins">
   <meta itemprop="description" content="Penruins Penruins 的博客，分享🤖技术，🤹🏻生活，📚书，🎬电影，🚴🏽‍♂️骑行，English，文章，博客，网站 和其他一些有趣的东西(📖学习记录, ⛰️爬山)
 2025-10-09 ssh 命令的使用 2025-10-09 docker 常用操作 2025-10-09 linux 常用命令 2025-04-10 广州找工作 2025-03-29 教育到底怎么了">
-  <meta itemprop="dateModified" content="2025-10-19T21:24:19+08:00">
+  <meta itemprop="dateModified" content="2025-10-19T21:29:21+08:00">
   <meta itemprop="wordCount" content="18">
 
 <title>Penruins</title>
@@ -80,17 +80,13 @@ const dataArray = [
   "艾柯：將來，教育目的是教人“篩選”這種藝術。再沒必要教加德滿都在哪裏，或者查理大帝之後誰是第一個法蘭西國王，因為我們隨處找到答案。不過，我們應該叫學生考查十五個網絡頁面，讓他們自己判斷哪個最差。需要教會他們“比較”這種技巧。"
 ];
 
-// 随机选择一个元素
-const randomIndex = Math.floor(Math.random() * dataArray.length);
-const randomElement = dataArray[randomIndex];
-
 // 展示随机选择的元素
-displayElement(randomElement);
+displayElement(dataArray[Math.floor(Math.random() * dataArray.length)], 'display');
 
 // 展示元素的函数
-function displayElement(element) {
+function displayElement(element, name) {
   // 获取页面上的展示区域
-  const displayArea = document.getElementById('display');
+  const displayArea = document.getElementById(name);
   
   if (displayArea) {
     // 清空展示区域
