@@ -37,7 +37,7 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-20T00:36:01+08:00">
+    <meta property="article:modified_time" content="2025-10-20T11:07:04+08:00">
 
 
   <meta itemprop="name" content="xxl job">
@@ -51,7 +51,7 @@ https://github.com/alex-shpak/hugo-book
 分布式调度：通过中心化调度器（如数据库、Redis）避免任务重复执行。 任务分片：将大数据任务拆分到多个节点并行处理（如批量处理百万条数据）。 运维友好：提供管理界面，支持动态配置、日志查看、报警推送。 扩展性：支持 GLUE 脚本（动态修改代码）、跨语言任务（通过 HTTP 调用）。 局限性：
 需要额外部署调度中心（Admin）和执行器（Executor），增加架构复杂度。 依赖中间件（如 MySQL），存在性能瓶颈风险（高频任务需优化）。 示例配置：
 @XxlJob(&#34;demoJobHandler&#34;) public void execute() { // 分布式任务逻辑（支持分片参数） int shardIndex = XxlJobHelper.getShardIndex(); int shardTotal = XxlJobHelper.getShardTotal(); } 决策树：如何选择？# 是否多实例部署？">
-  <meta itemprop="dateModified" content="2025-10-20T00:36:01+08:00">
+  <meta itemprop="dateModified" content="2025-10-20T11:07:04+08:00">
   <meta itemprop="wordCount" content="135">
 
 <title>xxl job | Penruins</title>
