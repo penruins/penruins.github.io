@@ -9,7 +9,7 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="2025-08-26 ssh 进行端口转发# 如果你的网络连接是这样的：你当前的电脑是 Network-Node-1, 可以通过 ssh 连接服务器 Server-1, Server-1 可以通过 ssh 连接 Server-2, 和 Server-3，Server-2 和 Server-3 也是相互联通的。但是 Network-Node-1 不能直接连接 Server-2 和 Server-3。
-flowchart LR Network-Node-1 &lt;--&gt; Server-1 Server-1 &lt;--&gt; Server-2 Server-1 &lt;--&gt; Server-3 Server-2 &lt;--&gt; Server-3如果在 Server-2 或者 Server-3 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？
+如果在 Server-2 或者 Server-3 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？
 这个时候最好的方法就是使用端口转发
 在 ~/.ssh/config 中进行配置
 Host test HostName Server-1 User myuser Port 22 LocalForward 18001 Server-2:22 # Server-2 ssh LocalForward 18002 Server-3:22 # Server-3 ssh LocalForward 18003 Server-2:3306 # mysql文件保存之后执行 ssh test, 接下来输入密码就会通过 ssh 连接到 Server-1, 这个时候你所看到的和普通的 ssh 连接没有什么区别，但实际上它进行了端口转发。保留当前这个窗口不关闭，使用 ip 为 localhost，端口为 18001 和 18002, 可以在 Network-1 直接连接 Server-2 和 Server-3, 同时也可以通过 localhost:3306 连接在 Server-2 上部署的 mysql 服务
@@ -20,7 +20,7 @@ Host test HostName Server-1 User myuser Port 22 LocalForward 18001 Server-2:22 #
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Penruins">
   <meta property="og:description" content="2025-08-26 ssh 进行端口转发# 如果你的网络连接是这样的：你当前的电脑是 Network-Node-1, 可以通过 ssh 连接服务器 Server-1, Server-1 可以通过 ssh 连接 Server-2, 和 Server-3，Server-2 和 Server-3 也是相互联通的。但是 Network-Node-1 不能直接连接 Server-2 和 Server-3。
-flowchart LR Network-Node-1 &lt;--&gt; Server-1 Server-1 &lt;--&gt; Server-2 Server-1 &lt;--&gt; Server-3 Server-2 &lt;--&gt; Server-3如果在 Server-2 或者 Server-3 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？
+如果在 Server-2 或者 Server-3 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？
 这个时候最好的方法就是使用端口转发
 在 ~/.ssh/config 中进行配置
 Host test HostName Server-1 User myuser Port 22 LocalForward 18001 Server-2:22 # Server-2 ssh LocalForward 18002 Server-3:22 # Server-3 ssh LocalForward 18003 Server-2:3306 # mysql文件保存之后执行 ssh test, 接下来输入密码就会通过 ssh 连接到 Server-1, 这个时候你所看到的和普通的 ssh 连接没有什么区别，但实际上它进行了端口转发。保留当前这个窗口不关闭，使用 ip 为 localhost，端口为 18001 和 18002, 可以在 Network-1 直接连接 Server-2 和 Server-3, 同时也可以通过 localhost:3306 连接在 Server-2 上部署的 mysql 服务">
@@ -31,11 +31,11 @@ Host test HostName Server-1 User myuser Port 22 LocalForward 18001 Server-2:22 #
 
   <meta itemprop="name" content="Penruins">
   <meta itemprop="description" content="2025-08-26 ssh 进行端口转发# 如果你的网络连接是这样的：你当前的电脑是 Network-Node-1, 可以通过 ssh 连接服务器 Server-1, Server-1 可以通过 ssh 连接 Server-2, 和 Server-3，Server-2 和 Server-3 也是相互联通的。但是 Network-Node-1 不能直接连接 Server-2 和 Server-3。
-flowchart LR Network-Node-1 &lt;--&gt; Server-1 Server-1 &lt;--&gt; Server-2 Server-1 &lt;--&gt; Server-3 Server-2 &lt;--&gt; Server-3如果在 Server-2 或者 Server-3 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？
+如果在 Server-2 或者 Server-3 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？
 这个时候最好的方法就是使用端口转发
 在 ~/.ssh/config 中进行配置
 Host test HostName Server-1 User myuser Port 22 LocalForward 18001 Server-2:22 # Server-2 ssh LocalForward 18002 Server-3:22 # Server-3 ssh LocalForward 18003 Server-2:3306 # mysql文件保存之后执行 ssh test, 接下来输入密码就会通过 ssh 连接到 Server-1, 这个时候你所看到的和普通的 ssh 连接没有什么区别，但实际上它进行了端口转发。保留当前这个窗口不关闭，使用 ip 为 localhost，端口为 18001 和 18002, 可以在 Network-1 直接连接 Server-2 和 Server-3, 同时也可以通过 localhost:3306 连接在 Server-2 上部署的 mysql 服务">
-  <meta itemprop="wordCount" content="99">
+  <meta itemprop="wordCount" content="86">
 
 <title>2025 08 26 SSH 端口转发 | Penruins</title>
 <link rel="icon" href="/favicon.png" >
@@ -45,7 +45,7 @@ Host test HostName Server-1 User myuser Port 22 LocalForward 18001 Server-2:22 #
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.e087ac80af31cac65d7acea565967276cfb14ca8da09ff59db8fe2a230e93da0.js" ></script>
+  <script defer src="/en.search.min.d6f84c17f674a673bb0b1f3c6fdeb627990b9c778d8b6ce978ada60463836bc6.js" ></script>
 
 
 
@@ -2280,11 +2280,7 @@ Host test HostName Server-1 User myuser Port 22 LocalForward 18001 Server-2:22 #
       
   <article class="markdown book-article"><h1 id="2025-08-26-ssh-进行端口转发">2025-08-26 ssh 进行端口转发<a class="anchor" href="#2025-08-26-ssh-%e8%bf%9b%e8%a1%8c%e7%ab%af%e5%8f%a3%e8%bd%ac%e5%8f%91">#</a></h1>
 <p>如果你的网络连接是这样的：你当前的电脑是 <code>Network-Node-1</code>, 可以通过 ssh 连接服务器 <code>Server-1</code>, <code>Server-1</code> 可以通过 ssh 连接 <code>Server-2</code>, 和 <code>Server-3</code>，<code>Server-2</code> 和 <code>Server-3</code> 也是相互联通的。但是 <code>Network-Node-1</code> 不能直接连接 <code>Server-2</code> 和 <code>Server-3</code>。</p>
-<pre class="mermaid">flowchart LR
-    Network-Node-1 &lt;--&gt; Server-1
-    Server-1 &lt;--&gt; Server-2
-    Server-1 &lt;--&gt; Server-3
-    Server-2 &lt;--&gt; Server-3</pre><script src="/mermaid.min.js"></script><script>mermaid.initialize({"flowchart":{"useMaxWidth":true},"theme":"default"})</script><p>如果在 <code>Server-2</code> 或者 <code>Server-3</code> 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？</p>
+<p>如果在 <code>Server-2</code> 或者 <code>Server-3</code> 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？</p>
 <p>这个时候最好的方法就是使用端口转发</p>
 <p>在 <code>~/.ssh/config</code> 中进行配置</p>
 <pre tabindex="0"><code>Host test
