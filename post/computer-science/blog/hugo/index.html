@@ -8,7 +8,7 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content=" hugo website hugo-book alex-shpak/hugo-book Document Hexo, Hugo, Vitepress，Vuepress博客框架比较 浅谈我为什么从 HEXO 迁移到 HUGO 在 Hugo 中配置 TOC 从一级标题开始显示# 要在 Hugo 中让侧边栏的目录(TOC)从一级标题(h1)开始显示，你可以通过以下几种方法实现：
+<meta name="description" content=" hugo website hugo-book alex-shpak/hugo-book Document Mermaid Document Hexo, Hugo, Vitepress，Vuepress博客框架比较 浅谈我为什么从 HEXO 迁移到 HUGO 在 Hugo 中配置 TOC 从一级标题开始显示# 要在 Hugo 中让侧边栏的目录(TOC)从一级标题(h1)开始显示，你可以通过以下几种方法实现：
 方法一：修改 config.toml# 在你的 Hugo 配置文件(通常是 config.toml 或 config.yaml)中添加或修改以下设置：
 [markup] [markup.tableOfContents] startLevel = 1 endLevel = 6或者对于 YAML 格式：
 markup: tableOfContents: startLevel: 1 endLevel: 6方法二：模板中指定# 如果你在模板中调用 TOC，可以这样指定：
@@ -22,7 +22,7 @@ markup: tableOfContents: startLevel: 1 endLevel: 6方法二：模板中指定# �
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/blog/hugo/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Hugo">
-  <meta property="og:description" content="hugo website hugo-book alex-shpak/hugo-book Document Hexo, Hugo, Vitepress，Vuepress博客框架比较 浅谈我为什么从 HEXO 迁移到 HUGO 在 Hugo 中配置 TOC 从一级标题开始显示# 要在 Hugo 中让侧边栏的目录(TOC)从一级标题(h1)开始显示，你可以通过以下几种方法实现：
+  <meta property="og:description" content="hugo website hugo-book alex-shpak/hugo-book Document Mermaid Document Hexo, Hugo, Vitepress，Vuepress博客框架比较 浅谈我为什么从 HEXO 迁移到 HUGO 在 Hugo 中配置 TOC 从一级标题开始显示# 要在 Hugo 中让侧边栏的目录(TOC)从一级标题(h1)开始显示，你可以通过以下几种方法实现：
 方法一：修改 config.toml# 在你的 Hugo 配置文件(通常是 config.toml 或 config.yaml)中添加或修改以下设置：
 [markup] [markup.tableOfContents] startLevel = 1 endLevel = 6或者对于 YAML 格式：
 markup: tableOfContents: startLevel: 1 endLevel: 6方法二：模板中指定# 如果你在模板中调用 TOC，可以这样指定：
@@ -33,11 +33,11 @@ markup: tableOfContents: startLevel: 1 endLevel: 6方法二：模板中指定# �
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-21T16:10:14+08:00">
+    <meta property="article:modified_time" content="2025-10-21T16:11:07+08:00">
 
 
   <meta itemprop="name" content="Hugo">
-  <meta itemprop="description" content="hugo website hugo-book alex-shpak/hugo-book Document Hexo, Hugo, Vitepress，Vuepress博客框架比较 浅谈我为什么从 HEXO 迁移到 HUGO 在 Hugo 中配置 TOC 从一级标题开始显示# 要在 Hugo 中让侧边栏的目录(TOC)从一级标题(h1)开始显示，你可以通过以下几种方法实现：
+  <meta itemprop="description" content="hugo website hugo-book alex-shpak/hugo-book Document Mermaid Document Hexo, Hugo, Vitepress，Vuepress博客框架比较 浅谈我为什么从 HEXO 迁移到 HUGO 在 Hugo 中配置 TOC 从一级标题开始显示# 要在 Hugo 中让侧边栏的目录(TOC)从一级标题(h1)开始显示，你可以通过以下几种方法实现：
 方法一：修改 config.toml# 在你的 Hugo 配置文件(通常是 config.toml 或 config.yaml)中添加或修改以下设置：
 [markup] [markup.tableOfContents] startLevel = 1 endLevel = 6或者对于 YAML 格式：
 markup: tableOfContents: startLevel: 1 endLevel: 6方法二：模板中指定# 如果你在模板中调用 TOC，可以这样指定：
@@ -45,8 +45,8 @@ markup: tableOfContents: startLevel: 1 endLevel: 6方法二：模板中指定# �
 方法三：使用自定义 CSS# 如果配置修改后仍然不符合预期，你可以添加自定义 CSS 来隐藏不需要的层级：
 /* 隐藏除一级标题外的其他层级 */ #TableOfContents ul ul { display: none; }方法四：使用 Goldmark 配置# 如果你使用的是 Goldmark 渲染器(默认)，确保配置正确：
 [markup.goldmark] [markup.goldmark.parser] [markup.goldmark.parser.attribute] block = true title = true注意事项# 确保你的内容中确实有一级标题(# 或 &lt;h1&gt;) 某些主题可能会覆盖默认的 TOC 行为，你可能需要检查主题文档 清除缓存(hugo --gc)有时能解决显示问题 如果你使用的是特定主题，可能需要查看该主题的文档，因为有些主题会提供自己的 TOC 配置选项。">
-  <meta itemprop="dateModified" content="2025-10-21T16:10:14+08:00">
-  <meta itemprop="wordCount" content="91">
+  <meta itemprop="dateModified" content="2025-10-21T16:11:07+08:00">
+  <meta itemprop="wordCount" content="93">
 
 <title>Hugo | Penruins</title>
 <link rel="icon" href="/favicon.png" >
@@ -56,7 +56,7 @@ markup: tableOfContents: startLevel: 1 endLevel: 6方法二：模板中指定# �
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.3c67be454dd58bed1c719d87222ba2958d7ee5e92f1818202a6f787576f4a277.js" ></script>
+  <script defer src="/en.search.min.e087ac80af31cac65d7acea565967276cfb14ca8da09ff59db8fe2a230e93da0.js" ></script>
 
 
 
@@ -2306,7 +2306,11 @@ markup: tableOfContents: startLevel: 1 endLevel: 6方法二：模板中指定# �
 <li>hugo-book
 <ul>
 <li><a href="https://github.com/alex-shpak/hugo-book">alex-shpak/hugo-book</a></li>
-<li><a href="https://hugo-book-demo.netlify.app/">Document</a></li>
+<li><a href="https://hugo-book-demo.netlify.app/">Document</a>
+<ul>
+<li><a href="https://mermaid.js.org/intro/">Mermaid Document</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="https://www.fuling.me/posts/51220/">Hexo, Hugo, Vitepress，Vuepress博客框架比较</a></li>
