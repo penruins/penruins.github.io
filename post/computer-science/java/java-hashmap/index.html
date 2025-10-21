@@ -23,14 +23,14 @@ JDK 1.7 及之前# 数据结构：数组 &#43; 链表 数组：是 HashMap 的�
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-21T13:53:10+08:00">
+    <meta property="article:modified_time" content="2025-10-21T14:41:22+08:00">
 
 
   <meta itemprop="name" content="java HashMap">
   <meta itemprop="description" content="HashMap# HashMap底层的数据结构是怎样的# HashMap 底层的数据结构在 JDK 1.7 和 JDK 1.8 中有显著的不同，主要体现在如何处理哈希冲突和存储数据的方式上。
 JDK 1.7 及之前# 数据结构：数组 &#43; 链表 数组：是 HashMap 的主体，用于存储键值对（Entry 对象）。数组的每个位置称为一个 桶（bucket）。 链表：用于解决哈希冲突。当多个键的哈希值相同（即计算出的数组索引相同）时，这些键值对会以链表的形式存储在同一个桶中。 哈希冲突解决：通过 拉链法（Chaining）解决哈希冲突，即链表的形式。 性能问题：当链表过长时，查询效率会降低，时间复杂度退化为 O(n)。 JDK 1.8 及之后# 数据结构：数组 &#43; 链表 &#43; 红黑树 数组：仍然是 HashMap 的主体，用于存储键值对（Node 对象）。 链表：当哈希冲突时，键值对首先以链表的形式存储。 红黑树：当链表长度超过 阈值（默认是 8） 且 数组长度大于 64 时，链表会转换为 红黑树，以提高查询效率。 哈希冲突解决：仍然使用 拉链法，但当链表过长时会转换为红黑树，时间复杂度优化为 O(log n)。 性能优化：红黑树的引入大大减少了哈希冲突严重时的查询时间。 核心机制# 哈希计算
 通过 key.hashCode() 计算哈希值，再通过 (n - 1) &amp; hash 计算数组索引（n 是数组长度）。 为了减少哈希冲突，JDK 1.8 对哈希值进行了优化，将高 16 位与低 16 位进行异或运算，使哈希分布更均匀13。 扩容机制">
-  <meta itemprop="dateModified" content="2025-10-21T13:53:10+08:00">
+  <meta itemprop="dateModified" content="2025-10-21T14:41:22+08:00">
   <meta itemprop="wordCount" content="695">
 
 <title>java HashMap | Penruins</title>
@@ -41,7 +41,7 @@ JDK 1.7 及之前# 数据结构：数组 &#43; 链表 数组：是 HashMap 的�
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.baa4bde2ab81019d421ec1b42623db003128ad4ab27422a93cf397e17e9a7571.js" ></script>
+  <script defer src="/en.search.min.eb8f8bcc1e1959767863adf7155151b05f7fcbf6d013a3305d99454a8a479ad6.js" ></script>
 
 
 
@@ -2169,6 +2169,34 @@ JDK 1.7 及之前# 数据结构：数组 &#43; 链表 数组：是 HashMap 的�
       
     
   </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/blog/2025/2025-08-07-%E5%B9%BF%E5%B7%9E%E7%94%9F%E6%B4%BB/" class="">
+      2025 08 07 广州生活</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/blog/2025/2025-10-21-java%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E7%82%B9/" class="">
+      2025 10 21 Java开发踩坑点</a>
+  
 
         </li>
       
