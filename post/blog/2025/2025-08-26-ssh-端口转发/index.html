@@ -8,28 +8,39 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="# 加上多线程的参数 -T 可以加快构建速度 数量就设置为CPU的核心数就行了 # 这个参数要和实际并行构建的任务综合考虑，如果同时构建的任务太多，那么这个参数不宜设置为CPU的核心数 # 如果经常是单个任务进行构建，那么可以直接配置为CPU的核心数 mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prodplugin# 从Maven中的命令行参数跳过exec-Maven插件 reference# 利用码云gitee搭建个人maven仓库 ">
+<meta name="description" content="2025-08-26 ssh 进行端口转发# 如果你的网络连接是这样的：你当前的电脑是 Network-Node-1, 可以通过 ssh 连接服务器 Server-1, Server-1 可以通过 ssh 连接 Server-2, 和 Server-3，Server-2 和 Server-3 也是相互联通的。但是 Network-Node-1 不能直接连接 Server-2 和 Server-3。
+如果在 Server-2 或者 Server-3 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？
+这个时候最好的方法就是使用端口转发
+在 ~/.ssh/config 中进行配置
+Host test HostName Server-1 User myuser Port 22 LocalForward 18001 Server-2:22 # Server-2 ssh LocalForward 18002 Server-3:22 # Server-3 ssh LocalForward 18003 Server-2:3306 # mysql文件保存之后执行 ssh test, 接下来输入密码就会通过 ssh 连接到 Server-1, 这个时候你所看到的和普通的 ssh 连接没有什么区别，但实际上它进行了端口转发。保留当前这个窗口不关闭，使用 ip 为 localhost，端口为 18001 和 18002, 可以在 Network-1 直接连接 Server-2 和 Server-3, 同时也可以通过 localhost:3306 连接在 Server-2 上部署的 mysql 服务
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/ci-cd/maven/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/blog/2025/2025-08-26-ssh-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="maven">
-  <meta property="og:description" content="# 加上多线程的参数 -T 可以加快构建速度 数量就设置为CPU的核心数就行了 # 这个参数要和实际并行构建的任务综合考虑，如果同时构建的任务太多，那么这个参数不宜设置为CPU的核心数 # 如果经常是单个任务进行构建，那么可以直接配置为CPU的核心数 mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prodplugin# 从Maven中的命令行参数跳过exec-Maven插件 reference# 利用码云gitee搭建个人maven仓库">
+  <meta property="og:title" content="Penruins">
+  <meta property="og:description" content="2025-08-26 ssh 进行端口转发# 如果你的网络连接是这样的：你当前的电脑是 Network-Node-1, 可以通过 ssh 连接服务器 Server-1, Server-1 可以通过 ssh 连接 Server-2, 和 Server-3，Server-2 和 Server-3 也是相互联通的。但是 Network-Node-1 不能直接连接 Server-2 和 Server-3。
+如果在 Server-2 或者 Server-3 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？
+这个时候最好的方法就是使用端口转发
+在 ~/.ssh/config 中进行配置
+Host test HostName Server-1 User myuser Port 22 LocalForward 18001 Server-2:22 # Server-2 ssh LocalForward 18002 Server-3:22 # Server-3 ssh LocalForward 18003 Server-2:3306 # mysql文件保存之后执行 ssh test, 接下来输入密码就会通过 ssh 连接到 Server-1, 这个时候你所看到的和普通的 ssh 连接没有什么区别，但实际上它进行了端口转发。保留当前这个窗口不关闭，使用 ip 为 localhost，端口为 18001 和 18002, 可以在 Network-1 直接连接 Server-2 和 Server-3, 同时也可以通过 localhost:3306 连接在 Server-2 上部署的 mysql 服务">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-21T16:00:55+08:00">
 
 
-  <meta itemprop="name" content="maven">
-  <meta itemprop="description" content="# 加上多线程的参数 -T 可以加快构建速度 数量就设置为CPU的核心数就行了 # 这个参数要和实际并行构建的任务综合考虑，如果同时构建的任务太多，那么这个参数不宜设置为CPU的核心数 # 如果经常是单个任务进行构建，那么可以直接配置为CPU的核心数 mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prodplugin# 从Maven中的命令行参数跳过exec-Maven插件 reference# 利用码云gitee搭建个人maven仓库">
-  <meta itemprop="dateModified" content="2025-10-21T16:00:55+08:00">
-  <meta itemprop="wordCount" content="20">
+  <meta itemprop="name" content="Penruins">
+  <meta itemprop="description" content="2025-08-26 ssh 进行端口转发# 如果你的网络连接是这样的：你当前的电脑是 Network-Node-1, 可以通过 ssh 连接服务器 Server-1, Server-1 可以通过 ssh 连接 Server-2, 和 Server-3，Server-2 和 Server-3 也是相互联通的。但是 Network-Node-1 不能直接连接 Server-2 和 Server-3。
+如果在 Server-2 或者 Server-3 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？
+这个时候最好的方法就是使用端口转发
+在 ~/.ssh/config 中进行配置
+Host test HostName Server-1 User myuser Port 22 LocalForward 18001 Server-2:22 # Server-2 ssh LocalForward 18002 Server-3:22 # Server-3 ssh LocalForward 18003 Server-2:3306 # mysql文件保存之后执行 ssh test, 接下来输入密码就会通过 ssh 连接到 Server-1, 这个时候你所看到的和普通的 ssh 连接没有什么区别，但实际上它进行了端口转发。保留当前这个窗口不关闭，使用 ip 为 localhost，端口为 18001 和 18002, 可以在 Network-1 直接连接 Server-2 和 Server-3, 同时也可以通过 localhost:3306 连接在 Server-2 上部署的 mysql 服务">
+  <meta itemprop="wordCount" content="86">
 
-<title>maven | Penruins</title>
+<title>2025 08 26 SSH 端口转发 | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/ci-cd/maven/">
+<link rel="canonical" href="/post/blog/2025/2025-08-26-ssh-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
 <link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
 
 
@@ -364,7 +375,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex">
       <a role="button" class="">
         Computer Science</a>
@@ -1574,7 +1585,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-91cda33c3f083dc425de7b0831dd4a4b" class="toggle" checked />
+    <input type="checkbox" id="section-91cda33c3f083dc425de7b0831dd4a4b" class="toggle"  />
     <label for="section-91cda33c3f083dc425de7b0831dd4a4b" class="flex">
       <a role="button" class="">
         CI/CD</a>
@@ -1620,7 +1631,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/maven/" class="active">
+    <a href="/post/computer-science/ci-cd/maven/" class="">
       maven</a>
   
 
@@ -2238,7 +2249,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>maven</h3>
+  <h3>2025 08 26 SSH 端口转发</h3>
 
   <label for="toc-control">
     
@@ -2254,8 +2265,7 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#plugin">plugin</a></li>
-    <li><a href="#reference">reference</a></li>
+    <li><a href="#2025-08-26-ssh-进行端口转发">2025-08-26 ssh 进行端口转发</a></li>
   </ul>
 </nav>
 
@@ -2268,17 +2278,18 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><pre tabindex="0"><code># 加上多线程的参数 -T 可以加快构建速度 数量就设置为CPU的核心数就行了
-# 这个参数要和实际并行构建的任务综合考虑，如果同时构建的任务太多，那么这个参数不宜设置为CPU的核心数
-# 如果经常是单个任务进行构建，那么可以直接配置为CPU的核心数
-mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prod</code></pre><h1 id="plugin">plugin<a class="anchor" href="#plugin">#</a></h1>
-<ul>
-<li><a href="https://cloud.tencent.com/developer/ask/sof/111436212">从Maven中的命令行参数跳过exec-Maven插件</a></li>
-</ul>
-<h1 id="reference">reference<a class="anchor" href="#reference">#</a></h1>
-<ul>
-<li><a href="https://blog.csdn.net/u011747754/article/details/78574026">利用码云gitee搭建个人maven仓库</a></li>
-</ul>
+  <article class="markdown book-article"><h1 id="2025-08-26-ssh-进行端口转发">2025-08-26 ssh 进行端口转发<a class="anchor" href="#2025-08-26-ssh-%e8%bf%9b%e8%a1%8c%e7%ab%af%e5%8f%a3%e8%bd%ac%e5%8f%91">#</a></h1>
+<p>如果你的网络连接是这样的：你当前的电脑是 <code>Network-Node-1</code>, 可以通过 ssh 连接服务器 <code>Server-1</code>, <code>Server-1</code> 可以通过 ssh 连接 <code>Server-2</code>, 和 <code>Server-3</code>，<code>Server-2</code> 和 <code>Server-3</code> 也是相互联通的。但是 <code>Network-Node-1</code> 不能直接连接 <code>Server-2</code> 和 <code>Server-3</code>。</p>
+<p>如果在 <code>Server-2</code> 或者 <code>Server-3</code> 上部署了一些服务(例如数据库)，你会如何连接这些服务呢？</p>
+<p>这个时候最好的方法就是使用端口转发</p>
+<p>在 <code>~/.ssh/config</code> 中进行配置</p>
+<pre tabindex="0"><code>Host test
+    HostName Server-1
+    User myuser 
+    Port 22
+    LocalForward 18001 Server-2:22 # Server-2 ssh
+    LocalForward 18002 Server-3:22 # Server-3 ssh
+    LocalForward 18003 Server-2:3306 # mysql</code></pre><p>文件保存之后执行 <code>ssh test</code>, 接下来输入密码就会通过 ssh 连接到 <code>Server-1</code>, 这个时候你所看到的和普通的 ssh 连接没有什么区别，但实际上它进行了<strong>端口转发</strong>。保留当前这个窗口不关闭，使用 ip 为 localhost，端口为 18001 和 18002, 可以在 <code>Network-1</code> 直接连接 <code>Server-2</code> 和 <code>Server-3</code>, 同时也可以通过 <code>localhost:3306</code> 连接在 <code>Server-2</code> 上部署的 mysql 服务</p>
 </article>
  
       
@@ -2303,25 +2314,6 @@ mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prod</code></pre>
 
   
   
-  
-  <div class="flex flex-wrap justify-between">
-    <span>
-    
-      <a href="/post/computer-science/ci-cd/jenkins/" class="flex align-center">
-        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-        <span>Jenkins</span>
-      </a>
-    
-    </span>
-    <span>
-    
-      <a href="/post/computer-science/ci-cd/nexus/" class="flex align-center">
-        <span>Nexus</span>
-        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
-      </a>
-    
-    </span>
-  </div>
   
 
 
@@ -2360,8 +2352,7 @@ mvn clean package -T {CPU.CORE_NUMS} -Dmaven.test.skip=true -P prod</code></pre>
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#plugin">plugin</a></li>
-    <li><a href="#reference">reference</a></li>
+    <li><a href="#2025-08-26-ssh-进行端口转发">2025-08-26 ssh 进行端口转发</a></li>
   </ul>
 </nav>
 
