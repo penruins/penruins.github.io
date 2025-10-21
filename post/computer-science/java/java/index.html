@@ -31,7 +31,7 @@ StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存�
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-21T23:01:08+08:00">
+    <meta property="article:modified_time" content="2025-10-21T23:02:22+08:00">
 
 
   <meta itemprop="name" content="java">
@@ -42,7 +42,7 @@ public synchronized StringBuffer append(String str){ // 方法实现 }这种机�
 3. 性能影响# 虽然 StringBuffer 的同步机制确保了线程安全，但也带来了性能开销。因为在多线程环境下，每次只能有一个线程操作 StringBuffer ，其他线程会被阻塞。因此，在单线程环境下，推荐使用性能更高的 StringBuilder，它没有同步机制158。
 4. 适用场景# 多线程环境：如果需要在多线程环境下对字符串进行操作，StringBuffer 是合适的选择，因为它确保了线程安全29。 单线程环境：在单线程环境下，建议使用 StringBuilder，因为它没有同步开销，性能更高18。 总结# StringBuffer 通过 synchronized 关键字实现的同步机制，确保了多线程环境下的线程安全性。虽然这种机制带来了性能开销，但在需要线程安全的场景下，它是一个可靠的选择127。
 StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的# StringBuffer 和 StringBuilder 在底层都是使用 字符数组（char[]） 来保存字符串数据的。具体来说，它们继承了 AbstractStringBuilder 类，而 AbstractStringBuilder 类中定义了一个 char[] value 数组，用于存储字符序列134。">
-  <meta itemprop="dateModified" content="2025-10-21T23:01:08+08:00">
+  <meta itemprop="dateModified" content="2025-10-21T23:02:22+08:00">
   <meta itemprop="wordCount" content="8152">
 
 <title>java | Penruins</title>
@@ -53,7 +53,7 @@ StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存�
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.3ca1d15d4f89db0cacf41b6abb3f44db28d83d5158deb484ddb724292fa4b941.js" ></script>
+  <script defer src="/en.search.min.eadf47d91fba8483b7c8594e64a3930b62bdfbcf269847fb3bb1f2e55dd6dad4.js" ></script>
 
 
 
