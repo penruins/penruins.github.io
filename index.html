@@ -25,7 +25,7 @@ https://github.com/alex-shpak/hugo-book
   <meta itemprop="name" content="Penruins">
   <meta itemprop="description" content="Penruins Penruins 的博客，分享🤖技术，🤹🏻生活，📚书，🎬电影，🚴🏽‍♂️骑行，English，文章，博客，网站 和其他一些有趣的东西(📖学习记录, ⛰️爬山)
 2025-10-21 java 开发踩坑点 2025-10-09 ssh 命令的使用 2025-10-09 docker 常用操作 2025-10-09 linux 常用命令 2025-08-07 使用 ssh 进行端口转发 2025-08-07 广州生活 2025-04-10 广州找工作 2025-03-29 教育到底怎么了">
-  <meta itemprop="dateModified" content="2025-10-21T22:45:57+08:00">
+  <meta itemprop="dateModified" content="2025-10-21T23:01:08+08:00">
   <meta itemprop="wordCount" content="27">
 
 <title>Penruins</title>
@@ -117,7 +117,7 @@ const dataArray = [
 ];
 
 // 展示随机选择的元素
-displayElement(dataArray[Math.floor(Math.random() * dataArray.length)], 'display');
+displayElement(dataArray[Math.floor(Date.now() / 20000) % dataArray.length], 'display');
 
 // 展示元素的函数
 function displayElement(element, name) {
