@@ -8,14 +8,14 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="2025-10-21 java 开发踩坑点# spring-boot-starter-validation# @AssertTrue 方法名前缀# 使用 @AssertTrue 进行字段校验时，方法名称必须以 is 或 has 开头, 不然不会生效 Tips: 在使用 swagger2 的项目中，如果使用 is 开头，会在接口文档中将方法解析为一个字段，换成 has 为前缀之后不会出现这样的情况 @AssertTrue(message = &#34;计划培训开始时间不能大于计划培训结束时间&#34;) public boolean isTrainEndTimeAfterTrainStarTime() { return trainStartTime.compareTo(trainEndTime) &lt;= 0; }mybatis-plus# condition 为 false 时，之后的方法仍会执行# 使用 lambdaQuery().eq(boolean condition, R column, Object val) 时，如果 condition 条件不成立，val 如果是一个方法，还是会执行
+<meta name="description" content="2025-10-21 java 开发踩坑点# spring-boot-starter-validation# @AssertTrue 方法名前缀# 使用 @AssertTrue 进行字段校验时，方法名称必须以 is 或 has 开头, 不然不会生效 Tips: 在使用 swagger2 的项目中，如果使用 is 开头，会在接口文档中将方法解析为一个字段，换成 has 为前缀之后不会出现这样的情况 如果一定要使用 is 作为方法名称的前缀，应该也可以使用 @ApiModelProperty(hidden = true) 将其隐藏 @AssertTrue(message = &#34;计划培训开始时间不能大于计划培训结束时间&#34;) public boolean isTrainEndTimeAfterTrainStarTime() { return trainStartTime.compareTo(trainEndTime) &lt;= 0; }mybatis-plus# condition 为 false 时，之后的方法仍会执行# 使用 lambdaQuery().eq(boolean condition, R column, Object val) 时，如果 condition 条件不成立，val 如果是一个方法，还是会执行
 xxxxService.lambdaQuery() .eq(1 == 0, Entity:getId, getId()) // getId() 这个方法仍然是会执行的 这区别于 java 的三元表达式以及逻辑判断 0 == 1 || (1 / 0 == 5) 这是会报错的 0 == 0 || (1 / 0 == 5) 这不会报错 int r = 0 == 0 ? 1 : 1 / 0; 这不会报错 int r = 0 == 1 ? 1 : 1 / 0; 这会报错 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/blog/2025/2025-10-21-java%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E7%82%B9/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="2025-10-21 java 开发踩坑点# spring-boot-starter-validation# @AssertTrue 方法名前缀# 使用 @AssertTrue 进行字段校验时，方法名称必须以 is 或 has 开头, 不然不会生效 Tips: 在使用 swagger2 的项目中，如果使用 is 开头，会在接口文档中将方法解析为一个字段，换成 has 为前缀之后不会出现这样的情况 @AssertTrue(message = &#34;计划培训开始时间不能大于计划培训结束时间&#34;) public boolean isTrainEndTimeAfterTrainStarTime() { return trainStartTime.compareTo(trainEndTime) &lt;= 0; }mybatis-plus# condition 为 false 时，之后的方法仍会执行# 使用 lambdaQuery().eq(boolean condition, R column, Object val) 时，如果 condition 条件不成立，val 如果是一个方法，还是会执行
+  <meta property="og:description" content="2025-10-21 java 开发踩坑点# spring-boot-starter-validation# @AssertTrue 方法名前缀# 使用 @AssertTrue 进行字段校验时，方法名称必须以 is 或 has 开头, 不然不会生效 Tips: 在使用 swagger2 的项目中，如果使用 is 开头，会在接口文档中将方法解析为一个字段，换成 has 为前缀之后不会出现这样的情况 如果一定要使用 is 作为方法名称的前缀，应该也可以使用 @ApiModelProperty(hidden = true) 将其隐藏 @AssertTrue(message = &#34;计划培训开始时间不能大于计划培训结束时间&#34;) public boolean isTrainEndTimeAfterTrainStarTime() { return trainStartTime.compareTo(trainEndTime) &lt;= 0; }mybatis-plus# condition 为 false 时，之后的方法仍会执行# 使用 lambdaQuery().eq(boolean condition, R column, Object val) 时，如果 condition 条件不成立，val 如果是一个方法，还是会执行
 xxxxService.lambdaQuery() .eq(1 == 0, Entity:getId, getId()) // getId() 这个方法仍然是会执行的 这区别于 java 的三元表达式以及逻辑判断 0 == 1 || (1 / 0 == 5) 这是会报错的 0 == 0 || (1 / 0 == 5) 这不会报错 int r = 0 == 0 ? 1 : 1 / 0; 这不会报错 int r = 0 == 1 ? 1 : 1 / 0; 这会报错">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
@@ -23,9 +23,9 @@ xxxxService.lambdaQuery() .eq(1 == 0, Entity:getId, getId()) // getId() 这个�
 
 
   <meta itemprop="name" content="Penruins">
-  <meta itemprop="description" content="2025-10-21 java 开发踩坑点# spring-boot-starter-validation# @AssertTrue 方法名前缀# 使用 @AssertTrue 进行字段校验时，方法名称必须以 is 或 has 开头, 不然不会生效 Tips: 在使用 swagger2 的项目中，如果使用 is 开头，会在接口文档中将方法解析为一个字段，换成 has 为前缀之后不会出现这样的情况 @AssertTrue(message = &#34;计划培训开始时间不能大于计划培训结束时间&#34;) public boolean isTrainEndTimeAfterTrainStarTime() { return trainStartTime.compareTo(trainEndTime) &lt;= 0; }mybatis-plus# condition 为 false 时，之后的方法仍会执行# 使用 lambdaQuery().eq(boolean condition, R column, Object val) 时，如果 condition 条件不成立，val 如果是一个方法，还是会执行
+  <meta itemprop="description" content="2025-10-21 java 开发踩坑点# spring-boot-starter-validation# @AssertTrue 方法名前缀# 使用 @AssertTrue 进行字段校验时，方法名称必须以 is 或 has 开头, 不然不会生效 Tips: 在使用 swagger2 的项目中，如果使用 is 开头，会在接口文档中将方法解析为一个字段，换成 has 为前缀之后不会出现这样的情况 如果一定要使用 is 作为方法名称的前缀，应该也可以使用 @ApiModelProperty(hidden = true) 将其隐藏 @AssertTrue(message = &#34;计划培训开始时间不能大于计划培训结束时间&#34;) public boolean isTrainEndTimeAfterTrainStarTime() { return trainStartTime.compareTo(trainEndTime) &lt;= 0; }mybatis-plus# condition 为 false 时，之后的方法仍会执行# 使用 lambdaQuery().eq(boolean condition, R column, Object val) 时，如果 condition 条件不成立，val 如果是一个方法，还是会执行
 xxxxService.lambdaQuery() .eq(1 == 0, Entity:getId, getId()) // getId() 这个方法仍然是会执行的 这区别于 java 的三元表达式以及逻辑判断 0 == 1 || (1 / 0 == 5) 这是会报错的 0 == 0 || (1 / 0 == 5) 这不会报错 int r = 0 == 0 ? 1 : 1 / 0; 这不会报错 int r = 0 == 1 ? 1 : 1 / 0; 这会报错">
-  <meta itemprop="wordCount" content="107">
+  <meta itemprop="wordCount" content="114">
 
 <title>2025 10 21 Java开发踩坑点 | Penruins</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ xxxxService.lambdaQuery() .eq(1 == 0, Entity:getId, getId()) // getId() 这个�
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.c33ecf4ed03af5184b1ae690393d7a7e720040346db2bad778790de7ac4a8403.js" ></script>
+  <script defer src="/en.search.min.28af72b5164498ca90126e9c44f0ac635ae069c9a403591dcb0e1aff38c49248.js" ></script>
 
 
 
@@ -2301,7 +2301,11 @@ xxxxService.lambdaQuery() .eq(1 == 0, Entity:getId, getId()) // getId() 这个�
 <ul>
 <li>使用 <code>@AssertTrue</code> 进行字段校验时，方法名称必须以 is 或 has 开头, 不然不会生效
 <ul>
-<li>Tips: 在使用 <code>swagger2</code> 的项目中，如果使用 is 开头，会在接口文档中将方法解析为一个字段，换成 has 为前缀之后不会出现这样的情况</li>
+<li>Tips: 在使用 <code>swagger2</code> 的项目中，如果使用 is 开头，会在接口文档中将方法解析为一个字段，换成 has 为前缀之后不会出现这样的情况
+<ul>
+<li>如果一定要使用 is 作为方法名称的前缀，应该也可以使用 <code>@ApiModelProperty(hidden = true)</code> 将其隐藏</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
