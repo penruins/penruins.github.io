@@ -8,23 +8,26 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content=" document 条件构造器 ">
+<meta name="description" content=" document 条件构造器 condition 为 false 时，之后的方法仍会执行# 使用 lambdaQuery().eq(boolean condition, R column, Object val) 时，如果 condition 条件不成立，val 如果是一个方法，还是会执行
+xxxxService.lambdaQuery() .eq(1 == 0, Entity:getId, getId()) // getId() 这个方法仍然是会执行的 这区别于 java 的三元表达式以及逻辑判断 0 == 1 || (1 / 0 == 5) 这是会报错的 0 == 0 || (1 / 0 == 5) 这不会报错 int r = 0 == 0 ? 1 : 1 / 0; 这不会报错 int r = 0 == 1 ? 1 : 1 / 0; 这会报错 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/java/mybatis-plus/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Mybatis Plus">
-  <meta property="og:description" content="document 条件构造器">
+  <meta property="og:description" content="document 条件构造器 condition 为 false 时，之后的方法仍会执行# 使用 lambdaQuery().eq(boolean condition, R column, Object val) 时，如果 condition 条件不成立，val 如果是一个方法，还是会执行
+xxxxService.lambdaQuery() .eq(1 == 0, Entity:getId, getId()) // getId() 这个方法仍然是会执行的 这区别于 java 的三元表达式以及逻辑判断 0 == 1 || (1 / 0 == 5) 这是会报错的 0 == 0 || (1 / 0 == 5) 这不会报错 int r = 0 == 0 ? 1 : 1 / 0; 这不会报错 int r = 0 == 1 ? 1 : 1 / 0; 这会报错">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-24T09:11:54+08:00">
+    <meta property="article:modified_time" content="2025-10-24T10:12:58+08:00">
 
 
   <meta itemprop="name" content="Mybatis Plus">
-  <meta itemprop="description" content="document 条件构造器">
-  <meta itemprop="dateModified" content="2025-10-24T09:11:54+08:00">
-  <meta itemprop="wordCount" content="2">
+  <meta itemprop="description" content="document 条件构造器 condition 为 false 时，之后的方法仍会执行# 使用 lambdaQuery().eq(boolean condition, R column, Object val) 时，如果 condition 条件不成立，val 如果是一个方法，还是会执行
+xxxxService.lambdaQuery() .eq(1 == 0, Entity:getId, getId()) // getId() 这个方法仍然是会执行的 这区别于 java 的三元表达式以及逻辑判断 0 == 1 || (1 / 0 == 5) 这是会报错的 0 == 0 || (1 / 0 == 5) 这不会报错 int r = 0 == 0 ? 1 : 1 / 0; 这不会报错 int r = 0 == 1 ? 1 : 1 / 0; 这会报错">
+  <meta itemprop="dateModified" content="2025-10-24T10:12:58+08:00">
+  <meta itemprop="wordCount" content="75">
 
 <title>Mybatis Plus | Penruins</title>
 <link rel="icon" href="/favicon.png" >
@@ -34,7 +37,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.fbfaca0035ca3e7e8d05b3c2631c7b3162ca534d068f4f4bcd095238763f73cb.js" ></script>
+  <script defer src="/en.search.min.23dd1161171cc84152cc57b35b64082ce3cbfa8e89856e5be40556f9b4957480.js" ></script>
 
 
 
@@ -897,6 +900,34 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/post/computer-science/java/spring/springboot/" class="">
+      spring boot</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-boot-validation/" class="">
+      spring boot validation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/post/computer-science/java/spring/spring-transaction/" class="">
       spring transaction</a>
   
@@ -974,20 +1005,6 @@ https://github.com/alex-shpak/hugo-book
   
     <a href="/post/computer-science/java/mybatis-plus/" class="active">
       Mybatis Plus</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/post/computer-science/java/springboot/" class="">
-      spring boot</a>
   
 
         </li>
@@ -2242,10 +2259,25 @@ https://github.com/alex-shpak/hugo-book
 
   <label for="toc-control">
     
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
   </label>
 </div>
 
 
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#condition-为-false-时之后的方法仍会执行">condition 为 false 时，之后的方法仍会执行</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
   
  
       </header>
@@ -2256,6 +2288,19 @@ https://github.com/alex-shpak/hugo-book
 <li>document
 <ul>
 <li><a href="https://baomidou.com/guides/wrapper/#nested">条件构造器</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="condition-为-false-时之后的方法仍会执行">condition 为 false 时，之后的方法仍会执行<a class="anchor" href="#condition-%e4%b8%ba-false-%e6%97%b6%e4%b9%8b%e5%90%8e%e7%9a%84%e6%96%b9%e6%b3%95%e4%bb%8d%e4%bc%9a%e6%89%a7%e8%a1%8c">#</a></h1>
+<p>使用 <code>lambdaQuery().eq(boolean condition, R column, Object val)</code> 时，如果 <code>condition</code> 条件不成立，val 如果是一个方法，还是会执行</p>
+<pre tabindex="0"><code>xxxxService.lambdaQuery()
+    .eq(1 == 0, Entity:getId, getId()) // getId() 这个方法仍然是会执行的</code></pre><ul>
+<li>这区别于 java 的三元表达式以及逻辑判断
+<ul>
+<li><code>0 == 1 || (1 / 0 == 5)</code> 这是会报错的</li>
+<li><code>0 == 0 || (1 / 0 == 5)</code> 这不会报错</li>
+<li><code>int r = 0 == 0 ? 1 : 1 / 0;</code> 这不会报错</li>
+<li><code>int r = 0 == 1 ? 1 : 1 / 0;</code> 这会报错</li>
 </ul>
 </li>
 </ul>
@@ -2295,8 +2340,8 @@ https://github.com/alex-shpak/hugo-book
     </span>
     <span>
     
-      <a href="/post/computer-science/java/springboot/" class="flex align-center">
-        <span>spring boot</span>
+      <a href="/post/computer-science/java/xxl-job/" class="flex align-center">
+        <span>xxl job</span>
         <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     
@@ -2333,6 +2378,21 @@ https://github.com/alex-shpak/hugo-book
     </div>
 
     
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#condition-为-false-时之后的方法仍会执行">condition 为 false 时，之后的方法仍会执行</a></li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
   
  
   </main>
