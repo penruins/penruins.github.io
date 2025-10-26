@@ -18,12 +18,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-26T11:51:42+08:00">
+    <meta property="article:modified_time" content="2025-10-26T12:05:33+08:00">
 
 
   <meta itemprop="name" content="kafka">
   <meta itemprop="description" content="kafka# kafka vs rocketmq# Kafka 和 RocketMQ 之性能对比 kafka如何实现高吞吐量的？# 顺序读写 零拷贝 分区与并行处理 批量发送 数据压缩 页缓存 高效的日志存储(将消息分段、并建立索引文件、支持快速定位与消息读取) Kafka突然宕机了消息会不会丢失# 消息的持久化机制 消息会存储到日志文件中，宕机后不会丢失 副本机制 一个分区可以建立副本，确保数据不丢失 生产者确认机制 刷盘机制 同步刷盘, 每次写入消息就将写入到磁盘中, 但损失了效率 异步刷盘 kafka如何保障顺序消费# 分区内的顺序性 将分区键与业务ID进行绑定，保证相同业务的消息都发送到对应分区进行顺序消费 kafka重平衡的触发条件是什么？# 消费者组成员发生变化 消费者的加入、退出或崩溃 订阅主题分区数发生变化 主题分区增加或减少 订阅主题发生变化 使用正则表达式订阅主题时，新的主题被匹配 kafka发送失败如何处理# 同步发送模式 捕获异常 异步发送模式 在回调方法中捕获异常 重试机制 设置重试次数 错误分类处理 可恢复错误 网络超时 不可恢复错误 无效的主题 调整生产者配置 设置acks, 可以设置为all，确保所有副本都确认才返回成功 使用死信队列 将发送失败的消息加入到死信队列中，以便后续处理 kafka的分区分配策略有哪些？# RangeAssignor RoundRobinAssignor StickerAssignor CooperativeStickerAssignor kafka默认的分区策略是什么？# DefaultPartitioner 指定分区 基于key分配 轮询分配">
-  <meta itemprop="dateModified" content="2025-10-26T11:51:42+08:00">
+  <meta itemprop="dateModified" content="2025-10-26T12:05:33+08:00">
   <meta itemprop="wordCount" content="64">
 
 <title>kafka | Penruins</title>
