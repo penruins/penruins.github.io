@@ -11,28 +11,30 @@ https://github.com/alex-shpak/hugo-book
 <meta name="description" content="# centos 操作系统环境下 # docker 启动 systemctl start docker # docker 重启 systemctl restart docker # docker 停止 systemctl stop docker # docker 运行状态 systemctl status docker # 进入容器中 docker exec -it &lt;container-name&gt; /bin/bash # 查看本地镜像 docker images # 当前有哪些容器在运行 docker ps # docker 中有哪些容器，包括在运行以及已停止的 docker ps -a如何开启 debug 模式# # 编辑文件 sudo vim /etc/systemd/system/docker.service.d/debug.conf # 添加或修改以下内容 [Service] ExecStart= ExecStart=/usr/bin/dockerd --debug # 重新加载 systemd 配置并重启 Docker sudo systemctl daemon-reload sudo systemctl restart docker">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/blog/2025/2025-10-09-docker-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/ci-cd/docker/">
   <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
+  <meta property="og:title" content="docker">
   <meta property="og:description" content="# centos 操作系统环境下 # docker 启动 systemctl start docker # docker 重启 systemctl restart docker # docker 停止 systemctl stop docker # docker 运行状态 systemctl status docker # 进入容器中 docker exec -it &lt;container-name&gt; /bin/bash # 查看本地镜像 docker images # 当前有哪些容器在运行 docker ps # docker 中有哪些容器，包括在运行以及已停止的 docker ps -a如何开启 debug 模式# # 编辑文件 sudo vim /etc/systemd/system/docker.service.d/debug.conf # 添加或修改以下内容 [Service] ExecStart= ExecStart=/usr/bin/dockerd --debug # 重新加载 systemd 配置并重启 Docker sudo systemctl daemon-reload sudo systemctl restart docker">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-26T16:29:23+08:00">
 
 
-  <meta itemprop="name" content="Penruins">
+  <meta itemprop="name" content="docker">
   <meta itemprop="description" content="# centos 操作系统环境下 # docker 启动 systemctl start docker # docker 重启 systemctl restart docker # docker 停止 systemctl stop docker # docker 运行状态 systemctl status docker # 进入容器中 docker exec -it &lt;container-name&gt; /bin/bash # 查看本地镜像 docker images # 当前有哪些容器在运行 docker ps # docker 中有哪些容器，包括在运行以及已停止的 docker ps -a如何开启 debug 模式# # 编辑文件 sudo vim /etc/systemd/system/docker.service.d/debug.conf # 添加或修改以下内容 [Service] ExecStart= ExecStart=/usr/bin/dockerd --debug # 重新加载 systemd 配置并重启 Docker sudo systemctl daemon-reload sudo systemctl restart docker">
+  <meta itemprop="dateModified" content="2025-10-26T16:29:23+08:00">
   <meta itemprop="wordCount" content="73">
 
-<title>2025 10 09 Docker 常用操作 | Penruins</title>
+<title>docker | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/blog/2025/2025-10-09-docker-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
+<link rel="canonical" href="/post/computer-science/ci-cd/docker/">
 <link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.6b8a4df42846501463e075eab370b8d8eb6dec95f76311f7d23e77027349aab8.js" ></script>
+  <script defer src="/en.search.min.d9bc3717a9939af3140a629e7ffd0f9abe0378ca262800c7166fdafe9d45a547.js" ></script>
 
 
 
@@ -362,7 +364,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle"  />
+    <input type="checkbox" id="section-0e80d916dfbf49a298199837cff9b464" class="toggle" checked />
     <label for="section-0e80d916dfbf49a298199837cff9b464" class="flex">
       <a role="button" class="">
         Computer Science</a>
@@ -1584,7 +1586,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-91cda33c3f083dc425de7b0831dd4a4b" class="toggle"  />
+    <input type="checkbox" id="section-91cda33c3f083dc425de7b0831dd4a4b" class="toggle" checked />
     <label for="section-91cda33c3f083dc425de7b0831dd4a4b" class="flex">
       <a role="button" class="">
         CI/CD</a>
@@ -1594,6 +1596,20 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/docker/" class="active">
+      docker</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -2248,7 +2264,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>2025 10 09 Docker 常用操作</h3>
+  <h3>docker</h3>
 
   <label for="toc-control">
     
@@ -2335,6 +2351,25 @@ sudo systemctl restart docker</code></pre></article>
 
   
   
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/post/computer-science/artificial-intelligence/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Artificial Intelligence</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/post/computer-science/ci-cd/gitlab/" class="flex align-center">
+        <span>Gitlab</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
   
 
 
