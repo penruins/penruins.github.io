@@ -26,7 +26,7 @@ LinkedList 是基于双向链表实现的，插入和删除操作只需要调整
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
     <meta property="article:published_time" content="2024-11-14T08:59:49+08:00">
-    <meta property="article:modified_time" content="2025-10-26T16:00:47+08:00">
+    <meta property="article:modified_time" content="2025-10-26T16:10:01+08:00">
 
 
   <meta itemprop="name" content="Algorithm">
@@ -35,7 +35,7 @@ LinkedList 是基于双向链表实现的，插入和删除操作只需要调整
 import java.util.LinkedList; import java.util.List; public class Main { public static void main(String[] args) { // 创建一个 LinkedList List&lt;Integer&gt; list = new LinkedList&lt;&gt;(); // 在列表开头插入元素 list.add(0, 1); // 插入元素 1 list.add(0, 2); // 插入元素 2 list.add(0, 3); // 插入元素 3 // 输出列表 System.out.println(list); // 输出: [3, 2, 1] } }为什么 LinkedList 更高效？
 LinkedList 是基于双向链表实现的，插入和删除操作只需要调整节点的指针，时间复杂度为 O(1)。 ArrayList 是基于动态数组实现的，插入和删除操作需要移动元素，时间复杂度为 O(n)。 总结：">
   <meta itemprop="datePublished" content="2024-11-14T08:59:49+08:00">
-  <meta itemprop="dateModified" content="2025-10-26T16:00:47+08:00">
+  <meta itemprop="dateModified" content="2025-10-26T16:10:01+08:00">
   <meta itemprop="wordCount" content="2972">
 
 <title>Algorithm | Penruins</title>
@@ -46,7 +46,7 @@ LinkedList 是基于双向链表实现的，插入和删除操作只需要调整
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.1a6fe94bacd7660571419a507bcfc5f07de9b96f952abb8d655fa31734587626.js" ></script>
+  <script defer src="/en.search.min.6b8a4df42846501463e075eab370b8d8eb6dec95f76311f7d23e77027349aab8.js" ></script>
 
 
 
@@ -4310,7 +4310,26 @@ LinkedList 是基于双向链表实现的，插入和删除操作只需要调整
         
   
   <div class="book-comments">
-
+<div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Xiang Liu" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
   
  
