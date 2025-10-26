@@ -18,12 +18,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-26T21:19:37+08:00">
+    <meta property="article:modified_time" content="2025-10-26T21:31:09+08:00">
 
 
   <meta itemprop="name" content="spring">
   <meta itemprop="description" content="Spring# huanzi-qch/springBoot SpringBoot系列Demo代码 什么是Spring# Spring是一个java开发框架 它的核心特性是 控制反转 依赖注入 面向切面编程 声明式事务管理 模块化设计 Spring MVC# Spring MVC 流程# 流程 用户发送请求 DispatcherServlet 调用 HandlerMapping DispatcherServlet 调用 HandlerAdapter Controller 处理请求 DispatcherServlet 调用 ViewResolver 视图渲染 ModelAndView -&gt; ViewResolver -&gt; View 返回响应 核心组件 DispatcherServlet：前端控制器，负责请求的分发和协调 HandlerMapping：根据请求 URL 查找对应的 Handler HandlerAdapter：适配并执行 Handler Controller：处理具体的业务逻辑 ViewResolver：解析视图名称，生成具体的 View 对象 View：负责视图的渲染 Bean# Bean的生命周期# Bean的实例化 通过反射调用 Bean 的构造函数，创建Bean的实例 填充属性（依赖注入） Spring根据配置文件或注解，将依赖的Bean注入到当前Bean中 调用Aware接口 如果Bean实现了Spring的Aware接口，Spring会调用对应的回调方法 BeanPostProcessor 的前置处理 Spring调用所有BeanPostProcessor的postProcessBeforeInitialization()方法 执行初始化方法 Spring会调用Bean的初始化方法。 @PostConstruct BeanPostProcessor的后置处理 Spring调用所有BeanPostProcessor的postProcessAfterInitialization()方法。 Bean初始化完成 Bean已经完全初始化，可以被其他Bean使用。 Bean的使用 Bean的销毁 Bean的作用域# Singleton（单例） 默认作用域，单例模式 Prototype（原型） 每次请求创建新实例 Request（请求） 每个 HTTP 请求创建一个实例 Session（会话） 每个 HTTP Session 创建一个实例 Application（应用） 整个 ServletContext 生命周期内有效 WebSocket WebSocket 会话生命周期内有效 spring 循环依赖如何解决？# 三级缓存 singletonObjects：一级缓存，存储经历了完整生命周期的Bean对象 earlySingletonObjects：二级缓存，存储提前暴露出来的Bean对象，其生命周期未结束，属性未完全填充 singletonFactories：三级缓存，存储生成Bean的工厂 IOC# 什么是IOC# IOC是控制反转的意思，在一个程序中对象的创建与管理由一个容器负责，对象之间的引用通过注入(属性填充)的方式从容器中获取，降低了代码之间的耦合度 IOC 的核心概念是什么？# 依赖注入 控制反转 IOC容器 举一个 Spring 的容器？# BeanFactory ApplicationContext WebApplicationContext IOC 的优势是什么？# 降低耦合度 提高可测试性 注入模拟对象进行测试 增强可扩展性 优化资源管理 容器管理对象的创建和销毁，避免资源浪费 AOP# 什么是AOP？# AOP 是一种编程范式, 通过将横切关注点与业务代码分离，提高代码的可维护性与可重用性 AOP的核心概念是什么？# 切面 Aspect 连接点 Join Point 程序执行过程中可以插入切面的点（方法的调用或异常的处理） 通知 Advice 切面在连接点执行的操作 @Before @After @Around 切入点 Pointcut 定义在哪些连接点上应用通知，通常通过表达式来匹配 织入 Weaving 将切面应用到目标对象并创建代理对象的过程，可以在编译期、类加载期或运行期进行 AOP的应用场景# 日志记录 事务管理 权限控制 性能监控 记录方法执行时间 AOP的实现方式# JDK动态代理 实现了接口的类 CGLIB代理 未实现接口的类 事务#">
-  <meta itemprop="dateModified" content="2025-10-26T21:19:37+08:00">
+  <meta itemprop="dateModified" content="2025-10-26T21:31:09+08:00">
   <meta itemprop="wordCount" content="156">
 
 <title>spring | Penruins</title>
@@ -34,7 +34,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.8c0f39c4f81754b1c09ef3a03dd19cae2883329fbf4f63cd7316c96f765528a4.js" ></script>
+  <script defer src="/en.search.min.ff2b1c0633518861f3ad065000a5c5c1c0db1f8d95cf8f1088f30a52aa59be68.js" ></script>
 
 
 
@@ -1662,6 +1662,20 @@ https://github.com/alex-shpak/hugo-book
   
     <a href="/post/computer-science/ci-cd/nexus/" class="">
       Nexus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/orbstack/" class="">
+      OrbStack</a>
   
 
         </li>

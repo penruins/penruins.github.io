@@ -43,5 +43,12 @@
       <guid>/post/computer-science/ci-cd/nexus/</guid>
       <description>&lt;h1 id=&#34;nexus&#34;&gt;Nexus&lt;a class=&#34;anchor&#34; href=&#34;#nexus&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://hub.docker.com/r/sonatype/nexus3/tags&#34;&gt;docker sonatype/nexus3&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;install &lt;code&gt;docker run -d -p 8081:8081 --name nexus sonatype/nexus3&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
+    <item>
+      <title>OrbStack</title>
+      <link>/post/computer-science/ci-cd/orbstack/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/post/computer-science/ci-cd/orbstack/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://orbstack.dev/&#34;&gt;OrbStack&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;OrbStack is the fast, light, and easy way to run Docker containers and Linux. Develop at lightspeed with our Docker Desktop alternative.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
   </channel>
 </rss>
