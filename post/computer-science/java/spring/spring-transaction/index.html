@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service; import org.springframework.transa
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-27T18:11:07+08:00">
+    <meta property="article:modified_time" content="2025-10-27T18:33:54+08:00">
 
 
   <meta itemprop="name" content="spring transaction">
@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service; import org.springframework.transa
 &lt;dependency&gt; &lt;groupId&gt;com.baomidou&lt;/groupId&gt; &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt; &lt;version&gt;最新版本&lt;/version&gt; &lt;/dependency&gt;2. 配置事务管理器# Spring Boot 会自动配置事务管理器，但如果你想自定义，可以在配置类中添加：
 import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.jdbc.datasource.DataSourceTransactionManager; import javax.sql.DataSource; @Configuration public class MyBatisPlusConfig { @Bean public DataSourceTransactionManager transactionManager(DataSource dataSource) { return new DataSourceTransactionManager(dataSource); } }3. 使用事务# 3.1 声明式事务（推荐）# 在 Service 层方法上添加 @Transactional 注解：
 import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional; @Service public class UserServiceImpl implements UserService { @Autowired private UserMapper userMapper; @Autowired private OrderMapper orderMapper; @Override @Transactional // 默认遇到RuntimeException时回滚 public void createUserWithOrder(User user, Order order) { // 插入用户 userMapper.insert(user); // 设置订单用户ID order.setUserId(user.getId()); // 插入订单 orderMapper.insert(order); // 如果此处抛出异常，上面两个操作都会回滚 } @Override @Transactional(rollbackFor = Exception.class) // 遇到所有异常都回滚 public void updateUserWithOrder(User user, Order order) throws Exception { userMapper.updateById(user); orderMapper.updateById(order); // 即使抛出非RuntimeException也会回滚 } }3.2 编程式事务# 如果需要更精细的控制，可以使用编程式事务：">
-  <meta itemprop="dateModified" content="2025-10-27T18:11:07+08:00">
+  <meta itemprop="dateModified" content="2025-10-27T18:33:54+08:00">
   <meta itemprop="wordCount" content="333">
 
 <title>spring transaction | Penruins</title>
@@ -47,7 +47,7 @@ import org.springframework.stereotype.Service; import org.springframework.transa
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.019313cc62388a3e5f4d941a4c83e9fa1fa2d27c1b61f8a513bf28d07c99a269.js" ></script>
+  <script defer src="/en.search.min.fcb8e3ecc1d2e1bbd7fcb089ffa0ac987a06be86acb32d2384ad080e6e9d6ff2.js" ></script>
 
 
 
