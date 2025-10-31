@@ -1,0 +1,2874 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="在java中如何使用AES加密算法# 在 Java 中使用 AES 加密算法可以通过 javax.crypto 包中的类实现。以下是详细的步骤和示例代码：
+1. 导入必要的包# import javax.crypto.Cipher; import javax.crypto.KeyGenerator; import javax.crypto.SecretKey; import javax.crypto.spec.SecretKeySpec; import java.util.Base64; 2. 生成 AES 密钥# AES 密钥可以通过 KeyGenerator 生成，支持 128 位、192 位和 256 位密钥长度。
+public static SecretKey generateKey(int keySize)throws Exception{ KeyGenerator keyGen=KeyGenerator.getInstance(&#34;AES&#34;); keyGen.init(keySize); // 128, 192, 或 256 return keyGen.generateKey(); } 3. 加密方法# 使用 Cipher 类进行加密，并指定加密模式和填充方式（如 AES/CBC/PKCS5Padding）。
+public static String encrypt(String data,SecretKey secretKey)throws Exception{ Cipher cipher=Cipher.getInstance(&#34;AES/ECB/PKCS5Padding&#34;); // 默认模式 cipher.init(Cipher.ENCRYPT_MODE,secretKey); byte[]encryptedBytes=cipher.doFinal(data.getBytes()); return Base64.getEncoder().encodeToString(encryptedBytes); // 返回 Base64 编码的密文 } 4. 解密方法# 使用相同的密钥和模式进行解密。
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="java 密码学">
+  <meta property="og:description" content="在java中如何使用AES加密算法# 在 Java 中使用 AES 加密算法可以通过 javax.crypto 包中的类实现。以下是详细的步骤和示例代码：
+1. 导入必要的包# import javax.crypto.Cipher; import javax.crypto.KeyGenerator; import javax.crypto.SecretKey; import javax.crypto.spec.SecretKeySpec; import java.util.Base64; 2. 生成 AES 密钥# AES 密钥可以通过 KeyGenerator 生成，支持 128 位、192 位和 256 位密钥长度。
+public static SecretKey generateKey(int keySize)throws Exception{ KeyGenerator keyGen=KeyGenerator.getInstance(&#34;AES&#34;); keyGen.init(keySize); // 128, 192, 或 256 return keyGen.generateKey(); } 3. 加密方法# 使用 Cipher 类进行加密，并指定加密模式和填充方式（如 AES/CBC/PKCS5Padding）。
+public static String encrypt(String data,SecretKey secretKey)throws Exception{ Cipher cipher=Cipher.getInstance(&#34;AES/ECB/PKCS5Padding&#34;); // 默认模式 cipher.init(Cipher.ENCRYPT_MODE,secretKey); byte[]encryptedBytes=cipher.doFinal(data.getBytes()); return Base64.getEncoder().encodeToString(encryptedBytes); // 返回 Base64 编码的密文 } 4. 解密方法# 使用相同的密钥和模式进行解密。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+
+
+  <meta itemprop="name" content="java 密码学">
+  <meta itemprop="description" content="在java中如何使用AES加密算法# 在 Java 中使用 AES 加密算法可以通过 javax.crypto 包中的类实现。以下是详细的步骤和示例代码：
+1. 导入必要的包# import javax.crypto.Cipher; import javax.crypto.KeyGenerator; import javax.crypto.SecretKey; import javax.crypto.spec.SecretKeySpec; import java.util.Base64; 2. 生成 AES 密钥# AES 密钥可以通过 KeyGenerator 生成，支持 128 位、192 位和 256 位密钥长度。
+public static SecretKey generateKey(int keySize)throws Exception{ KeyGenerator keyGen=KeyGenerator.getInstance(&#34;AES&#34;); keyGen.init(keySize); // 128, 192, 或 256 return keyGen.generateKey(); } 3. 加密方法# 使用 Cipher 类进行加密，并指定加密模式和填充方式（如 AES/CBC/PKCS5Padding）。
+public static String encrypt(String data,SecretKey secretKey)throws Exception{ Cipher cipher=Cipher.getInstance(&#34;AES/ECB/PKCS5Padding&#34;); // 默认模式 cipher.init(Cipher.ENCRYPT_MODE,secretKey); byte[]encryptedBytes=cipher.doFinal(data.getBytes()); return Base64.getEncoder().encodeToString(encryptedBytes); // 返回 Base64 编码的密文 } 4. 解密方法# 使用相同的密钥和模式进行解密。">
+  <meta itemprop="wordCount" content="732">
+
+<title>java 密码学 | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/">
+<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.1e4254d6ef5c3d4b931350d3ad5355ea88c400709582577a866d1cb5f2a8f4f5.js" ></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-post">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d673e25af27f33796c279e3a05cc634f" class="toggle"  />
+    <label for="section-d673e25af27f33796c279e3a05cc634f" class="flex">
+      <a role="button" class="">
+        Life</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/books/" class="">
+      books</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
+      摘抄分享</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%96%B0%E7%9F%A5/" class="">
+      新知</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/movies-log/" class="">
+      观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/bilibili/" class="">
+      bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/hiking/" class="">
+      hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life/" class="">
+      life</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life-recommend/" class="">
+      life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/learning-others-log/" class="">
+      other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/podcast/" class="">
+      podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/politics/" class="">
+      politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/goal/" class="">
+      goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/coffee/" class="">
+      coffee</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/article/" class="">
+      article</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/law/" class="">
+      law</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-history/" class="">
+      my history</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-timeline/" class="">
+      My Timeline</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e52270c7d6707875ea89b3ec9b091983" class="toggle" checked />
+    <label for="section-e52270c7d6707875ea89b3ec9b091983" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science/" class="">
+      computer science</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f834cb9837867b0fca71e863c9ed2d28" class="toggle"  />
+    <label for="section-f834cb9837867b0fca71e863c9ed2d28" class="flex">
+      <a role="button" class="">
+        Algorithm</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm/" class="">
+      Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
+      algorithm practice 剑指 offer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
+      剑指offer题目对应</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
+      面试经典 150 题</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-12ae84c3ad3679302ffec2ab120d7fb0" class="toggle"  />
+    <label for="section-12ae84c3ad3679302ffec2ab120d7fb0" class="flex">
+      <a role="button" class="">
+        Big Data</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hadoop/" class="">
+      hadoop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hbase/" class="">
+      hbase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hive/" class="">
+      hive</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-256c0c0348e7dc55386785c98f7fa516" class="toggle"  />
+    <label for="section-256c0c0348e7dc55386785c98f7fa516" class="flex">
+      <a role="button" class="">
+        Database</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/database/" class="">
+      database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/druid/" class="">
+      druid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/elasticsearch/" class="">
+      elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mycat/" class="">
+      mycat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mysql/" class="">
+      mysql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/postgresql/" class="">
+      postgresql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/shardingsphere/" class="">
+      shardingsphere</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/sql/" class="">
+      SQL</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mongodb/" class="">
+      Penruins</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="toggle"  />
+    <label for="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="flex">
+      <a role="button" class="">
+        Distributed System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-98c822a4c30374b08c20bbb746ca28ff" class="toggle"  />
+    <label for="section-98c822a4c30374b08c20bbb746ca28ff" class="flex">
+      <a role="button" class="">
+        Message Queue</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/kafka/" class="">
+      kafka</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/message-queue/" class="">
+      Message Queue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
+      rabbitmq</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/distributed-system/" class="">
+      distributed system</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/sentinel/" class="">
+      Sentinel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud/" class="">
+      Spring Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
+      Spring Cloud Alibaba</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-184fcde54f4fb8e56ff1923eee779551" class="toggle" checked />
+    <label for="section-184fcde54f4fb8e56ff1923eee779551" class="flex">
+      <a role="button" class="">
+        Java</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-basic/" class="">
+      java basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6355ae1f9fa9f60a52445009b471b5e2" class="toggle"  />
+    <label for="section-6355ae1f9fa9f60a52445009b471b5e2" class="flex">
+      <a role="button" class="">
+        Spring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring/" class="">
+      spring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/springboot/" class="">
+      spring boot</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-boot-validation/" class="">
+      spring boot validation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-transaction/" class="">
+      spring transaction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/unit-test/" class="">
+      unit test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java/" class="">
+      java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jvm/" class="">
+      jvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis/" class="">
+      Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis-plus/" class="">
+      Mybatis Plus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/xxl-job/" class="">
+      xxl job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/concurrent/" class="">
+      concurrent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jackson/" class="">
+      jackson</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-hashmap/" class="">
+      java HashMap</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-utils/" class="">
+      Java Utils</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="active">
+      java 密码学</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/map/" class="">
+      map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-51f600e6ef5b531bcd84ecd789276516" class="toggle"  />
+    <label for="section-51f600e6ef5b531bcd84ecd789276516" class="flex">
+      <a role="button" class="">
+        Monitor</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/monitor/prometheus/" class="">
+      prometheus</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b11c61a955da170f736b6dbde7b6e083" class="toggle"  />
+    <label for="section-b11c61a955da170f736b6dbde7b6e083" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/tools/idea/" class="">
+      IDEA</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-recommend/" class="">
+      推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-learning-log/" class="">
+      学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/github/" class="">
+      github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/job/" class="">
+      job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/redis/" class="">
+      redis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/security/" class="">
+      security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-44f9701b64ae8bf371ea70118bc45414" class="toggle"  />
+    <label for="section-44f9701b64ae8bf371ea70118bc45414" class="flex">
+      <a role="button" class="">
+        Blog</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/blog/" class="">
+      blog</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/hugo/" class="">
+      Hugo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/cloud/" class="">
+      Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="toggle"  />
+    <label for="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="flex">
+      <a role="button" class="">
+        Front End</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/echarts/" class="">
+      echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/vue/" class="">
+      vue</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-529cbb550ade3cc11293cf67d1d534f0" class="toggle"  />
+    <label for="section-529cbb550ade3cc11293cf67d1d534f0" class="flex">
+      <a role="button" class="">
+        Micro Service</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/nacos/" class="">
+      Nacos</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/micro-service/" class="">
+      micro service</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="toggle"  />
+    <label for="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="flex">
+      <a role="button" class="">
+        Operating System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/ios/" class="">
+      IOS</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/linux/" class="">
+      linux</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/mac/" class="">
+      mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/raspberrypi/" class="">
+      raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/powershell/" class="">
+      powershell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/windows/" class="">
+      windows</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="toggle"  />
+    <label for="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="flex">
+      <a role="button" class="">
+        Software</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/artificial-intelligence/" class="">
+      Artificial Intelligence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6c1b5eb9fa302a23733b5ce342165515" class="toggle"  />
+    <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
+      <a role="button" class="">
+        CI/CD</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/docker/" class="">
+      docker</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/gitlab/" class="">
+      Gitlab</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/jenkins/" class="">
+      Jenkins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/maven/" class="">
+      maven</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/nexus/" class="">
+      Nexus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/orbstack/" class="">
+      OrbStack</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/crawler/" class="">
+      crawler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/git/" class="">
+      git</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/networking/" class="">
+      networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/python/" class="">
+      Python</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/reddison/" class="">
+      reddison</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/vim/" class="">
+      vim</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
+      系统设计</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
+      运维</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3b7129f485a86f816ed70cb52a2a5843" class="toggle"  />
+    <label for="section-3b7129f485a86f816ed70cb52a2a5843" class="flex">
+      <a role="button" class="">
+        History</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/history/chinese-history/" class="">
+      Chinese History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-27743f5ad758a53b0d2d97b463de9ca0" class="toggle"  />
+    <label for="section-27743f5ad758a53b0d2d97b463de9ca0" class="flex">
+      <a role="button" class="">
+        Others</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/about-me/" class="">
+      about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/english-learning/" class="">
+      English Learning</a>
+  
+
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/economy/" class="">
+      Economy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/f1/" class="">
+      F1</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7cf7927dd7be57fd9ac871554e5eab30" class="toggle"  />
+    <label for="section-7cf7927dd7be57fd9ac871554e5eab30" class="flex">
+      <a role="button" class="">
+        Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/science/biology/" class="">
+      biology</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c86d83c6ab9662a5734c7c938687f51c" class="toggle"  />
+    <label for="section-c86d83c6ab9662a5734c7c938687f51c" class="flex">
+      <a role="button" class="">
+        Sports</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/table-tennis/" class="">
+      table tennis</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a7716b8c5e1ddba36a22182d4f60014c" class="toggle"  />
+    <label for="section-a7716b8c5e1ddba36a22182d4f60014c" class="flex">
+      <a role="button" class="">
+        Wl Public</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6fc9a7b0dd6392ef81e392a65430999b" class="toggle"  />
+    <label for="section-6fc9a7b0dd6392ef81e392a65430999b" class="flex">
+      <a role="button" class="">
+        Books</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-06aae5e89825d313a1291f1996bfc76d" class="toggle"  />
+    <label for="section-06aae5e89825d313a1291f1996bfc76d" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
+      Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+      Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
+      Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
+      Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
+      一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
+      宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
+      英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="toggle"  />
+    <label for="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/tools/obsidian/" class="">
+      obsidian</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>java 密码学</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#在java中如何使用aes加密算法">在java中如何使用AES加密算法</a>
+          <ul>
+            <li><a href="#1-导入必要的包"><strong>1. 导入必要的包</strong></a></li>
+            <li><a href="#2-生成-aes-密钥"><strong>2. 生成 AES 密钥</strong></a></li>
+            <li><a href="#3-加密方法"><strong>3. 加密方法</strong></a></li>
+            <li><a href="#4-解密方法"><strong>4. 解密方法</strong></a></li>
+            <li><a href="#5-完整示例"><strong>5. 完整示例</strong></a></li>
+            <li><a href="#6-注意事项"><strong>6. 注意事项</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在java中如何使用rsa算法进行加解密">在Java中如何使用RSA算法进行加解密</a>
+          <ul>
+            <li><a href="#1-生成-rsa-密钥对"><strong>1. 生成 RSA 密钥对</strong></a></li>
+            <li><a href="#2-使用公钥加密"><strong>2. 使用公钥加密</strong></a></li>
+            <li><a href="#3-使用私钥解密"><strong>3. 使用私钥解密</strong></a></li>
+            <li><a href="#4-注意事项"><strong>4. 注意事项</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#公钥只能用来加密私钥只能用来解密吗">公钥只能用来加密，私钥只能用来解密吗？</a>
+          <ul>
+            <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
+            <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
+            <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
+            <li><a href="#总结"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
+          <ul>
+            <li><a href="#1-ecbelectronic-code-book电子密码本模式"><strong>1. ECB（Electronic Code Book，电子密码本模式）</strong></a></li>
+            <li><a href="#2-cbccipher-block-chaining密码分组链接模式"><strong>2. CBC（Cipher Block Chaining，密码分组链接模式）</strong></a></li>
+            <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
+            <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
+            <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
+            <li><a href="#总结-1"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
+          <ul>
+            <li><a href="#1-pkcs7-padding">1. <strong>PKCS7 Padding</strong></a></li>
+            <li><a href="#2-pkcs5-padding">2. <strong>PKCS5 Padding</strong></a></li>
+            <li><a href="#3-no-padding">3. <strong>No Padding</strong></a></li>
+            <li><a href="#4-iso10126-padding">4. <strong>ISO10126 Padding</strong></a></li>
+            <li><a href="#5-iso7816-4-padding">5. <strong>ISO7816-4 Padding</strong></a></li>
+            <li><a href="#6-zero-byte-padding">6. <strong>Zero Byte Padding</strong></a></li>
+            <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
+            <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
+            <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
+            <li><a href="#总结-2">总结</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="在java中如何使用aes加密算法">在java中如何使用AES加密算法<a class="anchor" href="#%e5%9c%a8java%e4%b8%ad%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8aes%e5%8a%a0%e5%af%86%e7%ae%97%e6%b3%95">#</a></h2>
+<p>在 Java 中使用 AES 加密算法可以通过 <code>javax.crypto</code> 包中的类实现。以下是详细的步骤和示例代码：</p>
+<hr>
+<h3 id="1-导入必要的包"><strong>1. 导入必要的包</strong><a class="anchor" href="#1-%e5%af%bc%e5%85%a5%e5%bf%85%e8%a6%81%e7%9a%84%e5%8c%85">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.Cipher;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.KeyGenerator;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.SecretKey;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.spec.SecretKeySpec;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;</span></span></code></pre></div><hr>
+<h3 id="2-生成-aes-密钥"><strong>2. 生成 AES 密钥</strong><a class="anchor" href="#2-%e7%94%9f%e6%88%90-aes-%e5%af%86%e9%92%a5">#</a></h3>
+<p>AES 密钥可以通过 <code>KeyGenerator</code> 生成，支持 128 位、192 位和 256 位密钥长度。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> SecretKey <span style="color:#a6e22e">generateKey</span>(<span style="color:#66d9ef">int</span> keySize)<span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        KeyGenerator keyGen<span style="color:#f92672">=</span>KeyGenerator.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES&#34;</span>);
+</span></span><span style="display:flex;"><span>        keyGen.<span style="color:#a6e22e">init</span>(keySize); <span style="color:#75715e">// 128, 192, 或 256</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> keyGen.<span style="color:#a6e22e">generateKey</span>();
+</span></span><span style="display:flex;"><span>        }</span></span></code></pre></div><hr>
+<h3 id="3-加密方法"><strong>3. 加密方法</strong><a class="anchor" href="#3-%e5%8a%a0%e5%af%86%e6%96%b9%e6%b3%95">#</a></h3>
+<p>使用 <code>Cipher</code> 类进行加密，并指定加密模式和填充方式（如 <code>AES/CBC/PKCS5Padding</code>）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">encrypt</span>(String data,SecretKey secretKey)<span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        Cipher cipher<span style="color:#f92672">=</span>Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>); <span style="color:#75715e">// 默认模式</span>
+</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">ENCRYPT_MODE</span>,secretKey);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span>encryptedBytes<span style="color:#f92672">=</span>cipher.<span style="color:#a6e22e">doFinal</span>(data.<span style="color:#a6e22e">getBytes</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(encryptedBytes); <span style="color:#75715e">// 返回 Base64 编码的密文</span>
+</span></span><span style="display:flex;"><span>        }</span></span></code></pre></div><hr>
+<h3 id="4-解密方法"><strong>4. 解密方法</strong><a class="anchor" href="#4-%e8%a7%a3%e5%af%86%e6%96%b9%e6%b3%95">#</a></h3>
+<p>使用相同的密钥和模式进行解密。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">decrypt</span>(String encryptedData,SecretKey secretKey)<span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        Cipher cipher<span style="color:#f92672">=</span>Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>);
+</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">DECRYPT_MODE</span>,secretKey);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span>decodedBytes<span style="color:#f92672">=</span>Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(encryptedData);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span>decryptedBytes<span style="color:#f92672">=</span>cipher.<span style="color:#a6e22e">doFinal</span>(decodedBytes);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(decryptedBytes); <span style="color:#75715e">// 返回解密后的明文</span>
+</span></span><span style="display:flex;"><span>        }</span></span></code></pre></div><hr>
+<h3 id="5-完整示例"><strong>5. 完整示例</strong><a class="anchor" href="#5-%e5%ae%8c%e6%95%b4%e7%a4%ba%e4%be%8b">#</a></h3>
+<p>以下是一个完整的示例，包括生成密钥、加密和解密：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AESExample</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        SecretKey secretKey <span style="color:#f92672">=</span> generateKey(128); <span style="color:#75715e">// 生成 128 位密钥</span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Secret Key (Base64): &#34;</span> <span style="color:#f92672">+</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(secretKey.<span style="color:#a6e22e">getEncoded</span>()));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        String originalText <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, AES!&#34;</span>;
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Original Text: &#34;</span> <span style="color:#f92672">+</span> originalText);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        String encryptedText <span style="color:#f92672">=</span> encrypt(originalText, secretKey);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Encrypted Text: &#34;</span> <span style="color:#f92672">+</span> encryptedText);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        String decryptedText <span style="color:#f92672">=</span> decrypt(encryptedText, secretKey);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Decrypted Text: &#34;</span> <span style="color:#f92672">+</span> decryptedText);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> SecretKey <span style="color:#a6e22e">generateKey</span>(<span style="color:#66d9ef">int</span> keySize) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        KeyGenerator keyGen <span style="color:#f92672">=</span> KeyGenerator.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES&#34;</span>);
+</span></span><span style="display:flex;"><span>        keyGen.<span style="color:#a6e22e">init</span>(keySize);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> keyGen.<span style="color:#a6e22e">generateKey</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">encrypt</span>(String data, SecretKey secretKey) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>);
+</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">ENCRYPT_MODE</span>, secretKey);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> encryptedBytes <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(data.<span style="color:#a6e22e">getBytes</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(encryptedBytes);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">decrypt</span>(String encryptedData, SecretKey secretKey) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;AES/ECB/PKCS5Padding&#34;</span>);
+</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">DECRYPT_MODE</span>, secretKey);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decodedBytes <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(encryptedData);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decryptedBytes <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(decodedBytes);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(decryptedBytes);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><hr>
+<h3 id="6-注意事项"><strong>6. 注意事项</strong><a class="anchor" href="#6-%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a></h3>
+<ol>
+<li><strong>密钥管理</strong>：密钥应安全存储，避免硬编码在代码中。</li>
+<li><strong>加密模式</strong>：默认使用 <code>ECB</code> 模式，但安全性较低，建议使用 <code>CBC</code> 模式并指定初始化向量（IV）。</li>
+<li><strong>填充方式</strong>：常用 <code>PKCS5Padding</code>，确保明文长度符合 AES 分组要求。</li>
+<li><strong>异常处理</strong>：在实际应用中，应妥善处理可能抛出的异常（如 <code>NoSuchAlgorithmException</code>、<code>InvalidKeyException</code> 等）。</li>
+</ol>
+<hr>
+<p>通过以上步骤，你可以在 Java 中轻松实现 AES 加密和解密。如果需要更安全的模式（如 <code>CBC</code>），请参考相关文档<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</p>
+<h2 id="在java中如何使用rsa算法进行加解密">在Java中如何使用RSA算法进行加解密<a class="anchor" href="#%e5%9c%a8java%e4%b8%ad%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8rsa%e7%ae%97%e6%b3%95%e8%bf%9b%e8%a1%8c%e5%8a%a0%e8%a7%a3%e5%af%86">#</a></h2>
+<p>在 Java 中使用 RSA 算法进行加解密可以通过 <code>java.security</code> 和 <code>javax.crypto</code> 包中的类实现。以下是详细的步骤和示例代码：</p>
+<hr>
+<h3 id="1-生成-rsa-密钥对"><strong>1. 生成 RSA 密钥对</strong><a class="anchor" href="#1-%e7%94%9f%e6%88%90-rsa-%e5%af%86%e9%92%a5%e5%af%b9">#</a></h3>
+<p>首先，需要生成 RSA 的公钥和私钥对：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.KeyPair;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.KeyPairGenerator;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.NoSuchAlgorithmException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.interfaces.RSAPrivateKey;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.interfaces.RSAPublicKey;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RSAKeyGenerator</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> NoSuchAlgorithmException {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 创建 KeyPairGenerator 实例，指定算法为 RSA</span>
+</span></span><span style="display:flex;"><span>        KeyPairGenerator keyPairGenerator <span style="color:#f92672">=</span> KeyPairGenerator.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;RSA&#34;</span>);
+</span></span><span style="display:flex;"><span>        keyPairGenerator.<span style="color:#a6e22e">initialize</span>(2048); <span style="color:#75715e">// 设置密钥长度为 2048 位</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 生成密钥对</span>
+</span></span><span style="display:flex;"><span>        KeyPair keyPair <span style="color:#f92672">=</span> keyPairGenerator.<span style="color:#a6e22e">generateKeyPair</span>();
+</span></span><span style="display:flex;"><span>        RSAPublicKey publicKey <span style="color:#f92672">=</span> (RSAPublicKey) keyPair.<span style="color:#a6e22e">getPublic</span>();
+</span></span><span style="display:flex;"><span>        RSAPrivateKey privateKey <span style="color:#f92672">=</span> (RSAPrivateKey) keyPair.<span style="color:#a6e22e">getPrivate</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 将密钥转换为 Base64 编码的字符串</span>
+</span></span><span style="display:flex;"><span>        String publicKeyStr <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(publicKey.<span style="color:#a6e22e">getEncoded</span>());
+</span></span><span style="display:flex;"><span>        String privateKeyStr <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(privateKey.<span style="color:#a6e22e">getEncoded</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;公钥: &#34;</span> <span style="color:#f92672">+</span> publicKeyStr);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;私钥: &#34;</span> <span style="color:#f92672">+</span> privateKeyStr);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><hr>
+<h3 id="2-使用公钥加密"><strong>2. 使用公钥加密</strong><a class="anchor" href="#2-%e4%bd%bf%e7%94%a8%e5%85%ac%e9%92%a5%e5%8a%a0%e5%af%86">#</a></h3>
+<p>使用公钥对数据进行加密：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.Cipher;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.KeyFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.PublicKey;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.spec.X509EncodedKeySpec;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RSAEncryptor</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">encrypt</span>(String data, String publicKeyStr) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 将 Base64 编码的公钥字符串转换为 PublicKey 对象</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> publicKeyBytes <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(publicKeyStr);
+</span></span><span style="display:flex;"><span>        X509EncodedKeySpec keySpec <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> X509EncodedKeySpec(publicKeyBytes);
+</span></span><span style="display:flex;"><span>        KeyFactory keyFactory <span style="color:#f92672">=</span> KeyFactory.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;RSA&#34;</span>);
+</span></span><span style="display:flex;"><span>        PublicKey publicKey <span style="color:#f92672">=</span> keyFactory.<span style="color:#a6e22e">generatePublic</span>(keySpec);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 使用公钥初始化 Cipher 对象进行加密</span>
+</span></span><span style="display:flex;"><span>        Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;RSA&#34;</span>);
+</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">ENCRYPT_MODE</span>, publicKey);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 加密数据并返回 Base64 编码的密文</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> encryptedBytes <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(data.<span style="color:#a6e22e">getBytes</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(encryptedBytes);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        String publicKeyStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...&#34;</span>; <span style="color:#75715e">// 替换为生成的公钥</span>
+</span></span><span style="display:flex;"><span>        String data <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, RSA!&#34;</span>;
+</span></span><span style="display:flex;"><span>        String encryptedData <span style="color:#f92672">=</span> encrypt(data, publicKeyStr);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;加密后的数据: &#34;</span> <span style="color:#f92672">+</span> encryptedData);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><hr>
+<h3 id="3-使用私钥解密"><strong>3. 使用私钥解密</strong><a class="anchor" href="#3-%e4%bd%bf%e7%94%a8%e7%a7%81%e9%92%a5%e8%a7%a3%e5%af%86">#</a></h3>
+<p>使用私钥对加密数据进行解密：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.crypto.Cipher;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.KeyFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.PrivateKey;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.security.spec.PKCS8EncodedKeySpec;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RSADecryptor</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">decrypt</span>(String encryptedData, String privateKeyStr) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 将 Base64 编码的私钥字符串转换为 PrivateKey 对象</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> privateKeyBytes <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(privateKeyStr);
+</span></span><span style="display:flex;"><span>        PKCS8EncodedKeySpec keySpec <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PKCS8EncodedKeySpec(privateKeyBytes);
+</span></span><span style="display:flex;"><span>        KeyFactory keyFactory <span style="color:#f92672">=</span> KeyFactory.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;RSA&#34;</span>);
+</span></span><span style="display:flex;"><span>        PrivateKey privateKey <span style="color:#f92672">=</span> keyFactory.<span style="color:#a6e22e">generatePrivate</span>(keySpec);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 使用私钥初始化 Cipher 对象进行解密</span>
+</span></span><span style="display:flex;"><span>        Cipher cipher <span style="color:#f92672">=</span> Cipher.<span style="color:#a6e22e">getInstance</span>(<span style="color:#e6db74">&#34;RSA&#34;</span>);
+</span></span><span style="display:flex;"><span>        cipher.<span style="color:#a6e22e">init</span>(Cipher.<span style="color:#a6e22e">DECRYPT_MODE</span>, privateKey);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 解密数据并返回明文</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decryptedBytes <span style="color:#f92672">=</span> cipher.<span style="color:#a6e22e">doFinal</span>(Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(encryptedData));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(decryptedBytes);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        String privateKeyStr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgE...&#34;</span>; <span style="color:#75715e">// 替换为生成的私钥</span>
+</span></span><span style="display:flex;"><span>        String encryptedData <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;加密后的数据&#34;</span>; <span style="color:#75715e">// 替换为加密后的数据</span>
+</span></span><span style="display:flex;"><span>        String decryptedData <span style="color:#f92672">=</span> decrypt(encryptedData, privateKeyStr);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;解密后的数据: &#34;</span> <span style="color:#f92672">+</span> decryptedData);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><hr>
+<h3 id="4-注意事项"><strong>4. 注意事项</strong><a class="anchor" href="#4-%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">#</a></h3>
+<ol>
+<li><strong>密钥长度</strong>：建议使用 2048 位或更长的密钥，以确保安全性<a href="@ref">1</a>。</li>
+<li><strong>加密数据大小</strong>：RSA 加密的数据长度受密钥长度限制，通常用于加密对称密钥或小数据块<a href="@ref">3</a>。</li>
+<li><strong>填充模式</strong>：默认使用 <code>PKCS1Padding</code>，也可以选择 <code>OAEPPadding</code> 等更安全的填充模式<a href="@ref">3</a>。</li>
+</ol>
+<p>通过以上步骤，你可以在 Java 中实现 RSA 算法的加解密功能。</p>
+<h2 id="公钥只能用来加密私钥只能用来解密吗">公钥只能用来加密，私钥只能用来解密吗？<a class="anchor" href="#%e5%85%ac%e9%92%a5%e5%8f%aa%e8%83%bd%e7%94%a8%e6%9d%a5%e5%8a%a0%e5%af%86%e7%a7%81%e9%92%a5%e5%8f%aa%e8%83%bd%e7%94%a8%e6%9d%a5%e8%a7%a3%e5%af%86%e5%90%97">#</a></h2>
+<p>公钥和私钥的使用不仅仅是“公钥加密，私钥解密”，它们的功能取决于具体的应用场景。以下是公钥和私钥的主要用途：</p>
+<hr>
+<h3 id="1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong><a class="anchor" href="#1-%e5%85%ac%e9%92%a5%e5%8a%a0%e5%af%86%e7%a7%81%e9%92%a5%e8%a7%a3%e5%af%86">#</a></h3>
+<ul>
+<li><strong>用途</strong>：用于数据加密，确保数据的机密性。</li>
+<li><strong>场景</strong>：当A想向B发送加密消息时，A使用B的公钥加密数据，B收到后用自己的私钥解密。由于只有B持有私钥，因此只有B能解密消息，确保了消息的安全性<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<hr>
+<h3 id="2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong><a class="anchor" href="#2-%e7%a7%81%e9%92%a5%e7%ad%be%e5%90%8d%e5%85%ac%e9%92%a5%e9%aa%8c%e7%ad%be">#</a></h3>
+<ul>
+<li><strong>用途</strong>：用于数字签名，确保数据的完整性和身份认证。</li>
+<li><strong>场景</strong>：当A想向B发送一条消息并证明消息确实来自A时，A会用私钥对消息进行签名，B收到后用A的公钥验证签名。由于只有A持有私钥，因此B可以确认消息确实来自A，且未被篡改<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</li>
+</ul>
+<hr>
+<h3 id="3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong><a class="anchor" href="#3-%e7%a7%81%e9%92%a5%e5%8a%a0%e5%af%86%e5%85%ac%e9%92%a5%e8%a7%a3%e5%af%86">#</a></h3>
+<ul>
+<li><strong>用途</strong>：用于身份认证或特定场景的加密。</li>
+<li><strong>场景</strong>：在某些特殊情况下（如密钥交换），私钥也可以用于加密，公钥用于解密。例如，在TLS/SSL协议中，服务器可能会用私钥加密某些信息，客户端用公钥解密以验证服务器的身份<a href="@ref">5</a>。</li>
+</ul>
+<hr>
+<h3 id="总结"><strong>总结</strong><a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a></h3>
+<p>公钥和私钥的功能是灵活的，具体使用方式取决于应用场景：</p>
+<ul>
+<li><strong>公钥加密，私钥解密</strong>：确保数据机密性。</li>
+<li><strong>私钥签名，公钥验签</strong>：确保数据完整性和身份认证。</li>
+<li><strong>私钥加密，公钥解密</strong>：用于特定场景的身份认证或密钥交换。</li>
+</ul>
+<p>因此，公钥和私钥的使用并不仅限于“公钥加密，私钥解密”，而是根据需求灵活应用的<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">5</a>。</p>
+<h2 id="对称加密中的加密模式是什么">对称加密中的加密模式是什么<a class="anchor" href="#%e5%af%b9%e7%a7%b0%e5%8a%a0%e5%af%86%e4%b8%ad%e7%9a%84%e5%8a%a0%e5%af%86%e6%a8%a1%e5%bc%8f%e6%98%af%e4%bb%80%e4%b9%88">#</a></h2>
+<p>对称加密中的加密模式是指将明文分组加密的方式，用于处理长度不固定的明文数据。常见的加密模式包括以下五种：</p>
+<hr>
+<h3 id="1-ecbelectronic-code-book电子密码本模式"><strong>1. ECB（Electronic Code Book，电子密码本模式）</strong><a class="anchor" href="#1-ecbelectronic-code-book%e7%94%b5%e5%ad%90%e5%af%86%e7%a0%81%e6%9c%ac%e6%a8%a1%e5%bc%8f">#</a></h3>
+<ul>
+<li><strong>特点</strong>：
+<ul>
+<li>简单快速，支持并行计算。</li>
+<li>相同的明文会生成相同的密文，容易被破解。</li>
+<li>最后一个分组需要填充。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>安全性较低，容易受到密码本重放攻击。</li>
+<li>不推荐使用<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-cbccipher-block-chaining密码分组链接模式"><strong>2. CBC（Cipher Block Chaining，密码分组链接模式）</strong><a class="anchor" href="#2-cbccipher-block-chaining%e5%af%86%e7%a0%81%e5%88%86%e7%bb%84%e9%93%be%e6%8e%a5%e6%a8%a1%e5%bc%8f">#</a></h3>
+<ul>
+<li><strong>特点</strong>：
+<ul>
+<li>每个明文分组在加密前会与前一个密文分组进行异或操作。</li>
+<li>需要初始化向量（IV），且加解密时 IV 必须相同。</li>
+<li>最后一个分组需要填充。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：
+<ul>
+<li>安全性较高，密文无规律。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>不支持并行加密，解密支持并行<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong><a class="anchor" href="#3-cfbcipher-feedback%e5%af%86%e6%96%87%e5%8f%8d%e9%a6%88%e6%a8%a1%e5%bc%8f">#</a></h3>
+<ul>
+<li><strong>特点</strong>：
+<ul>
+<li>将分组密码转换为流密码，按位或按字节加密。</li>
+<li>需要初始化向量（IV），且加解密时 IV 必须相同。</li>
+<li>不需要填充。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：
+<ul>
+<li>支持并行解密。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>不支持并行加密，存在错误扩散<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong><a class="anchor" href="#4-ofboutput-feedback%e8%be%93%e5%87%ba%e5%8f%8d%e9%a6%88%e6%a8%a1%e5%bc%8f">#</a></h3>
+<ul>
+<li><strong>特点</strong>：
+<ul>
+<li>将分组密码转换为流密码，按位或按字节加密。</li>
+<li>需要初始化向量（IV），且加解密时 IV 必须相同。</li>
+<li>不需要填充。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：
+<ul>
+<li>加密和解密使用相同结构。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>不支持并行运算，存在错误扩散<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong><a class="anchor" href="#5-ctrcounter%e8%ae%a1%e6%95%b0%e5%99%a8%e6%a8%a1%e5%bc%8f">#</a></h3>
+<ul>
+<li><strong>特点</strong>：
+<ul>
+<li>将分组密码转换为流密码，按位或按字节加密。</li>
+<li>不需要初始化向量（IV），使用计数器生成密钥流。</li>
+<li>不需要填充。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：
+<ul>
+<li>支持并行加密和解密，效率高。</li>
+<li>安全性高，推荐使用<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="总结-1"><strong>总结</strong><a class="anchor" href="#%e6%80%bb%e7%bb%93-1">#</a></h3>
+<ul>
+<li><strong>推荐模式</strong>：CBC 和 CTR 模式，尤其是 CTR 模式，因其高效性和安全性<a href="@ref">1</a><a href="@ref">3</a>。</li>
+<li><strong>不推荐模式</strong>：ECB 模式，因其安全性较低<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+<p>以上五种模式各有特点，具体选择应根据应用场景和安全需求决定<a href="@ref">1</a><a href="@ref">3</a>。</p>
+<h2 id="aes中的填充方式有哪些">AES中的填充方式有哪些？<a class="anchor" href="#aes%e4%b8%ad%e7%9a%84%e5%a1%ab%e5%85%85%e6%96%b9%e5%bc%8f%e6%9c%89%e5%93%aa%e4%ba%9b">#</a></h2>
+<p>AES（Advanced Encryption Standard）中的填充方式主要用于将明文数据填充到符合AES分组长度（128位）的整数倍，以便进行加密。以下是常见的填充方式：</p>
+<h3 id="1-pkcs7-padding">1. <strong>PKCS7 Padding</strong><a class="anchor" href="#1-pkcs7-padding">#</a></h3>
+<ul>
+<li><strong>描述</strong>：在明文末尾添加填充字节，填充字节的值等于需要填充的字节数。例如，如果需要填充5个字节，则填充值为<code>05 05 05 05 05</code>。</li>
+<li><strong>特点</strong>：适用于任意块大小（1~255字节），是AES中最常用的填充方式<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="2-pkcs5-padding">2. <strong>PKCS5 Padding</strong><a class="anchor" href="#2-pkcs5-padding">#</a></h3>
+<ul>
+<li><strong>描述</strong>：与PKCS7类似，但块大小固定为8字节。在AES中，由于块大小为16字节，PKCS5与PKCS7的效果相同<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="3-no-padding">3. <strong>No Padding</strong><a class="anchor" href="#3-no-padding">#</a></h3>
+<ul>
+<li><strong>描述</strong>：不进行任何填充，要求明文长度必须是分组长度的整数倍。如果明文长度不符合要求，则会抛出异常。</li>
+<li><strong>特点</strong>：适用于明文长度已知且为分组大小整数倍的场景<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="4-iso10126-padding">4. <strong>ISO10126 Padding</strong><a class="anchor" href="#4-iso10126-padding">#</a></h3>
+<ul>
+<li><strong>描述</strong>：在明文末尾填充随机字节，最后一个字节为填充的数量数。例如，如果需要填充5个字节，则填充格式为<code>XX XX XX XX 05</code>，其中<code>XX</code>为随机字节。</li>
+<li><strong>特点</strong>：填充值随机，安全性较高<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="5-iso7816-4-padding">5. <strong>ISO7816-4 Padding</strong><a class="anchor" href="#5-iso7816-4-padding">#</a></h3>
+<ul>
+<li><strong>描述</strong>：在明文末尾填充<code>0x80</code>，后面补<code>0x00</code>，直到分组长度。例如，如果需要填充5个字节，则填充格式为<code>80 00 00 00 00</code>。</li>
+<li><strong>特点</strong>：适用于特定场景，如智能卡应用<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="6-zero-byte-padding">6. <strong>Zero Byte Padding</strong><a class="anchor" href="#6-zero-byte-padding">#</a></h3>
+<ul>
+<li><strong>描述</strong>：在明文末尾填充<code>0x00</code>，直到分组长度。例如，如果需要填充5个字节，则填充格式为<code>00 00 00 00 00</code>。</li>
+<li><strong>特点</strong>：简单易用，但无法区分填充和原始数据<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="7-x923-padding">7. <strong>X923 Padding</strong><a class="anchor" href="#7-x923-padding">#</a></h3>
+<ul>
+<li><strong>描述</strong>：在明文末尾填充<code>0x00</code>，最后一个字节为填充的数量数。例如，如果需要填充5个字节，则填充格式为<code>00 00 00 00 05</code>。</li>
+<li><strong>特点</strong>：与PKCS7类似，但填充值为<code>0x00</code><a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong><a class="anchor" href="#8-tbc-padding-trailing-bit-compliment">#</a></h3>
+<ul>
+<li><strong>描述</strong>：根据明文的最后一位进行填充。如果最后一位为<code>1</code>，则填充<code>0x00</code>；如果最后一位为<code>0</code>，则填充<code>0xFF</code>。</li>
+<li><strong>特点</strong>：适用于特定场景，如某些协议要求<a href="@ref">1</a><a href="@ref">2</a>。</li>
+</ul>
+<h3 id="9-pkcs1-padding">9. <strong>PKCS1 Padding</strong><a class="anchor" href="#9-pkcs1-padding">#</a></h3>
+<ul>
+<li><strong>描述</strong>：主要用于RSA加密，填充格式为<code>00 + BT + PS + 00 + D</code>，其中<code>BT</code>为处理模式，<code>PS</code>为填充字节。</li>
+<li><strong>特点</strong>：适用于RSA加密，不常用于AES<a href="@ref">2</a>。</li>
+</ul>
+<h3 id="总结-2">总结<a class="anchor" href="#%e6%80%bb%e7%bb%93-2">#</a></h3>
+<p>AES中的填充方式多样，常见的包括 <strong>PKCS7</strong>、<strong>PKCS5</strong>、<strong>No Padding</strong>、<strong>ISO10126</strong> 等。选择填充方式时需根据具体应用场景和安全性需求进行权衡<a href="@ref">1</a><a href="@ref">2</a>。</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/post/computer-science/java/java-utils/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Java Utils</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/post/computer-science/java/map/" class="flex align-center">
+        <span>map</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+  <div class="book-copyright flex justify-center">
+    <small>Penruins - <a href="/">Main Page</a></small>
+  </div>
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#在java中如何使用aes加密算法">在java中如何使用AES加密算法</a>
+          <ul>
+            <li><a href="#1-导入必要的包"><strong>1. 导入必要的包</strong></a></li>
+            <li><a href="#2-生成-aes-密钥"><strong>2. 生成 AES 密钥</strong></a></li>
+            <li><a href="#3-加密方法"><strong>3. 加密方法</strong></a></li>
+            <li><a href="#4-解密方法"><strong>4. 解密方法</strong></a></li>
+            <li><a href="#5-完整示例"><strong>5. 完整示例</strong></a></li>
+            <li><a href="#6-注意事项"><strong>6. 注意事项</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#在java中如何使用rsa算法进行加解密">在Java中如何使用RSA算法进行加解密</a>
+          <ul>
+            <li><a href="#1-生成-rsa-密钥对"><strong>1. 生成 RSA 密钥对</strong></a></li>
+            <li><a href="#2-使用公钥加密"><strong>2. 使用公钥加密</strong></a></li>
+            <li><a href="#3-使用私钥解密"><strong>3. 使用私钥解密</strong></a></li>
+            <li><a href="#4-注意事项"><strong>4. 注意事项</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#公钥只能用来加密私钥只能用来解密吗">公钥只能用来加密，私钥只能用来解密吗？</a>
+          <ul>
+            <li><a href="#1-公钥加密私钥解密"><strong>1. 公钥加密，私钥解密</strong></a></li>
+            <li><a href="#2-私钥签名公钥验签"><strong>2. 私钥签名，公钥验签</strong></a></li>
+            <li><a href="#3-私钥加密公钥解密"><strong>3. 私钥加密，公钥解密</strong></a></li>
+            <li><a href="#总结"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#对称加密中的加密模式是什么">对称加密中的加密模式是什么</a>
+          <ul>
+            <li><a href="#1-ecbelectronic-code-book电子密码本模式"><strong>1. ECB（Electronic Code Book，电子密码本模式）</strong></a></li>
+            <li><a href="#2-cbccipher-block-chaining密码分组链接模式"><strong>2. CBC（Cipher Block Chaining，密码分组链接模式）</strong></a></li>
+            <li><a href="#3-cfbcipher-feedback密文反馈模式"><strong>3. CFB（Cipher Feedback，密文反馈模式）</strong></a></li>
+            <li><a href="#4-ofboutput-feedback输出反馈模式"><strong>4. OFB（Output Feedback，输出反馈模式）</strong></a></li>
+            <li><a href="#5-ctrcounter计数器模式"><strong>5. CTR（Counter，计数器模式）</strong></a></li>
+            <li><a href="#总结-1"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#aes中的填充方式有哪些">AES中的填充方式有哪些？</a>
+          <ul>
+            <li><a href="#1-pkcs7-padding">1. <strong>PKCS7 Padding</strong></a></li>
+            <li><a href="#2-pkcs5-padding">2. <strong>PKCS5 Padding</strong></a></li>
+            <li><a href="#3-no-padding">3. <strong>No Padding</strong></a></li>
+            <li><a href="#4-iso10126-padding">4. <strong>ISO10126 Padding</strong></a></li>
+            <li><a href="#5-iso7816-4-padding">5. <strong>ISO7816-4 Padding</strong></a></li>
+            <li><a href="#6-zero-byte-padding">6. <strong>Zero Byte Padding</strong></a></li>
+            <li><a href="#7-x923-padding">7. <strong>X923 Padding</strong></a></li>
+            <li><a href="#8-tbc-padding-trailing-bit-compliment">8. <strong>TBC Padding (Trailing-Bit-Compliment)</strong></a></li>
+            <li><a href="#9-pkcs1-padding">9. <strong>PKCS1 Padding</strong></a></li>
+            <li><a href="#总结-2">总结</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

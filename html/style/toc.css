@@ -1,0 +1,206 @@
+/* 目录按钮样式 */
+#toc-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-size: 20px;
+}
+
+/* 目录容器样式 - 默认隐藏 */
+#toc-container {
+    position: fixed;
+    right: 20px;
+    bottom: 80px;
+    width: 25rem;
+    height: 90%;
+    background: #fff8e1;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transform: scale(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+    z-index: 999;
+}
+
+/* 展开状态 */
+#toc-container.show {
+    transform: scale(1);
+}
+
+/* 目录内容样式 */
+#toc-content {
+    padding: 15px;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+#toc-content h3 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+#toc-content ul {
+    list-style: none;
+    padding-left: 15px;
+    margin: 0;
+}
+
+#toc-content li {
+    margin: 5px 0;
+}
+
+#toc-content a {
+    text-decoration: none;
+    display: block;
+    padding: 0;
+}
+
+#toc-content a:hover {
+    colortoc-content a:hover {
+        color: #007bff;
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 600px) {
+    #toc-container {
+        width: 90%;
+        right: 5%;
+        bottom: 10px;
+    }
+}
+
+/* typography */
+body {
+    font-family: ui-monospace, Menlo, Monaco,"Cascadia Mono", "Segoe UI Mono", Consolas, "Liberation Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Droid Sans Mono", "Lucida Console", "Courier New", monospace;
+    line-height: 1.5;
+    /* 米黄色: #fff8e1 - 温和的米黄色，接近纸张颜色*/
+    /* 暖白色: #fefefe - 带有轻微暖色调的白色*/
+    /* 淡奶油色: #fffde7 - 柔和的奶油色调*/
+    /* 护眼黄: #fff9c4 - 经典的护眼黄色背景*/
+    background-color: #fff8e1
+}
+
+/* 深色模式下的背景 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #343a40;
+    }
+
+    #toc-container {
+        background: #343a40;
+    }
+}
+
+ul {
+    margin: 0px;
+    padding-inline-start: 15px;
+}
+
+li {
+    padding-left: 1px;
+}
+
+body {
+    /*font-size: 15px;*/
+    font-size: 1rem;
+}
+
+/*@media only screen and (max-width: 1284px) {*/
+/*    body {*/
+/*        font-size: 2.6rem;*/
+/*    }*/
+/*}*/
+
+/* 当系统启用了夜间模式时应用的样式 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #343a40;
+        color: #e9ecef;
+    }
+
+    a {
+        text-decoration: none;
+        color: #84b2ff;
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* 默认情况下隐藏气泡 */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 500px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* 定位气泡 */
+    position: absolute;
+    z-index: 1;
+    top: 120%; /* 气泡位于元素上方 */
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0px; /* 使用margin自动调整水平居中 */
+
+    /* 添加小三角形 */
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent #555 transparent;
+    }
+}
+
+/* 当鼠标悬停在工具提示上时显示气泡 */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+h1::before {
+    content: "# ";
+}
+
+h2::before {
+    content: "## ";
+}
+
+h3::before {
+    content: "### ";
+}
+
+h4::before {
+    content: "#### ";
+}
+
+h5::before {
+    content: "##### ";
+}
+
+h6::before {
+    content: "###### ";
+}
