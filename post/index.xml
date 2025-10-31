@@ -7,7 +7,7 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>[Main Page](/)</copyright>
-    <lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 31 Oct 2025 09:51:02 +0800</lastBuildDate>
     <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
@@ -43,6 +43,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/post/blog/2025/2025-10-27-spring-ai-%E5%AD%A6%E4%B9%A0/</guid>
       <description>&lt;h1 id=&#34;spring-ai-学习-2025-10-27&#34;&gt;Spring AI 学习 (2025-10-27)&lt;a class=&#34;anchor&#34; href=&#34;#spring-ai-%e5%ad%a6%e4%b9%a0-2025-10-27&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;项目地址 &lt;a href=&#34;https://github.com/penruins/spring-ai-demo&#34;&gt;penruins/spring-ai-demo&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;test&#34;&gt;test&lt;a class=&#34;anchor&#34; href=&#34;#test&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X POST &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http://localhost:8080/chat/test/1&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; -d &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{&amp;#34;question&amp;#34;: &amp;#34;云南省的省会是哪里?&amp;#34;}&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;reference&#34;&gt;reference&lt;a class=&#34;anchor&#34; href=&#34;#reference&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://developer.aliyun.com/article/1677190&#34;&gt;Spring AI 进阶之路01：三步将 AI 整合进 Spring Boot&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/ThomasVitale/llm-apps-java-spring-ai&#34;&gt;ThomasVitale/llm-apps-java-spring-ai&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Samples showing how to build Java applications powered by Generative AI and Large Language Models (LLMs) using Spring AI.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://javaai.pig4cloud.com/spring-ai/overview/overview&#34;&gt;零基础入门Spring AI&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>/post/blog/2025/2025-10-29-idea-proxy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/post/blog/2025/2025-10-29-idea-proxy/</guid>
+      <description>&lt;h1 id=&#34;idea-过代理抓包&#34;&gt;idea 过代理抓包&lt;a class=&#34;anchor&#34; href=&#34;#idea-%e8%bf%87%e4%bb%a3%e7%90%86%e6%8a%93%e5%8c%85&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;blockquote class=&#39;book-hint &#39;&gt;&#xA;&lt;p&gt;最近在研究 spring AI，对框架如何调用模型的接口构造参数比较感兴趣，就想在运行程序的时候抓包看一下调用接口的参数。在 IntelliJ Idea 中运行的程序需要单独配置代理（我用的抓包工具是 Charles），这篇文章把我配置的笔记整理一下&lt;/p&gt;&#xA;&lt;/blockquote&gt;&lt;p&gt;在 charles 中导出证书文件 .cer 或者 .pem 拓展名&lt;/p&gt;&#xA;&lt;p&gt;然后执行如下命令，将证书导入到 java 的证书中&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#34;$JAVA_HOME\bin\keytool.exe -import -file $CHARLES_CERTIFICATE_PATH -keystore $JAVA_HOME\security\cacerts -alias charles_cert&#xA;# 命令执行会要求输入密码，请记住这个密码 $CHARLES_CERT_PASSWORD&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在 idea 项目的配置中加上如下的 jvm 参数&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;-Djavax.net.ssl.trustStore=&amp;#34;$JAVA_HOME\security\cacerts&amp;#34;&#xA;-Djavax.net.ssl.trustStorePassword=&amp;#34;$CHARLES_CERT_PASSWORD&amp;#34;&#xA;-DproxySet=true&#xA;-DproxyHost=127.0.0.1&#xA;-DproxyPort=8887&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;reference&#34;&gt;reference&lt;a class=&#34;anchor&#34; href=&#34;#reference&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/46926910/how-do-i-hook-up-charles-with-intellij&#34;&gt;How do I hook up Charles with IntelliJ?&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>2025 广州 找工作</title>
