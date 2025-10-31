@@ -18,12 +18,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-31T17:45:32+08:00">
+    <meta property="article:modified_time" content="2025-10-31T17:48:54+08:00">
 
 
   <meta itemprop="name" content="spring boot validation">
   <meta itemprop="description" content="@AssertTrue 方法名前缀# 使用 @AssertTrue 进行字段校验时，方法名称必须以 is 或 has 开头, 不然不会生效 Tips: 在使用 swagger2 的项目中，如果使用 is 开头，会在接口文档中将方法解析为一个字段，换成 has 为前缀之后不会出现这样的情况 如果一定要使用 is 作为方法名称的前缀，应该也可以使用 @ApiModelProperty(hidden = true) 将其隐藏 @AssertTrue(message = &#34;计划培训开始时间不能大于计划培训结束时间&#34;) public boolean isTrainEndTimeAfterTrainStarTime() { return trainStartTime.compareTo(trainEndTime) &lt;= 0; }校验整数字段不能为空# @NotNull(message = &#34;pageNum 不能为空&#34;) private Integer pageNum;校验字符串不能为空# @NotBlank(message = &#34;申请人 不能为空&#34;) private String applicant;校验时间段字段先后关系# // 日期为 字符串 类型 @NotEmpty(message = &#34;计划培训开始时间 不能为空&#34;) private String trainStartTime; @NotEmpty(message = &#34;计划培训结束时间 不能为空&#34;) private String trainEndTime; @AssertTrue(message = &#34;计划培训开始时间不能大于计划培训结束时间&#34;) public boolean isTrainEndTimeAfterTrainStarTime() { // 方法名称要以 is 或 has 开头 return trainStartTime.compareTo(trainEndTime) &lt;= 0; }// 日期为 LocalDate 类型 @NotNull(message = &#34;开始日期(startDate) 不能为空&#34;) private LocalDate startDate; @NotNull(message = &#34;结束日期(endDate) 不能为空&#34;) private LocalDate endDate; @AssertTrue(message = &#34;结束日期(endDate) 不能先于 开始日期(startDate)&#34;) public boolean isEndDateAfterStartDate() { return !endDate.isBefore(startDate); }">
-  <meta itemprop="dateModified" content="2025-10-31T17:45:32+08:00">
+  <meta itemprop="dateModified" content="2025-10-31T17:48:54+08:00">
   <meta itemprop="wordCount" content="116">
 
 <title>spring boot validation | Penruins</title>
