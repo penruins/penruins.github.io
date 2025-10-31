@@ -18,12 +18,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-31T22:49:33+08:00">
+    <meta property="article:modified_time" content="2025-10-31T23:16:26+08:00">
 
 
   <meta itemprop="name" content="spring boot">
   <meta itemprop="description" content="spring boot# AOP# 为什么要使用AOP？# AOP的术语和流程# AOP开发详解# 确定拦截目标 需要拦截什么类的什么方法 开发切面 @Aspect 注解的一个类 @Before @After @AfterReturning @AfterThrowing 定义切点 环绕通知# 一般而言，只有在需要大幅度修改原有目标对象的服务逻辑时才使用它，一般情况下尽量不要使用它。环绕通知是一个取代整个流程的通知，当然它也提供了回调原有流程的能力 引入# 通知获取参数# 织入# 织入是一个生成动态代理对象并且将切面和目标对象方法编入约定流程的过程 本书中采用先声明接口再提供一个实现类的形式来提供服务类，这也是Spring推荐的方式，但是是否拥有接口并不是AOP的强制要求 在Java中，当前有多种方式实现动态代理，我们之前谈到的CGLIB只是其中的一种，业界比较流行的还有JDK和Javassist等。Spring采用了JDK和CGLIB，对于JDK动态代理的要求是被代理的目标对象必须拥有接口，而对于CGLIB动态代理则不做要求。因此，在默认的情况下，Spring会按照这样的一条规则处理：当需要使用AOP的类拥有接口时，它会以JDK动态代理的方式运行，否则以CGLIB动态代理的方式运行 多个切面# 数据库事务# JDBC的数据库事务# Spring声明式事务的使用# 声明式事务是使用注解@Transactional进行标注的，这个注解可以标注在类或者方法上，当它标注在类上时，表示这个类所有公共的(public)非静态的方法都将启用事务功能 Spring事务管理器# 在Spring中，事务管理器的顶层接口为 TransactionManager，这个接口没有任何方法定义，这是因为这个接口下又可以划分两大类事务管理器 响应式编程的事务管理器 非响应式编程的事务管理器 PlatformTransactionManager getTransaction 获取事务，返回事务状态 commit 提交事务 rollback 回滚事务 在Spring Boot中，添加Maven依赖mybatis-spring-boot-starter之后，会自动创建JdbcTransactionManager对象作为事务管理器 如果依赖spring-boot-starter-data-jpa，则会自动创建JpaTransactionManager对象作为事务管理器 隔离级别# 在企业的生产实践中，选择隔离级别一般会以读写提交为主，它能够防止脏读，但不能避免不可重复读和幻读 传播行为# 执行一个批量任务，它会处理很多的交易，绝大部分交易可以顺利完成，但是也有极少数的交易因为特殊原因不能完成而发生异常，这时我们不应该因为极少数的交易不能完成而回滚批量任务调用的其他交易，使得那些本能完成的交易也不能完成了 在执行一个批量任务的过程中，调用多个交易时，如果有一些交易发生异常，只回滚那些出现异常的交易，而不回滚整个批量任务，这样就能够使得那些没有问题的交易顺利完成，而有问题的交易则不做任何事情 在Spring中，当一个方法调用另一个方法时，可以让事务采取不同的策略工作，如新建事务或者挂起当前事务等，这便是事务的传播行为 7种传播行为 REQUIRED 需要事务，它是默认传播行为。如果当前存在事务，就沿用当前事务；否则新建一个事务运行该方法 SUPPORTS 支持事务。如果当前存在事务，就沿用当前事务；否则继续采用无事务的方式运行该方法 MANDATORY 必须使用事务。如果当前没有事务，则会抛出异常；如果存在当前事务，则沿用当前事务运行该方法￼ REQUIRES_NEW 无论当前事务是否存在，都会创建新事务运行该方法，这样新事务就可以拥有新的锁和隔离级别等特性，与当前事务相互独立￼ e.g. 在进行数据同步的时候，不用将整个同步过程都设置为一个事务 NOT_SUPPORTED 不支持事务，当前存在事务时，将挂起事务，运行方法 NEVER 不支持事务，如果当前存在事务，则抛出异常，否则继续采用无事务的方式运行该方法￼ NESTED 在当前方法调用方法时，如果被调用的方法发生异常，只回滚被调用的方法运行过的SQL语句，而不回滚当前方法的事务 原理 在大部分的数据库中，一段SQL语句中可以设置一个标志位，运行后面的SQL语句时如果有问题，只回滚到这个标志位的数据状态，而不会让这个标志位之前的SQL语句也回滚。这个标志位在数据库概念中被称为保存点(save point)。从加粗日志部分可以看到，Spring生成了nested事务，也可以看到保存点的释放，可见Spring也是使用保存点技术来完成让子事务回滚而不致使当前事务回滚的工作。 注意，并不是所有数据库都支持保存点技术，因此Spring内部有这样的规则：当数据库支持保存点技术时，就启用保存点技术；如果不能支持，就新建一个事务来运行代码，即等价于REQUIRES_NEW传播行为 NESTED 和 REQUIRES_NEW 的区别 NESTED传播行为和REQUIRES_NEW传播行为是有区别的：NESTED传播行为会沿用当前事务，以保存点技术为主；REQUIRES_NEW传播行为则创建新的事务，事务的提交和回滚也是独立的，它拥有独立上下文（例如隔离级别和超时时间等），这是在应用中需要注意的地方。 占用事务时间过长# @Transactional自调用失效问题# spring-data-redis# Reference 《深入迁出 Spring Boot 3.x》7.1 spring-data-redis项目简介 Lettuce vs Jedis# 在Java中有很多种与Redis连接的驱动，目前使用比较广泛的是Lettuce和Jedis，它们是类似的，不过自Spring Boot 2.0发布以来，默认使用的是Lettuce Lettuce是基于Netty框架的事件驱动的Redis客户端，其方法调用是异步的，其API也是线程安全的，因此多个线程可以操作单个Lettuce连接来完成各种操作，并且Lettuce支持连接池。Lettuce线程可以被多个请求公用，且不会产生频繁创建和关闭Lettuce连接的开销，因此比较适合应用于高并发网站。 Jedis是同步的，不支持异步，Jedis客户端连接不是线程安全的，需要为每个请求创建和关闭一个Jedis连接，所以一般通过连接池来使用Jedis客户端连接。Jedis不太适合在高并发网站使用，当遇到高并发场景时，Jedis连接池无法避免频繁创建和关闭Jedis连接，因为这会造成十分大的系统开销 RedisTemplate和 StringRedisTemplate# StringRedisTemplate是RedisTemplate的子类，从名称就可以看出，StringRedisTemplate专门用于操作字符串 RedisTemplate，它是一个强大的类，会自动从RedisConnectionFactory工厂中获取连接，然后执行对应的Redis命令，最后还会关闭Redis的连接。这些操作都被封装在RedisTemplate中，所以开发者并不需要关注Redis连接的闭合问题 Spring对Redis数据类型操作的封装# ValueOperations 字符串操作接口 HashOperations 哈希操作接口 ListOperations 列表（链表）操作接口 SetOperations 集合操作接口 ZSetOperations 有序集合操作接口 // 获取字符串操作接口 redisTemplate.opsForValue(); // 获取哈希操作接口 redisTemplate.opsForHash(); // 获取列表（链表）操作接口 redisTemplate.opsForList(); // 获取集合操作接口 redisTemplate.opsForSet(); // 获取有序集合操作接口 redisTemplate.opsForZSet();SessionCallback 和 RedisCallback 接口# Redis事务# 使用 Redis 流水线# 在默认的情况下，Redis客户端把命令逐条发送到Redis服务器，这样做显然性能不高。在关系数据库中我们可以批量运行语句，也就是只有需要运行SQL语句时，才一次性地发送所有SQL语句去运行，这样性能就提高了许多。类似地，Redis也可以批量执行命令，这便是流水线(pipeline)技术，在很多情况下并不是Redis性能不佳，而是网络传输的速度慢造成瓶颈，使用流水线技术可以在需要执行很多命令时大幅度地提升Redis的性能 使用 Redis发布 / 订阅# 使用 Lua 脚本# 在Redis中运行Lua脚本具备原子性，且Lua脚本具备更加强大的计算能力，在高并发环境中需要保证数据一致性时，使用Lua脚本方案比使用Redis自身提供的事务更好 Redis提供了两种运行Lua的方法 一种是直接发送Lua脚本到Redis服务器运行 另一种是先把Lua脚本发送给Redis服务器，Redis服务器对Lua脚本进行缓存，然后返回一个32位的SHA1编码，之后只需要发送SHA1和相关参数给Redis服务器便可以运行了。 这里需要解释为什么会存在通过32位编码运行Lua脚本的方法。如果Lua脚本很长，那么就需要通过网络传递脚本给Redis服务器运行，而现实的情况是网络的传递速度往往跟不上Redis的运行速度，因此网络速度就会成为Redis运行的瓶颈。如果只传递32位编码和参数，那么需要通过网络传输的消息就少了许多，这样就可以提高系统的性能 使用 Spring 缓存注解操作 Redis# @CachePut 将方法返回的结果存储到缓存中 @Cacheable 先通过定义的键从缓存中查询，如果可以查询到数据则返回，否则运行该方法，返回数据，并且将返回的结果存储到缓存中 @CacheEvict 通过定义的键移除缓存 缓存注解自调用失效问题# 自定义缓存管理器# 异步线程池# 异步消息 RabbitMQ# 定时任务# validation# spring boot validated 验证开始时间和结束时间 Spring-boot-monitor# 好久没维护了，服务有上下文资源会请求不到，这。。。。。。。 单机监控SpringBoot应用指标 官网">
-  <meta itemprop="dateModified" content="2025-10-31T22:49:33+08:00">
+  <meta itemprop="dateModified" content="2025-10-31T23:16:26+08:00">
   <meta itemprop="wordCount" content="168">
 
 <title>spring boot | Penruins</title>
@@ -34,7 +34,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.1e4254d6ef5c3d4b931350d3ad5355ea88c400709582577a866d1cb5f2a8f4f5.js" ></script>
+  <script defer src="/en.search.min.effd34492e2fa40d0e08e8b84b373d02a7610a77e59715ef3402a6fa243482eb.js" ></script>
 
 
 
@@ -1572,20 +1572,6 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/artificial-intelligence/" class="">
-      Artificial Intelligence</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <input type="checkbox" id="section-6c1b5eb9fa302a23733b5ce342165515" class="toggle"  />
     <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
       <a role="button" class="">
@@ -1695,34 +1681,6 @@ https://github.com/alex-shpak/hugo-book
   
     <a href="/post/computer-science/crawler/" class="">
       crawler</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/post/computer-science/git/" class="">
-      git</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/post/computer-science/networking/" class="">
-      networking</a>
   
 
         </li>
