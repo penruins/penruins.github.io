@@ -11,7 +11,7 @@ https://github.com/alex-shpak/hugo-book
 <meta name="description" content=" Java并发编程实战 第1章 简介# 1.1 并发简史# 1.2 线程的优势# 1.3 线程带来的风险# 1.4 线程无处不在# 开发线程安全的类比开发非线程安全的类要更加谨慎和细致 每个Java应用程序都会使用线程 当JVM启动时，它将为JVM的内部任务（例如，垃圾收集、终结操作等）创建后台线程，并创建一个主线程来运行main方法。 AWT（Abstract Window Toolkit，抽象窗口工具库）和Swing的用户界面框架将创建线程来管理用户界面事件。 Timer将创建线程来执行延迟任务。 一些组件框架，例如Servlet和RMI，都会创建线程池并调用这些线程中的方法。 当某个框架在应用程序中引入并发性时，通常不可能将并发性仅局限于框架代码，因为框架本身会回调（Callback）应用程序的代码，而这些代码将访问应用程序的状态。 对线程安全性的需求也不能局限于被调用的代码，而是要延伸到需要访问这些代码所访问的程序状态的所有代码路径。因此，对线程安全性的需求将在程序中蔓延开来。 第2章 线程安全性# 要编写线程安全的代码，其核心在于要对状态访问操作进行管理，特别是对共享的（Shared）和可变的（Mutable）状态的访问。 “共享”意味着变量可以由多个线程同时访问，而“可变”则意味着变量的值在其生命周期内可以发生变化。 一个对象是否需要是线程安全的，取决于它是否被多个线程访问 当多个线程访问某个状态变量并且其中有一个线程执行写入操作时，必须采用同步机制来协同这些线程对变量的访问。 Java中的主要同步机制是关键字synchronized，它提供了一种独占的加锁方式，但“同步”这个术语还包括volatile类型的变量，显式锁（Explicit Lock）以及原子变量。 2.1 什么是线程安全性# 在线程安全性的定义中，最核心的概念就是正确性。如果对线程安全性的定义是模糊的，那么就是因为缺乏对正确性的清晰定义。 正确性的含义是，某个类的行为与其规范完全一致。在良好的规范中通常会定义各种不变性条件（Invariant）来约束对象的状态，以及定义各种后验条件（Postcondition）来描述对象操作的结果。 线程安全性：当多个线程访问某个类时，这个类始终都能表现出正确的行为，那么就称这个类是线程安全的。 当多个线程访问某个类时，不管运行时环境采用何种调度方式或者这些线程将如何交替执行，并且在主调代码中不需要任何额外的同步或协同，这个类都能表现出正确的行为，那么就称这个类是线程安全的。 在线程安全类中封装了必要的同步机制，因此客户端无须进一步采取同步措施。 无状态对象一定是线程安全的 大多数Servlet都是无状态的，从而极大地降低了在实现Servlet线程安全性时的复杂性。只有当Servlet在处理请求时需要保存一些信息，线程安全性才会成为一个问题。 2.2 原子性# 在并发编程中，这种由于不恰当的执行时序而出现不正确的结果是一种非常重要的情况，它有一个正式的名字：竞态条件（Race Condition） 2.2.1 竞态条件# 当某个计算的正确性取决于多个线程的交替执行时序时，那么就会发生竞态条件。换句话说，就是正确的结果要取决于运气 “先检查后执行”：首先观察到某个条件为真（例如文件X不存在），然后根据这个观察结果采用相应的动作（创建文件X），但事实上，在你观察到这个结果以及开始创建文件之间，观察结果可能变得无效（另一个线程在这期间创建了文件X），从而导致各种问题（未预期的异常、数据被覆盖、文件被破坏等）。 2.2.2 示例：延迟初始化中的竞态条件# 延迟初始化的目的是将对象的初始化操作推迟到实际被使用时才进行，同时要确保只被初始化一次。 假定线程A和线程B同时执行getInstance。A看到instance为空，因而创建一个新的ExpensiveObject实例。B同样需要判断instance是否为空。此时的instance是否为空，要取决于不可预测的时序，包括线程的调度方式，以及A需要花多长时间来初始化ExpensiveObject并设置instance。如果当B检查时，instance为空，那么在两次调用getInstance时可能会得到不同的结果，即使getInstance通常被认为是返回相同的实例。 2.2.3 复合操作# 要避免竞态条件问题，就必须在某个线程修改该变量时，通过某种方式防止其他线程使用这个变量，从而确保其他线程只能在修改操作完成之前或之后读取和修改状态，而不是在修改状态的过程中。 假定有两个操作A和B，如果从执行A的线程来看，当另一个线程执行B时，要么将B全部执行完，要么完全不执行B，那么A和B对彼此来说是原子的。 原子操作是指，对于访问同一个状态的所有操作（包括该操作本身）来说，这个操作是一个以原子方式执行的操作。 在java.util.concurrent.atomic包中包含了一些原子变量类，用于实现在数值和对象引用上的原子状态转换。通过用AtomicLong来代替long类型的计数器，能够确保所有对计数器状态的访问操作都是原子的。 当在无状态的类中添加一个状态时，如果该状态完全由线程安全的对象来管理，那么这个类仍然是线程安全的 当状态变量的数量由一个变为多个时，并不会像状态变量数量由零个变为一个那样简单 在实际情况中，应尽可能地使用现有的线程安全对象（例如AtomicLong）来管理类的状态。与非线程安全的对象相比，判断线程安全对象的可能状态及其状态转换情况要更为容易，从而也更容易维护和验证线程安全性。 2.3 加锁机制# 要保持状态的一致性，就需要在单个原子操作中更新所有相关的状态变量。 2.3.1 内置锁# Java提供了一种内置的锁机制来支持原子性：同步代码块（Synchronized Block）。 以关键字synchronized来修饰的方法就是一种横跨整个方法体的同步代码块，其中该同步代码块的锁就是方法调用所在的对象。静态的synchronized方法以Class对象作为锁。 每个Java对象都可以用做一个实现同步的锁，这些锁被称为内置锁（Intrinsic Lock）或监视器锁（Monitor Lock） 2.3.2 重入# 当某个线程请求一个由其他线程持有的锁时，发出请求的线程就会阻塞 由于内置锁是可重入的，因此如果某个线程试图获得一个已经由它自己持有的锁，那么这个请求就会成功。“重入”意味着获取锁的操作的粒度是“线程”，而不是“调用” 重入的一种实现方法是，为每个锁关联一个获取计数值和一个所有者线程。 当计数值为0时，这个锁就被认为是没有被任何线程持有。当线程请求一个未被持有的锁时，JVM将记下锁的持有者，并且将获取计数值置为1。如果同一个线程再次获取这个锁，计数值将递增，而当线程退出同步代码块时，计数器会相应地递减。当计数值为0时，这个锁将被释放。 2.4 用锁来保护状态# 对于可能被多个线程同时访问的可变状态变量，在访问它时都需要持有同一个锁，在这种情况下，我们称状态变量是由这个锁保护的。 之所以每个对象都有一个内置锁，只是为了免去显式地创建锁对象。 每个共享的和可变的变量都应该只由一个锁来保护，从而使维护人员知道是哪一个锁。 一种常见的加锁约定是，将所有的可变状态都封装在对象内部，并通过对象的内置锁对所有访问可变状态的代码路径进行同步，使得在该对象上不会发生并发访问。 并非所有数据都需要锁的保护，只有被多个线程同时访问的可变数据才需要通过锁来保护。 2.5 活跃性与性能# 不良并发（Poor Concurrency）应用程序：可同时调用的数量，不仅受到可用处理资源的限制，还受到应用程序本身结构的限制。 当实现某个同步策略时，一定不要盲目地为了性能而牺牲简单性（这可能会破坏安全性）。 无论是执行计算密集的操作，还是在执行某个可能阻塞的操作，如果持有锁的时间过长，那么都会带来活跃性或性能问题。 当执行时间较长的计算或者可能无法快速完成的操作时（例如，网络I/O或控制台I/O），一定不要持有锁。 第3章 对象的共享# 同步还有另一个重要的方面：内存可见性（Memory Visibility）。我们不仅希望防止某个线程正在使用对象状态而另一个线程在同时修改该状态，而且希望确保当一个线程修改了对象状态后，其他线程能够看到发生的状态变化。 3.1 可见性# 在没有同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整。 3.1.1 失效数据# 3.1.2　非原子的64位操作# 当线程在没有同步的情况下读取变量时，可能会得到一个失效值，但至少这个值是由之前某个线程设置的值，而不是一个随机值。这种安全性保证也被称为最低安全性（out-of-thin-air safety） 最低安全性适用于绝大多数变量，但是存在一个例外：非volatile类型的64位数值变量（double和long，请参见3.1.4节）。Java内存模型要求，变量的读取操作和写入操作都必须是原子操作，但对于非volatile类型的long和double变量，JVM允许将64位的读操作或写操作分解为两个32位的操作。当读取一个非volatile类型的long变量时，如果对该变量的读操作和写操作在不同的线程中执行，那么很可能会读取到某个值的高32位和另一个值的低32位￼。因此，即使不考虑失效数据问题，在多线程程序中使用共享且可变的long和double等类型的变量也是不安全的，除非用关键字volatile来声明它们，或者用锁保护起来。 3.1.3　加锁与可见性# 加锁的含义不仅仅局限于互斥行为，还包括内存可见性。为了确保所有线程都能看到共享变量的最新值，所有执行读操作或者写操作的线程都必须在同一个锁上同步。 3.1.4　Volatile变量# Java语言提供了一种稍弱的同步机制，即volatile变量，用来确保将变量的更新操作通知到其他线程。当把变量声明为volatile类型后，编译器与运行时都会注意到这个变量是共享的，因此不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或者对其他处理器不可见的地方，因此在读取volatile类型的变量时总会返回最新写入的值。 在访问volatile变量时不会执行加锁操作，因此也就不会使执行线程阻塞，因此volatile变量是一种比sychronized关键字更轻量级的同步机制。 在当前大多数处理器架构上，读取volatile变量的开销只比读取非volatile变量的开销略高一些。 我们并不建议过度依赖volatile变量提供的可见性。如果在代码中依赖volatile变量来控制状态的可见性，通常比使用锁的代码更脆弱，也更难以理解。 仅当volatile变量能简化代码的实现以及对同步策略的验证时，才应该使用它们。 如果在验证正确性时需要对可见性进行复杂的判断，那么就不要使用volatile变量。 volatile的语义不足以确保递增操作（count&#43;&#43;）的原子性，除非你能确保只有一个线程对变量执行写操作。 加锁机制既可以确保可见性又可以确保原子性，而volatile变量只能确保可见性。 当且仅当满足以下所有条件时，才应该使用volatile变量 对变量的写入操作不依赖变量的当前值，或者你能确保只有单个线程更新变量的值。 该变量不会与其他状态变量一起纳入不变性条件中。 在访问变量时不需要加锁。 调试小提示：对于服务器应用程序，无论在开发阶段还是在测试阶段，当启动JVM时一定都要指定-server命令行选项。server模式的JVM将比client模式的JVM进行更多的优化，例如将循环中未被修改的变量提升到循环外部，因此在开发环境（client模式的JVM）中能正确运行的代码，可能会在部署环境（server模式的JVM）中运行失败。例如，如果在程序清单3-4中“忘记”把asleep变量声明为volatile类型，那么server模式的JVM会将asleep的判断条件提升到循环体外部（这将导致一个无限循环），但client模式的JVM不会这么做。在解决开发环境中出现无限循环问题时，解决这个问题的开销远小于解决在应用环境出现无限循环的开销。 3.2 发布与逸出# “发布（Publish）”一个对象的意思是指，使对象能够在当前作用域之外的代码中使用。 将一个指向该对象的引用保存到其他代码可以访问的地方，或者在某一个非私有的方法中返回该引用，或者将引用传递到其他类的方法中。在许多情况中，我们要确保对象及其内部状态不被发布。而在某些情况下，我们又需要发布某个对象，但如果在发布时要确保线程安全性，则可能需要同步。发布内部状态可能会破坏封装性，并使得程序难以维持不变性条件。例如，如果在对象构造完成之前就发布该对象，就会破坏线程安全性。当某个不应该发布的对象被发布时，这种情况就被称为逸出（Escape）。 发布对象的最简单方法是将对象的引用保存到一个公有的静态变量中，以便任何类和线程都能看见该对象 一般来说，如果一个已经发布的对象能够通过非私有的变量引用和方法调用到达其他的对象，那么这些对象也都会被发布。 当某个对象逸出后，你必须假设有某个类或线程可能会误用该对象。这正是需要使用封装的最主要原因：封装能够使得对程序的正确性进行分析变得可能，并使得无意中破坏设计约束条件变得更难。 安全的对象构造过程 不要在构造过程中使this引用逸出 在构造过程中使this引用逸出的一个常见错误是，在构造函数中启动一个线程。当对象在其构造函数中创建一个线程时，无论是显式创建（通过将它传给构造函数）还是隐式创建（由于Thread或Runnable是该对象的一个内部类），this引用都会被新创建的线程共享。在对象尚未完全构造之前，新的线程就可以看见它。 在构造函数中创建线程并没有错误，但最好不要立即启动它，而是通过一个start或initialize方法来启动 在构造函数中调用一个可改写的实例方法时（既不是私有方法，也不是终结方法），同样会导致this引用在构造过程中逸出。 如果想在构造函数中注册一个事件监听器或启动线程，那么可以使用一个私有的构造函数和一个公共的工厂方法（Factory Method），从而避免不正确的构造过程 3.3 线程封闭# Swing应用程序的许多并发错误都是由于错误地在另一个线程中使用了这些被封闭的对象。 线程封闭是在程序设计中的一个考虑因素，必须在程序中实现。 3.3.1 Ad-hoc线程封闭# 在volatile变量上存在一种特殊的线程封闭。只要你能确保只有单个线程对共享的volatile变量执行写入操作，那么就可以安全地在这些共享的volatile变量上执行“读取-修改-写入”的操作。在这种情况下，相当于将修改操作封闭在单个线程中以防止发生竞态条件，并且volatile变量的可见性保证还确保了其他线程能看到最新的值。 由于Ad-hoc线程封闭技术的脆弱性，因此在程序中尽量少用它，在可能的情况下，应该使用更强的线程封闭技术（例如，栈封闭或ThreadLocal类）。 3.3.2 栈封闭# 栈封闭是线程封闭的一种特例，在栈封闭中，只能通过局部变量才能访问对象。 由于任何方法都无法获得对基本类型的引用，因此Java语言的这种语义就确保了基本类型的局部变量始终封闭在线程内。 3.3.3 ThreadLocal 类# ThreadLocal对象通常用于防止对可变的单实例变量（Singleton）或全局变量进行共享。 假设你需要将一个单线程应用程序移植到多线程环境中，通过将共享的全局变量转换为ThreadLocal对象（如果全局变量的语义允许），可以维持线程安全性。 3.4 不变性# 如果某个对象在被创建后其状态就不能被修改，那么这个对象就称为不可变对象。 不可变对象一定是线程安全的 虽然在Java语言规范和Java内存模型中都没有给出不可变性的正式定义，但不可变性并不等于将对象中所有的域都声明为final类型，即使对象中所有的域都是final类型的，这个对象也仍然是可变的，因为在final类型的域中可以保存对可变对象的引用。 当满足以下条件时，对象才是不可变的： 对象创建以后其状态就不能修改。 对象的所有域都是final类型。 对象是正确创建的（在对象的创建期间，this引用没有逸出）。 3.4.1 Final域# 关键字final可以视为C&#43;&#43;中const机制的一种受限版本，用于构造不可变性对象。final类型的域是不能修改的（但如果final域所引用的对象是可变的，那么这些被引用的对象是可以修改的）。 即使对象是可变的，通过将对象的某些域声明为final类型，仍然可以简化对状态的判断，因此限制对象的可变性也就相当于限制了该对象可能的状态集合。 正如“除非需要更高的可见性，否则应将所有的域都声明为私有域”[EJ Item 12]是一个良好的编程习惯，“除非需要某个域是可变的，否则应将其声明为final域”也是一个良好的编程习惯。 3.4.2 示例：使用volatile类型来发布不可变对象# 通过使用包含多个状态变量的容器对象来维持不变性条件，并使用一个volatile类型的引用来确保可见性，使得Volatile Cached Factorizer在没有显式地使用锁的情况下仍然是线程安全的 3.5 安全发布# 3.5.1 不正确的发布：正确的对象被破坏# 你不能指望一个尚未被完全创建的对象拥有完整性。某个观察该对象的线程将看到对象处于不一致的状态，然后看到对象的状态突然发生变化，即使线程在对象发布后还没有修改过它。 3.5.2 不可变对象与初始化安全性# 我们已经知道，即使某个对象的引用对其他线程是可见的，也并不意味着对象状态对于使用该对象的线程来说一定是可见的。为了确保对象状态能呈现出一致的视图，就必须使用同步。 任何线程都可以在不需要额外同步的情况下安全地访问不可变对象，即使在发布这些对象时没有使用同步。 在没有额外同步的情况下，也可以安全地访问final类型的域。然而，如果final类型的域所指向的是可变对象，那么在访问这些域所指向的对象的状态时仍然需要同步。 3.5.3 安全发布的常用模式# 可变对象必须通过安全的方式来发布，这通常意味着在发布和使用该对象的线程时都必须使用同步。 要安全地发布一个对象，对象的引用以及对象的状态必须同时对其他线程可见 在静态初始化函数中初始化一个对象引用。 将对象的引用保存到volatile类型的域或者AtomicReferance对象中。 将对象的引用保存到某个正确构造对象的final类型域中。 将对象的引用保存到一个由锁保护的域中。 在线程安全容器内部的同步意味着，在将对象放入到某个容器，例如Vector或synchronizedList时，将满足上述最后一条需求。如果线程A将对象X放入一个线程安全的容器，随后线程B读取这个对象，那么可以确保B看到A设置的X状态，即便在这段读/写X的应用程序代码中没有包含显式的同步。 线程安全库中的容器类提供了以下的安全发布保证 通过将一个键或者值放入Hashtable、synchronizedMap或者ConcurrentMap中，可以安全地将它发布给任何从这些容器中访问它的线程（无论是直接访问还是通过迭代器访问）。 通过将某个元素放入Vector、CopyOnWriteArrayList、CopyOnWriteArraySet、synchronizedList或synchronizedSet中，可以将该元素安全地发布到任何从这些容器中访问该元素的线程。 通过将某个元素放入BlockingQueue或者ConcurrentLinkedQueue中，可以将该元素安全地发布到任何从这些队列中访问该元素的线程。 要发布一个静态构造的对象，最简单和最安全的方式是使用静态的初始化器 public static Holder holder=new Holder（42） 静态初始化器由JVM在类的初始化阶段执行。由于在JVM内部存在着同步机制，因此通过这种方式初始化的任何对象都可以被安全地发布 3.5.4 事实不可变对象# 如果对象在发布后不会被修改，那么对于其他在没有额外同步的情况下安全地访问这些对象的线程来说，安全发布是足够的。 如果对象从技术上来看是可变的，但其状态在发布后不会再改变，那么把这种对象称为“事实不可变对象（Effectively Immutable Object）” 通过使用事实不可变对象，不仅可以简化开发过程，而且还能由于减少了同步而提高性能。 例如，Date本身是可变的￼，但如果将它作为不可变对象来使用，那么在多个线程之间共享Date对象时，就可以省去对锁的使用 3.5.5 可变对象# 如果对象在构造后可以修改，那么安全发布只能确保“发布当时”状态的可见性。对于可变对象，不仅在发布对象时需要使用同步，而且在每次对象访问时同样需要使用同步来确保后续修改操作的可见性。 在并发程序中使用和共享对象时，可以使用一些实用的策略，包括： 线程封闭。线程封闭的对象只能由一个线程拥有，对象被封闭在该线程中，并且只能由这个线程修改。 只读共享。在没有额外同步的情况下，共享的只读对象可以由多个线程并发访问，但任何线程都不能修改它。共享的只读对象包括不可变对象和事实不可变对象。 线程安全共享。线程安全的对象在其内部实现同步，因此多个线程可以通过对象的公有接口来进行访问而不需要进一步的同步。 保护对象。被保护的对象只能通过持有特定的锁来访问。保护对象包括封装在其他线程安全对象中的对象，以及已发布的并且由某个特定锁保护的对象。 3.5.6 安全地共享对象# 第4章 对象的组合# 4.1 设计线程安全的类# 4.2 实例封闭# 4.3 线程安全性的委托# 4.4 在现有的线程安全类中添加功能# 4.5 将同步策略文档化# 第5章 基础构建模块# 5.1 同步容器类# 5.2 并发容器# 5.3 阻塞队列和生产者-消费者模式# 5.4 阻塞方法与中断方法# 5.5 同步工具类# 5.6 构建高效且可伸缩的结果缓存# 第6章 任务执行# 6.1 在线程中执行任务# 6.2 Executor框架# 6.3 找出可利用的并行性# 第7章 取消与关闭# 7.1 任务取消# 7.2 停止基于线程的服务# 7.3 处理非正常的线程终止# 7.4 JVM关闭# 第8章 线程池的使用# 8.1 在任务与执行策略之间的隐性耦合# 8.2 设置线程池的大小# 8.3 配置ThreadPoolExecutor# 8.4 扩展ThreadPoolExecutor# 8.5 递归算法的并行化# 第9章 图形用户界面应用程序# 9.1 为什么GUI是单线程的# 9.2 短时间的GUI任务# 9.3 长时间的GUI任务# 9.4 共享数据模型# 9.5 其他形式的单线程子系统# 第10章 避免活跃性危险# 10.1 死锁# 10.2 死锁的避免与诊断# 10.3 其他活跃性危险# 第11章 性能与可伸缩性# 11.1 对性能的思考# 11.2 Amdahl定律# 11.3 线程引入的开销# 11.4 减少锁的竞争# 11.5 示例：比较Map的性能# 11.6 减少上下文切换的开销# 第12章 并发程序的测试# 12.1 正确性测试# 12.2 性能测试# 12.3 避免性能测试的陷阱# 12.4 其他的测试方法# 第13章 显式锁# 13.1 Lock与ReentrantLock# 13.2 性能考虑因素# 13.3 公平性# 13.4 在synchronized和ReentrantLock之间进行选择# 13.5 读-写锁# 第14章 构建自定义的同步工具# 14.1 状态依赖性的管理# 14.2 使用条件队列# 14.3 显式的Condition对象# 14.4 Synchronizer剖析# 14.5 AbstractQueuedSynchronizer# 14.6 java.util.concurrent同步器类中的AQS# 第15章 原子变量与非阻塞同步机制# 15.1 锁的劣势# 15.2 硬件对并发的支持# 15.3 原子变量类# 15.4 非阻塞算法# 第16章 Java内存模型# 16.1 什么是内存模型，为什么需要它# 16.2 发布# 16.3 初始化过程中的安全性#">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https//penruins.github.io/hugo/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://penruins.github.io/hugo/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Java并发编程实战">
   <meta property="og:description" content="Java并发编程实战 第1章 简介# 1.1 并发简史# 1.2 线程的优势# 1.3 线程带来的风险# 1.4 线程无处不在# 开发线程安全的类比开发非线程安全的类要更加谨慎和细致 每个Java应用程序都会使用线程 当JVM启动时，它将为JVM的内部任务（例如，垃圾收集、终结操作等）创建后台线程，并创建一个主线程来运行main方法。 AWT（Abstract Window Toolkit，抽象窗口工具库）和Swing的用户界面框架将创建线程来管理用户界面事件。 Timer将创建线程来执行延迟任务。 一些组件框架，例如Servlet和RMI，都会创建线程池并调用这些线程中的方法。 当某个框架在应用程序中引入并发性时，通常不可能将并发性仅局限于框架代码，因为框架本身会回调（Callback）应用程序的代码，而这些代码将访问应用程序的状态。 对线程安全性的需求也不能局限于被调用的代码，而是要延伸到需要访问这些代码所访问的程序状态的所有代码路径。因此，对线程安全性的需求将在程序中蔓延开来。 第2章 线程安全性# 要编写线程安全的代码，其核心在于要对状态访问操作进行管理，特别是对共享的（Shared）和可变的（Mutable）状态的访问。 “共享”意味着变量可以由多个线程同时访问，而“可变”则意味着变量的值在其生命周期内可以发生变化。 一个对象是否需要是线程安全的，取决于它是否被多个线程访问 当多个线程访问某个状态变量并且其中有一个线程执行写入操作时，必须采用同步机制来协同这些线程对变量的访问。 Java中的主要同步机制是关键字synchronized，它提供了一种独占的加锁方式，但“同步”这个术语还包括volatile类型的变量，显式锁（Explicit Lock）以及原子变量。 2.1 什么是线程安全性# 在线程安全性的定义中，最核心的概念就是正确性。如果对线程安全性的定义是模糊的，那么就是因为缺乏对正确性的清晰定义。 正确性的含义是，某个类的行为与其规范完全一致。在良好的规范中通常会定义各种不变性条件（Invariant）来约束对象的状态，以及定义各种后验条件（Postcondition）来描述对象操作的结果。 线程安全性：当多个线程访问某个类时，这个类始终都能表现出正确的行为，那么就称这个类是线程安全的。 当多个线程访问某个类时，不管运行时环境采用何种调度方式或者这些线程将如何交替执行，并且在主调代码中不需要任何额外的同步或协同，这个类都能表现出正确的行为，那么就称这个类是线程安全的。 在线程安全类中封装了必要的同步机制，因此客户端无须进一步采取同步措施。 无状态对象一定是线程安全的 大多数Servlet都是无状态的，从而极大地降低了在实现Servlet线程安全性时的复杂性。只有当Servlet在处理请求时需要保存一些信息，线程安全性才会成为一个问题。 2.2 原子性# 在并发编程中，这种由于不恰当的执行时序而出现不正确的结果是一种非常重要的情况，它有一个正式的名字：竞态条件（Race Condition） 2.2.1 竞态条件# 当某个计算的正确性取决于多个线程的交替执行时序时，那么就会发生竞态条件。换句话说，就是正确的结果要取决于运气 “先检查后执行”：首先观察到某个条件为真（例如文件X不存在），然后根据这个观察结果采用相应的动作（创建文件X），但事实上，在你观察到这个结果以及开始创建文件之间，观察结果可能变得无效（另一个线程在这期间创建了文件X），从而导致各种问题（未预期的异常、数据被覆盖、文件被破坏等）。 2.2.2 示例：延迟初始化中的竞态条件# 延迟初始化的目的是将对象的初始化操作推迟到实际被使用时才进行，同时要确保只被初始化一次。 假定线程A和线程B同时执行getInstance。A看到instance为空，因而创建一个新的ExpensiveObject实例。B同样需要判断instance是否为空。此时的instance是否为空，要取决于不可预测的时序，包括线程的调度方式，以及A需要花多长时间来初始化ExpensiveObject并设置instance。如果当B检查时，instance为空，那么在两次调用getInstance时可能会得到不同的结果，即使getInstance通常被认为是返回相同的实例。 2.2.3 复合操作# 要避免竞态条件问题，就必须在某个线程修改该变量时，通过某种方式防止其他线程使用这个变量，从而确保其他线程只能在修改操作完成之前或之后读取和修改状态，而不是在修改状态的过程中。 假定有两个操作A和B，如果从执行A的线程来看，当另一个线程执行B时，要么将B全部执行完，要么完全不执行B，那么A和B对彼此来说是原子的。 原子操作是指，对于访问同一个状态的所有操作（包括该操作本身）来说，这个操作是一个以原子方式执行的操作。 在java.util.concurrent.atomic包中包含了一些原子变量类，用于实现在数值和对象引用上的原子状态转换。通过用AtomicLong来代替long类型的计数器，能够确保所有对计数器状态的访问操作都是原子的。 当在无状态的类中添加一个状态时，如果该状态完全由线程安全的对象来管理，那么这个类仍然是线程安全的 当状态变量的数量由一个变为多个时，并不会像状态变量数量由零个变为一个那样简单 在实际情况中，应尽可能地使用现有的线程安全对象（例如AtomicLong）来管理类的状态。与非线程安全的对象相比，判断线程安全对象的可能状态及其状态转换情况要更为容易，从而也更容易维护和验证线程安全性。 2.3 加锁机制# 要保持状态的一致性，就需要在单个原子操作中更新所有相关的状态变量。 2.3.1 内置锁# Java提供了一种内置的锁机制来支持原子性：同步代码块（Synchronized Block）。 以关键字synchronized来修饰的方法就是一种横跨整个方法体的同步代码块，其中该同步代码块的锁就是方法调用所在的对象。静态的synchronized方法以Class对象作为锁。 每个Java对象都可以用做一个实现同步的锁，这些锁被称为内置锁（Intrinsic Lock）或监视器锁（Monitor Lock） 2.3.2 重入# 当某个线程请求一个由其他线程持有的锁时，发出请求的线程就会阻塞 由于内置锁是可重入的，因此如果某个线程试图获得一个已经由它自己持有的锁，那么这个请求就会成功。“重入”意味着获取锁的操作的粒度是“线程”，而不是“调用” 重入的一种实现方法是，为每个锁关联一个获取计数值和一个所有者线程。 当计数值为0时，这个锁就被认为是没有被任何线程持有。当线程请求一个未被持有的锁时，JVM将记下锁的持有者，并且将获取计数值置为1。如果同一个线程再次获取这个锁，计数值将递增，而当线程退出同步代码块时，计数器会相应地递减。当计数值为0时，这个锁将被释放。 2.4 用锁来保护状态# 对于可能被多个线程同时访问的可变状态变量，在访问它时都需要持有同一个锁，在这种情况下，我们称状态变量是由这个锁保护的。 之所以每个对象都有一个内置锁，只是为了免去显式地创建锁对象。 每个共享的和可变的变量都应该只由一个锁来保护，从而使维护人员知道是哪一个锁。 一种常见的加锁约定是，将所有的可变状态都封装在对象内部，并通过对象的内置锁对所有访问可变状态的代码路径进行同步，使得在该对象上不会发生并发访问。 并非所有数据都需要锁的保护，只有被多个线程同时访问的可变数据才需要通过锁来保护。 2.5 活跃性与性能# 不良并发（Poor Concurrency）应用程序：可同时调用的数量，不仅受到可用处理资源的限制，还受到应用程序本身结构的限制。 当实现某个同步策略时，一定不要盲目地为了性能而牺牲简单性（这可能会破坏安全性）。 无论是执行计算密集的操作，还是在执行某个可能阻塞的操作，如果持有锁的时间过长，那么都会带来活跃性或性能问题。 当执行时间较长的计算或者可能无法快速完成的操作时（例如，网络I/O或控制台I/O），一定不要持有锁。 第3章 对象的共享# 同步还有另一个重要的方面：内存可见性（Memory Visibility）。我们不仅希望防止某个线程正在使用对象状态而另一个线程在同时修改该状态，而且希望确保当一个线程修改了对象状态后，其他线程能够看到发生的状态变化。 3.1 可见性# 在没有同步的情况下，编译器、处理器以及运行时等都可能对操作的执行顺序进行一些意想不到的调整。 3.1.1 失效数据# 3.1.2　非原子的64位操作# 当线程在没有同步的情况下读取变量时，可能会得到一个失效值，但至少这个值是由之前某个线程设置的值，而不是一个随机值。这种安全性保证也被称为最低安全性（out-of-thin-air safety） 最低安全性适用于绝大多数变量，但是存在一个例外：非volatile类型的64位数值变量（double和long，请参见3.1.4节）。Java内存模型要求，变量的读取操作和写入操作都必须是原子操作，但对于非volatile类型的long和double变量，JVM允许将64位的读操作或写操作分解为两个32位的操作。当读取一个非volatile类型的long变量时，如果对该变量的读操作和写操作在不同的线程中执行，那么很可能会读取到某个值的高32位和另一个值的低32位￼。因此，即使不考虑失效数据问题，在多线程程序中使用共享且可变的long和double等类型的变量也是不安全的，除非用关键字volatile来声明它们，或者用锁保护起来。 3.1.3　加锁与可见性# 加锁的含义不仅仅局限于互斥行为，还包括内存可见性。为了确保所有线程都能看到共享变量的最新值，所有执行读操作或者写操作的线程都必须在同一个锁上同步。 3.1.4　Volatile变量# Java语言提供了一种稍弱的同步机制，即volatile变量，用来确保将变量的更新操作通知到其他线程。当把变量声明为volatile类型后，编译器与运行时都会注意到这个变量是共享的，因此不会将该变量上的操作与其他内存操作一起重排序。volatile变量不会被缓存在寄存器或者对其他处理器不可见的地方，因此在读取volatile类型的变量时总会返回最新写入的值。 在访问volatile变量时不会执行加锁操作，因此也就不会使执行线程阻塞，因此volatile变量是一种比sychronized关键字更轻量级的同步机制。 在当前大多数处理器架构上，读取volatile变量的开销只比读取非volatile变量的开销略高一些。 我们并不建议过度依赖volatile变量提供的可见性。如果在代码中依赖volatile变量来控制状态的可见性，通常比使用锁的代码更脆弱，也更难以理解。 仅当volatile变量能简化代码的实现以及对同步策略的验证时，才应该使用它们。 如果在验证正确性时需要对可见性进行复杂的判断，那么就不要使用volatile变量。 volatile的语义不足以确保递增操作（count&#43;&#43;）的原子性，除非你能确保只有一个线程对变量执行写操作。 加锁机制既可以确保可见性又可以确保原子性，而volatile变量只能确保可见性。 当且仅当满足以下所有条件时，才应该使用volatile变量 对变量的写入操作不依赖变量的当前值，或者你能确保只有单个线程更新变量的值。 该变量不会与其他状态变量一起纳入不变性条件中。 在访问变量时不需要加锁。 调试小提示：对于服务器应用程序，无论在开发阶段还是在测试阶段，当启动JVM时一定都要指定-server命令行选项。server模式的JVM将比client模式的JVM进行更多的优化，例如将循环中未被修改的变量提升到循环外部，因此在开发环境（client模式的JVM）中能正确运行的代码，可能会在部署环境（server模式的JVM）中运行失败。例如，如果在程序清单3-4中“忘记”把asleep变量声明为volatile类型，那么server模式的JVM会将asleep的判断条件提升到循环体外部（这将导致一个无限循环），但client模式的JVM不会这么做。在解决开发环境中出现无限循环问题时，解决这个问题的开销远小于解决在应用环境出现无限循环的开销。 3.2 发布与逸出# “发布（Publish）”一个对象的意思是指，使对象能够在当前作用域之外的代码中使用。 将一个指向该对象的引用保存到其他代码可以访问的地方，或者在某一个非私有的方法中返回该引用，或者将引用传递到其他类的方法中。在许多情况中，我们要确保对象及其内部状态不被发布。而在某些情况下，我们又需要发布某个对象，但如果在发布时要确保线程安全性，则可能需要同步。发布内部状态可能会破坏封装性，并使得程序难以维持不变性条件。例如，如果在对象构造完成之前就发布该对象，就会破坏线程安全性。当某个不应该发布的对象被发布时，这种情况就被称为逸出（Escape）。 发布对象的最简单方法是将对象的引用保存到一个公有的静态变量中，以便任何类和线程都能看见该对象 一般来说，如果一个已经发布的对象能够通过非私有的变量引用和方法调用到达其他的对象，那么这些对象也都会被发布。 当某个对象逸出后，你必须假设有某个类或线程可能会误用该对象。这正是需要使用封装的最主要原因：封装能够使得对程序的正确性进行分析变得可能，并使得无意中破坏设计约束条件变得更难。 安全的对象构造过程 不要在构造过程中使this引用逸出 在构造过程中使this引用逸出的一个常见错误是，在构造函数中启动一个线程。当对象在其构造函数中创建一个线程时，无论是显式创建（通过将它传给构造函数）还是隐式创建（由于Thread或Runnable是该对象的一个内部类），this引用都会被新创建的线程共享。在对象尚未完全构造之前，新的线程就可以看见它。 在构造函数中创建线程并没有错误，但最好不要立即启动它，而是通过一个start或initialize方法来启动 在构造函数中调用一个可改写的实例方法时（既不是私有方法，也不是终结方法），同样会导致this引用在构造过程中逸出。 如果想在构造函数中注册一个事件监听器或启动线程，那么可以使用一个私有的构造函数和一个公共的工厂方法（Factory Method），从而避免不正确的构造过程 3.3 线程封闭# Swing应用程序的许多并发错误都是由于错误地在另一个线程中使用了这些被封闭的对象。 线程封闭是在程序设计中的一个考虑因素，必须在程序中实现。 3.3.1 Ad-hoc线程封闭# 在volatile变量上存在一种特殊的线程封闭。只要你能确保只有单个线程对共享的volatile变量执行写入操作，那么就可以安全地在这些共享的volatile变量上执行“读取-修改-写入”的操作。在这种情况下，相当于将修改操作封闭在单个线程中以防止发生竞态条件，并且volatile变量的可见性保证还确保了其他线程能看到最新的值。 由于Ad-hoc线程封闭技术的脆弱性，因此在程序中尽量少用它，在可能的情况下，应该使用更强的线程封闭技术（例如，栈封闭或ThreadLocal类）。 3.3.2 栈封闭# 栈封闭是线程封闭的一种特例，在栈封闭中，只能通过局部变量才能访问对象。 由于任何方法都无法获得对基本类型的引用，因此Java语言的这种语义就确保了基本类型的局部变量始终封闭在线程内。 3.3.3 ThreadLocal 类# ThreadLocal对象通常用于防止对可变的单实例变量（Singleton）或全局变量进行共享。 假设你需要将一个单线程应用程序移植到多线程环境中，通过将共享的全局变量转换为ThreadLocal对象（如果全局变量的语义允许），可以维持线程安全性。 3.4 不变性# 如果某个对象在被创建后其状态就不能被修改，那么这个对象就称为不可变对象。 不可变对象一定是线程安全的 虽然在Java语言规范和Java内存模型中都没有给出不可变性的正式定义，但不可变性并不等于将对象中所有的域都声明为final类型，即使对象中所有的域都是final类型的，这个对象也仍然是可变的，因为在final类型的域中可以保存对可变对象的引用。 当满足以下条件时，对象才是不可变的： 对象创建以后其状态就不能修改。 对象的所有域都是final类型。 对象是正确创建的（在对象的创建期间，this引用没有逸出）。 3.4.1 Final域# 关键字final可以视为C&#43;&#43;中const机制的一种受限版本，用于构造不可变性对象。final类型的域是不能修改的（但如果final域所引用的对象是可变的，那么这些被引用的对象是可以修改的）。 即使对象是可变的，通过将对象的某些域声明为final类型，仍然可以简化对状态的判断，因此限制对象的可变性也就相当于限制了该对象可能的状态集合。 正如“除非需要更高的可见性，否则应将所有的域都声明为私有域”[EJ Item 12]是一个良好的编程习惯，“除非需要某个域是可变的，否则应将其声明为final域”也是一个良好的编程习惯。 3.4.2 示例：使用volatile类型来发布不可变对象# 通过使用包含多个状态变量的容器对象来维持不变性条件，并使用一个volatile类型的引用来确保可见性，使得Volatile Cached Factorizer在没有显式地使用锁的情况下仍然是线程安全的 3.5 安全发布# 3.5.1 不正确的发布：正确的对象被破坏# 你不能指望一个尚未被完全创建的对象拥有完整性。某个观察该对象的线程将看到对象处于不一致的状态，然后看到对象的状态突然发生变化，即使线程在对象发布后还没有修改过它。 3.5.2 不可变对象与初始化安全性# 我们已经知道，即使某个对象的引用对其他线程是可见的，也并不意味着对象状态对于使用该对象的线程来说一定是可见的。为了确保对象状态能呈现出一致的视图，就必须使用同步。 任何线程都可以在不需要额外同步的情况下安全地访问不可变对象，即使在发布这些对象时没有使用同步。 在没有额外同步的情况下，也可以安全地访问final类型的域。然而，如果final类型的域所指向的是可变对象，那么在访问这些域所指向的对象的状态时仍然需要同步。 3.5.3 安全发布的常用模式# 可变对象必须通过安全的方式来发布，这通常意味着在发布和使用该对象的线程时都必须使用同步。 要安全地发布一个对象，对象的引用以及对象的状态必须同时对其他线程可见 在静态初始化函数中初始化一个对象引用。 将对象的引用保存到volatile类型的域或者AtomicReferance对象中。 将对象的引用保存到某个正确构造对象的final类型域中。 将对象的引用保存到一个由锁保护的域中。 在线程安全容器内部的同步意味着，在将对象放入到某个容器，例如Vector或synchronizedList时，将满足上述最后一条需求。如果线程A将对象X放入一个线程安全的容器，随后线程B读取这个对象，那么可以确保B看到A设置的X状态，即便在这段读/写X的应用程序代码中没有包含显式的同步。 线程安全库中的容器类提供了以下的安全发布保证 通过将一个键或者值放入Hashtable、synchronizedMap或者ConcurrentMap中，可以安全地将它发布给任何从这些容器中访问它的线程（无论是直接访问还是通过迭代器访问）。 通过将某个元素放入Vector、CopyOnWriteArrayList、CopyOnWriteArraySet、synchronizedList或synchronizedSet中，可以将该元素安全地发布到任何从这些容器中访问该元素的线程。 通过将某个元素放入BlockingQueue或者ConcurrentLinkedQueue中，可以将该元素安全地发布到任何从这些队列中访问该元素的线程。 要发布一个静态构造的对象，最简单和最安全的方式是使用静态的初始化器 public static Holder holder=new Holder（42） 静态初始化器由JVM在类的初始化阶段执行。由于在JVM内部存在着同步机制，因此通过这种方式初始化的任何对象都可以被安全地发布 3.5.4 事实不可变对象# 如果对象在发布后不会被修改，那么对于其他在没有额外同步的情况下安全地访问这些对象的线程来说，安全发布是足够的。 如果对象从技术上来看是可变的，但其状态在发布后不会再改变，那么把这种对象称为“事实不可变对象（Effectively Immutable Object）” 通过使用事实不可变对象，不仅可以简化开发过程，而且还能由于减少了同步而提高性能。 例如，Date本身是可变的￼，但如果将它作为不可变对象来使用，那么在多个线程之间共享Date对象时，就可以省去对锁的使用 3.5.5 可变对象# 如果对象在构造后可以修改，那么安全发布只能确保“发布当时”状态的可见性。对于可变对象，不仅在发布对象时需要使用同步，而且在每次对象访问时同样需要使用同步来确保后续修改操作的可见性。 在并发程序中使用和共享对象时，可以使用一些实用的策略，包括： 线程封闭。线程封闭的对象只能由一个线程拥有，对象被封闭在该线程中，并且只能由这个线程修改。 只读共享。在没有额外同步的情况下，共享的只读对象可以由多个线程并发访问，但任何线程都不能修改它。共享的只读对象包括不可变对象和事实不可变对象。 线程安全共享。线程安全的对象在其内部实现同步，因此多个线程可以通过对象的公有接口来进行访问而不需要进一步的同步。 保护对象。被保护的对象只能通过持有特定的锁来访问。保护对象包括封装在其他线程安全对象中的对象，以及已发布的并且由某个特定锁保护的对象。 3.5.6 安全地共享对象# 第4章 对象的组合# 4.1 设计线程安全的类# 4.2 实例封闭# 4.3 线程安全性的委托# 4.4 在现有的线程安全类中添加功能# 4.5 将同步策略文档化# 第5章 基础构建模块# 5.1 同步容器类# 5.2 并发容器# 5.3 阻塞队列和生产者-消费者模式# 5.4 阻塞方法与中断方法# 5.5 同步工具类# 5.6 构建高效且可伸缩的结果缓存# 第6章 任务执行# 6.1 在线程中执行任务# 6.2 Executor框架# 6.3 找出可利用的并行性# 第7章 取消与关闭# 7.1 任务取消# 7.2 停止基于线程的服务# 7.3 处理非正常的线程终止# 7.4 JVM关闭# 第8章 线程池的使用# 8.1 在任务与执行策略之间的隐性耦合# 8.2 设置线程池的大小# 8.3 配置ThreadPoolExecutor# 8.4 扩展ThreadPoolExecutor# 8.5 递归算法的并行化# 第9章 图形用户界面应用程序# 9.1 为什么GUI是单线程的# 9.2 短时间的GUI任务# 9.3 长时间的GUI任务# 9.4 共享数据模型# 9.5 其他形式的单线程子系统# 第10章 避免活跃性危险# 10.1 死锁# 10.2 死锁的避免与诊断# 10.3 其他活跃性危险# 第11章 性能与可伸缩性# 11.1 对性能的思考# 11.2 Amdahl定律# 11.3 线程引入的开销# 11.4 减少锁的竞争# 11.5 示例：比较Map的性能# 11.6 减少上下文切换的开销# 第12章 并发程序的测试# 12.1 正确性测试# 12.2 性能测试# 12.3 避免性能测试的陷阱# 12.4 其他的测试方法# 第13章 显式锁# 13.1 Lock与ReentrantLock# 13.2 性能考虑因素# 13.3 公平性# 13.4 在synchronized和ReentrantLock之间进行选择# 13.5 读-写锁# 第14章 构建自定义的同步工具# 14.1 状态依赖性的管理# 14.2 使用条件队列# 14.3 显式的Condition对象# 14.4 Synchronizer剖析# 14.5 AbstractQueuedSynchronizer# 14.6 java.util.concurrent同步器类中的AQS# 第15章 原子变量与非阻塞同步机制# 15.1 锁的劣势# 15.2 硬件对并发的支持# 15.3 原子变量类# 15.4 非阻塞算法# 第16章 Java内存模型# 16.1 什么是内存模型，为什么需要它# 16.2 发布# 16.3 初始化过程中的安全性#">
@@ -25,14 +25,14 @@ https://github.com/alex-shpak/hugo-book
   <meta itemprop="wordCount" content="366">
 
 <title>Java并发编程实战 | Penruins</title>
-<link rel="icon" href="/https/penruins.github.io/hugo/favicon.png" >
-<link rel="manifest" href="https//penruins.github.io/hugo/manifest.json">
-<link rel="canonical" href="https//penruins.github.io/hugo/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/">
-<link rel="stylesheet" href="https//penruins.github.io/hugo/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+<link rel="icon" href="/hugo/favicon.png" >
+<link rel="manifest" href="/hugo/manifest.json">
+<link rel="canonical" href="https://penruins.github.io/hugo/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/">
+<link rel="stylesheet" href="/hugo/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" integrity="sha256-BGyUtNVsoeJ6MyG/aplzWnmDlEFTVMZduVU9HDAy2Sk=" crossorigin="anonymous">
 
 
-  <script defer src="/https/penruins.github.io/hugo/fuse.min.js"></script>
-  <script defer src="https//penruins.github.io/hugo/en.search.min.cf1d6f6d47e839c8a36b65a1b229659b781422cf9199c54e0510cc36719b26f1.js" ></script>
+  <script defer src="/hugo/fuse.min.js"></script>
+  <script defer src="/hugo/en.search.min.667e165960c69f1a4a3665ed8754e5f91a5de6e5a2d3a2d61381c5a0ccc65377.js" integrity="sha256-Zn4WWWDGnxpKNmXth1Tl&#43;Rpd5uWi06LWE4HFoMzGU3c=" crossorigin="anonymous"></script>
 
 
 
@@ -48,7 +48,7 @@ https://github.com/alex-shpak/hugo-book
     
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="https/penruins.github.io/hugo/"><span>Penruins</span>
+  <a class="flex align-center" href="/hugo/"><span>Penruins</span>
   </a>
 </h2>
 
@@ -89,7 +89,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-d673e25af27f33796c279e3a05cc634f" class="flex">
       <a role="button" class="">
         Life</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -103,7 +103,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/books/" class="">
+    <a href="/hugo/post/life/books/" class="">
       books</a>
   
 
@@ -117,7 +117,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
+    <a href="/hugo/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
       摘抄分享</a>
   
 
@@ -131,7 +131,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/%E6%96%B0%E7%9F%A5/" class="">
+    <a href="/hugo/post/life/%E6%96%B0%E7%9F%A5/" class="">
       新知</a>
   
 
@@ -145,7 +145,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/movies-log/" class="">
+    <a href="/hugo/post/life/movies-log/" class="">
       观影记录</a>
   
 
@@ -159,7 +159,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/bilibili/" class="">
+    <a href="/hugo/post/life/bilibili/" class="">
       bilibili</a>
   
 
@@ -173,7 +173,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/cycling/" class="">
+    <a href="/hugo/post/life/cycling/" class="">
       cycling</a>
   
 
@@ -187,7 +187,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/hiking/" class="">
+    <a href="/hugo/post/life/hiking/" class="">
       hiking</a>
   
 
@@ -201,7 +201,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/life/" class="">
+    <a href="/hugo/post/life/life/" class="">
       life</a>
   
 
@@ -215,7 +215,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/life-recommend/" class="">
+    <a href="/hugo/post/life/life-recommend/" class="">
       life recommand</a>
   
 
@@ -229,7 +229,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/learning-others-log/" class="">
+    <a href="/hugo/post/life/learning-others-log/" class="">
       other learning</a>
   
 
@@ -243,7 +243,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/podcast/" class="">
+    <a href="/hugo/post/life/podcast/" class="">
       podcast</a>
   
 
@@ -257,7 +257,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/politics/" class="">
+    <a href="/hugo/post/life/politics/" class="">
       politics</a>
   
 
@@ -271,7 +271,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/goal/" class="">
+    <a href="/hugo/post/life/goal/" class="">
       goal</a>
   
 
@@ -285,7 +285,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/coffee/" class="">
+    <a href="/hugo/post/life/coffee/" class="">
       coffee</a>
   
 
@@ -299,7 +299,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/article/" class="">
+    <a href="/hugo/post/life/article/" class="">
       article</a>
   
 
@@ -313,7 +313,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/law/" class="">
+    <a href="/hugo/post/life/law/" class="">
       law</a>
   
 
@@ -327,7 +327,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/my-history/" class="">
+    <a href="/hugo/post/life/my-history/" class="">
       my history</a>
   
 
@@ -341,7 +341,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/my-timeline/" class="">
+    <a href="/hugo/post/life/my-timeline/" class="">
       My Timeline</a>
   
 
@@ -366,7 +366,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-e52270c7d6707875ea89b3ec9b091983" class="flex">
       <a role="button" class="">
         Computer Science</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -380,7 +380,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/computer-science/" class="">
+    <a href="/hugo/post/computer-science/computer-science/" class="">
       computer science</a>
   
 
@@ -398,7 +398,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-f834cb9837867b0fca71e863c9ed2d28" class="flex">
       <a role="button" class="">
         Algorithm</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -412,7 +412,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/algorithm/" class="">
+    <a href="/hugo/post/computer-science/algorithm/algorithm/" class="">
       Algorithm</a>
   
 
@@ -426,7 +426,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
+    <a href="/hugo/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
       algorithm practice 剑指 offer</a>
   
 
@@ -440,7 +440,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
+    <a href="/hugo/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
       剑指offer题目对应</a>
   
 
@@ -454,7 +454,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
+    <a href="/hugo/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
       面试经典 150 题</a>
   
 
@@ -477,7 +477,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-12ae84c3ad3679302ffec2ab120d7fb0" class="flex">
       <a role="button" class="">
         Big Data</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -491,7 +491,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/big-data/hadoop/" class="">
+    <a href="/hugo/post/computer-science/big-data/hadoop/" class="">
       hadoop</a>
   
 
@@ -505,7 +505,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/big-data/hbase/" class="">
+    <a href="/hugo/post/computer-science/big-data/hbase/" class="">
       hbase</a>
   
 
@@ -519,7 +519,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/big-data/hive/" class="">
+    <a href="/hugo/post/computer-science/big-data/hive/" class="">
       hive</a>
   
 
@@ -542,7 +542,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-256c0c0348e7dc55386785c98f7fa516" class="flex">
       <a role="button" class="">
         Database</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -556,7 +556,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/database/" class="">
+    <a href="/hugo/post/computer-science/database/database/" class="">
       database</a>
   
 
@@ -570,7 +570,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/druid/" class="">
+    <a href="/hugo/post/computer-science/database/druid/" class="">
       druid</a>
   
 
@@ -584,7 +584,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/elasticsearch/" class="">
+    <a href="/hugo/post/computer-science/database/elasticsearch/" class="">
       elasticsearch</a>
   
 
@@ -598,7 +598,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/mycat/" class="">
+    <a href="/hugo/post/computer-science/database/mycat/" class="">
       mycat</a>
   
 
@@ -612,7 +612,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/mysql/" class="">
+    <a href="/hugo/post/computer-science/database/mysql/" class="">
       mysql</a>
   
 
@@ -626,7 +626,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/postgresql/" class="">
+    <a href="/hugo/post/computer-science/database/postgresql/" class="">
       postgresql</a>
   
 
@@ -640,7 +640,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/shardingsphere/" class="">
+    <a href="/hugo/post/computer-science/database/shardingsphere/" class="">
       shardingsphere</a>
   
 
@@ -654,7 +654,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/sql/" class="">
+    <a href="/hugo/post/computer-science/database/sql/" class="">
       SQL</a>
   
 
@@ -668,7 +668,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/mongodb/" class="">
+    <a href="/hugo/post/computer-science/database/mongodb/" class="">
       Penruins</a>
   
 
@@ -691,7 +691,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="flex">
       <a role="button" class="">
         Distributed System</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -709,7 +709,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-98c822a4c30374b08c20bbb746ca28ff" class="flex">
       <a role="button" class="">
         Message Queue</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -723,7 +723,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/message-queue/kafka/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/message-queue/kafka/" class="">
       kafka</a>
   
 
@@ -737,7 +737,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/message-queue/message-queue/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/message-queue/message-queue/" class="">
       Message Queue</a>
   
 
@@ -751,7 +751,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
       rabbitmq</a>
   
 
@@ -770,7 +770,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/distributed-system/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/distributed-system/" class="">
       distributed system</a>
   
 
@@ -784,7 +784,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/sentinel/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/sentinel/" class="">
       Sentinel</a>
   
 
@@ -798,7 +798,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/spring-cloud/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/spring-cloud/" class="">
       Spring Cloud</a>
   
 
@@ -812,7 +812,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
       Spring Cloud Alibaba</a>
   
 
@@ -835,7 +835,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-184fcde54f4fb8e56ff1923eee779551" class="flex">
       <a role="button" class="">
         Java</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -849,7 +849,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-basic/" class="">
+    <a href="/hugo/post/computer-science/java/java-basic/" class="">
       java basic</a>
   
 
@@ -867,7 +867,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-6355ae1f9fa9f60a52445009b471b5e2" class="flex">
       <a role="button" class="">
         Spring</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -881,7 +881,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/spring/" class="">
+    <a href="/hugo/post/computer-science/java/spring/spring/" class="">
       spring</a>
   
 
@@ -895,7 +895,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/springboot/" class="">
+    <a href="/hugo/post/computer-science/java/spring/springboot/" class="">
       spring boot</a>
   
 
@@ -909,7 +909,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/spring-boot-validation/" class="">
+    <a href="/hugo/post/computer-science/java/spring/spring-boot-validation/" class="">
       spring boot validation</a>
   
 
@@ -923,7 +923,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/spring-transaction/" class="">
+    <a href="/hugo/post/computer-science/java/spring/spring-transaction/" class="">
       spring transaction</a>
   
 
@@ -937,7 +937,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/unit-test/" class="">
+    <a href="/hugo/post/computer-science/java/spring/unit-test/" class="">
       unit test</a>
   
 
@@ -956,7 +956,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/java/" class="">
+    <a href="/hugo/post/computer-science/java/java/" class="">
       java</a>
   
 
@@ -970,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/jvm/" class="">
+    <a href="/hugo/post/computer-science/java/jvm/" class="">
       jvm</a>
   
 
@@ -984,7 +984,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/mybatis/" class="">
+    <a href="/hugo/post/computer-science/java/mybatis/" class="">
       Mybatis</a>
   
 
@@ -998,7 +998,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/mybatis-plus/" class="">
+    <a href="/hugo/post/computer-science/java/mybatis-plus/" class="">
       Mybatis Plus</a>
   
 
@@ -1012,7 +1012,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/xxl-job/" class="">
+    <a href="/hugo/post/computer-science/java/xxl-job/" class="">
       xxl job</a>
   
 
@@ -1026,7 +1026,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/concurrent/" class="">
+    <a href="/hugo/post/computer-science/java/concurrent/" class="">
       concurrent</a>
   
 
@@ -1040,7 +1040,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/jackson/" class="">
+    <a href="/hugo/post/computer-science/java/jackson/" class="">
       jackson</a>
   
 
@@ -1054,7 +1054,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-hashmap/" class="">
+    <a href="/hugo/post/computer-science/java/java-hashmap/" class="">
       java HashMap</a>
   
 
@@ -1068,7 +1068,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-utils/" class="">
+    <a href="/hugo/post/computer-science/java/java-utils/" class="">
       Java Utils</a>
   
 
@@ -1082,7 +1082,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
+    <a href="/hugo/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
       java 密码学</a>
   
 
@@ -1096,7 +1096,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/map/" class="">
+    <a href="/hugo/post/computer-science/java/map/" class="">
       map</a>
   
 
@@ -1119,7 +1119,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-51f600e6ef5b531bcd84ecd789276516" class="flex">
       <a role="button" class="">
         Monitor</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1133,7 +1133,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/monitor/prometheus/" class="">
+    <a href="/hugo/post/computer-science/monitor/prometheus/" class="">
       prometheus</a>
   
 
@@ -1156,7 +1156,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-b11c61a955da170f736b6dbde7b6e083" class="flex">
       <a role="button" class="">
         Tools</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1170,7 +1170,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/tools/idea/" class="">
+    <a href="/hugo/post/computer-science/tools/idea/" class="">
       IDEA</a>
   
 
@@ -1189,7 +1189,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/computer-science-recommend/" class="">
+    <a href="/hugo/post/computer-science/computer-science-recommend/" class="">
       推荐</a>
   
 
@@ -1203,7 +1203,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/computer-science-learning-log/" class="">
+    <a href="/hugo/post/computer-science/computer-science-learning-log/" class="">
       学习记录</a>
   
 
@@ -1217,7 +1217,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/github/" class="">
+    <a href="/hugo/post/computer-science/github/" class="">
       github</a>
   
 
@@ -1231,7 +1231,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/job/" class="">
+    <a href="/hugo/post/computer-science/job/" class="">
       job</a>
   
 
@@ -1245,7 +1245,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/redis/" class="">
+    <a href="/hugo/post/computer-science/redis/" class="">
       redis</a>
   
 
@@ -1259,7 +1259,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/security/" class="">
+    <a href="/hugo/post/computer-science/security/" class="">
       security</a>
   
 
@@ -1277,7 +1277,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-44f9701b64ae8bf371ea70118bc45414" class="flex">
       <a role="button" class="">
         Blog</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1291,7 +1291,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/blog/blog/" class="">
+    <a href="/hugo/post/computer-science/blog/blog/" class="">
       blog</a>
   
 
@@ -1305,7 +1305,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/blog/hugo/" class="">
+    <a href="/hugo/post/computer-science/blog/hugo/" class="">
       Hugo</a>
   
 
@@ -1324,7 +1324,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/cloud/" class="">
+    <a href="/hugo/post/computer-science/cloud/" class="">
       Cloud</a>
   
 
@@ -1342,7 +1342,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="flex">
       <a role="button" class="">
         Front End</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1356,7 +1356,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/front-end/echarts/" class="">
+    <a href="/hugo/post/computer-science/front-end/echarts/" class="">
       echarts</a>
   
 
@@ -1370,7 +1370,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/front-end/vue/" class="">
+    <a href="/hugo/post/computer-science/front-end/vue/" class="">
       vue</a>
   
 
@@ -1393,7 +1393,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-529cbb550ade3cc11293cf67d1d534f0" class="flex">
       <a role="button" class="">
         Micro Service</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1407,7 +1407,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/micro-service/nacos/" class="">
+    <a href="/hugo/post/computer-science/micro-service/nacos/" class="">
       Nacos</a>
   
 
@@ -1421,7 +1421,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/micro-service/micro-service/" class="">
+    <a href="/hugo/post/computer-science/micro-service/micro-service/" class="">
       micro service</a>
   
 
@@ -1444,7 +1444,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="flex">
       <a role="button" class="">
         Operating System</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1458,7 +1458,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/ios/" class="">
+    <a href="/hugo/post/computer-science/operating-system/ios/" class="">
       IOS</a>
   
 
@@ -1472,7 +1472,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/linux/" class="">
+    <a href="/hugo/post/computer-science/operating-system/linux/" class="">
       linux</a>
   
 
@@ -1486,7 +1486,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/mac/" class="">
+    <a href="/hugo/post/computer-science/operating-system/mac/" class="">
       mac</a>
   
 
@@ -1500,7 +1500,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/raspberrypi/" class="">
+    <a href="/hugo/post/computer-science/operating-system/raspberrypi/" class="">
       raspberry pi</a>
   
 
@@ -1514,7 +1514,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/powershell/" class="">
+    <a href="/hugo/post/computer-science/operating-system/powershell/" class="">
       powershell</a>
   
 
@@ -1528,7 +1528,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/windows/" class="">
+    <a href="/hugo/post/computer-science/operating-system/windows/" class="">
       windows</a>
   
 
@@ -1551,7 +1551,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="flex">
       <a role="button" class="">
         Software</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1570,7 +1570,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/artificial-intelligence/" class="">
+    <a href="/hugo/post/computer-science/artificial-intelligence/" class="">
       Artificial Intelligence</a>
   
 
@@ -1588,7 +1588,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
       <a role="button" class="">
         CI/CD</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1602,7 +1602,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/docker/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/docker/" class="">
       docker</a>
   
 
@@ -1616,7 +1616,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/gitlab/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/gitlab/" class="">
       Gitlab</a>
   
 
@@ -1630,7 +1630,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/jenkins/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/jenkins/" class="">
       Jenkins</a>
   
 
@@ -1644,7 +1644,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/maven/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/maven/" class="">
       maven</a>
   
 
@@ -1658,7 +1658,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/nexus/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/nexus/" class="">
       Nexus</a>
   
 
@@ -1672,7 +1672,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/orbstack/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/orbstack/" class="">
       OrbStack</a>
   
 
@@ -1691,7 +1691,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/crawler/" class="">
+    <a href="/hugo/post/computer-science/crawler/" class="">
       crawler</a>
   
 
@@ -1705,7 +1705,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/git/" class="">
+    <a href="/hugo/post/computer-science/git/" class="">
       git</a>
   
 
@@ -1719,7 +1719,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/networking/" class="">
+    <a href="/hugo/post/computer-science/networking/" class="">
       networking</a>
   
 
@@ -1733,7 +1733,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/python/" class="">
+    <a href="/hugo/post/computer-science/python/" class="">
       Python</a>
   
 
@@ -1747,7 +1747,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/reddison/" class="">
+    <a href="/hugo/post/computer-science/reddison/" class="">
       reddison</a>
   
 
@@ -1761,7 +1761,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/vim/" class="">
+    <a href="/hugo/post/computer-science/vim/" class="">
       vim</a>
   
 
@@ -1775,7 +1775,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
+    <a href="/hugo/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
       系统设计</a>
   
 
@@ -1789,7 +1789,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
+    <a href="/hugo/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
       运维</a>
   
 
@@ -1812,7 +1812,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-3b7129f485a86f816ed70cb52a2a5843" class="flex">
       <a role="button" class="">
         History</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1826,7 +1826,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/history/chinese-history/" class="">
+    <a href="/hugo/post/history/chinese-history/" class="">
       Chinese History</a>
   
 
@@ -1849,7 +1849,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-27743f5ad758a53b0d2d97b463de9ca0" class="flex">
       <a role="button" class="">
         Others</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1863,7 +1863,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/others/about-me/" class="">
+    <a href="/hugo/post/others/about-me/" class="">
       about me</a>
   
 
@@ -1877,7 +1877,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/others/english-learning/" class="">
+    <a href="/hugo/post/others/english-learning/" class="">
       English Learning</a>
   
 
@@ -1893,7 +1893,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/others/economy/" class="">
+    <a href="/hugo/post/others/economy/" class="">
       Economy</a>
   
 
@@ -1907,7 +1907,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/others/f1/" class="">
+    <a href="/hugo/post/others/f1/" class="">
       F1</a>
   
 
@@ -1930,7 +1930,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-7cf7927dd7be57fd9ac871554e5eab30" class="flex">
       <a role="button" class="">
         Science</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1944,7 +1944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/science/biology/" class="">
+    <a href="/hugo/post/science/biology/" class="">
       biology</a>
   
 
@@ -1967,7 +1967,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-c86d83c6ab9662a5734c7c938687f51c" class="flex">
       <a role="button" class="">
         Sports</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1981,7 +1981,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/sports/cycling/" class="">
+    <a href="/hugo/post/sports/cycling/" class="">
       cycling</a>
   
 
@@ -1995,7 +1995,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/sports/table-tennis/" class="">
+    <a href="/hugo/post/sports/table-tennis/" class="">
       table tennis</a>
   
 
@@ -2018,7 +2018,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-a7716b8c5e1ddba36a22182d4f60014c" class="flex">
       <a role="button" class="">
         Wl Public</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2041,7 +2041,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-6fc9a7b0dd6392ef81e392a65430999b" class="flex">
       <a role="button" class="">
         Books</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2059,7 +2059,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-06aae5e89825d313a1291f1996bfc76d" class="flex">
       <a role="button" class="">
         Computer Science</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2073,7 +2073,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="active">
+    <a href="/hugo/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="active">
       Java并发编程实战</a>
   
 
@@ -2087,7 +2087,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+    <a href="/hugo/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
       Python神经网络编程</a>
   
 
@@ -2101,7 +2101,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
+    <a href="/hugo/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
       Redis设计与实现</a>
   
 
@@ -2115,7 +2115,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
+    <a href="/hugo/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
       Spring Cloud微服务：入门、实战与进阶</a>
   
 
@@ -2129,7 +2129,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
+    <a href="/hugo/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
       一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
   
 
@@ -2148,7 +2148,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
+    <a href="/hugo/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
       宏观经济学 第三版</a>
   
 
@@ -2162,7 +2162,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
+    <a href="/hugo/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
       英伟达-黄仁勋之芯</a>
   
 
@@ -2185,7 +2185,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="flex">
       <a role="button" class="">
         Tools</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2199,7 +2199,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="https/penruins.github.io/hugo/post/tools/obsidian/" class="">
+    <a href="/hugo/post/tools/obsidian/" class="">
       obsidian</a>
   
 
@@ -2243,14 +2243,14 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="https//penruins.github.io/hugo/icons/menu.svg" class="book-icon" alt="Menu" />
+    <img src="/hugo/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
   <h3>Java并发编程实战</h3>
 
   <label for="toc-control">
     
-    <img src="https//penruins.github.io/hugo/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="/hugo/icons/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
@@ -2846,17 +2846,17 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="https/penruins.github.io/hugo/post/sports/table-tennis/" class="flex align-center">
-        <img src="https//penruins.github.io/hugo/icons/backward.svg" class="book-icon" alt="Backward" />
+      <a href="/hugo/post/sports/table-tennis/" class="flex align-center">
+        <img src="/hugo/icons/backward.svg" class="book-icon" alt="Backward" />
         <span>table tennis</span>
       </a>
     
     </span>
     <span>
     
-      <a href="https/penruins.github.io/hugo/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="flex align-center">
+      <a href="/hugo/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="flex align-center">
         <span>Python神经网络编程</span>
-        <img src="https//penruins.github.io/hugo/icons/forward.svg" class="book-icon" alt="Forward" />
+        <img src="/hugo/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     
     </span>

@@ -18,7 +18,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https//penruins.github.io/hugo/post/computer-science/llm/2025-03-30-6-kafka%E7%9A%84%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%85%B6%E4%BB%96%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%B3%BB%E7%BB%9F%E7%9B%B8%E6%AF%94%E6%9C%89%E4%BD%95%E4%BC%98%E5%8A%BF/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://penruins.github.io/hugo/post/computer-science/llm/2025-03-30-6-kafka%E7%9A%84%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%85%B6%E4%BB%96%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%B3%BB%E7%BB%9F%E7%9B%B8%E6%AF%94%E6%9C%89%E4%BD%95%E4%BC%98%E5%8A%BF/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Kafka的顺序消费能力与其他消息队列系统相比有何优势">
   <meta property="og:description" content="Kafka的顺序消费能力与其他消息队列系统相比有何优势# Kafka 在顺序消费能力上与其他主流消息队列系统（如 RabbitMQ、RocketMQ）相比，具有独特的优势和适用场景。以下是详细对比分析：
@@ -44,14 +44,14 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   <meta itemprop="wordCount" content="98">
 
 <title>Kafka的顺序消费能力与其他消息队列系统相比有何优势 | Penruins</title>
-<link rel="icon" href="/https/penruins.github.io/hugo/favicon.png" >
-<link rel="manifest" href="https//penruins.github.io/hugo/manifest.json">
-<link rel="canonical" href="https//penruins.github.io/hugo/post/computer-science/llm/2025-03-30-6-kafka%E7%9A%84%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%85%B6%E4%BB%96%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%B3%BB%E7%BB%9F%E7%9B%B8%E6%AF%94%E6%9C%89%E4%BD%95%E4%BC%98%E5%8A%BF/">
-<link rel="stylesheet" href="https//penruins.github.io/hugo/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+<link rel="icon" href="/hugo/favicon.png" >
+<link rel="manifest" href="/hugo/manifest.json">
+<link rel="canonical" href="https://penruins.github.io/hugo/post/computer-science/llm/2025-03-30-6-kafka%E7%9A%84%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%85%B6%E4%BB%96%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%B3%BB%E7%BB%9F%E7%9B%B8%E6%AF%94%E6%9C%89%E4%BD%95%E4%BC%98%E5%8A%BF/">
+<link rel="stylesheet" href="/hugo/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" integrity="sha256-BGyUtNVsoeJ6MyG/aplzWnmDlEFTVMZduVU9HDAy2Sk=" crossorigin="anonymous">
 
 
-  <script defer src="/https/penruins.github.io/hugo/fuse.min.js"></script>
-  <script defer src="https//penruins.github.io/hugo/en.search.min.cf1d6f6d47e839c8a36b65a1b229659b781422cf9199c54e0510cc36719b26f1.js" ></script>
+  <script defer src="/hugo/fuse.min.js"></script>
+  <script defer src="/hugo/en.search.min.667e165960c69f1a4a3665ed8754e5f91a5de6e5a2d3a2d61381c5a0ccc65377.js" integrity="sha256-Zn4WWWDGnxpKNmXth1Tl&#43;Rpd5uWi06LWE4HFoMzGU3c=" crossorigin="anonymous"></script>
 
 
 
@@ -67,7 +67,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="https/penruins.github.io/hugo/"><span>Penruins</span>
+  <a class="flex align-center" href="/hugo/"><span>Penruins</span>
   </a>
 </h2>
 
@@ -108,7 +108,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-d673e25af27f33796c279e3a05cc634f" class="flex">
       <a role="button" class="">
         Life</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -122,7 +122,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/books/" class="">
+    <a href="/hugo/post/life/books/" class="">
       books</a>
   
 
@@ -136,7 +136,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
+    <a href="/hugo/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
       摘抄分享</a>
   
 
@@ -150,7 +150,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/%E6%96%B0%E7%9F%A5/" class="">
+    <a href="/hugo/post/life/%E6%96%B0%E7%9F%A5/" class="">
       新知</a>
   
 
@@ -164,7 +164,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/movies-log/" class="">
+    <a href="/hugo/post/life/movies-log/" class="">
       观影记录</a>
   
 
@@ -178,7 +178,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/bilibili/" class="">
+    <a href="/hugo/post/life/bilibili/" class="">
       bilibili</a>
   
 
@@ -192,7 +192,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/cycling/" class="">
+    <a href="/hugo/post/life/cycling/" class="">
       cycling</a>
   
 
@@ -206,7 +206,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/hiking/" class="">
+    <a href="/hugo/post/life/hiking/" class="">
       hiking</a>
   
 
@@ -220,7 +220,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/life/" class="">
+    <a href="/hugo/post/life/life/" class="">
       life</a>
   
 
@@ -234,7 +234,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/life-recommend/" class="">
+    <a href="/hugo/post/life/life-recommend/" class="">
       life recommand</a>
   
 
@@ -248,7 +248,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/learning-others-log/" class="">
+    <a href="/hugo/post/life/learning-others-log/" class="">
       other learning</a>
   
 
@@ -262,7 +262,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/podcast/" class="">
+    <a href="/hugo/post/life/podcast/" class="">
       podcast</a>
   
 
@@ -276,7 +276,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/politics/" class="">
+    <a href="/hugo/post/life/politics/" class="">
       politics</a>
   
 
@@ -290,7 +290,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/goal/" class="">
+    <a href="/hugo/post/life/goal/" class="">
       goal</a>
   
 
@@ -304,7 +304,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/coffee/" class="">
+    <a href="/hugo/post/life/coffee/" class="">
       coffee</a>
   
 
@@ -318,7 +318,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/article/" class="">
+    <a href="/hugo/post/life/article/" class="">
       article</a>
   
 
@@ -332,7 +332,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/law/" class="">
+    <a href="/hugo/post/life/law/" class="">
       law</a>
   
 
@@ -346,7 +346,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/my-history/" class="">
+    <a href="/hugo/post/life/my-history/" class="">
       my history</a>
   
 
@@ -360,7 +360,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/life/my-timeline/" class="">
+    <a href="/hugo/post/life/my-timeline/" class="">
       My Timeline</a>
   
 
@@ -385,7 +385,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-e52270c7d6707875ea89b3ec9b091983" class="flex">
       <a role="button" class="">
         Computer Science</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -399,7 +399,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/computer-science/" class="">
+    <a href="/hugo/post/computer-science/computer-science/" class="">
       computer science</a>
   
 
@@ -417,7 +417,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-f834cb9837867b0fca71e863c9ed2d28" class="flex">
       <a role="button" class="">
         Algorithm</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -431,7 +431,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/algorithm/" class="">
+    <a href="/hugo/post/computer-science/algorithm/algorithm/" class="">
       Algorithm</a>
   
 
@@ -445,7 +445,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
+    <a href="/hugo/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
       algorithm practice 剑指 offer</a>
   
 
@@ -459,7 +459,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
+    <a href="/hugo/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
       剑指offer题目对应</a>
   
 
@@ -473,7 +473,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
+    <a href="/hugo/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
       面试经典 150 题</a>
   
 
@@ -496,7 +496,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-12ae84c3ad3679302ffec2ab120d7fb0" class="flex">
       <a role="button" class="">
         Big Data</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -510,7 +510,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/big-data/hadoop/" class="">
+    <a href="/hugo/post/computer-science/big-data/hadoop/" class="">
       hadoop</a>
   
 
@@ -524,7 +524,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/big-data/hbase/" class="">
+    <a href="/hugo/post/computer-science/big-data/hbase/" class="">
       hbase</a>
   
 
@@ -538,7 +538,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/big-data/hive/" class="">
+    <a href="/hugo/post/computer-science/big-data/hive/" class="">
       hive</a>
   
 
@@ -561,7 +561,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-256c0c0348e7dc55386785c98f7fa516" class="flex">
       <a role="button" class="">
         Database</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -575,7 +575,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/database/" class="">
+    <a href="/hugo/post/computer-science/database/database/" class="">
       database</a>
   
 
@@ -589,7 +589,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/druid/" class="">
+    <a href="/hugo/post/computer-science/database/druid/" class="">
       druid</a>
   
 
@@ -603,7 +603,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/elasticsearch/" class="">
+    <a href="/hugo/post/computer-science/database/elasticsearch/" class="">
       elasticsearch</a>
   
 
@@ -617,7 +617,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/mycat/" class="">
+    <a href="/hugo/post/computer-science/database/mycat/" class="">
       mycat</a>
   
 
@@ -631,7 +631,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/mysql/" class="">
+    <a href="/hugo/post/computer-science/database/mysql/" class="">
       mysql</a>
   
 
@@ -645,7 +645,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/postgresql/" class="">
+    <a href="/hugo/post/computer-science/database/postgresql/" class="">
       postgresql</a>
   
 
@@ -659,7 +659,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/shardingsphere/" class="">
+    <a href="/hugo/post/computer-science/database/shardingsphere/" class="">
       shardingsphere</a>
   
 
@@ -673,7 +673,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/sql/" class="">
+    <a href="/hugo/post/computer-science/database/sql/" class="">
       SQL</a>
   
 
@@ -687,7 +687,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/database/mongodb/" class="">
+    <a href="/hugo/post/computer-science/database/mongodb/" class="">
       Penruins</a>
   
 
@@ -710,7 +710,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="flex">
       <a role="button" class="">
         Distributed System</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -728,7 +728,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-98c822a4c30374b08c20bbb746ca28ff" class="flex">
       <a role="button" class="">
         Message Queue</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -742,7 +742,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/message-queue/kafka/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/message-queue/kafka/" class="">
       kafka</a>
   
 
@@ -756,7 +756,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/message-queue/message-queue/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/message-queue/message-queue/" class="">
       Message Queue</a>
   
 
@@ -770,7 +770,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
       rabbitmq</a>
   
 
@@ -789,7 +789,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/distributed-system/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/distributed-system/" class="">
       distributed system</a>
   
 
@@ -803,7 +803,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/sentinel/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/sentinel/" class="">
       Sentinel</a>
   
 
@@ -817,7 +817,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/spring-cloud/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/spring-cloud/" class="">
       Spring Cloud</a>
   
 
@@ -831,7 +831,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
+    <a href="/hugo/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
       Spring Cloud Alibaba</a>
   
 
@@ -854,7 +854,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-184fcde54f4fb8e56ff1923eee779551" class="flex">
       <a role="button" class="">
         Java</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -868,7 +868,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-basic/" class="">
+    <a href="/hugo/post/computer-science/java/java-basic/" class="">
       java basic</a>
   
 
@@ -886,7 +886,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-6355ae1f9fa9f60a52445009b471b5e2" class="flex">
       <a role="button" class="">
         Spring</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -900,7 +900,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/spring/" class="">
+    <a href="/hugo/post/computer-science/java/spring/spring/" class="">
       spring</a>
   
 
@@ -914,7 +914,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/springboot/" class="">
+    <a href="/hugo/post/computer-science/java/spring/springboot/" class="">
       spring boot</a>
   
 
@@ -928,7 +928,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/spring-boot-validation/" class="">
+    <a href="/hugo/post/computer-science/java/spring/spring-boot-validation/" class="">
       spring boot validation</a>
   
 
@@ -942,7 +942,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/spring-transaction/" class="">
+    <a href="/hugo/post/computer-science/java/spring/spring-transaction/" class="">
       spring transaction</a>
   
 
@@ -956,7 +956,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/unit-test/" class="">
+    <a href="/hugo/post/computer-science/java/spring/unit-test/" class="">
       unit test</a>
   
 
@@ -975,7 +975,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/java/" class="">
+    <a href="/hugo/post/computer-science/java/java/" class="">
       java</a>
   
 
@@ -989,7 +989,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/jvm/" class="">
+    <a href="/hugo/post/computer-science/java/jvm/" class="">
       jvm</a>
   
 
@@ -1003,7 +1003,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/mybatis/" class="">
+    <a href="/hugo/post/computer-science/java/mybatis/" class="">
       Mybatis</a>
   
 
@@ -1017,7 +1017,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/mybatis-plus/" class="">
+    <a href="/hugo/post/computer-science/java/mybatis-plus/" class="">
       Mybatis Plus</a>
   
 
@@ -1031,7 +1031,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/xxl-job/" class="">
+    <a href="/hugo/post/computer-science/java/xxl-job/" class="">
       xxl job</a>
   
 
@@ -1045,7 +1045,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/concurrent/" class="">
+    <a href="/hugo/post/computer-science/java/concurrent/" class="">
       concurrent</a>
   
 
@@ -1059,7 +1059,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/jackson/" class="">
+    <a href="/hugo/post/computer-science/java/jackson/" class="">
       jackson</a>
   
 
@@ -1073,7 +1073,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-hashmap/" class="">
+    <a href="/hugo/post/computer-science/java/java-hashmap/" class="">
       java HashMap</a>
   
 
@@ -1087,7 +1087,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-utils/" class="">
+    <a href="/hugo/post/computer-science/java/java-utils/" class="">
       Java Utils</a>
   
 
@@ -1101,7 +1101,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
+    <a href="/hugo/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
       java 密码学</a>
   
 
@@ -1115,7 +1115,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/java/map/" class="">
+    <a href="/hugo/post/computer-science/java/map/" class="">
       map</a>
   
 
@@ -1138,7 +1138,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-51f600e6ef5b531bcd84ecd789276516" class="flex">
       <a role="button" class="">
         Monitor</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1152,7 +1152,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/monitor/prometheus/" class="">
+    <a href="/hugo/post/computer-science/monitor/prometheus/" class="">
       prometheus</a>
   
 
@@ -1175,7 +1175,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-b11c61a955da170f736b6dbde7b6e083" class="flex">
       <a role="button" class="">
         Tools</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1189,7 +1189,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/tools/idea/" class="">
+    <a href="/hugo/post/computer-science/tools/idea/" class="">
       IDEA</a>
   
 
@@ -1208,7 +1208,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/computer-science-recommend/" class="">
+    <a href="/hugo/post/computer-science/computer-science-recommend/" class="">
       推荐</a>
   
 
@@ -1222,7 +1222,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/computer-science-learning-log/" class="">
+    <a href="/hugo/post/computer-science/computer-science-learning-log/" class="">
       学习记录</a>
   
 
@@ -1236,7 +1236,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/github/" class="">
+    <a href="/hugo/post/computer-science/github/" class="">
       github</a>
   
 
@@ -1250,7 +1250,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/job/" class="">
+    <a href="/hugo/post/computer-science/job/" class="">
       job</a>
   
 
@@ -1264,7 +1264,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/redis/" class="">
+    <a href="/hugo/post/computer-science/redis/" class="">
       redis</a>
   
 
@@ -1278,7 +1278,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/security/" class="">
+    <a href="/hugo/post/computer-science/security/" class="">
       security</a>
   
 
@@ -1296,7 +1296,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-44f9701b64ae8bf371ea70118bc45414" class="flex">
       <a role="button" class="">
         Blog</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1310,7 +1310,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/blog/blog/" class="">
+    <a href="/hugo/post/computer-science/blog/blog/" class="">
       blog</a>
   
 
@@ -1324,7 +1324,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/blog/hugo/" class="">
+    <a href="/hugo/post/computer-science/blog/hugo/" class="">
       Hugo</a>
   
 
@@ -1343,7 +1343,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/cloud/" class="">
+    <a href="/hugo/post/computer-science/cloud/" class="">
       Cloud</a>
   
 
@@ -1361,7 +1361,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="flex">
       <a role="button" class="">
         Front End</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1375,7 +1375,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/front-end/echarts/" class="">
+    <a href="/hugo/post/computer-science/front-end/echarts/" class="">
       echarts</a>
   
 
@@ -1389,7 +1389,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/front-end/vue/" class="">
+    <a href="/hugo/post/computer-science/front-end/vue/" class="">
       vue</a>
   
 
@@ -1412,7 +1412,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-529cbb550ade3cc11293cf67d1d534f0" class="flex">
       <a role="button" class="">
         Micro Service</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1426,7 +1426,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/micro-service/nacos/" class="">
+    <a href="/hugo/post/computer-science/micro-service/nacos/" class="">
       Nacos</a>
   
 
@@ -1440,7 +1440,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/micro-service/micro-service/" class="">
+    <a href="/hugo/post/computer-science/micro-service/micro-service/" class="">
       micro service</a>
   
 
@@ -1463,7 +1463,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="flex">
       <a role="button" class="">
         Operating System</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1477,7 +1477,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/ios/" class="">
+    <a href="/hugo/post/computer-science/operating-system/ios/" class="">
       IOS</a>
   
 
@@ -1491,7 +1491,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/linux/" class="">
+    <a href="/hugo/post/computer-science/operating-system/linux/" class="">
       linux</a>
   
 
@@ -1505,7 +1505,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/mac/" class="">
+    <a href="/hugo/post/computer-science/operating-system/mac/" class="">
       mac</a>
   
 
@@ -1519,7 +1519,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/raspberrypi/" class="">
+    <a href="/hugo/post/computer-science/operating-system/raspberrypi/" class="">
       raspberry pi</a>
   
 
@@ -1533,7 +1533,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/powershell/" class="">
+    <a href="/hugo/post/computer-science/operating-system/powershell/" class="">
       powershell</a>
   
 
@@ -1547,7 +1547,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/windows/" class="">
+    <a href="/hugo/post/computer-science/operating-system/windows/" class="">
       windows</a>
   
 
@@ -1570,7 +1570,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="flex">
       <a role="button" class="">
         Software</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1589,7 +1589,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/artificial-intelligence/" class="">
+    <a href="/hugo/post/computer-science/artificial-intelligence/" class="">
       Artificial Intelligence</a>
   
 
@@ -1607,7 +1607,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
       <a role="button" class="">
         CI/CD</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1621,7 +1621,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/docker/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/docker/" class="">
       docker</a>
   
 
@@ -1635,7 +1635,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/gitlab/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/gitlab/" class="">
       Gitlab</a>
   
 
@@ -1649,7 +1649,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/jenkins/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/jenkins/" class="">
       Jenkins</a>
   
 
@@ -1663,7 +1663,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/maven/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/maven/" class="">
       maven</a>
   
 
@@ -1677,7 +1677,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/nexus/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/nexus/" class="">
       Nexus</a>
   
 
@@ -1691,7 +1691,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/orbstack/" class="">
+    <a href="/hugo/post/computer-science/ci-cd/orbstack/" class="">
       OrbStack</a>
   
 
@@ -1710,7 +1710,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/crawler/" class="">
+    <a href="/hugo/post/computer-science/crawler/" class="">
       crawler</a>
   
 
@@ -1724,7 +1724,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/git/" class="">
+    <a href="/hugo/post/computer-science/git/" class="">
       git</a>
   
 
@@ -1738,7 +1738,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/networking/" class="">
+    <a href="/hugo/post/computer-science/networking/" class="">
       networking</a>
   
 
@@ -1752,7 +1752,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/python/" class="">
+    <a href="/hugo/post/computer-science/python/" class="">
       Python</a>
   
 
@@ -1766,7 +1766,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/reddison/" class="">
+    <a href="/hugo/post/computer-science/reddison/" class="">
       reddison</a>
   
 
@@ -1780,7 +1780,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/vim/" class="">
+    <a href="/hugo/post/computer-science/vim/" class="">
       vim</a>
   
 
@@ -1794,7 +1794,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
+    <a href="/hugo/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
       系统设计</a>
   
 
@@ -1808,7 +1808,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
+    <a href="/hugo/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
       运维</a>
   
 
@@ -1831,7 +1831,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-3b7129f485a86f816ed70cb52a2a5843" class="flex">
       <a role="button" class="">
         History</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1845,7 +1845,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/history/chinese-history/" class="">
+    <a href="/hugo/post/history/chinese-history/" class="">
       Chinese History</a>
   
 
@@ -1868,7 +1868,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-27743f5ad758a53b0d2d97b463de9ca0" class="flex">
       <a role="button" class="">
         Others</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1882,7 +1882,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/others/about-me/" class="">
+    <a href="/hugo/post/others/about-me/" class="">
       about me</a>
   
 
@@ -1896,7 +1896,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/others/english-learning/" class="">
+    <a href="/hugo/post/others/english-learning/" class="">
       English Learning</a>
   
 
@@ -1912,7 +1912,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/others/economy/" class="">
+    <a href="/hugo/post/others/economy/" class="">
       Economy</a>
   
 
@@ -1926,7 +1926,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/others/f1/" class="">
+    <a href="/hugo/post/others/f1/" class="">
       F1</a>
   
 
@@ -1949,7 +1949,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-7cf7927dd7be57fd9ac871554e5eab30" class="flex">
       <a role="button" class="">
         Science</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1963,7 +1963,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/science/biology/" class="">
+    <a href="/hugo/post/science/biology/" class="">
       biology</a>
   
 
@@ -1986,7 +1986,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-c86d83c6ab9662a5734c7c938687f51c" class="flex">
       <a role="button" class="">
         Sports</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2000,7 +2000,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/sports/cycling/" class="">
+    <a href="/hugo/post/sports/cycling/" class="">
       cycling</a>
   
 
@@ -2014,7 +2014,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/sports/table-tennis/" class="">
+    <a href="/hugo/post/sports/table-tennis/" class="">
       table tennis</a>
   
 
@@ -2037,7 +2037,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-a7716b8c5e1ddba36a22182d4f60014c" class="flex">
       <a role="button" class="">
         Wl Public</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2060,7 +2060,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-6fc9a7b0dd6392ef81e392a65430999b" class="flex">
       <a role="button" class="">
         Books</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2078,7 +2078,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-06aae5e89825d313a1291f1996bfc76d" class="flex">
       <a role="button" class="">
         Computer Science</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2092,7 +2092,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
+    <a href="/hugo/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
       Java并发编程实战</a>
   
 
@@ -2106,7 +2106,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+    <a href="/hugo/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
       Python神经网络编程</a>
   
 
@@ -2120,7 +2120,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
+    <a href="/hugo/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
       Redis设计与实现</a>
   
 
@@ -2134,7 +2134,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
+    <a href="/hugo/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
       Spring Cloud微服务：入门、实战与进阶</a>
   
 
@@ -2148,7 +2148,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
+    <a href="/hugo/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
       一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
   
 
@@ -2167,7 +2167,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
+    <a href="/hugo/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
       宏观经济学 第三版</a>
   
 
@@ -2181,7 +2181,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
+    <a href="/hugo/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
       英伟达-黄仁勋之芯</a>
   
 
@@ -2204,7 +2204,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
     <label for="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="flex">
       <a role="button" class="">
         Tools</a>
-      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2218,7 +2218,7 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
   
 
   
-    <a href="https/penruins.github.io/hugo/post/tools/obsidian/" class="">
+    <a href="/hugo/post/tools/obsidian/" class="">
       obsidian</a>
   
 
@@ -2262,14 +2262,14 @@ Kafka 的零拷贝技术和批量发送机制减少 I/O 开销，在高吞吐场
         
   <div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="https//penruins.github.io/hugo/icons/menu.svg" class="book-icon" alt="Menu" />
+    <img src="/hugo/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
   <h3>Kafka的顺序消费能力与其他消息队列系统相比有何优势</h3>
 
   <label for="toc-control">
     
-    <img src="https//penruins.github.io/hugo/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="/hugo/icons/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
