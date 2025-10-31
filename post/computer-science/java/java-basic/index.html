@@ -1,0 +1,2660 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="java basic# mess# 八大数据类型# byte char boolean short int long float double transient 关键字的作用是什么？# 在一个类中如果变量被 transient 关键字修饰，在对类的对象进行序列化的时候就会忽略这个变量 什么是深拷贝？什么是浅拷贝？# 深拷贝：递归地复制对象及其所有嵌套的子对象，生成一个完全独立的新对象。两个对象之间不共享引用 浅拷贝：创建一个新的对象，但只复制对象的最外层属性的引用 String# equals与 == 区别# equals 比较的是两个字符串的内容是否是相等的 == 比较的是两个变量指向的引用是否是相等的 StringBuilder StringBuffer区别# StringBuilder 线程不安全 StringBuffer 线程安全 StringBuffer 是怎么保证线程安全的？# 对字符串操作的方法都通过 synchronized 关键字修饰，保证线程安全 StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的# 两个类都继承子 AbstractStringBuilder 均使用 char[] value 保存字符串数据 HashMap# HashMap底层的数据结构是怎样的？# java 1.8 之前 数组 &#43; 链表 java 1.8 之后 数组 &#43; 链表/红黑树 HashMap 是否线程安全，如何保证线程安全# 不是线程安全的 如何保证线程安全 Collections.synchronizedMap() ConcurrentHashMap 读写锁 ReadWriteLock 局部使用 HashMap 初始化写，后续只读 HashMap get 时间复杂度# 最好的情况是O(1) 若发生哈希碰撞，对应到桶之后还需要查询链表或红黑树，时间复杂度下降到O(N)或O(logN) HashMap 和 Hashtable 有什么区别？# 线程安全性 HashMap是线程不安全的，HashTable是线程安全的 对空值的支持 HashMap的key和value都支持空值，HashTable不支持key或value为空值 List# Collection 和 Collections 有什么区别？# Collection 是集合类的一个接口 Collections 是集合的一个工具类 LinkedList 删除时间复杂度# 删除头和尾的时间复杂度为O(1)，因为在LinkedList中维护了头和尾2个指针 其他位置的时间复杂度为O(n) 函数式编程# java的函数式编程包含哪些内容？# java的函数式编程的概念中将只包含一个方法的接口称为函数式接口，可以通过Lambda表达式简化匿名类的定义 提供流操作了API，可以将集合的迭代操作变为链式操作，提供了并行处理集合的方法 提供了Optional类用来处理空指针的情况 I/O# 网络io分为哪几种# 网络 I/O 模型主要分为以下五种：
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/java/java-basic/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="java basic">
+  <meta property="og:description" content="java basic# mess# 八大数据类型# byte char boolean short int long float double transient 关键字的作用是什么？# 在一个类中如果变量被 transient 关键字修饰，在对类的对象进行序列化的时候就会忽略这个变量 什么是深拷贝？什么是浅拷贝？# 深拷贝：递归地复制对象及其所有嵌套的子对象，生成一个完全独立的新对象。两个对象之间不共享引用 浅拷贝：创建一个新的对象，但只复制对象的最外层属性的引用 String# equals与 == 区别# equals 比较的是两个字符串的内容是否是相等的 == 比较的是两个变量指向的引用是否是相等的 StringBuilder StringBuffer区别# StringBuilder 线程不安全 StringBuffer 线程安全 StringBuffer 是怎么保证线程安全的？# 对字符串操作的方法都通过 synchronized 关键字修饰，保证线程安全 StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的# 两个类都继承子 AbstractStringBuilder 均使用 char[] value 保存字符串数据 HashMap# HashMap底层的数据结构是怎样的？# java 1.8 之前 数组 &#43; 链表 java 1.8 之后 数组 &#43; 链表/红黑树 HashMap 是否线程安全，如何保证线程安全# 不是线程安全的 如何保证线程安全 Collections.synchronizedMap() ConcurrentHashMap 读写锁 ReadWriteLock 局部使用 HashMap 初始化写，后续只读 HashMap get 时间复杂度# 最好的情况是O(1) 若发生哈希碰撞，对应到桶之后还需要查询链表或红黑树，时间复杂度下降到O(N)或O(logN) HashMap 和 Hashtable 有什么区别？# 线程安全性 HashMap是线程不安全的，HashTable是线程安全的 对空值的支持 HashMap的key和value都支持空值，HashTable不支持key或value为空值 List# Collection 和 Collections 有什么区别？# Collection 是集合类的一个接口 Collections 是集合的一个工具类 LinkedList 删除时间复杂度# 删除头和尾的时间复杂度为O(1)，因为在LinkedList中维护了头和尾2个指针 其他位置的时间复杂度为O(n) 函数式编程# java的函数式编程包含哪些内容？# java的函数式编程的概念中将只包含一个方法的接口称为函数式接口，可以通过Lambda表达式简化匿名类的定义 提供流操作了API，可以将集合的迭代操作变为链式操作，提供了并行处理集合的方法 提供了Optional类用来处理空指针的情况 I/O# 网络io分为哪几种# 网络 I/O 模型主要分为以下五种：">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-31T22:45:32+08:00">
+
+
+  <meta itemprop="name" content="java basic">
+  <meta itemprop="description" content="java basic# mess# 八大数据类型# byte char boolean short int long float double transient 关键字的作用是什么？# 在一个类中如果变量被 transient 关键字修饰，在对类的对象进行序列化的时候就会忽略这个变量 什么是深拷贝？什么是浅拷贝？# 深拷贝：递归地复制对象及其所有嵌套的子对象，生成一个完全独立的新对象。两个对象之间不共享引用 浅拷贝：创建一个新的对象，但只复制对象的最外层属性的引用 String# equals与 == 区别# equals 比较的是两个字符串的内容是否是相等的 == 比较的是两个变量指向的引用是否是相等的 StringBuilder StringBuffer区别# StringBuilder 线程不安全 StringBuffer 线程安全 StringBuffer 是怎么保证线程安全的？# 对字符串操作的方法都通过 synchronized 关键字修饰，保证线程安全 StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的# 两个类都继承子 AbstractStringBuilder 均使用 char[] value 保存字符串数据 HashMap# HashMap底层的数据结构是怎样的？# java 1.8 之前 数组 &#43; 链表 java 1.8 之后 数组 &#43; 链表/红黑树 HashMap 是否线程安全，如何保证线程安全# 不是线程安全的 如何保证线程安全 Collections.synchronizedMap() ConcurrentHashMap 读写锁 ReadWriteLock 局部使用 HashMap 初始化写，后续只读 HashMap get 时间复杂度# 最好的情况是O(1) 若发生哈希碰撞，对应到桶之后还需要查询链表或红黑树，时间复杂度下降到O(N)或O(logN) HashMap 和 Hashtable 有什么区别？# 线程安全性 HashMap是线程不安全的，HashTable是线程安全的 对空值的支持 HashMap的key和value都支持空值，HashTable不支持key或value为空值 List# Collection 和 Collections 有什么区别？# Collection 是集合类的一个接口 Collections 是集合的一个工具类 LinkedList 删除时间复杂度# 删除头和尾的时间复杂度为O(1)，因为在LinkedList中维护了头和尾2个指针 其他位置的时间复杂度为O(n) 函数式编程# java的函数式编程包含哪些内容？# java的函数式编程的概念中将只包含一个方法的接口称为函数式接口，可以通过Lambda表达式简化匿名类的定义 提供流操作了API，可以将集合的迭代操作变为链式操作，提供了并行处理集合的方法 提供了Optional类用来处理空指针的情况 I/O# 网络io分为哪几种# 网络 I/O 模型主要分为以下五种：">
+  <meta itemprop="dateModified" content="2025-10-31T22:45:32+08:00">
+  <meta itemprop="wordCount" content="236">
+
+<title>java basic | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/post/computer-science/java/java-basic/">
+<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.1e4254d6ef5c3d4b931350d3ad5355ea88c400709582577a866d1cb5f2a8f4f5.js" ></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-post">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d673e25af27f33796c279e3a05cc634f" class="toggle"  />
+    <label for="section-d673e25af27f33796c279e3a05cc634f" class="flex">
+      <a role="button" class="">
+        Life</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/books/" class="">
+      books</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
+      摘抄分享</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%96%B0%E7%9F%A5/" class="">
+      新知</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/movies-log/" class="">
+      观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/bilibili/" class="">
+      bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/hiking/" class="">
+      hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life/" class="">
+      life</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life-recommend/" class="">
+      life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/learning-others-log/" class="">
+      other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/podcast/" class="">
+      podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/politics/" class="">
+      politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/goal/" class="">
+      goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/coffee/" class="">
+      coffee</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/article/" class="">
+      article</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/law/" class="">
+      law</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-history/" class="">
+      my history</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-timeline/" class="">
+      My Timeline</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e52270c7d6707875ea89b3ec9b091983" class="toggle" checked />
+    <label for="section-e52270c7d6707875ea89b3ec9b091983" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science/" class="">
+      computer science</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f834cb9837867b0fca71e863c9ed2d28" class="toggle"  />
+    <label for="section-f834cb9837867b0fca71e863c9ed2d28" class="flex">
+      <a role="button" class="">
+        Algorithm</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm/" class="">
+      Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
+      algorithm practice 剑指 offer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
+      剑指offer题目对应</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
+      面试经典 150 题</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-12ae84c3ad3679302ffec2ab120d7fb0" class="toggle"  />
+    <label for="section-12ae84c3ad3679302ffec2ab120d7fb0" class="flex">
+      <a role="button" class="">
+        Big Data</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hadoop/" class="">
+      hadoop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hbase/" class="">
+      hbase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hive/" class="">
+      hive</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-256c0c0348e7dc55386785c98f7fa516" class="toggle"  />
+    <label for="section-256c0c0348e7dc55386785c98f7fa516" class="flex">
+      <a role="button" class="">
+        Database</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/database/" class="">
+      database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/druid/" class="">
+      druid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/elasticsearch/" class="">
+      elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mycat/" class="">
+      mycat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mysql/" class="">
+      mysql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/postgresql/" class="">
+      postgresql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/shardingsphere/" class="">
+      shardingsphere</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/sql/" class="">
+      SQL</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mongodb/" class="">
+      Penruins</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="toggle"  />
+    <label for="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="flex">
+      <a role="button" class="">
+        Distributed System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-98c822a4c30374b08c20bbb746ca28ff" class="toggle"  />
+    <label for="section-98c822a4c30374b08c20bbb746ca28ff" class="flex">
+      <a role="button" class="">
+        Message Queue</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/kafka/" class="">
+      kafka</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/message-queue/" class="">
+      Message Queue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
+      rabbitmq</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/distributed-system/" class="">
+      distributed system</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/sentinel/" class="">
+      Sentinel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud/" class="">
+      Spring Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
+      Spring Cloud Alibaba</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-184fcde54f4fb8e56ff1923eee779551" class="toggle" checked />
+    <label for="section-184fcde54f4fb8e56ff1923eee779551" class="flex">
+      <a role="button" class="">
+        Java</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-basic/" class="active">
+      java basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6355ae1f9fa9f60a52445009b471b5e2" class="toggle"  />
+    <label for="section-6355ae1f9fa9f60a52445009b471b5e2" class="flex">
+      <a role="button" class="">
+        Spring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring/" class="">
+      spring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/springboot/" class="">
+      spring boot</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-boot-validation/" class="">
+      spring boot validation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-transaction/" class="">
+      spring transaction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/unit-test/" class="">
+      unit test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java/" class="">
+      java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jvm/" class="">
+      jvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis/" class="">
+      Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis-plus/" class="">
+      Mybatis Plus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/xxl-job/" class="">
+      xxl job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/concurrent/" class="">
+      concurrent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jackson/" class="">
+      jackson</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-hashmap/" class="">
+      java HashMap</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-utils/" class="">
+      Java Utils</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
+      java 密码学</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/map/" class="">
+      map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-51f600e6ef5b531bcd84ecd789276516" class="toggle"  />
+    <label for="section-51f600e6ef5b531bcd84ecd789276516" class="flex">
+      <a role="button" class="">
+        Monitor</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/monitor/prometheus/" class="">
+      prometheus</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b11c61a955da170f736b6dbde7b6e083" class="toggle"  />
+    <label for="section-b11c61a955da170f736b6dbde7b6e083" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/tools/idea/" class="">
+      IDEA</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-recommend/" class="">
+      推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-learning-log/" class="">
+      学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/github/" class="">
+      github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/job/" class="">
+      job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/redis/" class="">
+      redis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/security/" class="">
+      security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-44f9701b64ae8bf371ea70118bc45414" class="toggle"  />
+    <label for="section-44f9701b64ae8bf371ea70118bc45414" class="flex">
+      <a role="button" class="">
+        Blog</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/blog/" class="">
+      blog</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/hugo/" class="">
+      Hugo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/cloud/" class="">
+      Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="toggle"  />
+    <label for="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="flex">
+      <a role="button" class="">
+        Front End</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/echarts/" class="">
+      echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/vue/" class="">
+      vue</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-529cbb550ade3cc11293cf67d1d534f0" class="toggle"  />
+    <label for="section-529cbb550ade3cc11293cf67d1d534f0" class="flex">
+      <a role="button" class="">
+        Micro Service</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/nacos/" class="">
+      Nacos</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/micro-service/" class="">
+      micro service</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="toggle"  />
+    <label for="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="flex">
+      <a role="button" class="">
+        Operating System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/ios/" class="">
+      IOS</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/linux/" class="">
+      linux</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/mac/" class="">
+      mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/raspberrypi/" class="">
+      raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/powershell/" class="">
+      powershell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/windows/" class="">
+      windows</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="toggle"  />
+    <label for="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="flex">
+      <a role="button" class="">
+        Software</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/artificial-intelligence/" class="">
+      Artificial Intelligence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6c1b5eb9fa302a23733b5ce342165515" class="toggle"  />
+    <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
+      <a role="button" class="">
+        CI/CD</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/docker/" class="">
+      docker</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/gitlab/" class="">
+      Gitlab</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/jenkins/" class="">
+      Jenkins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/maven/" class="">
+      maven</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/nexus/" class="">
+      Nexus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/orbstack/" class="">
+      OrbStack</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/crawler/" class="">
+      crawler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/git/" class="">
+      git</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/networking/" class="">
+      networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/python/" class="">
+      Python</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/reddison/" class="">
+      reddison</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/vim/" class="">
+      vim</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
+      系统设计</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
+      运维</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3b7129f485a86f816ed70cb52a2a5843" class="toggle"  />
+    <label for="section-3b7129f485a86f816ed70cb52a2a5843" class="flex">
+      <a role="button" class="">
+        History</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/history/chinese-history/" class="">
+      Chinese History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-27743f5ad758a53b0d2d97b463de9ca0" class="toggle"  />
+    <label for="section-27743f5ad758a53b0d2d97b463de9ca0" class="flex">
+      <a role="button" class="">
+        Others</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/about-me/" class="">
+      about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/english-learning/" class="">
+      English Learning</a>
+  
+
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/economy/" class="">
+      Economy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/f1/" class="">
+      F1</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7cf7927dd7be57fd9ac871554e5eab30" class="toggle"  />
+    <label for="section-7cf7927dd7be57fd9ac871554e5eab30" class="flex">
+      <a role="button" class="">
+        Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/science/biology/" class="">
+      biology</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c86d83c6ab9662a5734c7c938687f51c" class="toggle"  />
+    <label for="section-c86d83c6ab9662a5734c7c938687f51c" class="flex">
+      <a role="button" class="">
+        Sports</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/table-tennis/" class="">
+      table tennis</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a7716b8c5e1ddba36a22182d4f60014c" class="toggle"  />
+    <label for="section-a7716b8c5e1ddba36a22182d4f60014c" class="flex">
+      <a role="button" class="">
+        Wl Public</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6fc9a7b0dd6392ef81e392a65430999b" class="toggle"  />
+    <label for="section-6fc9a7b0dd6392ef81e392a65430999b" class="flex">
+      <a role="button" class="">
+        Books</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-06aae5e89825d313a1291f1996bfc76d" class="toggle"  />
+    <label for="section-06aae5e89825d313a1291f1996bfc76d" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
+      Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+      Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
+      Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
+      Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
+      一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
+      宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
+      英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="toggle"  />
+    <label for="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/tools/obsidian/" class="">
+      obsidian</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>java basic</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#java-basic">java basic</a>
+      <ul>
+        <li><a href="#mess">mess</a>
+          <ul>
+            <li><a href="#八大数据类型">八大数据类型</a></li>
+            <li><a href="#transient-关键字的作用是什么">transient 关键字的作用是什么？</a></li>
+            <li><a href="#什么是深拷贝什么是浅拷贝">什么是深拷贝？什么是浅拷贝？</a></li>
+          </ul>
+        </li>
+        <li><a href="#string">String</a>
+          <ul>
+            <li><a href="#equals与--区别">equals与 == 区别</a></li>
+            <li><a href="#stringbuilder-stringbuffer区别">StringBuilder StringBuffer区别</a></li>
+            <li><a href="#stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？</a></li>
+            <li><a href="#stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的</a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap">HashMap</a>
+          <ul>
+            <li><a href="#hashmap底层的数据结构是怎样的">HashMap底层的数据结构是怎样的？</a></li>
+            <li><a href="#hashmap-是否线程安全如何保证线程安全">HashMap 是否线程安全，如何保证线程安全</a></li>
+            <li><a href="#hashmap-get-时间复杂度">HashMap get 时间复杂度</a></li>
+            <li><a href="#hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？</a></li>
+          </ul>
+        </li>
+        <li><a href="#list">List</a>
+          <ul>
+            <li><a href="#collection-和-collections-有什么区别">Collection 和 Collections 有什么区别？</a></li>
+          </ul>
+        </li>
+        <li><a href="#linkedlist-删除时间复杂度">LinkedList 删除时间复杂度</a></li>
+        <li><a href="#函数式编程">函数式编程</a>
+          <ul>
+            <li><a href="#java的函数式编程包含哪些内容">java的函数式编程包含哪些内容？</a></li>
+          </ul>
+        </li>
+        <li><a href="#io">I/O</a>
+          <ul>
+            <li><a href="#网络io分为哪几种">网络io分为哪几种</a></li>
+            <li><a href="#java支持的io模型">Java支持的IO模型</a></li>
+            <li><a href="#stream-结构">stream 结构</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="java-basic">java basic<a class="anchor" href="#java-basic">#</a></h1>
+<h2 id="mess">mess<a class="anchor" href="#mess">#</a></h2>
+<h3 id="八大数据类型">八大数据类型<a class="anchor" href="#%e5%85%ab%e5%a4%a7%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b">#</a></h3>
+<ul>
+<li><code>byte</code></li>
+<li><code>char</code></li>
+<li><code>boolean</code></li>
+<li><code>short</code></li>
+<li><code>int</code></li>
+<li><code>long</code></li>
+<li><code>float</code></li>
+<li><code>double</code></li>
+</ul>
+<h3 id="transient-关键字的作用是什么">transient 关键字的作用是什么？<a class="anchor" href="#transient-%e5%85%b3%e9%94%ae%e5%ad%97%e7%9a%84%e4%bd%9c%e7%94%a8%e6%98%af%e4%bb%80%e4%b9%88">#</a></h3>
+<ul>
+<li>在一个类中如果变量被 transient 关键字修饰，在对类的对象进行序列化的时候就会忽略这个变量</li>
+</ul>
+<h3 id="什么是深拷贝什么是浅拷贝">什么是深拷贝？什么是浅拷贝？<a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af%e6%b7%b1%e6%8b%b7%e8%b4%9d%e4%bb%80%e4%b9%88%e6%98%af%e6%b5%85%e6%8b%b7%e8%b4%9d">#</a></h3>
+<ul>
+<li>深拷贝：递归地复制对象及其所有嵌套的子对象，生成一个完全独立的新对象。两个对象之间不共享引用</li>
+<li>浅拷贝：创建一个新的对象，但只复制对象的最外层属性的引用</li>
+</ul>
+<h2 id="string">String<a class="anchor" href="#string">#</a></h2>
+<h3 id="equals与--区别">equals与 == 区别<a class="anchor" href="#equals%e4%b8%8e--%e5%8c%ba%e5%88%ab">#</a></h3>
+<ul>
+<li><code>equals</code> 比较的是两个字符串的内容是否是相等的</li>
+<li><code>==</code> 比较的是两个变量指向的引用是否是相等的</li>
+</ul>
+<h3 id="stringbuilder-stringbuffer区别">StringBuilder StringBuffer区别<a class="anchor" href="#stringbuilder-stringbuffer%e5%8c%ba%e5%88%ab">#</a></h3>
+<ul>
+<li>StringBuilder 线程不安全</li>
+<li>StringBuffer 线程安全</li>
+</ul>
+<h3 id="stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？<a class="anchor" href="#stringbuffer-%e6%98%af%e6%80%8e%e4%b9%88%e4%bf%9d%e8%af%81%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e7%9a%84">#</a></h3>
+<ul>
+<li>对字符串操作的方法都通过 synchronized 关键字修饰，保证线程安全</li>
+</ul>
+<h3 id="stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的<a class="anchor" href="#stringbuffer-%e5%92%8c-stringbuilder-%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%9c%a8%e5%ba%95%e5%b1%82%e6%98%af%e4%bb%a5%e4%bb%80%e4%b9%88%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e4%bf%9d%e5%ad%98%e7%9a%84">#</a></h3>
+<ul>
+<li>两个类都继承子 <code>AbstractStringBuilder</code> 均使用 <code>char[] value</code> 保存字符串数据</li>
+</ul>
+<h2 id="hashmap">HashMap<a class="anchor" href="#hashmap">#</a></h2>
+<h3 id="hashmap底层的数据结构是怎样的">HashMap底层的数据结构是怎样的？<a class="anchor" href="#hashmap%e5%ba%95%e5%b1%82%e7%9a%84%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e6%98%af%e6%80%8e%e6%a0%b7%e7%9a%84">#</a></h3>
+<ul>
+<li>java 1.8 之前 数组 + 链表</li>
+<li>java 1.8 之后 数组 + 链表/红黑树</li>
+</ul>
+<h3 id="hashmap-是否线程安全如何保证线程安全">HashMap 是否线程安全，如何保证线程安全<a class="anchor" href="#hashmap-%e6%98%af%e5%90%a6%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e5%a6%82%e4%bd%95%e4%bf%9d%e8%af%81%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8">#</a></h3>
+<ul>
+<li>不是线程安全的</li>
+<li>如何保证线程安全
+<ul>
+<li>Collections.synchronizedMap()</li>
+<li>ConcurrentHashMap</li>
+<li>读写锁 ReadWriteLock</li>
+<li>局部使用 HashMap</li>
+<li>初始化写，后续只读</li>
+</ul>
+</li>
+</ul>
+<h3 id="hashmap-get-时间复杂度">HashMap get 时间复杂度<a class="anchor" href="#hashmap-get-%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6">#</a></h3>
+<ul>
+<li>最好的情况是O(1)</li>
+<li>若发生哈希碰撞，对应到桶之后还需要查询链表或红黑树，时间复杂度下降到O(N)或O(logN)</li>
+</ul>
+<h3 id="hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？<a class="anchor" href="#hashmap-%e5%92%8c-hashtable-%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab">#</a></h3>
+<ul>
+<li>线程安全性
+<ul>
+<li>HashMap是线程不安全的，HashTable是线程安全的</li>
+</ul>
+</li>
+<li>对空值的支持
+<ul>
+<li>HashMap的key和value都支持空值，HashTable不支持key或value为空值</li>
+</ul>
+</li>
+</ul>
+<h2 id="list">List<a class="anchor" href="#list">#</a></h2>
+<h3 id="collection-和-collections-有什么区别">Collection 和 Collections 有什么区别？<a class="anchor" href="#collection-%e5%92%8c-collections-%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab">#</a></h3>
+<ul>
+<li>Collection 是集合类的一个接口</li>
+<li>Collections 是集合的一个工具类</li>
+</ul>
+<h2 id="linkedlist-删除时间复杂度">LinkedList 删除时间复杂度<a class="anchor" href="#linkedlist-%e5%88%a0%e9%99%a4%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6">#</a></h2>
+<ul>
+<li>删除头和尾的时间复杂度为O(1)，因为在LinkedList中维护了头和尾2个指针</li>
+<li>其他位置的时间复杂度为O(n)</li>
+</ul>
+<h2 id="函数式编程">函数式编程<a class="anchor" href="#%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b">#</a></h2>
+<h3 id="java的函数式编程包含哪些内容">java的函数式编程包含哪些内容？<a class="anchor" href="#java%e7%9a%84%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b%e5%8c%85%e5%90%ab%e5%93%aa%e4%ba%9b%e5%86%85%e5%ae%b9">#</a></h3>
+<ul>
+<li>java的函数式编程的概念中将只包含一个方法的接口称为函数式接口，可以通过Lambda表达式简化匿名类的定义</li>
+<li>提供流操作了API，可以将集合的迭代操作变为链式操作，提供了并行处理集合的方法</li>
+<li>提供了Optional类用来处理空指针的情况</li>
+</ul>
+<h2 id="io">I/O<a class="anchor" href="#io">#</a></h2>
+<h3 id="网络io分为哪几种">网络io分为哪几种<a class="anchor" href="#%e7%bd%91%e7%bb%9cio%e5%88%86%e4%b8%ba%e5%93%aa%e5%87%a0%e7%a7%8d">#</a></h3>
+<p>网络 I/O 模型主要分为以下五种：</p>
+<ul>
+<li><strong>阻塞 I/O（Blocking I/O, BIO）</strong>
+<ul>
+<li><strong>特点</strong>：用户线程在发起 I/O 操作后，如果数据未准备好，会一直阻塞等待，直到数据就绪并完成拷贝。</li>
+<li><strong>优点</strong>：实现简单，适合连接数少、并发度低的场景。</li>
+<li><strong>缺点</strong>：每个连接需要一个线程处理，线程开销大，不适合高并发场景。</li>
+</ul>
+</li>
+<li><strong>非阻塞 I/O（Non-blocking I/O, NIO）</strong>
+<ul>
+<li><strong>特点</strong>：用户线程发起 I/O 操作后，如果数据未准备好，会立即返回错误码，线程通过轮询不断检查数据是否就绪。</li>
+<li><strong>优点</strong>：一个线程可以处理多个连接，减少了线程阻塞。</li>
+<li><strong>缺点</strong>：频繁的系统调用和轮询会导致 CPU 资源浪费。</li>
+</ul>
+</li>
+<li><strong>I/O 多路复用（I/O Multiplexing）</strong>
+<ul>
+<li><strong>特点</strong>：使用单个线程监听多个文件描述符（如 socket），当某个描述符就绪时，通知用户线程进行处理。常见的实现有 <code>select</code>、<code>poll</code> 和 <code>epoll</code>。</li>
+<li><strong>优点</strong>：适合高并发场景，减少线程数量和系统开销。</li>
+<li><strong>缺点</strong>：数据拷贝阶段仍然是阻塞的，且实现复杂度较高。</li>
+</ul>
+</li>
+<li><strong>信号驱动 I/O（Signal-driven I/O）</strong>
+<ul>
+<li><strong>特点</strong>：用户线程发起 I/O 操作后，内核通过信号通知用户线程数据已就绪。</li>
+<li><strong>优点</strong>：避免了轮询，减少 CPU 资源浪费。</li>
+<li><strong>缺点</strong>：信号处理复杂，且信号队列可能溢出。</li>
+</ul>
+</li>
+<li><strong>异步 I/O（Asynchronous I/O, AIO）</strong>
+<ul>
+<li><strong>特点</strong>：用户线程发起 I/O 操作后立即返回，内核在数据准备和拷贝完成后通知用户线程。</li>
+<li><strong>优点</strong>：完全非阻塞，适合高性能场景。</li>
+<li><strong>缺点</strong>：实现复杂，且并非所有系统都支持。</li>
+</ul>
+</li>
+</ul>
+<blockquote class="book-hint info">
+<p><strong>Reference</strong><br>
+所以当发生一次网络请求时，将会按顺序经历“等待数据从远程主机到达缓冲区”和“将数据从缓冲区复制到应用程序地址空间”两个阶段</p>
+<p>根据实现这两个阶段的不同方法，人们把网络I/O模型总结为两类、五种模型：两类是指同步I/O与异步I/O，五种是指在同步I/O中又划分出阻塞I/O、非阻塞I/O、多路复用I/O、信号驱动I/O四种细分模型以及异步I/O模型</p>
+<p>异步I/O(Asynchronous I/O)：比如你在美团外卖订了个盒饭，付款之后你自己该干嘛干嘛，饭送到时骑手自然会打电话通知你。异步I/O中数据到达缓冲区后，不需要由调用进程主动进行从缓冲区复制数据的操作，而是复制完成后由操作系统向线程发送信号，所以它一定是非阻塞的。</p>
+<p>阻塞I/O(Blocking I/O)：你去饭堂打饭，发现饭还没做好，只能等待（线程休眠），直到饭做好，这就是被阻塞了。阻塞I/O是最直观的I/O模型，逻辑清晰，也比较节省CPU资源，但缺点是线程休眠所带来的上下文切换，这是一种需要切换到内核态的重负载操作，不应当频繁进行。</p>
+<p>非阻塞I/O(Non-Blocking I/O)：你去饭堂，发现饭还没做好，你就回去了，然后每隔3分钟来一次饭堂看饭是否做好，一直重复，直到饭做好。非阻塞I/O能够避免线程休眠，对于一些很快就能返回结果的请求，非阻塞I/O可以节省切换上下文切换的消耗，但是对于较长时间才能返回的请求，非阻塞I/O反而白白浪费了CPU资源，所以目前并不太常用。</p>
+<p>多路复用I/O(Multiplexing I/O)：多路复用I/O本质上是阻塞I/O的一种，但是它的好处是可以在同一条阻塞线程上处理多个不同端口的监听。仍以去食堂打饭为例，比如你代表整个宿舍去饭堂打饭，去到饭堂，发现饭还没做好，还是继续等待，其中某个舍友的饭好了，你就马上把那份饭送回去，然后继续等待其他舍友的饭做好。多路复用I/O是目前高并发网络应用的主流，它还可以细分为select、epoll、kqueue等不同实现，这里就不再展开了。</p>
+<p>信号驱动I/O(Signal-Driven I/O)：你去到饭堂，发现饭还没做好，但你跟厨师很熟，跟他说饭做好了叫你，然后你就回去了，等收到厨师通知后，你再去饭堂把饭拿回宿舍。这里厨师的通知就是那个“信号”，<strong>信号驱动I/O与异步I/O的区别是“从缓冲区获取数据”这个步骤的处理，前者收到的通知是可以开始进行复制操作了，即要你自己从饭堂拿回宿舍，在复制完成之前线程处于阻塞状态，所以它仍属于同步I/O操作，而后者收到的通知是复制操作已经完成，即外卖小哥已经把饭送到了。</strong></p>
+<p>显然，异步I/O模型是最方便的，但前提是系统支持异步操作。异步I/O受限于操作系统，Windows NT内核早在3.5以后，就通过IOCP实现了真正的异步I/O模型。而Linux系统是在Linux Kernel 2.6才首次引入，目前还不算很完善，因此在Linux系统下实现高并发网络编程时仍以多路复用I/O模型模式为主。</p>
+<p>《凤凰架构》 7.2.2 网络I/O 模型</p>
+</blockquote>
+<h3 id="java支持的io模型">Java支持的IO模型<a class="anchor" href="#java%e6%94%af%e6%8c%81%e7%9a%84io%e6%a8%a1%e5%9e%8b">#</a></h3>
+<ul>
+<li><strong>阻塞 I/O（Blocking I/O, BIO）</strong>
+<ul>
+<li><strong>特点</strong>：线程在发起 I/O 操作后会被阻塞，直到数据准备就绪并完成拷贝。</li>
+<li><strong>实现</strong>：Java 的传统 I/O 模型，位于 <code>java.io</code> 包下，如 <code>FileInputStream</code>、<code>FileOutputStream</code> 等。</li>
+<li><strong>适用场景</strong>：适合连接数较少、并发度低的场景。</li>
+<li><strong>缺点</strong>：每个连接需要一个线程处理，线程开销大，不适合高并发。</li>
+</ul>
+</li>
+<li><strong>非阻塞 I/O（Non-blocking I/O, NIO）</strong>
+<ul>
+<li><strong>特点</strong>：线程在发起 I/O 操作后不会被阻塞，可以立即返回并继续执行其他任务。</li>
+<li><strong>实现</strong>：Java 1.4 引入的新 I/O 模型，位于 <code>java.nio</code> 包下，如 <code>ByteBuffer</code>、<code>FileChannel</code>、<code>SocketChannel</code> 等。</li>
+<li><strong>适用场景</strong>：适合高并发场景，一个线程可以处理多个连接。</li>
+<li><strong>缺点</strong>：需要复杂的调度和管理。</li>
+</ul>
+</li>
+<li><strong>异步 I/O（Asynchronous I/O, AIO）</strong>
+<ul>
+<li><strong>特点</strong>：线程发起 I/O 操作后立即返回，内核在数据准备和拷贝完成后通知线程。</li>
+<li><strong>实现</strong>：Java 7 引入的异步 I/O 模型，位于 <code>java.nio.channels</code> 包下，如 <code>AsynchronousFileChannel</code>、<code>AsynchronousSocketChannel</code> 等。</li>
+<li><strong>适用场景</strong>：适合高性能、高并发的场景。</li>
+<li><strong>缺点</strong>：实现复杂，且并非所有系统都支持。</li>
+</ul>
+</li>
+</ul>
+<h3 id="stream-结构">stream 结构<a class="anchor" href="#stream-%e7%bb%93%e6%9e%84">#</a></h3>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Spring Cloud Alibaba</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/post/computer-science/java/spring/spring/" class="flex align-center">
+        <span>spring</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+  <div class="book-copyright flex justify-center">
+    <small>Penruins - <a href="/">Main Page</a></small>
+  </div>
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#java-basic">java basic</a>
+      <ul>
+        <li><a href="#mess">mess</a>
+          <ul>
+            <li><a href="#八大数据类型">八大数据类型</a></li>
+            <li><a href="#transient-关键字的作用是什么">transient 关键字的作用是什么？</a></li>
+            <li><a href="#什么是深拷贝什么是浅拷贝">什么是深拷贝？什么是浅拷贝？</a></li>
+          </ul>
+        </li>
+        <li><a href="#string">String</a>
+          <ul>
+            <li><a href="#equals与--区别">equals与 == 区别</a></li>
+            <li><a href="#stringbuilder-stringbuffer区别">StringBuilder StringBuffer区别</a></li>
+            <li><a href="#stringbuffer-是怎么保证线程安全的">StringBuffer 是怎么保证线程安全的？</a></li>
+            <li><a href="#stringbuffer-和-stringbuilder-字符串在底层是以什么数据结构保存的">StringBuffer 和 StringBuilder 字符串在底层是以什么数据结构保存的</a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap">HashMap</a>
+          <ul>
+            <li><a href="#hashmap底层的数据结构是怎样的">HashMap底层的数据结构是怎样的？</a></li>
+            <li><a href="#hashmap-是否线程安全如何保证线程安全">HashMap 是否线程安全，如何保证线程安全</a></li>
+            <li><a href="#hashmap-get-时间复杂度">HashMap get 时间复杂度</a></li>
+            <li><a href="#hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？</a></li>
+          </ul>
+        </li>
+        <li><a href="#list">List</a>
+          <ul>
+            <li><a href="#collection-和-collections-有什么区别">Collection 和 Collections 有什么区别？</a></li>
+          </ul>
+        </li>
+        <li><a href="#linkedlist-删除时间复杂度">LinkedList 删除时间复杂度</a></li>
+        <li><a href="#函数式编程">函数式编程</a>
+          <ul>
+            <li><a href="#java的函数式编程包含哪些内容">java的函数式编程包含哪些内容？</a></li>
+          </ul>
+        </li>
+        <li><a href="#io">I/O</a>
+          <ul>
+            <li><a href="#网络io分为哪几种">网络io分为哪几种</a></li>
+            <li><a href="#java支持的io模型">Java支持的IO模型</a></li>
+            <li><a href="#stream-结构">stream 结构</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,2537 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="不同消息队列消息写入方式对比# 以下是主流消息队列（Kafka、RocketMQ、RabbitMQ、Pulsar、ActiveMQ）在消息写入方式上的对比，结合性能、可靠性和适用场景进行综合分析：
+1. Kafka# 写入方式： 顺序追加写入：消息以追加（Append-only）方式写入分区日志文件，利用磁盘顺序I/O的高性能特性11528。 批量发送：生产者（Producer）将消息累积到批次（如1MB或100ms阈值）后批量发送，减少网络和磁盘I/O次数28。 异步刷盘：默认异步刷盘（依赖页缓存），通过参数可配置同步刷盘（牺牲性能换可靠性）28。 特点： 高吞吐（10万级/秒），适合日志、大数据场景115。 不支持延迟消息，仅保证分区内有序1628。 2. RocketMQ# 写入方式： 顺序写&#43;索引：消息追加到CommitLog文件（顺序写），同时构建索引文件（ConsumeQueue）加速查询42。 同步/异步刷盘：支持同步刷盘（强一致性）和异步刷盘（高性能）4243。 事务消息：通过“半消息”机制实现分布式事务，先暂存消息，本地事务提交后再确认写入42。 特点： 兼顾高吞吐（10万级/秒）和功能完备性（延迟消息、事务支持）1628。 适合电商、金融等业务场景142。 3. RabbitMQ# 写入方式： 内存&#43;磁盘混合：默认优先写入内存，通过持久化队列（Durable Queue）将消息同步到磁盘128。 Exchange路由：消息通过Exchange根据路由规则（Direct/Topic/Fanout）分发到队列116。 特点： 实时性高（微秒级延迟），但吞吐量较低（万级/秒）28。 支持复杂路由和消息确认机制，适合中小规模业务116。 4. Pulsar# 写入方式： 分层存储：消息先写入Broker的内存层，再异步持久化到BookKeeper集群（计算与存储分离）116。 分片（Segment）存储：Topic分区划分为Segment，分散存储提高扩展性1。 特点： 支持秒级延迟消息和多租户，适合云原生和异地容灾场景116。 吞吐量接近Kafka，但架构更复杂1。 5. ActiveMQ# 写入方式： 内存/KahaDB/JDBC：默认KahaDB（基于日志的存储），支持JDBC持久化到数据库。 同步刷盘可选：通过配置选择是否同步刷盘。 特点： 功能全面但吞吐量最低（万级/秒），适合传统企业应用28。 社区活跃度低，逐渐被替代28。 对比总结# 特性 Kafka RocketMQ RabbitMQ Pulsar ActiveMQ 写入性能 最高（顺序I/O&#43;批量） 高（顺序写&#43;索引） 低（内存优先） 高（分层存储） 最低 可靠性 异步刷盘可能丢数据 支持同步刷盘 依赖持久化配置 高（BookKeeper） 依赖配置 延迟消息 不支持 支持 支持（插件） 支持秒级 支持 适用场景 日志/大数据 电商/金融 中小规模业务 云原生/异地容灾 传统企业应用 参考资料：115162842
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/llm/2025-03-30-4-%E4%B8%8D%E5%90%8C%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%B6%88%E6%81%AF%E5%86%99%E5%85%A5%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="不同消息队列消息写入方式对比">
+  <meta property="og:description" content="不同消息队列消息写入方式对比# 以下是主流消息队列（Kafka、RocketMQ、RabbitMQ、Pulsar、ActiveMQ）在消息写入方式上的对比，结合性能、可靠性和适用场景进行综合分析：
+1. Kafka# 写入方式： 顺序追加写入：消息以追加（Append-only）方式写入分区日志文件，利用磁盘顺序I/O的高性能特性11528。 批量发送：生产者（Producer）将消息累积到批次（如1MB或100ms阈值）后批量发送，减少网络和磁盘I/O次数28。 异步刷盘：默认异步刷盘（依赖页缓存），通过参数可配置同步刷盘（牺牲性能换可靠性）28。 特点： 高吞吐（10万级/秒），适合日志、大数据场景115。 不支持延迟消息，仅保证分区内有序1628。 2. RocketMQ# 写入方式： 顺序写&#43;索引：消息追加到CommitLog文件（顺序写），同时构建索引文件（ConsumeQueue）加速查询42。 同步/异步刷盘：支持同步刷盘（强一致性）和异步刷盘（高性能）4243。 事务消息：通过“半消息”机制实现分布式事务，先暂存消息，本地事务提交后再确认写入42。 特点： 兼顾高吞吐（10万级/秒）和功能完备性（延迟消息、事务支持）1628。 适合电商、金融等业务场景142。 3. RabbitMQ# 写入方式： 内存&#43;磁盘混合：默认优先写入内存，通过持久化队列（Durable Queue）将消息同步到磁盘128。 Exchange路由：消息通过Exchange根据路由规则（Direct/Topic/Fanout）分发到队列116。 特点： 实时性高（微秒级延迟），但吞吐量较低（万级/秒）28。 支持复杂路由和消息确认机制，适合中小规模业务116。 4. Pulsar# 写入方式： 分层存储：消息先写入Broker的内存层，再异步持久化到BookKeeper集群（计算与存储分离）116。 分片（Segment）存储：Topic分区划分为Segment，分散存储提高扩展性1。 特点： 支持秒级延迟消息和多租户，适合云原生和异地容灾场景116。 吞吐量接近Kafka，但架构更复杂1。 5. ActiveMQ# 写入方式： 内存/KahaDB/JDBC：默认KahaDB（基于日志的存储），支持JDBC持久化到数据库。 同步刷盘可选：通过配置选择是否同步刷盘。 特点： 功能全面但吞吐量最低（万级/秒），适合传统企业应用28。 社区活跃度低，逐渐被替代28。 对比总结# 特性 Kafka RocketMQ RabbitMQ Pulsar ActiveMQ 写入性能 最高（顺序I/O&#43;批量） 高（顺序写&#43;索引） 低（内存优先） 高（分层存储） 最低 可靠性 异步刷盘可能丢数据 支持同步刷盘 依赖持久化配置 高（BookKeeper） 依赖配置 延迟消息 不支持 支持 支持（插件） 支持秒级 支持 适用场景 日志/大数据 电商/金融 中小规模业务 云原生/异地容灾 传统企业应用 参考资料：115162842">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+
+
+  <meta itemprop="name" content="不同消息队列消息写入方式对比">
+  <meta itemprop="description" content="不同消息队列消息写入方式对比# 以下是主流消息队列（Kafka、RocketMQ、RabbitMQ、Pulsar、ActiveMQ）在消息写入方式上的对比，结合性能、可靠性和适用场景进行综合分析：
+1. Kafka# 写入方式： 顺序追加写入：消息以追加（Append-only）方式写入分区日志文件，利用磁盘顺序I/O的高性能特性11528。 批量发送：生产者（Producer）将消息累积到批次（如1MB或100ms阈值）后批量发送，减少网络和磁盘I/O次数28。 异步刷盘：默认异步刷盘（依赖页缓存），通过参数可配置同步刷盘（牺牲性能换可靠性）28。 特点： 高吞吐（10万级/秒），适合日志、大数据场景115。 不支持延迟消息，仅保证分区内有序1628。 2. RocketMQ# 写入方式： 顺序写&#43;索引：消息追加到CommitLog文件（顺序写），同时构建索引文件（ConsumeQueue）加速查询42。 同步/异步刷盘：支持同步刷盘（强一致性）和异步刷盘（高性能）4243。 事务消息：通过“半消息”机制实现分布式事务，先暂存消息，本地事务提交后再确认写入42。 特点： 兼顾高吞吐（10万级/秒）和功能完备性（延迟消息、事务支持）1628。 适合电商、金融等业务场景142。 3. RabbitMQ# 写入方式： 内存&#43;磁盘混合：默认优先写入内存，通过持久化队列（Durable Queue）将消息同步到磁盘128。 Exchange路由：消息通过Exchange根据路由规则（Direct/Topic/Fanout）分发到队列116。 特点： 实时性高（微秒级延迟），但吞吐量较低（万级/秒）28。 支持复杂路由和消息确认机制，适合中小规模业务116。 4. Pulsar# 写入方式： 分层存储：消息先写入Broker的内存层，再异步持久化到BookKeeper集群（计算与存储分离）116。 分片（Segment）存储：Topic分区划分为Segment，分散存储提高扩展性1。 特点： 支持秒级延迟消息和多租户，适合云原生和异地容灾场景116。 吞吐量接近Kafka，但架构更复杂1。 5. ActiveMQ# 写入方式： 内存/KahaDB/JDBC：默认KahaDB（基于日志的存储），支持JDBC持久化到数据库。 同步刷盘可选：通过配置选择是否同步刷盘。 特点： 功能全面但吞吐量最低（万级/秒），适合传统企业应用28。 社区活跃度低，逐渐被替代28。 对比总结# 特性 Kafka RocketMQ RabbitMQ Pulsar ActiveMQ 写入性能 最高（顺序I/O&#43;批量） 高（顺序写&#43;索引） 低（内存优先） 高（分层存储） 最低 可靠性 异步刷盘可能丢数据 支持同步刷盘 依赖持久化配置 高（BookKeeper） 依赖配置 延迟消息 不支持 支持 支持（插件） 支持秒级 支持 适用场景 日志/大数据 电商/金融 中小规模业务 云原生/异地容灾 传统企业应用 参考资料：115162842">
+  <meta itemprop="wordCount" content="77">
+
+<title>不同消息队列消息写入方式对比 | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/post/computer-science/llm/2025-03-30-4-%E4%B8%8D%E5%90%8C%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%B6%88%E6%81%AF%E5%86%99%E5%85%A5%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94/">
+<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.1e4254d6ef5c3d4b931350d3ad5355ea88c400709582577a866d1cb5f2a8f4f5.js" ></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-post">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d673e25af27f33796c279e3a05cc634f" class="toggle"  />
+    <label for="section-d673e25af27f33796c279e3a05cc634f" class="flex">
+      <a role="button" class="">
+        Life</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/books/" class="">
+      books</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
+      摘抄分享</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%96%B0%E7%9F%A5/" class="">
+      新知</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/movies-log/" class="">
+      观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/bilibili/" class="">
+      bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/hiking/" class="">
+      hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life/" class="">
+      life</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life-recommend/" class="">
+      life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/learning-others-log/" class="">
+      other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/podcast/" class="">
+      podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/politics/" class="">
+      politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/goal/" class="">
+      goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/coffee/" class="">
+      coffee</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/article/" class="">
+      article</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/law/" class="">
+      law</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-history/" class="">
+      my history</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-timeline/" class="">
+      My Timeline</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e52270c7d6707875ea89b3ec9b091983" class="toggle" checked />
+    <label for="section-e52270c7d6707875ea89b3ec9b091983" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science/" class="">
+      computer science</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f834cb9837867b0fca71e863c9ed2d28" class="toggle"  />
+    <label for="section-f834cb9837867b0fca71e863c9ed2d28" class="flex">
+      <a role="button" class="">
+        Algorithm</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm/" class="">
+      Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
+      algorithm practice 剑指 offer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
+      剑指offer题目对应</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
+      面试经典 150 题</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-12ae84c3ad3679302ffec2ab120d7fb0" class="toggle"  />
+    <label for="section-12ae84c3ad3679302ffec2ab120d7fb0" class="flex">
+      <a role="button" class="">
+        Big Data</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hadoop/" class="">
+      hadoop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hbase/" class="">
+      hbase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hive/" class="">
+      hive</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-256c0c0348e7dc55386785c98f7fa516" class="toggle"  />
+    <label for="section-256c0c0348e7dc55386785c98f7fa516" class="flex">
+      <a role="button" class="">
+        Database</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/database/" class="">
+      database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/druid/" class="">
+      druid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/elasticsearch/" class="">
+      elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mycat/" class="">
+      mycat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mysql/" class="">
+      mysql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/postgresql/" class="">
+      postgresql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/shardingsphere/" class="">
+      shardingsphere</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/sql/" class="">
+      SQL</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mongodb/" class="">
+      Penruins</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="toggle"  />
+    <label for="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="flex">
+      <a role="button" class="">
+        Distributed System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-98c822a4c30374b08c20bbb746ca28ff" class="toggle"  />
+    <label for="section-98c822a4c30374b08c20bbb746ca28ff" class="flex">
+      <a role="button" class="">
+        Message Queue</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/kafka/" class="">
+      kafka</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/message-queue/" class="">
+      Message Queue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
+      rabbitmq</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/distributed-system/" class="">
+      distributed system</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/sentinel/" class="">
+      Sentinel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud/" class="">
+      Spring Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
+      Spring Cloud Alibaba</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-184fcde54f4fb8e56ff1923eee779551" class="toggle"  />
+    <label for="section-184fcde54f4fb8e56ff1923eee779551" class="flex">
+      <a role="button" class="">
+        Java</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-basic/" class="">
+      java basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6355ae1f9fa9f60a52445009b471b5e2" class="toggle"  />
+    <label for="section-6355ae1f9fa9f60a52445009b471b5e2" class="flex">
+      <a role="button" class="">
+        Spring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring/" class="">
+      spring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/springboot/" class="">
+      spring boot</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-boot-validation/" class="">
+      spring boot validation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-transaction/" class="">
+      spring transaction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/unit-test/" class="">
+      unit test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java/" class="">
+      java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jvm/" class="">
+      jvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis/" class="">
+      Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis-plus/" class="">
+      Mybatis Plus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/xxl-job/" class="">
+      xxl job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/concurrent/" class="">
+      concurrent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jackson/" class="">
+      jackson</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-hashmap/" class="">
+      java HashMap</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-utils/" class="">
+      Java Utils</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
+      java 密码学</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/map/" class="">
+      map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-51f600e6ef5b531bcd84ecd789276516" class="toggle"  />
+    <label for="section-51f600e6ef5b531bcd84ecd789276516" class="flex">
+      <a role="button" class="">
+        Monitor</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/monitor/prometheus/" class="">
+      prometheus</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b11c61a955da170f736b6dbde7b6e083" class="toggle"  />
+    <label for="section-b11c61a955da170f736b6dbde7b6e083" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/tools/idea/" class="">
+      IDEA</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-recommend/" class="">
+      推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-learning-log/" class="">
+      学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/github/" class="">
+      github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/job/" class="">
+      job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/redis/" class="">
+      redis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/security/" class="">
+      security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-44f9701b64ae8bf371ea70118bc45414" class="toggle"  />
+    <label for="section-44f9701b64ae8bf371ea70118bc45414" class="flex">
+      <a role="button" class="">
+        Blog</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/blog/" class="">
+      blog</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/hugo/" class="">
+      Hugo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/cloud/" class="">
+      Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="toggle"  />
+    <label for="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="flex">
+      <a role="button" class="">
+        Front End</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/echarts/" class="">
+      echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/vue/" class="">
+      vue</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-529cbb550ade3cc11293cf67d1d534f0" class="toggle"  />
+    <label for="section-529cbb550ade3cc11293cf67d1d534f0" class="flex">
+      <a role="button" class="">
+        Micro Service</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/nacos/" class="">
+      Nacos</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/micro-service/" class="">
+      micro service</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="toggle"  />
+    <label for="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="flex">
+      <a role="button" class="">
+        Operating System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/ios/" class="">
+      IOS</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/linux/" class="">
+      linux</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/mac/" class="">
+      mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/raspberrypi/" class="">
+      raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/powershell/" class="">
+      powershell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/windows/" class="">
+      windows</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="toggle"  />
+    <label for="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="flex">
+      <a role="button" class="">
+        Software</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/artificial-intelligence/" class="">
+      Artificial Intelligence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6c1b5eb9fa302a23733b5ce342165515" class="toggle"  />
+    <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
+      <a role="button" class="">
+        CI/CD</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/docker/" class="">
+      docker</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/gitlab/" class="">
+      Gitlab</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/jenkins/" class="">
+      Jenkins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/maven/" class="">
+      maven</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/nexus/" class="">
+      Nexus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/orbstack/" class="">
+      OrbStack</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/crawler/" class="">
+      crawler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/git/" class="">
+      git</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/networking/" class="">
+      networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/python/" class="">
+      Python</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/reddison/" class="">
+      reddison</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/vim/" class="">
+      vim</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
+      系统设计</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
+      运维</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3b7129f485a86f816ed70cb52a2a5843" class="toggle"  />
+    <label for="section-3b7129f485a86f816ed70cb52a2a5843" class="flex">
+      <a role="button" class="">
+        History</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/history/chinese-history/" class="">
+      Chinese History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-27743f5ad758a53b0d2d97b463de9ca0" class="toggle"  />
+    <label for="section-27743f5ad758a53b0d2d97b463de9ca0" class="flex">
+      <a role="button" class="">
+        Others</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/about-me/" class="">
+      about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/english-learning/" class="">
+      English Learning</a>
+  
+
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/economy/" class="">
+      Economy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/f1/" class="">
+      F1</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7cf7927dd7be57fd9ac871554e5eab30" class="toggle"  />
+    <label for="section-7cf7927dd7be57fd9ac871554e5eab30" class="flex">
+      <a role="button" class="">
+        Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/science/biology/" class="">
+      biology</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c86d83c6ab9662a5734c7c938687f51c" class="toggle"  />
+    <label for="section-c86d83c6ab9662a5734c7c938687f51c" class="flex">
+      <a role="button" class="">
+        Sports</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/table-tennis/" class="">
+      table tennis</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a7716b8c5e1ddba36a22182d4f60014c" class="toggle"  />
+    <label for="section-a7716b8c5e1ddba36a22182d4f60014c" class="flex">
+      <a role="button" class="">
+        Wl Public</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6fc9a7b0dd6392ef81e392a65430999b" class="toggle"  />
+    <label for="section-6fc9a7b0dd6392ef81e392a65430999b" class="flex">
+      <a role="button" class="">
+        Books</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-06aae5e89825d313a1291f1996bfc76d" class="toggle"  />
+    <label for="section-06aae5e89825d313a1291f1996bfc76d" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
+      Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+      Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
+      Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
+      Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
+      一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
+      宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
+      英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="toggle"  />
+    <label for="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/tools/obsidian/" class="">
+      obsidian</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>不同消息队列消息写入方式对比</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#不同消息队列消息写入方式对比">不同消息队列消息写入方式对比</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-kafka">1. <strong>Kafka</strong></a></li>
+            <li><a href="#2-rocketmq">2. <strong>RocketMQ</strong></a></li>
+            <li><a href="#3-rabbitmq">3. <strong>RabbitMQ</strong></a></li>
+            <li><a href="#4-pulsar">4. <strong>Pulsar</strong></a></li>
+            <li><a href="#5-activemq">5. <strong>ActiveMQ</strong></a></li>
+            <li><a href="#对比总结"><strong>对比总结</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="不同消息队列消息写入方式对比">不同消息队列消息写入方式对比<a class="anchor" href="#%e4%b8%8d%e5%90%8c%e6%b6%88%e6%81%af%e9%98%9f%e5%88%97%e6%b6%88%e6%81%af%e5%86%99%e5%85%a5%e6%96%b9%e5%bc%8f%e5%af%b9%e6%af%94">#</a></h1>
+<p>以下是主流消息队列（Kafka、RocketMQ、RabbitMQ、Pulsar、ActiveMQ）在消息写入方式上的对比，结合性能、可靠性和适用场景进行综合分析：</p>
+<hr>
+<h3 id="1-kafka">1. <strong>Kafka</strong><a class="anchor" href="#1-kafka">#</a></h3>
+<ul>
+<li><strong>写入方式</strong>：
+<ul>
+<li><strong>顺序追加写入</strong>：消息以追加（Append-only）方式写入分区日志文件，利用磁盘顺序I/O的高性能特性<a href="@ref">1</a><a href="@ref">15</a><a href="@ref">28</a>。</li>
+<li><strong>批量发送</strong>：生产者（Producer）将消息累积到批次（如1MB或100ms阈值）后批量发送，减少网络和磁盘I/O次数<a href="@ref">28</a>。</li>
+<li><strong>异步刷盘</strong>：默认异步刷盘（依赖页缓存），通过参数可配置同步刷盘（牺牲性能换可靠性）<a href="@ref">28</a>。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>高吞吐（10万级/秒），适合日志、大数据场景<a href="@ref">1</a><a href="@ref">15</a>。</li>
+<li>不支持延迟消息，仅保证分区内有序<a href="@ref">16</a><a href="@ref">28</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-rocketmq">2. <strong>RocketMQ</strong><a class="anchor" href="#2-rocketmq">#</a></h3>
+<ul>
+<li><strong>写入方式</strong>：
+<ul>
+<li><strong>顺序写+索引</strong>：消息追加到CommitLog文件（顺序写），同时构建索引文件（ConsumeQueue）加速查询<a href="@ref">42</a>。</li>
+<li><strong>同步/异步刷盘</strong>：支持同步刷盘（强一致性）和异步刷盘（高性能）<a href="@ref">42</a><a href="@ref">43</a>。</li>
+<li><strong>事务消息</strong>：通过“半消息”机制实现分布式事务，先暂存消息，本地事务提交后再确认写入<a href="@ref">42</a>。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>兼顾高吞吐（10万级/秒）和功能完备性（延迟消息、事务支持）<a href="@ref">16</a><a href="@ref">28</a>。</li>
+<li>适合电商、金融等业务场景<a href="@ref">1</a><a href="@ref">42</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-rabbitmq">3. <strong>RabbitMQ</strong><a class="anchor" href="#3-rabbitmq">#</a></h3>
+<ul>
+<li><strong>写入方式</strong>：
+<ul>
+<li><strong>内存+磁盘混合</strong>：默认优先写入内存，通过持久化队列（Durable Queue）将消息同步到磁盘<a href="@ref">1</a><a href="@ref">28</a>。</li>
+<li><strong>Exchange路由</strong>：消息通过Exchange根据路由规则（Direct/Topic/Fanout）分发到队列<a href="@ref">1</a><a href="@ref">16</a>。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>实时性高（微秒级延迟），但吞吐量较低（万级/秒）<a href="@ref">28</a>。</li>
+<li>支持复杂路由和消息确认机制，适合中小规模业务<a href="@ref">1</a><a href="@ref">16</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="4-pulsar">4. <strong>Pulsar</strong><a class="anchor" href="#4-pulsar">#</a></h3>
+<ul>
+<li><strong>写入方式</strong>：
+<ul>
+<li><strong>分层存储</strong>：消息先写入Broker的内存层，再异步持久化到BookKeeper集群（计算与存储分离）<a href="@ref">1</a><a href="@ref">16</a>。</li>
+<li><strong>分片（Segment）存储</strong>：Topic分区划分为Segment，分散存储提高扩展性<a href="@ref">1</a>。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>支持秒级延迟消息和多租户，适合云原生和异地容灾场景<a href="@ref">1</a><a href="@ref">16</a>。</li>
+<li>吞吐量接近Kafka，但架构更复杂<a href="@ref">1</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-activemq">5. <strong>ActiveMQ</strong><a class="anchor" href="#5-activemq">#</a></h3>
+<ul>
+<li><strong>写入方式</strong>：
+<ul>
+<li><strong>内存/KahaDB/JDBC</strong>：默认KahaDB（基于日志的存储），支持JDBC持久化到数据库。</li>
+<li><strong>同步刷盘可选</strong>：通过配置选择是否同步刷盘。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>功能全面但吞吐量最低（万级/秒），适合传统企业应用<a href="@ref">28</a>。</li>
+<li>社区活跃度低，逐渐被替代<a href="@ref">28</a>。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="对比总结"><strong>对比总结</strong><a class="anchor" href="#%e5%af%b9%e6%af%94%e6%80%bb%e7%bb%93">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>Kafka</th>
+          <th>RocketMQ</th>
+          <th>RabbitMQ</th>
+          <th>Pulsar</th>
+          <th>ActiveMQ</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>写入性能</strong></td>
+          <td>最高（顺序I/O+批量）</td>
+          <td>高（顺序写+索引）</td>
+          <td>低（内存优先）</td>
+          <td>高（分层存储）</td>
+          <td>最低</td>
+      </tr>
+      <tr>
+          <td><strong>可靠性</strong></td>
+          <td>异步刷盘可能丢数据</td>
+          <td>支持同步刷盘</td>
+          <td>依赖持久化配置</td>
+          <td>高（BookKeeper）</td>
+          <td>依赖配置</td>
+      </tr>
+      <tr>
+          <td><strong>延迟消息</strong></td>
+          <td>不支持</td>
+          <td>支持</td>
+          <td>支持（插件）</td>
+          <td>支持秒级</td>
+          <td>支持</td>
+      </tr>
+      <tr>
+          <td><strong>适用场景</strong></td>
+          <td>日志/大数据</td>
+          <td>电商/金融</td>
+          <td>中小规模业务</td>
+          <td>云原生/异地容灾</td>
+          <td>传统企业应用</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>参考资料</strong>：<a href="@ref">1</a><a href="@ref">15</a><a href="@ref">16</a><a href="@ref">28</a><a href="@ref">42</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+  <div class="book-copyright flex justify-center">
+    <small>Penruins - <a href="/">Main Page</a></small>
+  </div>
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#不同消息队列消息写入方式对比">不同消息队列消息写入方式对比</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-kafka">1. <strong>Kafka</strong></a></li>
+            <li><a href="#2-rocketmq">2. <strong>RocketMQ</strong></a></li>
+            <li><a href="#3-rabbitmq">3. <strong>RabbitMQ</strong></a></li>
+            <li><a href="#4-pulsar">4. <strong>Pulsar</strong></a></li>
+            <li><a href="#5-activemq">5. <strong>ActiveMQ</strong></a></li>
+            <li><a href="#对比总结"><strong>对比总结</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

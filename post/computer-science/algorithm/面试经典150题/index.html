@@ -1,0 +1,3306 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="面试经典 150 题# 数组 / 字符串# ✅ 88 合并两个有序数组# ✅ 27 移除元素# ✅ 26 删除有序数组中的重复项# ✅ 80 删除有序数组中的重复项 II# ✅ 169 多数元素# ✅ 189 轮转数组# ✅ 121 买卖股票的最佳时机# 122 买卖股票的最佳时机 II# ✅ 55 跳跃游戏# ✅ 45 跳跃游戏 II# ✅ 274 H 指数# O(1) 时间插入、删除和获取随机元素# 除自身以外数组的乘积# 加油站# 分发糖果# 接雨水# ✅ 13 罗马数字转整数# 整数转罗马数字# ✅ 58 最后一个单词的长度# ✅ 14 最长公共前缀# ✅ 151 反转字符串中的单词# Z 字形变换# ✅ 28 找出字符串中第一个匹配项的下标# 文本左右对齐# 双指针# ✅ 125 验证回文串# ✅ 392 判断子序列# ✅ 167 两数之和 II - 输入有序数组# 盛最多水的容器# 三数之和# 滑动窗口# ✅ 长度最小的子数组# ✅ 无重复字符的最长子串# ✅ 串联所有单词的子串# 最小覆盖子串# 矩阵# ✅ 有效的数独# ✅ 螺旋矩阵# 旋转图像# ✅ 矩阵置零# ✅ 生命游戏# 哈希表# ✅ 383 赎金信# ✅ 205 同构字符串# ✅ 290 单词规律# ✅ 242 有效的字母异位词# ✅ 49 字母异位词分组# ✅ 1 两数之和# ✅ 202 快乐数# ✅ 219 存在重复元素 II# ✅ 128 最长连续序列# 区间# 汇总区间# 合并区间# 插入区间# 用最少数量的箭引爆气球# # 栈# ✅ 20 有效的括号# ✅ 71 简化路径# ✅ 155 最小栈# ✅ 150 逆波兰表达式求值# 基本计算器# 链表# ✅ 141 环形链表# ✅ 2 两数相加# ✅ 21 合并两个有序链表# ✅ 138 随机链表的复制# ✅ 92 反转链表 II# K 个一组翻转链表# ✅ 19 删除链表的倒数第 N 个结点# ✅ 82 删除排序链表中的重复元素 II# ✅ 61 旋转链表# ✅ 86 分隔链表# ✅ 146 LRU 缓存# 二叉树# ✅ 104 二叉树的最大深度# 104. 二叉树的最大深度 ✅ 100 相同的树# 100. 相同的树 ✅ 226 翻转二叉树# 226. 翻转二叉树 ✅ 101 对称二叉树# 101. 对称二叉树 ✅ 105 从前序与中序遍历序列构造二叉树# 105. 从前序与中序遍历序列构造二叉树 ✅ 106 从中序与后序遍历序列构造二叉树# 106. 从中序与后序遍历序列构造二叉树 ✅ 117 填充每个节点的下一个右侧节点指针 II# 117. 填充每个节点的下一个右侧节点指针 II 二叉树展开为链表# ✅ 路径总和# 求根节点到叶节点数字之和# 二叉树中的最大路径和# 二叉搜索树迭代器# 完全二叉树的节点个数# 二叉树的最近公共祖先# 二叉树层次遍历# ✅ 199 二叉树的右视图# 199.二叉树的右视图 ✅ 637 二叉树的层平均值# 637. 二叉树的层平均值 ✅ 二叉树的层序遍历# ✅ 二叉树的锯齿形层序遍历# 103.二叉树的锯齿形层序遍历 ✅ 二叉搜索树# ✅ 二叉搜索树的最小绝对差# ✅ 二叉搜索树中第 K 小的元素# 验证二叉搜索树# 图# ✅ 200 岛屿数量# 200.岛屿数量 被围绕的区域# 克隆图# 除法求值# 课程表# 课程表 II# 图的广度优先搜索# 909 蛇梯棋# 909 蛇梯棋 官方题解
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="面试经典 150 题">
+  <meta property="og:description" content="面试经典 150 题# 数组 / 字符串# ✅ 88 合并两个有序数组# ✅ 27 移除元素# ✅ 26 删除有序数组中的重复项# ✅ 80 删除有序数组中的重复项 II# ✅ 169 多数元素# ✅ 189 轮转数组# ✅ 121 买卖股票的最佳时机# 122 买卖股票的最佳时机 II# ✅ 55 跳跃游戏# ✅ 45 跳跃游戏 II# ✅ 274 H 指数# O(1) 时间插入、删除和获取随机元素# 除自身以外数组的乘积# 加油站# 分发糖果# 接雨水# ✅ 13 罗马数字转整数# 整数转罗马数字# ✅ 58 最后一个单词的长度# ✅ 14 最长公共前缀# ✅ 151 反转字符串中的单词# Z 字形变换# ✅ 28 找出字符串中第一个匹配项的下标# 文本左右对齐# 双指针# ✅ 125 验证回文串# ✅ 392 判断子序列# ✅ 167 两数之和 II - 输入有序数组# 盛最多水的容器# 三数之和# 滑动窗口# ✅ 长度最小的子数组# ✅ 无重复字符的最长子串# ✅ 串联所有单词的子串# 最小覆盖子串# 矩阵# ✅ 有效的数独# ✅ 螺旋矩阵# 旋转图像# ✅ 矩阵置零# ✅ 生命游戏# 哈希表# ✅ 383 赎金信# ✅ 205 同构字符串# ✅ 290 单词规律# ✅ 242 有效的字母异位词# ✅ 49 字母异位词分组# ✅ 1 两数之和# ✅ 202 快乐数# ✅ 219 存在重复元素 II# ✅ 128 最长连续序列# 区间# 汇总区间# 合并区间# 插入区间# 用最少数量的箭引爆气球# # 栈# ✅ 20 有效的括号# ✅ 71 简化路径# ✅ 155 最小栈# ✅ 150 逆波兰表达式求值# 基本计算器# 链表# ✅ 141 环形链表# ✅ 2 两数相加# ✅ 21 合并两个有序链表# ✅ 138 随机链表的复制# ✅ 92 反转链表 II# K 个一组翻转链表# ✅ 19 删除链表的倒数第 N 个结点# ✅ 82 删除排序链表中的重复元素 II# ✅ 61 旋转链表# ✅ 86 分隔链表# ✅ 146 LRU 缓存# 二叉树# ✅ 104 二叉树的最大深度# 104. 二叉树的最大深度 ✅ 100 相同的树# 100. 相同的树 ✅ 226 翻转二叉树# 226. 翻转二叉树 ✅ 101 对称二叉树# 101. 对称二叉树 ✅ 105 从前序与中序遍历序列构造二叉树# 105. 从前序与中序遍历序列构造二叉树 ✅ 106 从中序与后序遍历序列构造二叉树# 106. 从中序与后序遍历序列构造二叉树 ✅ 117 填充每个节点的下一个右侧节点指针 II# 117. 填充每个节点的下一个右侧节点指针 II 二叉树展开为链表# ✅ 路径总和# 求根节点到叶节点数字之和# 二叉树中的最大路径和# 二叉搜索树迭代器# 完全二叉树的节点个数# 二叉树的最近公共祖先# 二叉树层次遍历# ✅ 199 二叉树的右视图# 199.二叉树的右视图 ✅ 637 二叉树的层平均值# 637. 二叉树的层平均值 ✅ 二叉树的层序遍历# ✅ 二叉树的锯齿形层序遍历# 103.二叉树的锯齿形层序遍历 ✅ 二叉搜索树# ✅ 二叉搜索树的最小绝对差# ✅ 二叉搜索树中第 K 小的元素# 验证二叉搜索树# 图# ✅ 200 岛屿数量# 200.岛屿数量 被围绕的区域# 克隆图# 除法求值# 课程表# 课程表 II# 图的广度优先搜索# 909 蛇梯棋# 909 蛇梯棋 官方题解">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+
+
+  <meta itemprop="name" content="面试经典 150 题">
+  <meta itemprop="description" content="面试经典 150 题# 数组 / 字符串# ✅ 88 合并两个有序数组# ✅ 27 移除元素# ✅ 26 删除有序数组中的重复项# ✅ 80 删除有序数组中的重复项 II# ✅ 169 多数元素# ✅ 189 轮转数组# ✅ 121 买卖股票的最佳时机# 122 买卖股票的最佳时机 II# ✅ 55 跳跃游戏# ✅ 45 跳跃游戏 II# ✅ 274 H 指数# O(1) 时间插入、删除和获取随机元素# 除自身以外数组的乘积# 加油站# 分发糖果# 接雨水# ✅ 13 罗马数字转整数# 整数转罗马数字# ✅ 58 最后一个单词的长度# ✅ 14 最长公共前缀# ✅ 151 反转字符串中的单词# Z 字形变换# ✅ 28 找出字符串中第一个匹配项的下标# 文本左右对齐# 双指针# ✅ 125 验证回文串# ✅ 392 判断子序列# ✅ 167 两数之和 II - 输入有序数组# 盛最多水的容器# 三数之和# 滑动窗口# ✅ 长度最小的子数组# ✅ 无重复字符的最长子串# ✅ 串联所有单词的子串# 最小覆盖子串# 矩阵# ✅ 有效的数独# ✅ 螺旋矩阵# 旋转图像# ✅ 矩阵置零# ✅ 生命游戏# 哈希表# ✅ 383 赎金信# ✅ 205 同构字符串# ✅ 290 单词规律# ✅ 242 有效的字母异位词# ✅ 49 字母异位词分组# ✅ 1 两数之和# ✅ 202 快乐数# ✅ 219 存在重复元素 II# ✅ 128 最长连续序列# 区间# 汇总区间# 合并区间# 插入区间# 用最少数量的箭引爆气球# # 栈# ✅ 20 有效的括号# ✅ 71 简化路径# ✅ 155 最小栈# ✅ 150 逆波兰表达式求值# 基本计算器# 链表# ✅ 141 环形链表# ✅ 2 两数相加# ✅ 21 合并两个有序链表# ✅ 138 随机链表的复制# ✅ 92 反转链表 II# K 个一组翻转链表# ✅ 19 删除链表的倒数第 N 个结点# ✅ 82 删除排序链表中的重复元素 II# ✅ 61 旋转链表# ✅ 86 分隔链表# ✅ 146 LRU 缓存# 二叉树# ✅ 104 二叉树的最大深度# 104. 二叉树的最大深度 ✅ 100 相同的树# 100. 相同的树 ✅ 226 翻转二叉树# 226. 翻转二叉树 ✅ 101 对称二叉树# 101. 对称二叉树 ✅ 105 从前序与中序遍历序列构造二叉树# 105. 从前序与中序遍历序列构造二叉树 ✅ 106 从中序与后序遍历序列构造二叉树# 106. 从中序与后序遍历序列构造二叉树 ✅ 117 填充每个节点的下一个右侧节点指针 II# 117. 填充每个节点的下一个右侧节点指针 II 二叉树展开为链表# ✅ 路径总和# 求根节点到叶节点数字之和# 二叉树中的最大路径和# 二叉搜索树迭代器# 完全二叉树的节点个数# 二叉树的最近公共祖先# 二叉树层次遍历# ✅ 199 二叉树的右视图# 199.二叉树的右视图 ✅ 637 二叉树的层平均值# 637. 二叉树的层平均值 ✅ 二叉树的层序遍历# ✅ 二叉树的锯齿形层序遍历# 103.二叉树的锯齿形层序遍历 ✅ 二叉搜索树# ✅ 二叉搜索树的最小绝对差# ✅ 二叉搜索树中第 K 小的元素# 验证二叉搜索树# 图# ✅ 200 岛屿数量# 200.岛屿数量 被围绕的区域# 克隆图# 除法求值# 课程表# 课程表 II# 图的广度优先搜索# 909 蛇梯棋# 909 蛇梯棋 官方题解">
+  <meta itemprop="wordCount" content="967">
+
+<title>面试经典 150 题 | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/">
+<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.1e4254d6ef5c3d4b931350d3ad5355ea88c400709582577a866d1cb5f2a8f4f5.js" ></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-post">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d673e25af27f33796c279e3a05cc634f" class="toggle"  />
+    <label for="section-d673e25af27f33796c279e3a05cc634f" class="flex">
+      <a role="button" class="">
+        Life</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/books/" class="">
+      books</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
+      摘抄分享</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%96%B0%E7%9F%A5/" class="">
+      新知</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/movies-log/" class="">
+      观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/bilibili/" class="">
+      bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/hiking/" class="">
+      hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life/" class="">
+      life</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life-recommend/" class="">
+      life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/learning-others-log/" class="">
+      other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/podcast/" class="">
+      podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/politics/" class="">
+      politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/goal/" class="">
+      goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/coffee/" class="">
+      coffee</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/article/" class="">
+      article</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/law/" class="">
+      law</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-history/" class="">
+      my history</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-timeline/" class="">
+      My Timeline</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e52270c7d6707875ea89b3ec9b091983" class="toggle" checked />
+    <label for="section-e52270c7d6707875ea89b3ec9b091983" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science/" class="">
+      computer science</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f834cb9837867b0fca71e863c9ed2d28" class="toggle" checked />
+    <label for="section-f834cb9837867b0fca71e863c9ed2d28" class="flex">
+      <a role="button" class="">
+        Algorithm</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm/" class="">
+      Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
+      algorithm practice 剑指 offer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
+      剑指offer题目对应</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="active">
+      面试经典 150 题</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-12ae84c3ad3679302ffec2ab120d7fb0" class="toggle"  />
+    <label for="section-12ae84c3ad3679302ffec2ab120d7fb0" class="flex">
+      <a role="button" class="">
+        Big Data</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hadoop/" class="">
+      hadoop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hbase/" class="">
+      hbase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hive/" class="">
+      hive</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-256c0c0348e7dc55386785c98f7fa516" class="toggle"  />
+    <label for="section-256c0c0348e7dc55386785c98f7fa516" class="flex">
+      <a role="button" class="">
+        Database</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/database/" class="">
+      database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/druid/" class="">
+      druid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/elasticsearch/" class="">
+      elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mycat/" class="">
+      mycat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mysql/" class="">
+      mysql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/postgresql/" class="">
+      postgresql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/shardingsphere/" class="">
+      shardingsphere</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/sql/" class="">
+      SQL</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mongodb/" class="">
+      Penruins</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="toggle"  />
+    <label for="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="flex">
+      <a role="button" class="">
+        Distributed System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-98c822a4c30374b08c20bbb746ca28ff" class="toggle"  />
+    <label for="section-98c822a4c30374b08c20bbb746ca28ff" class="flex">
+      <a role="button" class="">
+        Message Queue</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/kafka/" class="">
+      kafka</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/message-queue/" class="">
+      Message Queue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
+      rabbitmq</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/distributed-system/" class="">
+      distributed system</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/sentinel/" class="">
+      Sentinel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud/" class="">
+      Spring Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
+      Spring Cloud Alibaba</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-184fcde54f4fb8e56ff1923eee779551" class="toggle"  />
+    <label for="section-184fcde54f4fb8e56ff1923eee779551" class="flex">
+      <a role="button" class="">
+        Java</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-basic/" class="">
+      java basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6355ae1f9fa9f60a52445009b471b5e2" class="toggle"  />
+    <label for="section-6355ae1f9fa9f60a52445009b471b5e2" class="flex">
+      <a role="button" class="">
+        Spring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring/" class="">
+      spring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/springboot/" class="">
+      spring boot</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-boot-validation/" class="">
+      spring boot validation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-transaction/" class="">
+      spring transaction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/unit-test/" class="">
+      unit test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java/" class="">
+      java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jvm/" class="">
+      jvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis/" class="">
+      Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis-plus/" class="">
+      Mybatis Plus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/xxl-job/" class="">
+      xxl job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/concurrent/" class="">
+      concurrent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jackson/" class="">
+      jackson</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-hashmap/" class="">
+      java HashMap</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-utils/" class="">
+      Java Utils</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
+      java 密码学</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/map/" class="">
+      map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-51f600e6ef5b531bcd84ecd789276516" class="toggle"  />
+    <label for="section-51f600e6ef5b531bcd84ecd789276516" class="flex">
+      <a role="button" class="">
+        Monitor</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/monitor/prometheus/" class="">
+      prometheus</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b11c61a955da170f736b6dbde7b6e083" class="toggle"  />
+    <label for="section-b11c61a955da170f736b6dbde7b6e083" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/tools/idea/" class="">
+      IDEA</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-recommend/" class="">
+      推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-learning-log/" class="">
+      学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/github/" class="">
+      github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/job/" class="">
+      job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/redis/" class="">
+      redis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/security/" class="">
+      security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-44f9701b64ae8bf371ea70118bc45414" class="toggle"  />
+    <label for="section-44f9701b64ae8bf371ea70118bc45414" class="flex">
+      <a role="button" class="">
+        Blog</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/blog/" class="">
+      blog</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/hugo/" class="">
+      Hugo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/cloud/" class="">
+      Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="toggle"  />
+    <label for="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="flex">
+      <a role="button" class="">
+        Front End</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/echarts/" class="">
+      echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/vue/" class="">
+      vue</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-529cbb550ade3cc11293cf67d1d534f0" class="toggle"  />
+    <label for="section-529cbb550ade3cc11293cf67d1d534f0" class="flex">
+      <a role="button" class="">
+        Micro Service</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/nacos/" class="">
+      Nacos</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/micro-service/" class="">
+      micro service</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="toggle"  />
+    <label for="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="flex">
+      <a role="button" class="">
+        Operating System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/ios/" class="">
+      IOS</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/linux/" class="">
+      linux</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/mac/" class="">
+      mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/raspberrypi/" class="">
+      raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/powershell/" class="">
+      powershell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/windows/" class="">
+      windows</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="toggle"  />
+    <label for="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="flex">
+      <a role="button" class="">
+        Software</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/artificial-intelligence/" class="">
+      Artificial Intelligence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6c1b5eb9fa302a23733b5ce342165515" class="toggle"  />
+    <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
+      <a role="button" class="">
+        CI/CD</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/docker/" class="">
+      docker</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/gitlab/" class="">
+      Gitlab</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/jenkins/" class="">
+      Jenkins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/maven/" class="">
+      maven</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/nexus/" class="">
+      Nexus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/orbstack/" class="">
+      OrbStack</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/crawler/" class="">
+      crawler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/git/" class="">
+      git</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/networking/" class="">
+      networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/python/" class="">
+      Python</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/reddison/" class="">
+      reddison</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/vim/" class="">
+      vim</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
+      系统设计</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
+      运维</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3b7129f485a86f816ed70cb52a2a5843" class="toggle"  />
+    <label for="section-3b7129f485a86f816ed70cb52a2a5843" class="flex">
+      <a role="button" class="">
+        History</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/history/chinese-history/" class="">
+      Chinese History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-27743f5ad758a53b0d2d97b463de9ca0" class="toggle"  />
+    <label for="section-27743f5ad758a53b0d2d97b463de9ca0" class="flex">
+      <a role="button" class="">
+        Others</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/about-me/" class="">
+      about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/english-learning/" class="">
+      English Learning</a>
+  
+
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/economy/" class="">
+      Economy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/f1/" class="">
+      F1</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7cf7927dd7be57fd9ac871554e5eab30" class="toggle"  />
+    <label for="section-7cf7927dd7be57fd9ac871554e5eab30" class="flex">
+      <a role="button" class="">
+        Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/science/biology/" class="">
+      biology</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c86d83c6ab9662a5734c7c938687f51c" class="toggle"  />
+    <label for="section-c86d83c6ab9662a5734c7c938687f51c" class="flex">
+      <a role="button" class="">
+        Sports</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/table-tennis/" class="">
+      table tennis</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a7716b8c5e1ddba36a22182d4f60014c" class="toggle"  />
+    <label for="section-a7716b8c5e1ddba36a22182d4f60014c" class="flex">
+      <a role="button" class="">
+        Wl Public</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6fc9a7b0dd6392ef81e392a65430999b" class="toggle"  />
+    <label for="section-6fc9a7b0dd6392ef81e392a65430999b" class="flex">
+      <a role="button" class="">
+        Books</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-06aae5e89825d313a1291f1996bfc76d" class="toggle"  />
+    <label for="section-06aae5e89825d313a1291f1996bfc76d" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
+      Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+      Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
+      Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
+      Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
+      一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
+      宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
+      英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="toggle"  />
+    <label for="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/tools/obsidian/" class="">
+      obsidian</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>面试经典 150 题</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#面试经典-150-题">面试经典 150 题</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#数组--字符串">数组 / 字符串</a>
+                  <ul>
+                    <li><a href="#-88-合并两个有序数组">✅ 88 合并两个有序数组</a></li>
+                    <li><a href="#-27-移除元素">✅ 27 移除元素</a></li>
+                    <li><a href="#-26-删除有序数组中的重复项">✅ 26 删除有序数组中的重复项</a></li>
+                    <li><a href="#-80-删除有序数组中的重复项-ii">✅ 80 删除有序数组中的重复项 II</a></li>
+                    <li><a href="#-169-多数元素">✅ 169 多数元素</a></li>
+                    <li><a href="#-189-轮转数组">✅ 189 轮转数组</a></li>
+                    <li><a href="#-121-买卖股票的最佳时机">✅ 121 买卖股票的最佳时机</a></li>
+                    <li><a href="#122-买卖股票的最佳时机-ii">122 买卖股票的最佳时机 II</a></li>
+                    <li><a href="#-55-跳跃游戏">✅ 55 跳跃游戏</a></li>
+                    <li><a href="#-45-跳跃游戏-ii">✅ 45 跳跃游戏 II</a></li>
+                    <li><a href="#-274-h-指数">✅ 274 H 指数</a></li>
+                    <li><a href="#o1-时间插入删除和获取随机元素">O(1) 时间插入、删除和获取随机元素</a></li>
+                    <li><a href="#除自身以外数组的乘积">除自身以外数组的乘积</a></li>
+                    <li><a href="#加油站">加油站</a></li>
+                    <li><a href="#分发糖果">分发糖果</a></li>
+                    <li><a href="#接雨水">接雨水</a></li>
+                    <li><a href="#-13-罗马数字转整数">✅ 13 罗马数字转整数</a></li>
+                    <li><a href="#整数转罗马数字">整数转罗马数字</a></li>
+                    <li><a href="#-58-最后一个单词的长度">✅ 58 最后一个单词的长度</a></li>
+                    <li><a href="#-14-最长公共前缀">✅ 14 最长公共前缀</a></li>
+                    <li><a href="#-151-反转字符串中的单词">✅ 151 反转字符串中的单词</a></li>
+                    <li><a href="#z-字形变换">Z 字形变换</a></li>
+                    <li><a href="#-28-找出字符串中第一个匹配项的下标">✅ 28 找出字符串中第一个匹配项的下标</a></li>
+                    <li><a href="#文本左右对齐">文本左右对齐</a></li>
+                  </ul>
+                </li>
+                <li><a href="#双指针">双指针</a>
+                  <ul>
+                    <li><a href="#-125-验证回文串">✅ 125 验证回文串</a></li>
+                    <li><a href="#-392-判断子序列">✅ 392 判断子序列</a></li>
+                    <li><a href="#-167-两数之和-ii---输入有序数组">✅ 167 两数之和 II - 输入有序数组</a></li>
+                    <li><a href="#盛最多水的容器">盛最多水的容器</a></li>
+                    <li><a href="#三数之和">三数之和</a></li>
+                  </ul>
+                </li>
+                <li><a href="#滑动窗口">滑动窗口</a>
+                  <ul>
+                    <li><a href="#-长度最小的子数组">✅ 长度最小的子数组</a></li>
+                    <li><a href="#-无重复字符的最长子串">✅ 无重复字符的最长子串</a></li>
+                    <li><a href="#-串联所有单词的子串">✅ 串联所有单词的子串</a></li>
+                    <li><a href="#最小覆盖子串">最小覆盖子串</a></li>
+                  </ul>
+                </li>
+                <li><a href="#矩阵">矩阵</a>
+                  <ul>
+                    <li><a href="#-有效的数独">✅ 有效的数独</a></li>
+                    <li><a href="#-螺旋矩阵">✅ 螺旋矩阵</a></li>
+                    <li><a href="#旋转图像">旋转图像</a></li>
+                    <li><a href="#-矩阵置零">✅ 矩阵置零</a></li>
+                    <li><a href="#-生命游戏">✅ 生命游戏</a></li>
+                  </ul>
+                </li>
+                <li><a href="#哈希表">哈希表</a>
+                  <ul>
+                    <li><a href="#-383-赎金信">✅ 383 赎金信</a></li>
+                    <li><a href="#-205-同构字符串">✅ 205 同构字符串</a></li>
+                    <li><a href="#-290-单词规律">✅ 290 单词规律</a></li>
+                    <li><a href="#-242-有效的字母异位词">✅ 242 有效的字母异位词</a></li>
+                    <li><a href="#-49-字母异位词分组">✅ 49 字母异位词分组</a></li>
+                    <li><a href="#-1-两数之和">✅ 1 两数之和</a></li>
+                    <li><a href="#-202-快乐数">✅ 202 快乐数</a></li>
+                    <li><a href="#-219-存在重复元素-ii">✅ 219 存在重复元素 II</a></li>
+                    <li><a href="#-128-最长连续序列">✅ 128 最长连续序列</a></li>
+                  </ul>
+                </li>
+                <li><a href="#区间">区间</a>
+                  <ul>
+                    <li><a href="#汇总区间">汇总区间</a></li>
+                    <li><a href="#合并区间">合并区间</a></li>
+                    <li><a href="#插入区间">插入区间</a></li>
+                    <li><a href="#用最少数量的箭引爆气球">用最少数量的箭引爆气球</a></li>
+                    <li></li>
+                  </ul>
+                </li>
+                <li><a href="#栈">栈</a>
+                  <ul>
+                    <li><a href="#-20-有效的括号">✅ 20 有效的括号</a></li>
+                    <li><a href="#-71-简化路径">✅ 71 简化路径</a></li>
+                    <li><a href="#-155-最小栈">✅ 155 最小栈</a></li>
+                    <li><a href="#-150-逆波兰表达式求值">✅ 150 逆波兰表达式求值</a></li>
+                    <li><a href="#基本计算器">基本计算器</a></li>
+                  </ul>
+                </li>
+                <li><a href="#链表">链表</a>
+                  <ul>
+                    <li><a href="#-141-环形链表">✅ 141 环形链表</a></li>
+                    <li><a href="#-2-两数相加">✅ 2 两数相加</a></li>
+                    <li><a href="#-21-合并两个有序链表">✅ 21 合并两个有序链表</a></li>
+                    <li><a href="#-138-随机链表的复制">✅ 138 随机链表的复制</a></li>
+                    <li><a href="#-92-反转链表-ii">✅ 92 反转链表 II</a></li>
+                    <li><a href="#k-个一组翻转链表">K 个一组翻转链表</a></li>
+                    <li><a href="#-19-删除链表的倒数第-n-个结点">✅ 19 删除链表的倒数第 N 个结点</a></li>
+                    <li><a href="#-82-删除排序链表中的重复元素-ii">✅ 82 删除排序链表中的重复元素 II</a></li>
+                    <li><a href="#-61-旋转链表">✅ 61 旋转链表</a></li>
+                    <li><a href="#-86-分隔链表">✅ 86 分隔链表</a></li>
+                    <li><a href="#-146-lru-缓存">✅ 146 LRU 缓存</a></li>
+                  </ul>
+                </li>
+                <li><a href="#二叉树">二叉树</a>
+                  <ul>
+                    <li><a href="#-104-二叉树的最大深度">✅ 104 二叉树的最大深度</a></li>
+                    <li><a href="#-100-相同的树">✅ 100 相同的树</a></li>
+                    <li><a href="#-226-翻转二叉树">✅ 226 翻转二叉树</a></li>
+                    <li><a href="#-101-对称二叉树">✅ 101 对称二叉树</a></li>
+                    <li><a href="#-105-从前序与中序遍历序列构造二叉树">✅ 105 从前序与中序遍历序列构造二叉树</a></li>
+                    <li><a href="#-106-从中序与后序遍历序列构造二叉树">✅ 106 从中序与后序遍历序列构造二叉树</a></li>
+                    <li><a href="#-117-填充每个节点的下一个右侧节点指针-ii">✅ 117 填充每个节点的下一个右侧节点指针 II</a></li>
+                    <li><a href="#二叉树展开为链表">二叉树展开为链表</a></li>
+                    <li><a href="#-路径总和">✅ 路径总和</a></li>
+                    <li><a href="#求根节点到叶节点数字之和">求根节点到叶节点数字之和</a></li>
+                    <li><a href="#二叉树中的最大路径和">二叉树中的最大路径和</a></li>
+                    <li><a href="#二叉搜索树迭代器">二叉搜索树迭代器</a></li>
+                    <li><a href="#完全二叉树的节点个数">完全二叉树的节点个数</a></li>
+                    <li><a href="#二叉树的最近公共祖先">二叉树的最近公共祖先</a></li>
+                  </ul>
+                </li>
+                <li><a href="#二叉树层次遍历">二叉树层次遍历</a>
+                  <ul>
+                    <li><a href="#-199-二叉树的右视图">✅ 199 二叉树的右视图</a></li>
+                    <li><a href="#-637-二叉树的层平均值">✅ 637 二叉树的层平均值</a></li>
+                    <li><a href="#-二叉树的层序遍历">✅ 二叉树的层序遍历</a></li>
+                    <li><a href="#-二叉树的锯齿形层序遍历">✅ 二叉树的锯齿形层序遍历</a></li>
+                  </ul>
+                </li>
+                <li><a href="#-二叉搜索树">✅ 二叉搜索树</a>
+                  <ul>
+                    <li><a href="#-二叉搜索树的最小绝对差">✅ 二叉搜索树的最小绝对差</a></li>
+                    <li><a href="#-二叉搜索树中第-k-小的元素">✅ 二叉搜索树中第 K 小的元素</a></li>
+                    <li><a href="#验证二叉搜索树">验证二叉搜索树</a></li>
+                  </ul>
+                </li>
+                <li><a href="#图">图</a>
+                  <ul>
+                    <li><a href="#-200-岛屿数量">✅ 200 岛屿数量</a></li>
+                    <li><a href="#被围绕的区域">被围绕的区域</a></li>
+                    <li><a href="#克隆图">克隆图</a></li>
+                    <li><a href="#除法求值">除法求值</a></li>
+                    <li><a href="#课程表">课程表</a></li>
+                    <li><a href="#课程表-ii">课程表 II</a></li>
+                  </ul>
+                </li>
+                <li><a href="#图的广度优先搜索">图的广度优先搜索</a>
+                  <ul>
+                    <li><a href="#909-蛇梯棋">909 蛇梯棋</a></li>
+                    <li><a href="#最小基因变化">最小基因变化</a>
+                      <ul>
+                        <li><a href="#方法一广度优先搜索">方法一：广度优先搜索</a></li>
+                        <li><a href="#方法二预处理优化">方法二：预处理优化</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#单词接龙">单词接龙</a></li>
+                  </ul>
+                </li>
+                <li><a href="#-字典树">✅ 字典树</a>
+                  <ul>
+                    <li><a href="#-208-实现-trie-前缀树">✅ 208 实现 Trie (前缀树)</a></li>
+                    <li><a href="#-211-添加与搜索单词---数据结构设计">✅ 211 添加与搜索单词 - 数据结构设计</a></li>
+                    <li><a href="#-212-单词搜索-ii">✅ 212 单词搜索 II</a></li>
+                  </ul>
+                </li>
+                <li><a href="#-回溯">✅ 回溯</a>
+                  <ul>
+                    <li><a href="#-电话号码的字母组合">✅ 电话号码的字母组合</a></li>
+                    <li><a href="#-组合">✅ 组合</a></li>
+                    <li><a href="#-全排列">✅ 全排列</a></li>
+                    <li><a href="#-组合总和">✅ 组合总和</a></li>
+                    <li><a href="#-n-皇后-ii">✅ N 皇后 II</a></li>
+                    <li><a href="#-括号生成">✅ 括号生成</a></li>
+                    <li><a href="#-单词搜索">✅ 单词搜索</a></li>
+                  </ul>
+                </li>
+                <li><a href="#分治">分治</a>
+                  <ul>
+                    <li><a href="#-108-将有序数组转换为二叉搜索树">✅ 108 将有序数组转换为二叉搜索树</a></li>
+                    <li><a href="#148-排序链表">148 排序链表</a></li>
+                    <li><a href="#建立四叉树">建立四叉树</a></li>
+                    <li><a href="#合并-k-个升序链表">合并 K 个升序链表</a></li>
+                  </ul>
+                </li>
+                <li><a href="#kadane-算法">Kadane 算法</a>
+                  <ul>
+                    <li><a href="#最大子数组和">最大子数组和</a></li>
+                    <li><a href="#环形子数组的最大和">环形子数组的最大和</a></li>
+                  </ul>
+                </li>
+                <li><a href="#二分查找">二分查找</a>
+                  <ul>
+                    <li><a href="#搜索插入位置">搜索插入位置</a></li>
+                    <li><a href="#搜索二维矩阵">搜索二维矩阵</a></li>
+                    <li><a href="#寻找峰值">寻找峰值</a></li>
+                    <li><a href="#搜索旋转排序数组">搜索旋转排序数组</a></li>
+                    <li><a href="#在排序数组中查找元素的第一个和最后一个位置">在排序数组中查找元素的第一个和最后一个位置</a></li>
+                    <li><a href="#寻找旋转排序数组中的最小值">寻找旋转排序数组中的最小值</a></li>
+                    <li><a href="#寻找两个正序数组的中位数">寻找两个正序数组的中位数</a></li>
+                  </ul>
+                </li>
+                <li><a href="#堆">堆</a>
+                  <ul>
+                    <li><a href="#数组中的第k个最大元素">数组中的第K个最大元素</a></li>
+                    <li><a href="#ipo">IPO</a></li>
+                    <li><a href="#查找和最小的-k-对数字">查找和最小的 K 对数字</a></li>
+                    <li><a href="#数据流的中位数">数据流的中位数</a></li>
+                  </ul>
+                </li>
+                <li><a href="#位运算">位运算</a>
+                  <ul>
+                    <li><a href="#二进制求和">二进制求和</a></li>
+                    <li><a href="#颠倒二进制位">颠倒二进制位</a></li>
+                    <li><a href="#位1的个数">位1的个数</a></li>
+                    <li><a href="#只出现一次的数字">只出现一次的数字</a></li>
+                    <li><a href="#只出现一次的数字-ii">只出现一次的数字 II</a></li>
+                    <li><a href="#数字范围按位与">数字范围按位与</a></li>
+                  </ul>
+                </li>
+                <li><a href="#数学">数学</a>
+                  <ul>
+                    <li><a href="#-9-回文数">✅ 9 回文数</a></li>
+                    <li><a href="#-66-加一">✅ 66 加一</a></li>
+                    <li><a href="#-172-阶乘后的零">✅ 172 阶乘后的零</a></li>
+                    <li><a href="#-69-x-的平方根">✅ 69 x 的平方根</a></li>
+                    <li><a href="#50-powx-n">50 Pow(x, n)</a></li>
+                    <li><a href="#149-直线上最多的点数">149 直线上最多的点数</a></li>
+                  </ul>
+                </li>
+                <li><a href="#一维动态规划">一维动态规划</a>
+                  <ul>
+                    <li><a href="#-爬楼梯">✅ 爬楼梯</a></li>
+                    <li><a href="#打家劫舍">打家劫舍</a></li>
+                    <li><a href="#单词拆分">单词拆分</a></li>
+                    <li><a href="#零钱兑换">零钱兑换</a></li>
+                    <li><a href="#最长递增子序列">最长递增子序列</a></li>
+                  </ul>
+                </li>
+                <li><a href="#多维动态规划">多维动态规划</a>
+                  <ul>
+                    <li><a href="#三角形最小路径和">三角形最小路径和</a></li>
+                    <li><a href="#最小路径和">最小路径和</a></li>
+                    <li><a href="#不同路径-ii">不同路径 II</a></li>
+                    <li><a href="#最长回文子串">最长回文子串</a></li>
+                    <li><a href="#交错字符串">交错字符串</a></li>
+                    <li><a href="#编辑距离">编辑距离</a></li>
+                    <li><a href="#买卖股票的最佳时机-iii">买卖股票的最佳时机 III</a></li>
+                    <li><a href="#买卖股票的最佳时机-iv">买卖股票的最佳时机 IV</a></li>
+                    <li><a href="#最大正方形">最大正方形</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="面试经典-150-题">面试经典 150 题<a class="anchor" href="#%e9%9d%a2%e8%af%95%e7%bb%8f%e5%85%b8-150-%e9%a2%98">#</a></h2>
+<h4 id="数组--字符串">数组 / 字符串<a class="anchor" href="#%e6%95%b0%e7%bb%84--%e5%ad%97%e7%ac%a6%e4%b8%b2">#</a></h4>
+<h5 id="-88-合并两个有序数组">✅ 88 合并两个有序数组<a class="anchor" href="#-88-%e5%90%88%e5%b9%b6%e4%b8%a4%e4%b8%aa%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84">#</a></h5>
+<h5 id="-27-移除元素">✅ 27 移除元素<a class="anchor" href="#-27-%e7%a7%bb%e9%99%a4%e5%85%83%e7%b4%a0">#</a></h5>
+<h5 id="-26-删除有序数组中的重复项">✅ 26 删除有序数组中的重复项<a class="anchor" href="#-26-%e5%88%a0%e9%99%a4%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84%e4%b8%ad%e7%9a%84%e9%87%8d%e5%a4%8d%e9%a1%b9">#</a></h5>
+<h5 id="-80-删除有序数组中的重复项-ii">✅ 80 删除有序数组中的重复项 II<a class="anchor" href="#-80-%e5%88%a0%e9%99%a4%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84%e4%b8%ad%e7%9a%84%e9%87%8d%e5%a4%8d%e9%a1%b9-ii">#</a></h5>
+<h5 id="-169-多数元素">✅ 169 多数元素<a class="anchor" href="#-169-%e5%a4%9a%e6%95%b0%e5%85%83%e7%b4%a0">#</a></h5>
+<h5 id="-189-轮转数组">✅ 189 轮转数组<a class="anchor" href="#-189-%e8%bd%ae%e8%bd%ac%e6%95%b0%e7%bb%84">#</a></h5>
+<h5 id="-121-买卖股票的最佳时机">✅ 121 买卖股票的最佳时机<a class="anchor" href="#-121-%e4%b9%b0%e5%8d%96%e8%82%a1%e7%a5%a8%e7%9a%84%e6%9c%80%e4%bd%b3%e6%97%b6%e6%9c%ba">#</a></h5>
+<h5 id="122-买卖股票的最佳时机-ii">122 买卖股票的最佳时机 II<a class="anchor" href="#122-%e4%b9%b0%e5%8d%96%e8%82%a1%e7%a5%a8%e7%9a%84%e6%9c%80%e4%bd%b3%e6%97%b6%e6%9c%ba-ii">#</a></h5>
+<h5 id="-55-跳跃游戏">✅ 55 跳跃游戏<a class="anchor" href="#-55-%e8%b7%b3%e8%b7%83%e6%b8%b8%e6%88%8f">#</a></h5>
+<h5 id="-45-跳跃游戏-ii">✅ 45 跳跃游戏 II<a class="anchor" href="#-45-%e8%b7%b3%e8%b7%83%e6%b8%b8%e6%88%8f-ii">#</a></h5>
+<h5 id="-274-h-指数">✅ 274 H 指数<a class="anchor" href="#-274-h-%e6%8c%87%e6%95%b0">#</a></h5>
+<h5 id="o1-时间插入删除和获取随机元素">O(1) 时间插入、删除和获取随机元素<a class="anchor" href="#o1-%e6%97%b6%e9%97%b4%e6%8f%92%e5%85%a5%e5%88%a0%e9%99%a4%e5%92%8c%e8%8e%b7%e5%8f%96%e9%9a%8f%e6%9c%ba%e5%85%83%e7%b4%a0">#</a></h5>
+<h5 id="除自身以外数组的乘积">除自身以外数组的乘积<a class="anchor" href="#%e9%99%a4%e8%87%aa%e8%ba%ab%e4%bb%a5%e5%a4%96%e6%95%b0%e7%bb%84%e7%9a%84%e4%b9%98%e7%a7%af">#</a></h5>
+<h5 id="加油站">加油站<a class="anchor" href="#%e5%8a%a0%e6%b2%b9%e7%ab%99">#</a></h5>
+<h5 id="分发糖果">分发糖果<a class="anchor" href="#%e5%88%86%e5%8f%91%e7%b3%96%e6%9e%9c">#</a></h5>
+<h5 id="接雨水">接雨水<a class="anchor" href="#%e6%8e%a5%e9%9b%a8%e6%b0%b4">#</a></h5>
+<h5 id="-13-罗马数字转整数">✅ 13 罗马数字转整数<a class="anchor" href="#-13-%e7%bd%97%e9%a9%ac%e6%95%b0%e5%ad%97%e8%bd%ac%e6%95%b4%e6%95%b0">#</a></h5>
+<h5 id="整数转罗马数字">整数转罗马数字<a class="anchor" href="#%e6%95%b4%e6%95%b0%e8%bd%ac%e7%bd%97%e9%a9%ac%e6%95%b0%e5%ad%97">#</a></h5>
+<h5 id="-58-最后一个单词的长度">✅ 58 最后一个单词的长度<a class="anchor" href="#-58-%e6%9c%80%e5%90%8e%e4%b8%80%e4%b8%aa%e5%8d%95%e8%af%8d%e7%9a%84%e9%95%bf%e5%ba%a6">#</a></h5>
+<h5 id="-14-最长公共前缀">✅ 14 最长公共前缀<a class="anchor" href="#-14-%e6%9c%80%e9%95%bf%e5%85%ac%e5%85%b1%e5%89%8d%e7%bc%80">#</a></h5>
+<h5 id="-151-反转字符串中的单词">✅ 151 反转字符串中的单词<a class="anchor" href="#-151-%e5%8f%8d%e8%bd%ac%e5%ad%97%e7%ac%a6%e4%b8%b2%e4%b8%ad%e7%9a%84%e5%8d%95%e8%af%8d">#</a></h5>
+<h5 id="z-字形变换">Z 字形变换<a class="anchor" href="#z-%e5%ad%97%e5%bd%a2%e5%8f%98%e6%8d%a2">#</a></h5>
+<h5 id="-28-找出字符串中第一个匹配项的下标">✅ 28 找出字符串中第一个匹配项的下标<a class="anchor" href="#-28-%e6%89%be%e5%87%ba%e5%ad%97%e7%ac%a6%e4%b8%b2%e4%b8%ad%e7%ac%ac%e4%b8%80%e4%b8%aa%e5%8c%b9%e9%85%8d%e9%a1%b9%e7%9a%84%e4%b8%8b%e6%a0%87">#</a></h5>
+<h5 id="文本左右对齐">文本左右对齐<a class="anchor" href="#%e6%96%87%e6%9c%ac%e5%b7%a6%e5%8f%b3%e5%af%b9%e9%bd%90">#</a></h5>
+<h4 id="双指针">双指针<a class="anchor" href="#%e5%8f%8c%e6%8c%87%e9%92%88">#</a></h4>
+<h5 id="-125-验证回文串">✅ 125 验证回文串<a class="anchor" href="#-125-%e9%aa%8c%e8%af%81%e5%9b%9e%e6%96%87%e4%b8%b2">#</a></h5>
+<h5 id="-392-判断子序列">✅ 392 判断子序列<a class="anchor" href="#-392-%e5%88%a4%e6%96%ad%e5%ad%90%e5%ba%8f%e5%88%97">#</a></h5>
+<h5 id="-167-两数之和-ii---输入有序数组">✅ 167 两数之和 II - 输入有序数组<a class="anchor" href="#-167-%e4%b8%a4%e6%95%b0%e4%b9%8b%e5%92%8c-ii---%e8%be%93%e5%85%a5%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84">#</a></h5>
+<h5 id="盛最多水的容器">盛最多水的容器<a class="anchor" href="#%e7%9b%9b%e6%9c%80%e5%a4%9a%e6%b0%b4%e7%9a%84%e5%ae%b9%e5%99%a8">#</a></h5>
+<h5 id="三数之和">三数之和<a class="anchor" href="#%e4%b8%89%e6%95%b0%e4%b9%8b%e5%92%8c">#</a></h5>
+<h4 id="滑动窗口">滑动窗口<a class="anchor" href="#%e6%bb%91%e5%8a%a8%e7%aa%97%e5%8f%a3">#</a></h4>
+<h5 id="-长度最小的子数组">✅ 长度最小的子数组<a class="anchor" href="#-%e9%95%bf%e5%ba%a6%e6%9c%80%e5%b0%8f%e7%9a%84%e5%ad%90%e6%95%b0%e7%bb%84">#</a></h5>
+<h5 id="-无重复字符的最长子串">✅ 无重复字符的最长子串<a class="anchor" href="#-%e6%97%a0%e9%87%8d%e5%a4%8d%e5%ad%97%e7%ac%a6%e7%9a%84%e6%9c%80%e9%95%bf%e5%ad%90%e4%b8%b2">#</a></h5>
+<h5 id="-串联所有单词的子串">✅ 串联所有单词的子串<a class="anchor" href="#-%e4%b8%b2%e8%81%94%e6%89%80%e6%9c%89%e5%8d%95%e8%af%8d%e7%9a%84%e5%ad%90%e4%b8%b2">#</a></h5>
+<h5 id="最小覆盖子串">最小覆盖子串<a class="anchor" href="#%e6%9c%80%e5%b0%8f%e8%a6%86%e7%9b%96%e5%ad%90%e4%b8%b2">#</a></h5>
+<h4 id="矩阵">矩阵<a class="anchor" href="#%e7%9f%a9%e9%98%b5">#</a></h4>
+<h5 id="-有效的数独">✅ 有效的数独<a class="anchor" href="#-%e6%9c%89%e6%95%88%e7%9a%84%e6%95%b0%e7%8b%ac">#</a></h5>
+<h5 id="-螺旋矩阵">✅ 螺旋矩阵<a class="anchor" href="#-%e8%9e%ba%e6%97%8b%e7%9f%a9%e9%98%b5">#</a></h5>
+<h5 id="旋转图像">旋转图像<a class="anchor" href="#%e6%97%8b%e8%bd%ac%e5%9b%be%e5%83%8f">#</a></h5>
+<h5 id="-矩阵置零">✅ 矩阵置零<a class="anchor" href="#-%e7%9f%a9%e9%98%b5%e7%bd%ae%e9%9b%b6">#</a></h5>
+<h5 id="-生命游戏">✅ 生命游戏<a class="anchor" href="#-%e7%94%9f%e5%91%bd%e6%b8%b8%e6%88%8f">#</a></h5>
+<h4 id="哈希表">哈希表<a class="anchor" href="#%e5%93%88%e5%b8%8c%e8%a1%a8">#</a></h4>
+<h5 id="-383-赎金信">✅ 383 赎金信<a class="anchor" href="#-383-%e8%b5%8e%e9%87%91%e4%bf%a1">#</a></h5>
+<h5 id="-205-同构字符串">✅ 205 同构字符串<a class="anchor" href="#-205-%e5%90%8c%e6%9e%84%e5%ad%97%e7%ac%a6%e4%b8%b2">#</a></h5>
+<h5 id="-290-单词规律">✅ 290 单词规律<a class="anchor" href="#-290-%e5%8d%95%e8%af%8d%e8%a7%84%e5%be%8b">#</a></h5>
+<h5 id="-242-有效的字母异位词">✅ 242 有效的字母异位词<a class="anchor" href="#-242-%e6%9c%89%e6%95%88%e7%9a%84%e5%ad%97%e6%af%8d%e5%bc%82%e4%bd%8d%e8%af%8d">#</a></h5>
+<h5 id="-49-字母异位词分组">✅ 49 字母异位词分组<a class="anchor" href="#-49-%e5%ad%97%e6%af%8d%e5%bc%82%e4%bd%8d%e8%af%8d%e5%88%86%e7%bb%84">#</a></h5>
+<h5 id="-1-两数之和">✅ 1 两数之和<a class="anchor" href="#-1-%e4%b8%a4%e6%95%b0%e4%b9%8b%e5%92%8c">#</a></h5>
+<h5 id="-202-快乐数">✅ 202 快乐数<a class="anchor" href="#-202-%e5%bf%ab%e4%b9%90%e6%95%b0">#</a></h5>
+<h5 id="-219-存在重复元素-ii">✅ 219 存在重复元素 II<a class="anchor" href="#-219-%e5%ad%98%e5%9c%a8%e9%87%8d%e5%a4%8d%e5%85%83%e7%b4%a0-ii">#</a></h5>
+<h5 id="-128-最长连续序列">✅ 128 最长连续序列<a class="anchor" href="#-128-%e6%9c%80%e9%95%bf%e8%bf%9e%e7%bb%ad%e5%ba%8f%e5%88%97">#</a></h5>
+<h4 id="区间">区间<a class="anchor" href="#%e5%8c%ba%e9%97%b4">#</a></h4>
+<h5 id="汇总区间">汇总区间<a class="anchor" href="#%e6%b1%87%e6%80%bb%e5%8c%ba%e9%97%b4">#</a></h5>
+<h5 id="合并区间">合并区间<a class="anchor" href="#%e5%90%88%e5%b9%b6%e5%8c%ba%e9%97%b4">#</a></h5>
+<h5 id="插入区间">插入区间<a class="anchor" href="#%e6%8f%92%e5%85%a5%e5%8c%ba%e9%97%b4">#</a></h5>
+<h5 id="用最少数量的箭引爆气球">用最少数量的箭引爆气球<a class="anchor" href="#%e7%94%a8%e6%9c%80%e5%b0%91%e6%95%b0%e9%87%8f%e7%9a%84%e7%ae%ad%e5%bc%95%e7%88%86%e6%b0%94%e7%90%83">#</a></h5>
+<h5 id=""><a class="anchor" href="#">#</a></h5>
+<h4 id="栈">栈<a class="anchor" href="#%e6%a0%88">#</a></h4>
+<h5 id="-20-有效的括号">✅ 20 有效的括号<a class="anchor" href="#-20-%e6%9c%89%e6%95%88%e7%9a%84%e6%8b%ac%e5%8f%b7">#</a></h5>
+<h5 id="-71-简化路径">✅ 71 简化路径<a class="anchor" href="#-71-%e7%ae%80%e5%8c%96%e8%b7%af%e5%be%84">#</a></h5>
+<h5 id="-155-最小栈">✅ 155 最小栈<a class="anchor" href="#-155-%e6%9c%80%e5%b0%8f%e6%a0%88">#</a></h5>
+<h5 id="-150-逆波兰表达式求值">✅ 150 逆波兰表达式求值<a class="anchor" href="#-150-%e9%80%86%e6%b3%a2%e5%85%b0%e8%a1%a8%e8%be%be%e5%bc%8f%e6%b1%82%e5%80%bc">#</a></h5>
+<h5 id="基本计算器">基本计算器<a class="anchor" href="#%e5%9f%ba%e6%9c%ac%e8%ae%a1%e7%ae%97%e5%99%a8">#</a></h5>
+<h4 id="链表">链表<a class="anchor" href="#%e9%93%be%e8%a1%a8">#</a></h4>
+<h5 id="-141-环形链表">✅ 141 环形链表<a class="anchor" href="#-141-%e7%8e%af%e5%bd%a2%e9%93%be%e8%a1%a8">#</a></h5>
+<h5 id="-2-两数相加">✅ 2 两数相加<a class="anchor" href="#-2-%e4%b8%a4%e6%95%b0%e7%9b%b8%e5%8a%a0">#</a></h5>
+<h5 id="-21-合并两个有序链表">✅ 21 合并两个有序链表<a class="anchor" href="#-21-%e5%90%88%e5%b9%b6%e4%b8%a4%e4%b8%aa%e6%9c%89%e5%ba%8f%e9%93%be%e8%a1%a8">#</a></h5>
+<h5 id="-138-随机链表的复制">✅ 138 随机链表的复制<a class="anchor" href="#-138-%e9%9a%8f%e6%9c%ba%e9%93%be%e8%a1%a8%e7%9a%84%e5%a4%8d%e5%88%b6">#</a></h5>
+<h5 id="-92-反转链表-ii">✅ 92 反转链表 II<a class="anchor" href="#-92-%e5%8f%8d%e8%bd%ac%e9%93%be%e8%a1%a8-ii">#</a></h5>
+<h5 id="k-个一组翻转链表">K 个一组翻转链表<a class="anchor" href="#k-%e4%b8%aa%e4%b8%80%e7%bb%84%e7%bf%bb%e8%bd%ac%e9%93%be%e8%a1%a8">#</a></h5>
+<h5 id="-19-删除链表的倒数第-n-个结点">✅ 19 删除链表的倒数第 N 个结点<a class="anchor" href="#-19-%e5%88%a0%e9%99%a4%e9%93%be%e8%a1%a8%e7%9a%84%e5%80%92%e6%95%b0%e7%ac%ac-n-%e4%b8%aa%e7%bb%93%e7%82%b9">#</a></h5>
+<h5 id="-82-删除排序链表中的重复元素-ii">✅ 82 删除排序链表中的重复元素 II<a class="anchor" href="#-82-%e5%88%a0%e9%99%a4%e6%8e%92%e5%ba%8f%e9%93%be%e8%a1%a8%e4%b8%ad%e7%9a%84%e9%87%8d%e5%a4%8d%e5%85%83%e7%b4%a0-ii">#</a></h5>
+<h5 id="-61-旋转链表">✅ 61 旋转链表<a class="anchor" href="#-61-%e6%97%8b%e8%bd%ac%e9%93%be%e8%a1%a8">#</a></h5>
+<h5 id="-86-分隔链表">✅ 86 分隔链表<a class="anchor" href="#-86-%e5%88%86%e9%9a%94%e9%93%be%e8%a1%a8">#</a></h5>
+<h5 id="-146-lru-缓存">✅ 146 LRU 缓存<a class="anchor" href="#-146-lru-%e7%bc%93%e5%ad%98">#</a></h5>
+<h4 id="二叉树">二叉树<a class="anchor" href="#%e4%ba%8c%e5%8f%89%e6%a0%91">#</a></h4>
+<h5 id="-104-二叉树的最大深度">✅ 104 二叉树的最大深度<a class="anchor" href="#-104-%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e6%9c%80%e5%a4%a7%e6%b7%b1%e5%ba%a6">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/description/?envType=study-plan-v2&amp;envId=top-interview-150">104. 二叉树的最大深度</a></li>
+</ul>
+<h5 id="-100-相同的树">✅ 100 相同的树<a class="anchor" href="#-100-%e7%9b%b8%e5%90%8c%e7%9a%84%e6%a0%91">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/same-tree/description/?envType=study-plan-v2&amp;envId=top-interview-150">100. 相同的树</a></li>
+</ul>
+<h5 id="-226-翻转二叉树">✅ 226 翻转二叉树<a class="anchor" href="#-226-%e7%bf%bb%e8%bd%ac%e4%ba%8c%e5%8f%89%e6%a0%91">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/invert-binary-tree/description/?envType=study-plan-v2&amp;envId=top-interview-150">226. 翻转二叉树</a></li>
+</ul>
+<h5 id="-101-对称二叉树">✅ 101 对称二叉树<a class="anchor" href="#-101-%e5%af%b9%e7%a7%b0%e4%ba%8c%e5%8f%89%e6%a0%91">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/symmetric-tree/?envType=study-plan-v2&amp;envId=top-interview-150">101. 对称二叉树</a></li>
+</ul>
+<h5 id="-105-从前序与中序遍历序列构造二叉树">✅ 105 从前序与中序遍历序列构造二叉树<a class="anchor" href="#-105-%e4%bb%8e%e5%89%8d%e5%ba%8f%e4%b8%8e%e4%b8%ad%e5%ba%8f%e9%81%8d%e5%8e%86%e5%ba%8f%e5%88%97%e6%9e%84%e9%80%a0%e4%ba%8c%e5%8f%89%e6%a0%91">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/?envType=study-plan-v2&amp;envId=top-interview-150">105. 从前序与中序遍历序列构造二叉树</a></li>
+</ul>
+<h5 id="-106-从中序与后序遍历序列构造二叉树">✅ 106 从中序与后序遍历序列构造二叉树<a class="anchor" href="#-106-%e4%bb%8e%e4%b8%ad%e5%ba%8f%e4%b8%8e%e5%90%8e%e5%ba%8f%e9%81%8d%e5%8e%86%e5%ba%8f%e5%88%97%e6%9e%84%e9%80%a0%e4%ba%8c%e5%8f%89%e6%a0%91">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/?envType=study-plan-v2&amp;envId=top-interview-150">106. 从中序与后序遍历序列构造二叉树</a></li>
+</ul>
+<h5 id="-117-填充每个节点的下一个右侧节点指针-ii">✅ 117 填充每个节点的下一个右侧节点指针 II<a class="anchor" href="#-117-%e5%a1%ab%e5%85%85%e6%af%8f%e4%b8%aa%e8%8a%82%e7%82%b9%e7%9a%84%e4%b8%8b%e4%b8%80%e4%b8%aa%e5%8f%b3%e4%be%a7%e8%8a%82%e7%82%b9%e6%8c%87%e9%92%88-ii">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/populating-next-right-pointers-in-each-node-ii/description/?envType=study-plan-v2&amp;envId=top-interview-150">117. 填充每个节点的下一个右侧节点指针 II</a></li>
+</ul>
+<h5 id="二叉树展开为链表">二叉树展开为链表<a class="anchor" href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e5%b1%95%e5%bc%80%e4%b8%ba%e9%93%be%e8%a1%a8">#</a></h5>
+<h5 id="-路径总和">✅ 路径总和<a class="anchor" href="#-%e8%b7%af%e5%be%84%e6%80%bb%e5%92%8c">#</a></h5>
+<h5 id="求根节点到叶节点数字之和">求根节点到叶节点数字之和<a class="anchor" href="#%e6%b1%82%e6%a0%b9%e8%8a%82%e7%82%b9%e5%88%b0%e5%8f%b6%e8%8a%82%e7%82%b9%e6%95%b0%e5%ad%97%e4%b9%8b%e5%92%8c">#</a></h5>
+<h5 id="二叉树中的最大路径和">二叉树中的最大路径和<a class="anchor" href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e4%b8%ad%e7%9a%84%e6%9c%80%e5%a4%a7%e8%b7%af%e5%be%84%e5%92%8c">#</a></h5>
+<h5 id="二叉搜索树迭代器">二叉搜索树迭代器<a class="anchor" href="#%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e8%bf%ad%e4%bb%a3%e5%99%a8">#</a></h5>
+<h5 id="完全二叉树的节点个数">完全二叉树的节点个数<a class="anchor" href="#%e5%ae%8c%e5%85%a8%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e8%8a%82%e7%82%b9%e4%b8%aa%e6%95%b0">#</a></h5>
+<h5 id="二叉树的最近公共祖先">二叉树的最近公共祖先<a class="anchor" href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e6%9c%80%e8%bf%91%e5%85%ac%e5%85%b1%e7%a5%96%e5%85%88">#</a></h5>
+<h4 id="二叉树层次遍历">二叉树层次遍历<a class="anchor" href="#%e4%ba%8c%e5%8f%89%e6%a0%91%e5%b1%82%e6%ac%a1%e9%81%8d%e5%8e%86">#</a></h4>
+<h5 id="-199-二叉树的右视图">✅ 199 二叉树的右视图<a class="anchor" href="#-199-%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%8f%b3%e8%a7%86%e5%9b%be">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/binary-tree-right-side-view/description/?envType=study-plan-v2&amp;envId=top-interview-150">199.二叉树的右视图</a></li>
+</ul>
+<h5 id="-637-二叉树的层平均值">✅ 637 二叉树的层平均值<a class="anchor" href="#-637-%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%b1%82%e5%b9%b3%e5%9d%87%e5%80%bc">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/average-of-levels-in-binary-tree/?envType=study-plan-v2&amp;envId=top-interview-150">637. 二叉树的层平均值</a></li>
+</ul>
+<h5 id="-二叉树的层序遍历">✅ 二叉树的层序遍历<a class="anchor" href="#-%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%b1%82%e5%ba%8f%e9%81%8d%e5%8e%86">#</a></h5>
+<h5 id="-二叉树的锯齿形层序遍历">✅ 二叉树的锯齿形层序遍历<a class="anchor" href="#-%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e9%94%af%e9%bd%bf%e5%bd%a2%e5%b1%82%e5%ba%8f%e9%81%8d%e5%8e%86">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/description/?envType=study-plan-v2&amp;envId=top-interview-150">103.二叉树的锯齿形层序遍历</a></li>
+</ul>
+<h4 id="-二叉搜索树">✅ 二叉搜索树<a class="anchor" href="#-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91">#</a></h4>
+<h5 id="-二叉搜索树的最小绝对差">✅ 二叉搜索树的最小绝对差<a class="anchor" href="#-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84%e6%9c%80%e5%b0%8f%e7%bb%9d%e5%af%b9%e5%b7%ae">#</a></h5>
+<h5 id="-二叉搜索树中第-k-小的元素">✅ 二叉搜索树中第 K 小的元素<a class="anchor" href="#-%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e4%b8%ad%e7%ac%ac-k-%e5%b0%8f%e7%9a%84%e5%85%83%e7%b4%a0">#</a></h5>
+<h5 id="验证二叉搜索树">验证二叉搜索树<a class="anchor" href="#%e9%aa%8c%e8%af%81%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91">#</a></h5>
+<h4 id="图">图<a class="anchor" href="#%e5%9b%be">#</a></h4>
+<h5 id="-200-岛屿数量">✅ 200 岛屿数量<a class="anchor" href="#-200-%e5%b2%9b%e5%b1%bf%e6%95%b0%e9%87%8f">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/number-of-islands/description/?envType=study-plan-v2&amp;envId=top-interview-150">200.岛屿数量</a></li>
+</ul>
+<h5 id="被围绕的区域">被围绕的区域<a class="anchor" href="#%e8%a2%ab%e5%9b%b4%e7%bb%95%e7%9a%84%e5%8c%ba%e5%9f%9f">#</a></h5>
+<h5 id="克隆图">克隆图<a class="anchor" href="#%e5%85%8b%e9%9a%86%e5%9b%be">#</a></h5>
+<h5 id="除法求值">除法求值<a class="anchor" href="#%e9%99%a4%e6%b3%95%e6%b1%82%e5%80%bc">#</a></h5>
+<h5 id="课程表">课程表<a class="anchor" href="#%e8%af%be%e7%a8%8b%e8%a1%a8">#</a></h5>
+<h5 id="课程表-ii">课程表 II<a class="anchor" href="#%e8%af%be%e7%a8%8b%e8%a1%a8-ii">#</a></h5>
+<h4 id="图的广度优先搜索">图的广度优先搜索<a class="anchor" href="#%e5%9b%be%e7%9a%84%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2">#</a></h4>
+<h5 id="909-蛇梯棋">909 蛇梯棋<a class="anchor" href="#909-%e8%9b%87%e6%a2%af%e6%a3%8b">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/snakes-and-ladders/description/?envType=study-plan-v2&amp;envId=top-interview-150">909 蛇梯棋</a></li>
+</ul>
+<p>官方题解</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">snakesAndLadders</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span> board) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> board.<span style="color:#a6e22e">length</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> vis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>n <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> 1<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 广度优先使用队列</span>
+</span></span><span style="display:flex;"><span>        Queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// int[0] cell的序号</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// int[1] 到达这个cell所需要的步数</span>
+</span></span><span style="display:flex;"><span>        queue.<span style="color:#a6e22e">offer</span>(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span>{1, 0});
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>queue.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> p <span style="color:#f92672">=</span> queue.<span style="color:#a6e22e">poll</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 遍历6个可能下棋的位置</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1; i <span style="color:#f92672">&lt;=</span> 6; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> nxt <span style="color:#f92672">=</span> p<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> i;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (nxt <span style="color:#f92672">&gt;</span> n <span style="color:#f92672">*</span> n) { <span style="color:#75715e">// 超出边界</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> rc <span style="color:#f92672">=</span> id2rc(nxt, n); <span style="color:#75715e">// 得到下一步的行列</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (board<span style="color:#f92672">[</span>rc<span style="color:#f92672">[</span>0<span style="color:#f92672">]][</span>rc<span style="color:#f92672">[</span>1<span style="color:#f92672">]]</span> <span style="color:#f92672">&gt;</span> 0) { <span style="color:#75715e">// 存在蛇或梯子</span>
+</span></span><span style="display:flex;"><span>                    nxt <span style="color:#f92672">=</span> board<span style="color:#f92672">[</span>rc<span style="color:#f92672">[</span>0<span style="color:#f92672">]][</span>rc<span style="color:#f92672">[</span>1<span style="color:#f92672">]]</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (nxt <span style="color:#f92672">==</span> n <span style="color:#f92672">*</span> n) { <span style="color:#75715e">// 到达终点</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> p<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> 1;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>vis<span style="color:#f92672">[</span>nxt<span style="color:#f92672">]</span>) {
+</span></span><span style="display:flex;"><span>                    vis<span style="color:#f92672">[</span>nxt<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                    queue.<span style="color:#a6e22e">offer</span>(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span>{nxt, p<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> 1}); <span style="color:#75715e">// 扩展新状态</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">id2rc</span>(<span style="color:#66d9ef">int</span> id, <span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> (id <span style="color:#f92672">-</span> 1) <span style="color:#f92672">/</span> n, c <span style="color:#f92672">=</span> (id <span style="color:#f92672">-</span> 1) <span style="color:#f92672">%</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (r <span style="color:#f92672">%</span> 2 <span style="color:#f92672">==</span> 1) {
+</span></span><span style="display:flex;"><span>            c <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> 1 <span style="color:#f92672">-</span> c;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span>{n <span style="color:#f92672">-</span> 1 <span style="color:#f92672">-</span> r, c};
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="最小基因变化">最小基因变化<a class="anchor" href="#%e6%9c%80%e5%b0%8f%e5%9f%ba%e5%9b%a0%e5%8f%98%e5%8c%96">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/minimum-genetic-mutation/solutions/1470943/zui-xiao-ji-yin-bian-hua-by-leetcode-sol-lhwy/?envType=study-plan-v2&amp;envId=top-interview-150">最小基因变化</a></li>
+</ul>
+<h6 id="方法一广度优先搜索">方法一：广度优先搜索<a class="anchor" href="#%e6%96%b9%e6%b3%95%e4%b8%80%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2">#</a></h6>
+<p>官方题解</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minMutation</span>(String start, String end, String<span style="color:#f92672">[]</span> bank) {
+</span></span><span style="display:flex;"><span>        Set<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> cnt <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>        Set<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> visited <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> keys <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;A&#39;</span>, <span style="color:#e6db74">&#39;C&#39;</span>, <span style="color:#e6db74">&#39;G&#39;</span>, <span style="color:#e6db74">&#39;T&#39;</span>};
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (String w : bank) {
+</span></span><span style="display:flex;"><span>            cnt.<span style="color:#a6e22e">add</span>(w);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (start.<span style="color:#a6e22e">equals</span>(end)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> 0;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>cnt.<span style="color:#a6e22e">contains</span>(end)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        Queue<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayDeque<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>        queue.<span style="color:#a6e22e">offer</span>(start);
+</span></span><span style="display:flex;"><span>        visited.<span style="color:#a6e22e">add</span>(start);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> step <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>queue.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> queue.<span style="color:#a6e22e">size</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> sz; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                String curr <span style="color:#f92672">=</span> queue.<span style="color:#a6e22e">poll</span>();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 0; j <span style="color:#f92672">&lt;</span> 8; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> 0; k <span style="color:#f92672">&lt;</span> 4; k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">// 24种变异</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">if</span> (keys<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">!=</span> curr.<span style="color:#a6e22e">charAt</span>(j)) {
+</span></span><span style="display:flex;"><span>                            StringBuffer sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuffer(curr);
+</span></span><span style="display:flex;"><span>                            sb.<span style="color:#a6e22e">setCharAt</span>(j, keys<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span>);
+</span></span><span style="display:flex;"><span>                            String next <span style="color:#f92672">=</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>                            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>visited.<span style="color:#a6e22e">contains</span>(next) <span style="color:#75715e">/*没有遍历过*/</span> <span style="color:#f92672">&amp;&amp;</span> cnt.<span style="color:#a6e22e">contains</span>(next) <span style="color:#75715e">/*在基因库中*/</span>) {
+</span></span><span style="display:flex;"><span>                                <span style="color:#66d9ef">if</span> (next.<span style="color:#a6e22e">equals</span>(end)) {
+</span></span><span style="display:flex;"><span>                                    <span style="color:#66d9ef">return</span> step;
+</span></span><span style="display:flex;"><span>                                }
+</span></span><span style="display:flex;"><span>                                <span style="color:#75715e">// 在基因库中，但不是目标值</span>
+</span></span><span style="display:flex;"><span>                                queue.<span style="color:#a6e22e">offer</span>(next);
+</span></span><span style="display:flex;"><span>                                visited.<span style="color:#a6e22e">add</span>(next);
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            step<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h6 id="方法二预处理优化">方法二：预处理优化<a class="anchor" href="#%e6%96%b9%e6%b3%95%e4%ba%8c%e9%a2%84%e5%a4%84%e7%90%86%e4%bc%98%e5%8c%96">#</a></h6>
+<p>官方题解</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minMutation</span>(String start, String end, String<span style="color:#f92672">[]</span> bank) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> start.<span style="color:#a6e22e">length</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> bank.<span style="color:#a6e22e">length</span>;
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;[]</span> adj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> List<span style="color:#f92672">[</span>n<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            adj<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> endIndex <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 记录目标基因序列在基因库中的下标</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (end.<span style="color:#a6e22e">equals</span>(bank<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>)) {
+</span></span><span style="display:flex;"><span>                endIndex <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> 1; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> mutations <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> 0; k <span style="color:#f92672">&lt;</span> m; k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (bank<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>.<span style="color:#a6e22e">charAt</span>(k) <span style="color:#f92672">!=</span> bank<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span>.<span style="color:#a6e22e">charAt</span>(k)) {
+</span></span><span style="display:flex;"><span>                        mutations<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (mutations <span style="color:#f92672">&gt;</span> 1) {
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 记录基因库中每个基因序列可以进行的有效基因变异</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (mutations <span style="color:#f92672">==</span> 1) {
+</span></span><span style="display:flex;"><span>                    adj<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>.<span style="color:#a6e22e">add</span>(j);
+</span></span><span style="display:flex;"><span>                    adj<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span>.<span style="color:#a6e22e">add</span>(i);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 目标基因序列不再基因库中</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (endIndex <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Queue<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayDeque<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> visited <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>n<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> step <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> mutations <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> 0; k <span style="color:#f92672">&lt;</span> m; k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (start.<span style="color:#a6e22e">charAt</span>(k) <span style="color:#f92672">!=</span> bank<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>.<span style="color:#a6e22e">charAt</span>(k)) {
+</span></span><span style="display:flex;"><span>                    mutations<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (mutations <span style="color:#f92672">&gt;</span> 1) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 如果执行到这里，说明初始基因序列可以通过一次有效变异为当前遍历的基因库序列</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 队列记录的是一次有效变异可变的基因序列下标（在基因库中的下标）</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (mutations <span style="color:#f92672">==</span> 1) {
+</span></span><span style="display:flex;"><span>                queue.<span style="color:#a6e22e">offer</span>(i);
+</span></span><span style="display:flex;"><span>                visited<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>queue.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> queue.<span style="color:#a6e22e">size</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> sz; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> curr <span style="color:#f92672">=</span> queue.<span style="color:#a6e22e">poll</span>();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (curr <span style="color:#f92672">==</span> endIndex) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> step;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> next : adj<span style="color:#f92672">[</span>curr<span style="color:#f92672">]</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (visited<span style="color:#f92672">[</span>next<span style="color:#f92672">]</span>) {
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    visited<span style="color:#f92672">[</span>next<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                    queue.<span style="color:#a6e22e">offer</span>(next);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            step<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="单词接龙">单词接龙<a class="anchor" href="#%e5%8d%95%e8%af%8d%e6%8e%a5%e9%be%99">#</a></h5>
+<h4 id="-字典树">✅ 字典树<a class="anchor" href="#-%e5%ad%97%e5%85%b8%e6%a0%91">#</a></h4>
+<h5 id="-208-实现-trie-前缀树">✅ 208 实现 Trie (前缀树)<a class="anchor" href="#-208-%e5%ae%9e%e7%8e%b0-trie-%e5%89%8d%e7%bc%80%e6%a0%91">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/implement-trie-prefix-tree/description/?envType=study-plan-v2&amp;envId=top-interview-150">208 实现 Trie (前缀树)</a></li>
+</ul>
+<h5 id="-211-添加与搜索单词---数据结构设计">✅ 211 添加与搜索单词 - 数据结构设计<a class="anchor" href="#-211-%e6%b7%bb%e5%8a%a0%e4%b8%8e%e6%90%9c%e7%b4%a2%e5%8d%95%e8%af%8d---%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e8%ae%be%e8%ae%a1">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/design-add-and-search-words-data-structure/description/?envType=study-plan-v2&amp;envId=top-interview-150">211 添加与搜索单词 - 数据结构设计</a></li>
+</ul>
+<h5 id="-212-单词搜索-ii">✅ 212 单词搜索 II<a class="anchor" href="#-212-%e5%8d%95%e8%af%8d%e6%90%9c%e7%b4%a2-ii">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/word-search-ii/?envType=study-plan-v2&amp;envId=top-interview-150">212 单词搜索 II</a></li>
+</ul>
+<h4 id="-回溯">✅ 回溯<a class="anchor" href="#-%e5%9b%9e%e6%ba%af">#</a></h4>
+<h5 id="-电话号码的字母组合">✅ 电话号码的字母组合<a class="anchor" href="#-%e7%94%b5%e8%af%9d%e5%8f%b7%e7%a0%81%e7%9a%84%e5%ad%97%e6%af%8d%e7%bb%84%e5%90%88">#</a></h5>
+<h5 id="-组合">✅ 组合<a class="anchor" href="#-%e7%bb%84%e5%90%88">#</a></h5>
+<h5 id="-全排列">✅ 全排列<a class="anchor" href="#-%e5%85%a8%e6%8e%92%e5%88%97">#</a></h5>
+<h5 id="-组合总和">✅ 组合总和<a class="anchor" href="#-%e7%bb%84%e5%90%88%e6%80%bb%e5%92%8c">#</a></h5>
+<h5 id="-n-皇后-ii">✅ N 皇后 II<a class="anchor" href="#-n-%e7%9a%87%e5%90%8e-ii">#</a></h5>
+<h5 id="-括号生成">✅ 括号生成<a class="anchor" href="#-%e6%8b%ac%e5%8f%b7%e7%94%9f%e6%88%90">#</a></h5>
+<h5 id="-单词搜索">✅ 单词搜索<a class="anchor" href="#-%e5%8d%95%e8%af%8d%e6%90%9c%e7%b4%a2">#</a></h5>
+<h4 id="分治">分治<a class="anchor" href="#%e5%88%86%e6%b2%bb">#</a></h4>
+<h5 id="-108-将有序数组转换为二叉搜索树">✅ 108 将有序数组转换为二叉搜索树<a class="anchor" href="#-108-%e5%b0%86%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84%e8%bd%ac%e6%8d%a2%e4%b8%ba%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/description/?envType=study-plan-v2&amp;envId=top-interview-150">108 将有序数组转换为二叉搜索树</a></li>
+</ul>
+<h5 id="148-排序链表">148 排序链表<a class="anchor" href="#148-%e6%8e%92%e5%ba%8f%e9%93%be%e8%a1%a8">#</a></h5>
+<ul>
+<li><a href="https://leetcode.cn/problems/sort-list/?envType=study-plan-v2&amp;envId=top-interview-150">148 排序链表</a></li>
+</ul>
+<h5 id="建立四叉树">建立四叉树<a class="anchor" href="#%e5%bb%ba%e7%ab%8b%e5%9b%9b%e5%8f%89%e6%a0%91">#</a></h5>
+<h5 id="合并-k-个升序链表">合并 K 个升序链表<a class="anchor" href="#%e5%90%88%e5%b9%b6-k-%e4%b8%aa%e5%8d%87%e5%ba%8f%e9%93%be%e8%a1%a8">#</a></h5>
+<h4 id="kadane-算法">Kadane 算法<a class="anchor" href="#kadane-%e7%ae%97%e6%b3%95">#</a></h4>
+<h5 id="最大子数组和">最大子数组和<a class="anchor" href="#%e6%9c%80%e5%a4%a7%e5%ad%90%e6%95%b0%e7%bb%84%e5%92%8c">#</a></h5>
+<h5 id="环形子数组的最大和">环形子数组的最大和<a class="anchor" href="#%e7%8e%af%e5%bd%a2%e5%ad%90%e6%95%b0%e7%bb%84%e7%9a%84%e6%9c%80%e5%a4%a7%e5%92%8c">#</a></h5>
+<h4 id="二分查找">二分查找<a class="anchor" href="#%e4%ba%8c%e5%88%86%e6%9f%a5%e6%89%be">#</a></h4>
+<h5 id="搜索插入位置">搜索插入位置<a class="anchor" href="#%e6%90%9c%e7%b4%a2%e6%8f%92%e5%85%a5%e4%bd%8d%e7%bd%ae">#</a></h5>
+<h5 id="搜索二维矩阵">搜索二维矩阵<a class="anchor" href="#%e6%90%9c%e7%b4%a2%e4%ba%8c%e7%bb%b4%e7%9f%a9%e9%98%b5">#</a></h5>
+<h5 id="寻找峰值">寻找峰值<a class="anchor" href="#%e5%af%bb%e6%89%be%e5%b3%b0%e5%80%bc">#</a></h5>
+<h5 id="搜索旋转排序数组">搜索旋转排序数组<a class="anchor" href="#%e6%90%9c%e7%b4%a2%e6%97%8b%e8%bd%ac%e6%8e%92%e5%ba%8f%e6%95%b0%e7%bb%84">#</a></h5>
+<h5 id="在排序数组中查找元素的第一个和最后一个位置">在排序数组中查找元素的第一个和最后一个位置<a class="anchor" href="#%e5%9c%a8%e6%8e%92%e5%ba%8f%e6%95%b0%e7%bb%84%e4%b8%ad%e6%9f%a5%e6%89%be%e5%85%83%e7%b4%a0%e7%9a%84%e7%ac%ac%e4%b8%80%e4%b8%aa%e5%92%8c%e6%9c%80%e5%90%8e%e4%b8%80%e4%b8%aa%e4%bd%8d%e7%bd%ae">#</a></h5>
+<h5 id="寻找旋转排序数组中的最小值">寻找旋转排序数组中的最小值<a class="anchor" href="#%e5%af%bb%e6%89%be%e6%97%8b%e8%bd%ac%e6%8e%92%e5%ba%8f%e6%95%b0%e7%bb%84%e4%b8%ad%e7%9a%84%e6%9c%80%e5%b0%8f%e5%80%bc">#</a></h5>
+<h5 id="寻找两个正序数组的中位数">寻找两个正序数组的中位数<a class="anchor" href="#%e5%af%bb%e6%89%be%e4%b8%a4%e4%b8%aa%e6%ad%a3%e5%ba%8f%e6%95%b0%e7%bb%84%e7%9a%84%e4%b8%ad%e4%bd%8d%e6%95%b0">#</a></h5>
+<h4 id="堆">堆<a class="anchor" href="#%e5%a0%86">#</a></h4>
+<h5 id="数组中的第k个最大元素">数组中的第K个最大元素<a class="anchor" href="#%e6%95%b0%e7%bb%84%e4%b8%ad%e7%9a%84%e7%ac%ack%e4%b8%aa%e6%9c%80%e5%a4%a7%e5%85%83%e7%b4%a0">#</a></h5>
+<h5 id="ipo">IPO<a class="anchor" href="#ipo">#</a></h5>
+<h5 id="查找和最小的-k-对数字">查找和最小的 K 对数字<a class="anchor" href="#%e6%9f%a5%e6%89%be%e5%92%8c%e6%9c%80%e5%b0%8f%e7%9a%84-k-%e5%af%b9%e6%95%b0%e5%ad%97">#</a></h5>
+<h5 id="数据流的中位数">数据流的中位数<a class="anchor" href="#%e6%95%b0%e6%8d%ae%e6%b5%81%e7%9a%84%e4%b8%ad%e4%bd%8d%e6%95%b0">#</a></h5>
+<h4 id="位运算">位运算<a class="anchor" href="#%e4%bd%8d%e8%bf%90%e7%ae%97">#</a></h4>
+<h5 id="二进制求和">二进制求和<a class="anchor" href="#%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%b1%82%e5%92%8c">#</a></h5>
+<h5 id="颠倒二进制位">颠倒二进制位<a class="anchor" href="#%e9%a2%a0%e5%80%92%e4%ba%8c%e8%bf%9b%e5%88%b6%e4%bd%8d">#</a></h5>
+<h5 id="位1的个数">位1的个数<a class="anchor" href="#%e4%bd%8d1%e7%9a%84%e4%b8%aa%e6%95%b0">#</a></h5>
+<h5 id="只出现一次的数字">只出现一次的数字<a class="anchor" href="#%e5%8f%aa%e5%87%ba%e7%8e%b0%e4%b8%80%e6%ac%a1%e7%9a%84%e6%95%b0%e5%ad%97">#</a></h5>
+<h5 id="只出现一次的数字-ii">只出现一次的数字 II<a class="anchor" href="#%e5%8f%aa%e5%87%ba%e7%8e%b0%e4%b8%80%e6%ac%a1%e7%9a%84%e6%95%b0%e5%ad%97-ii">#</a></h5>
+<h5 id="数字范围按位与">数字范围按位与<a class="anchor" href="#%e6%95%b0%e5%ad%97%e8%8c%83%e5%9b%b4%e6%8c%89%e4%bd%8d%e4%b8%8e">#</a></h5>
+<h4 id="数学">数学<a class="anchor" href="#%e6%95%b0%e5%ad%a6">#</a></h4>
+<h5 id="-9-回文数">✅ 9 回文数<a class="anchor" href="#-9-%e5%9b%9e%e6%96%87%e6%95%b0">#</a></h5>
+<h5 id="-66-加一">✅ 66 加一<a class="anchor" href="#-66-%e5%8a%a0%e4%b8%80">#</a></h5>
+<h5 id="-172-阶乘后的零">✅ 172 阶乘后的零<a class="anchor" href="#-172-%e9%98%b6%e4%b9%98%e5%90%8e%e7%9a%84%e9%9b%b6">#</a></h5>
+<h5 id="-69-x-的平方根">✅ 69 x 的平方根<a class="anchor" href="#-69-x-%e7%9a%84%e5%b9%b3%e6%96%b9%e6%a0%b9">#</a></h5>
+<h5 id="50-powx-n">50 Pow(x, n)<a class="anchor" href="#50-powx-n">#</a></h5>
+<h5 id="149-直线上最多的点数">149 直线上最多的点数<a class="anchor" href="#149-%e7%9b%b4%e7%ba%bf%e4%b8%8a%e6%9c%80%e5%a4%9a%e7%9a%84%e7%82%b9%e6%95%b0">#</a></h5>
+<h4 id="一维动态规划">一维动态规划<a class="anchor" href="#%e4%b8%80%e7%bb%b4%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92">#</a></h4>
+<h5 id="-爬楼梯">✅ 爬楼梯<a class="anchor" href="#-%e7%88%ac%e6%a5%bc%e6%a2%af">#</a></h5>
+<h5 id="打家劫舍">打家劫舍<a class="anchor" href="#%e6%89%93%e5%ae%b6%e5%8a%ab%e8%88%8d">#</a></h5>
+<h5 id="单词拆分">单词拆分<a class="anchor" href="#%e5%8d%95%e8%af%8d%e6%8b%86%e5%88%86">#</a></h5>
+<h5 id="零钱兑换">零钱兑换<a class="anchor" href="#%e9%9b%b6%e9%92%b1%e5%85%91%e6%8d%a2">#</a></h5>
+<h5 id="最长递增子序列">最长递增子序列<a class="anchor" href="#%e6%9c%80%e9%95%bf%e9%80%92%e5%a2%9e%e5%ad%90%e5%ba%8f%e5%88%97">#</a></h5>
+<h4 id="多维动态规划">多维动态规划<a class="anchor" href="#%e5%a4%9a%e7%bb%b4%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92">#</a></h4>
+<h5 id="三角形最小路径和">三角形最小路径和<a class="anchor" href="#%e4%b8%89%e8%a7%92%e5%bd%a2%e6%9c%80%e5%b0%8f%e8%b7%af%e5%be%84%e5%92%8c">#</a></h5>
+<h5 id="最小路径和">最小路径和<a class="anchor" href="#%e6%9c%80%e5%b0%8f%e8%b7%af%e5%be%84%e5%92%8c">#</a></h5>
+<h5 id="不同路径-ii">不同路径 II<a class="anchor" href="#%e4%b8%8d%e5%90%8c%e8%b7%af%e5%be%84-ii">#</a></h5>
+<h5 id="最长回文子串">最长回文子串<a class="anchor" href="#%e6%9c%80%e9%95%bf%e5%9b%9e%e6%96%87%e5%ad%90%e4%b8%b2">#</a></h5>
+<h5 id="交错字符串">交错字符串<a class="anchor" href="#%e4%ba%a4%e9%94%99%e5%ad%97%e7%ac%a6%e4%b8%b2">#</a></h5>
+<h5 id="编辑距离">编辑距离<a class="anchor" href="#%e7%bc%96%e8%be%91%e8%b7%9d%e7%a6%bb">#</a></h5>
+<h5 id="买卖股票的最佳时机-iii">买卖股票的最佳时机 III<a class="anchor" href="#%e4%b9%b0%e5%8d%96%e8%82%a1%e7%a5%a8%e7%9a%84%e6%9c%80%e4%bd%b3%e6%97%b6%e6%9c%ba-iii">#</a></h5>
+<h5 id="买卖股票的最佳时机-iv">买卖股票的最佳时机 IV<a class="anchor" href="#%e4%b9%b0%e5%8d%96%e8%82%a1%e7%a5%a8%e7%9a%84%e6%9c%80%e4%bd%b3%e6%97%b6%e6%9c%ba-iv">#</a></h5>
+<h5 id="最大正方形">最大正方形<a class="anchor" href="#%e6%9c%80%e5%a4%a7%e6%ad%a3%e6%96%b9%e5%bd%a2">#</a></h5>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>剑指offer题目对应</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/post/computer-science/big-data/hadoop/" class="flex align-center">
+        <span>hadoop</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+  <div class="book-copyright flex justify-center">
+    <small>Penruins - <a href="/">Main Page</a></small>
+  </div>
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#面试经典-150-题">面试经典 150 题</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#数组--字符串">数组 / 字符串</a>
+                  <ul>
+                    <li><a href="#-88-合并两个有序数组">✅ 88 合并两个有序数组</a></li>
+                    <li><a href="#-27-移除元素">✅ 27 移除元素</a></li>
+                    <li><a href="#-26-删除有序数组中的重复项">✅ 26 删除有序数组中的重复项</a></li>
+                    <li><a href="#-80-删除有序数组中的重复项-ii">✅ 80 删除有序数组中的重复项 II</a></li>
+                    <li><a href="#-169-多数元素">✅ 169 多数元素</a></li>
+                    <li><a href="#-189-轮转数组">✅ 189 轮转数组</a></li>
+                    <li><a href="#-121-买卖股票的最佳时机">✅ 121 买卖股票的最佳时机</a></li>
+                    <li><a href="#122-买卖股票的最佳时机-ii">122 买卖股票的最佳时机 II</a></li>
+                    <li><a href="#-55-跳跃游戏">✅ 55 跳跃游戏</a></li>
+                    <li><a href="#-45-跳跃游戏-ii">✅ 45 跳跃游戏 II</a></li>
+                    <li><a href="#-274-h-指数">✅ 274 H 指数</a></li>
+                    <li><a href="#o1-时间插入删除和获取随机元素">O(1) 时间插入、删除和获取随机元素</a></li>
+                    <li><a href="#除自身以外数组的乘积">除自身以外数组的乘积</a></li>
+                    <li><a href="#加油站">加油站</a></li>
+                    <li><a href="#分发糖果">分发糖果</a></li>
+                    <li><a href="#接雨水">接雨水</a></li>
+                    <li><a href="#-13-罗马数字转整数">✅ 13 罗马数字转整数</a></li>
+                    <li><a href="#整数转罗马数字">整数转罗马数字</a></li>
+                    <li><a href="#-58-最后一个单词的长度">✅ 58 最后一个单词的长度</a></li>
+                    <li><a href="#-14-最长公共前缀">✅ 14 最长公共前缀</a></li>
+                    <li><a href="#-151-反转字符串中的单词">✅ 151 反转字符串中的单词</a></li>
+                    <li><a href="#z-字形变换">Z 字形变换</a></li>
+                    <li><a href="#-28-找出字符串中第一个匹配项的下标">✅ 28 找出字符串中第一个匹配项的下标</a></li>
+                    <li><a href="#文本左右对齐">文本左右对齐</a></li>
+                  </ul>
+                </li>
+                <li><a href="#双指针">双指针</a>
+                  <ul>
+                    <li><a href="#-125-验证回文串">✅ 125 验证回文串</a></li>
+                    <li><a href="#-392-判断子序列">✅ 392 判断子序列</a></li>
+                    <li><a href="#-167-两数之和-ii---输入有序数组">✅ 167 两数之和 II - 输入有序数组</a></li>
+                    <li><a href="#盛最多水的容器">盛最多水的容器</a></li>
+                    <li><a href="#三数之和">三数之和</a></li>
+                  </ul>
+                </li>
+                <li><a href="#滑动窗口">滑动窗口</a>
+                  <ul>
+                    <li><a href="#-长度最小的子数组">✅ 长度最小的子数组</a></li>
+                    <li><a href="#-无重复字符的最长子串">✅ 无重复字符的最长子串</a></li>
+                    <li><a href="#-串联所有单词的子串">✅ 串联所有单词的子串</a></li>
+                    <li><a href="#最小覆盖子串">最小覆盖子串</a></li>
+                  </ul>
+                </li>
+                <li><a href="#矩阵">矩阵</a>
+                  <ul>
+                    <li><a href="#-有效的数独">✅ 有效的数独</a></li>
+                    <li><a href="#-螺旋矩阵">✅ 螺旋矩阵</a></li>
+                    <li><a href="#旋转图像">旋转图像</a></li>
+                    <li><a href="#-矩阵置零">✅ 矩阵置零</a></li>
+                    <li><a href="#-生命游戏">✅ 生命游戏</a></li>
+                  </ul>
+                </li>
+                <li><a href="#哈希表">哈希表</a>
+                  <ul>
+                    <li><a href="#-383-赎金信">✅ 383 赎金信</a></li>
+                    <li><a href="#-205-同构字符串">✅ 205 同构字符串</a></li>
+                    <li><a href="#-290-单词规律">✅ 290 单词规律</a></li>
+                    <li><a href="#-242-有效的字母异位词">✅ 242 有效的字母异位词</a></li>
+                    <li><a href="#-49-字母异位词分组">✅ 49 字母异位词分组</a></li>
+                    <li><a href="#-1-两数之和">✅ 1 两数之和</a></li>
+                    <li><a href="#-202-快乐数">✅ 202 快乐数</a></li>
+                    <li><a href="#-219-存在重复元素-ii">✅ 219 存在重复元素 II</a></li>
+                    <li><a href="#-128-最长连续序列">✅ 128 最长连续序列</a></li>
+                  </ul>
+                </li>
+                <li><a href="#区间">区间</a>
+                  <ul>
+                    <li><a href="#汇总区间">汇总区间</a></li>
+                    <li><a href="#合并区间">合并区间</a></li>
+                    <li><a href="#插入区间">插入区间</a></li>
+                    <li><a href="#用最少数量的箭引爆气球">用最少数量的箭引爆气球</a></li>
+                    <li></li>
+                  </ul>
+                </li>
+                <li><a href="#栈">栈</a>
+                  <ul>
+                    <li><a href="#-20-有效的括号">✅ 20 有效的括号</a></li>
+                    <li><a href="#-71-简化路径">✅ 71 简化路径</a></li>
+                    <li><a href="#-155-最小栈">✅ 155 最小栈</a></li>
+                    <li><a href="#-150-逆波兰表达式求值">✅ 150 逆波兰表达式求值</a></li>
+                    <li><a href="#基本计算器">基本计算器</a></li>
+                  </ul>
+                </li>
+                <li><a href="#链表">链表</a>
+                  <ul>
+                    <li><a href="#-141-环形链表">✅ 141 环形链表</a></li>
+                    <li><a href="#-2-两数相加">✅ 2 两数相加</a></li>
+                    <li><a href="#-21-合并两个有序链表">✅ 21 合并两个有序链表</a></li>
+                    <li><a href="#-138-随机链表的复制">✅ 138 随机链表的复制</a></li>
+                    <li><a href="#-92-反转链表-ii">✅ 92 反转链表 II</a></li>
+                    <li><a href="#k-个一组翻转链表">K 个一组翻转链表</a></li>
+                    <li><a href="#-19-删除链表的倒数第-n-个结点">✅ 19 删除链表的倒数第 N 个结点</a></li>
+                    <li><a href="#-82-删除排序链表中的重复元素-ii">✅ 82 删除排序链表中的重复元素 II</a></li>
+                    <li><a href="#-61-旋转链表">✅ 61 旋转链表</a></li>
+                    <li><a href="#-86-分隔链表">✅ 86 分隔链表</a></li>
+                    <li><a href="#-146-lru-缓存">✅ 146 LRU 缓存</a></li>
+                  </ul>
+                </li>
+                <li><a href="#二叉树">二叉树</a>
+                  <ul>
+                    <li><a href="#-104-二叉树的最大深度">✅ 104 二叉树的最大深度</a></li>
+                    <li><a href="#-100-相同的树">✅ 100 相同的树</a></li>
+                    <li><a href="#-226-翻转二叉树">✅ 226 翻转二叉树</a></li>
+                    <li><a href="#-101-对称二叉树">✅ 101 对称二叉树</a></li>
+                    <li><a href="#-105-从前序与中序遍历序列构造二叉树">✅ 105 从前序与中序遍历序列构造二叉树</a></li>
+                    <li><a href="#-106-从中序与后序遍历序列构造二叉树">✅ 106 从中序与后序遍历序列构造二叉树</a></li>
+                    <li><a href="#-117-填充每个节点的下一个右侧节点指针-ii">✅ 117 填充每个节点的下一个右侧节点指针 II</a></li>
+                    <li><a href="#二叉树展开为链表">二叉树展开为链表</a></li>
+                    <li><a href="#-路径总和">✅ 路径总和</a></li>
+                    <li><a href="#求根节点到叶节点数字之和">求根节点到叶节点数字之和</a></li>
+                    <li><a href="#二叉树中的最大路径和">二叉树中的最大路径和</a></li>
+                    <li><a href="#二叉搜索树迭代器">二叉搜索树迭代器</a></li>
+                    <li><a href="#完全二叉树的节点个数">完全二叉树的节点个数</a></li>
+                    <li><a href="#二叉树的最近公共祖先">二叉树的最近公共祖先</a></li>
+                  </ul>
+                </li>
+                <li><a href="#二叉树层次遍历">二叉树层次遍历</a>
+                  <ul>
+                    <li><a href="#-199-二叉树的右视图">✅ 199 二叉树的右视图</a></li>
+                    <li><a href="#-637-二叉树的层平均值">✅ 637 二叉树的层平均值</a></li>
+                    <li><a href="#-二叉树的层序遍历">✅ 二叉树的层序遍历</a></li>
+                    <li><a href="#-二叉树的锯齿形层序遍历">✅ 二叉树的锯齿形层序遍历</a></li>
+                  </ul>
+                </li>
+                <li><a href="#-二叉搜索树">✅ 二叉搜索树</a>
+                  <ul>
+                    <li><a href="#-二叉搜索树的最小绝对差">✅ 二叉搜索树的最小绝对差</a></li>
+                    <li><a href="#-二叉搜索树中第-k-小的元素">✅ 二叉搜索树中第 K 小的元素</a></li>
+                    <li><a href="#验证二叉搜索树">验证二叉搜索树</a></li>
+                  </ul>
+                </li>
+                <li><a href="#图">图</a>
+                  <ul>
+                    <li><a href="#-200-岛屿数量">✅ 200 岛屿数量</a></li>
+                    <li><a href="#被围绕的区域">被围绕的区域</a></li>
+                    <li><a href="#克隆图">克隆图</a></li>
+                    <li><a href="#除法求值">除法求值</a></li>
+                    <li><a href="#课程表">课程表</a></li>
+                    <li><a href="#课程表-ii">课程表 II</a></li>
+                  </ul>
+                </li>
+                <li><a href="#图的广度优先搜索">图的广度优先搜索</a>
+                  <ul>
+                    <li><a href="#909-蛇梯棋">909 蛇梯棋</a></li>
+                    <li><a href="#最小基因变化">最小基因变化</a>
+                      <ul>
+                        <li><a href="#方法一广度优先搜索">方法一：广度优先搜索</a></li>
+                        <li><a href="#方法二预处理优化">方法二：预处理优化</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#单词接龙">单词接龙</a></li>
+                  </ul>
+                </li>
+                <li><a href="#-字典树">✅ 字典树</a>
+                  <ul>
+                    <li><a href="#-208-实现-trie-前缀树">✅ 208 实现 Trie (前缀树)</a></li>
+                    <li><a href="#-211-添加与搜索单词---数据结构设计">✅ 211 添加与搜索单词 - 数据结构设计</a></li>
+                    <li><a href="#-212-单词搜索-ii">✅ 212 单词搜索 II</a></li>
+                  </ul>
+                </li>
+                <li><a href="#-回溯">✅ 回溯</a>
+                  <ul>
+                    <li><a href="#-电话号码的字母组合">✅ 电话号码的字母组合</a></li>
+                    <li><a href="#-组合">✅ 组合</a></li>
+                    <li><a href="#-全排列">✅ 全排列</a></li>
+                    <li><a href="#-组合总和">✅ 组合总和</a></li>
+                    <li><a href="#-n-皇后-ii">✅ N 皇后 II</a></li>
+                    <li><a href="#-括号生成">✅ 括号生成</a></li>
+                    <li><a href="#-单词搜索">✅ 单词搜索</a></li>
+                  </ul>
+                </li>
+                <li><a href="#分治">分治</a>
+                  <ul>
+                    <li><a href="#-108-将有序数组转换为二叉搜索树">✅ 108 将有序数组转换为二叉搜索树</a></li>
+                    <li><a href="#148-排序链表">148 排序链表</a></li>
+                    <li><a href="#建立四叉树">建立四叉树</a></li>
+                    <li><a href="#合并-k-个升序链表">合并 K 个升序链表</a></li>
+                  </ul>
+                </li>
+                <li><a href="#kadane-算法">Kadane 算法</a>
+                  <ul>
+                    <li><a href="#最大子数组和">最大子数组和</a></li>
+                    <li><a href="#环形子数组的最大和">环形子数组的最大和</a></li>
+                  </ul>
+                </li>
+                <li><a href="#二分查找">二分查找</a>
+                  <ul>
+                    <li><a href="#搜索插入位置">搜索插入位置</a></li>
+                    <li><a href="#搜索二维矩阵">搜索二维矩阵</a></li>
+                    <li><a href="#寻找峰值">寻找峰值</a></li>
+                    <li><a href="#搜索旋转排序数组">搜索旋转排序数组</a></li>
+                    <li><a href="#在排序数组中查找元素的第一个和最后一个位置">在排序数组中查找元素的第一个和最后一个位置</a></li>
+                    <li><a href="#寻找旋转排序数组中的最小值">寻找旋转排序数组中的最小值</a></li>
+                    <li><a href="#寻找两个正序数组的中位数">寻找两个正序数组的中位数</a></li>
+                  </ul>
+                </li>
+                <li><a href="#堆">堆</a>
+                  <ul>
+                    <li><a href="#数组中的第k个最大元素">数组中的第K个最大元素</a></li>
+                    <li><a href="#ipo">IPO</a></li>
+                    <li><a href="#查找和最小的-k-对数字">查找和最小的 K 对数字</a></li>
+                    <li><a href="#数据流的中位数">数据流的中位数</a></li>
+                  </ul>
+                </li>
+                <li><a href="#位运算">位运算</a>
+                  <ul>
+                    <li><a href="#二进制求和">二进制求和</a></li>
+                    <li><a href="#颠倒二进制位">颠倒二进制位</a></li>
+                    <li><a href="#位1的个数">位1的个数</a></li>
+                    <li><a href="#只出现一次的数字">只出现一次的数字</a></li>
+                    <li><a href="#只出现一次的数字-ii">只出现一次的数字 II</a></li>
+                    <li><a href="#数字范围按位与">数字范围按位与</a></li>
+                  </ul>
+                </li>
+                <li><a href="#数学">数学</a>
+                  <ul>
+                    <li><a href="#-9-回文数">✅ 9 回文数</a></li>
+                    <li><a href="#-66-加一">✅ 66 加一</a></li>
+                    <li><a href="#-172-阶乘后的零">✅ 172 阶乘后的零</a></li>
+                    <li><a href="#-69-x-的平方根">✅ 69 x 的平方根</a></li>
+                    <li><a href="#50-powx-n">50 Pow(x, n)</a></li>
+                    <li><a href="#149-直线上最多的点数">149 直线上最多的点数</a></li>
+                  </ul>
+                </li>
+                <li><a href="#一维动态规划">一维动态规划</a>
+                  <ul>
+                    <li><a href="#-爬楼梯">✅ 爬楼梯</a></li>
+                    <li><a href="#打家劫舍">打家劫舍</a></li>
+                    <li><a href="#单词拆分">单词拆分</a></li>
+                    <li><a href="#零钱兑换">零钱兑换</a></li>
+                    <li><a href="#最长递增子序列">最长递增子序列</a></li>
+                  </ul>
+                </li>
+                <li><a href="#多维动态规划">多维动态规划</a>
+                  <ul>
+                    <li><a href="#三角形最小路径和">三角形最小路径和</a></li>
+                    <li><a href="#最小路径和">最小路径和</a></li>
+                    <li><a href="#不同路径-ii">不同路径 II</a></li>
+                    <li><a href="#最长回文子串">最长回文子串</a></li>
+                    <li><a href="#交错字符串">交错字符串</a></li>
+                    <li><a href="#编辑距离">编辑距离</a></li>
+                    <li><a href="#买卖股票的最佳时机-iii">买卖股票的最佳时机 III</a></li>
+                    <li><a href="#买卖股票的最佳时机-iv">买卖股票的最佳时机 IV</a></li>
+                    <li><a href="#最大正方形">最大正方形</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="什么情况下使用 redistemplate 什么时候使用 reddison# 在 Java 项目中，选择 RedisTemplate（Spring Data Redis）还是 Redisson 取决于具体需求场景。以下是两者的对比和适用场景分析：
+1. RedisTemplate（Spring Data Redis）# 定位：Spring 生态提供的轻量级 Redis 操作工具，封装了 Jedis/Lettuce。 适用场景：
+简单的 CRUD 操作：读写字符串、Hash、List 等基础数据结构。 与 Spring 生态深度集成：需要无缝配合 @Cacheable、Spring Session 等功能。 无需复杂分布式特性：例如仅需缓存数据、计数器等基础功能。 特点：
+支持 JSON、JDK 序列化等多种序列化方式。 提供简单的发布/订阅、事务支持。 不支持分布式锁、信号量等高级功能（需自行基于 SETNX 实现）。 示例场景：
+// 存储字符串 redisTemplate.opsForValue().set(&#34;key&#34;, &#34;value&#34;); // 存储Hash redisTemplate.opsForHash().put(&#34;user:1&#34;, &#34;name&#34;, &#34;Alice&#34;); 2. Redisson# 定位：分布式服务框架，提供丰富的分布式数据结构和高阶功能。 适用场景：
+需要分布式协调：如分布式锁（RLock）、信号量（RSemaphore）、延迟队列（RDelayedQueue）。 复杂分布式业务：跨 JVM 共享对象、分布式任务调度（如 RExecutorService）。 高性能分布式缓存：支持本地缓存联动（RLocalCachedMap）。 特点：
+提供 java.util.concurrent 风格的 API（如 RMap、RList）。 内置看门狗机制避免锁死，支持锁自动续期。 支持 Redis 集群、哨兵、云托管等多种部署模式。 示例场景：
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/reddison/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="reddison">
+  <meta property="og:description" content="什么情况下使用 redistemplate 什么时候使用 reddison# 在 Java 项目中，选择 RedisTemplate（Spring Data Redis）还是 Redisson 取决于具体需求场景。以下是两者的对比和适用场景分析：
+1. RedisTemplate（Spring Data Redis）# 定位：Spring 生态提供的轻量级 Redis 操作工具，封装了 Jedis/Lettuce。 适用场景：
+简单的 CRUD 操作：读写字符串、Hash、List 等基础数据结构。 与 Spring 生态深度集成：需要无缝配合 @Cacheable、Spring Session 等功能。 无需复杂分布式特性：例如仅需缓存数据、计数器等基础功能。 特点：
+支持 JSON、JDK 序列化等多种序列化方式。 提供简单的发布/订阅、事务支持。 不支持分布式锁、信号量等高级功能（需自行基于 SETNX 实现）。 示例场景：
+// 存储字符串 redisTemplate.opsForValue().set(&#34;key&#34;, &#34;value&#34;); // 存储Hash redisTemplate.opsForHash().put(&#34;user:1&#34;, &#34;name&#34;, &#34;Alice&#34;); 2. Redisson# 定位：分布式服务框架，提供丰富的分布式数据结构和高阶功能。 适用场景：
+需要分布式协调：如分布式锁（RLock）、信号量（RSemaphore）、延迟队列（RDelayedQueue）。 复杂分布式业务：跨 JVM 共享对象、分布式任务调度（如 RExecutorService）。 高性能分布式缓存：支持本地缓存联动（RLocalCachedMap）。 特点：
+提供 java.util.concurrent 风格的 API（如 RMap、RList）。 内置看门狗机制避免锁死，支持锁自动续期。 支持 Redis 集群、哨兵、云托管等多种部署模式。 示例场景：">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-31T22:45:32+08:00">
+
+
+  <meta itemprop="name" content="reddison">
+  <meta itemprop="description" content="什么情况下使用 redistemplate 什么时候使用 reddison# 在 Java 项目中，选择 RedisTemplate（Spring Data Redis）还是 Redisson 取决于具体需求场景。以下是两者的对比和适用场景分析：
+1. RedisTemplate（Spring Data Redis）# 定位：Spring 生态提供的轻量级 Redis 操作工具，封装了 Jedis/Lettuce。 适用场景：
+简单的 CRUD 操作：读写字符串、Hash、List 等基础数据结构。 与 Spring 生态深度集成：需要无缝配合 @Cacheable、Spring Session 等功能。 无需复杂分布式特性：例如仅需缓存数据、计数器等基础功能。 特点：
+支持 JSON、JDK 序列化等多种序列化方式。 提供简单的发布/订阅、事务支持。 不支持分布式锁、信号量等高级功能（需自行基于 SETNX 实现）。 示例场景：
+// 存储字符串 redisTemplate.opsForValue().set(&#34;key&#34;, &#34;value&#34;); // 存储Hash redisTemplate.opsForHash().put(&#34;user:1&#34;, &#34;name&#34;, &#34;Alice&#34;); 2. Redisson# 定位：分布式服务框架，提供丰富的分布式数据结构和高阶功能。 适用场景：
+需要分布式协调：如分布式锁（RLock）、信号量（RSemaphore）、延迟队列（RDelayedQueue）。 复杂分布式业务：跨 JVM 共享对象、分布式任务调度（如 RExecutorService）。 高性能分布式缓存：支持本地缓存联动（RLocalCachedMap）。 特点：
+提供 java.util.concurrent 风格的 API（如 RMap、RList）。 内置看门狗机制避免锁死，支持锁自动续期。 支持 Redis 集群、哨兵、云托管等多种部署模式。 示例场景：">
+  <meta itemprop="dateModified" content="2025-10-31T22:45:32+08:00">
+  <meta itemprop="wordCount" content="164">
+
+<title>reddison | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/post/computer-science/reddison/">
+<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.1e4254d6ef5c3d4b931350d3ad5355ea88c400709582577a866d1cb5f2a8f4f5.js" ></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-post">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d673e25af27f33796c279e3a05cc634f" class="toggle"  />
+    <label for="section-d673e25af27f33796c279e3a05cc634f" class="flex">
+      <a role="button" class="">
+        Life</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/books/" class="">
+      books</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
+      摘抄分享</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%96%B0%E7%9F%A5/" class="">
+      新知</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/movies-log/" class="">
+      观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/bilibili/" class="">
+      bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/hiking/" class="">
+      hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life/" class="">
+      life</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life-recommend/" class="">
+      life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/learning-others-log/" class="">
+      other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/podcast/" class="">
+      podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/politics/" class="">
+      politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/goal/" class="">
+      goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/coffee/" class="">
+      coffee</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/article/" class="">
+      article</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/law/" class="">
+      law</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-history/" class="">
+      my history</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-timeline/" class="">
+      My Timeline</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e52270c7d6707875ea89b3ec9b091983" class="toggle" checked />
+    <label for="section-e52270c7d6707875ea89b3ec9b091983" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science/" class="">
+      computer science</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f834cb9837867b0fca71e863c9ed2d28" class="toggle"  />
+    <label for="section-f834cb9837867b0fca71e863c9ed2d28" class="flex">
+      <a role="button" class="">
+        Algorithm</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm/" class="">
+      Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
+      algorithm practice 剑指 offer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
+      剑指offer题目对应</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
+      面试经典 150 题</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-12ae84c3ad3679302ffec2ab120d7fb0" class="toggle"  />
+    <label for="section-12ae84c3ad3679302ffec2ab120d7fb0" class="flex">
+      <a role="button" class="">
+        Big Data</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hadoop/" class="">
+      hadoop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hbase/" class="">
+      hbase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hive/" class="">
+      hive</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-256c0c0348e7dc55386785c98f7fa516" class="toggle"  />
+    <label for="section-256c0c0348e7dc55386785c98f7fa516" class="flex">
+      <a role="button" class="">
+        Database</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/database/" class="">
+      database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/druid/" class="">
+      druid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/elasticsearch/" class="">
+      elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mycat/" class="">
+      mycat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mysql/" class="">
+      mysql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/postgresql/" class="">
+      postgresql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/shardingsphere/" class="">
+      shardingsphere</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/sql/" class="">
+      SQL</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mongodb/" class="">
+      Penruins</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="toggle"  />
+    <label for="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="flex">
+      <a role="button" class="">
+        Distributed System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-98c822a4c30374b08c20bbb746ca28ff" class="toggle"  />
+    <label for="section-98c822a4c30374b08c20bbb746ca28ff" class="flex">
+      <a role="button" class="">
+        Message Queue</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/kafka/" class="">
+      kafka</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/message-queue/" class="">
+      Message Queue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
+      rabbitmq</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/distributed-system/" class="">
+      distributed system</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/sentinel/" class="">
+      Sentinel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud/" class="">
+      Spring Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
+      Spring Cloud Alibaba</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-184fcde54f4fb8e56ff1923eee779551" class="toggle"  />
+    <label for="section-184fcde54f4fb8e56ff1923eee779551" class="flex">
+      <a role="button" class="">
+        Java</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-basic/" class="">
+      java basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6355ae1f9fa9f60a52445009b471b5e2" class="toggle"  />
+    <label for="section-6355ae1f9fa9f60a52445009b471b5e2" class="flex">
+      <a role="button" class="">
+        Spring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring/" class="">
+      spring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/springboot/" class="">
+      spring boot</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-boot-validation/" class="">
+      spring boot validation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-transaction/" class="">
+      spring transaction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/unit-test/" class="">
+      unit test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java/" class="">
+      java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jvm/" class="">
+      jvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis/" class="">
+      Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis-plus/" class="">
+      Mybatis Plus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/xxl-job/" class="">
+      xxl job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/concurrent/" class="">
+      concurrent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jackson/" class="">
+      jackson</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-hashmap/" class="">
+      java HashMap</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-utils/" class="">
+      Java Utils</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
+      java 密码学</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/map/" class="">
+      map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-51f600e6ef5b531bcd84ecd789276516" class="toggle"  />
+    <label for="section-51f600e6ef5b531bcd84ecd789276516" class="flex">
+      <a role="button" class="">
+        Monitor</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/monitor/prometheus/" class="">
+      prometheus</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b11c61a955da170f736b6dbde7b6e083" class="toggle"  />
+    <label for="section-b11c61a955da170f736b6dbde7b6e083" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/tools/idea/" class="">
+      IDEA</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-recommend/" class="">
+      推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-learning-log/" class="">
+      学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/github/" class="">
+      github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/job/" class="">
+      job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/redis/" class="">
+      redis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/security/" class="">
+      security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-44f9701b64ae8bf371ea70118bc45414" class="toggle"  />
+    <label for="section-44f9701b64ae8bf371ea70118bc45414" class="flex">
+      <a role="button" class="">
+        Blog</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/blog/" class="">
+      blog</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/hugo/" class="">
+      Hugo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/cloud/" class="">
+      Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="toggle"  />
+    <label for="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="flex">
+      <a role="button" class="">
+        Front End</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/echarts/" class="">
+      echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/vue/" class="">
+      vue</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-529cbb550ade3cc11293cf67d1d534f0" class="toggle"  />
+    <label for="section-529cbb550ade3cc11293cf67d1d534f0" class="flex">
+      <a role="button" class="">
+        Micro Service</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/nacos/" class="">
+      Nacos</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/micro-service/" class="">
+      micro service</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="toggle"  />
+    <label for="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="flex">
+      <a role="button" class="">
+        Operating System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/ios/" class="">
+      IOS</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/linux/" class="">
+      linux</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/mac/" class="">
+      mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/raspberrypi/" class="">
+      raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/powershell/" class="">
+      powershell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/windows/" class="">
+      windows</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="toggle"  />
+    <label for="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="flex">
+      <a role="button" class="">
+        Software</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/artificial-intelligence/" class="">
+      Artificial Intelligence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6c1b5eb9fa302a23733b5ce342165515" class="toggle"  />
+    <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
+      <a role="button" class="">
+        CI/CD</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/docker/" class="">
+      docker</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/gitlab/" class="">
+      Gitlab</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/jenkins/" class="">
+      Jenkins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/maven/" class="">
+      maven</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/nexus/" class="">
+      Nexus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/orbstack/" class="">
+      OrbStack</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/crawler/" class="">
+      crawler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/git/" class="">
+      git</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/networking/" class="">
+      networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/python/" class="">
+      Python</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/reddison/" class="active">
+      reddison</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/vim/" class="">
+      vim</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
+      系统设计</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
+      运维</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3b7129f485a86f816ed70cb52a2a5843" class="toggle"  />
+    <label for="section-3b7129f485a86f816ed70cb52a2a5843" class="flex">
+      <a role="button" class="">
+        History</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/history/chinese-history/" class="">
+      Chinese History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-27743f5ad758a53b0d2d97b463de9ca0" class="toggle"  />
+    <label for="section-27743f5ad758a53b0d2d97b463de9ca0" class="flex">
+      <a role="button" class="">
+        Others</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/about-me/" class="">
+      about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/english-learning/" class="">
+      English Learning</a>
+  
+
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/economy/" class="">
+      Economy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/f1/" class="">
+      F1</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7cf7927dd7be57fd9ac871554e5eab30" class="toggle"  />
+    <label for="section-7cf7927dd7be57fd9ac871554e5eab30" class="flex">
+      <a role="button" class="">
+        Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/science/biology/" class="">
+      biology</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c86d83c6ab9662a5734c7c938687f51c" class="toggle"  />
+    <label for="section-c86d83c6ab9662a5734c7c938687f51c" class="flex">
+      <a role="button" class="">
+        Sports</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/table-tennis/" class="">
+      table tennis</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a7716b8c5e1ddba36a22182d4f60014c" class="toggle"  />
+    <label for="section-a7716b8c5e1ddba36a22182d4f60014c" class="flex">
+      <a role="button" class="">
+        Wl Public</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6fc9a7b0dd6392ef81e392a65430999b" class="toggle"  />
+    <label for="section-6fc9a7b0dd6392ef81e392a65430999b" class="flex">
+      <a role="button" class="">
+        Books</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-06aae5e89825d313a1291f1996bfc76d" class="toggle"  />
+    <label for="section-06aae5e89825d313a1291f1996bfc76d" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
+      Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+      Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
+      Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
+      Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
+      一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
+      宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
+      英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="toggle"  />
+    <label for="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/tools/obsidian/" class="">
+      obsidian</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>reddison</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么情况下使用-redistemplate-什么时候使用-reddison">什么情况下使用 redistemplate 什么时候使用 reddison</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-redistemplatespring-data-redis"><strong>1. RedisTemplate（Spring Data Redis）</strong></a></li>
+            <li><a href="#2-redisson"><strong>2. Redisson</strong></a></li>
+            <li><a href="#3-对比总结"><strong>3. 对比总结</strong></a></li>
+            <li><a href="#4-如何选择"><strong>4. 如何选择？</strong></a></li>
+            <li><a href="#5-混合使用"><strong>5. 混合使用</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="什么情况下使用-redistemplate-什么时候使用-reddison">什么情况下使用 redistemplate 什么时候使用 reddison<a class="anchor" href="#%e4%bb%80%e4%b9%88%e6%83%85%e5%86%b5%e4%b8%8b%e4%bd%bf%e7%94%a8-redistemplate-%e4%bb%80%e4%b9%88%e6%97%b6%e5%80%99%e4%bd%bf%e7%94%a8-reddison">#</a></h1>
+<p>在 Java 项目中，选择 <code>RedisTemplate</code>（Spring Data Redis）还是 <code>Redisson</code> 取决于具体需求场景。以下是两者的对比和适用场景分析：</p>
+<hr>
+<h3 id="1-redistemplatespring-data-redis"><strong>1. RedisTemplate（Spring Data Redis）</strong><a class="anchor" href="#1-redistemplatespring-data-redis">#</a></h3>
+<p><strong>定位</strong>：Spring 生态提供的轻量级 Redis 操作工具，封装了 Jedis/Lettuce。
+<strong>适用场景</strong>：</p>
+<ul>
+<li><strong>简单的 CRUD 操作</strong>：读写字符串、Hash、List 等基础数据结构。</li>
+<li><strong>与 Spring 生态深度集成</strong>：需要无缝配合 <code>@Cacheable</code>、Spring Session 等功能。</li>
+<li><strong>无需复杂分布式特性</strong>：例如仅需缓存数据、计数器等基础功能。</li>
+</ul>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>支持 JSON、JDK 序列化等多种序列化方式。</li>
+<li>提供简单的发布/订阅、事务支持。</li>
+<li><strong>不支持分布式锁、信号量等高级功能</strong>（需自行基于 <code>SETNX</code> 实现）。</li>
+</ul>
+<p><strong>示例场景</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 存储字符串</span>
+</span></span><span style="display:flex;"><span>redisTemplate.<span style="color:#a6e22e">opsForValue</span>().<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#34;key&#34;</span>, <span style="color:#e6db74">&#34;value&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 存储Hash</span>
+</span></span><span style="display:flex;"><span>redisTemplate.<span style="color:#a6e22e">opsForHash</span>().<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;user:1&#34;</span>, <span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;Alice&#34;</span>);</span></span></code></pre></div><hr>
+<h3 id="2-redisson"><strong>2. Redisson</strong><a class="anchor" href="#2-redisson">#</a></h3>
+<p><strong>定位</strong>：分布式服务框架，提供丰富的分布式数据结构和高阶功能。
+<strong>适用场景</strong>：</p>
+<ul>
+<li><strong>需要分布式协调</strong>：如分布式锁（<code>RLock</code>）、信号量（<code>RSemaphore</code>）、延迟队列（<code>RDelayedQueue</code>）。</li>
+<li><strong>复杂分布式业务</strong>：跨 JVM 共享对象、分布式任务调度（如 <code>RExecutorService</code>）。</li>
+<li><strong>高性能分布式缓存</strong>：支持本地缓存联动（<code>RLocalCachedMap</code>）。</li>
+</ul>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>提供 <code>java.util.concurrent</code> 风格的 API（如 <code>RMap</code>、<code>RList</code>）。</li>
+<li>内置看门狗机制避免锁死，支持锁自动续期。</li>
+<li>支持 Redis 集群、哨兵、云托管等多种部署模式。</li>
+</ul>
+<p><strong>示例场景</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 分布式锁</span>
+</span></span><span style="display:flex;"><span>RLock lock <span style="color:#f92672">=</span> redisson.<span style="color:#a6e22e">getLock</span>(<span style="color:#e6db74">&#34;orderLock&#34;</span>);
+</span></span><span style="display:flex;"><span>lock.<span style="color:#a6e22e">lock</span>(10, TimeUnit.<span style="color:#a6e22e">SECONDS</span>); <span style="color:#75715e">// 自动释放避免死锁</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 处理订单</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>    lock.<span style="color:#a6e22e">unlock</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 分布式Map</span>
+</span></span><span style="display:flex;"><span>RMap<span style="color:#f92672">&lt;</span>String, Object<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> redisson.<span style="color:#a6e22e">getMap</span>(<span style="color:#e6db74">&#34;userMap&#34;</span>);
+</span></span><span style="display:flex;"><span>map.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;user1&#34;</span>, <span style="color:#66d9ef">new</span> User());</span></span></code></pre></div><hr>
+<h3 id="3-对比总结"><strong>3. 对比总结</strong><a class="anchor" href="#3-%e5%af%b9%e6%af%94%e6%80%bb%e7%bb%93">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th><strong>需求</strong></th>
+          <th><strong>RedisTemplate</strong></th>
+          <th><strong>Redisson</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>简单数据读写（String/Hash）</td>
+          <td>✅ 更轻量</td>
+          <td>✅ 但稍重</td>
+      </tr>
+      <tr>
+          <td>分布式锁/信号量</td>
+          <td>❌ 需手动实现</td>
+          <td>✅ 内置完善支持</td>
+      </tr>
+      <tr>
+          <td>与 Spring Cache 集成</td>
+          <td>✅ 原生支持</td>
+          <td>✅ 需额外配置</td>
+      </tr>
+      <tr>
+          <td>跨 JVM 共享复杂对象</td>
+          <td>❌ 序列化受限</td>
+          <td>✅ 透明化操作</td>
+      </tr>
+      <tr>
+          <td>延迟队列、BloomFilter</td>
+          <td>❌ 不支持</td>
+          <td>✅ 直接提供</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="4-如何选择"><strong>4. 如何选择？</strong><a class="anchor" href="#4-%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9">#</a></h3>
+<ul>
+<li>
+<p><strong>选 <code>RedisTemplate</code> 如果</strong>：</p>
+</li>
+<li>
+<p>项目已深度集成 Spring，仅需基础 Redis 操作。</p>
+</li>
+<li>
+<p>不想引入额外依赖，保持轻量级。</p>
+</li>
+<li>
+<p><strong>选 <code>Redisson</code> 如果</strong>：</p>
+</li>
+<li>
+<p>需要分布式锁、限流等高级功能。</p>
+</li>
+<li>
+<p>业务涉及跨服务共享对象或复杂协调逻辑。</p>
+</li>
+<li>
+<p>追求更直观的分布式数据结构（如 <code>RList</code> 替代手动序列化）。</p>
+</li>
+</ul>
+<hr>
+<h3 id="5-混合使用"><strong>5. 混合使用</strong><a class="anchor" href="#5-%e6%b7%b7%e5%90%88%e4%bd%bf%e7%94%a8">#</a></h3>
+<p>两者可以共存，例如：</p>
+<ul>
+<li>用 <code>RedisTemplate</code> 处理简单缓存。</li>
+<li>用 <code>Redisson</code> 实现分布式锁和队列。
+需注意避免序列化冲突（建议统一配置序列化方式）。</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/post/computer-science/python/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Python</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/post/computer-science/vim/" class="flex align-center">
+        <span>vim</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+  <div class="book-copyright flex justify-center">
+    <small>Penruins - <a href="/">Main Page</a></small>
+  </div>
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么情况下使用-redistemplate-什么时候使用-reddison">什么情况下使用 redistemplate 什么时候使用 reddison</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-redistemplatespring-data-redis"><strong>1. RedisTemplate（Spring Data Redis）</strong></a></li>
+            <li><a href="#2-redisson"><strong>2. Redisson</strong></a></li>
+            <li><a href="#3-对比总结"><strong>3. 对比总结</strong></a></li>
+            <li><a href="#4-如何选择"><strong>4. 如何选择？</strong></a></li>
+            <li><a href="#5-混合使用"><strong>5. 混合使用</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

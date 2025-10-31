@@ -1,0 +1,3028 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="HashMap# HashMap底层的数据结构是怎样的# HashMap 底层的数据结构在 JDK 1.7 和 JDK 1.8 中有显著的不同，主要体现在如何处理哈希冲突和存储数据的方式上。
+JDK 1.7 及之前# 数据结构：数组 &#43; 链表 数组：是 HashMap 的主体，用于存储键值对（Entry 对象）。数组的每个位置称为一个 桶（bucket）。 链表：用于解决哈希冲突。当多个键的哈希值相同（即计算出的数组索引相同）时，这些键值对会以链表的形式存储在同一个桶中。 哈希冲突解决：通过 拉链法（Chaining）解决哈希冲突，即链表的形式。 性能问题：当链表过长时，查询效率会降低，时间复杂度退化为 O(n)。 JDK 1.8 及之后# 数据结构：数组 &#43; 链表 &#43; 红黑树 数组：仍然是 HashMap 的主体，用于存储键值对（Node 对象）。 链表：当哈希冲突时，键值对首先以链表的形式存储。 红黑树：当链表长度超过 阈值（默认是 8） 且 数组长度大于 64 时，链表会转换为 红黑树，以提高查询效率。 哈希冲突解决：仍然使用 拉链法，但当链表过长时会转换为红黑树，时间复杂度优化为 O(log n)。 性能优化：红黑树的引入大大减少了哈希冲突严重时的查询时间。 核心机制# 哈希计算
+通过 key.hashCode() 计算哈希值，再通过 (n - 1) &amp; hash 计算数组索引（n 是数组长度）。 为了减少哈希冲突，JDK 1.8 对哈希值进行了优化，将高 16 位与低 16 位进行异或运算，使哈希分布更均匀13。 扩容机制
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/java/java-hashmap/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="java HashMap">
+  <meta property="og:description" content="HashMap# HashMap底层的数据结构是怎样的# HashMap 底层的数据结构在 JDK 1.7 和 JDK 1.8 中有显著的不同，主要体现在如何处理哈希冲突和存储数据的方式上。
+JDK 1.7 及之前# 数据结构：数组 &#43; 链表 数组：是 HashMap 的主体，用于存储键值对（Entry 对象）。数组的每个位置称为一个 桶（bucket）。 链表：用于解决哈希冲突。当多个键的哈希值相同（即计算出的数组索引相同）时，这些键值对会以链表的形式存储在同一个桶中。 哈希冲突解决：通过 拉链法（Chaining）解决哈希冲突，即链表的形式。 性能问题：当链表过长时，查询效率会降低，时间复杂度退化为 O(n)。 JDK 1.8 及之后# 数据结构：数组 &#43; 链表 &#43; 红黑树 数组：仍然是 HashMap 的主体，用于存储键值对（Node 对象）。 链表：当哈希冲突时，键值对首先以链表的形式存储。 红黑树：当链表长度超过 阈值（默认是 8） 且 数组长度大于 64 时，链表会转换为 红黑树，以提高查询效率。 哈希冲突解决：仍然使用 拉链法，但当链表过长时会转换为红黑树，时间复杂度优化为 O(log n)。 性能优化：红黑树的引入大大减少了哈希冲突严重时的查询时间。 核心机制# 哈希计算
+通过 key.hashCode() 计算哈希值，再通过 (n - 1) &amp; hash 计算数组索引（n 是数组长度）。 为了减少哈希冲突，JDK 1.8 对哈希值进行了优化，将高 16 位与低 16 位进行异或运算，使哈希分布更均匀13。 扩容机制">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-31T22:45:32+08:00">
+
+
+  <meta itemprop="name" content="java HashMap">
+  <meta itemprop="description" content="HashMap# HashMap底层的数据结构是怎样的# HashMap 底层的数据结构在 JDK 1.7 和 JDK 1.8 中有显著的不同，主要体现在如何处理哈希冲突和存储数据的方式上。
+JDK 1.7 及之前# 数据结构：数组 &#43; 链表 数组：是 HashMap 的主体，用于存储键值对（Entry 对象）。数组的每个位置称为一个 桶（bucket）。 链表：用于解决哈希冲突。当多个键的哈希值相同（即计算出的数组索引相同）时，这些键值对会以链表的形式存储在同一个桶中。 哈希冲突解决：通过 拉链法（Chaining）解决哈希冲突，即链表的形式。 性能问题：当链表过长时，查询效率会降低，时间复杂度退化为 O(n)。 JDK 1.8 及之后# 数据结构：数组 &#43; 链表 &#43; 红黑树 数组：仍然是 HashMap 的主体，用于存储键值对（Node 对象）。 链表：当哈希冲突时，键值对首先以链表的形式存储。 红黑树：当链表长度超过 阈值（默认是 8） 且 数组长度大于 64 时，链表会转换为 红黑树，以提高查询效率。 哈希冲突解决：仍然使用 拉链法，但当链表过长时会转换为红黑树，时间复杂度优化为 O(log n)。 性能优化：红黑树的引入大大减少了哈希冲突严重时的查询时间。 核心机制# 哈希计算
+通过 key.hashCode() 计算哈希值，再通过 (n - 1) &amp; hash 计算数组索引（n 是数组长度）。 为了减少哈希冲突，JDK 1.8 对哈希值进行了优化，将高 16 位与低 16 位进行异或运算，使哈希分布更均匀13。 扩容机制">
+  <meta itemprop="dateModified" content="2025-10-31T22:45:32+08:00">
+  <meta itemprop="wordCount" content="695">
+
+<title>java HashMap | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/post/computer-science/java/java-hashmap/">
+<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.1e4254d6ef5c3d4b931350d3ad5355ea88c400709582577a866d1cb5f2a8f4f5.js" ></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-post">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d673e25af27f33796c279e3a05cc634f" class="toggle"  />
+    <label for="section-d673e25af27f33796c279e3a05cc634f" class="flex">
+      <a role="button" class="">
+        Life</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/books/" class="">
+      books</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
+      摘抄分享</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%96%B0%E7%9F%A5/" class="">
+      新知</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/movies-log/" class="">
+      观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/bilibili/" class="">
+      bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/hiking/" class="">
+      hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life/" class="">
+      life</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life-recommend/" class="">
+      life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/learning-others-log/" class="">
+      other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/podcast/" class="">
+      podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/politics/" class="">
+      politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/goal/" class="">
+      goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/coffee/" class="">
+      coffee</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/article/" class="">
+      article</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/law/" class="">
+      law</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-history/" class="">
+      my history</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-timeline/" class="">
+      My Timeline</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e52270c7d6707875ea89b3ec9b091983" class="toggle" checked />
+    <label for="section-e52270c7d6707875ea89b3ec9b091983" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science/" class="">
+      computer science</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f834cb9837867b0fca71e863c9ed2d28" class="toggle"  />
+    <label for="section-f834cb9837867b0fca71e863c9ed2d28" class="flex">
+      <a role="button" class="">
+        Algorithm</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm/" class="">
+      Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
+      algorithm practice 剑指 offer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
+      剑指offer题目对应</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
+      面试经典 150 题</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-12ae84c3ad3679302ffec2ab120d7fb0" class="toggle"  />
+    <label for="section-12ae84c3ad3679302ffec2ab120d7fb0" class="flex">
+      <a role="button" class="">
+        Big Data</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hadoop/" class="">
+      hadoop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hbase/" class="">
+      hbase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hive/" class="">
+      hive</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-256c0c0348e7dc55386785c98f7fa516" class="toggle"  />
+    <label for="section-256c0c0348e7dc55386785c98f7fa516" class="flex">
+      <a role="button" class="">
+        Database</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/database/" class="">
+      database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/druid/" class="">
+      druid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/elasticsearch/" class="">
+      elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mycat/" class="">
+      mycat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mysql/" class="">
+      mysql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/postgresql/" class="">
+      postgresql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/shardingsphere/" class="">
+      shardingsphere</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/sql/" class="">
+      SQL</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mongodb/" class="">
+      Penruins</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="toggle"  />
+    <label for="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="flex">
+      <a role="button" class="">
+        Distributed System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-98c822a4c30374b08c20bbb746ca28ff" class="toggle"  />
+    <label for="section-98c822a4c30374b08c20bbb746ca28ff" class="flex">
+      <a role="button" class="">
+        Message Queue</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/kafka/" class="">
+      kafka</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/message-queue/" class="">
+      Message Queue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
+      rabbitmq</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/distributed-system/" class="">
+      distributed system</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/sentinel/" class="">
+      Sentinel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud/" class="">
+      Spring Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
+      Spring Cloud Alibaba</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-184fcde54f4fb8e56ff1923eee779551" class="toggle" checked />
+    <label for="section-184fcde54f4fb8e56ff1923eee779551" class="flex">
+      <a role="button" class="">
+        Java</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-basic/" class="">
+      java basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6355ae1f9fa9f60a52445009b471b5e2" class="toggle"  />
+    <label for="section-6355ae1f9fa9f60a52445009b471b5e2" class="flex">
+      <a role="button" class="">
+        Spring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring/" class="">
+      spring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/springboot/" class="">
+      spring boot</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-boot-validation/" class="">
+      spring boot validation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-transaction/" class="">
+      spring transaction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/unit-test/" class="">
+      unit test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java/" class="">
+      java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jvm/" class="">
+      jvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis/" class="">
+      Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis-plus/" class="">
+      Mybatis Plus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/xxl-job/" class="">
+      xxl job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/concurrent/" class="">
+      concurrent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jackson/" class="">
+      jackson</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-hashmap/" class="active">
+      java HashMap</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-utils/" class="">
+      Java Utils</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
+      java 密码学</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/map/" class="">
+      map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-51f600e6ef5b531bcd84ecd789276516" class="toggle"  />
+    <label for="section-51f600e6ef5b531bcd84ecd789276516" class="flex">
+      <a role="button" class="">
+        Monitor</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/monitor/prometheus/" class="">
+      prometheus</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b11c61a955da170f736b6dbde7b6e083" class="toggle"  />
+    <label for="section-b11c61a955da170f736b6dbde7b6e083" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/tools/idea/" class="">
+      IDEA</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-recommend/" class="">
+      推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-learning-log/" class="">
+      学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/github/" class="">
+      github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/job/" class="">
+      job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/redis/" class="">
+      redis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/security/" class="">
+      security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-44f9701b64ae8bf371ea70118bc45414" class="toggle"  />
+    <label for="section-44f9701b64ae8bf371ea70118bc45414" class="flex">
+      <a role="button" class="">
+        Blog</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/blog/" class="">
+      blog</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/hugo/" class="">
+      Hugo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/cloud/" class="">
+      Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="toggle"  />
+    <label for="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="flex">
+      <a role="button" class="">
+        Front End</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/echarts/" class="">
+      echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/vue/" class="">
+      vue</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-529cbb550ade3cc11293cf67d1d534f0" class="toggle"  />
+    <label for="section-529cbb550ade3cc11293cf67d1d534f0" class="flex">
+      <a role="button" class="">
+        Micro Service</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/nacos/" class="">
+      Nacos</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/micro-service/" class="">
+      micro service</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="toggle"  />
+    <label for="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="flex">
+      <a role="button" class="">
+        Operating System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/ios/" class="">
+      IOS</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/linux/" class="">
+      linux</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/mac/" class="">
+      mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/raspberrypi/" class="">
+      raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/powershell/" class="">
+      powershell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/windows/" class="">
+      windows</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="toggle"  />
+    <label for="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="flex">
+      <a role="button" class="">
+        Software</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/artificial-intelligence/" class="">
+      Artificial Intelligence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6c1b5eb9fa302a23733b5ce342165515" class="toggle"  />
+    <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
+      <a role="button" class="">
+        CI/CD</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/docker/" class="">
+      docker</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/gitlab/" class="">
+      Gitlab</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/jenkins/" class="">
+      Jenkins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/maven/" class="">
+      maven</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/nexus/" class="">
+      Nexus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/orbstack/" class="">
+      OrbStack</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/crawler/" class="">
+      crawler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/git/" class="">
+      git</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/networking/" class="">
+      networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/python/" class="">
+      Python</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/reddison/" class="">
+      reddison</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/vim/" class="">
+      vim</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
+      系统设计</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
+      运维</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3b7129f485a86f816ed70cb52a2a5843" class="toggle"  />
+    <label for="section-3b7129f485a86f816ed70cb52a2a5843" class="flex">
+      <a role="button" class="">
+        History</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/history/chinese-history/" class="">
+      Chinese History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-27743f5ad758a53b0d2d97b463de9ca0" class="toggle"  />
+    <label for="section-27743f5ad758a53b0d2d97b463de9ca0" class="flex">
+      <a role="button" class="">
+        Others</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/about-me/" class="">
+      about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/english-learning/" class="">
+      English Learning</a>
+  
+
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/economy/" class="">
+      Economy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/f1/" class="">
+      F1</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7cf7927dd7be57fd9ac871554e5eab30" class="toggle"  />
+    <label for="section-7cf7927dd7be57fd9ac871554e5eab30" class="flex">
+      <a role="button" class="">
+        Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/science/biology/" class="">
+      biology</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c86d83c6ab9662a5734c7c938687f51c" class="toggle"  />
+    <label for="section-c86d83c6ab9662a5734c7c938687f51c" class="flex">
+      <a role="button" class="">
+        Sports</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/table-tennis/" class="">
+      table tennis</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a7716b8c5e1ddba36a22182d4f60014c" class="toggle"  />
+    <label for="section-a7716b8c5e1ddba36a22182d4f60014c" class="flex">
+      <a role="button" class="">
+        Wl Public</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6fc9a7b0dd6392ef81e392a65430999b" class="toggle"  />
+    <label for="section-6fc9a7b0dd6392ef81e392a65430999b" class="flex">
+      <a role="button" class="">
+        Books</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-06aae5e89825d313a1291f1996bfc76d" class="toggle"  />
+    <label for="section-06aae5e89825d313a1291f1996bfc76d" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
+      Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+      Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
+      Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
+      Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
+      一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
+      宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
+      英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="toggle"  />
+    <label for="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/tools/obsidian/" class="">
+      obsidian</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>java HashMap</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#hashmap">HashMap</a>
+      <ul>
+        <li><a href="#hashmap底层的数据结构是怎样的">HashMap底层的数据结构是怎样的</a>
+          <ul>
+            <li><a href="#jdk-17-及之前"><strong>JDK 1.7 及之前</strong></a></li>
+            <li><a href="#jdk-18-及之后"><strong>JDK 1.8 及之后</strong></a></li>
+            <li><a href="#核心机制"><strong>核心机制</strong></a></li>
+            <li><a href="#总结"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？</a>
+          <ul>
+            <li><a href="#一红黑树的特性优势">一、<strong>红黑树的特性优势</strong></a></li>
+            <li><a href="#二与其他树结构的对比">二、<strong>与其他树结构的对比</strong></a>
+              <ul>
+                <li><a href="#1-与-avl-树的对比">1. <strong>与 AVL 树的对比</strong></a></li>
+                <li><a href="#2-与普通二叉搜索树的对比">2. <strong>与普通二叉搜索树的对比</strong></a></li>
+                <li><a href="#3-与-b-树b-树的对比">3. <strong>与 B 树/B+ 树的对比</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#三hashmap-的特定需求">三、<strong>HashMap 的特定需求</strong></a></li>
+            <li><a href="#四总结">四、<strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap-get-的时间复杂度">HashMap get 的时间复杂度</a>
+          <ul>
+            <li><a href="#1-理想情况o1">1. <strong>理想情况（O(1)）</strong></a></li>
+            <li><a href="#2-最坏情况on">2. <strong>最坏情况（O(n)）</strong></a></li>
+            <li><a href="#3-总结">3. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap如何保证线程安全">HashMap如何保证线程安全</a>
+          <ul>
+            <li><a href="#1-使用"><strong>1. 使用 <code>Collections.synchronizedMap</code></strong></a></li>
+            <li><a href="#2-使用"><strong>2. 使用 <code>ConcurrentHashMap</code></strong></a></li>
+            <li><a href="#3-使用读写锁-"><strong>3. 使用读写锁 (<code>ReadWriteLock</code>)</strong></a></li>
+            <li><a href="#4-方法内部使用局部"><strong>4. 方法内部使用局部 <code>HashMap</code></strong></a></li>
+            <li><a href="#5-初始化写后续只读"><strong>5. 初始化写，后续只读</strong></a></li>
+            <li><a href="#总结-1"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？</a>
+          <ul>
+            <li><a href="#1-线程安全性"><strong>1. 线程安全性</strong></a></li>
+            <li><a href="#2-对-null-值的支持"><strong>2. 对 null 值的支持</strong></a></li>
+            <li><a href="#3-性能"><strong>3. 性能</strong></a></li>
+            <li><a href="#4-继承与实现"><strong>4. 继承与实现</strong></a></li>
+            <li><a href="#5-扩容机制"><strong>5. 扩容机制</strong></a></li>
+            <li><a href="#6-迭代器"><strong>6. 迭代器</strong></a></li>
+            <li><a href="#7-计算哈希值的方式"><strong>7. 计算哈希值的方式</strong></a></li>
+            <li><a href="#总结-2"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#当-hashmap-扩容时所有的红黑树或者链表都会重新构造吗">当 HashMap 扩容时，所有的红黑树或者链表都会重新构造吗</a>
+          <ul>
+            <li><a href="#1-链表重新构造"><strong>1. 链表重新构造</strong></a></li>
+            <li><a href="#2-红黑树重新构造"><strong>2. 红黑树重新构造</strong></a></li>
+            <li><a href="#3-重新哈希的原因"><strong>3. 重新哈希的原因</strong></a></li>
+            <li><a href="#总结-3"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#为什么hashmap选择红黑树而不选择b树">为什么HashMap选择红黑树而不选择B+树</a>
+          <ul>
+            <li><a href="#1-算法实现复杂度">1. <strong>算法实现复杂度</strong></a></li>
+            <li><a href="#2-底层数据结构匹配">2. <strong>底层数据结构匹配</strong></a></li>
+            <li><a href="#3-修改效率">3. <strong>修改效率</strong></a></li>
+            <li><a href="#4-内存占用">4. <strong>内存占用</strong></a></li>
+            <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
+            <li><a href="#6-维护成本">6. <strong>维护成本</strong></a></li>
+            <li><a href="#总结-4">总结</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="hashmap">HashMap<a class="anchor" href="#hashmap">#</a></h1>
+<h2 id="hashmap底层的数据结构是怎样的">HashMap底层的数据结构是怎样的<a class="anchor" href="#hashmap%e5%ba%95%e5%b1%82%e7%9a%84%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e6%98%af%e6%80%8e%e6%a0%b7%e7%9a%84">#</a></h2>
+<p>HashMap 底层的数据结构在 <strong>JDK 1.7</strong> 和 <strong>JDK 1.8</strong> 中有显著的不同，主要体现在如何处理哈希冲突和存储数据的方式上。</p>
+<hr>
+<h3 id="jdk-17-及之前"><strong>JDK 1.7 及之前</strong><a class="anchor" href="#jdk-17-%e5%8f%8a%e4%b9%8b%e5%89%8d">#</a></h3>
+<ul>
+<li><strong>数据结构</strong>：<code>数组 + 链表</code>
+<ul>
+<li><strong>数组</strong>：是 HashMap 的主体，用于存储键值对（<code>Entry</code> 对象）。数组的每个位置称为一个 <strong>桶</strong>（bucket）。</li>
+<li><strong>链表</strong>：用于解决哈希冲突。当多个键的哈希值相同（即计算出的数组索引相同）时，这些键值对会以链表的形式存储在同一个桶中。</li>
+</ul>
+</li>
+<li><strong>哈希冲突解决</strong>：通过 <strong>拉链法</strong>（Chaining）解决哈希冲突，即链表的形式。</li>
+<li><strong>性能问题</strong>：当链表过长时，查询效率会降低，时间复杂度退化为 O(n)。</li>
+</ul>
+<hr>
+<h3 id="jdk-18-及之后"><strong>JDK 1.8 及之后</strong><a class="anchor" href="#jdk-18-%e5%8f%8a%e4%b9%8b%e5%90%8e">#</a></h3>
+<ul>
+<li><strong>数据结构</strong>：<code>数组 + 链表 + 红黑树</code>
+<ul>
+<li><strong>数组</strong>：仍然是 HashMap 的主体，用于存储键值对（<code>Node</code> 对象）。</li>
+<li><strong>链表</strong>：当哈希冲突时，键值对首先以链表的形式存储。</li>
+<li><strong>红黑树</strong>：当链表长度超过 <strong>阈值（默认是 8）</strong> 且 <strong>数组长度大于 64</strong> 时，链表会转换为 <strong>红黑树</strong>，以提高查询效率。</li>
+</ul>
+</li>
+<li><strong>哈希冲突解决</strong>：仍然使用 <strong>拉链法</strong>，但当链表过长时会转换为红黑树，时间复杂度优化为 O(log n)。</li>
+<li><strong>性能优化</strong>：红黑树的引入大大减少了哈希冲突严重时的查询时间。</li>
+</ul>
+<hr>
+<h3 id="核心机制"><strong>核心机制</strong><a class="anchor" href="#%e6%a0%b8%e5%bf%83%e6%9c%ba%e5%88%b6">#</a></h3>
+<ol>
+<li>
+<p><strong>哈希计算</strong></p>
+<ul>
+<li>通过 <code>key.hashCode()</code> 计算哈希值，再通过 <code>(n - 1) &amp; hash</code> 计算数组索引（<code>n</code> 是数组长度）。</li>
+<li>为了减少哈希冲突，JDK 1.8 对哈希值进行了优化，将高 16 位与低 16 位进行异或运算，使哈希分布更均匀<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>扩容机制</strong></p>
+<ul>
+<li>当 HashMap 中的元素数量超过 <code>容量 * 负载因子</code> 时，会触发扩容（默认容量为 16，负载因子为 0.75）。</li>
+<li>扩容时，数组长度变为原来的 2 倍，所有元素会重新计算哈希并分配到新的桶中<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>红黑树转换</strong></p>
+<ul>
+<li>当链表长度超过 8 且数组长度大于 64 时，链表会转换为红黑树；当红黑树节点数小于 6 时，红黑树会退化为链表<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="总结"><strong>总结</strong><a class="anchor" href="#%e6%80%bb%e7%bb%93">#</a></h3>
+<ul>
+<li><strong>JDK 1.7</strong>：<code>数组 + 链表</code>，通过拉链法解决哈希冲突，性能较差。</li>
+<li><strong>JDK 1.8</strong>：<code>数组 + 链表 + 红黑树</code>，通过链表和红黑树结合，优化了查询性能。</li>
+</ul>
+<p>这种数据结构的设计使得 HashMap 在大多数情况下能够以 O(1) 的时间复杂度进行查找、插入和删除操作，同时在高并发场景下也能保持较好的性能<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</p>
+<h2 id="为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？<a class="anchor" href="#%e4%b8%ba%e4%bb%80%e4%b9%88hashmap%e8%a6%81%e4%bd%bf%e7%94%a8%e7%ba%a2%e9%bb%91%e6%a0%91%e8%80%8c%e4%b8%8d%e4%bd%bf%e7%94%a8%e5%85%b6%e4%bb%96%e7%9a%84%e6%a0%91%e7%bb%93%e6%9e%84">#</a></h2>
+<pre tabindex="0"><code class="language-ys_think" data-lang="ys_think">
+&lt;icon&gt;https://wy-static.wenxiaobai.com/bot-capability/prod/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83.png&lt;/icon&gt;
+
+&lt;start&gt;思考中...&lt;/start&gt;
+
+嗯，用户问为什么HashMap用红黑树而不是其他树结构。我得仔细看看搜索结果里的内容。首先，记得之前学过的，红黑树是自平衡二叉搜索树，而HashMap在链表过长时转成红黑树是为了提高查询效率。那为什么要选红黑树而不是比如AVL树或者其他树呢？
+
+搜索结果里，网页1提到红黑树的平均查找长度是log(n)，链表是n/2，当长度超过8的时候，转换成树更有必要。同时，网页6和网页8也讨论了红黑树和AVL树的区别。网页6说红黑树在插入和删除时效率更高，因为旋转次数少。而AVL树虽然查询更快，但维护平衡的成本高，每次调整可能需要更多旋转。
+
+网页8提到红黑树的平衡性不如AVL严格，但这样换来的是更高效的插入和删除操作。对于HashMap这种需要频繁插入和删除的场景，红黑树的性能更好。另外，红黑树在调整时最多三次旋转就能恢复平衡，而AVL可能需要O(log n)次，这在多线程或高并发情况下更有优势。
+
+还有网页4和网页7也提到，红黑树在解决哈希冲突时，能提供O(log n)的时间复杂度，而链表是O(n)。当链表长度增加到一定阈值时，转换为树结构能有效提升性能。而选择红黑树而不是其他树结构，比如B树或者二叉搜索树，可能是因为红黑树在内存中操作更高效，不需要像B树那样处理大量子节点，适合内存中的数据结构。
+
+另外，网页9和网页10提到HashMap在JDK8之后使用红黑树的条件是链表长度超过8且数组容量达到64。这说明红黑树的使用是有严格条件的，而红黑树的结构特性刚好满足这种需要部分平衡的场景，既保证了查询效率，又减少了维护平衡的开销。
+
+所以总结下来，HashMap选择红黑树主要是因为它在插入、删除和查询之间找到了一个平衡点，适合频繁修改的场景。而其他树结构如AVL树可能在查询上更快，但维护成本高；二叉堆或B树可能结构不适合HashMap的需求。红黑树的这些特性使得它在HashMap中表现更优。
+
+&lt;end&gt;已深度思考（用时14秒）&lt;/end&gt;</code></pre><p>在 Java 的 HashMap 中，当哈希冲突导致链表长度超过阈值（默认为 8）时，链表会转换为红黑树以优化性能。选择红黑树而非其他树结构（如 AVL 树、普通二叉搜索树等）是经过多方面权衡后的结果，主要原因如下：</p>
+<hr>
+<h3 id="一红黑树的特性优势">一、<strong>红黑树的特性优势</strong><a class="anchor" href="#%e4%b8%80%e7%ba%a2%e9%bb%91%e6%a0%91%e7%9a%84%e7%89%b9%e6%80%a7%e4%bc%98%e5%8a%bf">#</a></h3>
+<p>红黑树是一种<strong>自平衡二叉搜索树</strong>，其核心优势在于<strong>平衡性与操作效率的折中</strong>。以下是其关键特性：</p>
+<ol>
+<li>
+<p><strong>近似平衡</strong><br>
+红黑树通过约束条件（如红色节点不能连续、从根到叶子的黑节点数相同）保证最长路径不超过最短路径的两倍<a href="@ref">1</a><a href="@ref">5</a><a href="@ref">9</a>。这种“非严格平衡”使得维护成本低于 AVL
+树，同时仍能保证对数级时间复杂度（O(log n)）的查找效率。</p>
+</li>
+<li>
+<p><strong>高效的增删操作</strong></p>
+<ul>
+<li><strong>插入/删除性能</strong>：红黑树在调整平衡时最多需要<strong>3次旋转</strong>即可完成，而 AVL 树可能需要多次旋转甚至 O(log n) 次调整<a href="@ref">6</a><a href="@ref">8</a>。例如，删除节点时，AVL
+需维护从删除节点到根的路径平衡，而红黑树只需局部调整<a href="@ref">8</a>。</li>
+<li><strong>时间复杂度</strong>：红黑树的插入、删除和查找均为 O(log n)，且实际性能稳定，适合频繁修改的场景<a href="@ref">7</a><a href="@ref">12</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>内存占用优化</strong><br>
+红黑树仅需存储颜色标记（1 bit），而 AVL 树需存储平衡因子（通常为整型），内存开销更小<a href="@ref">8</a>。</p>
+</li>
+</ol>
+<hr>
+<h3 id="二与其他树结构的对比">二、<strong>与其他树结构的对比</strong><a class="anchor" href="#%e4%ba%8c%e4%b8%8e%e5%85%b6%e4%bb%96%e6%a0%91%e7%bb%93%e6%9e%84%e7%9a%84%e5%af%b9%e6%af%94">#</a></h3>
+<h4 id="1-与-avl-树的对比">1. <strong>与 AVL 树的对比</strong><a class="anchor" href="#1-%e4%b8%8e-avl-%e6%a0%91%e7%9a%84%e5%af%b9%e6%af%94">#</a></h4>
+<ul>
+<li><strong>平衡性</strong>：AVL 树追求严格平衡（左右子树高度差≤1），查询效率略高于红黑树，但插入/删除时维护平衡的代价更高<a href="@ref">6</a><a href="@ref">8</a>。</li>
+<li><strong>适用场景</strong>：AVL 树适合<strong>读多写少</strong>的场景（如数据库索引），而 HashMap 需要频繁插入和删除节点，红黑树的综合性能更优<a href="@ref">8</a><a href="@ref">12</a>。</li>
+</ul>
+<h4 id="2-与普通二叉搜索树的对比">2. <strong>与普通二叉搜索树的对比</strong><a class="anchor" href="#2-%e4%b8%8e%e6%99%ae%e9%80%9a%e4%ba%8c%e5%8f%89%e6%90%9c%e7%b4%a2%e6%a0%91%e7%9a%84%e5%af%b9%e6%af%94">#</a></h4>
+<ul>
+<li><strong>退化问题</strong>：普通二叉搜索树在极端情况下（如数据有序插入）会退化为链表，时间复杂度退化为 O(n)，而红黑树通过自平衡机制避免此问题<a href="@ref">5</a><a href="@ref">9</a>。</li>
+</ul>
+<h4 id="3-与-b-树b-树的对比">3. <strong>与 B 树/B+ 树的对比</strong><a class="anchor" href="#3-%e4%b8%8e-b-%e6%a0%91b-%e6%a0%91%e7%9a%84%e5%af%b9%e6%af%94">#</a></h4>
+<ul>
+<li><strong>内存与磁盘优化</strong>：B 树适用于磁盘存储（减少 I/O 次数），而红黑树作为内存数据结构，更适合 HashMap 的哈希桶管理<a href="@ref">8</a>。</li>
+</ul>
+<hr>
+<h3 id="三hashmap-的特定需求">三、<strong>HashMap 的特定需求</strong><a class="anchor" href="#%e4%b8%89hashmap-%e7%9a%84%e7%89%b9%e5%ae%9a%e9%9c%80%e6%b1%82">#</a></h3>
+<ol>
+<li>
+<p><strong>哈希冲突的局部性</strong><br>
+HashMap 仅在单个哈希桶内使用红黑树，冲突节点数量通常较小（默认阈值 8），红黑树的局部调整特性更契合这种场景<a href="@ref">3</a><a href="@ref">7</a><a href="@ref">10</a>。</p>
+</li>
+<li>
+<p><strong>性能与成本的权衡</strong></p>
+<ul>
+<li><strong>树化阈值选择</strong>：链表长度超过 8 才转换为红黑树，因为此时链表的平均查找长度为 4，而红黑树为 3，性能提升显著<a href="@ref">1</a><a href="@ref">3</a>。</li>
+<li><strong>树退化阈值</strong>：当节点数降至 6 时还原为链表，避免频繁树化与退化（中间差值 7 作为缓冲）<a href="@ref">1</a><a href="@ref">10</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>工程实践验证</strong><br>
+红黑树的实现复杂度适中，且经过大量工程验证（如 Linux 内核、Java 集合框架），其稳定性和效率已被广泛认可<a href="@ref">6</a><a href="@ref">8</a>。</p>
+</li>
+</ol>
+<hr>
+<h3 id="四总结">四、<strong>总结</strong><a class="anchor" href="#%e5%9b%9b%e6%80%bb%e7%bb%93">#</a></h3>
+<p>HashMap 选择红黑树的核心原因在于：</p>
+<ol>
+<li><strong>平衡效率与维护成本</strong>：在近似平衡的基础上，以更低的代价实现高效的增删操作。</li>
+<li><strong>适应哈希冲突场景</strong>：适合局部、小规模的数据结构管理需求。</li>
+<li><strong>工程实践优势</strong>：经过长期验证，性能稳定且实现成熟。</li>
+</ol>
+<p>相比之下，其他树结构或过于追求平衡（如 AVL 树），或缺乏自适应性（如普通二叉搜索树），无法在 HashMap 的特定场景中达到最优性能<a href="@ref">1</a><a href="@ref">6</a><a href="@ref">8</a>。</p>
+<h2 id="hashmap-get-的时间复杂度">HashMap get 的时间复杂度<a class="anchor" href="#hashmap-get-%e7%9a%84%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6">#</a></h2>
+<p><code>HashMap</code> 的 <code>get</code> 方法的时间复杂度在理想情况下是 <strong>O(1)</strong>，但在最坏情况下可能退化为 <strong>O(n)</strong>。以下是详细说明：</p>
+<h3 id="1-理想情况o1">1. <strong>理想情况（O(1)）</strong><a class="anchor" href="#1-%e7%90%86%e6%83%b3%e6%83%85%e5%86%b5o1">#</a></h3>
+<ul>
+<li><strong>哈希函数均匀分布</strong>：当哈希函数能够将键均匀地分布到各个桶（bucket）中时，<code>HashMap</code> 的 <code>get</code> 操作可以通过计算键的哈希值直接定位到对应的桶，从而在常数时间内获取值。</li>
+<li><strong>无哈希冲突</strong>：如果每个桶中只有一个元素（没有哈希冲突），<code>get</code> 操作的时间复杂度为 O(1)。</li>
+</ul>
+<h3 id="2-最坏情况on">2. <strong>最坏情况（O(n)）</strong><a class="anchor" href="#2-%e6%9c%80%e5%9d%8f%e6%83%85%e5%86%b5on">#</a></h3>
+<ul>
+<li><strong>哈希冲突严重</strong>：当多个键的哈希值相同（哈希冲突），且这些键被存储在同一个桶中时，<code>HashMap</code> 会使用链表或红黑树来存储这些键值对。在这种情况下，<code>get</code> 操作需要遍历链表或红黑树来查找目标键。
+<ul>
+<li><strong>链表</strong>：如果桶中的元素以链表形式存储，时间复杂度为 O(n)，其中n是链表的长度。</li>
+<li><strong>红黑树</strong>：在 JDK 1.8 及之后，当链表长度超过一定阈值（默认是 8）且桶数组长度大于等于 64 时，链表会转换为红黑树。此时，<code>get</code> 操作的时间复杂度为 O(log n)，其中 n
+是树中节点的数量<a href="@ref">3</a><a href="@ref">4</a>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-总结">3. <strong>总结</strong><a class="anchor" href="#3-%e6%80%bb%e7%bb%93">#</a></h3>
+<ul>
+<li><strong>平均时间复杂度</strong>：O(1)，在哈希函数分布均匀且哈希冲突较少的情况下。</li>
+<li><strong>最坏时间复杂度</strong>：O(n)，在哈希冲突严重且链表未转换为红黑树的情况下。</li>
+<li><strong>优化后的最坏时间复杂度</strong>：O(log n)，在链表转换为红黑树的情况下<a href="@ref">4</a><a href="@ref">5</a>。</li>
+</ul>
+<p>通过合理的哈希函数设计和 <code>HashMap</code> 的扩容机制，可以尽量减少哈希冲突，使 <code>get</code> 操作的时间复杂度接近 O(1)。</p>
+<h2 id="hashmap如何保证线程安全">HashMap如何保证线程安全<a class="anchor" href="#hashmap%e5%a6%82%e4%bd%95%e4%bf%9d%e8%af%81%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8">#</a></h2>
+<p>HashMap 本身是 <strong>非线程安全</strong> 的，在多线程环境下可能会出现数据不一致、死循环等问题。为了保证线程安全，可以使用以下几种方法：</p>
+<hr>
+<h3 id="1-使用"><strong>1. 使用 <code>Collections.synchronizedMap</code></strong><a class="anchor" href="#1-%e4%bd%bf%e7%94%a8">#</a></h3>
+<p><code>Collections.synchronizedMap</code> 方法可以将普通的 <code>HashMap</code> 包装为一个线程安全的 <code>Map</code>。它通过在 <code>HashMap</code> 的所有操作方法上加锁（<code>synchronized</code>）来保证线程安全。<br>
+<strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map<span style="color:#f92672">=</span>Collections.<span style="color:#a6e22e">synchronizedMap</span>(<span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>());</span></span></code></pre></div><p><strong>特点</strong>：</p>
+<ul>
+<li><strong>优点</strong>：使用简单，适合低并发场景。</li>
+<li><strong>缺点</strong>：锁粒度较大（整个 <code>Map</code>），性能较差<a href="@ref">2</a>。</li>
+</ul>
+<hr>
+<h3 id="2-使用"><strong>2. 使用 <code>ConcurrentHashMap</code></strong><a class="anchor" href="#2-%e4%bd%bf%e7%94%a8">#</a></h3>
+<p><code>ConcurrentHashMap</code> 是 Java 并发包中提供的线程安全的 <code>Map</code> 实现。它通过 <strong>分段锁</strong>（JDK 1.7）或 <strong>CAS + <code>synchronized</code></strong>（JDK 1.8 及之后）来保证线程安全。<br>
+<strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ConcurrentHashMap<span style="color:#f92672">&lt;&gt;</span>();</span></span></code></pre></div><p><strong>特点</strong>：</p>
+<ul>
+<li><strong>优点</strong>：锁粒度更细，性能更高，适合高并发场景。</li>
+<li><strong>缺点</strong>：内存开销较大，实现复杂<a href="@ref">3</a><a href="@ref">4</a>。</li>
+</ul>
+<hr>
+<h3 id="3-使用读写锁-"><strong>3. 使用读写锁 (<code>ReadWriteLock</code>)</strong><a class="anchor" href="#3-%e4%bd%bf%e7%94%a8%e8%af%bb%e5%86%99%e9%94%81-">#</a></h3>
+<p>读写锁将锁分为 <strong>读锁</strong> 和 <strong>写锁</strong>，允许多个线程同时读取数据，但写操作是独占的。<br>
+<strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ReadWriteLock lock<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ReentrantReadWriteLock();
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 写操作</span>
+</span></span><span style="display:flex;"><span>        lock.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">writeLock</span>().
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        lock();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>{
+</span></span><span style="display:flex;"><span>        map.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>,<span style="color:#e6db74">&#34;value&#34;</span>);
+</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">finally</span>{
+</span></span><span style="display:flex;"><span>        lock.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">writeLock</span>().
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        unlock();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 读操作</span>
+</span></span><span style="display:flex;"><span>        lock.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">readLock</span>().
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        lock();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>{
+</span></span><span style="display:flex;"><span>        String value<span style="color:#f92672">=</span>map.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;key&#34;</span>);
+</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">finally</span>{
+</span></span><span style="display:flex;"><span>        lock.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">readLock</span>().
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        unlock();
+</span></span><span style="display:flex;"><span>        }</span></span></code></pre></div><p><strong>特点</strong>：</p>
+<ul>
+<li><strong>优点</strong>：适合读多写少的场景，性能较好。</li>
+<li><strong>缺点</strong>：实现较为复杂<a href="@ref">2</a>。</li>
+</ul>
+<hr>
+<h3 id="4-方法内部使用局部"><strong>4. 方法内部使用局部 <code>HashMap</code></strong><a class="anchor" href="#4-%e6%96%b9%e6%b3%95%e5%86%85%e9%83%a8%e4%bd%bf%e7%94%a8%e5%b1%80%e9%83%a8">#</a></h3>
+<p>如果 <code>HashMap</code> 只在方法内部使用，且每个线程都有自己的实例，则无需额外同步。<br>
+<strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">process</span>(){
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> localMap<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        localMap.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>,<span style="color:#e6db74">&#34;value&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 其他操作</span>
+</span></span><span style="display:flex;"><span>        }</span></span></code></pre></div><p><strong>特点</strong>：</p>
+<ul>
+<li><strong>优点</strong>：简单且线程安全。</li>
+<li><strong>缺点</strong>：仅适用于局部变量场景<a href="@ref">2</a>。</li>
+</ul>
+<hr>
+<h3 id="5-初始化写后续只读"><strong>5. 初始化写，后续只读</strong><a class="anchor" href="#5-%e5%88%9d%e5%a7%8b%e5%8c%96%e5%86%99%e5%90%8e%e7%bb%ad%e5%8f%aa%e8%af%bb">#</a></h3>
+<p>如果 <code>HashMap</code> 在初始化后不再修改，可以将其设为只读，从而避免线程安全问题。<br>
+<strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> map<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        map.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>,<span style="color:#e6db74">&#34;value&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">=</span>Collections.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">unmodifiableMap</span>(map);</span></span></code></pre></div><p><strong>特点</strong>：</p>
+<ul>
+<li><strong>优点</strong>：简单且线程安全。</li>
+<li><strong>缺点</strong>：仅适用于初始化后不再修改的场景<a href="@ref">2</a>。</li>
+</ul>
+<hr>
+<h3 id="总结-1"><strong>总结</strong><a class="anchor" href="#%e6%80%bb%e7%bb%93-1">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th>适用场景</th>
+          <th>优点</th>
+          <th>缺点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>Collections.synchronizedMap</code></td>
+          <td>低并发场景</td>
+          <td>使用简单</td>
+          <td>锁粒度大，性能差</td>
+      </tr>
+      <tr>
+          <td><code>ConcurrentHashMap</code></td>
+          <td>高并发场景</td>
+          <td>锁粒度细，性能高</td>
+          <td>内存开销大，实现复杂</td>
+      </tr>
+      <tr>
+          <td>读写锁 (<code>ReadWriteLock</code>)</td>
+          <td>读多写少场景</td>
+          <td>读操作并发性好</td>
+          <td>实现复杂</td>
+      </tr>
+      <tr>
+          <td>局部 <code>HashMap</code></td>
+          <td>方法内部使用</td>
+          <td>简单且线程安全</td>
+          <td>仅适用于局部变量</td>
+      </tr>
+      <tr>
+          <td>初始化写，后续只读</td>
+          <td>初始化后不再修改的场景</td>
+          <td>简单且线程安全</td>
+          <td>仅适用于只读场景</td>
+      </tr>
+  </tbody>
+</table>
+<p>在实际开发中，<strong><code>ConcurrentHashMap</code></strong> 是保证 <code>HashMap</code> 线程安全的首选方案，尤其在高并发场景下<a href="@ref">3</a><a href="@ref">4</a>。</p>
+<h2 id="hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？<a class="anchor" href="#hashmap-%e5%92%8c-hashtable-%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab">#</a></h2>
+<p><code>HashMap</code> 和 <code>Hashtable</code> 是 Java 中两种常用的键值对存储结构，它们虽然功能相似，但在线程安全性、性能、对 null 值的支持等方面存在显著区别。以下是它们的详细对比：</p>
+<hr>
+<h3 id="1-线程安全性"><strong>1. 线程安全性</strong><a class="anchor" href="#1-%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8%e6%80%a7">#</a></h3>
+<ul>
+<li><strong><code>Hashtable</code></strong>：是线程安全的，其所有公共方法都使用了 <code>synchronized</code> 关键字进行同步，因此在多线程环境下可以直接使用，但性能较低<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
+<li><strong><code>HashMap</code></strong>：是非线程安全的，多线程环境下可能导致数据不一致。如果需要在多线程环境中使用，可以通过 <code>Collections.synchronizedMap</code> 方法将其包装为线程安全的 <code>Map</code>
+，或者使用 <code>ConcurrentHashMap</code><a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
+</ul>
+<hr>
+<h3 id="2-对-null-值的支持"><strong>2. 对 null 值的支持</strong><a class="anchor" href="#2-%e5%af%b9-null-%e5%80%bc%e7%9a%84%e6%94%af%e6%8c%81">#</a></h3>
+<ul>
+<li><strong><code>Hashtable</code></strong>：不允许键或值为 <code>null</code>，否则会抛出 <code>NullPointerException</code><a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
+<li><strong><code>HashMap</code></strong>：允许键和值均为 <code>null</code>，但键为 <code>null</code> 的情况只能有一个，因为键必须唯一<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
+</ul>
+<hr>
+<h3 id="3-性能"><strong>3. 性能</strong><a class="anchor" href="#3-%e6%80%a7%e8%83%bd">#</a></h3>
+<ul>
+<li><strong><code>Hashtable</code></strong>：由于所有方法都是同步的，性能较低，尤其在多线程环境下<a href="@ref">2</a><a href="@ref">3</a>。</li>
+<li><strong><code>HashMap</code></strong>：非同步实现，性能较高，适合单线程环境。在多线程环境下，可以通过 <code>ConcurrentHashMap</code> 获得更好的性能<a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>。</li>
+</ul>
+<hr>
+<h3 id="4-继承与实现"><strong>4. 继承与实现</strong><a class="anchor" href="#4-%e7%bb%a7%e6%89%bf%e4%b8%8e%e5%ae%9e%e7%8e%b0">#</a></h3>
+<ul>
+<li><strong><code>Hashtable</code></strong>：继承自 <code>Dictionary</code> 类（已过时），并实现了 <code>Map</code> 接口<a href="@ref">1</a><a href="@ref">3</a>。</li>
+<li><strong><code>HashMap</code></strong>：继承自 <code>AbstractMap</code> 类，并实现了 <code>Map</code> 接口<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+<hr>
+<h3 id="5-扩容机制"><strong>5. 扩容机制</strong><a class="anchor" href="#5-%e6%89%a9%e5%ae%b9%e6%9c%ba%e5%88%b6">#</a></h3>
+<ul>
+<li><strong><code>Hashtable</code></strong>：默认初始容量为 11，扩容时容量变为原来的 2 倍加 1<a href="@ref">1</a><a href="@ref">3</a>。</li>
+<li><strong><code>HashMap</code></strong>：默认初始容量为 16，扩容时容量变为原来的 2 倍<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+<hr>
+<h3 id="6-迭代器"><strong>6. 迭代器</strong><a class="anchor" href="#6-%e8%bf%ad%e4%bb%a3%e5%99%a8">#</a></h3>
+<ul>
+<li><strong><code>Hashtable</code></strong>：使用 <code>Enumeration</code> 进行遍历，不支持 <code>fail-fast</code> 机制<a href="@ref">1</a><a href="@ref">3</a>。</li>
+<li><strong><code>HashMap</code></strong>：使用 <code>Iterator</code> 进行遍历，支持 <code>fail-fast</code> 机制。如果在迭代过程中修改了 <code>HashMap</code>
+的结构（如添加或删除元素），会抛出 <code>ConcurrentModificationException</code><a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+<hr>
+<h3 id="7-计算哈希值的方式"><strong>7. 计算哈希值的方式</strong><a class="anchor" href="#7-%e8%ae%a1%e7%ae%97%e5%93%88%e5%b8%8c%e5%80%bc%e7%9a%84%e6%96%b9%e5%bc%8f">#</a></h3>
+<ul>
+<li><strong><code>Hashtable</code></strong>：直接使用对象的 <code>hashCode</code> 方法计算哈希值<a href="@ref">1</a><a href="@ref">3</a>。</li>
+<li><strong><code>HashMap</code></strong>：对 <code>hashCode</code> 进行二次处理，通过 <code>(h = key.hashCode()) ^ (h &gt;&gt;&gt; 16)</code> 重新计算哈希值，以减少哈希冲突<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ul>
+<hr>
+<h3 id="总结-2"><strong>总结</strong><a class="anchor" href="#%e6%80%bb%e7%bb%93-2">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th><code>Hashtable</code></th>
+          <th><code>HashMap</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>线程安全性</strong></td>
+          <td>线程安全（同步方法）</td>
+          <td>非线程安全</td>
+      </tr>
+      <tr>
+          <td><strong>对 null 值的支持</strong></td>
+          <td>不允许键或值为 <code>null</code></td>
+          <td>允许键和值为 <code>null</code></td>
+      </tr>
+      <tr>
+          <td><strong>性能</strong></td>
+          <td>较低</td>
+          <td>较高</td>
+      </tr>
+      <tr>
+          <td><strong>继承类</strong></td>
+          <td><code>Dictionary</code>（已过时）</td>
+          <td><code>AbstractMap</code></td>
+      </tr>
+      <tr>
+          <td><strong>扩容机制</strong></td>
+          <td>容量变为 2 倍加 1</td>
+          <td>容量变为 2 倍</td>
+      </tr>
+      <tr>
+          <td><strong>迭代器</strong></td>
+          <td><code>Enumeration</code>，不支持 <code>fail-fast</code></td>
+          <td><code>Iterator</code>，支持 <code>fail-fast</code></td>
+      </tr>
+      <tr>
+          <td><strong>哈希值计算</strong></td>
+          <td>直接使用 <code>hashCode</code></td>
+          <td>对 <code>hashCode</code> 进行二次处理</td>
+      </tr>
+  </tbody>
+</table>
+<p>在实际开发中，<strong><code>HashMap</code></strong> 是更常用的选择，尤其是在单线程环境下。如果需要线程安全，推荐使用 <strong><code>ConcurrentHashMap</code></strong>，而不是 <code>Hashtable</code><a href="@ref">1</a><a href="@ref">2</a><a href="@ref">3</a>
+。</p>
+<h2 id="当-hashmap-扩容时所有的红黑树或者链表都会重新构造吗">当 HashMap 扩容时，所有的红黑树或者链表都会重新构造吗<a class="anchor" href="#%e5%bd%93-hashmap-%e6%89%a9%e5%ae%b9%e6%97%b6%e6%89%80%e6%9c%89%e7%9a%84%e7%ba%a2%e9%bb%91%e6%a0%91%e6%88%96%e8%80%85%e9%93%be%e8%a1%a8%e9%83%bd%e4%bc%9a%e9%87%8d%e6%96%b0%e6%9e%84%e9%80%a0%e5%90%97">#</a></h2>
+<p>是的，当 <strong>HashMap 扩容</strong> 时，所有的 <strong>链表</strong> 和 <strong>红黑树</strong> 都会重新构造。这是因为扩容后，数组的长度发生了变化，原有的哈希值计算方式也会随之改变，因此需要对所有元素进行重新哈希和分配。以下是详细的过程：</p>
+<hr>
+<h3 id="1-链表重新构造"><strong>1. 链表重新构造</strong><a class="anchor" href="#1-%e9%93%be%e8%a1%a8%e9%87%8d%e6%96%b0%e6%9e%84%e9%80%a0">#</a></h3>
+<p>在扩容过程中，链表会被拆分为 <strong>高位链表</strong> 和 <strong>低位链表</strong>，分别对应新数组中的不同位置。具体步骤如下：</p>
+<ol>
+<li><strong>遍历链表</strong>：从链表的头节点开始，逐个遍历每个节点。</li>
+<li><strong>计算新位置</strong>：通过位运算 <code>e.hash &amp; oldCap</code> 判断节点应该分配到高位还是低位。
+<ul>
+<li>如果结果为 0，节点放入 <strong>低位链表</strong>，位置为 <code>原索引</code>。</li>
+<li>如果结果为 1，节点放入 <strong>高位链表</strong>，位置为 <code>原索引 + 旧数组长度</code>。</li>
+</ul>
+</li>
+<li><strong>重新连接链表</strong>：将拆分后的链表重新连接到新数组的对应位置<a href="@ref">1</a><a href="@ref">3</a>。</li>
+</ol>
+<hr>
+<h3 id="2-红黑树重新构造"><strong>2. 红黑树重新构造</strong><a class="anchor" href="#2-%e7%ba%a2%e9%bb%91%e6%a0%91%e9%87%8d%e6%96%b0%e6%9e%84%e9%80%a0">#</a></h3>
+<p>红黑树的重新构造与链表类似，但会涉及到红黑树的拆分和可能的 <strong>树转链表</strong> 操作：</p>
+<ol>
+<li><strong>遍历红黑树</strong>：红黑树的节点保留了链表的结构，因此可以像链表一样遍历。</li>
+<li><strong>计算新位置</strong>：同样通过 <code>e.hash &amp; oldCap</code> 判断节点应该分配到高位还是低位。</li>
+<li><strong>拆分红黑树</strong>：将红黑树拆分为 <strong>高位树</strong> 和 <strong>低位树</strong>。</li>
+<li><strong>判断是否需要转链表</strong>：
+<ul>
+<li>如果拆分后的树节点数小于等于 <code>UNTREEIFY_THRESHOLD</code>（默认是 6），则将红黑树转换为链表。</li>
+<li>否则，将拆分后的树重新插入新数组的对应位置<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">5</a>。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="3-重新哈希的原因"><strong>3. 重新哈希的原因</strong><a class="anchor" href="#3-%e9%87%8d%e6%96%b0%e5%93%88%e5%b8%8c%e7%9a%84%e5%8e%9f%e5%9b%a0">#</a></h3>
+<p>扩容后，数组的长度变为原来的两倍（例如从 16 变为 32），哈希值的计算方式从 <code>(n - 1) &amp; hash</code> 变为 <code>(2n - 1) &amp; hash</code>
+。因此，原有的哈希值可能会映射到不同的位置，需要重新计算和分配<a href="@ref">1</a><a href="@ref">3</a>。</p>
+<hr>
+<h3 id="总结-3"><strong>总结</strong><a class="anchor" href="#%e6%80%bb%e7%bb%93-3">#</a></h3>
+<p>当 HashMap 扩容时，所有的链表和红黑树都会重新构造。链表会被拆分为高位和低位链表，红黑树会被拆分为高位和低位树，并根据节点数决定是否转换为链表。这一过程确保了扩容后元素的分布依然均匀，维持了 HashMap
+的高效性<a href="@ref">1</a><a href="@ref">3</a><a href="@ref">5</a>。</p>
+<h2 id="为什么hashmap选择红黑树而不选择b树">为什么HashMap选择红黑树而不选择B+树<a class="anchor" href="#%e4%b8%ba%e4%bb%80%e4%b9%88hashmap%e9%80%89%e6%8b%a9%e7%ba%a2%e9%bb%91%e6%a0%91%e8%80%8c%e4%b8%8d%e9%80%89%e6%8b%a9b%e6%a0%91">#</a></h2>
+<p><code>HashMap</code> 选择红黑树而不是 B+ 树的原因主要有以下几点：</p>
+<hr>
+<h3 id="1-算法实现复杂度">1. <strong>算法实现复杂度</strong><a class="anchor" href="#1-%e7%ae%97%e6%b3%95%e5%ae%9e%e7%8e%b0%e5%a4%8d%e6%9d%82%e5%ba%a6">#</a></h3>
+<ul>
+<li><strong>红黑树</strong>：Java 中已经实现了红黑树，且红黑树的实现相对简单，复杂度较低。红黑树是一种自平衡二叉查找树，适合内存中的数据结构操作<a href="@ref">22</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树的实现较为复杂，尤其是在内存中维护 B+ 树的结构需要更多的指针和节点管理，增加了实现的难度<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="2-底层数据结构匹配">2. <strong>底层数据结构匹配</strong><a class="anchor" href="#2-%e5%ba%95%e5%b1%82%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e5%8c%b9%e9%85%8d">#</a></h3>
+<ul>
+<li><strong>红黑树</strong>：<code>HashMap</code> 的底层是哈希表，红黑树作为链表过长时的替代结构，能够很好地与哈希表结合，解决哈希冲突问题<a href="@ref">22</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树通常用于磁盘存储结构，其设计目标是减少磁盘 I/O 操作。而 <code>HashMap</code> 是基于内存的数据结构，B+ 树的优势在内存中并不明显<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="3-修改效率">3. <strong>修改效率</strong><a class="anchor" href="#3-%e4%bf%ae%e6%94%b9%e6%95%88%e7%8e%87">#</a></h3>
+<ul>
+<li><strong>红黑树</strong>：红黑树在插入、删除和查找操作上都有较好的性能，且维护平衡的代价较低。红黑树的旋转操作次数较少，适合频繁修改的场景<a href="@ref">22</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树的修改操作需要调整节点和指针，尤其是在内存中频繁修改时，开销较大。B+ 树更适合静态或冷数据存储<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="4-内存占用">4. <strong>内存占用</strong><a class="anchor" href="#4-%e5%86%85%e5%ad%98%e5%8d%a0%e7%94%a8">#</a></h3>
+<ul>
+<li><strong>红黑树</strong>：红黑树的结构相对简单，内存占用较少，适合内存中的高效操作<a href="@ref">22</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树的节点通常包含多个子节点，需要更多的指针和空间来维护结构，内存占用较高<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="5-适用场景">5. <strong>适用场景</strong><a class="anchor" href="#5-%e9%80%82%e7%94%a8%e5%9c%ba%e6%99%af">#</a></h3>
+<ul>
+<li><strong>红黑树</strong>：红黑树适合内存中的动态数据管理，尤其是需要频繁插入、删除和查找的场景。<code>HashMap</code> 在链表长度超过阈值（默认为 8）时，将链表转换为红黑树，以提高查询效率<a href="@ref">55</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树更适合磁盘存储，其设计目标是减少磁盘 I/O 操作，适用于数据库和文件系统等场景<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="6-维护成本">6. <strong>维护成本</strong><a class="anchor" href="#6-%e7%bb%b4%e6%8a%a4%e6%88%90%e6%9c%ac">#</a></h3>
+<ul>
+<li><strong>红黑树</strong>：红黑树的维护成本较低，适合高并发的场景。<code>HashMap</code> 在链表长度小于 6 时，会将红黑树转换回链表，进一步降低维护成本<a href="@ref">56</a>。</li>
+<li><strong>B+ 树</strong>：B+ 树的维护成本较高，尤其是在内存中频繁修改时，需要复杂的节点调整和指针管理<a href="@ref">22</a>。</li>
+</ul>
+<hr>
+<h3 id="总结-4">总结<a class="anchor" href="#%e6%80%bb%e7%bb%93-4">#</a></h3>
+<p><code>HashMap</code> 选择红黑树而不是 B+ 树的主要原因在于红黑树更适合内存中的动态数据管理，实现简单、修改效率高、内存占用少，且维护成本低。而 B+
+树更适合磁盘存储，其优势在内存中无法充分发挥<a href="@ref">22</a><a href="@ref">55</a><a href="@ref">56</a>。</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/post/computer-science/java/jackson/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>jackson</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/post/computer-science/java/java-utils/" class="flex align-center">
+        <span>Java Utils</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+  <div class="book-copyright flex justify-center">
+    <small>Penruins - <a href="/">Main Page</a></small>
+  </div>
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#hashmap">HashMap</a>
+      <ul>
+        <li><a href="#hashmap底层的数据结构是怎样的">HashMap底层的数据结构是怎样的</a>
+          <ul>
+            <li><a href="#jdk-17-及之前"><strong>JDK 1.7 及之前</strong></a></li>
+            <li><a href="#jdk-18-及之后"><strong>JDK 1.8 及之后</strong></a></li>
+            <li><a href="#核心机制"><strong>核心机制</strong></a></li>
+            <li><a href="#总结"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#为什么hashmap要使用红黑树而不使用其他的树结构">为什么HashMap要使用红黑树而不使用其他的树结构？</a>
+          <ul>
+            <li><a href="#一红黑树的特性优势">一、<strong>红黑树的特性优势</strong></a></li>
+            <li><a href="#二与其他树结构的对比">二、<strong>与其他树结构的对比</strong></a>
+              <ul>
+                <li><a href="#1-与-avl-树的对比">1. <strong>与 AVL 树的对比</strong></a></li>
+                <li><a href="#2-与普通二叉搜索树的对比">2. <strong>与普通二叉搜索树的对比</strong></a></li>
+                <li><a href="#3-与-b-树b-树的对比">3. <strong>与 B 树/B+ 树的对比</strong></a></li>
+              </ul>
+            </li>
+            <li><a href="#三hashmap-的特定需求">三、<strong>HashMap 的特定需求</strong></a></li>
+            <li><a href="#四总结">四、<strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap-get-的时间复杂度">HashMap get 的时间复杂度</a>
+          <ul>
+            <li><a href="#1-理想情况o1">1. <strong>理想情况（O(1)）</strong></a></li>
+            <li><a href="#2-最坏情况on">2. <strong>最坏情况（O(n)）</strong></a></li>
+            <li><a href="#3-总结">3. <strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap如何保证线程安全">HashMap如何保证线程安全</a>
+          <ul>
+            <li><a href="#1-使用"><strong>1. 使用 <code>Collections.synchronizedMap</code></strong></a></li>
+            <li><a href="#2-使用"><strong>2. 使用 <code>ConcurrentHashMap</code></strong></a></li>
+            <li><a href="#3-使用读写锁-"><strong>3. 使用读写锁 (<code>ReadWriteLock</code>)</strong></a></li>
+            <li><a href="#4-方法内部使用局部"><strong>4. 方法内部使用局部 <code>HashMap</code></strong></a></li>
+            <li><a href="#5-初始化写后续只读"><strong>5. 初始化写，后续只读</strong></a></li>
+            <li><a href="#总结-1"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#hashmap-和-hashtable-有什么区别">HashMap 和 Hashtable 有什么区别？</a>
+          <ul>
+            <li><a href="#1-线程安全性"><strong>1. 线程安全性</strong></a></li>
+            <li><a href="#2-对-null-值的支持"><strong>2. 对 null 值的支持</strong></a></li>
+            <li><a href="#3-性能"><strong>3. 性能</strong></a></li>
+            <li><a href="#4-继承与实现"><strong>4. 继承与实现</strong></a></li>
+            <li><a href="#5-扩容机制"><strong>5. 扩容机制</strong></a></li>
+            <li><a href="#6-迭代器"><strong>6. 迭代器</strong></a></li>
+            <li><a href="#7-计算哈希值的方式"><strong>7. 计算哈希值的方式</strong></a></li>
+            <li><a href="#总结-2"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#当-hashmap-扩容时所有的红黑树或者链表都会重新构造吗">当 HashMap 扩容时，所有的红黑树或者链表都会重新构造吗</a>
+          <ul>
+            <li><a href="#1-链表重新构造"><strong>1. 链表重新构造</strong></a></li>
+            <li><a href="#2-红黑树重新构造"><strong>2. 红黑树重新构造</strong></a></li>
+            <li><a href="#3-重新哈希的原因"><strong>3. 重新哈希的原因</strong></a></li>
+            <li><a href="#总结-3"><strong>总结</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#为什么hashmap选择红黑树而不选择b树">为什么HashMap选择红黑树而不选择B+树</a>
+          <ul>
+            <li><a href="#1-算法实现复杂度">1. <strong>算法实现复杂度</strong></a></li>
+            <li><a href="#2-底层数据结构匹配">2. <strong>底层数据结构匹配</strong></a></li>
+            <li><a href="#3-修改效率">3. <strong>修改效率</strong></a></li>
+            <li><a href="#4-内存占用">4. <strong>内存占用</strong></a></li>
+            <li><a href="#5-适用场景">5. <strong>适用场景</strong></a></li>
+            <li><a href="#6-维护成本">6. <strong>维护成本</strong></a></li>
+            <li><a href="#总结-4">总结</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
