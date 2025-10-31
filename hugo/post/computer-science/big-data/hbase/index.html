@@ -1,0 +1,2651 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="hbase# HBase 是一个面向列式存储的分布式数据库，其设计思想来源于 Google 的 BigTable 论文 HBase 底层存储基于 HDFS 实现，集群的管理基于 ZooKeeper 实现 HBase 良好的分布式架构设计为海量数据的快速存储、随机访问提供了可能，基于数据副本机制和分区机制可以轻松实现在线扩容、缩容和数据容灾，是大数据领域中 Key-Value 数据结构存储最常用的数据库方案 hbase vs elasticsearch# HBase是基于Hadoop生态的分布式列式数据库，源自Google BigTable设计，擅长海量结构化/半结构化数据的存储和高吞吐写入 Elasticsearch是基于Lucene的分布式搜索引擎，专注于全文检索、复杂查询和实时分析，采用文档型数据模型 数据模型与灵活性 HBase采用列式存储模型，数据按&#34;行键(RowKey)&#43;列族(Column Family)&#43;列限定符(Qualifier)“组织，适合结构化或半结构化数据。虽然schema-free设计允许灵活添加列，但列族需要预先定义 Elasticsearch采用文档型模型，数据以JSON格式存储，天然支持非结构化数据。字段可以动态添加，无需预定义schema，更适合多变的数据结构 查询能力对比 HBase查询能力相对有限 主要支持基于RowKey的精确查询和范围扫描(Scan) 复杂查询需要借助二级索引或Phoenix等SQL层 无内置全文检索能力，需结合Solr等搜索引擎 Elasticsearch提供丰富的查询功能 支持全文搜索、模糊查询、分词查询、聚合分析等高级特性 提供强大的DSL查询语言和SQL接口 内置倒排索引，亿级数据下仍能保持秒级响应 典型场景：HBase适合&#34;已知RowKey查明细”，ES适合&#34;根据内容特征找文档&#34; 性能与扩展性 写入性能 两者都基于LSM树结构，理论写入性能相当 实际场景中HBase写入更高效，因为ES需要构建倒排索引等额外开销 HBase单集群可支持每天TB级数据写入 查询性能 ES在复杂查询和全文检索方面性能显著优于HBase HBase在简单键值查询和范围扫描上延迟更低 扩展能力 HBase天生为海量数据设计，通过Region分裂实现水平扩展 ES通过分片(Shard)机制扩展，但数据量极大时可能需要业务层干预 存储成本与资源消耗 存储效率 HBase采用列式存储&#43;压缩，存储效率更高，适合长期保存海量数据 ES因维护索引和副本，存储开销通常比HBase高30%-50% 资源消耗 ES的CPU和内存消耗更高（分词、索引构建等） HBase更注重I/O优化，适合资源受限环境 维护复杂度 HBase依赖完整的Hadoop生态(HDFS/ZooKeeper等)，组件多，运维复杂度高 Elasticsearch自成体系，部署和维护相对简单，但集群调优需要专业知识 实时性与一致性 HBase采用强一致性模型(基于2PC协议)，适合对一致性要求高的场景 Elasticsearch采用最终一致性，查询实时性更好但可能短暂不一致 典型应用场景推荐 适合选择HBase的场景 海量时序数据存储：如设备监控数据、日志流水(每日5G以上) 高吞吐写入：需要持续写入TB级结构化数据的场景 简单查询为主：已知主键的快速查询或固定模式的范围扫描 长期数据归档：需要低成本长期保存的历史数据 案例：某埋点系统每天100G数据通过Kafka写入HBase，稳定运行 适合选择Elasticsearch的场景 全文检索需求：如商品搜索、内容检索、日志分析 复杂查询分析：需要多条件组合、聚合统计的业务 实时数据分析：如应用监控、安全分析等需要秒级响应的场景 灵活的数据结构：字段频繁变化或无法预定义schema的情况 混合架构方案 对于同时需要海量存储和复杂查询的场景，可考虑ES&#43;HBase组合架构 HBase作为主存储，保证数据持久性和高吞吐写入 ES作为索引层，提供丰富的查询能力 通过数据同步工具保持两者数据一致 百亿级数据架构案例：使用ES处理复杂查询，HBase保证可靠存储，两者协同工作 选型决策关键因素 数据规模：日增5GB以下ES更简单，TB级选HBase 查询复杂度：简单查询HBase足够，复杂搜索选ES 数据结构：固定结构用HBase，多变结构用ES 资源预算：资源有限优先HBase，可接受较高成本选ES 团队技能：熟悉Hadoop选HBase，无大数据经验ES更易上手 总结建议 Elasticsearch是搜索和复杂查询的首选，特别适合日志分析、内容检索等需要灵活查询的场景 HBase是海量数据存储的可靠选择，特别适合时序数据、用户行为记录等高吞吐写入场景 HBase与RDBMS的区别# 存储方式：HBase为列式存储，RDBMS为行式存储 扩展性：HBase支持水平扩展，RDBMS通常垂直扩展 事务：HBase仅支持单行事务，RDBMS支持多行复杂事务 HBase与Hive的区别# 用途：HBase是实时数据库，Hive是离线数据仓库 查询性能：HBase支持毫秒级查询，Hive依赖MapReduce，延迟高 数据存储结构# Region：表的水平分区，按RowKey范围划分 MemStore：写缓存，满时刷盘生成HFile HFile：底层存储文件，基于HDFS的列族数据块 hbase 的特点# 易扩展 海量存储 列式存储 高可靠性 稀疏性 模块组成# HBase 可以将数据存储在本地文件系统，也可以存储在 HDFS 文件系统。在生产环境中，HBase 一般运行在 HDFS 上，以 HDFS 作为基础的存储设施。HBase 通过 HBase Client 提供的 Java API 来访问 HBase 数据库，以完成数据的写入和读取。HBase 集群主由HMaster、Region Server 和 ZooKeeper 组成 HMaster 负责管理 RegionServer，实现其负载均衡 管理和分配 Region，比如在 Region split时分配新的 Region，在 RegionServer 退出时迁移其内的 Region 到其他 RegionServer上 管理namespace和table的元数据（实际存储在HDFS上） 权限控制（ACL） RegionServer 存放和管理本地 Region 读写HDFS，管理Table中的数据 Client 从 HMaster 中获取元数据，找到 RowKey 所在的 RegionServer 进行读写数据 ZooKeeper 存放整个 HBase集群的元数据以及集群的状态信息 实现HMaster主从节点的failover RowKey设计原则# 长度：建议≤16字节，避免内存和存储浪费 散列性：高位散列（如哈希前缀）防止热点问题 唯一性：必须保证RowKey唯一标识数据 应用场景# 适用场景 半结构化/非结构化数据（如日志、用户行为） 高并发实时读写（如电商订单、社交消息） HBase是根据谷歌的BigTable设计的。典型的应用场景就是不断插入新的信息（谷歌的情况下就是互联网上新生成的网页），而不怎么修改。比如现在Facebook的messenger就是用HBase实现的 Facebook Facebook用HBase存储在线消息，每天数据量近百亿，每月数据量250 ~ 300T， HBase读写比基本在1:1，吞吐量150w qps 小米 10&#43;在线HBase集群，好几百台服务器，米聊历史数据，消息push系统等多个重要应用系统都建立在HBase基础之上 网易 哨兵监控系统，云信历史数据，日志归档数据等一系列重要应用底层都由HBase提供服务 写密集型应用，每天写入量巨大，而相对读数量较小的应用，比如IM的历史消息，游戏的日志等等 不需要复杂查询条件来查询数据的应用，HBase只支持基于rowkey的查询，对于HBase来说，单条记录或者小范围的查询是可以接受的，大范围的查询由于分布式的原因，可能在性能上有点影响，而对于像SQL的join等查询，HBase无法支持 对性能和可靠性要求非常高的应用，由于HBase本身没有单点故障，可用性非常高 数据量较大，而且增长量无法预估的应用，HBase支持在线扩展，即使在一段时间内数据量呈井喷式增长，也可以通过HBase横向扩展来满足功能 不适用场景 需要复杂事务或多表关联查询的业务 Reference# 什么是HBase？终于有人讲明白了 ">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/big-data/hbase/">
+  <meta property="og:site_name" content="Penruins">
+  <meta property="og:title" content="hbase">
+  <meta property="og:description" content="hbase# HBase 是一个面向列式存储的分布式数据库，其设计思想来源于 Google 的 BigTable 论文 HBase 底层存储基于 HDFS 实现，集群的管理基于 ZooKeeper 实现 HBase 良好的分布式架构设计为海量数据的快速存储、随机访问提供了可能，基于数据副本机制和分区机制可以轻松实现在线扩容、缩容和数据容灾，是大数据领域中 Key-Value 数据结构存储最常用的数据库方案 hbase vs elasticsearch# HBase是基于Hadoop生态的分布式列式数据库，源自Google BigTable设计，擅长海量结构化/半结构化数据的存储和高吞吐写入 Elasticsearch是基于Lucene的分布式搜索引擎，专注于全文检索、复杂查询和实时分析，采用文档型数据模型 数据模型与灵活性 HBase采用列式存储模型，数据按&#34;行键(RowKey)&#43;列族(Column Family)&#43;列限定符(Qualifier)“组织，适合结构化或半结构化数据。虽然schema-free设计允许灵活添加列，但列族需要预先定义 Elasticsearch采用文档型模型，数据以JSON格式存储，天然支持非结构化数据。字段可以动态添加，无需预定义schema，更适合多变的数据结构 查询能力对比 HBase查询能力相对有限 主要支持基于RowKey的精确查询和范围扫描(Scan) 复杂查询需要借助二级索引或Phoenix等SQL层 无内置全文检索能力，需结合Solr等搜索引擎 Elasticsearch提供丰富的查询功能 支持全文搜索、模糊查询、分词查询、聚合分析等高级特性 提供强大的DSL查询语言和SQL接口 内置倒排索引，亿级数据下仍能保持秒级响应 典型场景：HBase适合&#34;已知RowKey查明细”，ES适合&#34;根据内容特征找文档&#34; 性能与扩展性 写入性能 两者都基于LSM树结构，理论写入性能相当 实际场景中HBase写入更高效，因为ES需要构建倒排索引等额外开销 HBase单集群可支持每天TB级数据写入 查询性能 ES在复杂查询和全文检索方面性能显著优于HBase HBase在简单键值查询和范围扫描上延迟更低 扩展能力 HBase天生为海量数据设计，通过Region分裂实现水平扩展 ES通过分片(Shard)机制扩展，但数据量极大时可能需要业务层干预 存储成本与资源消耗 存储效率 HBase采用列式存储&#43;压缩，存储效率更高，适合长期保存海量数据 ES因维护索引和副本，存储开销通常比HBase高30%-50% 资源消耗 ES的CPU和内存消耗更高（分词、索引构建等） HBase更注重I/O优化，适合资源受限环境 维护复杂度 HBase依赖完整的Hadoop生态(HDFS/ZooKeeper等)，组件多，运维复杂度高 Elasticsearch自成体系，部署和维护相对简单，但集群调优需要专业知识 实时性与一致性 HBase采用强一致性模型(基于2PC协议)，适合对一致性要求高的场景 Elasticsearch采用最终一致性，查询实时性更好但可能短暂不一致 典型应用场景推荐 适合选择HBase的场景 海量时序数据存储：如设备监控数据、日志流水(每日5G以上) 高吞吐写入：需要持续写入TB级结构化数据的场景 简单查询为主：已知主键的快速查询或固定模式的范围扫描 长期数据归档：需要低成本长期保存的历史数据 案例：某埋点系统每天100G数据通过Kafka写入HBase，稳定运行 适合选择Elasticsearch的场景 全文检索需求：如商品搜索、内容检索、日志分析 复杂查询分析：需要多条件组合、聚合统计的业务 实时数据分析：如应用监控、安全分析等需要秒级响应的场景 灵活的数据结构：字段频繁变化或无法预定义schema的情况 混合架构方案 对于同时需要海量存储和复杂查询的场景，可考虑ES&#43;HBase组合架构 HBase作为主存储，保证数据持久性和高吞吐写入 ES作为索引层，提供丰富的查询能力 通过数据同步工具保持两者数据一致 百亿级数据架构案例：使用ES处理复杂查询，HBase保证可靠存储，两者协同工作 选型决策关键因素 数据规模：日增5GB以下ES更简单，TB级选HBase 查询复杂度：简单查询HBase足够，复杂搜索选ES 数据结构：固定结构用HBase，多变结构用ES 资源预算：资源有限优先HBase，可接受较高成本选ES 团队技能：熟悉Hadoop选HBase，无大数据经验ES更易上手 总结建议 Elasticsearch是搜索和复杂查询的首选，特别适合日志分析、内容检索等需要灵活查询的场景 HBase是海量数据存储的可靠选择，特别适合时序数据、用户行为记录等高吞吐写入场景 HBase与RDBMS的区别# 存储方式：HBase为列式存储，RDBMS为行式存储 扩展性：HBase支持水平扩展，RDBMS通常垂直扩展 事务：HBase仅支持单行事务，RDBMS支持多行复杂事务 HBase与Hive的区别# 用途：HBase是实时数据库，Hive是离线数据仓库 查询性能：HBase支持毫秒级查询，Hive依赖MapReduce，延迟高 数据存储结构# Region：表的水平分区，按RowKey范围划分 MemStore：写缓存，满时刷盘生成HFile HFile：底层存储文件，基于HDFS的列族数据块 hbase 的特点# 易扩展 海量存储 列式存储 高可靠性 稀疏性 模块组成# HBase 可以将数据存储在本地文件系统，也可以存储在 HDFS 文件系统。在生产环境中，HBase 一般运行在 HDFS 上，以 HDFS 作为基础的存储设施。HBase 通过 HBase Client 提供的 Java API 来访问 HBase 数据库，以完成数据的写入和读取。HBase 集群主由HMaster、Region Server 和 ZooKeeper 组成 HMaster 负责管理 RegionServer，实现其负载均衡 管理和分配 Region，比如在 Region split时分配新的 Region，在 RegionServer 退出时迁移其内的 Region 到其他 RegionServer上 管理namespace和table的元数据（实际存储在HDFS上） 权限控制（ACL） RegionServer 存放和管理本地 Region 读写HDFS，管理Table中的数据 Client 从 HMaster 中获取元数据，找到 RowKey 所在的 RegionServer 进行读写数据 ZooKeeper 存放整个 HBase集群的元数据以及集群的状态信息 实现HMaster主从节点的failover RowKey设计原则# 长度：建议≤16字节，避免内存和存储浪费 散列性：高位散列（如哈希前缀）防止热点问题 唯一性：必须保证RowKey唯一标识数据 应用场景# 适用场景 半结构化/非结构化数据（如日志、用户行为） 高并发实时读写（如电商订单、社交消息） HBase是根据谷歌的BigTable设计的。典型的应用场景就是不断插入新的信息（谷歌的情况下就是互联网上新生成的网页），而不怎么修改。比如现在Facebook的messenger就是用HBase实现的 Facebook Facebook用HBase存储在线消息，每天数据量近百亿，每月数据量250 ~ 300T， HBase读写比基本在1:1，吞吐量150w qps 小米 10&#43;在线HBase集群，好几百台服务器，米聊历史数据，消息push系统等多个重要应用系统都建立在HBase基础之上 网易 哨兵监控系统，云信历史数据，日志归档数据等一系列重要应用底层都由HBase提供服务 写密集型应用，每天写入量巨大，而相对读数量较小的应用，比如IM的历史消息，游戏的日志等等 不需要复杂查询条件来查询数据的应用，HBase只支持基于rowkey的查询，对于HBase来说，单条记录或者小范围的查询是可以接受的，大范围的查询由于分布式的原因，可能在性能上有点影响，而对于像SQL的join等查询，HBase无法支持 对性能和可靠性要求非常高的应用，由于HBase本身没有单点故障，可用性非常高 数据量较大，而且增长量无法预估的应用，HBase支持在线扩展，即使在一段时间内数据量呈井喷式增长，也可以通过HBase横向扩展来满足功能 不适用场景 需要复杂事务或多表关联查询的业务 Reference# 什么是HBase？终于有人讲明白了">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:modified_time" content="2025-10-31T21:57:31+08:00">
+
+
+  <meta itemprop="name" content="hbase">
+  <meta itemprop="description" content="hbase# HBase 是一个面向列式存储的分布式数据库，其设计思想来源于 Google 的 BigTable 论文 HBase 底层存储基于 HDFS 实现，集群的管理基于 ZooKeeper 实现 HBase 良好的分布式架构设计为海量数据的快速存储、随机访问提供了可能，基于数据副本机制和分区机制可以轻松实现在线扩容、缩容和数据容灾，是大数据领域中 Key-Value 数据结构存储最常用的数据库方案 hbase vs elasticsearch# HBase是基于Hadoop生态的分布式列式数据库，源自Google BigTable设计，擅长海量结构化/半结构化数据的存储和高吞吐写入 Elasticsearch是基于Lucene的分布式搜索引擎，专注于全文检索、复杂查询和实时分析，采用文档型数据模型 数据模型与灵活性 HBase采用列式存储模型，数据按&#34;行键(RowKey)&#43;列族(Column Family)&#43;列限定符(Qualifier)“组织，适合结构化或半结构化数据。虽然schema-free设计允许灵活添加列，但列族需要预先定义 Elasticsearch采用文档型模型，数据以JSON格式存储，天然支持非结构化数据。字段可以动态添加，无需预定义schema，更适合多变的数据结构 查询能力对比 HBase查询能力相对有限 主要支持基于RowKey的精确查询和范围扫描(Scan) 复杂查询需要借助二级索引或Phoenix等SQL层 无内置全文检索能力，需结合Solr等搜索引擎 Elasticsearch提供丰富的查询功能 支持全文搜索、模糊查询、分词查询、聚合分析等高级特性 提供强大的DSL查询语言和SQL接口 内置倒排索引，亿级数据下仍能保持秒级响应 典型场景：HBase适合&#34;已知RowKey查明细”，ES适合&#34;根据内容特征找文档&#34; 性能与扩展性 写入性能 两者都基于LSM树结构，理论写入性能相当 实际场景中HBase写入更高效，因为ES需要构建倒排索引等额外开销 HBase单集群可支持每天TB级数据写入 查询性能 ES在复杂查询和全文检索方面性能显著优于HBase HBase在简单键值查询和范围扫描上延迟更低 扩展能力 HBase天生为海量数据设计，通过Region分裂实现水平扩展 ES通过分片(Shard)机制扩展，但数据量极大时可能需要业务层干预 存储成本与资源消耗 存储效率 HBase采用列式存储&#43;压缩，存储效率更高，适合长期保存海量数据 ES因维护索引和副本，存储开销通常比HBase高30%-50% 资源消耗 ES的CPU和内存消耗更高（分词、索引构建等） HBase更注重I/O优化，适合资源受限环境 维护复杂度 HBase依赖完整的Hadoop生态(HDFS/ZooKeeper等)，组件多，运维复杂度高 Elasticsearch自成体系，部署和维护相对简单，但集群调优需要专业知识 实时性与一致性 HBase采用强一致性模型(基于2PC协议)，适合对一致性要求高的场景 Elasticsearch采用最终一致性，查询实时性更好但可能短暂不一致 典型应用场景推荐 适合选择HBase的场景 海量时序数据存储：如设备监控数据、日志流水(每日5G以上) 高吞吐写入：需要持续写入TB级结构化数据的场景 简单查询为主：已知主键的快速查询或固定模式的范围扫描 长期数据归档：需要低成本长期保存的历史数据 案例：某埋点系统每天100G数据通过Kafka写入HBase，稳定运行 适合选择Elasticsearch的场景 全文检索需求：如商品搜索、内容检索、日志分析 复杂查询分析：需要多条件组合、聚合统计的业务 实时数据分析：如应用监控、安全分析等需要秒级响应的场景 灵活的数据结构：字段频繁变化或无法预定义schema的情况 混合架构方案 对于同时需要海量存储和复杂查询的场景，可考虑ES&#43;HBase组合架构 HBase作为主存储，保证数据持久性和高吞吐写入 ES作为索引层，提供丰富的查询能力 通过数据同步工具保持两者数据一致 百亿级数据架构案例：使用ES处理复杂查询，HBase保证可靠存储，两者协同工作 选型决策关键因素 数据规模：日增5GB以下ES更简单，TB级选HBase 查询复杂度：简单查询HBase足够，复杂搜索选ES 数据结构：固定结构用HBase，多变结构用ES 资源预算：资源有限优先HBase，可接受较高成本选ES 团队技能：熟悉Hadoop选HBase，无大数据经验ES更易上手 总结建议 Elasticsearch是搜索和复杂查询的首选，特别适合日志分析、内容检索等需要灵活查询的场景 HBase是海量数据存储的可靠选择，特别适合时序数据、用户行为记录等高吞吐写入场景 HBase与RDBMS的区别# 存储方式：HBase为列式存储，RDBMS为行式存储 扩展性：HBase支持水平扩展，RDBMS通常垂直扩展 事务：HBase仅支持单行事务，RDBMS支持多行复杂事务 HBase与Hive的区别# 用途：HBase是实时数据库，Hive是离线数据仓库 查询性能：HBase支持毫秒级查询，Hive依赖MapReduce，延迟高 数据存储结构# Region：表的水平分区，按RowKey范围划分 MemStore：写缓存，满时刷盘生成HFile HFile：底层存储文件，基于HDFS的列族数据块 hbase 的特点# 易扩展 海量存储 列式存储 高可靠性 稀疏性 模块组成# HBase 可以将数据存储在本地文件系统，也可以存储在 HDFS 文件系统。在生产环境中，HBase 一般运行在 HDFS 上，以 HDFS 作为基础的存储设施。HBase 通过 HBase Client 提供的 Java API 来访问 HBase 数据库，以完成数据的写入和读取。HBase 集群主由HMaster、Region Server 和 ZooKeeper 组成 HMaster 负责管理 RegionServer，实现其负载均衡 管理和分配 Region，比如在 Region split时分配新的 Region，在 RegionServer 退出时迁移其内的 Region 到其他 RegionServer上 管理namespace和table的元数据（实际存储在HDFS上） 权限控制（ACL） RegionServer 存放和管理本地 Region 读写HDFS，管理Table中的数据 Client 从 HMaster 中获取元数据，找到 RowKey 所在的 RegionServer 进行读写数据 ZooKeeper 存放整个 HBase集群的元数据以及集群的状态信息 实现HMaster主从节点的failover RowKey设计原则# 长度：建议≤16字节，避免内存和存储浪费 散列性：高位散列（如哈希前缀）防止热点问题 唯一性：必须保证RowKey唯一标识数据 应用场景# 适用场景 半结构化/非结构化数据（如日志、用户行为） 高并发实时读写（如电商订单、社交消息） HBase是根据谷歌的BigTable设计的。典型的应用场景就是不断插入新的信息（谷歌的情况下就是互联网上新生成的网页），而不怎么修改。比如现在Facebook的messenger就是用HBase实现的 Facebook Facebook用HBase存储在线消息，每天数据量近百亿，每月数据量250 ~ 300T， HBase读写比基本在1:1，吞吐量150w qps 小米 10&#43;在线HBase集群，好几百台服务器，米聊历史数据，消息push系统等多个重要应用系统都建立在HBase基础之上 网易 哨兵监控系统，云信历史数据，日志归档数据等一系列重要应用底层都由HBase提供服务 写密集型应用，每天写入量巨大，而相对读数量较小的应用，比如IM的历史消息，游戏的日志等等 不需要复杂查询条件来查询数据的应用，HBase只支持基于rowkey的查询，对于HBase来说，单条记录或者小范围的查询是可以接受的，大范围的查询由于分布式的原因，可能在性能上有点影响，而对于像SQL的join等查询，HBase无法支持 对性能和可靠性要求非常高的应用，由于HBase本身没有单点故障，可用性非常高 数据量较大，而且增长量无法预估的应用，HBase支持在线扩展，即使在一段时间内数据量呈井喷式增长，也可以通过HBase横向扩展来满足功能 不适用场景 需要复杂事务或多表关联查询的业务 Reference# 什么是HBase？终于有人讲明白了">
+  <meta itemprop="dateModified" content="2025-10-31T21:57:31+08:00">
+  <meta itemprop="wordCount" content="188">
+
+<title>hbase | Penruins</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="/post/computer-science/big-data/hbase/">
+<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.1e4254d6ef5c3d4b931350d3ad5355ea88c400709582577a866d1cb5f2a8f4f5.js" ></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-post">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Penruins</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d673e25af27f33796c279e3a05cc634f" class="toggle"  />
+    <label for="section-d673e25af27f33796c279e3a05cc634f" class="flex">
+      <a role="button" class="">
+        Life</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/books/" class="">
+      books</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
+      摘抄分享</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/%E6%96%B0%E7%9F%A5/" class="">
+      新知</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/movies-log/" class="">
+      观影记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/bilibili/" class="">
+      bilibili</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/hiking/" class="">
+      hiking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life/" class="">
+      life</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/life-recommend/" class="">
+      life recommand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/learning-others-log/" class="">
+      other learning</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/podcast/" class="">
+      podcast</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/politics/" class="">
+      politics</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/goal/" class="">
+      goal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/coffee/" class="">
+      coffee</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/article/" class="">
+      article</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/law/" class="">
+      law</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-history/" class="">
+      my history</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/life/my-timeline/" class="">
+      My Timeline</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e52270c7d6707875ea89b3ec9b091983" class="toggle" checked />
+    <label for="section-e52270c7d6707875ea89b3ec9b091983" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science/" class="">
+      computer science</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f834cb9837867b0fca71e863c9ed2d28" class="toggle"  />
+    <label for="section-f834cb9837867b0fca71e863c9ed2d28" class="flex">
+      <a role="button" class="">
+        Algorithm</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm/" class="">
+      Algorithm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="">
+      algorithm practice 剑指 offer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
+      剑指offer题目对应</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
+      面试经典 150 题</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-12ae84c3ad3679302ffec2ab120d7fb0" class="toggle" checked />
+    <label for="section-12ae84c3ad3679302ffec2ab120d7fb0" class="flex">
+      <a role="button" class="">
+        Big Data</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hadoop/" class="">
+      hadoop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hbase/" class="active">
+      hbase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/big-data/hive/" class="">
+      hive</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-256c0c0348e7dc55386785c98f7fa516" class="toggle"  />
+    <label for="section-256c0c0348e7dc55386785c98f7fa516" class="flex">
+      <a role="button" class="">
+        Database</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/database/" class="">
+      database</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/druid/" class="">
+      druid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/elasticsearch/" class="">
+      elasticsearch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mycat/" class="">
+      mycat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mysql/" class="">
+      mysql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/postgresql/" class="">
+      postgresql</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/shardingsphere/" class="">
+      shardingsphere</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/sql/" class="">
+      SQL</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/database/mongodb/" class="">
+      Penruins</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="toggle"  />
+    <label for="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="flex">
+      <a role="button" class="">
+        Distributed System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-98c822a4c30374b08c20bbb746ca28ff" class="toggle"  />
+    <label for="section-98c822a4c30374b08c20bbb746ca28ff" class="flex">
+      <a role="button" class="">
+        Message Queue</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/kafka/" class="">
+      kafka</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/message-queue/" class="">
+      Message Queue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
+      rabbitmq</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/distributed-system/" class="">
+      distributed system</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/sentinel/" class="">
+      Sentinel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud/" class="">
+      Spring Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
+      Spring Cloud Alibaba</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-184fcde54f4fb8e56ff1923eee779551" class="toggle"  />
+    <label for="section-184fcde54f4fb8e56ff1923eee779551" class="flex">
+      <a role="button" class="">
+        Java</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-basic/" class="">
+      java basic</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6355ae1f9fa9f60a52445009b471b5e2" class="toggle"  />
+    <label for="section-6355ae1f9fa9f60a52445009b471b5e2" class="flex">
+      <a role="button" class="">
+        Spring</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring/" class="">
+      spring</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/springboot/" class="">
+      spring boot</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-boot-validation/" class="">
+      spring boot validation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/spring-transaction/" class="">
+      spring transaction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/spring/unit-test/" class="">
+      unit test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java/" class="">
+      java</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jvm/" class="">
+      jvm</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis/" class="">
+      Mybatis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/mybatis-plus/" class="">
+      Mybatis Plus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/xxl-job/" class="">
+      xxl job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/concurrent/" class="">
+      concurrent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/jackson/" class="">
+      jackson</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-hashmap/" class="">
+      java HashMap</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-utils/" class="">
+      Java Utils</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
+      java 密码学</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/java/map/" class="">
+      map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-51f600e6ef5b531bcd84ecd789276516" class="toggle"  />
+    <label for="section-51f600e6ef5b531bcd84ecd789276516" class="flex">
+      <a role="button" class="">
+        Monitor</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/monitor/prometheus/" class="">
+      prometheus</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b11c61a955da170f736b6dbde7b6e083" class="toggle"  />
+    <label for="section-b11c61a955da170f736b6dbde7b6e083" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/tools/idea/" class="">
+      IDEA</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-recommend/" class="">
+      推荐</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/computer-science-learning-log/" class="">
+      学习记录</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/github/" class="">
+      github</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/job/" class="">
+      job</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/redis/" class="">
+      redis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/security/" class="">
+      security</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-44f9701b64ae8bf371ea70118bc45414" class="toggle"  />
+    <label for="section-44f9701b64ae8bf371ea70118bc45414" class="flex">
+      <a role="button" class="">
+        Blog</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/blog/" class="">
+      blog</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/blog/hugo/" class="">
+      Hugo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/cloud/" class="">
+      Cloud</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="toggle"  />
+    <label for="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="flex">
+      <a role="button" class="">
+        Front End</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/echarts/" class="">
+      echarts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/front-end/vue/" class="">
+      vue</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-529cbb550ade3cc11293cf67d1d534f0" class="toggle"  />
+    <label for="section-529cbb550ade3cc11293cf67d1d534f0" class="flex">
+      <a role="button" class="">
+        Micro Service</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/nacos/" class="">
+      Nacos</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/micro-service/micro-service/" class="">
+      micro service</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="toggle"  />
+    <label for="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="flex">
+      <a role="button" class="">
+        Operating System</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/ios/" class="">
+      IOS</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/linux/" class="">
+      linux</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/mac/" class="">
+      mac</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/raspberrypi/" class="">
+      raspberry pi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/powershell/" class="">
+      powershell</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/operating-system/windows/" class="">
+      windows</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="toggle"  />
+    <label for="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="flex">
+      <a role="button" class="">
+        Software</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/artificial-intelligence/" class="">
+      Artificial Intelligence</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6c1b5eb9fa302a23733b5ce342165515" class="toggle"  />
+    <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
+      <a role="button" class="">
+        CI/CD</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/docker/" class="">
+      docker</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/gitlab/" class="">
+      Gitlab</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/jenkins/" class="">
+      Jenkins</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/maven/" class="">
+      maven</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/nexus/" class="">
+      Nexus</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/ci-cd/orbstack/" class="">
+      OrbStack</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/crawler/" class="">
+      crawler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/git/" class="">
+      git</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/networking/" class="">
+      networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/python/" class="">
+      Python</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/reddison/" class="">
+      reddison</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/vim/" class="">
+      vim</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
+      系统设计</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
+      运维</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3b7129f485a86f816ed70cb52a2a5843" class="toggle"  />
+    <label for="section-3b7129f485a86f816ed70cb52a2a5843" class="flex">
+      <a role="button" class="">
+        History</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/history/chinese-history/" class="">
+      Chinese History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-27743f5ad758a53b0d2d97b463de9ca0" class="toggle"  />
+    <label for="section-27743f5ad758a53b0d2d97b463de9ca0" class="flex">
+      <a role="button" class="">
+        Others</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/about-me/" class="">
+      about me</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/english-learning/" class="">
+      English Learning</a>
+  
+
+        </li>
+      
+    
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/economy/" class="">
+      Economy</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/others/f1/" class="">
+      F1</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7cf7927dd7be57fd9ac871554e5eab30" class="toggle"  />
+    <label for="section-7cf7927dd7be57fd9ac871554e5eab30" class="flex">
+      <a role="button" class="">
+        Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/science/biology/" class="">
+      biology</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c86d83c6ab9662a5734c7c938687f51c" class="toggle"  />
+    <label for="section-c86d83c6ab9662a5734c7c938687f51c" class="flex">
+      <a role="button" class="">
+        Sports</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/cycling/" class="">
+      cycling</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/sports/table-tennis/" class="">
+      table tennis</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a7716b8c5e1ddba36a22182d4f60014c" class="toggle"  />
+    <label for="section-a7716b8c5e1ddba36a22182d4f60014c" class="flex">
+      <a role="button" class="">
+        Wl Public</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6fc9a7b0dd6392ef81e392a65430999b" class="toggle"  />
+    <label for="section-6fc9a7b0dd6392ef81e392a65430999b" class="flex">
+      <a role="button" class="">
+        Books</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-06aae5e89825d313a1291f1996bfc76d" class="toggle"  />
+    <label for="section-06aae5e89825d313a1291f1996bfc76d" class="flex">
+      <a role="button" class="">
+        Computer Science</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
+      Java并发编程实战</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+      Python神经网络编程</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
+      Redis设计与实现</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
+      Spring Cloud微服务：入门、实战与进阶</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
+      一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
+      宏观经济学 第三版</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
+      英伟达-黄仁勋之芯</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="toggle"  />
+    <label for="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="flex">
+      <a role="button" class="">
+        Tools</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/post/tools/obsidian/" class="">
+      obsidian</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>hbase</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#hbase">hbase</a>
+      <ul>
+        <li><a href="#hbase-vs-elasticsearch">hbase vs elasticsearch</a></li>
+        <li><a href="#hbase与rdbms的区别">HBase与RDBMS的区别</a></li>
+        <li><a href="#hbase与hive的区别">HBase与Hive的区别</a></li>
+        <li><a href="#数据存储结构">数据存储结构</a></li>
+        <li><a href="#hbase-的特点">hbase 的特点</a></li>
+        <li><a href="#模块组成">模块组成</a></li>
+        <li><a href="#rowkey设计原则">RowKey设计原则</a></li>
+        <li><a href="#应用场景">应用场景</a></li>
+        <li><a href="#reference">Reference</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="hbase">hbase<a class="anchor" href="#hbase">#</a></h1>
+<ul>
+<li>HBase 是一个面向列式存储的分布式数据库，其设计思想来源于 Google 的 BigTable 论文</li>
+<li>HBase 底层存储基于 HDFS 实现，集群的管理基于 ZooKeeper 实现</li>
+<li>HBase 良好的分布式架构设计为海量数据的快速存储、随机访问提供了可能，基于数据副本机制和分区机制可以轻松实现在线扩容、缩容和数据容灾，是大数据领域中 Key-Value 数据结构存储最常用的数据库方案</li>
+</ul>
+<h2 id="hbase-vs-elasticsearch">hbase vs elasticsearch<a class="anchor" href="#hbase-vs-elasticsearch">#</a></h2>
+<ul>
+<li>HBase是基于Hadoop生态的分布式列式数据库，源自Google BigTable设计，擅长海量结构化/半结构化数据的存储和高吞吐写入</li>
+<li>Elasticsearch是基于Lucene的分布式搜索引擎，专注于全文检索、复杂查询和实时分析，采用文档型数据模型</li>
+<li>数据模型与灵活性
+<ul>
+<li>HBase采用列式存储模型，数据按&quot;行键(RowKey)+列族(Column Family)+列限定符(Qualifier)&ldquo;组织，适合结构化或半结构化数据。虽然schema-free设计允许灵活添加列，但列族需要预先定义</li>
+<li>Elasticsearch采用文档型模型，数据以JSON格式存储，天然支持非结构化数据。字段可以动态添加，无需预定义schema，更适合多变的数据结构</li>
+</ul>
+</li>
+<li>查询能力对比
+<ul>
+<li>HBase查询能力相对有限
+<ul>
+<li>主要支持基于RowKey的精确查询和范围扫描(Scan)</li>
+<li>复杂查询需要借助二级索引或Phoenix等SQL层</li>
+<li>无内置全文检索能力，需结合Solr等搜索引擎</li>
+</ul>
+</li>
+<li>Elasticsearch提供丰富的查询功能
+<ul>
+<li>支持全文搜索、模糊查询、分词查询、聚合分析等高级特性</li>
+<li>提供强大的DSL查询语言和SQL接口</li>
+<li>内置倒排索引，亿级数据下仍能保持秒级响应</li>
+</ul>
+</li>
+<li><strong>典型场景：HBase适合&quot;已知RowKey查明细&rdquo;，ES适合&quot;根据内容特征找文档&quot;</strong></li>
+</ul>
+</li>
+<li>性能与扩展性
+<ul>
+<li>写入性能
+<ul>
+<li>两者都基于LSM树结构，理论写入性能相当</li>
+<li>实际场景中HBase写入更高效，因为ES需要构建倒排索引等额外开销</li>
+<li>HBase单集群可支持每天TB级数据写入</li>
+</ul>
+</li>
+<li>查询性能
+<ul>
+<li>ES在复杂查询和全文检索方面性能显著优于HBase</li>
+<li>HBase在简单键值查询和范围扫描上延迟更低</li>
+</ul>
+</li>
+<li>扩展能力
+<ul>
+<li>HBase天生为海量数据设计，通过Region分裂实现水平扩展</li>
+<li>ES通过分片(Shard)机制扩展，但数据量极大时可能需要业务层干预</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>存储成本与资源消耗
+<ul>
+<li>存储效率
+<ul>
+<li>HBase采用列式存储+压缩，存储效率更高，适合长期保存海量数据</li>
+<li>ES因维护索引和副本，存储开销通常比HBase高30%-50%</li>
+</ul>
+</li>
+<li>资源消耗
+<ul>
+<li>ES的CPU和内存消耗更高（分词、索引构建等）</li>
+<li>HBase更注重I/O优化，适合资源受限环境</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>维护复杂度
+<ul>
+<li>HBase依赖完整的Hadoop生态(HDFS/ZooKeeper等)，组件多，运维复杂度高</li>
+<li>Elasticsearch自成体系，部署和维护相对简单，但集群调优需要专业知识</li>
+</ul>
+</li>
+<li>实时性与一致性
+<ul>
+<li>HBase采用强一致性模型(基于2PC协议)，适合对一致性要求高的场景</li>
+<li>Elasticsearch采用最终一致性，查询实时性更好但可能短暂不一致</li>
+</ul>
+</li>
+<li>典型应用场景推荐
+<ul>
+<li>适合选择HBase的场景
+<ul>
+<li>海量时序数据存储：如设备监控数据、日志流水(每日5G以上)</li>
+<li>高吞吐写入：需要持续写入TB级结构化数据的场景</li>
+<li>简单查询为主：已知主键的快速查询或固定模式的范围扫描</li>
+<li>长期数据归档：需要低成本长期保存的历史数据</li>
+<li>案例：某埋点系统每天100G数据通过Kafka写入HBase，稳定运行</li>
+</ul>
+</li>
+<li>适合选择Elasticsearch的场景
+<ul>
+<li>全文检索需求：如商品搜索、内容检索、日志分析</li>
+<li>复杂查询分析：需要多条件组合、聚合统计的业务</li>
+<li>实时数据分析：如应用监控、安全分析等需要秒级响应的场景</li>
+<li>灵活的数据结构：字段频繁变化或无法预定义schema的情况</li>
+</ul>
+</li>
+<li>混合架构方案
+<ul>
+<li>对于同时需要海量存储和复杂查询的场景，可考虑ES+HBase组合架构
+<ul>
+<li>HBase作为主存储，保证数据持久性和高吞吐写入</li>
+<li>ES作为索引层，提供丰富的查询能力</li>
+<li>通过数据同步工具保持两者数据一致</li>
+</ul>
+</li>
+<li>百亿级数据架构案例：使用ES处理复杂查询，HBase保证可靠存储，两者协同工作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>选型决策关键因素
+<ul>
+<li>数据规模：日增5GB以下ES更简单，TB级选HBase</li>
+<li>查询复杂度：简单查询HBase足够，复杂搜索选ES</li>
+<li>数据结构：固定结构用HBase，多变结构用ES</li>
+<li>资源预算：资源有限优先HBase，可接受较高成本选ES</li>
+<li>团队技能：熟悉Hadoop选HBase，无大数据经验ES更易上手</li>
+</ul>
+</li>
+<li>总结建议
+<ul>
+<li>Elasticsearch是搜索和复杂查询的首选，特别适合日志分析、内容检索等需要灵活查询的场景</li>
+<li>HBase是海量数据存储的可靠选择，特别适合时序数据、用户行为记录等高吞吐写入场景</li>
+</ul>
+</li>
+</ul>
+<h2 id="hbase与rdbms的区别">HBase与RDBMS的区别<a class="anchor" href="#hbase%e4%b8%8erdbms%e7%9a%84%e5%8c%ba%e5%88%ab">#</a></h2>
+<ul>
+<li>存储方式：HBase为列式存储，RDBMS为行式存储</li>
+<li>扩展性：HBase支持水平扩展，RDBMS通常垂直扩展</li>
+<li>事务：HBase仅支持单行事务，RDBMS支持多行复杂事务</li>
+</ul>
+<h2 id="hbase与hive的区别">HBase与Hive的区别<a class="anchor" href="#hbase%e4%b8%8ehive%e7%9a%84%e5%8c%ba%e5%88%ab">#</a></h2>
+<ul>
+<li>用途：HBase是实时数据库，Hive是离线数据仓库</li>
+<li>查询性能：HBase支持毫秒级查询，Hive依赖MapReduce，延迟高</li>
+</ul>
+<h2 id="数据存储结构">数据存储结构<a class="anchor" href="#%e6%95%b0%e6%8d%ae%e5%ad%98%e5%82%a8%e7%bb%93%e6%9e%84">#</a></h2>
+<ul>
+<li><strong>Region</strong>：表的水平分区，按RowKey范围划分</li>
+<li><strong>MemStore</strong>：写缓存，满时刷盘生成HFile</li>
+<li><strong>HFile</strong>：底层存储文件，基于HDFS的列族数据块</li>
+</ul>
+<h2 id="hbase-的特点">hbase 的特点<a class="anchor" href="#hbase-%e7%9a%84%e7%89%b9%e7%82%b9">#</a></h2>
+<ul>
+<li>易扩展</li>
+<li>海量存储</li>
+<li>列式存储</li>
+<li>高可靠性</li>
+<li>稀疏性</li>
+</ul>
+<h2 id="模块组成">模块组成<a class="anchor" href="#%e6%a8%a1%e5%9d%97%e7%bb%84%e6%88%90">#</a></h2>
+<ul>
+<li>HBase 可以将数据存储在本地文件系统，也可以存储在 HDFS 文件系统。在生产环境中，HBase 一般运行在 HDFS 上，以 HDFS 作为基础的存储设施。HBase 通过 HBase Client 提供的 Java API 来访问 HBase 数据库，以完成数据的写入和读取。HBase 集群主由HMaster、Region Server 和 ZooKeeper 组成
+<ul>
+<li><strong>HMaster</strong>
+<ul>
+<li>负责管理 RegionServer，实现其负载均衡</li>
+<li>管理和分配 Region，比如在 Region split时分配新的 Region，在 RegionServer 退出时迁移其内的 Region 到其他 RegionServer上</li>
+<li>管理namespace和table的元数据（实际存储在HDFS上）</li>
+<li>权限控制（ACL）</li>
+</ul>
+</li>
+<li><strong>RegionServer</strong>
+<ul>
+<li>存放和管理本地 Region</li>
+<li>读写HDFS，管理Table中的数据</li>
+<li>Client 从 HMaster 中获取元数据，找到 RowKey 所在的 RegionServer 进行读写数据</li>
+</ul>
+</li>
+<li><strong>ZooKeeper</strong>
+<ul>
+<li>存放整个 HBase集群的元数据以及集群的状态信息</li>
+<li>实现HMaster主从节点的failover</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="rowkey设计原则">RowKey设计原则<a class="anchor" href="#rowkey%e8%ae%be%e8%ae%a1%e5%8e%9f%e5%88%99">#</a></h2>
+<ul>
+<li>长度：建议≤16字节，避免内存和存储浪费</li>
+<li>散列性：高位散列（如哈希前缀）防止热点问题</li>
+<li>唯一性：必须保证RowKey唯一标识数据</li>
+</ul>
+<h2 id="应用场景">应用场景<a class="anchor" href="#%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af">#</a></h2>
+<ul>
+<li>适用场景
+<ul>
+<li>半结构化/非结构化数据（如日志、用户行为）</li>
+<li>高并发实时读写（如电商订单、社交消息）</li>
+<li>HBase是根据谷歌的BigTable设计的。典型的应用场景就是不断插入新的信息（谷歌的情况下就是互联网上新生成的网页），而不怎么修改。比如现在Facebook的messenger就是用HBase实现的</li>
+<li>Facebook
+<ul>
+<li>Facebook用HBase存储在线消息，每天数据量近百亿，每月数据量250 ~ 300T， HBase读写比基本在1:1，吞吐量150w qps</li>
+</ul>
+</li>
+<li>小米
+<ul>
+<li>10+在线HBase集群，好几百台服务器，米聊历史数据，消息push系统等多个重要应用系统都建立在HBase基础之上</li>
+</ul>
+</li>
+<li>网易
+<ul>
+<li>哨兵监控系统，云信历史数据，日志归档数据等一系列重要应用底层都由HBase提供服务</li>
+</ul>
+</li>
+<li>写密集型应用，每天写入量巨大，而相对读数量较小的应用，比如IM的历史消息，游戏的日志等等</li>
+<li>不需要复杂查询条件来查询数据的应用，HBase只支持基于rowkey的查询，对于HBase来说，单条记录或者小范围的查询是可以接受的，大范围的查询由于分布式的原因，可能在性能上有点影响，而对于像SQL的join等查询，HBase无法支持</li>
+<li>对性能和可靠性要求非常高的应用，由于HBase本身没有单点故障，可用性非常高</li>
+<li>数据量较大，而且增长量无法预估的应用，HBase支持在线扩展，即使在一段时间内数据量呈井喷式增长，也可以通过HBase横向扩展来满足功能</li>
+</ul>
+</li>
+<li>不适用场景
+<ul>
+<li>需要复杂事务或多表关联查询的业务</li>
+</ul>
+</li>
+</ul>
+<h2 id="reference">Reference<a class="anchor" href="#reference">#</a></h2>
+<ul>
+<li><a href="https://www.cnblogs.com/datadance/p/16327298.html">什么是HBase？终于有人讲明白了</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/post/computer-science/big-data/hadoop/" class="flex align-center">
+        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>hadoop</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/post/computer-science/big-data/hive/" class="flex align-center">
+        <span>hive</span>
+        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+  <div class="book-copyright flex justify-center">
+    <small>Penruins - <a href="/">Main Page</a></small>
+  </div>
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#hbase">hbase</a>
+      <ul>
+        <li><a href="#hbase-vs-elasticsearch">hbase vs elasticsearch</a></li>
+        <li><a href="#hbase与rdbms的区别">HBase与RDBMS的区别</a></li>
+        <li><a href="#hbase与hive的区别">HBase与Hive的区别</a></li>
+        <li><a href="#数据存储结构">数据存储结构</a></li>
+        <li><a href="#hbase-的特点">hbase 的特点</a></li>
+        <li><a href="#模块组成">模块组成</a></li>
+        <li><a href="#rowkey设计原则">RowKey设计原则</a></li>
+        <li><a href="#应用场景">应用场景</a></li>
+        <li><a href="#reference">Reference</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
