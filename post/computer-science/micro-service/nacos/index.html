@@ -18,12 +18,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-10-30T17:31:25+08:00">
+    <meta property="article:modified_time" content="2025-10-31T08:59:35+08:00">
 
 
   <meta itemprop="name" content="Penruins">
   <meta itemprop="description" content="关于 Nacos 配置更新后避免 HikariCP 连接断开的问题# 解决方案# 使用 @RefreshScope(proxyMode = ScopedProxyMode.NO) 排除数据源# @Configuration @RefreshScope(proxyMode = ScopedProxyMode.NO) public class DataSourceConfig { // 数据源配置 }自定义 RefreshScope 排除数据源相关配置# @Bean public RefreshScope refreshScope() { RefreshScope scope = new RefreshScope(); scope.setExcludeNames(new String[]{&#34;dataSource&#34;, &#34;hikariDataSource&#34;}); return scope; }在 bootstrap.yml 中排除特定配置的刷新# spring: cloud: nacos: config: refresh-enabled: true refreshable-data-sources: none # 不刷新数据源配置使用 @RefreshScope 但不刷新数据源# @Bean @ConfigurationProperties(prefix = &#34;spring.datasource.hikari&#34;) @RefreshScope(proxyMode = ScopedProxyMode.NO) public HikariDataSource dataSource() { return DataSourceBuilder.create().type(HikariDataSource.class).build(); }最佳实践# 分离配置：将数据库配置和其他频繁变动的配置分开，放在不同的配置文件中 版本控制：对数据库配置的修改应该通过版本控制和应用重启来完成，而不是热更新 监控：即使解决了这个问题，也应该监控数据库连接池状态 注意事项# 这些解决方案可能会因 Spring Boot/Cloud 版本不同而有所差异 在生产环境实施前应在测试环境充分验证 如果确实需要动态修改数据库配置，建议使用更优雅的方式如多数据源切换">
-  <meta itemprop="dateModified" content="2025-10-30T17:31:25+08:00">
+  <meta itemprop="dateModified" content="2025-10-31T08:59:35+08:00">
   <meta itemprop="wordCount" content="78">
 
 <title>Nacos | Penruins</title>
