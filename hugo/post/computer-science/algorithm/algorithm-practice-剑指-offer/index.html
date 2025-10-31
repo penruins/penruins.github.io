@@ -11,7 +11,7 @@ https://github.com/alex-shpak/hugo-book
 <meta name="description" content="algorithm practice 剑指 offer# 第1章 整数# 1.1 整数的基础知识# 面试题1：整数除法# 1.2 二进制# 面试题2：二进制加法# 面试题3：前n个数字二进制形式中1的个数# 简单计算每个整数的二进制形式中1的个数# 根据“i&amp;（i-1）”计算i的二进制形式中1的个数# 根据“i/2”计算i的二进制形式中1的个数# 面试题4：只出现一次的数字# 面试题5：单词长度的最大乘积# 用哈希表记录字符串中出现的字符# 用整数的二进制数位记录字符串中出现的字符# 1.3 本章小结# 第2章 数组# 2.1 数组的基础知识# 2.2 双指针# 面试题6：排序数组中的两个数字之和# 面试题7：数组中和为0的3个数字# 面试题8：和大于或等于k的最短子数组# 面试题9：乘积小于k的子数组# 2.3 累加数组数字求子数组之和# 面试题10：和为k的子数组# 面试题11：0和1个数相同的子数组# 面试题12：左右两边子数组的和相等# 面试题13：二维子矩阵的数字之和# 2.4 本章小结# 第3章 字符串# 3.1 字符串的基础知识# 3.2 双指针# 面试题14：字符串中的变位词# 面试题15：字符串中的所有变位词# 面试题16：不含重复字符的最长子字符串# 需要多次遍历整个哈希表的解法# 避免多次遍历整个哈希表的解法# 面试题17：包含所有字符的最短字符串# 3.3 回文字符串# 面试题18：有效的回文# 面试题19：最多删除一个字符得到回文# 面试题20：回文子字符串的个数# 3.4 本章小结# 第4章 链表# 4.1 链表的基础知识# 4.2 哨兵节点# 用哨兵节点简化链表插入操作# 用哨兵节点简化链表删除操作# 4.3 双指针# 面试题21：删除倒数第k个节点# 面试题22：链表中环的入口节点# 需要知道环中节点数目的解法# 不需要知道环中节点数目的解法# 面试题23：两个链表的第1个重合节点# 4.4 反转链表# 面试题24：反转链表# 面试题25：链表中的数字相加# 面试题26：重排链表# 面试题27：回文链表# 4.5 双向链表和循环链表# 面试题28：展平多级双向链# 面试题29：排序的循环链表# 4.6 本章小结# 第5章 哈希表# 5.1 哈希表的基础知识# 5.2 哈希表的设计# 5.3 哈希表的应用# 5.4 本章小结# 第6章 栈# 6.1 栈的基础知识# 6.2 栈的应用# 面试题36：后缀表达式# 面试题37：小行星碰撞# 面试题38：每日温度# 面试题39：直方图最大矩形面积# 蛮力法# 分治法# 单调栈法# 面试题40：矩阵中的最大矩形# 6.3 本章小结# 第7章 队列# 7.1 队列的基础知识# 7.2 队列的应用# 面试题41：滑动窗口的平均值# 面试题42：最近请求次数# 7.3 二叉树的广度优先搜索 Solution0703001# 广度优先搜索# public List&lt;Integer&gt; bfs(TreeNode root) { Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;(); if (root != null) { queue.offer(root); } List&lt;Integer&gt; result = new ArrayList&lt;&gt;(); while (!queue.isEmpty()) { TreeNode node = queue.poll(); result.add(node.val); if (node.left != null) queue.offer(node.left); if (node.right != null) queue.offer(node.right); } return result; }面试题43：在完全二叉树中添加节点# // CBT Complete Binary Tree class CBTInserter { private Queue&lt;TreeNode&gt; queue; private TreeNode root; public CBTInserter(TreeNode root) { this.root = root; queue = new LinkedList&lt;&gt;(); while (queue.peek().left != null &amp;&amp; queue.peek().right != null) { TreeNode node = queue.poll(); queue.offer(node.left); queue.offer(node.right); } } public int insert(int v) { TreeNode parent = queue.peek(); TreeNode node = new TreeNode(v); if (parent.left == null) { parent.left = node; } else { parent.right = node; queue.poll(); queue.offer(parent.left); queue.offer(parent.right); } return parent.val; } public TreeNode get_root() { return this.root; } }面试题44：二叉树中每层的最大值# 用一个队列实现二叉树的广度优先搜索# public List&lt;Integer&gt; largestValues(TreeNode root) { int current = 0; int next = 0; Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;(); if (root != null) { queue.offer(root); current = 1; } List&lt;Integer&gt; result = new LinkedList&lt;&gt;(); int max = Integer.MIN_VALUE; while (!queue.isEmpty()) { TreeNode node = queue.poll(); current--; max = Math.max(max.node.val); if (node.left != null) { queue.offer(node.left); next&#43;&#43;; } if (node.right != null) { queue.offer(node.right); next&#43;&#43;; } if (current == 0) { result.add(max); max = Integer.MIN_VALUE; current = next; next = 0; } } return result; }用两个队列实现二叉树的广度优先搜索# public List&lt;Integer&gt; largestValues(TreeNode root) { Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;(); Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;(); if (root != null) { queue1.offer(root); } List&lt;Integer&gt; result = new LinkedList&lt;&gt;(); int max = Math.max(max, node.val); if (node.left != null) { queue2.offer(node.left); } if (node.right != null) { queue2.offer(node.right); } if (queue1.isEmpty()) { result.add(max); max = Integer.MIN_VALUE; queue1 = queue2; queue2 = new LinkedList&lt;&gt;(); } return result; }面试题45：二叉树最低层最左边的值# public int findBottomLeftValue(TreeNode root) { Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;(); Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;(); queue1.offer(root); int bottomLeft = root.val; while (!queue.isEmpty()) { TreeNode node = queue1.poll(); if (node.left != null) { queue2.offer(node.left); } if (node.right != null) { queue2.offer(node.right); } if (queue1.isEmpty()) { queue1 = queue2; queue2 = new LinkedList&lt;&gt;(); if (!queue1.isEmpty()) { bottomLeft = queue1.peek().val; } } } return bottomLeft; }面试题46：二叉树的右侧视图# public List&lt;Integer&gt; rightSideView(TreeNode root) { List&lt;Integer&gt; view = new LinkedList&lt;&gt;(); if (root == null) { return view; } Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;(); Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;(); queue1.offer(root); while (!queue1.isEmpty()) { TreeNode node = queue1.poll(); if (node.left != null) { queue2.offer(node.left); } if (node.right != null) { queue2.offer(node.right); } if (queue1.isEmpty()) { view.add(node.val); queue1 = queue2; queue2 = new LinkedList&lt;&gt;(); } } return view; }7.4 本章小结# 第8章 树# 8.1 树的基础知识# public class TreeNode { int val; TreeNode left; TreeNode right; TreeNode(int x) { val = x; } }8.2 二叉树的深度优先搜索# 中序遍历# public List&lt;Integer&gt; inorderTraversal() { List&lt;Integer&gt; nodes = new LinkedList&lt;&gt;(); dfs(root, nodes); return nodes; } private void dfs(TreeNode root, List&lt;Integer&gt; nodes) { if (root != null) { dfs(root.left, nodes); nodes.add(root.val); dfs(root.right, nodes); } }迭代# // left -&gt; current -&gt; right public List&lt;Integer&gt; inorderTraversal(TreeNode root) { List&lt;Integer&gt; nodes = new LinkedList&lt;&gt;(); Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;(); TreeNode cur = root; while (cur != null || !stack.isEmpty()) { while (cur != null) { stack.push(cur); cur = cur.left; } cur = stack.pop(); nodes.add(cur.val); // current node cur = cur.right; } return nodes; }前序遍历# public List&lt;Integer&gt; preorderTraversal(TreeNode root) { List&lt;Integer&gt; nodes = new LinkedList&lt;&gt;(); dfs(root, nodes); return nodes; } private void dfs(TreeNode root, List&lt;Integer&gt; nodes) { if (root != null) { nodes.add(root.val); dfs(node.left, nodes); dfs(node.right, nodes); } }迭代# // current -&gt; left -&gt; right public List&lt;Integer&gt; preorderTraversal(TreeNode root) { List&lt;Integer&gt; result = new LinkedList&lt;&gt;(); Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;(); TreeNode cur = root; if (cur != null || !stack.isEmpty()) { while (cur != null) { result.add(cur.val); // current node stack.push(cur); cur = cur.left; } cur = stack.pop(); cur = cur.right; } return result; }后序遍历# 迭代# public List&lt;Integer&gt; postorderTraversal(TreeNode root) { List&lt;Integer&gt; result = new LinkedList&lt;&gt;(); Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;(); TreeNode cur = root; TreeNode prev = null; while (cur != null || !stack.isEmpty()) { while (cur != null) { stack.push(cur); cur = cur.left; } cur = stack.peek(); if (cur.right != null &amp;&amp; cur.right != prev) { } else { stack.pop(); result.add(cur.val); prev = cur; cur = null; } } return result; }3种遍历方法小结# 面试题47：二叉树剪枝# public TreeNode pruneTree(TreeNode root) { if (root == null) { return root; } root.left = pruneTree(root.left); root.right = pruneTree(root.right); if (root.left == null &amp;&amp; root.right == null &amp;&amp; root.val == 0) { return null; } return root; }面试题48：序列化和反序列化二叉树# 序列化# public String serialize(TreeNode root) { if (root == null) { return &#34;#&#34;; } String leftStr = serialize(root.left); String right = serialize(root.right); return String.valueOf(root.val) &#43; &#34;,&#34; &#43; leftStr &#43; &#34;,&#34; &#43; rightStr; }反序列化# public TreeNode deserialize(String data) { String[] nodeStrs = data.split(&#34;,&#34;); int[] i = {0}; return dfs(nodeStrs, i); } private TreeNode dfs(String[] strs, int[] i) { String str = strs[i[0]]; i[0]&#43;&#43;; if (str.equals(&#34;#&#34;)) { return null; } TreeNode node = new TreeNode(Integer.valueOf(str)); node.left = dfs(strs, i); node.right = dfs(strs, i); return node; }面试题49：从根节点到叶节点的路径数字之和# public int sumNumbers(TreeNode root) { return dfs(root, 0); } private int dfs(TreeNode root, int path) { if (root == null) { return 0; } path = path * 10 &#43; root.val; if (root.left == null &amp;&amp; root.right == null) { return path; } return dfs(root.left, path) &#43; dfs(root.right, path); }面试题50：向下的路径节点值之和# public int pathSum(TreeNode root, int sum) { Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;(); map.put(0, 1); return dfs(root, sum, map, 0); } private int dfs(TreeNode root, int sum, Map&lt;Integer, Integer&gt; map, int path) { if (root == null) { return 0; } path &#43;= root.val; int count = map.getOrDefault(path - sum, 0); }面试题51：节点值之和最大的路径# 8.3 二叉搜索树# 面试题52：展平二叉搜索树# 面试题53：二叉搜索树的下一个节点# 时间复杂度O(n)的解法# 时间复杂度O(h)的解法# 面试题54：所有大于或等于节点的值之和# 面试题55：二叉搜索树迭代器# 面试题56：二叉搜索树种两个节点的值之和# 利用哈希表，空间复杂度为O（n）的解法# 应用双指针，空间复杂度为O（h）的解法# 8.4 TreeSet和TreeMap的应用# 面试题57：值和下标之差都在给定的范围内# 时间复杂度为O（nlogk）的解法# 时间复杂度为O（n）的解法# 面试题58：日程表# 8.5 本章小结# 第9章 堆# 9.1 堆的基础知识# 9.2 堆的应用# ✅ 面试题59：数据流的第k大数字 JZOffer59.java# ✅ 面试题60：出现频率最高的k个数字 JZOffer60.java# ✅ 面试题61：和最小的k个数对 JZOffer61.java# 使用最大堆# 使用最小堆# kSmallestPairs 9.3 本章小结# 第10章 前缀树# 10.1 前缀树的基础知识# ✅ 面试题62：实现前缀树 JZOffer62.java# 10.2 前缀树的应用# ✅ 面试题63：替换单词 JZOffer63.java# 面试题64：神奇的字典# 面试题65：最短的单词编码# 面试题66：单词之和# 面试题67：最大的异或# 10.3 本章小结# 第11章 二分查找# 11.1 二分查找的基础知识# ✅ 二分查找算法 com.penruins.JZOffer.BinarySearch.java# 11.2 在排序数组中二分查找# 面试题68：查找插入位置# 面试题69：山峰数组的顶部# 面试题70：排序数组中只出现一次的数字 com.penruins.JZOffer.JZOffer70.java# singleNonDuplicate 用异或运算的方式实现 面试题71：按权重生成随机数# 11.3 在数值范围内二分查找# 面试题72：求平方根# 面试题73：狒狒吃香蕉# 11.4 本章小结# 第12章 排序# 12.1 排序的基础知识# 面试题74：合并区间# 12.2 计数排序# 面试题75：数组相对排序# 12.3 快速排序# 快速排序算法 com.penruins.JZOffer.QuickSort# 面试题76：数组中第k大的数字# 12.4 归并排序# 面试题77：链表排序# 面试题78：合并排序链表# 利用最小堆选取值最小的节点# 按照归并排序的思路合并链表# 12.5 本章小结# 第13章 回溯法# 13.1 回溯法的基础知识# 13.2 集合的组合、排列# 13.3 回溯法解决其他类型问题# 13.4 本章小结# 第14章 动态规划# 14.1 动态规划的基础知识# 14.2 单序列问题# 14.3 双序列问题# 14.4 矩阵路径问题# 面试题98：路径的数目# 分析确定状态转移方程# 根据状态转移方程写递归代码# 递归代码# 优化空间效率# 面试题99：最小路径之和# 面试题100：三角形中最小路径之和# 14.5 背包问题# 0-1 背包问题 多重背包问题 完全背包问题 面试题101：分割等和子集# 分析确定状态转移方程# 根据状态转移方程写递归代码# 根据状态转移方程写迭代代码# 优化空间效率# 面试题102：加减的目标值# 面试题103：最小的硬币数目# 分析确定状态转移方程# 根据状态转移方程写代码# 另一种思路# 面试题104：排列的数目# int[] nums = new int[1 2 3]; i = 3; f(i) = f(i - nums[0]) &#43; f(i - nums[1]) &#43; f(i - nums[2]); f(0) = 1; f(1) = f(0) &#43; f(-1) &#43; f(-2) = 1; f(2) = f(1) &#43; f(0) &#43; f(-1) = 2; f(3) = f(2) &#43; f(1) &#43; f(0) = 4; f(2) {1,1} {2} f(1) {1} f(0) {}14.6 本章小结# 第15章 图 305# 15.1 图的基础知识 305# 15.2 图的搜索 307# 15.3 拓扑排序 333# 15.4 并查集 342# 15.5 本章小结 354#">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https//penruins.github.io/hugo/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="algorithm practice 剑指 offer">
   <meta property="og:description" content="algorithm practice 剑指 offer# 第1章 整数# 1.1 整数的基础知识# 面试题1：整数除法# 1.2 二进制# 面试题2：二进制加法# 面试题3：前n个数字二进制形式中1的个数# 简单计算每个整数的二进制形式中1的个数# 根据“i&amp;（i-1）”计算i的二进制形式中1的个数# 根据“i/2”计算i的二进制形式中1的个数# 面试题4：只出现一次的数字# 面试题5：单词长度的最大乘积# 用哈希表记录字符串中出现的字符# 用整数的二进制数位记录字符串中出现的字符# 1.3 本章小结# 第2章 数组# 2.1 数组的基础知识# 2.2 双指针# 面试题6：排序数组中的两个数字之和# 面试题7：数组中和为0的3个数字# 面试题8：和大于或等于k的最短子数组# 面试题9：乘积小于k的子数组# 2.3 累加数组数字求子数组之和# 面试题10：和为k的子数组# 面试题11：0和1个数相同的子数组# 面试题12：左右两边子数组的和相等# 面试题13：二维子矩阵的数字之和# 2.4 本章小结# 第3章 字符串# 3.1 字符串的基础知识# 3.2 双指针# 面试题14：字符串中的变位词# 面试题15：字符串中的所有变位词# 面试题16：不含重复字符的最长子字符串# 需要多次遍历整个哈希表的解法# 避免多次遍历整个哈希表的解法# 面试题17：包含所有字符的最短字符串# 3.3 回文字符串# 面试题18：有效的回文# 面试题19：最多删除一个字符得到回文# 面试题20：回文子字符串的个数# 3.4 本章小结# 第4章 链表# 4.1 链表的基础知识# 4.2 哨兵节点# 用哨兵节点简化链表插入操作# 用哨兵节点简化链表删除操作# 4.3 双指针# 面试题21：删除倒数第k个节点# 面试题22：链表中环的入口节点# 需要知道环中节点数目的解法# 不需要知道环中节点数目的解法# 面试题23：两个链表的第1个重合节点# 4.4 反转链表# 面试题24：反转链表# 面试题25：链表中的数字相加# 面试题26：重排链表# 面试题27：回文链表# 4.5 双向链表和循环链表# 面试题28：展平多级双向链# 面试题29：排序的循环链表# 4.6 本章小结# 第5章 哈希表# 5.1 哈希表的基础知识# 5.2 哈希表的设计# 5.3 哈希表的应用# 5.4 本章小结# 第6章 栈# 6.1 栈的基础知识# 6.2 栈的应用# 面试题36：后缀表达式# 面试题37：小行星碰撞# 面试题38：每日温度# 面试题39：直方图最大矩形面积# 蛮力法# 分治法# 单调栈法# 面试题40：矩阵中的最大矩形# 6.3 本章小结# 第7章 队列# 7.1 队列的基础知识# 7.2 队列的应用# 面试题41：滑动窗口的平均值# 面试题42：最近请求次数# 7.3 二叉树的广度优先搜索 Solution0703001# 广度优先搜索# public List&lt;Integer&gt; bfs(TreeNode root) { Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;(); if (root != null) { queue.offer(root); } List&lt;Integer&gt; result = new ArrayList&lt;&gt;(); while (!queue.isEmpty()) { TreeNode node = queue.poll(); result.add(node.val); if (node.left != null) queue.offer(node.left); if (node.right != null) queue.offer(node.right); } return result; }面试题43：在完全二叉树中添加节点# // CBT Complete Binary Tree class CBTInserter { private Queue&lt;TreeNode&gt; queue; private TreeNode root; public CBTInserter(TreeNode root) { this.root = root; queue = new LinkedList&lt;&gt;(); while (queue.peek().left != null &amp;&amp; queue.peek().right != null) { TreeNode node = queue.poll(); queue.offer(node.left); queue.offer(node.right); } } public int insert(int v) { TreeNode parent = queue.peek(); TreeNode node = new TreeNode(v); if (parent.left == null) { parent.left = node; } else { parent.right = node; queue.poll(); queue.offer(parent.left); queue.offer(parent.right); } return parent.val; } public TreeNode get_root() { return this.root; } }面试题44：二叉树中每层的最大值# 用一个队列实现二叉树的广度优先搜索# public List&lt;Integer&gt; largestValues(TreeNode root) { int current = 0; int next = 0; Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;(); if (root != null) { queue.offer(root); current = 1; } List&lt;Integer&gt; result = new LinkedList&lt;&gt;(); int max = Integer.MIN_VALUE; while (!queue.isEmpty()) { TreeNode node = queue.poll(); current--; max = Math.max(max.node.val); if (node.left != null) { queue.offer(node.left); next&#43;&#43;; } if (node.right != null) { queue.offer(node.right); next&#43;&#43;; } if (current == 0) { result.add(max); max = Integer.MIN_VALUE; current = next; next = 0; } } return result; }用两个队列实现二叉树的广度优先搜索# public List&lt;Integer&gt; largestValues(TreeNode root) { Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;(); Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;(); if (root != null) { queue1.offer(root); } List&lt;Integer&gt; result = new LinkedList&lt;&gt;(); int max = Math.max(max, node.val); if (node.left != null) { queue2.offer(node.left); } if (node.right != null) { queue2.offer(node.right); } if (queue1.isEmpty()) { result.add(max); max = Integer.MIN_VALUE; queue1 = queue2; queue2 = new LinkedList&lt;&gt;(); } return result; }面试题45：二叉树最低层最左边的值# public int findBottomLeftValue(TreeNode root) { Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;(); Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;(); queue1.offer(root); int bottomLeft = root.val; while (!queue.isEmpty()) { TreeNode node = queue1.poll(); if (node.left != null) { queue2.offer(node.left); } if (node.right != null) { queue2.offer(node.right); } if (queue1.isEmpty()) { queue1 = queue2; queue2 = new LinkedList&lt;&gt;(); if (!queue1.isEmpty()) { bottomLeft = queue1.peek().val; } } } return bottomLeft; }面试题46：二叉树的右侧视图# public List&lt;Integer&gt; rightSideView(TreeNode root) { List&lt;Integer&gt; view = new LinkedList&lt;&gt;(); if (root == null) { return view; } Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;(); Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;(); queue1.offer(root); while (!queue1.isEmpty()) { TreeNode node = queue1.poll(); if (node.left != null) { queue2.offer(node.left); } if (node.right != null) { queue2.offer(node.right); } if (queue1.isEmpty()) { view.add(node.val); queue1 = queue2; queue2 = new LinkedList&lt;&gt;(); } } return view; }7.4 本章小结# 第8章 树# 8.1 树的基础知识# public class TreeNode { int val; TreeNode left; TreeNode right; TreeNode(int x) { val = x; } }8.2 二叉树的深度优先搜索# 中序遍历# public List&lt;Integer&gt; inorderTraversal() { List&lt;Integer&gt; nodes = new LinkedList&lt;&gt;(); dfs(root, nodes); return nodes; } private void dfs(TreeNode root, List&lt;Integer&gt; nodes) { if (root != null) { dfs(root.left, nodes); nodes.add(root.val); dfs(root.right, nodes); } }迭代# // left -&gt; current -&gt; right public List&lt;Integer&gt; inorderTraversal(TreeNode root) { List&lt;Integer&gt; nodes = new LinkedList&lt;&gt;(); Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;(); TreeNode cur = root; while (cur != null || !stack.isEmpty()) { while (cur != null) { stack.push(cur); cur = cur.left; } cur = stack.pop(); nodes.add(cur.val); // current node cur = cur.right; } return nodes; }前序遍历# public List&lt;Integer&gt; preorderTraversal(TreeNode root) { List&lt;Integer&gt; nodes = new LinkedList&lt;&gt;(); dfs(root, nodes); return nodes; } private void dfs(TreeNode root, List&lt;Integer&gt; nodes) { if (root != null) { nodes.add(root.val); dfs(node.left, nodes); dfs(node.right, nodes); } }迭代# // current -&gt; left -&gt; right public List&lt;Integer&gt; preorderTraversal(TreeNode root) { List&lt;Integer&gt; result = new LinkedList&lt;&gt;(); Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;(); TreeNode cur = root; if (cur != null || !stack.isEmpty()) { while (cur != null) { result.add(cur.val); // current node stack.push(cur); cur = cur.left; } cur = stack.pop(); cur = cur.right; } return result; }后序遍历# 迭代# public List&lt;Integer&gt; postorderTraversal(TreeNode root) { List&lt;Integer&gt; result = new LinkedList&lt;&gt;(); Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;(); TreeNode cur = root; TreeNode prev = null; while (cur != null || !stack.isEmpty()) { while (cur != null) { stack.push(cur); cur = cur.left; } cur = stack.peek(); if (cur.right != null &amp;&amp; cur.right != prev) { } else { stack.pop(); result.add(cur.val); prev = cur; cur = null; } } return result; }3种遍历方法小结# 面试题47：二叉树剪枝# public TreeNode pruneTree(TreeNode root) { if (root == null) { return root; } root.left = pruneTree(root.left); root.right = pruneTree(root.right); if (root.left == null &amp;&amp; root.right == null &amp;&amp; root.val == 0) { return null; } return root; }面试题48：序列化和反序列化二叉树# 序列化# public String serialize(TreeNode root) { if (root == null) { return &#34;#&#34;; } String leftStr = serialize(root.left); String right = serialize(root.right); return String.valueOf(root.val) &#43; &#34;,&#34; &#43; leftStr &#43; &#34;,&#34; &#43; rightStr; }反序列化# public TreeNode deserialize(String data) { String[] nodeStrs = data.split(&#34;,&#34;); int[] i = {0}; return dfs(nodeStrs, i); } private TreeNode dfs(String[] strs, int[] i) { String str = strs[i[0]]; i[0]&#43;&#43;; if (str.equals(&#34;#&#34;)) { return null; } TreeNode node = new TreeNode(Integer.valueOf(str)); node.left = dfs(strs, i); node.right = dfs(strs, i); return node; }面试题49：从根节点到叶节点的路径数字之和# public int sumNumbers(TreeNode root) { return dfs(root, 0); } private int dfs(TreeNode root, int path) { if (root == null) { return 0; } path = path * 10 &#43; root.val; if (root.left == null &amp;&amp; root.right == null) { return path; } return dfs(root.left, path) &#43; dfs(root.right, path); }面试题50：向下的路径节点值之和# public int pathSum(TreeNode root, int sum) { Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;(); map.put(0, 1); return dfs(root, sum, map, 0); } private int dfs(TreeNode root, int sum, Map&lt;Integer, Integer&gt; map, int path) { if (root == null) { return 0; } path &#43;= root.val; int count = map.getOrDefault(path - sum, 0); }面试题51：节点值之和最大的路径# 8.3 二叉搜索树# 面试题52：展平二叉搜索树# 面试题53：二叉搜索树的下一个节点# 时间复杂度O(n)的解法# 时间复杂度O(h)的解法# 面试题54：所有大于或等于节点的值之和# 面试题55：二叉搜索树迭代器# 面试题56：二叉搜索树种两个节点的值之和# 利用哈希表，空间复杂度为O（n）的解法# 应用双指针，空间复杂度为O（h）的解法# 8.4 TreeSet和TreeMap的应用# 面试题57：值和下标之差都在给定的范围内# 时间复杂度为O（nlogk）的解法# 时间复杂度为O（n）的解法# 面试题58：日程表# 8.5 本章小结# 第9章 堆# 9.1 堆的基础知识# 9.2 堆的应用# ✅ 面试题59：数据流的第k大数字 JZOffer59.java# ✅ 面试题60：出现频率最高的k个数字 JZOffer60.java# ✅ 面试题61：和最小的k个数对 JZOffer61.java# 使用最大堆# 使用最小堆# kSmallestPairs 9.3 本章小结# 第10章 前缀树# 10.1 前缀树的基础知识# ✅ 面试题62：实现前缀树 JZOffer62.java# 10.2 前缀树的应用# ✅ 面试题63：替换单词 JZOffer63.java# 面试题64：神奇的字典# 面试题65：最短的单词编码# 面试题66：单词之和# 面试题67：最大的异或# 10.3 本章小结# 第11章 二分查找# 11.1 二分查找的基础知识# ✅ 二分查找算法 com.penruins.JZOffer.BinarySearch.java# 11.2 在排序数组中二分查找# 面试题68：查找插入位置# 面试题69：山峰数组的顶部# 面试题70：排序数组中只出现一次的数字 com.penruins.JZOffer.JZOffer70.java# singleNonDuplicate 用异或运算的方式实现 面试题71：按权重生成随机数# 11.3 在数值范围内二分查找# 面试题72：求平方根# 面试题73：狒狒吃香蕉# 11.4 本章小结# 第12章 排序# 12.1 排序的基础知识# 面试题74：合并区间# 12.2 计数排序# 面试题75：数组相对排序# 12.3 快速排序# 快速排序算法 com.penruins.JZOffer.QuickSort# 面试题76：数组中第k大的数字# 12.4 归并排序# 面试题77：链表排序# 面试题78：合并排序链表# 利用最小堆选取值最小的节点# 按照归并排序的思路合并链表# 12.5 本章小结# 第13章 回溯法# 13.1 回溯法的基础知识# 13.2 集合的组合、排列# 13.3 回溯法解决其他类型问题# 13.4 本章小结# 第14章 动态规划# 14.1 动态规划的基础知识# 14.2 单序列问题# 14.3 双序列问题# 14.4 矩阵路径问题# 面试题98：路径的数目# 分析确定状态转移方程# 根据状态转移方程写递归代码# 递归代码# 优化空间效率# 面试题99：最小路径之和# 面试题100：三角形中最小路径之和# 14.5 背包问题# 0-1 背包问题 多重背包问题 完全背包问题 面试题101：分割等和子集# 分析确定状态转移方程# 根据状态转移方程写递归代码# 根据状态转移方程写迭代代码# 优化空间效率# 面试题102：加减的目标值# 面试题103：最小的硬币数目# 分析确定状态转移方程# 根据状态转移方程写代码# 另一种思路# 面试题104：排列的数目# int[] nums = new int[1 2 3]; i = 3; f(i) = f(i - nums[0]) &#43; f(i - nums[1]) &#43; f(i - nums[2]); f(0) = 1; f(1) = f(0) &#43; f(-1) &#43; f(-2) = 1; f(2) = f(1) &#43; f(0) &#43; f(-1) = 2; f(3) = f(2) &#43; f(1) &#43; f(0) = 4; f(2) {1,1} {2} f(1) {1} f(0) {}14.6 本章小结# 第15章 图 305# 15.1 图的基础知识 305# 15.2 图的搜索 307# 15.3 拓扑排序 333# 15.4 并查集 342# 15.5 本章小结 354#">
@@ -25,14 +25,14 @@ https://github.com/alex-shpak/hugo-book
   <meta itemprop="wordCount" content="1252">
 
 <title>algorithm practice 剑指 offer | Penruins</title>
-<link rel="icon" href="/favicon.png" >
-<link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/">
-<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+<link rel="icon" href="/https/penruins.github.io/hugo/favicon.png" >
+<link rel="manifest" href="https//penruins.github.io/hugo/manifest.json">
+<link rel="canonical" href="https//penruins.github.io/hugo/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/">
+<link rel="stylesheet" href="https//penruins.github.io/hugo/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
 
 
-  <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.1e4254d6ef5c3d4b931350d3ad5355ea88c400709582577a866d1cb5f2a8f4f5.js" ></script>
+  <script defer src="/https/penruins.github.io/hugo/fuse.min.js"></script>
+  <script defer src="https//penruins.github.io/hugo/en.search.min.cf1d6f6d47e839c8a36b65a1b229659b781422cf9199c54e0510cc36719b26f1.js" ></script>
 
 
 
@@ -48,7 +48,7 @@ https://github.com/alex-shpak/hugo-book
     
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="/"><span>Penruins</span>
+  <a class="flex align-center" href="https/penruins.github.io/hugo/"><span>Penruins</span>
   </a>
 </h2>
 
@@ -89,7 +89,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-d673e25af27f33796c279e3a05cc634f" class="flex">
       <a role="button" class="">
         Life</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -103,7 +103,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/books/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/books/" class="">
       books</a>
   
 
@@ -117,7 +117,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/%E6%91%98%E6%8A%84%E5%88%86%E4%BA%AB/" class="">
       摘抄分享</a>
   
 
@@ -131,7 +131,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/%E6%96%B0%E7%9F%A5/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/%E6%96%B0%E7%9F%A5/" class="">
       新知</a>
   
 
@@ -145,7 +145,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/movies-log/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/movies-log/" class="">
       观影记录</a>
   
 
@@ -159,7 +159,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/bilibili/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/bilibili/" class="">
       bilibili</a>
   
 
@@ -173,7 +173,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/cycling/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/cycling/" class="">
       cycling</a>
   
 
@@ -187,7 +187,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/hiking/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/hiking/" class="">
       hiking</a>
   
 
@@ -201,7 +201,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/life/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/life/" class="">
       life</a>
   
 
@@ -215,7 +215,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/life-recommend/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/life-recommend/" class="">
       life recommand</a>
   
 
@@ -229,7 +229,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/learning-others-log/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/learning-others-log/" class="">
       other learning</a>
   
 
@@ -243,7 +243,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/podcast/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/podcast/" class="">
       podcast</a>
   
 
@@ -257,7 +257,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/politics/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/politics/" class="">
       politics</a>
   
 
@@ -271,7 +271,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/goal/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/goal/" class="">
       goal</a>
   
 
@@ -285,7 +285,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/coffee/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/coffee/" class="">
       coffee</a>
   
 
@@ -299,7 +299,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/article/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/article/" class="">
       article</a>
   
 
@@ -313,7 +313,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/law/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/law/" class="">
       law</a>
   
 
@@ -327,7 +327,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/my-history/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/my-history/" class="">
       my history</a>
   
 
@@ -341,7 +341,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/life/my-timeline/" class="">
+    <a href="https/penruins.github.io/hugo/post/life/my-timeline/" class="">
       My Timeline</a>
   
 
@@ -366,7 +366,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-e52270c7d6707875ea89b3ec9b091983" class="flex">
       <a role="button" class="">
         Computer Science</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -380,7 +380,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/computer-science/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/computer-science/" class="">
       computer science</a>
   
 
@@ -398,7 +398,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-f834cb9837867b0fca71e863c9ed2d28" class="flex">
       <a role="button" class="">
         Algorithm</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -412,7 +412,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/algorithm/algorithm/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/algorithm/" class="">
       Algorithm</a>
   
 
@@ -426,7 +426,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="active">
+    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/algorithm-practice-%E5%89%91%E6%8C%87-offer/" class="active">
       algorithm practice 剑指 offer</a>
   
 
@@ -440,7 +440,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="">
       剑指offer题目对应</a>
   
 
@@ -454,7 +454,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/%E9%9D%A2%E8%AF%95%E7%BB%8F%E5%85%B8150%E9%A2%98/" class="">
       面试经典 150 题</a>
   
 
@@ -477,7 +477,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-12ae84c3ad3679302ffec2ab120d7fb0" class="flex">
       <a role="button" class="">
         Big Data</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -491,7 +491,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/big-data/hadoop/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/big-data/hadoop/" class="">
       hadoop</a>
   
 
@@ -505,7 +505,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/big-data/hbase/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/big-data/hbase/" class="">
       hbase</a>
   
 
@@ -519,7 +519,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/big-data/hive/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/big-data/hive/" class="">
       hive</a>
   
 
@@ -542,7 +542,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-256c0c0348e7dc55386785c98f7fa516" class="flex">
       <a role="button" class="">
         Database</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -556,7 +556,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/database/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/database/database/" class="">
       database</a>
   
 
@@ -570,7 +570,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/druid/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/database/druid/" class="">
       druid</a>
   
 
@@ -584,7 +584,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/elasticsearch/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/database/elasticsearch/" class="">
       elasticsearch</a>
   
 
@@ -598,7 +598,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/mycat/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/database/mycat/" class="">
       mycat</a>
   
 
@@ -612,7 +612,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/mysql/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/database/mysql/" class="">
       mysql</a>
   
 
@@ -626,7 +626,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/postgresql/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/database/postgresql/" class="">
       postgresql</a>
   
 
@@ -640,7 +640,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/shardingsphere/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/database/shardingsphere/" class="">
       shardingsphere</a>
   
 
@@ -654,7 +654,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/sql/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/database/sql/" class="">
       SQL</a>
   
 
@@ -668,7 +668,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/database/mongodb/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/database/mongodb/" class="">
       Penruins</a>
   
 
@@ -691,7 +691,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-f46c5b5e1e52cbfb9fb92b25409b5352" class="flex">
       <a role="button" class="">
         Distributed System</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -709,7 +709,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-98c822a4c30374b08c20bbb746ca28ff" class="flex">
       <a role="button" class="">
         Message Queue</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -723,7 +723,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/message-queue/kafka/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/message-queue/kafka/" class="">
       kafka</a>
   
 
@@ -737,7 +737,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/message-queue/message-queue/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/message-queue/message-queue/" class="">
       Message Queue</a>
   
 
@@ -751,7 +751,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/message-queue/rabbitmq/" class="">
       rabbitmq</a>
   
 
@@ -770,7 +770,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/distributed-system/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/distributed-system/" class="">
       distributed system</a>
   
 
@@ -784,7 +784,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/sentinel/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/sentinel/" class="">
       Sentinel</a>
   
 
@@ -798,7 +798,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/spring-cloud/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/spring-cloud/" class="">
       Spring Cloud</a>
   
 
@@ -812,7 +812,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/distributed-system/spring-cloud-alibaba/" class="">
       Spring Cloud Alibaba</a>
   
 
@@ -835,7 +835,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-184fcde54f4fb8e56ff1923eee779551" class="flex">
       <a role="button" class="">
         Java</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -849,7 +849,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/java-basic/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-basic/" class="">
       java basic</a>
   
 
@@ -867,7 +867,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-6355ae1f9fa9f60a52445009b471b5e2" class="flex">
       <a role="button" class="">
         Spring</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -881,7 +881,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/spring/spring/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/spring/" class="">
       spring</a>
   
 
@@ -895,7 +895,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/spring/springboot/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/springboot/" class="">
       spring boot</a>
   
 
@@ -909,7 +909,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/spring/spring-boot-validation/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/spring-boot-validation/" class="">
       spring boot validation</a>
   
 
@@ -923,7 +923,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/spring/spring-transaction/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/spring-transaction/" class="">
       spring transaction</a>
   
 
@@ -937,7 +937,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/spring/unit-test/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/spring/unit-test/" class="">
       unit test</a>
   
 
@@ -956,7 +956,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/java/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/java/" class="">
       java</a>
   
 
@@ -970,7 +970,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/jvm/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/jvm/" class="">
       jvm</a>
   
 
@@ -984,7 +984,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/mybatis/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/mybatis/" class="">
       Mybatis</a>
   
 
@@ -998,7 +998,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/mybatis-plus/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/mybatis-plus/" class="">
       Mybatis Plus</a>
   
 
@@ -1012,7 +1012,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/xxl-job/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/xxl-job/" class="">
       xxl job</a>
   
 
@@ -1026,7 +1026,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/concurrent/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/concurrent/" class="">
       concurrent</a>
   
 
@@ -1040,7 +1040,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/jackson/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/jackson/" class="">
       jackson</a>
   
 
@@ -1054,7 +1054,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/java-hashmap/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-hashmap/" class="">
       java HashMap</a>
   
 
@@ -1068,7 +1068,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/java-utils/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-utils/" class="">
       Java Utils</a>
   
 
@@ -1082,7 +1082,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/java-%E5%AF%86%E7%A0%81%E5%AD%A6/" class="">
       java 密码学</a>
   
 
@@ -1096,7 +1096,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/java/map/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/java/map/" class="">
       map</a>
   
 
@@ -1119,7 +1119,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-51f600e6ef5b531bcd84ecd789276516" class="flex">
       <a role="button" class="">
         Monitor</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1133,7 +1133,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/monitor/prometheus/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/monitor/prometheus/" class="">
       prometheus</a>
   
 
@@ -1156,7 +1156,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-b11c61a955da170f736b6dbde7b6e083" class="flex">
       <a role="button" class="">
         Tools</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1170,7 +1170,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/tools/idea/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/tools/idea/" class="">
       IDEA</a>
   
 
@@ -1189,7 +1189,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/computer-science-recommend/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/computer-science-recommend/" class="">
       推荐</a>
   
 
@@ -1203,7 +1203,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/computer-science-learning-log/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/computer-science-learning-log/" class="">
       学习记录</a>
   
 
@@ -1217,7 +1217,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/github/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/github/" class="">
       github</a>
   
 
@@ -1231,7 +1231,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/job/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/job/" class="">
       job</a>
   
 
@@ -1245,7 +1245,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/redis/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/redis/" class="">
       redis</a>
   
 
@@ -1259,7 +1259,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/security/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/security/" class="">
       security</a>
   
 
@@ -1277,7 +1277,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-44f9701b64ae8bf371ea70118bc45414" class="flex">
       <a role="button" class="">
         Blog</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1291,7 +1291,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/blog/blog/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/blog/blog/" class="">
       blog</a>
   
 
@@ -1305,7 +1305,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/blog/hugo/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/blog/hugo/" class="">
       Hugo</a>
   
 
@@ -1324,7 +1324,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/cloud/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/cloud/" class="">
       Cloud</a>
   
 
@@ -1342,7 +1342,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-2f97889f3f0b1ca7ff547a7c288df6f0" class="flex">
       <a role="button" class="">
         Front End</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1356,7 +1356,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/front-end/echarts/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/front-end/echarts/" class="">
       echarts</a>
   
 
@@ -1370,7 +1370,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/front-end/vue/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/front-end/vue/" class="">
       vue</a>
   
 
@@ -1393,7 +1393,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-529cbb550ade3cc11293cf67d1d534f0" class="flex">
       <a role="button" class="">
         Micro Service</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1407,7 +1407,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/micro-service/nacos/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/micro-service/nacos/" class="">
       Nacos</a>
   
 
@@ -1421,7 +1421,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/micro-service/micro-service/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/micro-service/micro-service/" class="">
       micro service</a>
   
 
@@ -1444,7 +1444,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-53c205cf4e6c3e5d00ec77a3728f3fde" class="flex">
       <a role="button" class="">
         Operating System</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1458,7 +1458,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/ios/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/ios/" class="">
       IOS</a>
   
 
@@ -1472,7 +1472,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/linux/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/linux/" class="">
       linux</a>
   
 
@@ -1486,7 +1486,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/mac/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/mac/" class="">
       mac</a>
   
 
@@ -1500,7 +1500,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/raspberrypi/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/raspberrypi/" class="">
       raspberry pi</a>
   
 
@@ -1514,7 +1514,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/powershell/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/powershell/" class="">
       powershell</a>
   
 
@@ -1528,7 +1528,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/operating-system/windows/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/operating-system/windows/" class="">
       windows</a>
   
 
@@ -1551,7 +1551,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-fb5af4ccc08ed8db9c0d17ca2e0e9dff" class="flex">
       <a role="button" class="">
         Software</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1570,7 +1570,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/artificial-intelligence/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/artificial-intelligence/" class="">
       Artificial Intelligence</a>
   
 
@@ -1588,7 +1588,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-6c1b5eb9fa302a23733b5ce342165515" class="flex">
       <a role="button" class="">
         CI/CD</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1602,7 +1602,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/docker/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/docker/" class="">
       docker</a>
   
 
@@ -1616,7 +1616,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/gitlab/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/gitlab/" class="">
       Gitlab</a>
   
 
@@ -1630,7 +1630,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/jenkins/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/jenkins/" class="">
       Jenkins</a>
   
 
@@ -1644,7 +1644,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/maven/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/maven/" class="">
       maven</a>
   
 
@@ -1658,7 +1658,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/nexus/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/nexus/" class="">
       Nexus</a>
   
 
@@ -1672,7 +1672,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/ci-cd/orbstack/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/ci-cd/orbstack/" class="">
       OrbStack</a>
   
 
@@ -1691,7 +1691,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/crawler/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/crawler/" class="">
       crawler</a>
   
 
@@ -1705,7 +1705,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/git/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/git/" class="">
       git</a>
   
 
@@ -1719,7 +1719,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/networking/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/networking/" class="">
       networking</a>
   
 
@@ -1733,7 +1733,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/python/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/python/" class="">
       Python</a>
   
 
@@ -1747,7 +1747,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/reddison/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/reddison/" class="">
       reddison</a>
   
 
@@ -1761,7 +1761,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/vim/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/vim/" class="">
       vim</a>
   
 
@@ -1775,7 +1775,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="">
       系统设计</a>
   
 
@@ -1789,7 +1789,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
+    <a href="https/penruins.github.io/hugo/post/computer-science/%E8%BF%90%E7%BB%B4/" class="">
       运维</a>
   
 
@@ -1812,7 +1812,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-3b7129f485a86f816ed70cb52a2a5843" class="flex">
       <a role="button" class="">
         History</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1826,7 +1826,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/history/chinese-history/" class="">
+    <a href="https/penruins.github.io/hugo/post/history/chinese-history/" class="">
       Chinese History</a>
   
 
@@ -1849,7 +1849,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-27743f5ad758a53b0d2d97b463de9ca0" class="flex">
       <a role="button" class="">
         Others</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1863,7 +1863,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/others/about-me/" class="">
+    <a href="https/penruins.github.io/hugo/post/others/about-me/" class="">
       about me</a>
   
 
@@ -1877,7 +1877,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/others/english-learning/" class="">
+    <a href="https/penruins.github.io/hugo/post/others/english-learning/" class="">
       English Learning</a>
   
 
@@ -1893,7 +1893,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/others/economy/" class="">
+    <a href="https/penruins.github.io/hugo/post/others/economy/" class="">
       Economy</a>
   
 
@@ -1907,7 +1907,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/others/f1/" class="">
+    <a href="https/penruins.github.io/hugo/post/others/f1/" class="">
       F1</a>
   
 
@@ -1930,7 +1930,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-7cf7927dd7be57fd9ac871554e5eab30" class="flex">
       <a role="button" class="">
         Science</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1944,7 +1944,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/science/biology/" class="">
+    <a href="https/penruins.github.io/hugo/post/science/biology/" class="">
       biology</a>
   
 
@@ -1967,7 +1967,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-c86d83c6ab9662a5734c7c938687f51c" class="flex">
       <a role="button" class="">
         Sports</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -1981,7 +1981,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/sports/cycling/" class="">
+    <a href="https/penruins.github.io/hugo/post/sports/cycling/" class="">
       cycling</a>
   
 
@@ -1995,7 +1995,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/sports/table-tennis/" class="">
+    <a href="https/penruins.github.io/hugo/post/sports/table-tennis/" class="">
       table tennis</a>
   
 
@@ -2018,7 +2018,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-a7716b8c5e1ddba36a22182d4f60014c" class="flex">
       <a role="button" class="">
         Wl Public</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2041,7 +2041,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-6fc9a7b0dd6392ef81e392a65430999b" class="flex">
       <a role="button" class="">
         Books</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2059,7 +2059,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-06aae5e89825d313a1291f1996bfc76d" class="flex">
       <a role="button" class="">
         Computer Science</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2073,7 +2073,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
+    <a href="https/penruins.github.io/hugo/post/books/computer-science/java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/" class="">
       Java并发编程实战</a>
   
 
@@ -2087,7 +2087,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
+    <a href="https/penruins.github.io/hugo/post/books/computer-science/python%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="">
       Python神经网络编程</a>
   
 
@@ -2101,7 +2101,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
+    <a href="https/penruins.github.io/hugo/post/books/computer-science/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="">
       Redis设计与实现</a>
   
 
@@ -2115,7 +2115,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
+    <a href="https/penruins.github.io/hugo/post/books/computer-science/spring-cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8%E5%AE%9E%E6%88%98%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="">
       Spring Cloud微服务：入门、实战与进阶</a>
   
 
@@ -2129,7 +2129,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
+    <a href="https/penruins.github.io/hugo/post/books/computer-science/%E4%B8%80%E6%9C%AC%E4%B9%A6%E8%AE%B2%E9%80%8F-elasticsearch%E5%8E%9F%E7%90%86%E8%BF%9B%E9%98%B6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/" class="">
       一本书讲透 ElasticSearch：原理、进阶与工程实践</a>
   
 
@@ -2148,7 +2148,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
+    <a href="https/penruins.github.io/hugo/post/books/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E7%AC%AC%E4%B8%89%E7%89%88/" class="">
       宏观经济学 第三版</a>
   
 
@@ -2162,7 +2162,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
+    <a href="https/penruins.github.io/hugo/post/books/%E8%8B%B1%E4%BC%9F%E8%BE%BE-%E9%BB%84%E4%BB%81%E5%8B%8B%E4%B9%8B%E8%8A%AF/" class="">
       英伟达-黄仁勋之芯</a>
   
 
@@ -2185,7 +2185,7 @@ https://github.com/alex-shpak/hugo-book
     <label for="section-aea2a4e9afcf7a8e876e21f2b858e5ae" class="flex">
       <a role="button" class="">
         Tools</a>
-      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+      <img src="https//penruins.github.io/hugo/icons/chevron-right.svg" class="book-icon" alt="Expand" />
     </label>
   
 
@@ -2199,7 +2199,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/post/tools/obsidian/" class="">
+    <a href="https/penruins.github.io/hugo/post/tools/obsidian/" class="">
       obsidian</a>
   
 
@@ -2243,14 +2243,14 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+    <img src="https//penruins.github.io/hugo/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
   <h3>algorithm practice 剑指 offer</h3>
 
   <label for="toc-control">
     
-    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="https//penruins.github.io/hugo/icons/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
@@ -3219,17 +3219,17 @@ f(0) {}</code></pre><h4 id="146-本章小结">14.6 本章小结<a class="anchor"
   <div class="flex flex-wrap justify-between">
     <span>
     
-      <a href="/post/computer-science/algorithm/algorithm/" class="flex align-center">
-        <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+      <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/algorithm/" class="flex align-center">
+        <img src="https//penruins.github.io/hugo/icons/backward.svg" class="book-icon" alt="Backward" />
         <span>Algorithm</span>
       </a>
     
     </span>
     <span>
     
-      <a href="/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="flex align-center">
+      <a href="https/penruins.github.io/hugo/post/computer-science/algorithm/%E5%89%91%E6%8C%87offer%E8%BF%99%E6%9C%AC%E4%B9%A6%E4%B8%AD%E6%AF%8F%E4%B8%80%E9%81%93%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9%E5%BA%94leetcode%E7%9A%84%E9%A2%98%E7%9B%AE/" class="flex align-center">
         <span>剑指offer题目对应</span>
-        <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+        <img src="https//penruins.github.io/hugo/icons/forward.svg" class="book-icon" alt="Forward" />
       </a>
     
     </span>
