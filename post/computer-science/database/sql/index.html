@@ -19,12 +19,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-11-03T11:59:08+08:00">
+    <meta property="article:modified_time" content="2025-11-03T12:00:14+08:00">
 
 
   <meta itemprop="name" content="SQL">
   <meta itemprop="description" content="sql# 2502 设计内存分配器# ✅ 175 组合两个表# 175. 组合两个表 需要展示的字段 姓 LastName 名 FirstName 城市 City 州 State 如果 personId 的地址不再 Address 表中，则报告为 null 使用左连接 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId;176 第二高的薪水# 176. 第二高的薪水 Create table If Not Exists Employee ( id int, salary int ); Truncate table Employee; insert into Employee (id, salary) values (&#39;1&#39;, &#39;100&#39;); insert into Employee (id, salary) values (&#39;2&#39;, &#39;200&#39;); insert into Employee (id, salary) values (&#39;3&#39;, &#39;300&#39;); insert into Employee (id, salary) values (&#39;4&#39;, &#39;400&#39;); insert into Employee (id, salary) values (&#39;5&#39;, &#39;500&#39;); insert into Employee (id, salary) values (&#39;6&#39;, &#39;600&#39;); insert into Employee (id, salary) values (&#39;7&#39;, &#39;700&#39;);Employee 表： &#43;-------------&#43;------&#43; | Column Name | Type | &#43;-------------&#43;------&#43; | id | int | | salary | int | &#43;-------------&#43;------&#43; id 是这个表的主键。 表的每一行包含员工的工资信息。select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。">
-  <meta itemprop="dateModified" content="2025-11-03T11:59:08+08:00">
+  <meta itemprop="dateModified" content="2025-11-03T12:00:14+08:00">
   <meta itemprop="wordCount" content="1585">
 
 <title>SQL | Penruins</title>
