@@ -18,12 +18,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-11-08T23:37:38+08:00">
+    <meta property="article:modified_time" content="2025-11-08T23:55:12+08:00">
 
 
   <meta itemprop="name" content="Sentinel">
   <meta itemprop="description" content="Sentinel# 性能压测# “引入Sentinel带来的性能损耗非常小，只有在业务单机量级超过25万QPS的时候才会有一些显著的影响（5%～10%左右），单机QPS不太大的时候损耗几乎可以忽略不计。”这是Sentinel官方文档中的一句话，本节将通过基准测试验证这句话。 SPI在Sentinel中的应用# SPI机制在阿里巴巴集团开源的项目中被广泛使用，如Dubbo，RocketMQ与Sentinel都使用了SPI机制 除了Dubbo外，RocketMQ与Sentinel使用的都是Java提供的SPI机制 Dubbo使用的是自实现的一套SPI——Dubbo SPI，与Java SPI的配置方式不同，Dubbo SPI使用Key-Value方式配置，目的是实现自适应扩展机制 Java SPI实现原理与适用场景 SPI（Service Provider Interface，服务提供者接口）是一种服务发现机制，是Java的一个内置标准，可以保障不同的开发者实现某个特定的服务 SPI的本质是将接口实现类的全限定名配置在文件中，由服务加载器读取配置文件、加载实现类并创建实例。使用SPI机制能够实现运行时从配置文件中读取接口的实现类并创建实例 ServiceLoader.load() SPI机制的适用场景 适合适用策略模式、责任链模式的场景都可以使用SPI机制 Java SPI在Sentinel中的应用 我们可以直接替换Sentinel提供的默认SlotChainBuilder，使用自定义的SlotChainBuilder为资源构造自己的ProcessorSlotChain，以实现修改ProcessorSlot排列顺序、增加或移除ProcessorSlot的功能 责任链模式在Sentinel中的应用# 我们将Sentinel提供的所有ProcessorSlot分为两类 一类是负责完成资源指标数据统计的ProcessorSlot 一类是实现限流、熔断等流量控制功能的ProcessorSlot Sentinel使用责任链模式将注册的所有ProcessorSlot按照一定的顺序串成一个单向链表 实现资源指标数据统计的ProcessorSlot必须在实现流量控制功能的ProcessorSlot的前面，原因很简单，限流、熔断降级等都需要依赖资源的实时指标数据做判断 Reference# 实战Alibaba Sentinel：深度解析微服务高并发流量治理">
-  <meta itemprop="dateModified" content="2025-11-08T23:37:38+08:00">
+  <meta itemprop="dateModified" content="2025-11-08T23:55:12+08:00">
   <meta itemprop="wordCount" content="31">
 
 <title>Sentinel | Penruins</title>
