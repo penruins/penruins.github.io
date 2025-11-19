@@ -19,13 +19,13 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-11-19T09:55:20+08:00">
+    <meta property="article:modified_time" content="2025-11-19T11:57:30+08:00">
 
 
   <meta itemprop="name" content="mysql">
   <meta itemprop="description" content="mysql# MySQL知识体系的三驾马车 MySQL是怎样跑起来的读书笔记 #13 binlog# redo log 和 binlog日志# redo log 重做日志 Redo log是InnoDB存储引擎特有的物理日志，主要保证事务的持久性和崩溃恢复能力(crash-safe)。当MySQL实例意外宕机时，InnoDB可以通过redo log恢复已提交但未写入数据文件的事务，确保数据不会丢失 Redo log采用&#34;预写日志(WAL, Write-Ahead Logging)“机制：在数据页修改前，先记录日志到redo log buffer，再根据策略刷盘到redo log文件 刷盘策略 通过innodb_flush_log_at_trx_commit 参数控制 0：每秒刷盘一次，事务提交时不刷盘(可能丢失1秒数据) 1：每次事务提交都刷盘(默认，最安全) 2：写入OS缓存，不立即刷盘(仅MySQL崩溃安全，服务器宕机可能丢失数据) bin log 二进制日志 Binlog是MySQL Server层维护的逻辑日志，记录所有引起数据变更的SQL语句或行变更 主要用于 主从复制：从库通过重放主库的binlog实现数据同步 时间点恢复：结合全量备份和binlog可实现任意时间点的数据恢复 数据归档：记录数据库所有变更历史 三种格式 STATEMENT：记录SQL原文(默认)，可能因函数(如NOW())导致主从不一致 ROW：记录行数据变更(最安全)，但日志量大 MIXED：混合模式，根据语句自动选择格式 刷盘控制 通过 sync_binlog 参数控制 0：由系统决定刷盘时机 1：每次事务提交都刷盘(最安全) N：每N个事务刷盘一次(平衡性能与安全性) 两阶段提交：保证日志一致性 Prepare阶段：写入redo log并标记为prepare状态 写入binlog Commit阶段：将redo log标记为commit状态 读写分离# SpringBoot&#43;Mybatis-Plus实现mysql读写分离方案 在 Spring Boot 中优雅地实现读写分离 【读写分离】SpringBoot整合多数据源实现读写分离（一） Repeatable Read级别中的幻读问题如何通过间隙锁解决？# 在 MySQL 的 Repeatable Read 隔离级别中，幻读问题通过 间隙锁（Gap Lock） 和 Next-Key Lock 来解决。以下是详细的机制和实现方式：">
-  <meta itemprop="dateModified" content="2025-11-19T09:55:20+08:00">
-  <meta itemprop="wordCount" content="1513">
+  <meta itemprop="dateModified" content="2025-11-19T11:57:30+08:00">
+  <meta itemprop="wordCount" content="2072">
 
 <title>mysql | Penruins</title>
 <link rel="icon" href="/favicon.png" >
@@ -35,7 +35,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.d4ac057d2163a8dc4f9021cc9e2b0abe16cba687066fa6ed478b4df6e0e2b421.js" ></script>
+  <script defer src="/en.search.min.1fdbeb7a1d7974286b1a4efa480582d0df50dae97e3997634b51b270497b26d6.js" ></script>
 
 
 
@@ -1958,9 +1958,25 @@ https://github.com/alex-shpak/hugo-book
           </ul>
         </li>
         <li><a href="#如何评估分区键的选择是否会对查询性能产生显著影响">如何评估分区键的选择是否会对查询性能产生显著影响？</a></li>
-        <li><a href="#reference">Reference</a></li>
       </ul>
     </li>
+    <li><a href="#备份">备份</a>
+      <ul>
+        <li><a href="#how-to-back-up-and-restore-a-database-in-mysql">How to Back Up and Restore a Database in MySQL</a></li>
+        <li><a href="#mysqldump-官方文档">mysqldump 官方文档</a>
+          <ul>
+            <li><a href="#performance-and-scalability-considerations">Performance and Scalability Considerations</a></li>
+          </ul>
+        </li>
+        <li><a href="#logic-backup-逻辑备份">logic backup 逻辑备份</a></li>
+        <li><a href="#mysql-shell-dump-utilities">MySQL Shell dump utilities</a></li>
+        <li><a href="#backing-up-mysql-part-6-physical-vs-logical-backups">Backing Up MySQL Part 6: Physical vs. Logical Backups</a></li>
+        <li><a href="#可以在mysql还在运行时执行-mysqldump-吗">可以在mysql还在运行时执行 mysqldump 吗？</a></li>
+        <li><a href="#脚本中如何输入密码">脚本中如何输入密码</a></li>
+        <li><a href="#reference">reference</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference-1">Reference</a></li>
   </ul>
 </nav>
 
@@ -2891,9 +2907,156 @@ https://github.com/alex-shpak/hugo-book
 <h3 id="总结-9">总结<a class="anchor" href="#%e6%80%bb%e7%bb%93-9">#</a></h3>
 <p>在选择分区键时，应避免选择低基数列、数据分布不均的列、频繁更新的列、与查询条件无关的列、表达式或函数作为分区键，同时应考虑业务需求、数据增长模式、存储引擎限制和分区数量限制等因素，以确保分区表能够有效提升性能并简化管理。</p>
 <h2 id="如何评估分区键的选择是否会对查询性能产生显著影响">如何评估分区键的选择是否会对查询性能产生显著影响？<a class="anchor" href="#%e5%a6%82%e4%bd%95%e8%af%84%e4%bc%b0%e5%88%86%e5%8c%ba%e9%94%ae%e7%9a%84%e9%80%89%e6%8b%a9%e6%98%af%e5%90%a6%e4%bc%9a%e5%af%b9%e6%9f%a5%e8%af%a2%e6%80%a7%e8%83%bd%e4%ba%a7%e7%94%9f%e6%98%be%e8%91%97%e5%bd%b1%e5%93%8d">#</a></h2>
-<h2 id="reference">Reference<a class="anchor" href="#reference">#</a></h2>
+<h1 id="备份">备份<a class="anchor" href="#%e5%a4%87%e4%bb%bd">#</a></h1>
+<h2 id="how-to-back-up-and-restore-a-database-in-mysql">How to Back Up and Restore a Database in MySQL<a class="anchor" href="#how-to-back-up-and-restore-a-database-in-mysql">#</a></h2>
+<ul>
+<li>To back up a database on the MySQL server, you use the <code>mysqldump</code> program that comes by default with the MySQL client installation.</li>
+<li>To restore a backup created by the mysqldump program, you use the <code>mysql</code> command-line program.</li>
+</ul>
+<pre tabindex="0"><code>mysqldump -h localhost -u root -p hr &gt; D:\backup\hr.sql</code></pre><ul>
+<li>
+<p><code>mysqldump</code>: This is the <strong>command-line utility</strong> for MySQL that allows you to <strong>dump</strong> the contents of a database into a file.</p>
+</li>
+<li>
+<p>hr: <strong>This is the name of the MySQL database that you want to back up</strong>. Replace “hr” with the actual name of the database you want to back up.</p>
+</li>
+<li>
+<p>备份全库 <code>mysqldump -u root -p --all-databases &gt; all_databases_backup.sql</code></p>
+</li>
+<li>
+<p>备份单个数据库 <code>mysqldump -u root -p database_name &gt; database_backup.sql</code></p>
+</li>
+<li>
+<p>备份特定表 <code>mysqldump -u root -p database_name table_name &gt; table_backup.sql</code></p>
+</li>
+<li>
+<p>备份时增加压缩 <code>mysqldump -u root -p database_name | gzip &gt; database_backup.sql.gz</code></p>
+</li>
+<li>
+<p>reference</p>
+<ul>
+<li><a href="https://www.mysqltutorial.org/mysql-administration/mysql-backup-a-database/">How to Back Up and Restore a Database in MySQL</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/8544684157">MySQL数据库备份与恢复：全面指南</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="mysqldump-官方文档">mysqldump 官方文档<a class="anchor" href="#mysqldump-%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3">#</a></h2>
+<h3 id="performance-and-scalability-considerations">Performance and Scalability Considerations<a class="anchor" href="#performance-and-scalability-considerations">#</a></h3>
+<ul>
+<li>
+<p>mysqldump advantages include the convenience and flexibility of viewing or even editing the output before restoring. You can clone databases for development and DBA work, or produce slight variations of an existing database for testing.</p>
+<ul>
+<li>可以进行修改</li>
+</ul>
+</li>
+<li>
+<p>It is not intended as a fast or scalable solution for backing up substantial amounts of data. With large data sizes, even if the backup step takes a reasonable time, restoring the data can be very slow because replaying the SQL statements involves disk I/O for insertion, index creation, and so on.</p>
+<ul>
+<li>恢复需要时间，占用 I/O 资源</li>
+</ul>
+</li>
+<li>
+<p>For large-scale backup and restore, a physical backup is more appropriate, to copy the data files in their original format so that they can be restored quickly.</p>
+<ul>
+<li>如果数据量很大，建议使用物理备份</li>
+</ul>
+</li>
+<li>
+<p>If your tables are primarily InnoDB tables, or if you have a mix of InnoDB and MyISAM tables, consider using mysqlbackup, which is available as part of MySQL Enterprise. This tool provides high performance for InnoDB backups with minimal disruption; it can also back up tables from MyISAM and other storage engines; it also provides a number of convenient options to accommodate different backup scenarios.</p>
+<ul>
+<li>企业版备份工具</li>
+</ul>
+</li>
+<li>
+<p>reference</p>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.4/en/mysqldump.html">6.5.4 mysqldump — A Database Backup Program</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="logic-backup-逻辑备份">logic backup 逻辑备份<a class="anchor" href="#logic-backup-%e9%80%bb%e8%be%91%e5%a4%87%e4%bb%bd">#</a></h2>
+<ul>
+<li>
+<p>A backup that reproduces table structure and data, <strong>without copying the actual data files</strong>. For example, the mysqldump command produces a logical backup, because its output contains statements such as CREATE TABLE and INSERT that can re-create the data. Contrast with physical backup. A logical backup offers <strong>flexibility</strong> (for example, you could edit table definitions or insert statements before restoring), but can take substantially longer to restore than a physical backup.</p>
+</li>
+<li>
+<p><a href="https://dev.mysql.com/doc/refman/8.4/en/glossary.html#glos_logical_backup">logic backup</a></p>
+</li>
+</ul>
+<h2 id="mysql-shell-dump-utilities">MySQL Shell dump utilities<a class="anchor" href="#mysql-shell-dump-utilities">#</a></h2>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.4/en/mysqldump.html">6.5.4 mysqldump — A Database Backup Program</a></li>
+</ul>
+<h2 id="backing-up-mysql-part-6-physical-vs-logical-backups">Backing Up MySQL Part 6: Physical vs. Logical Backups<a class="anchor" href="#backing-up-mysql-part-6-physical-vs-logical-backups">#</a></h2>
+<ul>
+<li>reference
+<ul>
+<li><a href="https://www.red-gate.com/simple-talk/blogs/backing-up-mysql-part-6-physical-vs-logical-backups/">Backing Up MySQL Part 6: Physical vs. Logical Backups</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="可以在mysql还在运行时执行-mysqldump-吗">可以在mysql还在运行时执行 mysqldump 吗？<a class="anchor" href="#%e5%8f%af%e4%bb%a5%e5%9c%a8mysql%e8%bf%98%e5%9c%a8%e8%bf%90%e8%a1%8c%e6%97%b6%e6%89%a7%e8%a1%8c-mysqldump-%e5%90%97">#</a></h2>
+<ul>
+<li>为了在备份期间保证数据的一致性（即备份出来的数据在某个时间点是一致的，不会出现半截事务），mysqldump 主要使用两种策略
+<ul>
+<li><strong>使用 &ndash;single-transaction 选项（推荐用于 InnoDB）</strong>
+<ul>
+<li>工作原理：它通过启动一个单独的长事务来工作。在这个事务中，它利用 InnoDB 的 多版本并发控制（MVCC） 特性。当您启动 mysqldump &ndash;single-transaction 时，它会向 InnoDB 请求一个在备份开始时的一致性数据快照。之后，即使其他客户端在修改数据，mysqldump 读取的也始终是备份开始那个时间点的数据。</li>
+<li>优点
+<ul>
+<li>非阻塞：在备份过程中，不会锁定正在备份的表，因此应用程序的 读写操作可以正常进行，几乎不会感到任何阻塞。</li>
+<li>保证一致性：备份的数据是某个时间点的一致快照。</li>
+</ul>
+</li>
+<li>要求：仅适用于支持事务的存储引擎，如 InnoDB。对于 MyISAM 等非事务引擎，此选项无效。</li>
+</ul>
+</li>
+<li><strong>使用 &ndash;lock-tables 选项</strong>
+<ul>
+<li><strong>工作原理</strong>：在备份某个数据库的每个表之前，会对该表执行 LOCK TABLES &hellip; READ（读锁）。这意味着在备份这个表时，其他会话可以读，但不能写。</li>
+<li><strong>缺点</strong>
+<ul>
+<li>阻塞写入：在备份期间，被锁定的表无法被更新，这会导致应用程序的写操作被阻塞，如果备份很大，可能会造成严重的服务中断。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：通常只在需要备份 MyISAM 表，或者 MySQL 版本太老不支持 &ndash;single-transaction 时才考虑使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>mysqldump</code> 的默认行为
+<ul>
+<li>对于非事务性表（如 MyISAM），mysqldump 会自动使用 &ndash;lock-tables 来保证一致性。所以如果你混用了 InnoDB 和 MyISAM 表，最好明确指定你的选项。</li>
+</ul>
+</li>
+<li>最佳实践和建议
+<ul>
+<li>对于 InnoDB 表，始终使用 <code>--single-transaction</code>：这是在线备份的黄金标准，它能在保证一致性的前提下，最大限度地减少对业务的影响</li>
+<li>考虑备份期间的服务器负载
+<ul>
+<li>虽然 <code>--single-transaction</code> 不锁表，但它仍然会从服务器读取大量数据，这会产生 I/O 和 CPU 负载。建议在业务低峰期执行备份操作。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="脚本中如何输入密码">脚本中如何输入密码<a class="anchor" href="#%e8%84%9a%e6%9c%ac%e4%b8%ad%e5%a6%82%e4%bd%95%e8%be%93%e5%85%a5%e5%af%86%e7%a0%81">#</a></h2>
+<pre tabindex="0"><code># 设置登录路径
+mysql_config_editor set --login-path=backup_user --host=localhost --user=username --password
+
+# 执行时会提示输入密码，密码被加密存储
+
+# 在脚本中使用
+
+#!/bin/bash
+mysqldump --login-path=backup_user --single-transaction --databases your_database &gt; backup_$(date +%Y%m%d).sql</code></pre><h2 id="reference">reference<a class="anchor" href="#reference">#</a></h2>
+<ul>
+<li><a href="https://www.red-gate.com/simple-talk/databases/mysql/backing-up-mysql-part-1-mysqldump/">Backing up MySQL Part 1: mysqldump</a></li>
+</ul>
+<h1 id="reference-1">Reference<a class="anchor" href="#reference-1">#</a></h1>
 <ul>
 <li><a href="https://geekdaxue.co/books/zhangnio@or5bz8">MySQL 架构原理</a></li>
+<li><a href="https://www.mysqltutorial.org/">MySQL Tutorial</a></li>
 </ul>
 </article>
  
@@ -3130,9 +3293,25 @@ https://github.com/alex-shpak/hugo-book
           </ul>
         </li>
         <li><a href="#如何评估分区键的选择是否会对查询性能产生显著影响">如何评估分区键的选择是否会对查询性能产生显著影响？</a></li>
-        <li><a href="#reference">Reference</a></li>
       </ul>
     </li>
+    <li><a href="#备份">备份</a>
+      <ul>
+        <li><a href="#how-to-back-up-and-restore-a-database-in-mysql">How to Back Up and Restore a Database in MySQL</a></li>
+        <li><a href="#mysqldump-官方文档">mysqldump 官方文档</a>
+          <ul>
+            <li><a href="#performance-and-scalability-considerations">Performance and Scalability Considerations</a></li>
+          </ul>
+        </li>
+        <li><a href="#logic-backup-逻辑备份">logic backup 逻辑备份</a></li>
+        <li><a href="#mysql-shell-dump-utilities">MySQL Shell dump utilities</a></li>
+        <li><a href="#backing-up-mysql-part-6-physical-vs-logical-backups">Backing Up MySQL Part 6: Physical vs. Logical Backups</a></li>
+        <li><a href="#可以在mysql还在运行时执行-mysqldump-吗">可以在mysql还在运行时执行 mysqldump 吗？</a></li>
+        <li><a href="#脚本中如何输入密码">脚本中如何输入密码</a></li>
+        <li><a href="#reference">reference</a></li>
+      </ul>
+    </li>
+    <li><a href="#reference-1">Reference</a></li>
   </ul>
 </nav>
 
