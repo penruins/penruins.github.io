@@ -19,12 +19,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-11-25T17:29:12+08:00">
+    <meta property="article:modified_time" content="2025-11-25T21:15:02+08:00">
 
 
   <meta itemprop="name" content="rabbitmq">
   <meta itemprop="description" content="rabbitmq# main# RabbitMQ RabbitMQ Tutorials Hello World Work Queues Distributing tasks among workers 一个生产者，多个消费者 Publish/Subscribe Sending messages to many consumers at once 一个消息，每个消费者都能接收到 Routing 多个消费者订阅同一个生产者的消息, 通过路由键，选择性消费 Topics 通过匹配的方式来选择性接收 RPC rabbitmq有哪几种模式# 简单模式（Simple Mode） 描述：一个生产者（Producer）和一个消费者（Consumer），消息直接发送到队列中，不需要交换机（Exchange）。 特点：消息只能被一个消费者处理，适合简单的点对点通信。 应用场景：简单的任务队列，如日志收集。 工作队列模式（Work Queue Mode） 描述：一个生产者和多个消费者，消息分发到多个消费者，但每个消息只能被一个消费者处理。 特点：默认采用轮询机制分发消息，支持手动确认（ack）以确保消息处理成功。 应用场景：任务分发，如多个消费者处理不同的任务。 发布/订阅模式（Publish/Subscribe Mode） 描述：生产者将消息发送到交换机（Exchange），交换机将消息广播到所有绑定的队列，每个队列可以有多个消费者。 特点：使用 fanout 类型的交换机，消息会被所有消费者接收。 应用场景：消息广播，如通知多个系统或用户。 路由模式（Routing Mode） 描述：生产者将消息发送到交换机，交换机根据路由键（Routing Key）将消息分发到匹配的队列。 特点：使用 direct 类型的交换机，支持精确的路由规则。 应用场景：根据特定规则分发消息，如按日志级别分类。 主题模式（Topics Mode） 描述：类似于路由模式，但支持更灵活的路由规则，使用通配符（如 * 和 #）匹配路由键。 特点：使用 topic 类型的交换机，支持复杂的路由逻辑。 应用场景：需要灵活匹配和过滤消息的场景，如多维度消息分发。 RPC 模式（Remote Procedure Call Mode） 描述：生产者发送消息后，等待消费者处理并返回结果，类似于远程过程调用。 特点：通过回调队列实现请求和响应的匹配。 应用场景：需要同步返回结果的场景，如远程调用。 发布确认模式（Publisher Confirms Mode） 描述：生产者在发送消息后，等待 RabbitMQ 的确认，确保消息被成功接收。 特点：提高消息的可靠性，避免消息丢失。 应用场景：需要高可靠性的消息传递，如金融交易。 Header 模式（Headers Mode） 描述：根据消息的头部信息（Headers）进行路由，而不是依赖路由键。 特点：使用 headers 类型的交换机，支持复杂的匹配规则。 应用场景：需要根据消息属性进行路由的场景。 rabbitmq有哪些类型的路由键# 在 RabbitMQ 中，路由键（Routing Key） 是用于决定消息如何被路由到队列的关键字。路由键的具体使用方式取决于 交换机类型，不同类型的交换机对路由键的处理方式不同。以下是 RabbitMQ 中常见的交换机类型及其对应的路由键使用方式：">
-  <meta itemprop="dateModified" content="2025-11-25T17:29:12+08:00">
+  <meta itemprop="dateModified" content="2025-11-25T21:15:02+08:00">
   <meta itemprop="wordCount" content="609">
 
 <title>rabbitmq | Penruins</title>
