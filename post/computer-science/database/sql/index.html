@@ -19,12 +19,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2025-12-19T17:38:12+08:00">
+    <meta property="article:modified_time" content="2025-12-20T18:15:55+08:00">
 
 
   <meta itemprop="name" content="SQL">
   <meta itemprop="description" content="sql# 2502 设计内存分配器# ✅ 175 组合两个表# 175. 组合两个表 需要展示的字段 姓 LastName 名 FirstName 城市 City 州 State 如果 personId 的地址不再 Address 表中，则报告为 null 使用左连接 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId;176 第二高的薪水# 176. 第二高的薪水 Create table If Not Exists Employee ( id int, salary int ); Truncate table Employee; insert into Employee (id, salary) values (&#39;1&#39;, &#39;100&#39;); insert into Employee (id, salary) values (&#39;2&#39;, &#39;200&#39;); insert into Employee (id, salary) values (&#39;3&#39;, &#39;300&#39;); insert into Employee (id, salary) values (&#39;4&#39;, &#39;400&#39;); insert into Employee (id, salary) values (&#39;5&#39;, &#39;500&#39;); insert into Employee (id, salary) values (&#39;6&#39;, &#39;600&#39;); insert into Employee (id, salary) values (&#39;7&#39;, &#39;700&#39;);Employee 表： &#43;-------------&#43;------&#43; | Column Name | Type | &#43;-------------&#43;------&#43; | id | int | | salary | int | &#43;-------------&#43;------&#43; id 是这个表的主键。 表的每一行包含员工的工资信息。select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。">
-  <meta itemprop="dateModified" content="2025-12-19T17:38:12+08:00">
+  <meta itemprop="dateModified" content="2025-12-20T18:15:55+08:00">
   <meta itemprop="wordCount" content="1585">
 
 <title>SQL | Penruins</title>
@@ -2203,14 +2203,14 @@ id 是该表的主键（具有唯一值的列）。
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#a6e22e">Orders</span> (id, customerId)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>);</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e">-- 实现方法1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> c.name <span style="color:#66d9ef">as</span> Customers
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> c.name <span style="color:#66d9ef">as</span> Customers
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Customers c
 </span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> Orders o <span style="color:#66d9ef">on</span> c.id <span style="color:#f92672">=</span> o.customerId
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> o.id <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">null</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">-- 实现方法2
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> name <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;Customers&#39;</span>
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> name <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;Customers&#39;</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Customers
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> id <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">in</span>
 </span></span><span style="display:flex;"><span>      (<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span>(customerId) <span style="color:#66d9ef">from</span> Orders);</span></span></code></pre></div><h2 id="-184-部门工资最高的员工">✅ 184 部门工资最高的员工<a class="anchor" href="#-184-%e9%83%a8%e9%97%a8%e5%b7%a5%e8%b5%84%e6%9c%80%e9%ab%98%e7%9a%84%e5%91%98%e5%b7%a5">#</a></h2>
@@ -2332,7 +2332,7 @@ id 是该表的主键（具有唯一值的列）。
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">from</span> Activity A) X
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> X.rnk <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;</span></span></code></pre></div><h4 id="first_value">first_value()<a class="anchor" href="#first_value">#</a></h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#f92672">-</span><span style="color:#75715e">-- 必须使用 distinct
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> A.player_id,
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> A.player_id,
 </span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">FIRST_VALUE</span>(A.event_date) <span style="color:#a6e22e">OVER</span> (
 </span></span><span style="display:flex;"><span>                    PARTITION <span style="color:#66d9ef">BY</span>
 </span></span><span style="display:flex;"><span>                        A.player_id
