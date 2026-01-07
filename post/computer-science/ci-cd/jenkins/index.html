@@ -8,23 +8,23 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Jenkins# docs docker macOS macOS Installer for Jenkins LTS Install the latest LTS version: brew install jenkins-lts Start the Jenkins service: brew services start jenkins-lts Restart the Jenkins service: brew services restart jenkins-lts Update the Jenkins version: brew upgrade jenkins-lts Using Jenkins jenkins-zh/jenkins-client-java Java实现的对Jenkins操作 password# jenkins publish over SSH中SSH sever密码存放位置 记录 从jenkins配置文件中解密密码 reference# 在Jenkins中拉取GitHub上的代码包（超详细) jenkins配置全局凭据 结合gitlab jenkins部署github项目 ">
+<meta name="description" content="Jenkins# docs docker macOS macOS Installer for Jenkins LTS Install the latest LTS version: brew install jenkins-lts Start the Jenkins service: brew services start jenkins-lts Restart the Jenkins service: brew services restart jenkins-lts Update the Jenkins version: brew upgrade jenkins-lts Using Jenkins jenkins-zh/jenkins-client-java Java实现的对Jenkins操作 password# jenkins publish over SSH中SSH sever密码存放位置 记录 从jenkins配置文件中解密密码 磁盘空间# Jenkins Jenkins构建历史记录处理 reference# 在Jenkins中拉取GitHub上的代码包（超详细) jenkins配置全局凭据 结合gitlab jenkins部署github项目 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/ci-cd/jenkins/">
   <meta property="og:site_name" content="Penruins">
   <meta property="og:title" content="Jenkins">
-  <meta property="og:description" content="Jenkins# docs docker macOS macOS Installer for Jenkins LTS Install the latest LTS version: brew install jenkins-lts Start the Jenkins service: brew services start jenkins-lts Restart the Jenkins service: brew services restart jenkins-lts Update the Jenkins version: brew upgrade jenkins-lts Using Jenkins jenkins-zh/jenkins-client-java Java实现的对Jenkins操作 password# jenkins publish over SSH中SSH sever密码存放位置 记录 从jenkins配置文件中解密密码 reference# 在Jenkins中拉取GitHub上的代码包（超详细) jenkins配置全局凭据 结合gitlab jenkins部署github项目">
+  <meta property="og:description" content="Jenkins# docs docker macOS macOS Installer for Jenkins LTS Install the latest LTS version: brew install jenkins-lts Start the Jenkins service: brew services start jenkins-lts Restart the Jenkins service: brew services restart jenkins-lts Update the Jenkins version: brew upgrade jenkins-lts Using Jenkins jenkins-zh/jenkins-client-java Java实现的对Jenkins操作 password# jenkins publish over SSH中SSH sever密码存放位置 记录 从jenkins配置文件中解密密码 磁盘空间# Jenkins Jenkins构建历史记录处理 reference# 在Jenkins中拉取GitHub上的代码包（超详细) jenkins配置全局凭据 结合gitlab jenkins部署github项目">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2026-01-06T22:46:07+08:00">
+    <meta property="article:modified_time" content="2026-01-07T17:36:08+08:00">
 
 
   <meta itemprop="name" content="Jenkins">
-  <meta itemprop="description" content="Jenkins# docs docker macOS macOS Installer for Jenkins LTS Install the latest LTS version: brew install jenkins-lts Start the Jenkins service: brew services start jenkins-lts Restart the Jenkins service: brew services restart jenkins-lts Update the Jenkins version: brew upgrade jenkins-lts Using Jenkins jenkins-zh/jenkins-client-java Java实现的对Jenkins操作 password# jenkins publish over SSH中SSH sever密码存放位置 记录 从jenkins配置文件中解密密码 reference# 在Jenkins中拉取GitHub上的代码包（超详细) jenkins配置全局凭据 结合gitlab jenkins部署github项目">
-  <meta itemprop="dateModified" content="2026-01-06T22:46:07+08:00">
-  <meta itemprop="wordCount" content="57">
+  <meta itemprop="description" content="Jenkins# docs docker macOS macOS Installer for Jenkins LTS Install the latest LTS version: brew install jenkins-lts Start the Jenkins service: brew services start jenkins-lts Restart the Jenkins service: brew services restart jenkins-lts Update the Jenkins version: brew upgrade jenkins-lts Using Jenkins jenkins-zh/jenkins-client-java Java实现的对Jenkins操作 password# jenkins publish over SSH中SSH sever密码存放位置 记录 从jenkins配置文件中解密密码 磁盘空间# Jenkins Jenkins构建历史记录处理 reference# 在Jenkins中拉取GitHub上的代码包（超详细) jenkins配置全局凭据 结合gitlab jenkins部署github项目">
+  <meta itemprop="dateModified" content="2026-01-07T17:36:08+08:00">
+  <meta itemprop="wordCount" content="60">
 
 <title>Jenkins | Penruins</title>
 <link rel="icon" href="/favicon.png" >
@@ -34,7 +34,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.d0be2716393cedc3e2e3b37f7d32c04553306cc23b77be1eebec030fe0af38ab.js" ></script>
+  <script defer src="/en.search.min.93770e7ea6ba9ddf3c0c520ba45857d1f9bcd3561c6d4c018ee56bb416d68671.js" ></script>
 
 
 
@@ -1778,6 +1778,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#jenkins">Jenkins</a>
       <ul>
         <li><a href="#password">password</a></li>
+        <li><a href="#磁盘空间">磁盘空间</a></li>
         <li><a href="#reference">reference</a></li>
       </ul>
     </li>
@@ -1823,6 +1824,10 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><a href="https://ask.csdn.net/questions/4645065">jenkins publish over SSH中SSH sever密码存放位置</a></li>
 <li><a href="https://blog.csdn.net/qq_27156945/article/details/108083342">记录 从jenkins配置文件中解密密码</a></li>
+</ul>
+<h2 id="磁盘空间">磁盘空间<a class="anchor" href="#%e7%a3%81%e7%9b%98%e7%a9%ba%e9%97%b4">#</a></h2>
+<ul>
+<li><a href="https://developer.aliyun.com/article/1195696">Jenkins Jenkins构建历史记录处理</a></li>
 </ul>
 <h2 id="reference">reference<a class="anchor" href="#reference">#</a></h2>
 <ul>
@@ -1914,6 +1919,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#jenkins">Jenkins</a>
       <ul>
         <li><a href="#password">password</a></li>
+        <li><a href="#磁盘空间">磁盘空间</a></li>
         <li><a href="#reference">reference</a></li>
       </ul>
     </li>
