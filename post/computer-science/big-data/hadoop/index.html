@@ -18,12 +18,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2026-01-22T16:20:05+08:00">
+    <meta property="article:modified_time" content="2026-01-22T23:39:10+08:00">
 
 
   <meta itemprop="name" content="hadoop">
   <meta itemprop="description" content="hadoop# Hadoop生态系统是一个由Apache基金会维护的开源软件集合，用于处理和分析大规模数据集。经过多年发展，Hadoop已从最初的HDFS和MapReduce两个核心组件扩展为一个包含众多工具和框架的完整生态系统 核心基础组件 HDFS (Hadoop Distributed File System) Hadoop的分布式文件系统，用于存储超大规模数据集 采用主从架构：NameNode(主节点)管理元数据，DataNode(从节点)存储实际数据块 特点：高容错性、高吞吐量、适合部署在廉价硬件上 YARN (Yet Another Resource Negotiator) Hadoop 2.0引入的资源管理和作业调度框架 包含ResourceManager(集群资源管理)和NodeManager(节点资源监控) 支持多种计算框架(MapReduce、Spark等)共享集群资源 MapReduce 分布式计算框架，采用&#34;分而治之&#34;思想 包含Map(数据分解)和Reduce(结果汇总)两个阶段 适合处理大规模离线批处理任务 数据存储组件 HBase 分布式列式NoSQL数据库，基于Google BigTable设计 构建在HDFS之上，提供实时读写能力 适合存储海量结构化数据 Hive 数据仓库工具，提供类SQL查询语言(HiveQL) 将SQL转换为MapReduce/Tez/Spark作业执行 适合数据汇总、即席查询和分析 Pig 高级数据流语言(Pig Latin)和执行框架 简化MapReduce编程，适合ETL流程 支持结构化/半结构化数据处理 数据采集与传输组件 Sqoop 关系型数据库与Hadoop间数据传输工具 支持从MySQL、Oracle等导入数据到HDFS/Hive/HBase 也支持将Hadoop数据导出到关系数据库 Flume 分布式日志收集系统 适合采集、聚合和移动大量日志数据到HDFS 包含Source(数据源)、Channel(传输通道)和Sink(目的地)三个组件 协调与管理组件 Zookeeper 分布式协调服务 提供统一命名服务、配置管理、集群同步等 解决分布式环境下的数据一致性问题 Oozie 工作流调度系统 用于编排Hadoop作业(MapReduce、Pig、Hive等) 支持定时和依赖触发 Ambari Hadoop集群管理工具 提供Web界面监控、配置和管理Hadoop集群 支持大多数Hadoop组件 高级计算框架 Spark 内存计算框架，比MapReduce快10-100倍 支持批处理、流处理、机器学习和图计算 可与HDFS、HBase等集成 Flink 流处理框架，支持事件时间和精确一次处理 适合实时数据分析场景 与Hadoop生态系统兼容 Mahout 机器学习算法库 提供聚类、分类、推荐等算法实现 可扩展至大规模数据集 其他重要组件 Kafka 分布式消息队列系统 高吞吐量、低延迟 常用于实时数据管道 Tez 优化后的MapReduce执行引擎 减少中间结果写入磁盘，提高性能 被Hive、Pig等采用 Avro 数据序列化系统 提供紧凑的二进制数据格式 支持RPC通信">
-  <meta itemprop="dateModified" content="2026-01-22T16:20:05+08:00">
+  <meta itemprop="dateModified" content="2026-01-22T23:39:10+08:00">
   <meta itemprop="wordCount" content="87">
 
 <title>hadoop | Penruins</title>
