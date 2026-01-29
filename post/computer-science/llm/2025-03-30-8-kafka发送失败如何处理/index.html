@@ -1893,7 +1893,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>调用 <code>send().get()</code> 阻塞等待发送结果，捕获异常后重试或记录日志<a href="@ref">2</a><a href="@ref">22</a>。</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
 </span></span><span style="display:flex;"><span>    RecordMetadata metadata <span style="color:#f92672">=</span> producer.<span style="color:#a6e22e">send</span>(record).<span style="color:#a6e22e">get</span>();
 </span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (Exception e) {
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 重试或记录失败</span>
@@ -1903,7 +1903,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>通过回调（<code>Callback</code>）处理失败，例如重试或存入死信队列<a href="@ref">2</a>。</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>producer.<span style="color:#a6e22e">send</span>(record, (metadata, exception) <span style="color:#f92672">-&gt;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>producer.<span style="color:#a6e22e">send</span>(record, (metadata, exception) <span style="color:#f92672">-&gt;</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (exception <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 异步处理失败</span>
 </span></span><span style="display:flex;"><span>    }

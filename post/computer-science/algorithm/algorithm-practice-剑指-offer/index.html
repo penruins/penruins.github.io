@@ -2268,7 +2268,7 @@ https://github.com/alex-shpak/hugo-book
 <h5 id="面试题42最近请求次数">面试题42：最近请求次数<a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9842%e6%9c%80%e8%bf%91%e8%af%b7%e6%b1%82%e6%ac%a1%e6%95%b0">#</a></h5>
 <h4 id="73-二叉树的广度优先搜索-solution0703001">7.3 二叉树的广度优先搜索 Solution0703001<a class="anchor" href="#73-%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2-solution0703001">#</a></h4>
 <h5 id="广度优先搜索">广度优先搜索<a class="anchor" href="#%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2">#</a></h5>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">bfs</span>(TreeNode root) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">bfs</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
 </span></span><span style="display:flex;"><span>        queue.<span style="color:#a6e22e">offer</span>(root);
@@ -2284,7 +2284,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="面试题43在完全二叉树中添加节点">面试题43：在完全二叉树中添加节点<a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9843%e5%9c%a8%e5%ae%8c%e5%85%a8%e4%ba%8c%e5%8f%89%e6%a0%91%e4%b8%ad%e6%b7%bb%e5%8a%a0%e8%8a%82%e7%82%b9">#</a></h5>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// CBT Complete Binary Tree</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// CBT Complete Binary Tree</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CBTInserter</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue;
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> TreeNode root;
@@ -2319,7 +2319,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="面试题44二叉树中每层的最大值">面试题44：二叉树中每层的最大值<a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9844%e4%ba%8c%e5%8f%89%e6%a0%91%e4%b8%ad%e6%af%8f%e5%b1%82%e7%9a%84%e6%9c%80%e5%a4%a7%e5%80%bc">#</a></h5>
 <h6 id="用一个队列实现二叉树的广度优先搜索">用一个队列实现二叉树的广度优先搜索<a class="anchor" href="#%e7%94%a8%e4%b8%80%e4%b8%aa%e9%98%9f%e5%88%97%e5%ae%9e%e7%8e%b0%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2">#</a></h6>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">largestValues</span>(TreeNode root) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">largestValues</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> current <span style="color:#f92672">=</span> 0;
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> next <span style="color:#f92672">=</span> 0;
 </span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
@@ -2352,7 +2352,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h6 id="用两个队列实现二叉树的广度优先搜索">用两个队列实现二叉树的广度优先搜索<a class="anchor" href="#%e7%94%a8%e4%b8%a4%e4%b8%aa%e9%98%9f%e5%88%97%e5%ae%9e%e7%8e%b0%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2">#</a></h6>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">largestValues</span>(TreeNode root) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">largestValues</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
@@ -2377,7 +2377,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="面试题45二叉树最低层最左边的值">面试题45：二叉树最低层最左边的值<a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9845%e4%ba%8c%e5%8f%89%e6%a0%91%e6%9c%80%e4%bd%8e%e5%b1%82%e6%9c%80%e5%b7%a6%e8%be%b9%e7%9a%84%e5%80%bc">#</a></h5>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findBottomLeftValue</span>(TreeNode root) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findBottomLeftValue</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    Queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> queue2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    queue1.<span style="color:#a6e22e">offer</span>(root);
@@ -2400,7 +2400,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bottomLeft;
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="面试题46二叉树的右侧视图">面试题46：二叉树的右侧视图<a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9846%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%8f%b3%e4%be%a7%e8%a7%86%e5%9b%be">#</a></h5>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">rightSideView</span>(TreeNode root) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">rightSideView</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> view <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> view;
@@ -2426,7 +2426,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h4 id="74-本章小结">7.4 本章小结<a class="anchor" href="#74-%e6%9c%ac%e7%ab%a0%e5%b0%8f%e7%bb%93">#</a></h4>
 <h3 id="第8章-树">第8章 树<a class="anchor" href="#%e7%ac%ac8%e7%ab%a0-%e6%a0%91">#</a></h3>
 <h4 id="81-树的基础知识">8.1 树的基础知识<a class="anchor" href="#81-%e6%a0%91%e7%9a%84%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86">#</a></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TreeNode</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TreeNode</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
 </span></span><span style="display:flex;"><span>    TreeNode left;
 </span></span><span style="display:flex;"><span>    TreeNode right;
@@ -2436,7 +2436,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h4 id="82-二叉树的深度优先搜索">8.2 二叉树的深度优先搜索<a class="anchor" href="#82-%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88%e6%90%9c%e7%b4%a2">#</a></h4>
 <h5 id="中序遍历">中序遍历<a class="anchor" href="#%e4%b8%ad%e5%ba%8f%e9%81%8d%e5%8e%86">#</a></h5>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">inorderTraversal</span>() {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">inorderTraversal</span>() {
 </span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> nodes <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    dfs(root, nodes);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> nodes;
@@ -2449,7 +2449,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        dfs(root.<span style="color:#a6e22e">right</span>, nodes);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h6 id="迭代">迭代<a class="anchor" href="#%e8%bf%ad%e4%bb%a3">#</a></h6>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// left -&gt; current -&gt; right</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// left -&gt; current -&gt; right</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">inorderTraversal</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> nodes <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    Stack<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> stack <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Stack<span style="color:#f92672">&lt;&gt;</span>();
@@ -2465,7 +2465,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> nodes;
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="前序遍历">前序遍历<a class="anchor" href="#%e5%89%8d%e5%ba%8f%e9%81%8d%e5%8e%86">#</a></h5>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">preorderTraversal</span>(TreeNode root) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">preorderTraversal</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> nodes <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    dfs(root, nodes);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> nodes;
@@ -2478,7 +2478,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>        dfs(node.<span style="color:#a6e22e">right</span>, nodes);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h6 id="迭代-1">迭代<a class="anchor" href="#%e8%bf%ad%e4%bb%a3-1">#</a></h6>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// current -&gt; left -&gt; right</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// current -&gt; left -&gt; right</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">preorderTraversal</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    Stack<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> stack <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Stack<span style="color:#f92672">&lt;&gt;</span>();
@@ -2496,7 +2496,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="后序遍历">后序遍历<a class="anchor" href="#%e5%90%8e%e5%ba%8f%e9%81%8d%e5%8e%86">#</a></h5>
 <h6 id="迭代-2">迭代<a class="anchor" href="#%e8%bf%ad%e4%bb%a3-2">#</a></h6>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">postorderTraversal</span>(TreeNode root) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">postorderTraversal</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    Stack<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">&gt;</span> stack <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Stack<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    TreeNode cur <span style="color:#f92672">=</span> root;
@@ -2519,7 +2519,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="3种遍历方法小结">3种遍历方法小结<a class="anchor" href="#3%e7%a7%8d%e9%81%8d%e5%8e%86%e6%96%b9%e6%b3%95%e5%b0%8f%e7%bb%93">#</a></h5>
 <h5 id="面试题47二叉树剪枝">面试题47：二叉树剪枝<a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9847%e4%ba%8c%e5%8f%89%e6%a0%91%e5%89%aa%e6%9e%9d">#</a></h5>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> TreeNode <span style="color:#a6e22e">pruneTree</span>(TreeNode root) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> TreeNode <span style="color:#a6e22e">pruneTree</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> root;
 </span></span><span style="display:flex;"><span>    }
@@ -2531,7 +2531,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> root;
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="面试题48序列化和反序列化二叉树">面试题48：序列化和反序列化二叉树<a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9848%e5%ba%8f%e5%88%97%e5%8c%96%e5%92%8c%e5%8f%8d%e5%ba%8f%e5%88%97%e5%8c%96%e4%ba%8c%e5%8f%89%e6%a0%91">#</a></h5>
 <h6 id="序列化">序列化<a class="anchor" href="#%e5%ba%8f%e5%88%97%e5%8c%96">#</a></h6>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">serialize</span>(TreeNode root) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">serialize</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;#&#34;</span>;
 </span></span><span style="display:flex;"><span>    }
@@ -2539,7 +2539,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    String right <span style="color:#f92672">=</span> serialize(root.<span style="color:#a6e22e">right</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> String.<span style="color:#a6e22e">valueOf</span>(root.<span style="color:#a6e22e">val</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,&#34;</span> <span style="color:#f92672">+</span> leftStr <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;,&#34;</span> <span style="color:#f92672">+</span> rightStr;
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h6 id="反序列化">反序列化<a class="anchor" href="#%e5%8f%8d%e5%ba%8f%e5%88%97%e5%8c%96">#</a></h6>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> TreeNode <span style="color:#a6e22e">deserialize</span>(String data) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> TreeNode <span style="color:#a6e22e">deserialize</span>(String data) {
 </span></span><span style="display:flex;"><span>    String<span style="color:#f92672">[]</span> nodeStrs <span style="color:#f92672">=</span> data.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;,&#34;</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> i <span style="color:#f92672">=</span> {0};
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dfs(nodeStrs, i);
@@ -2556,7 +2556,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    node.<span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> dfs(strs, i);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> node;
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="面试题49从根节点到叶节点的路径数字之和">面试题49：从根节点到叶节点的路径数字之和<a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9849%e4%bb%8e%e6%a0%b9%e8%8a%82%e7%82%b9%e5%88%b0%e5%8f%b6%e8%8a%82%e7%82%b9%e7%9a%84%e8%b7%af%e5%be%84%e6%95%b0%e5%ad%97%e4%b9%8b%e5%92%8c">#</a></h5>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sumNumbers</span>(TreeNode root) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sumNumbers</span>(TreeNode root) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dfs(root, 0);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -2570,7 +2570,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dfs(root.<span style="color:#a6e22e">left</span>, path) <span style="color:#f92672">+</span> dfs(root.<span style="color:#a6e22e">right</span>, path);
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="面试题50向下的路径节点值之和">面试题50：向下的路径节点值之和<a class="anchor" href="#%e9%9d%a2%e8%af%95%e9%a2%9850%e5%90%91%e4%b8%8b%e7%9a%84%e8%b7%af%e5%be%84%e8%8a%82%e7%82%b9%e5%80%bc%e4%b9%8b%e5%92%8c">#</a></h5>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pathSum</span>(TreeNode root, <span style="color:#66d9ef">int</span> sum) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pathSum</span>(TreeNode root, <span style="color:#66d9ef">int</span> sum) {
 </span></span><span style="display:flex;"><span>    Map<span style="color:#f92672">&lt;</span>Integer, Integer<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
 </span></span><span style="display:flex;"><span>    map.<span style="color:#a6e22e">put</span>(0, 1);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dfs(root, sum, map, 0);

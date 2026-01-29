@@ -19,12 +19,12 @@ https://github.com/alex-shpak/hugo-book
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2026-01-29T00:10:36+08:00">
+    <meta property="article:modified_time" content="2026-01-29T12:00:21+08:00">
 
 
   <meta itemprop="name" content="SQL">
   <meta itemprop="description" content="sql# 2502 设计内存分配器# ✅ 175 组合两个表# 175. 组合两个表 需要展示的字段 姓 LastName 名 FirstName 城市 City 州 State 如果 personId 的地址不再 Address 表中，则报告为 null 使用左连接 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId;176 第二高的薪水# 176. 第二高的薪水 Create table If Not Exists Employee ( id int, salary int ); Truncate table Employee; insert into Employee (id, salary) values (&#39;1&#39;, &#39;100&#39;); insert into Employee (id, salary) values (&#39;2&#39;, &#39;200&#39;); insert into Employee (id, salary) values (&#39;3&#39;, &#39;300&#39;); insert into Employee (id, salary) values (&#39;4&#39;, &#39;400&#39;); insert into Employee (id, salary) values (&#39;5&#39;, &#39;500&#39;); insert into Employee (id, salary) values (&#39;6&#39;, &#39;600&#39;); insert into Employee (id, salary) values (&#39;7&#39;, &#39;700&#39;);Employee 表： &#43;-------------&#43;------&#43; | Column Name | Type | &#43;-------------&#43;------&#43; | id | int | | salary | int | &#43;-------------&#43;------&#43; id 是这个表的主键。 表的每一行包含员工的工资信息。select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。">
-  <meta itemprop="dateModified" content="2026-01-29T00:10:36+08:00">
+  <meta itemprop="dateModified" content="2026-01-29T12:00:21+08:00">
   <meta itemprop="wordCount" content="1585">
 
 <title>SQL | Penruins</title>
@@ -1903,13 +1903,13 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 </ul>
-<pre tabindex="0"><code></code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> FirstName, LastName, City, <span style="color:#66d9ef">State</span>
+<pre tabindex="0"><code></code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> FirstName, LastName, City, <span style="color:#66d9ef">State</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Person
 </span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> <span style="color:#66d9ef">on</span> Person.PersonId <span style="color:#f92672">=</span> Address.PersonId;</span></span></code></pre></div><h2 id="176-第二高的薪水">176 第二高的薪水<a class="anchor" href="#176-%e7%ac%ac%e4%ba%8c%e9%ab%98%e7%9a%84%e8%96%aa%e6%b0%b4">#</a></h2>
 <ul>
 <li><a href="https://leetcode.cn/problems/second-highest-salary/description/">176. 第二高的薪水</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Employee</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Employee</span>
 </span></span><span style="display:flex;"><span>(
 </span></span><span style="display:flex;"><span>    id     <span style="color:#66d9ef">int</span>,
 </span></span><span style="display:flex;"><span>    salary <span style="color:#66d9ef">int</span>
@@ -1936,11 +1936,11 @@ https://github.com/alex-shpak/hugo-book
 | salary      | int  |
 +-------------+------+
 id 是这个表的主键。
-表的每一行包含员工的工资信息。</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> Salary <span style="color:#66d9ef">as</span> SecondHighestSalary
+表的每一行包含员工的工资信息。</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> Salary <span style="color:#66d9ef">as</span> SecondHighestSalary
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Employee
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> Salary <span style="color:#66d9ef">desc</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">limit</span> <span style="color:#ae81ff">1</span> offset <span style="color:#ae81ff">1</span></span></span></code></pre></div><p>然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 &lsquo;Wrong Answer&rsquo; 。为了克服这个问题，我们可以将其作为临时表。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> Salary
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> Salary
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">FROM</span> Employee
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> Salary <span style="color:#66d9ef">DESC</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">LIMIT</span> <span style="color:#ae81ff">1</span> OFFSET <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">AS</span> SecondHighestSalary
@@ -1948,7 +1948,7 @@ id 是这个表的主键。
 <ul>
 <li><a href="https://leetcode.cn/problems/nth-highest-salary/">177 第N高的薪水</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> function <span style="color:#a6e22e">getNthHighestSalary</span>(N <span style="color:#66d9ef">int</span>) returns <span style="color:#66d9ef">int</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> function <span style="color:#a6e22e">getNthHighestSalary</span>(N <span style="color:#66d9ef">int</span>) returns <span style="color:#66d9ef">int</span>
 </span></span><span style="display:flex;"><span>begin
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">declare</span> M <span style="color:#66d9ef">int</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">set</span> M <span style="color:#f92672">=</span> N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
@@ -1960,7 +1960,7 @@ id 是这个表的主键。
 <ul>
 <li><a href="https://leetcode.cn/problems/rank-scores/">178 分数排名</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Scores</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Scores</span>
 </span></span><span style="display:flex;"><span>(
 </span></span><span style="display:flex;"><span>    id    <span style="color:#66d9ef">int</span>,
 </span></span><span style="display:flex;"><span>    score <span style="color:#66d9ef">DECIMAL</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>)
@@ -1986,19 +1986,19 @@ id 是这个表的主键。
 +-------------+---------+
 id 是该表的主键（有不同值的列）。
 该表的每一行都包含了一场比赛的分数。Score 是一个有两位小数点的浮点值。</code></pre><h3 id="方法-1dense_rank">方法 1：DENSE_RANK<a class="anchor" href="#%e6%96%b9%e6%b3%95-1dense_rank">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> s.score,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> s.score,
 </span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">dense_rank</span>() <span style="color:#a6e22e">over</span> (
 </span></span><span style="display:flex;"><span>           <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> S.score <span style="color:#66d9ef">desc</span>
 </span></span><span style="display:flex;"><span>           ) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;rank&#39;</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Scores S;</span></span></code></pre></div><h4 id="窗口函数">窗口函数<a class="anchor" href="#%e7%aa%97%e5%8f%a3%e5%87%bd%e6%95%b0">#</a></h4>
 <h3 id="方法-2-使用-countdistinct--的相关子查询">方法 2: 使用 COUNT(DISTINCT &hellip;) 的相关子查询<a class="anchor" href="#%e6%96%b9%e6%b3%95-2-%e4%bd%bf%e7%94%a8-countdistinct--%e7%9a%84%e7%9b%b8%e5%85%b3%e5%ad%90%e6%9f%a5%e8%af%a2">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> S1.score,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> S1.score,
 </span></span><span style="display:flex;"><span>       (<span style="color:#66d9ef">select</span> <span style="color:#a6e22e">count</span>(<span style="color:#66d9ef">distinct</span> S2.score)
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">from</span> Scores S2
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">where</span> S2.score <span style="color:#f92672">&gt;=</span> S1.score) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;rank&#39;</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Scores S1
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> S1.score <span style="color:#66d9ef">desc</span>;</span></span></code></pre></div><h3 id="方法-3使用-inner-join-和-countdistinct">方法 3：使用 INNER JOIN 和 COUNT(DISTINCT&hellip;)<a class="anchor" href="#%e6%96%b9%e6%b3%95-3%e4%bd%bf%e7%94%a8-inner-join-%e5%92%8c-countdistinct">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> S.score,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> S.score,
 </span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">count</span>(<span style="color:#66d9ef">distinct</span> T.score) <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;rank&#39;</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Scores S
 </span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">join</span> Scores T <span style="color:#66d9ef">on</span> S.score <span style="color:#f92672">&lt;=</span> T.score
@@ -2045,7 +2045,7 @@ id 是该表的主键（有不同值的列）。
   </tbody>
 </table>
 <p>执行以下自连接查询：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> e1.Name <span style="color:#66d9ef">AS</span> Employee, e2.Name <span style="color:#66d9ef">AS</span> Manager
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> e1.Name <span style="color:#66d9ef">AS</span> Employee, e2.Name <span style="color:#66d9ef">AS</span> Manager
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Employees e1
 </span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Employees e2 <span style="color:#66d9ef">ON</span> e1.ManagerID <span style="color:#f92672">=</span> e2.EmployeeID;</span></span></code></pre></div><p>结果：</p>
 <table>
@@ -2082,7 +2082,7 @@ id 是该表的主键（有不同值的列）。
 <ul>
 <li><a href="https://leetcode.cn/problems/consecutive-numbers/">180 连续出现的数字</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Logs</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Logs</span>
 </span></span><span style="display:flex;"><span>(
 </span></span><span style="display:flex;"><span>    id  <span style="color:#66d9ef">int</span>,
 </span></span><span style="display:flex;"><span>    num <span style="color:#66d9ef">int</span>
@@ -2111,7 +2111,7 @@ id 是该表的主键（有不同值的列）。
 | num         | varchar |
 +-------------+---------+
 在 SQL 中，id 是该表的主键。
-id 是一个自增列。</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> l1.Num <span style="color:#66d9ef">as</span> ConsecutiveNums
+id 是一个自增列。</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> l1.Num <span style="color:#66d9ef">as</span> ConsecutiveNums
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Logs l1,
 </span></span><span style="display:flex;"><span>     Logs l2,
 </span></span><span style="display:flex;"><span>     Logs l3
@@ -2123,7 +2123,7 @@ id 是一个自增列。</code></pre><div class="highlight"><pre tabindex="0" st
 <ul>
 <li><a href="https://leetcode.cn/problems/employees-earning-more-than-their-managers/description/">181 超过经理收入的员工</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Employee2</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Employee2</span>
 </span></span><span style="display:flex;"><span>(
 </span></span><span style="display:flex;"><span>    id        <span style="color:#66d9ef">int</span>,
 </span></span><span style="display:flex;"><span>    name      <span style="color:#66d9ef">varchar</span>(<span style="color:#ae81ff">255</span>),
@@ -2148,14 +2148,14 @@ id 是一个自增列。</code></pre><div class="highlight"><pre tabindex="0" st
 | managerId   | int     |
 +-------------+---------+
 id 是该表的主键（具有唯一值的列）。
-该表的每一行都表示雇员的ID、姓名、工资和经理的ID。</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> e1.name <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;Employee&#39;</span>
+该表的每一行都表示雇员的ID、姓名、工资和经理的ID。</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> e1.name <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;Employee&#39;</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Employee e1
 </span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">join</span> Employee e2 <span style="color:#66d9ef">on</span> e1.managerId <span style="color:#f92672">=</span> e2.Id
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> e1.salary <span style="color:#f92672">&gt;</span> e2.salary;</span></span></code></pre></div><h2 id="182-查找重复的电子邮箱">182 查找重复的电子邮箱<a class="anchor" href="#182-%e6%9f%a5%e6%89%be%e9%87%8d%e5%a4%8d%e7%9a%84%e7%94%b5%e5%ad%90%e9%82%ae%e7%ae%b1">#</a></h2>
 <ul>
 <li><a href="https://leetcode.cn/problems/duplicate-emails/description/">182 查找重复的电子邮箱</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Person</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Person</span>
 </span></span><span style="display:flex;"><span>(
 </span></span><span style="display:flex;"><span>    id    <span style="color:#66d9ef">int</span>,
 </span></span><span style="display:flex;"><span>    email <span style="color:#66d9ef">varchar</span>(<span style="color:#ae81ff">255</span>)
@@ -2167,19 +2167,19 @@ id 是该表的主键（具有唯一值的列）。
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;c@d.com&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#a6e22e">Person</span> (id, email)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;a@b.com&#39;</span>);</span></span></code></pre></div><h3 id="方法一使用-group-by-和临时表">方法一：使用 GROUP BY 和临时表<a class="anchor" href="#%e6%96%b9%e6%b3%95%e4%b8%80%e4%bd%bf%e7%94%a8-group-by-%e5%92%8c%e4%b8%b4%e6%97%b6%e8%a1%a8">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> Email
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> Email
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> (<span style="color:#66d9ef">select</span> Email, <span style="color:#a6e22e">count</span>(Email) <span style="color:#66d9ef">as</span> num
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">from</span> Person
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> Email) <span style="color:#66d9ef">as</span> statistics
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> num <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>;</span></span></code></pre></div><h3 id="方法二使用-group-by-和-having-条件">方法二：使用 GROUP BY 和 HAVING 条件<a class="anchor" href="#%e6%96%b9%e6%b3%95%e4%ba%8c%e4%bd%bf%e7%94%a8-group-by-%e5%92%8c-having-%e6%9d%a1%e4%bb%b6">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> Email
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> Email
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Person
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> Email
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">having</span> <span style="color:#a6e22e">count</span>(Email) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>;</span></span></code></pre></div><h2 id="-183-从不订购的客户">✅ 183 从不订购的客户<a class="anchor" href="#-183-%e4%bb%8e%e4%b8%8d%e8%ae%a2%e8%b4%ad%e7%9a%84%e5%ae%a2%e6%88%b7">#</a></h2>
 <ul>
 <li><a href="https://leetcode.cn/problems/customers-who-never-order/description/">183 从不订购的客户</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Customers</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Customers</span>
 </span></span><span style="display:flex;"><span>(
 </span></span><span style="display:flex;"><span>    id   <span style="color:#66d9ef">int</span>,
 </span></span><span style="display:flex;"><span>    name <span style="color:#66d9ef">varchar</span>(<span style="color:#ae81ff">255</span>)
@@ -2202,7 +2202,7 @@ id 是该表的主键（具有唯一值的列）。
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#a6e22e">Orders</span> (id, customerId)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#a6e22e">Orders</span> (id, customerId)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>);</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e">-- 实现方法1
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>);</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e">-- 实现方法1
 </span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">select</span> c.name <span style="color:#66d9ef">as</span> Customers
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Customers c
 </span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> Orders o <span style="color:#66d9ef">on</span> c.id <span style="color:#f92672">=</span> o.customerId
@@ -2217,7 +2217,7 @@ id 是该表的主键（具有唯一值的列）。
 <ul>
 <li><a href="https://leetcode.cn/problems/department-highest-salary/description/">184 部门工资最高的员工</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Employee3</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Employee3</span>
 </span></span><span style="display:flex;"><span>(
 </span></span><span style="display:flex;"><span>    id           <span style="color:#66d9ef">int</span>,
 </span></span><span style="display:flex;"><span>    name         <span style="color:#66d9ef">varchar</span>(<span style="color:#ae81ff">255</span>),
@@ -2246,7 +2246,7 @@ id 是该表的主键（具有唯一值的列）。
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#a6e22e">Department</span> (id, name)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;IT&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> <span style="color:#a6e22e">Department</span> (id, name)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;Sales&#39;</span>);</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> Department.name <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;Department&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;Sales&#39;</span>);</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> Department.name <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;Department&#39;</span>,
 </span></span><span style="display:flex;"><span>       Employee.name   <span style="color:#66d9ef">as</span> <span style="color:#e6db74">&#39;Employee&#39;</span>,
 </span></span><span style="display:flex;"><span>       Salary
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Employee
@@ -2260,7 +2260,7 @@ id 是该表的主键（具有唯一值的列）。
 <ul>
 <li><a href="https://leetcode.cn/problems/department-top-three-salaries/description/">185 部门工资前三高的所有员工</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">table</span> Employee;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">table</span> Employee;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> <span style="color:#a6e22e">Employee</span>
 </span></span><span style="display:flex;"><span>(
 </span></span><span style="display:flex;"><span>    id           <span style="color:#66d9ef">int</span>,
@@ -2299,7 +2299,7 @@ id 是该表的主键（具有唯一值的列）。
 <ul>
 <li><a href="https://leetcode.cn/problems/delete-duplicate-emails/">196 删除重复的电子邮箱</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> p1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">delete</span> p1
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Person p1,
 </span></span><span style="display:flex;"><span>     Person p2
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> p1.Email <span style="color:#f92672">=</span> p2.Email
@@ -2307,7 +2307,7 @@ id 是该表的主键（具有唯一值的列）。
 <ul>
 <li><a href="https://leetcode.cn/problems/rising-temperature/description/">197 上升的温度</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> a.id
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> a.id
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Weather a,
 </span></span><span style="display:flex;"><span>     Weather b
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> <span style="color:#a6e22e">datediff</span>(a.recordDate, b.recordDate) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
@@ -2317,12 +2317,12 @@ id 是该表的主键（具有唯一值的列）。
 <li><a href="https://leetcode.cn/problems/game-play-analysis-i/">511 游戏玩法分析 I</a></li>
 </ul>
 <h3 id="方法-1分组并提取最小值">方法 1：分组并提取最小值<a class="anchor" href="#%e6%96%b9%e6%b3%95-1%e5%88%86%e7%bb%84%e5%b9%b6%e6%8f%90%e5%8f%96%e6%9c%80%e5%b0%8f%e5%80%bc">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> player_id,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> player_id,
 </span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">min</span>(event_date) <span style="color:#66d9ef">as</span> first_login
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Activity
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> player_id;</span></span></code></pre></div><h3 id="方法-2窗口函数">方法 2：窗口函数<a class="anchor" href="#%e6%96%b9%e6%b3%95-2%e7%aa%97%e5%8f%a3%e5%87%bd%e6%95%b0">#</a></h3>
 <h4 id="rank">rank()<a class="anchor" href="#rank">#</a></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> X.player_id,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> X.player_id,
 </span></span><span style="display:flex;"><span>       X.event_date <span style="color:#66d9ef">as</span> first_login
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> (<span style="color:#66d9ef">select</span> A.player_id,
 </span></span><span style="display:flex;"><span>             A.event_date <span style="color:#a6e22e">rank</span>() <span style="color:#a6e22e">over</span> (
@@ -2331,7 +2331,7 @@ id 是该表的主键（具有唯一值的列）。
 </span></span><span style="display:flex;"><span>        ) <span style="color:#66d9ef">as</span> rnk
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">from</span> Activity A) X
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> X.rnk <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;</span></span></code></pre></div><h4 id="first_value">first_value()<a class="anchor" href="#first_value">#</a></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#f92672">-</span><span style="color:#75715e">-- 必须使用 distinct
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#f92672">-</span><span style="color:#75715e">-- 必须使用 distinct
 </span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> A.player_id,
 </span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">FIRST_VALUE</span>(A.event_date) <span style="color:#a6e22e">OVER</span> (
 </span></span><span style="display:flex;"><span>                    PARTITION <span style="color:#66d9ef">BY</span>
@@ -2345,12 +2345,12 @@ id 是该表的主键（具有唯一值的列）。
 <ul>
 <li><a href="https://leetcode.cn/problems/game-play-analysis-iv/description/">550. 游戏玩法分析 IV</a></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> player_id,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> player_id,
 </span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">date_add</span>(<span style="color:#a6e22e">min</span>(event_date), <span style="color:#66d9ef">interval</span> <span style="color:#ae81ff">1</span> day) <span style="color:#66d9ef">as</span> second_date
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">from</span> Activity
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> player_id</span></span></code></pre></div><h3 id="在sql中from后面用逗号写了多张表这样属于什么连接">在sql中，from后面用逗号写了多张表，这样属于什么连接<a class="anchor" href="#%e5%9c%a8sql%e4%b8%adfrom%e5%90%8e%e9%9d%a2%e7%94%a8%e9%80%97%e5%8f%b7%e5%86%99%e4%ba%86%e5%a4%9a%e5%bc%a0%e8%a1%a8%e8%bf%99%e6%a0%b7%e5%b1%9e%e4%ba%8e%e4%bb%80%e4%b9%88%e8%bf%9e%e6%8e%a5">#</a></h3>
 <p>在 SQL 中，如果在 <code>FROM</code> 子句中使用逗号分隔多张表，例如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> table1, table2</span></span></code></pre></div><p>这属于 <strong>隐式连接</strong>（Implicit Join），也称为 <strong>笛卡尔连接</strong>（Cartesian Join）或 <strong>交叉连接</strong>（Cross Join）。它的行为是将两张表的所有行进行组合，生成一个笛卡尔积。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> table1, table2</span></span></code></pre></div><p>这属于 <strong>隐式连接</strong>（Implicit Join），也称为 <strong>笛卡尔连接</strong>（Cartesian Join）或 <strong>交叉连接</strong>（Cross Join）。它的行为是将两张表的所有行进行组合，生成一个笛卡尔积。</p>
 <hr>
 <p>隐式连接的特点：</p>
 <ol>
@@ -2366,7 +2366,7 @@ id 是该表的主键（具有唯一值的列）。
 <ul>
 <li>如果需要特定的连接逻辑（如内连接），必须在 <code>WHERE</code> 子句中明确写出连接条件。</li>
 <li>例如：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> table1, table2
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> table1, table2
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> table1.id <span style="color:#f92672">=</span> table2.table1_id;</span></span></code></pre></div></li>
 </ul>
 </li>
@@ -2429,7 +2429,7 @@ id 是该表的主键（具有唯一值的列）。
 <ol>
 <li>隐式连接（无 <code>WHERE</code> 条件）：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> table1,
 </span></span><span style="display:flex;"><span>     table2;</span></span></code></pre></div><p><strong>结果</strong>（笛卡尔积）：</p>
 <table>
@@ -2490,7 +2490,7 @@ id 是该表的主键（具有唯一值的列）。
 <ol start="2">
 <li>隐式连接（带 <code>WHERE</code> 条件）：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> table1,
 </span></span><span style="display:flex;"><span>     table2
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> table1.id <span style="color:#f92672">=</span> table2.table1_id;</span></span></code></pre></div><p><strong>结果</strong>（内连接效果）：</p>
@@ -2538,7 +2538,7 @@ id 是该表的主键（具有唯一值的列）。
 <li>连接条件写在 <code>ON</code> 子句中。</li>
 <li>语法清晰，易于维护。</li>
 <li>示例：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> table1
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> table2 <span style="color:#66d9ef">ON</span> table1.id <span style="color:#f92672">=</span> table2.table1_id;</span></span></code></pre></div></li>
 </ul>

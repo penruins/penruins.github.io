@@ -1809,7 +1809,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>PostgreSQL的分区表机制本身<strong>不会自动为分区键创建索引</strong>。分区键仅用于数据路由（决定数据存储在哪个分区），但不会自动优化基于该列的查询性能<a href="@ref">1</a>。</li>
 <li>如果需要对分区键进行高效查询（尤其是范围查询或等值查询），<strong>必须手动创建索引</strong>。例如：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 在分区表上显式创建分区键索引
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 在分区表上显式创建分区键索引
 </span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> idx_logdate <span style="color:#66d9ef">ON</span> log_history (logdate);  <span style="color:#75715e">-- 自动在所有子分区上创建相同索引</span></span></span></code></pre></div>从PostgreSQL 11开始，在父表上创建的索引会自动传播到所有子分区<a href="@ref">16</a>。</li>
 </ul>
 <hr>
@@ -1817,7 +1817,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><strong>分区剪枝（Partition Pruning）依赖分区键</strong>：虽然查询时PostgreSQL会根据分区键过滤不需要的分区，但如果查询条件还包含其他非分区键列，仍需额外索引来加速<a href="@ref">1</a><a href="@ref">26</a>。</li>
 <li><strong>唯一约束的限制</strong>：若要在分区表上创建主键或唯一约束，<strong>必须包含分区键列</strong>，否则无法保证全局唯一性<a href="@ref">16</a>。例如：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 正确做法：包含分区键
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 正确做法：包含分区键
 </span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> sales <span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (order_id, sale_date);  <span style="color:#75715e">-- sale_date是分区键</span></span></span></code></pre></div></li>
 </ul>
 <hr>

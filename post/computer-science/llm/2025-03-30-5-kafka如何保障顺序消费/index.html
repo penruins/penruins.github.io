@@ -1845,7 +1845,7 @@ Kafka 的每个分区（Partition）是一个有序的、不可变的日志序�
 <p><strong>生产者配置</strong></p>
 <ul>
 <li><strong>相同 Key 路由到同一分区</strong>：生产者通过消息 Key 的哈希值确定分区，相同 Key 的消息始终进入同一分区，确保业务相关的消息顺序<a href="@ref">1</a><a href="@ref">25</a><a href="@ref">39</a>。
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 示例：发送相同Key的消息到同一分区</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 示例：发送相同Key的消息到同一分区</span>
 </span></span><span style="display:flex;"><span>ProducerRecord<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> record <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ProducerRecord<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#e6db74">&#34;topic&#34;</span>, <span style="color:#e6db74">&#34;order-123&#34;</span>, <span style="color:#e6db74">&#34;message&#34;</span>);
 </span></span><span style="display:flex;"><span>producer.<span style="color:#a6e22e">send</span>(record);</span></span></code></pre></div></li>
 <li><strong>限制并发请求</strong>：设置 <code>max.in.flight.requests.per.connection=1</code>，防止生产者因重试导致消息乱序<a href="@ref">31</a><a href="@ref">25</a>。</li>
@@ -1881,7 +1881,7 @@ Kafka 的每个分区（Partition）是一个有序的、不可变的日志序�
 <ul>
 <li>消费者拉取多分区消息后，通过优先级队列（如按时间戳或业务ID排序）实现全局顺序。</li>
 <li><strong>示例</strong>：
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>PriorityQueue<span style="color:#f92672">&lt;</span>ConsumerRecord<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PriorityQueue<span style="color:#f92672">&lt;&gt;</span>(Comparator.<span style="color:#a6e22e">comparing</span>(ConsumerRecord::timestamp));</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>PriorityQueue<span style="color:#f92672">&lt;</span>ConsumerRecord<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PriorityQueue<span style="color:#f92672">&lt;&gt;</span>(Comparator.<span style="color:#a6e22e">comparing</span>(ConsumerRecord::timestamp));</span></span></code></pre></div></li>
 </ul>
 </li>
 </ol>
