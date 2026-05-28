@@ -13,19 +13,19 @@ https://github.com/alex-shpak/hugo-book
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/database/sql/">
-  <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="SQL">
-  <meta property="og:description" content="sql# 2502 设计内存分配器# ✅ 175 组合两个表# 175. 组合两个表 需要展示的字段 姓 LastName 名 FirstName 城市 City 州 State 如果 personId 的地址不再 Address 表中，则报告为 null 使用左连接 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId;176 第二高的薪水# 176. 第二高的薪水 Create table If Not Exists Employee ( id int, salary int ); Truncate table Employee; insert into Employee (id, salary) values (&#39;1&#39;, &#39;100&#39;); insert into Employee (id, salary) values (&#39;2&#39;, &#39;200&#39;); insert into Employee (id, salary) values (&#39;3&#39;, &#39;300&#39;); insert into Employee (id, salary) values (&#39;4&#39;, &#39;400&#39;); insert into Employee (id, salary) values (&#39;5&#39;, &#39;500&#39;); insert into Employee (id, salary) values (&#39;6&#39;, &#39;600&#39;); insert into Employee (id, salary) values (&#39;7&#39;, &#39;700&#39;);Employee 表： &#43;-------------&#43;------&#43; | Column Name | Type | &#43;-------------&#43;------&#43; | id | int | | salary | int | &#43;-------------&#43;------&#43; id 是这个表的主键。 表的每一行包含员工的工资信息。select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:modified_time" content="2026-05-26T17:29:58+08:00">
+	<meta property="og:site_name" content="Penruins">
+	<meta property="og:title" content="SQL">
+	<meta property="og:description" content="sql# 2502 设计内存分配器# ✅ 175 组合两个表# 175. 组合两个表 需要展示的字段 姓 LastName 名 FirstName 城市 City 州 State 如果 personId 的地址不再 Address 表中，则报告为 null 使用左连接 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId;176 第二高的薪水# 176. 第二高的薪水 Create table If Not Exists Employee ( id int, salary int ); Truncate table Employee; insert into Employee (id, salary) values (&#39;1&#39;, &#39;100&#39;); insert into Employee (id, salary) values (&#39;2&#39;, &#39;200&#39;); insert into Employee (id, salary) values (&#39;3&#39;, &#39;300&#39;); insert into Employee (id, salary) values (&#39;4&#39;, &#39;400&#39;); insert into Employee (id, salary) values (&#39;5&#39;, &#39;500&#39;); insert into Employee (id, salary) values (&#39;6&#39;, &#39;600&#39;); insert into Employee (id, salary) values (&#39;7&#39;, &#39;700&#39;);Employee 表： &#43;-------------&#43;------&#43; | Column Name | Type | &#43;-------------&#43;------&#43; | id | int | | salary | int | &#43;-------------&#43;------&#43; id 是这个表的主键。 表的每一行包含员工的工资信息。select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="post">
+		<meta property="article:modified_time" content="2026-05-28T11:04:55+08:00">
 
 
-  <meta itemprop="name" content="SQL">
-  <meta itemprop="description" content="sql# 2502 设计内存分配器# ✅ 175 组合两个表# 175. 组合两个表 需要展示的字段 姓 LastName 名 FirstName 城市 City 州 State 如果 personId 的地址不再 Address 表中，则报告为 null 使用左连接 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId;176 第二高的薪水# 176. 第二高的薪水 Create table If Not Exists Employee ( id int, salary int ); Truncate table Employee; insert into Employee (id, salary) values (&#39;1&#39;, &#39;100&#39;); insert into Employee (id, salary) values (&#39;2&#39;, &#39;200&#39;); insert into Employee (id, salary) values (&#39;3&#39;, &#39;300&#39;); insert into Employee (id, salary) values (&#39;4&#39;, &#39;400&#39;); insert into Employee (id, salary) values (&#39;5&#39;, &#39;500&#39;); insert into Employee (id, salary) values (&#39;6&#39;, &#39;600&#39;); insert into Employee (id, salary) values (&#39;7&#39;, &#39;700&#39;);Employee 表： &#43;-------------&#43;------&#43; | Column Name | Type | &#43;-------------&#43;------&#43; | id | int | | salary | int | &#43;-------------&#43;------&#43; id 是这个表的主键。 表的每一行包含员工的工资信息。select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。">
-  <meta itemprop="dateModified" content="2026-05-26T17:29:58+08:00">
-  <meta itemprop="wordCount" content="1585">
+	<meta itemprop="name" content="SQL">
+	<meta itemprop="description" content="sql# 2502 设计内存分配器# ✅ 175 组合两个表# 175. 组合两个表 需要展示的字段 姓 LastName 名 FirstName 城市 City 州 State 如果 personId 的地址不再 Address 表中，则报告为 null 使用左连接 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId;176 第二高的薪水# 176. 第二高的薪水 Create table If Not Exists Employee ( id int, salary int ); Truncate table Employee; insert into Employee (id, salary) values (&#39;1&#39;, &#39;100&#39;); insert into Employee (id, salary) values (&#39;2&#39;, &#39;200&#39;); insert into Employee (id, salary) values (&#39;3&#39;, &#39;300&#39;); insert into Employee (id, salary) values (&#39;4&#39;, &#39;400&#39;); insert into Employee (id, salary) values (&#39;5&#39;, &#39;500&#39;); insert into Employee (id, salary) values (&#39;6&#39;, &#39;600&#39;); insert into Employee (id, salary) values (&#39;7&#39;, &#39;700&#39;);Employee 表： &#43;-------------&#43;------&#43; | Column Name | Type | &#43;-------------&#43;------&#43; | id | int | | salary | int | &#43;-------------&#43;------&#43; id 是这个表的主键。 表的每一行包含员工的工资信息。select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。">
+	<meta itemprop="dateModified" content="2026-05-28T11:04:55+08:00">
+	<meta itemprop="wordCount" content="1585">
 
 <title>SQL | Penruins</title>
 <link rel="icon" href="/favicon.png" >
@@ -2014,61 +2014,61 @@ id 是该表的主键（有不同值的列）。
 <p>示例：</p>
 <p>假设有一个表 <code>Employees</code>：</p>
 <table>
-  <thead>
-      <tr>
-          <th>EmployeeID</th>
-          <th>Name</th>
-          <th>ManagerID</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>Alice</td>
-          <td>3</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>Bob</td>
-          <td>3</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>Charlie</td>
-          <td>NULL</td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td>David</td>
-          <td>2</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>EmployeeID</th>
+					<th>Name</th>
+					<th>ManagerID</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>Alice</td>
+					<td>3</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>Bob</td>
+					<td>3</td>
+			</tr>
+			<tr>
+					<td>3</td>
+					<td>Charlie</td>
+					<td>NULL</td>
+			</tr>
+			<tr>
+					<td>4</td>
+					<td>David</td>
+					<td>2</td>
+			</tr>
+	</tbody>
 </table>
 <p>执行以下自连接查询：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> e1.Name <span style="color:#66d9ef">AS</span> Employee, e2.Name <span style="color:#66d9ef">AS</span> Manager
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> Employees e1
 </span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> Employees e2 <span style="color:#66d9ef">ON</span> e1.ManagerID <span style="color:#f92672">=</span> e2.EmployeeID;</span></span></code></pre></div><p>结果：</p>
 <table>
-  <thead>
-      <tr>
-          <th>Employee</th>
-          <th>Manager</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Alice</td>
-          <td>Charlie</td>
-      </tr>
-      <tr>
-          <td>Bob</td>
-          <td>Charlie</td>
-      </tr>
-      <tr>
-          <td>David</td>
-          <td>Bob</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Employee</th>
+					<th>Manager</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Alice</td>
+					<td>Charlie</td>
+			</tr>
+			<tr>
+					<td>Bob</td>
+					<td>Charlie</td>
+			</tr>
+			<tr>
+					<td>David</td>
+					<td>Bob</td>
+			</tr>
+	</tbody>
 </table>
 <p>解释：</p>
 <ul>
@@ -2331,7 +2331,7 @@ id 是该表的主键（具有唯一值的列）。
 </span></span><span style="display:flex;"><span>        ) <span style="color:#66d9ef">as</span> rnk
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">from</span> Activity A) X
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">where</span> X.rnk <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;</span></span></code></pre></div><h4 id="first_value">first_value()<a class="anchor" href="#first_value">#</a></h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#f92672">-</span><span style="color:#75715e">-- 必须使用 distinct
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#75715e">--- 必须使用 distinct
 </span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> A.player_id,
 </span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">FIRST_VALUE</span>(A.event_date) <span style="color:#a6e22e">OVER</span> (
 </span></span><span style="display:flex;"><span>                    PARTITION <span style="color:#66d9ef">BY</span>
@@ -2382,49 +2382,49 @@ id 是该表的主键（具有唯一值的列）。
 <p>假设有两张表：</p>
 <p><strong><code>table1</code></strong>:</p>
 <table>
-  <thead>
-      <tr>
-          <th>id</th>
-          <th>name</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>Alice</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>Bob</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>id</th>
+					<th>name</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>Alice</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>Bob</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong><code>table2</code></strong>:</p>
 <table>
-  <thead>
-      <tr>
-          <th>id</th>
-          <th>table1_id</th>
-          <th>value</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>1</td>
-          <td>100</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>200</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>1</td>
-          <td>300</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>id</th>
+					<th>table1_id</th>
+					<th>value</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>100</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>2</td>
+					<td>200</td>
+			</tr>
+			<tr>
+					<td>3</td>
+					<td>1</td>
+					<td>300</td>
+			</tr>
+	</tbody>
 </table>
 <ol>
 <li>隐式连接（无 <code>WHERE</code> 条件）：</li>
@@ -2433,59 +2433,59 @@ id 是该表的主键（具有唯一值的列）。
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> table1,
 </span></span><span style="display:flex;"><span>     table2;</span></span></code></pre></div><p><strong>结果</strong>（笛卡尔积）：</p>
 <table>
-  <thead>
-      <tr>
-          <th>id</th>
-          <th>name</th>
-          <th>id</th>
-          <th>table1_id</th>
-          <th>value</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>Alice</td>
-          <td>1</td>
-          <td>1</td>
-          <td>100</td>
-      </tr>
-      <tr>
-          <td>1</td>
-          <td>Alice</td>
-          <td>2</td>
-          <td>2</td>
-          <td>200</td>
-      </tr>
-      <tr>
-          <td>1</td>
-          <td>Alice</td>
-          <td>3</td>
-          <td>1</td>
-          <td>300</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>Bob</td>
-          <td>1</td>
-          <td>1</td>
-          <td>100</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>Bob</td>
-          <td>2</td>
-          <td>2</td>
-          <td>200</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>Bob</td>
-          <td>3</td>
-          <td>1</td>
-          <td>300</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>id</th>
+					<th>name</th>
+					<th>id</th>
+					<th>table1_id</th>
+					<th>value</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>Alice</td>
+					<td>1</td>
+					<td>1</td>
+					<td>100</td>
+			</tr>
+			<tr>
+					<td>1</td>
+					<td>Alice</td>
+					<td>2</td>
+					<td>2</td>
+					<td>200</td>
+			</tr>
+			<tr>
+					<td>1</td>
+					<td>Alice</td>
+					<td>3</td>
+					<td>1</td>
+					<td>300</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>Bob</td>
+					<td>1</td>
+					<td>1</td>
+					<td>100</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>Bob</td>
+					<td>2</td>
+					<td>2</td>
+					<td>200</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>Bob</td>
+					<td>3</td>
+					<td>1</td>
+					<td>300</td>
+			</tr>
+	</tbody>
 </table>
 <ol start="2">
 <li>隐式连接（带 <code>WHERE</code> 条件）：</li>
@@ -2495,38 +2495,38 @@ id 是该表的主键（具有唯一值的列）。
 </span></span><span style="display:flex;"><span>     table2
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> table1.id <span style="color:#f92672">=</span> table2.table1_id;</span></span></code></pre></div><p><strong>结果</strong>（内连接效果）：</p>
 <table>
-  <thead>
-      <tr>
-          <th>id</th>
-          <th>name</th>
-          <th>id</th>
-          <th>table1_id</th>
-          <th>value</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>1</td>
-          <td>Alice</td>
-          <td>1</td>
-          <td>1</td>
-          <td>100</td>
-      </tr>
-      <tr>
-          <td>1</td>
-          <td>Alice</td>
-          <td>3</td>
-          <td>1</td>
-          <td>300</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>Bob</td>
-          <td>2</td>
-          <td>2</td>
-          <td>200</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>id</th>
+					<th>name</th>
+					<th>id</th>
+					<th>table1_id</th>
+					<th>value</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>Alice</td>
+					<td>1</td>
+					<td>1</td>
+					<td>100</td>
+			</tr>
+			<tr>
+					<td>1</td>
+					<td>Alice</td>
+					<td>3</td>
+					<td>1</td>
+					<td>300</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>Bob</td>
+					<td>2</td>
+					<td>2</td>
+					<td>200</td>
+			</tr>
+	</tbody>
 </table>
 <hr>
 <p>显式连接 vs 隐式连接：</p>

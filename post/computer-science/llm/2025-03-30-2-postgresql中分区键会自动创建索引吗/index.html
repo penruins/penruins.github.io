@@ -14,19 +14,19 @@ https://github.com/alex-shpak/hugo-book
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/llm/2025-03-30-2-postgresql%E4%B8%AD%E5%88%86%E5%8C%BA%E9%94%AE%E4%BC%9A%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%90%97/">
-  <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="postgresql中分区键会自动创建索引吗">
-  <meta property="og:description" content="postgresql中分区键会自动创建索引吗# 在PostgreSQL中，分区键不会自动创建索引。以下是详细说明和相关建议：
+	<meta property="og:site_name" content="Penruins">
+	<meta property="og:title" content="postgresql中分区键会自动创建索引吗">
+	<meta property="og:description" content="postgresql中分区键会自动创建索引吗# 在PostgreSQL中，分区键不会自动创建索引。以下是详细说明和相关建议：
 1. 分区键与索引的关系# PostgreSQL的分区表机制本身不会自动为分区键创建索引。分区键仅用于数据路由（决定数据存储在哪个分区），但不会自动优化基于该列的查询性能1。 如果需要对分区键进行高效查询（尤其是范围查询或等值查询），必须手动创建索引。例如： -- 在分区表上显式创建分区键索引 CREATE INDEX idx_logdate ON log_history (logdate); -- 自动在所有子分区上创建相同索引从PostgreSQL 11开始，在父表上创建的索引会自动传播到所有子分区16。 2. 为什么需要手动创建索引？# 分区剪枝（Partition Pruning）依赖分区键：虽然查询时PostgreSQL会根据分区键过滤不需要的分区，但如果查询条件还包含其他非分区键列，仍需额外索引来加速126。 唯一约束的限制：若要在分区表上创建主键或唯一约束，必须包含分区键列，否则无法保证全局唯一性16。例如： -- 正确做法：包含分区键 ALTER TABLE sales ADD PRIMARY KEY (order_id, sale_date); -- sale_date是分区键 3. 自动索引传播的特性# 从PostgreSQL 11开始，在父表上创建的索引（包括唯一索引）会自动在所有子分区上创建相同结构的索引16。 但需注意： 并发创建索引（CONCURRENTLY）：无法直接在父表上并发创建索引，需逐个分区操作29。 索引类型一致性：所有分区的索引必须与父表索引类型相同（如B-tree、Hash等）。 4. 最佳实践建议# 显式为高频查询的分区键创建索引，即使它已用于分区剪枝126。 结合查询模式设计索引：若查询常使用分区键 &#43; 其他列，可创建复合索引。 定期监控索引使用情况：删除未使用的索引以减少维护开销。 总结# PostgreSQL的分区键本身不会自动创建索引，需手动添加。合理设计分区键和索引（尤其是包含分区键的复合索引）能显著提升查询性能116。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="post">
 
 
-  <meta itemprop="name" content="postgresql中分区键会自动创建索引吗">
-  <meta itemprop="description" content="postgresql中分区键会自动创建索引吗# 在PostgreSQL中，分区键不会自动创建索引。以下是详细说明和相关建议：
+	<meta itemprop="name" content="postgresql中分区键会自动创建索引吗">
+	<meta itemprop="description" content="postgresql中分区键会自动创建索引吗# 在PostgreSQL中，分区键不会自动创建索引。以下是详细说明和相关建议：
 1. 分区键与索引的关系# PostgreSQL的分区表机制本身不会自动为分区键创建索引。分区键仅用于数据路由（决定数据存储在哪个分区），但不会自动优化基于该列的查询性能1。 如果需要对分区键进行高效查询（尤其是范围查询或等值查询），必须手动创建索引。例如： -- 在分区表上显式创建分区键索引 CREATE INDEX idx_logdate ON log_history (logdate); -- 自动在所有子分区上创建相同索引从PostgreSQL 11开始，在父表上创建的索引会自动传播到所有子分区16。 2. 为什么需要手动创建索引？# 分区剪枝（Partition Pruning）依赖分区键：虽然查询时PostgreSQL会根据分区键过滤不需要的分区，但如果查询条件还包含其他非分区键列，仍需额外索引来加速126。 唯一约束的限制：若要在分区表上创建主键或唯一约束，必须包含分区键列，否则无法保证全局唯一性16。例如： -- 正确做法：包含分区键 ALTER TABLE sales ADD PRIMARY KEY (order_id, sale_date); -- sale_date是分区键 3. 自动索引传播的特性# 从PostgreSQL 11开始，在父表上创建的索引（包括唯一索引）会自动在所有子分区上创建相同结构的索引16。 但需注意： 并发创建索引（CONCURRENTLY）：无法直接在父表上并发创建索引，需逐个分区操作29。 索引类型一致性：所有分区的索引必须与父表索引类型相同（如B-tree、Hash等）。 4. 最佳实践建议# 显式为高频查询的分区键创建索引，即使它已用于分区剪枝126。 结合查询模式设计索引：若查询常使用分区键 &#43; 其他列，可创建复合索引。 定期监控索引使用情况：删除未使用的索引以减少维护开销。 总结# PostgreSQL的分区键本身不会自动创建索引，需手动添加。合理设计分区键和索引（尤其是包含分区键的复合索引）能显著提升查询性能116。">
-  <meta itemprop="wordCount" content="50">
+	<meta itemprop="wordCount" content="50">
 
 <title>postgresql中分区键会自动创建索引吗 | Penruins</title>
 <link rel="icon" href="/favicon.png" >

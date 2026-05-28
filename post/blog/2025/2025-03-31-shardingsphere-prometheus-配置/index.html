@@ -20,9 +20,9 @@ Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJa
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/blog/2025/2025-03-31-shardingsphere-prometheus-%E9%85%8D%E7%BD%AE/">
-  <meta property="og:site_name" content="Penruins">
-  <meta property="og:title" content="Penruins">
-  <meta property="og:description" content="2025-03-31-Shardingsphere-prometheus-配置# 把 shardingsphere proxy 搭建好之后，想要把监测数据放到 grafana里面进行监测，但是按照找到的资料来配置好像都不太行，自己研究了一下启动脚本，现在可以正常获取到指标数据了，所以花点时间把这个问题记录一下
+	<meta property="og:site_name" content="Penruins">
+	<meta property="og:title" content="Penruins">
+	<meta property="og:description" content="2025-03-31-Shardingsphere-prometheus-配置# 把 shardingsphere proxy 搭建好之后，想要把监测数据放到 grafana里面进行监测，但是按照找到的资料来配置好像都不太行，自己研究了一下启动脚本，现在可以正常获取到指标数据了，所以花点时间把这个问题记录一下
 下载了官网提供的 shardingsphere-proxy 的包之后，里面其实已经包含了 agent 相关的 jar 包以及插件相关的 jar 包，其实不需要再下载一个 shardingsphere-agent
 我们需要配置一下agent.yaml里面的内容，文件的位置在 apache-shardingsphere-5.5.2-shardingsphere-proxy-bin/agent/conf/agent.yaml，现在只需要配置 prometheus，所以如下所示
 plugins: metrics: Prometheus: host: &#34;localhost&#34; port: 9000 props: jvm-information-collector-enabled: &#34;true&#34;在 prometheus 的配置文件中需要加上 9000 的指标接口（如果是使用 brew 安装的话，配置文件在这个位置 /opt/homebrew/etc/prometheus.yml）
@@ -30,13 +30,13 @@ scrape_configs: - job_name: &#39;shardingsphere&#39; static_configs: - targets: 
 需要注意的是运行的目录需要在 shardingsphere-proxy 的根目录下，因此命令如下所示
 sh bin/start.sh 5555 --agent查看日志 vim logs/stdout.log 打印的应该如下所示
 Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-metrics-prometheus-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-tracing-opentelemetry-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-metrics-core-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-plugin-core-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-logging-file-5.5.2.jar [INFO ] 2025-03-31 18:07:38.772 [main] o.a.s.d.p.c.l.PipelineContextManagerLifecycleListener - mode type is not Cluster, mode type=&#39;Standalone&#39;, ignore [INFO ] 2025-03-31 18:07:38.786 [main] o.a.s.p.v.ShardingSphereProxyVersion - Database type is `MySQL`, version is `8.0.41`, database name is `sharding_db` [INFO ] 2025-03-31 18:07:38.786 [main] o.a.s.p.frontend.ssl.ProxySSLContext - Proxy frontend SSL/TLS is not enabled. [INFO ] 2025-03-31 18:07:38.836 [main] o.a.s.p.frontend.ShardingSphereProxy - ShardingSphere-Proxy Standalone mode started successfully这个时候需要查询一下数据库，agent才会把服务启起来">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="post">
 
 
-  <meta itemprop="name" content="Penruins">
-  <meta itemprop="description" content="2025-03-31-Shardingsphere-prometheus-配置# 把 shardingsphere proxy 搭建好之后，想要把监测数据放到 grafana里面进行监测，但是按照找到的资料来配置好像都不太行，自己研究了一下启动脚本，现在可以正常获取到指标数据了，所以花点时间把这个问题记录一下
+	<meta itemprop="name" content="Penruins">
+	<meta itemprop="description" content="2025-03-31-Shardingsphere-prometheus-配置# 把 shardingsphere proxy 搭建好之后，想要把监测数据放到 grafana里面进行监测，但是按照找到的资料来配置好像都不太行，自己研究了一下启动脚本，现在可以正常获取到指标数据了，所以花点时间把这个问题记录一下
 下载了官网提供的 shardingsphere-proxy 的包之后，里面其实已经包含了 agent 相关的 jar 包以及插件相关的 jar 包，其实不需要再下载一个 shardingsphere-agent
 我们需要配置一下agent.yaml里面的内容，文件的位置在 apache-shardingsphere-5.5.2-shardingsphere-proxy-bin/agent/conf/agent.yaml，现在只需要配置 prometheus，所以如下所示
 plugins: metrics: Prometheus: host: &#34;localhost&#34; port: 9000 props: jvm-information-collector-enabled: &#34;true&#34;在 prometheus 的配置文件中需要加上 9000 的指标接口（如果是使用 brew 安装的话，配置文件在这个位置 /opt/homebrew/etc/prometheus.yml）
@@ -44,7 +44,7 @@ scrape_configs: - job_name: &#39;shardingsphere&#39; static_configs: - targets: 
 需要注意的是运行的目录需要在 shardingsphere-proxy 的根目录下，因此命令如下所示
 sh bin/start.sh 5555 --agent查看日志 vim logs/stdout.log 打印的应该如下所示
 Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-metrics-prometheus-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-tracing-opentelemetry-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-metrics-core-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-plugin-core-5.5.2.jar Mar 31, 2025 6:07:37 PM org.apache.shardingsphere.agent.core.plugin.jar.PluginJarLoader load INFO: Loaded jar: shardingsphere-agent-logging-file-5.5.2.jar [INFO ] 2025-03-31 18:07:38.772 [main] o.a.s.d.p.c.l.PipelineContextManagerLifecycleListener - mode type is not Cluster, mode type=&#39;Standalone&#39;, ignore [INFO ] 2025-03-31 18:07:38.786 [main] o.a.s.p.v.ShardingSphereProxyVersion - Database type is `MySQL`, version is `8.0.41`, database name is `sharding_db` [INFO ] 2025-03-31 18:07:38.786 [main] o.a.s.p.frontend.ssl.ProxySSLContext - Proxy frontend SSL/TLS is not enabled. [INFO ] 2025-03-31 18:07:38.836 [main] o.a.s.p.frontend.ShardingSphereProxy - ShardingSphere-Proxy Standalone mode started successfully这个时候需要查询一下数据库，agent才会把服务启起来">
-  <meta itemprop="wordCount" content="207">
+	<meta itemprop="wordCount" content="207">
 
 <title>2025 03 31 Shardingsphere Prometheus 配置 | Penruins</title>
 <link rel="icon" href="/favicon.png" >
