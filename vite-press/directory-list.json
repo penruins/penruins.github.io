@@ -51,13 +51,42 @@
           }
         ]
       }
-    ]
+    ],
+    "count": 6
+  },
+  {
+    "type": "directory",
+    "name": "category",
+    "displayName": "Category",
+    "emoji": null,
+    "link": null,
+    "children": [
+      {
+        "type": "file",
+        "name": "article",
+        "displayName": "Article",
+        "link": "/category/article"
+      },
+      {
+        "type": "file",
+        "name": "computer-science",
+        "displayName": "Computer Science",
+        "link": "/category/computer-science"
+      },
+      {
+        "type": "file",
+        "name": "life",
+        "displayName": "Life",
+        "link": "/category/life"
+      }
+    ],
+    "count": 3
   },
   {
     "type": "directory",
     "name": "computer-science",
     "displayName": "Computer Science",
-    "emoji": "🤖",
+    "emoji": null,
     "link": "/computer-science/computer-science",
     "children": [
       {
@@ -282,13 +311,14 @@
           }
         ]
       }
-    ]
+    ],
+    "count": 31
   },
   {
     "type": "directory",
     "name": "life",
     "displayName": "Life",
-    "emoji": "🏻",
+    "emoji": null,
     "link": null,
     "children": [
       {
@@ -351,6 +381,7 @@
         "displayName": "摘抄分享",
         "link": "/life/摘抄分享"
       }
-    ]
+    ],
+    "count": 10
   }
 ]
