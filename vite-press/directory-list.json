@@ -1,6 +1,22 @@
 [
   {
     "type": "directory",
+    "name": "AI",
+    "displayName": "AI",
+    "emoji": null,
+    "link": null,
+    "children": [
+      {
+        "type": "file",
+        "name": "artificial-intelligence",
+        "displayName": "Artificial Intelligence",
+        "link": "/AI/artificial-intelligence"
+      }
+    ],
+    "count": 1
+  },
+  {
+    "type": "directory",
     "name": "article",
     "displayName": "Article",
     "emoji": null,
@@ -103,12 +119,6 @@
     "children": [
       {
         "type": "file",
-        "name": "artificial-intelligence",
-        "displayName": "Artificial Intelligence",
-        "link": "/computer-science/artificial-intelligence"
-      },
-      {
-        "type": "file",
         "name": "computer-science",
         "displayName": "Computer Science",
         "link": "/computer-science/computer-science"
@@ -154,132 +164,6 @@
       },
       {
         "type": "directory",
-        "name": "java",
-        "displayName": "Java",
-        "emoji": null,
-        "link": "/computer-science/java/_index",
-        "children": [
-          {
-            "type": "file",
-            "name": "concurrent",
-            "displayName": "Concurrent",
-            "link": "/computer-science/java/concurrent"
-          },
-          {
-            "type": "file",
-            "name": "jackson",
-            "displayName": "Jackson",
-            "link": "/computer-science/java/jackson"
-          },
-          {
-            "type": "file",
-            "name": "java-basic",
-            "displayName": "Java Basic",
-            "link": "/computer-science/java/java-basic"
-          },
-          {
-            "type": "file",
-            "name": "java-HashMap",
-            "displayName": "Java HashMap",
-            "link": "/computer-science/java/java-HashMap"
-          },
-          {
-            "type": "file",
-            "name": "java-utils",
-            "displayName": "Java Utils",
-            "link": "/computer-science/java/java-utils"
-          },
-          {
-            "type": "file",
-            "name": "java-密码学",
-            "displayName": "Java 密码学",
-            "link": "/computer-science/java/java-密码学"
-          },
-          {
-            "type": "file",
-            "name": "java",
-            "displayName": "Java",
-            "link": "/computer-science/java/java"
-          },
-          {
-            "type": "file",
-            "name": "jvm",
-            "displayName": "Jvm",
-            "link": "/computer-science/java/jvm"
-          },
-          {
-            "type": "file",
-            "name": "map",
-            "displayName": "Map",
-            "link": "/computer-science/java/map"
-          },
-          {
-            "type": "file",
-            "name": "mybatis-plus",
-            "displayName": "Mybatis Plus",
-            "link": "/computer-science/java/mybatis-plus"
-          },
-          {
-            "type": "file",
-            "name": "mybatis",
-            "displayName": "Mybatis",
-            "link": "/computer-science/java/mybatis"
-          },
-          {
-            "type": "file",
-            "name": "xxl-job",
-            "displayName": "Xxl Job",
-            "link": "/computer-science/java/xxl-job"
-          },
-          {
-            "type": "directory",
-            "name": "spring",
-            "displayName": "Spring",
-            "emoji": null,
-            "link": "/computer-science/java/spring/_index",
-            "children": [
-              {
-                "type": "file",
-                "name": "spring-boot-validation",
-                "displayName": "Spring Boot Validation",
-                "link": "/computer-science/java/spring/spring-boot-validation"
-              },
-              {
-                "type": "file",
-                "name": "spring-security",
-                "displayName": "Spring Security",
-                "link": "/computer-science/java/spring/spring-security"
-              },
-              {
-                "type": "file",
-                "name": "spring-transaction",
-                "displayName": "Spring Transaction",
-                "link": "/computer-science/java/spring/spring-transaction"
-              },
-              {
-                "type": "file",
-                "name": "spring",
-                "displayName": "Spring",
-                "link": "/computer-science/java/spring/spring"
-              },
-              {
-                "type": "file",
-                "name": "springboot",
-                "displayName": "Springboot",
-                "link": "/computer-science/java/spring/springboot"
-              },
-              {
-                "type": "file",
-                "name": "unit-test",
-                "displayName": "Unit Test",
-                "link": "/computer-science/java/spring/unit-test"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "type": "directory",
         "name": "operating-system",
         "displayName": "Operating System",
         "emoji": null,
@@ -312,7 +196,7 @@
         ]
       }
     ],
-    "count": 29
+    "count": 10
   },
   {
     "type": "directory",
@@ -329,6 +213,133 @@
       }
     ],
     "count": 1
+  },
+  {
+    "type": "directory",
+    "name": "java",
+    "displayName": "Java",
+    "emoji": null,
+    "link": "/java/_index",
+    "children": [
+      {
+        "type": "file",
+        "name": "concurrent",
+        "displayName": "Concurrent",
+        "link": "/java/concurrent"
+      },
+      {
+        "type": "file",
+        "name": "jackson",
+        "displayName": "Jackson",
+        "link": "/java/jackson"
+      },
+      {
+        "type": "file",
+        "name": "java-basic",
+        "displayName": "Java Basic",
+        "link": "/java/java-basic"
+      },
+      {
+        "type": "file",
+        "name": "java-HashMap",
+        "displayName": "Java HashMap",
+        "link": "/java/java-HashMap"
+      },
+      {
+        "type": "file",
+        "name": "java-utils",
+        "displayName": "Java Utils",
+        "link": "/java/java-utils"
+      },
+      {
+        "type": "file",
+        "name": "java-密码学",
+        "displayName": "Java 密码学",
+        "link": "/java/java-密码学"
+      },
+      {
+        "type": "file",
+        "name": "java",
+        "displayName": "Java",
+        "link": "/java/java"
+      },
+      {
+        "type": "file",
+        "name": "jvm",
+        "displayName": "Jvm",
+        "link": "/java/jvm"
+      },
+      {
+        "type": "file",
+        "name": "map",
+        "displayName": "Map",
+        "link": "/java/map"
+      },
+      {
+        "type": "file",
+        "name": "mybatis-plus",
+        "displayName": "Mybatis Plus",
+        "link": "/java/mybatis-plus"
+      },
+      {
+        "type": "file",
+        "name": "mybatis",
+        "displayName": "Mybatis",
+        "link": "/java/mybatis"
+      },
+      {
+        "type": "file",
+        "name": "xxl-job",
+        "displayName": "Xxl Job",
+        "link": "/java/xxl-job"
+      },
+      {
+        "type": "directory",
+        "name": "spring",
+        "displayName": "Spring",
+        "emoji": null,
+        "link": "/java/spring/_index",
+        "children": [
+          {
+            "type": "file",
+            "name": "spring-boot-validation",
+            "displayName": "Spring Boot Validation",
+            "link": "/java/spring/spring-boot-validation"
+          },
+          {
+            "type": "file",
+            "name": "spring-security",
+            "displayName": "Spring Security",
+            "link": "/java/spring/spring-security"
+          },
+          {
+            "type": "file",
+            "name": "spring-transaction",
+            "displayName": "Spring Transaction",
+            "link": "/java/spring/spring-transaction"
+          },
+          {
+            "type": "file",
+            "name": "spring",
+            "displayName": "Spring",
+            "link": "/java/spring/spring"
+          },
+          {
+            "type": "file",
+            "name": "springboot",
+            "displayName": "Springboot",
+            "link": "/java/spring/springboot"
+          },
+          {
+            "type": "file",
+            "name": "unit-test",
+            "displayName": "Unit Test",
+            "link": "/java/spring/unit-test"
+          }
+        ]
+      }
+    ],
+    "count": 18
   },
   {
     "type": "directory",
