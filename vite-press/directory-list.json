@@ -75,12 +75,24 @@
       },
       {
         "type": "file",
+        "name": "IOS",
+        "displayName": "IOS",
+        "link": "/category/IOS"
+      },
+      {
+        "type": "file",
         "name": "life",
         "displayName": "Life",
         "link": "/category/life"
+      },
+      {
+        "type": "file",
+        "name": "Mac",
+        "displayName": "Mac",
+        "link": "/category/Mac"
       }
     ],
-    "count": 3
+    "count": 5
   },
   {
     "type": "directory",
