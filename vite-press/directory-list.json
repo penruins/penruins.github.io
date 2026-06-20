@@ -1,17 +1,356 @@
 [
   {
+    "type": "directory",
     "name": "article",
-    "path": "article",
-    "link": "/article/2025/2025-03-29-教育到底怎么了"
+    "displayName": "Article",
+    "emoji": null,
+    "link": null,
+    "children": [
+      {
+        "type": "directory",
+        "name": "2025",
+        "displayName": "2025",
+        "emoji": null,
+        "link": null,
+        "children": [
+          {
+            "type": "file",
+            "name": "2025-03-29-教育到底怎么了",
+            "displayName": "2025 03 29 教育到底怎么了",
+            "link": "/article/2025/2025-03-29-教育到底怎么了"
+          },
+          {
+            "type": "file",
+            "name": "2025-08-07-广州生活",
+            "displayName": "2025 08 07 广州生活",
+            "link": "/article/2025/2025-08-07-广州生活"
+          },
+          {
+            "type": "file",
+            "name": "2025-08-26-ssh-端口转发",
+            "displayName": "2025 08 26 Ssh 端口转发",
+            "link": "/article/2025/2025-08-26-ssh-端口转发"
+          },
+          {
+            "type": "file",
+            "name": "2025-10-27-Spring-AI-学习",
+            "displayName": "2025 10 27 Spring AI 学习",
+            "link": "/article/2025/2025-10-27-Spring-AI-学习"
+          },
+          {
+            "type": "file",
+            "name": "2025-10-29-idea-proxy",
+            "displayName": "2025 10 29 Idea Proxy",
+            "link": "/article/2025/2025-10-29-idea-proxy"
+          },
+          {
+            "type": "file",
+            "name": "2025-广州-找工作",
+            "displayName": "2025 广州 找工作",
+            "link": "/article/2025/2025-广州-找工作"
+          }
+        ]
+      }
+    ]
   },
   {
+    "type": "directory",
     "name": "computer-science",
-    "path": "computer-science",
-    "link": "/computer-science/computer-science"
+    "displayName": "Computer Science",
+    "emoji": "🤖",
+    "link": "/computer-science/computer-science",
+    "children": [
+      {
+        "type": "file",
+        "name": "artificial-intelligence",
+        "displayName": "Artificial Intelligence",
+        "link": "/computer-science/artificial-intelligence"
+      },
+      {
+        "type": "file",
+        "name": "computer-science",
+        "displayName": "Computer Science",
+        "link": "/computer-science/computer-science"
+      },
+      {
+        "type": "file",
+        "name": "git",
+        "displayName": "Git",
+        "link": "/computer-science/git"
+      },
+      {
+        "type": "file",
+        "name": "networking",
+        "displayName": "Networking",
+        "link": "/computer-science/networking"
+      },
+      {
+        "type": "directory",
+        "name": "blog",
+        "displayName": "Blog",
+        "emoji": null,
+        "link": "/computer-science/blog/_index",
+        "children": [
+          {
+            "type": "file",
+            "name": "blog",
+            "displayName": "Blog",
+            "link": "/computer-science/blog/blog"
+          },
+          {
+            "type": "file",
+            "name": "hugo",
+            "displayName": "Hugo",
+            "link": "/computer-science/blog/hugo"
+          },
+          {
+            "type": "file",
+            "name": "vitepress",
+            "displayName": "Vitepress",
+            "link": "/computer-science/blog/vitepress"
+          }
+        ]
+      },
+      {
+        "type": "directory",
+        "name": "java",
+        "displayName": "Java",
+        "emoji": null,
+        "link": "/computer-science/java/_index",
+        "children": [
+          {
+            "type": "file",
+            "name": "concurrent",
+            "displayName": "Concurrent",
+            "link": "/computer-science/java/concurrent"
+          },
+          {
+            "type": "file",
+            "name": "jackson",
+            "displayName": "Jackson",
+            "link": "/computer-science/java/jackson"
+          },
+          {
+            "type": "file",
+            "name": "java-basic",
+            "displayName": "Java Basic",
+            "link": "/computer-science/java/java-basic"
+          },
+          {
+            "type": "file",
+            "name": "java-HashMap",
+            "displayName": "Java HashMap",
+            "link": "/computer-science/java/java-HashMap"
+          },
+          {
+            "type": "file",
+            "name": "java-utils",
+            "displayName": "Java Utils",
+            "link": "/computer-science/java/java-utils"
+          },
+          {
+            "type": "file",
+            "name": "java-密码学",
+            "displayName": "Java 密码学",
+            "link": "/computer-science/java/java-密码学"
+          },
+          {
+            "type": "file",
+            "name": "java",
+            "displayName": "Java",
+            "link": "/computer-science/java/java"
+          },
+          {
+            "type": "file",
+            "name": "jvm",
+            "displayName": "Jvm",
+            "link": "/computer-science/java/jvm"
+          },
+          {
+            "type": "file",
+            "name": "map",
+            "displayName": "Map",
+            "link": "/computer-science/java/map"
+          },
+          {
+            "type": "file",
+            "name": "mybatis-plus",
+            "displayName": "Mybatis Plus",
+            "link": "/computer-science/java/mybatis-plus"
+          },
+          {
+            "type": "file",
+            "name": "mybatis",
+            "displayName": "Mybatis",
+            "link": "/computer-science/java/mybatis"
+          },
+          {
+            "type": "file",
+            "name": "xxl-job",
+            "displayName": "Xxl Job",
+            "link": "/computer-science/java/xxl-job"
+          },
+          {
+            "type": "directory",
+            "name": "spring",
+            "displayName": "Spring",
+            "emoji": null,
+            "link": "/computer-science/java/spring/_index",
+            "children": [
+              {
+                "type": "file",
+                "name": "spring-boot-validation",
+                "displayName": "Spring Boot Validation",
+                "link": "/computer-science/java/spring/spring-boot-validation"
+              },
+              {
+                "type": "file",
+                "name": "spring-security",
+                "displayName": "Spring Security",
+                "link": "/computer-science/java/spring/spring-security"
+              },
+              {
+                "type": "file",
+                "name": "spring-transaction",
+                "displayName": "Spring Transaction",
+                "link": "/computer-science/java/spring/spring-transaction"
+              },
+              {
+                "type": "file",
+                "name": "spring",
+                "displayName": "Spring",
+                "link": "/computer-science/java/spring/spring"
+              },
+              {
+                "type": "file",
+                "name": "springboot",
+                "displayName": "Springboot",
+                "link": "/computer-science/java/spring/springboot"
+              },
+              {
+                "type": "file",
+                "name": "unit-test",
+                "displayName": "Unit Test",
+                "link": "/computer-science/java/spring/unit-test"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "directory",
+        "name": "operating-system",
+        "displayName": "Operating System",
+        "emoji": null,
+        "link": "/computer-science/operating-system/_index",
+        "children": [
+          {
+            "type": "file",
+            "name": "ios",
+            "displayName": "Ios",
+            "link": "/computer-science/operating-system/ios"
+          },
+          {
+            "type": "file",
+            "name": "linux",
+            "displayName": "Linux",
+            "link": "/computer-science/operating-system/linux"
+          },
+          {
+            "type": "file",
+            "name": "mac",
+            "displayName": "Mac",
+            "link": "/computer-science/operating-system/mac"
+          },
+          {
+            "type": "file",
+            "name": "powershell",
+            "displayName": "Powershell",
+            "link": "/computer-science/operating-system/powershell"
+          },
+          {
+            "type": "file",
+            "name": "raspberrypi",
+            "displayName": "Raspberrypi",
+            "link": "/computer-science/operating-system/raspberrypi"
+          },
+          {
+            "type": "file",
+            "name": "windows",
+            "displayName": "Windows",
+            "link": "/computer-science/operating-system/windows"
+          }
+        ]
+      }
+    ]
   },
   {
+    "type": "directory",
     "name": "life",
-    "path": "life",
-    "link": "/life/English-learning"
+    "displayName": "Life",
+    "emoji": "🏻",
+    "link": null,
+    "children": [
+      {
+        "type": "file",
+        "name": "article-recommend",
+        "displayName": "Article Recommend",
+        "link": "/life/article-recommend"
+      },
+      {
+        "type": "file",
+        "name": "books",
+        "displayName": "Books",
+        "link": "/life/books"
+      },
+      {
+        "type": "file",
+        "name": "casual-think",
+        "displayName": "Casual Think",
+        "link": "/life/casual-think"
+      },
+      {
+        "type": "file",
+        "name": "collection",
+        "displayName": "Collection",
+        "link": "/life/collection"
+      },
+      {
+        "type": "file",
+        "name": "English-learning",
+        "displayName": "English Learning",
+        "link": "/life/English-learning"
+      },
+      {
+        "type": "file",
+        "name": "life-recommend",
+        "displayName": "Life Recommend",
+        "link": "/life/life-recommend"
+      },
+      {
+        "type": "file",
+        "name": "movies-log",
+        "displayName": "Movies Log",
+        "link": "/life/movies-log"
+      },
+      {
+        "type": "file",
+        "name": "my-timeline",
+        "displayName": "My Timeline",
+        "link": "/life/my-timeline"
+      },
+      {
+        "type": "file",
+        "name": "website-recommend",
+        "displayName": "Website Recommend",
+        "link": "/life/website-recommend"
+      },
+      {
+        "type": "file",
+        "name": "摘抄分享",
+        "displayName": "摘抄分享",
+        "link": "/life/摘抄分享"
+      }
+    ]
   }
 ]
