@@ -72,6 +72,22 @@
   },
   {
     "type": "directory",
+    "name": "Books",
+    "displayName": "Books",
+    "emoji": null,
+    "link": null,
+    "children": [
+      {
+        "type": "file",
+        "name": "books",
+        "displayName": "Books",
+        "link": "/Books/books"
+      }
+    ],
+    "count": 1
+  },
+  {
+    "type": "directory",
     "name": "computer-science",
     "displayName": "Computer Science",
     "emoji": null,
@@ -316,12 +332,6 @@
       },
       {
         "type": "file",
-        "name": "books",
-        "displayName": "Books",
-        "link": "/life/books"
-      },
-      {
-        "type": "file",
         "name": "casual-think",
         "displayName": "Casual Think",
         "link": "/life/casual-think"
@@ -346,12 +356,6 @@
       },
       {
         "type": "file",
-        "name": "movies-log",
-        "displayName": "Movies Log",
-        "link": "/life/movies-log"
-      },
-      {
-        "type": "file",
         "name": "my-timeline",
         "displayName": "My Timeline",
         "link": "/life/my-timeline"
@@ -369,7 +373,7 @@
         "link": "/life/摘抄分享"
       }
     ],
-    "count": 10
+    "count": 8
   },
   {
     "type": "directory",
@@ -383,6 +387,22 @@
         "name": "mac",
         "displayName": "Mac",
         "link": "/Mac/mac"
+      }
+    ],
+    "count": 1
+  },
+  {
+    "type": "directory",
+    "name": "Movies",
+    "displayName": "Movies",
+    "emoji": null,
+    "link": null,
+    "children": [
+      {
+        "type": "file",
+        "name": "movies-log",
+        "displayName": "Movies Log",
+        "link": "/Movies/movies-log"
       }
     ],
     "count": 1
