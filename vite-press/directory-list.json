@@ -72,46 +72,6 @@
   },
   {
     "type": "directory",
-    "name": "category",
-    "displayName": "Category",
-    "emoji": null,
-    "link": null,
-    "children": [
-      {
-        "type": "file",
-        "name": "article",
-        "displayName": "Article",
-        "link": "/category/article"
-      },
-      {
-        "type": "file",
-        "name": "computer-science",
-        "displayName": "Computer Science",
-        "link": "/category/computer-science"
-      },
-      {
-        "type": "file",
-        "name": "IOS",
-        "displayName": "IOS",
-        "link": "/category/IOS"
-      },
-      {
-        "type": "file",
-        "name": "life",
-        "displayName": "Life",
-        "link": "/category/life"
-      },
-      {
-        "type": "file",
-        "name": "Mac",
-        "displayName": "Mac",
-        "link": "/category/Mac"
-      }
-    ],
-    "count": 5
-  },
-  {
-    "type": "directory",
     "name": "computer-science",
     "displayName": "Computer Science",
     "emoji": null,
