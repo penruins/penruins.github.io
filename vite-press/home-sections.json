@@ -1,0 +1,16 @@
+{
+  "sections": [
+    {
+      "title": "技术",
+      "categories": ["computer-science", "AI", "java"]
+    },
+    {
+      "title": "生活",
+      "categories": ["life", "article"]
+    },
+    {
+      "title": "其他",
+      "categories": ["IOS", "Mac"]
+    }
+  ]
+}
