@@ -2,15 +2,20 @@
   "sections": [
     {
       "title": "技术",
-      "categories": ["computer-science", "AI", "java"]
+      "categories": [
+        "computer-science",
+        "AI",
+        "java",
+        "IOS",
+        "Mac"
+      ]
     },
     {
       "title": "生活",
-      "categories": ["life", "article"]
-    },
-    {
-      "title": "其他",
-      "categories": ["IOS", "Mac"]
+      "categories": [
+        "life",
+        "article"
+      ]
     }
   ]
 }
