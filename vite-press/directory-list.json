@@ -1,5 +1,17 @@
 [
   {
+    "type": "file",
+    "name": "article-recommend",
+    "displayName": "Article Recommend",
+    "link": "/article-recommend"
+  },
+  {
+    "type": "file",
+    "name": "my-timeline",
+    "displayName": "My Timeline",
+    "link": "/my-timeline"
+  },
+  {
     "type": "directory",
     "name": "AI",
     "displayName": "AI",
@@ -342,12 +354,6 @@
     "children": [
       {
         "type": "file",
-        "name": "article-recommend",
-        "displayName": "Article Recommend",
-        "link": "/life/article-recommend"
-      },
-      {
-        "type": "file",
         "name": "casual-think",
         "displayName": "Casual Think",
         "link": "/life/casual-think"
@@ -372,12 +378,6 @@
       },
       {
         "type": "file",
-        "name": "my-timeline",
-        "displayName": "My Timeline",
-        "link": "/life/my-timeline"
-      },
-      {
-        "type": "file",
         "name": "website-recommend",
         "displayName": "Website Recommend",
         "link": "/life/website-recommend"
@@ -389,7 +389,7 @@
         "link": "/life/摘抄分享"
       }
     ],
-    "count": 8
+    "count": 6
   },
   {
     "type": "directory",
