@@ -1,15 +1,15 @@
 [
   {
     "type": "file",
-    "name": "article-recommend",
-    "displayName": "Article Recommend",
-    "link": "/article-recommend"
+    "name": "001-my-timeline",
+    "displayName": "My Timeline",
+    "link": "/001-my-timeline"
   },
   {
     "type": "file",
-    "name": "my-timeline",
-    "displayName": "My Timeline",
-    "link": "/my-timeline"
+    "name": "002-article-recommend",
+    "displayName": "Article Recommend",
+    "link": "/002-article-recommend"
   },
   {
     "type": "directory",
@@ -44,7 +44,7 @@
           {
             "type": "file",
             "name": "2025-03-29-教育到底怎么了",
-            "displayName": "2025 03 29 教育到底怎么了",
+            "displayName": "教育到底怎么了 2025-03-29",
             "link": "/article/2025/2025-03-29-教育到底怎么了"
           },
           {
@@ -101,26 +101,26 @@
   {
     "type": "directory",
     "name": "computer-science",
-    "displayName": "Computer Science",
+    "displayName": "computer science",
     "emoji": null,
     "link": "/computer-science/computer-science",
     "children": [
       {
         "type": "file",
         "name": "computer-science",
-        "displayName": "Computer Science",
+        "displayName": "computer science",
         "link": "/computer-science/computer-science"
       },
       {
         "type": "file",
         "name": "git",
-        "displayName": "Git",
+        "displayName": "git",
         "link": "/computer-science/git"
       },
       {
         "type": "file",
         "name": "networking",
-        "displayName": "Networking",
+        "displayName": "networking",
         "link": "/computer-science/networking"
       },
       {
@@ -133,7 +133,7 @@
           {
             "type": "file",
             "name": "blog",
-            "displayName": "Blog",
+            "displayName": "blog",
             "link": "/computer-science/blog/blog"
           },
           {
@@ -160,13 +160,13 @@
           {
             "type": "file",
             "name": "linux",
-            "displayName": "Linux",
+            "displayName": "linux",
             "link": "/computer-science/operating-system/linux"
           },
           {
             "type": "file",
             "name": "powershell",
-            "displayName": "Powershell",
+            "displayName": "powershell",
             "link": "/computer-science/operating-system/powershell"
           },
           {
@@ -178,7 +178,7 @@
           {
             "type": "file",
             "name": "windows",
-            "displayName": "Windows",
+            "displayName": "windows",
             "link": "/computer-science/operating-system/windows"
           }
         ]
@@ -189,14 +189,14 @@
   {
     "type": "directory",
     "name": "cycling",
-    "displayName": "Cycling",
+    "displayName": "cycling",
     "emoji": null,
     "link": "/cycling/cycling",
     "children": [
       {
         "type": "file",
         "name": "cycling",
-        "displayName": "Cycling",
+        "displayName": "cycling",
         "link": "/cycling/cycling"
       }
     ],
@@ -212,7 +212,7 @@
       {
         "type": "file",
         "name": "ios",
-        "displayName": "Ios",
+        "displayName": "IOS",
         "link": "/IOS/ios"
       }
     ],
@@ -234,19 +234,19 @@
       {
         "type": "file",
         "name": "jackson",
-        "displayName": "Jackson",
+        "displayName": "jackson",
         "link": "/java/jackson"
       },
       {
         "type": "file",
         "name": "java-basic",
-        "displayName": "Java Basic",
+        "displayName": "java basic",
         "link": "/java/java-basic"
       },
       {
         "type": "file",
         "name": "java-HashMap",
-        "displayName": "Java HashMap",
+        "displayName": "java HashMap",
         "link": "/java/java-HashMap"
       },
       {
@@ -258,25 +258,25 @@
       {
         "type": "file",
         "name": "java-密码学",
-        "displayName": "Java 密码学",
+        "displayName": "java 密码学",
         "link": "/java/java-密码学"
       },
       {
         "type": "file",
         "name": "java",
-        "displayName": "Java",
+        "displayName": "java",
         "link": "/java/java"
       },
       {
         "type": "file",
         "name": "jvm",
-        "displayName": "Jvm",
+        "displayName": "jvm",
         "link": "/java/jvm"
       },
       {
         "type": "file",
         "name": "map",
-        "displayName": "Map",
+        "displayName": "map",
         "link": "/java/map"
       },
       {
@@ -294,7 +294,7 @@
       {
         "type": "file",
         "name": "xxl-job",
-        "displayName": "Xxl Job",
+        "displayName": "xxl job",
         "link": "/java/xxl-job"
       },
       {
@@ -307,7 +307,7 @@
           {
             "type": "file",
             "name": "spring-boot-validation",
-            "displayName": "Spring Boot Validation",
+            "displayName": "spring boot validation",
             "link": "/java/spring/spring-boot-validation"
           },
           {
@@ -319,25 +319,25 @@
           {
             "type": "file",
             "name": "spring-transaction",
-            "displayName": "Spring Transaction",
+            "displayName": "spring transaction",
             "link": "/java/spring/spring-transaction"
           },
           {
             "type": "file",
             "name": "spring",
-            "displayName": "Spring",
+            "displayName": "spring",
             "link": "/java/spring/spring"
           },
           {
             "type": "file",
             "name": "springboot",
-            "displayName": "Springboot",
+            "displayName": "spring boot",
             "link": "/java/spring/springboot"
           },
           {
             "type": "file",
             "name": "unit-test",
-            "displayName": "Unit Test",
+            "displayName": "unit test",
             "link": "/java/spring/unit-test"
           }
         ]
@@ -373,7 +373,7 @@
       {
         "type": "file",
         "name": "life-recommend",
-        "displayName": "Life Recommend",
+        "displayName": "life recommand",
         "link": "/life/life-recommend"
       },
       {
@@ -401,7 +401,7 @@
       {
         "type": "file",
         "name": "mac",
-        "displayName": "Mac",
+        "displayName": "mac",
         "link": "/Mac/mac"
       }
     ],
@@ -417,7 +417,7 @@
       {
         "type": "file",
         "name": "movies-log",
-        "displayName": "Movies Log",
+        "displayName": "观影记录",
         "link": "/Movies/movies-log"
       }
     ],
