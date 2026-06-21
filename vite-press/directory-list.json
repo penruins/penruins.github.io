@@ -176,6 +176,22 @@
   },
   {
     "type": "directory",
+    "name": "cycling",
+    "displayName": "Cycling",
+    "emoji": null,
+    "link": "/cycling/cycling",
+    "children": [
+      {
+        "type": "file",
+        "name": "cycling",
+        "displayName": "Cycling",
+        "link": "/cycling/cycling"
+      }
+    ],
+    "count": 1
+  },
+  {
+    "type": "directory",
     "name": "IOS",
     "displayName": "IOS",
     "emoji": null,
