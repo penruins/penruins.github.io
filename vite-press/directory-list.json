@@ -152,6 +152,51 @@
       },
       {
         "type": "directory",
+        "name": "CI-CD",
+        "displayName": "CI/CD",
+        "emoji": null,
+        "link": "/computer-science/CI-CD/_index",
+        "children": [
+          {
+            "type": "file",
+            "name": "docker",
+            "displayName": "docker",
+            "link": "/computer-science/CI-CD/docker"
+          },
+          {
+            "type": "file",
+            "name": "gitlab",
+            "displayName": "Gitlab",
+            "link": "/computer-science/CI-CD/gitlab"
+          },
+          {
+            "type": "file",
+            "name": "jenkins",
+            "displayName": "Jenkins",
+            "link": "/computer-science/CI-CD/jenkins"
+          },
+          {
+            "type": "file",
+            "name": "maven",
+            "displayName": "maven",
+            "link": "/computer-science/CI-CD/maven"
+          },
+          {
+            "type": "file",
+            "name": "nexus",
+            "displayName": "Nexus",
+            "link": "/computer-science/CI-CD/nexus"
+          },
+          {
+            "type": "file",
+            "name": "orbStack",
+            "displayName": "OrbStack",
+            "link": "/computer-science/CI-CD/orbStack"
+          }
+        ]
+      },
+      {
+        "type": "directory",
         "name": "operating-system",
         "displayName": "Operating System",
         "emoji": null,
@@ -184,7 +229,7 @@
         ]
       }
     ],
-    "count": 10
+    "count": 16
   },
   {
     "type": "directory",
