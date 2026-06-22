@@ -91,12 +91,18 @@
     "children": [
       {
         "type": "file",
+        "name": "book-category",
+        "displayName": "Book Category",
+        "link": "/Books/book-category"
+      },
+      {
+        "type": "file",
         "name": "books",
         "displayName": "Books",
         "link": "/Books/books"
       }
     ],
-    "count": 1
+    "count": 2
   },
   {
     "type": "directory",
