@@ -473,5 +473,21 @@
       }
     ],
     "count": 1
+  },
+  {
+    "type": "directory",
+    "name": "news",
+    "displayName": "News",
+    "emoji": null,
+    "link": "/news/news",
+    "children": [
+      {
+        "type": "file",
+        "name": "news",
+        "displayName": "News",
+        "link": "/news/news"
+      }
+    ],
+    "count": 1
   }
 ]
