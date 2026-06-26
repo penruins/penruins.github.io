@@ -398,6 +398,43 @@
   },
   {
     "type": "directory",
+    "name": "knowledge",
+    "displayName": "Knowledge",
+    "emoji": null,
+    "link": null,
+    "children": [
+      {
+        "type": "file",
+        "name": "philosophy-western",
+        "displayName": "Philosophy Western",
+        "link": "/knowledge/philosophy-western"
+      },
+      {
+        "type": "directory",
+        "name": "history",
+        "displayName": "History",
+        "emoji": null,
+        "link": null,
+        "children": [
+          {
+            "type": "file",
+            "name": "history-China",
+            "displayName": "History China",
+            "link": "/knowledge/history/history-China"
+          },
+          {
+            "type": "file",
+            "name": "history-world",
+            "displayName": "History World",
+            "link": "/knowledge/history/history-world"
+          }
+        ]
+      }
+    ],
+    "count": 3
+  },
+  {
+    "type": "directory",
     "name": "life",
     "displayName": "Life",
     "emoji": null,
