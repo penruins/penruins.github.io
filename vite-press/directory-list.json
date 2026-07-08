@@ -203,6 +203,21 @@
       },
       {
         "type": "directory",
+        "name": "networking",
+        "displayName": "Networking",
+        "emoji": null,
+        "link": null,
+        "children": [
+          {
+            "type": "file",
+            "name": "mitmproxy",
+            "displayName": "Mitmproxy",
+            "link": "/computer-science/networking/mitmproxy"
+          }
+        ]
+      },
+      {
+        "type": "directory",
         "name": "operating-system",
         "displayName": "Operating System",
         "emoji": null,
@@ -235,7 +250,7 @@
         ]
       }
     ],
-    "count": 16
+    "count": 17
   },
   {
     "type": "directory",
