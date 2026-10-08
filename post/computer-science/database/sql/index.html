@@ -12,30 +12,30 @@ https://github.com/alex-shpak/hugo-book
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/database/sql/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://example.org/post/computer-science/database/sql/">
 	<meta property="og:site_name" content="Penruins">
 	<meta property="og:title" content="SQL">
 	<meta property="og:description" content="sql# 2502 设计内存分配器# ✅ 175 组合两个表# 175. 组合两个表 需要展示的字段 姓 LastName 名 FirstName 城市 City 州 State 如果 personId 的地址不再 Address 表中，则报告为 null 使用左连接 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId;176 第二高的薪水# 176. 第二高的薪水 Create table If Not Exists Employee ( id int, salary int ); Truncate table Employee; insert into Employee (id, salary) values (&#39;1&#39;, &#39;100&#39;); insert into Employee (id, salary) values (&#39;2&#39;, &#39;200&#39;); insert into Employee (id, salary) values (&#39;3&#39;, &#39;300&#39;); insert into Employee (id, salary) values (&#39;4&#39;, &#39;400&#39;); insert into Employee (id, salary) values (&#39;5&#39;, &#39;500&#39;); insert into Employee (id, salary) values (&#39;6&#39;, &#39;600&#39;); insert into Employee (id, salary) values (&#39;7&#39;, &#39;700&#39;);Employee 表： &#43;-------------&#43;------&#43; | Column Name | Type | &#43;-------------&#43;------&#43; | id | int | | salary | int | &#43;-------------&#43;------&#43; id 是这个表的主键。 表的每一行包含员工的工资信息。select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="post">
-		<meta property="article:modified_time" content="2026-09-25T19:01:50+08:00">
+		<meta property="article:modified_time" content="2026-10-08T09:18:11+08:00">
 
 
 	<meta itemprop="name" content="SQL">
 	<meta itemprop="description" content="sql# 2502 设计内存分配器# ✅ 175 组合两个表# 175. 组合两个表 需要展示的字段 姓 LastName 名 FirstName 城市 City 州 State 如果 personId 的地址不再 Address 表中，则报告为 null 使用左连接 select FirstName, LastName, City, State from Person left join on Person.PersonId = Address.PersonId;176 第二高的薪水# 176. 第二高的薪水 Create table If Not Exists Employee ( id int, salary int ); Truncate table Employee; insert into Employee (id, salary) values (&#39;1&#39;, &#39;100&#39;); insert into Employee (id, salary) values (&#39;2&#39;, &#39;200&#39;); insert into Employee (id, salary) values (&#39;3&#39;, &#39;300&#39;); insert into Employee (id, salary) values (&#39;4&#39;, &#39;400&#39;); insert into Employee (id, salary) values (&#39;5&#39;, &#39;500&#39;); insert into Employee (id, salary) values (&#39;6&#39;, &#39;600&#39;); insert into Employee (id, salary) values (&#39;7&#39;, &#39;700&#39;);Employee 表： &#43;-------------&#43;------&#43; | Column Name | Type | &#43;-------------&#43;------&#43; | id | int | | salary | int | &#43;-------------&#43;------&#43; id 是这个表的主键。 表的每一行包含员工的工资信息。select distinct Salary as SecondHighestSalary from Employee order by Salary desc limit 1 offset 1然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 ‘Wrong Answer’ 。为了克服这个问题，我们可以将其作为临时表。">
-	<meta itemprop="dateModified" content="2026-09-25T19:01:50+08:00">
+	<meta itemprop="dateModified" content="2026-10-08T09:18:11+08:00">
 	<meta itemprop="wordCount" content="1585">
 
 <title>SQL | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/database/sql/">
-<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+<link rel="canonical" href="https://example.org/post/computer-science/database/sql/">
+<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" integrity="sha256-BGyUtNVsoeJ6MyG/aplzWnmDlEFTVMZduVU9HDAy2Sk=" crossorigin="anonymous">
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.d383a49c20c4a38248b27e95a9cb0ad70ae6ccc8cec42c339b238a2962462281.js" ></script>
+  <script defer src="/en.search.min.d383a49c20c4a38248b27e95a9cb0ad70ae6ccc8cec42c339b238a2962462281.js" integrity="sha256-04OknCDEo4JIsn6VqcsK1wrmzMjOxCwzmyOKKWJGIoE=" crossorigin="anonymous"></script>
 
 
 

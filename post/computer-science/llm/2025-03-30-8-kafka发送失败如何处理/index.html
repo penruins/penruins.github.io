@@ -17,10 +17,12 @@ https://github.com/alex-shpak/hugo-book
 现象：bootstrap.servers 配置错误或序列化器不匹配。 解决： 检查 bootstrap.servers 地址和序列化配置（如 StringSerializer）。 二、发送失败的处理策略# 同步发送模式
 调用 send().get() 阻塞等待发送结果，捕获异常后重试或记录日志222。 try { RecordMetadata metadata = producer.send(record).get(); } catch (Exception e) { // 重试或记录失败 } 异步发送模式
 通过回调（Callback）处理失败，例如重试或存入死信队列2。 producer.send(record, (metadata, exception) -&gt; { if (exception != null) { // 异步处理失败 } }); 启用自动重试
-">
+配置 retries=3（默认0）和 retry.backoff.ms=1000，应对瞬时错误（如网络抖动）2。 幂等性与事务
+设置 enable.idempotence=true 避免重复消息；事务消息需配置 transactional.id。 监控与报警
+监控生产者指标（如 record-error-rate），对持续失败触发报警。 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="/post/computer-science/llm/2025-03-30-8-kafka%E5%8F%91%E9%80%81%E5%A4%B1%E8%B4%A5%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://example.org/post/computer-science/llm/2025-03-30-8-kafka%E5%8F%91%E9%80%81%E5%A4%B1%E8%B4%A5%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86/">
 	<meta property="og:site_name" content="Penruins">
 	<meta property="og:title" content="kafka发送失败如何处理">
 	<meta property="og:description" content="kafka发送失败如何处理# 当 Kafka 生产者发送消息失败时，可以通过以下方法进行排查和处理，结合错误类型和业务需求选择合适策略：
@@ -31,7 +33,10 @@ https://github.com/alex-shpak/hugo-book
 现象：消息超过 max.request.size 或 Broker 限制。 解决： 增大 max.request.size 或拆分大消息114。 生产者配置错误
 现象：bootstrap.servers 配置错误或序列化器不匹配。 解决： 检查 bootstrap.servers 地址和序列化配置（如 StringSerializer）。 二、发送失败的处理策略# 同步发送模式
 调用 send().get() 阻塞等待发送结果，捕获异常后重试或记录日志222。 try { RecordMetadata metadata = producer.send(record).get(); } catch (Exception e) { // 重试或记录失败 } 异步发送模式
-通过回调（Callback）处理失败，例如重试或存入死信队列2。 producer.send(record, (metadata, exception) -&gt; { if (exception != null) { // 异步处理失败 } }); 启用自动重试">
+通过回调（Callback）处理失败，例如重试或存入死信队列2。 producer.send(record, (metadata, exception) -&gt; { if (exception != null) { // 异步处理失败 } }); 启用自动重试
+配置 retries=3（默认0）和 retry.backoff.ms=1000，应对瞬时错误（如网络抖动）2。 幂等性与事务
+设置 enable.idempotence=true 避免重复消息；事务消息需配置 transactional.id。 监控与报警
+监控生产者指标（如 record-error-rate），对持续失败触发报警。">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="post">
@@ -46,18 +51,21 @@ https://github.com/alex-shpak/hugo-book
 现象：消息超过 max.request.size 或 Broker 限制。 解决： 增大 max.request.size 或拆分大消息114。 生产者配置错误
 现象：bootstrap.servers 配置错误或序列化器不匹配。 解决： 检查 bootstrap.servers 地址和序列化配置（如 StringSerializer）。 二、发送失败的处理策略# 同步发送模式
 调用 send().get() 阻塞等待发送结果，捕获异常后重试或记录日志222。 try { RecordMetadata metadata = producer.send(record).get(); } catch (Exception e) { // 重试或记录失败 } 异步发送模式
-通过回调（Callback）处理失败，例如重试或存入死信队列2。 producer.send(record, (metadata, exception) -&gt; { if (exception != null) { // 异步处理失败 } }); 启用自动重试">
+通过回调（Callback）处理失败，例如重试或存入死信队列2。 producer.send(record, (metadata, exception) -&gt; { if (exception != null) { // 异步处理失败 } }); 启用自动重试
+配置 retries=3（默认0）和 retry.backoff.ms=1000，应对瞬时错误（如网络抖动）2。 幂等性与事务
+设置 enable.idempotence=true 避免重复消息；事务消息需配置 transactional.id。 监控与报警
+监控生产者指标（如 record-error-rate），对持续失败触发报警。">
 	<meta itemprop="wordCount" content="121">
 
 <title>kafka发送失败如何处理 | Penruins</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="/post/computer-science/llm/2025-03-30-8-kafka%E5%8F%91%E9%80%81%E5%A4%B1%E8%B4%A5%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86/">
-<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" >
+<link rel="canonical" href="https://example.org/post/computer-science/llm/2025-03-30-8-kafka%E5%8F%91%E9%80%81%E5%A4%B1%E8%B4%A5%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86/">
+<link rel="stylesheet" href="/book.min.046c94b4d56ca1e27a3321bf6a99735a798394415354c65db9553d1c3032d929.css" integrity="sha256-BGyUtNVsoeJ6MyG/aplzWnmDlEFTVMZduVU9HDAy2Sk=" crossorigin="anonymous">
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.d383a49c20c4a38248b27e95a9cb0ad70ae6ccc8cec42c339b238a2962462281.js" ></script>
+  <script defer src="/en.search.min.d383a49c20c4a38248b27e95a9cb0ad70ae6ccc8cec42c339b238a2962462281.js" integrity="sha256-04OknCDEo4JIsn6VqcsK1wrmzMjOxCwzmyOKKWJGIoE=" crossorigin="anonymous"></script>
 
 
 

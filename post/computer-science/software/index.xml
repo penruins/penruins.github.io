@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Penruins</title>
-		<link>/post/computer-science/software/</link>
+		<link>https://example.org/post/computer-science/software/</link>
 		<description>Recent content on Penruins</description>
 		<generator>Hugo</generator>
 		<language>en</language>
@@ -12,6 +12,6 @@
 			<copyright>[Main Page](/)</copyright>
 		
 		
-			<atom:link href="/post/computer-science/software/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://example.org/post/computer-science/software/index.xml" rel="self" type="application/rss+xml" />
 	</channel>
 </rss>
