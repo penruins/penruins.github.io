@@ -10,9 +10,9 @@ https://github.com/alex-shpak/hugo-book
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="分区表的索引如何创建，请以postgresql举例# PostgreSQL分区表索引创建指南# PostgreSQL中分区表索引的创建方法与普通表有所不同，需要特别注意分区表的特性。以下是详细的创建方法和示例：
 一、基本索引创建方法# 1. 自动分区索引（PostgreSQL 11&#43;）# 从PostgreSQL 11开始，可以直接在父表上创建索引，系统会自动为所有子分区创建对应的索引1247。
--- 创建分区表 CREATE TABLE sales ( id SERIAL PRIMARY KEY, product VARCHAR, sale_date DATE ) PARTITION BY RANGE (sale_date); -- 创建子分区 CREATE TABLE sales_2021_01_01 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-01&#39;) TO (&#39;2021-01-02&#39;); CREATE TABLE sales_2021_01_02 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-02&#39;) TO (&#39;2021-01-03&#39;); -- 在父表上创建索引，会自动应用到所有分区 CREATE INDEX idx_product ON sales (product);2. 手动创建分区索引（PostgreSQL 10及以下）# 在PostgreSQL 10及以下版本，需要为每个分区单独创建索引：
--- 为每个分区单独创建索引 CREATE INDEX sales_2021_01_01_product_idx ON sales_2021_01_01 (product); CREATE INDEX sales_2021_01_02_product_idx ON sales_2021_01_02 (product);二、特殊索引类型# 1. 唯一索引和主键# PostgreSQL 11&#43;支持在分区表上创建唯一约束和主键，但必须包含分区键47：
--- 创建包含分区键的唯一索引 CREATE TABLE rtable(c1 INT, c2 VARCHAR(10)) PARTITION BY RANGE(c1); ALTER TABLE rtable ADD CONSTRAINT pk_rtable PRIMARY KEY(c1);2. 局部索引(Partial Index)# 可以只为满足特定条件的行创建索引，节省空间并提高查询效率25：
+-- 创建分区表 CREATE TABLE sales ( id SERIAL PRIMARY KEY, product VARCHAR, sale_date DATE ) PARTITION BY RANGE (sale_date); -- 创建子分区 CREATE TABLE sales_2021_01_01 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-01&#39;) TO (&#39;2021-01-02&#39;); CREATE TABLE sales_2021_01_02 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-02&#39;) TO (&#39;2021-01-03&#39;); -- 在父表上创建索引，会自动应用到所有分区 CREATE INDEX idx_product ON sales (product); 2. 手动创建分区索引（PostgreSQL 10及以下）# 在PostgreSQL 10及以下版本，需要为每个分区单独创建索引：
+-- 为每个分区单独创建索引 CREATE INDEX sales_2021_01_01_product_idx ON sales_2021_01_01 (product); CREATE INDEX sales_2021_01_02_product_idx ON sales_2021_01_02 (product); 二、特殊索引类型# 1. 唯一索引和主键# PostgreSQL 11&#43;支持在分区表上创建唯一约束和主键，但必须包含分区键47：
+-- 创建包含分区键的唯一索引 CREATE TABLE rtable(c1 INT, c2 VARCHAR(10)) PARTITION BY RANGE(c1); ALTER TABLE rtable ADD CONSTRAINT pk_rtable PRIMARY KEY(c1); 2. 局部索引(Partial Index)# 可以只为满足特定条件的行创建索引，节省空间并提高查询效率25：
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
@@ -21,9 +21,9 @@ https://github.com/alex-shpak/hugo-book
 	<meta property="og:title" content="分区表的索引如何创建，请以postgresql举例">
 	<meta property="og:description" content="分区表的索引如何创建，请以postgresql举例# PostgreSQL分区表索引创建指南# PostgreSQL中分区表索引的创建方法与普通表有所不同，需要特别注意分区表的特性。以下是详细的创建方法和示例：
 一、基本索引创建方法# 1. 自动分区索引（PostgreSQL 11&#43;）# 从PostgreSQL 11开始，可以直接在父表上创建索引，系统会自动为所有子分区创建对应的索引1247。
--- 创建分区表 CREATE TABLE sales ( id SERIAL PRIMARY KEY, product VARCHAR, sale_date DATE ) PARTITION BY RANGE (sale_date); -- 创建子分区 CREATE TABLE sales_2021_01_01 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-01&#39;) TO (&#39;2021-01-02&#39;); CREATE TABLE sales_2021_01_02 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-02&#39;) TO (&#39;2021-01-03&#39;); -- 在父表上创建索引，会自动应用到所有分区 CREATE INDEX idx_product ON sales (product);2. 手动创建分区索引（PostgreSQL 10及以下）# 在PostgreSQL 10及以下版本，需要为每个分区单独创建索引：
--- 为每个分区单独创建索引 CREATE INDEX sales_2021_01_01_product_idx ON sales_2021_01_01 (product); CREATE INDEX sales_2021_01_02_product_idx ON sales_2021_01_02 (product);二、特殊索引类型# 1. 唯一索引和主键# PostgreSQL 11&#43;支持在分区表上创建唯一约束和主键，但必须包含分区键47：
--- 创建包含分区键的唯一索引 CREATE TABLE rtable(c1 INT, c2 VARCHAR(10)) PARTITION BY RANGE(c1); ALTER TABLE rtable ADD CONSTRAINT pk_rtable PRIMARY KEY(c1);2. 局部索引(Partial Index)# 可以只为满足特定条件的行创建索引，节省空间并提高查询效率25：">
+-- 创建分区表 CREATE TABLE sales ( id SERIAL PRIMARY KEY, product VARCHAR, sale_date DATE ) PARTITION BY RANGE (sale_date); -- 创建子分区 CREATE TABLE sales_2021_01_01 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-01&#39;) TO (&#39;2021-01-02&#39;); CREATE TABLE sales_2021_01_02 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-02&#39;) TO (&#39;2021-01-03&#39;); -- 在父表上创建索引，会自动应用到所有分区 CREATE INDEX idx_product ON sales (product); 2. 手动创建分区索引（PostgreSQL 10及以下）# 在PostgreSQL 10及以下版本，需要为每个分区单独创建索引：
+-- 为每个分区单独创建索引 CREATE INDEX sales_2021_01_01_product_idx ON sales_2021_01_01 (product); CREATE INDEX sales_2021_01_02_product_idx ON sales_2021_01_02 (product); 二、特殊索引类型# 1. 唯一索引和主键# PostgreSQL 11&#43;支持在分区表上创建唯一约束和主键，但必须包含分区键47：
+-- 创建包含分区键的唯一索引 CREATE TABLE rtable(c1 INT, c2 VARCHAR(10)) PARTITION BY RANGE(c1); ALTER TABLE rtable ADD CONSTRAINT pk_rtable PRIMARY KEY(c1); 2. 局部索引(Partial Index)# 可以只为满足特定条件的行创建索引，节省空间并提高查询效率25：">
 	<meta property="og:locale" content="en">
 	<meta property="og:type" content="article">
 		<meta property="article:section" content="post">
@@ -32,10 +32,10 @@ https://github.com/alex-shpak/hugo-book
 	<meta itemprop="name" content="分区表的索引如何创建，请以postgresql举例">
 	<meta itemprop="description" content="分区表的索引如何创建，请以postgresql举例# PostgreSQL分区表索引创建指南# PostgreSQL中分区表索引的创建方法与普通表有所不同，需要特别注意分区表的特性。以下是详细的创建方法和示例：
 一、基本索引创建方法# 1. 自动分区索引（PostgreSQL 11&#43;）# 从PostgreSQL 11开始，可以直接在父表上创建索引，系统会自动为所有子分区创建对应的索引1247。
--- 创建分区表 CREATE TABLE sales ( id SERIAL PRIMARY KEY, product VARCHAR, sale_date DATE ) PARTITION BY RANGE (sale_date); -- 创建子分区 CREATE TABLE sales_2021_01_01 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-01&#39;) TO (&#39;2021-01-02&#39;); CREATE TABLE sales_2021_01_02 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-02&#39;) TO (&#39;2021-01-03&#39;); -- 在父表上创建索引，会自动应用到所有分区 CREATE INDEX idx_product ON sales (product);2. 手动创建分区索引（PostgreSQL 10及以下）# 在PostgreSQL 10及以下版本，需要为每个分区单独创建索引：
--- 为每个分区单独创建索引 CREATE INDEX sales_2021_01_01_product_idx ON sales_2021_01_01 (product); CREATE INDEX sales_2021_01_02_product_idx ON sales_2021_01_02 (product);二、特殊索引类型# 1. 唯一索引和主键# PostgreSQL 11&#43;支持在分区表上创建唯一约束和主键，但必须包含分区键47：
--- 创建包含分区键的唯一索引 CREATE TABLE rtable(c1 INT, c2 VARCHAR(10)) PARTITION BY RANGE(c1); ALTER TABLE rtable ADD CONSTRAINT pk_rtable PRIMARY KEY(c1);2. 局部索引(Partial Index)# 可以只为满足特定条件的行创建索引，节省空间并提高查询效率25：">
-	<meta itemprop="wordCount" content="191">
+-- 创建分区表 CREATE TABLE sales ( id SERIAL PRIMARY KEY, product VARCHAR, sale_date DATE ) PARTITION BY RANGE (sale_date); -- 创建子分区 CREATE TABLE sales_2021_01_01 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-01&#39;) TO (&#39;2021-01-02&#39;); CREATE TABLE sales_2021_01_02 PARTITION OF sales FOR VALUES FROM (&#39;2021-01-02&#39;) TO (&#39;2021-01-03&#39;); -- 在父表上创建索引，会自动应用到所有分区 CREATE INDEX idx_product ON sales (product); 2. 手动创建分区索引（PostgreSQL 10及以下）# 在PostgreSQL 10及以下版本，需要为每个分区单独创建索引：
+-- 为每个分区单独创建索引 CREATE INDEX sales_2021_01_01_product_idx ON sales_2021_01_01 (product); CREATE INDEX sales_2021_01_02_product_idx ON sales_2021_01_02 (product); 二、特殊索引类型# 1. 唯一索引和主键# PostgreSQL 11&#43;支持在分区表上创建唯一约束和主键，但必须包含分区键47：
+-- 创建包含分区键的唯一索引 CREATE TABLE rtable(c1 INT, c2 VARCHAR(10)) PARTITION BY RANGE(c1); ALTER TABLE rtable ADD CONSTRAINT pk_rtable PRIMARY KEY(c1); 2. 局部索引(Partial Index)# 可以只为满足特定条件的行创建索引，节省空间并提高查询效率25：">
+	<meta itemprop="wordCount" content="198">
 
 <title>分区表的索引如何创建，请以postgresql举例 | Penruins</title>
 <link rel="icon" href="/favicon.png" >
@@ -45,7 +45,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.d383a49c20c4a38248b27e95a9cb0ad70ae6ccc8cec42c339b238a2962462281.js" integrity="sha256-04OknCDEo4JIsn6VqcsK1wrmzMjOxCwzmyOKKWJGIoE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.8247677740ae01edde1d3e0ebffbce71528b5bc430b2804823e901fe933c9862.js" integrity="sha256-gkdnd0CuAe3eHT4Ov/vOcVKLW8QwsoBII&#43;kB/pM8mGI=" crossorigin="anonymous"></script>
 
 
 
