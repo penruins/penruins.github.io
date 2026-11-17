@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./chunks/framework.B5Yvbuyk.js";const l=JSON.parse('{"title":"","description":"","frontmatter":{"bookCollapseSection":true,"weight":2},"headers":[],"relativePath":"java/_index.md","filePath":"java/_index.md"}'),o={name:"java/_index.md"};function n(r,s,c,i,_,d){return a(),t("div")}const m=e(o,[["render",n]]);export{l as __pageData,m as default};
