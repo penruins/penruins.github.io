@@ -25,7 +25,8 @@
         "link": "/AI/artificial-intelligence"
       }
     ],
-    "count": 1
+    "count": 1,
+    "entryLink": "/AI/artificial-intelligence"
   },
   {
     "type": "directory",
@@ -92,7 +93,8 @@
         ]
       }
     ],
-    "count": 8
+    "count": 8,
+    "entryLink": "/article/2025/2025-03-29-教育到底怎么了"
   },
   {
     "type": "directory",
@@ -189,7 +191,8 @@
         ]
       }
     ],
-    "count": 13
+    "count": 13,
+    "entryLink": "/Books/books"
   },
   {
     "type": "directory",
@@ -820,7 +823,8 @@
         ]
       }
     ],
-    "count": 81
+    "count": 81,
+    "entryLink": "/computer-science/computer-science"
   },
   {
     "type": "directory",
@@ -836,7 +840,8 @@
         "link": "/cycling/cycling"
       }
     ],
-    "count": 1
+    "count": 1,
+    "entryLink": "/cycling/cycling"
   },
   {
     "type": "directory",
@@ -852,7 +857,8 @@
         "link": "/IOS/ios"
       }
     ],
-    "count": 1
+    "count": 1,
+    "entryLink": "/IOS/ios"
   },
   {
     "type": "directory",
@@ -979,7 +985,8 @@
         ]
       }
     ],
-    "count": 18
+    "count": 18,
+    "entryLink": "/java/java"
   },
   {
     "type": "directory",
@@ -1088,7 +1095,8 @@
         ]
       }
     ],
-    "count": 12
+    "count": 12,
+    "entryLink": "/knowledge/history/2026-11-17-Chinese-history"
   },
   {
     "type": "directory",
@@ -1257,7 +1265,8 @@
         ]
       }
     ],
-    "count": 25
+    "count": 25,
+    "entryLink": "/life/life-recommend"
   },
   {
     "type": "directory",
@@ -1273,7 +1282,8 @@
         "link": "/Mac/mac"
       }
     ],
-    "count": 1
+    "count": 1,
+    "entryLink": "/Mac/mac"
   },
   {
     "type": "directory",
@@ -1289,7 +1299,8 @@
         "link": "/Movies/movies-log"
       }
     ],
-    "count": 1
+    "count": 1,
+    "entryLink": "/Movies/movies-log"
   },
   {
     "type": "directory",
@@ -1305,7 +1316,8 @@
         "link": "/news/news"
       }
     ],
-    "count": 1
+    "count": 1,
+    "entryLink": "/news/news"
   },
   {
     "type": "directory",
@@ -1327,7 +1339,8 @@
         "link": "/tools/2026-11-17-obsidian"
       }
     ],
-    "count": 2
+    "count": 2,
+    "entryLink": "/tools/2026-11-17-obsidian"
   },
   {
     "type": "directory",
@@ -1343,6 +1356,7 @@
         "link": "/WL-public/2026-11-17-index"
       }
     ],
-    "count": 1
+    "count": 1,
+    "entryLink": null
   }
 ]
