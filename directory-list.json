@@ -1304,6 +1304,29 @@
   },
   {
     "type": "directory",
+    "name": "my-year",
+    "displayName": "My Year",
+    "emoji": null,
+    "link": null,
+    "children": [
+      {
+        "type": "file",
+        "name": "my-2025",
+        "displayName": "My 2025",
+        "link": "/my-year/my-2025"
+      },
+      {
+        "type": "file",
+        "name": "my-2026",
+        "displayName": "My 2026",
+        "link": "/my-year/my-2026"
+      }
+    ],
+    "count": 2,
+    "entryLink": "/my-year/my-2025"
+  },
+  {
+    "type": "directory",
     "name": "news",
     "displayName": "News",
     "emoji": null,

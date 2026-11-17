@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.CMWtagCP.js";const i=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"my-year/my-2025.md","filePath":"my-year/my-2025.md","lastUpdated":1794905706000}'),r={name:"my-year/my-2025.md"};function o(s,m,c,n,d,p){return a(),t("div")}const y=e(r,[["render",o]]);export{i as __pageData,y as default};
