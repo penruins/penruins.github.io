@@ -1,0 +1,316 @@
+import{_ as a,c as n,o as e,ak as i}from"./chunks/framework.CtX3_w5e.js";const k=JSON.parse('{"title":"SQL","description":"","frontmatter":{"title":"SQL","hugoSource":"computer-science/database/SQL.md","outline":[1,6]},"headers":[],"relativePath":"computer-science/database/2026-11-17-SQL.md","filePath":"computer-science/database/2026-11-17-SQL.md","lastUpdated":1794887319000}'),l={name:"computer-science/database/2026-11-17-SQL.md"};function p(t,s,r,d,h,c){return e(),n("div",null,[...s[0]||(s[0]=[i(`<h1 id="sql" tabindex="-1">sql <a class="header-anchor" href="#sql" aria-label="Permalink to “sql”">​</a></h1><h2 id="_2502-设计内存分配器" tabindex="-1">2502 设计内存分配器 <a class="header-anchor" href="#_2502-设计内存分配器" aria-label="Permalink to “2502 设计内存分配器”">​</a></h2><h2 id="✅-175-组合两个表" tabindex="-1">✅ 175 组合两个表 <a class="header-anchor" href="#✅-175-组合两个表" aria-label="Permalink to “✅ 175 组合两个表”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/combine-two-tables/" target="_blank" rel="noreferrer">175. 组合两个表</a><ul><li>需要展示的字段 <ul><li>姓 LastName</li><li>名 FirstName</li><li>城市 City</li><li>州 State</li></ul></li><li>如果 <code>personId</code> 的地址不再 <code>Address</code> 表中，则报告为 <code>null</code><ul><li>使用左连接</li></ul></li></ul></li></ul><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span></span></span></code></pre></div><div class="language-sql"><button title="Copy Code" class="copy"></button><span class="lang">sql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">select</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> FirstName, LastName, City, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">State</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">from</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Person</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">         left join</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> on</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> Person</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">PersonId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> Address</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">PersonId</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span></code></pre></div><h2 id="_176-第二高的薪水" tabindex="-1">176 第二高的薪水 <a class="header-anchor" href="#_176-第二高的薪水" aria-label="Permalink to “176 第二高的薪水”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/second-highest-salary/description/" target="_blank" rel="noreferrer">176. 第二高的薪水</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>Create table If Not Exists Employee</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id     int,</span></span>
+<span class="line"><span>    salary int</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span>Truncate table Employee;</span></span>
+<span class="line"><span>insert into Employee (id, salary)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;100&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, salary)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;200&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, salary)</span></span>
+<span class="line"><span>values (&#39;3&#39;, &#39;300&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, salary)</span></span>
+<span class="line"><span>values (&#39;4&#39;, &#39;400&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, salary)</span></span>
+<span class="line"><span>values (&#39;5&#39;, &#39;500&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, salary)</span></span>
+<span class="line"><span>values (&#39;6&#39;, &#39;600&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, salary)</span></span>
+<span class="line"><span>values (&#39;7&#39;, &#39;700&#39;);</span></span></code></pre></div><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>Employee 表：</span></span>
+<span class="line"><span>+-------------+------+</span></span>
+<span class="line"><span>| Column Name | Type |</span></span>
+<span class="line"><span>+-------------+------+</span></span>
+<span class="line"><span>| id          | int  |</span></span>
+<span class="line"><span>| salary      | int  |</span></span>
+<span class="line"><span>+-------------+------+</span></span>
+<span class="line"><span>id 是这个表的主键。</span></span>
+<span class="line"><span>表的每一行包含员工的工资信息。</span></span></code></pre></div><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select distinct Salary as SecondHighestSalary</span></span>
+<span class="line"><span>from Employee</span></span>
+<span class="line"><span>order by Salary desc</span></span>
+<span class="line"><span>limit 1 offset 1</span></span></code></pre></div><p>然而，如果没有第 2 高的薪资，即表里可能只有一条记录，这个解答会被评测为 &#39;Wrong Answer&#39; 。为了克服这个问题，我们可以将其作为临时表。</p><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>SELECT (SELECT DISTINCT Salary</span></span>
+<span class="line"><span>        FROM Employee</span></span>
+<span class="line"><span>        ORDER BY Salary DESC</span></span>
+<span class="line"><span>        LIMIT 1 OFFSET 1) AS SecondHighestSalary</span></span>
+<span class="line"><span>;</span></span></code></pre></div><h2 id="_177-第n高的薪水" tabindex="-1">177 第N高的薪水 <a class="header-anchor" href="#_177-第n高的薪水" aria-label="Permalink to “177 第N高的薪水”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/nth-highest-salary/" target="_blank" rel="noreferrer">177 第N高的薪水</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>create function getNthHighestSalary(N int) returns int</span></span>
+<span class="line"><span>begin</span></span>
+<span class="line"><span>    declare M int;</span></span>
+<span class="line"><span>    set M = N - 1;</span></span>
+<span class="line"><span>    return (select distinct salary</span></span>
+<span class="line"><span>            from Employee</span></span>
+<span class="line"><span>            order by salary desc</span></span>
+<span class="line"><span>            limit M, 1);</span></span>
+<span class="line"><span>end</span></span></code></pre></div><h2 id="_178-分数排名" tabindex="-1">178 分数排名 <a class="header-anchor" href="#_178-分数排名" aria-label="Permalink to “178 分数排名”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/rank-scores/" target="_blank" rel="noreferrer">178 分数排名</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>Create table If Not Exists Scores</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id    int,</span></span>
+<span class="line"><span>    score DECIMAL(3, 2)</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span>Truncate table Scores;</span></span>
+<span class="line"><span>insert into Scores (id, score)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;3.5&#39;);</span></span>
+<span class="line"><span>insert into Scores (id, score)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;3.65&#39;);</span></span>
+<span class="line"><span>insert into Scores (id, score)</span></span>
+<span class="line"><span>values (&#39;3&#39;, &#39;4.0&#39;);</span></span>
+<span class="line"><span>insert into Scores (id, score)</span></span>
+<span class="line"><span>values (&#39;4&#39;, &#39;3.85&#39;);</span></span>
+<span class="line"><span>insert into Scores (id, score)</span></span>
+<span class="line"><span>values (&#39;5&#39;, &#39;4.0&#39;);</span></span>
+<span class="line"><span>insert into Scores (id, score)</span></span>
+<span class="line"><span>values (&#39;6&#39;, &#39;3.65&#39;);</span></span></code></pre></div><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>表: Scores</span></span>
+<span class="line"><span>+-------------+---------+</span></span>
+<span class="line"><span>| Column Name | Type    |</span></span>
+<span class="line"><span>+-------------+---------+</span></span>
+<span class="line"><span>| id          | int     |</span></span>
+<span class="line"><span>| score       | decimal |</span></span>
+<span class="line"><span>+-------------+---------+</span></span>
+<span class="line"><span>id 是该表的主键（有不同值的列）。</span></span>
+<span class="line"><span>该表的每一行都包含了一场比赛的分数。Score 是一个有两位小数点的浮点值。</span></span></code></pre></div><h3 id="方法-1-dense-rank" tabindex="-1">方法 1：DENSE_RANK <a class="header-anchor" href="#方法-1-dense-rank" aria-label="Permalink to “方法 1：DENSE_RANK”">​</a></h3><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select s.score,</span></span>
+<span class="line"><span>       dense_rank() over (</span></span>
+<span class="line"><span>           order by S.score desc</span></span>
+<span class="line"><span>           ) as &#39;rank&#39;</span></span>
+<span class="line"><span>from Scores S;</span></span></code></pre></div><h4 id="窗口函数" tabindex="-1">窗口函数 <a class="header-anchor" href="#窗口函数" aria-label="Permalink to “窗口函数”">​</a></h4><h3 id="方法-2-使用-count-distinct-的相关子查询" tabindex="-1">方法 2: 使用 COUNT(DISTINCT ...) 的相关子查询 <a class="header-anchor" href="#方法-2-使用-count-distinct-的相关子查询" aria-label="Permalink to “方法 2: 使用 COUNT(DISTINCT ...) 的相关子查询”">​</a></h3><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select S1.score,</span></span>
+<span class="line"><span>       (select count(distinct S2.score)</span></span>
+<span class="line"><span>        from Scores S2</span></span>
+<span class="line"><span>        where S2.score &gt;= S1.score) as &#39;rank&#39;</span></span>
+<span class="line"><span>from Scores S1</span></span>
+<span class="line"><span>order by S1.score desc;</span></span></code></pre></div><h3 id="方法-3-使用-inner-join-和-count-distinct" tabindex="-1">方法 3：使用 INNER JOIN 和 COUNT(DISTINCT...) <a class="header-anchor" href="#方法-3-使用-inner-join-和-count-distinct" aria-label="Permalink to “方法 3：使用 INNER JOIN 和 COUNT(DISTINCT...)”">​</a></h3><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select S.score,</span></span>
+<span class="line"><span>       count(distinct T.score) as &#39;rank&#39;</span></span>
+<span class="line"><span>from Scores S</span></span>
+<span class="line"><span>         inner join Scores T on S.score &lt;= T.score</span></span>
+<span class="line"><span>group by S.id,</span></span>
+<span class="line"><span>         S.socre</span></span>
+<span class="line"><span>order by S.score desc;</span></span></code></pre></div><h4 id="数据库表自身进行内连接的结果是什么" tabindex="-1">数据库表自身进行内连接的结果是什么 <a class="header-anchor" href="#数据库表自身进行内连接的结果是什么" aria-label="Permalink to “数据库表自身进行内连接的结果是什么”">​</a></h4><p>数据库表自身进行内连接（Self-Join）的结果是将表中的每一行与同一表中的其他行进行匹配，基于指定的连接条件。如果连接条件满足，则返回匹配的行组合。</p><p>具体说明：</p><ol><li><strong>连接条件</strong>：通常使用主键、外键或其他相关列作为连接条件。</li><li><strong>结果</strong>：返回满足条件的行组合，未匹配的行将被排除。</li></ol><p>示例：</p><p>假设有一个表 <code>Employees</code>：</p><table tabindex="0"><thead><tr><th>EmployeeID</th><th>Name</th><th>ManagerID</th></tr></thead><tbody><tr><td>1</td><td>Alice</td><td>3</td></tr><tr><td>2</td><td>Bob</td><td>3</td></tr><tr><td>3</td><td>Charlie</td><td>NULL</td></tr><tr><td>4</td><td>David</td><td>2</td></tr></tbody></table><p>执行以下自连接查询：</p><div class="language-sql"><button title="Copy Code" class="copy"></button><span class="lang">sql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">SELECT</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> e1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">Name</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> AS</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Employee, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">e2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">Name</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> AS</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Manager</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">FROM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Employees e1</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">         INNER JOIN</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Employees e2 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">ON</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> e1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">ManagerID</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> e2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">EmployeeID</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span></code></pre></div><p>结果：</p><table tabindex="0"><thead><tr><th>Employee</th><th>Manager</th></tr></thead><tbody><tr><td>Alice</td><td>Charlie</td></tr><tr><td>Bob</td><td>Charlie</td></tr><tr><td>David</td><td>Bob</td></tr></tbody></table><p>解释：</p><ul><li><code>Alice</code> 和 <code>Bob</code> 的 <code>ManagerID</code> 为 <code>3</code>，与 <code>Charlie</code> 的 <code>EmployeeID</code> 匹配。</li><li><code>David</code> 的 <code>ManagerID</code> 为 <code>2</code>，与 <code>Bob</code> 的 <code>EmployeeID</code> 匹配。</li><li><code>Charlie</code> 没有 <code>ManagerID</code>，因此不参与匹配。</li></ul><p>总结：</p><p>自连接的结果是表中满足连接条件的行组合，常用于处理层次结构或递归关系的数据。</p><h2 id="_180-连续出现的数字" tabindex="-1">180 连续出现的数字 <a class="header-anchor" href="#_180-连续出现的数字" aria-label="Permalink to “180 连续出现的数字”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/consecutive-numbers/" target="_blank" rel="noreferrer">180 连续出现的数字</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>Create table If Not Exists Logs</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id  int,</span></span>
+<span class="line"><span>    num int</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span>Truncate table Logs;</span></span>
+<span class="line"><span>insert into Logs (id, num)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span>insert into Logs (id, num)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span>insert into Logs (id, num)</span></span>
+<span class="line"><span>values (&#39;3&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span>insert into Logs (id, num)</span></span>
+<span class="line"><span>values (&#39;4&#39;, &#39;2&#39;);</span></span>
+<span class="line"><span>insert into Logs (id, num)</span></span>
+<span class="line"><span>values (&#39;5&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span>insert into Logs (id, num)</span></span>
+<span class="line"><span>values (&#39;6&#39;, &#39;2&#39;);</span></span>
+<span class="line"><span>insert into Logs (id, num)</span></span>
+<span class="line"><span>values (&#39;7&#39;, &#39;2&#39;);</span></span>
+<span class="line"><span>insert into Logs (id, num)</span></span>
+<span class="line"><span>values (&#39;8&#39;, &#39;2&#39;);</span></span></code></pre></div><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>表：Logs</span></span>
+<span class="line"><span>+-------------+---------+</span></span>
+<span class="line"><span>| Column Name | Type    |</span></span>
+<span class="line"><span>+-------------+---------+</span></span>
+<span class="line"><span>| id          | int     |</span></span>
+<span class="line"><span>| num         | varchar |</span></span>
+<span class="line"><span>+-------------+---------+</span></span>
+<span class="line"><span>在 SQL 中，id 是该表的主键。</span></span>
+<span class="line"><span>id 是一个自增列。</span></span></code></pre></div><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select distinct l1.Num as ConsecutiveNums</span></span>
+<span class="line"><span>from Logs l1,</span></span>
+<span class="line"><span>     Logs l2,</span></span>
+<span class="line"><span>     Logs l3</span></span>
+<span class="line"><span>where l1.Id = l2.Id - 1</span></span>
+<span class="line"><span>  and l2.Id = l3.Id - 1</span></span>
+<span class="line"><span>  and l1.Num = l2.Num</span></span>
+<span class="line"><span>  and l2.Num = l3.Num</span></span>
+<span class="line"><span>  and l1.Num = l3.Num;</span></span></code></pre></div><h2 id="✅-181-超过经理收入的员工" tabindex="-1">✅ 181 超过经理收入的员工 <a class="header-anchor" href="#✅-181-超过经理收入的员工" aria-label="Permalink to “✅ 181 超过经理收入的员工”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/employees-earning-more-than-their-managers/description/" target="_blank" rel="noreferrer">181 超过经理收入的员工</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>Create table If Not Exists Employee2</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id        int,</span></span>
+<span class="line"><span>    name      varchar(255),</span></span>
+<span class="line"><span>    salary    int,</span></span>
+<span class="line"><span>    managerId int</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span>Truncate table Employee2;</span></span>
+<span class="line"><span>insert into Employee2 (id, name, salary, managerId)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;Joe&#39;, &#39;70000&#39;, &#39;3&#39;);</span></span>
+<span class="line"><span>insert into Employee2 (id, name, salary, managerId)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;Henry&#39;, &#39;80000&#39;, &#39;4&#39;);</span></span>
+<span class="line"><span>insert into Employee2 (id, name, salary, managerId)</span></span>
+<span class="line"><span>values (&#39;3&#39;, &#39;Sam&#39;, &#39;60000&#39;, NULL);</span></span>
+<span class="line"><span>insert into Employee2 (id, name, salary, managerId)</span></span>
+<span class="line"><span>values (&#39;4&#39;, &#39;Max&#39;, &#39;90000&#39;, NULL);</span></span></code></pre></div><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>表：Employee </span></span>
+<span class="line"><span>+-------------+---------+</span></span>
+<span class="line"><span>| Column Name | Type    |</span></span>
+<span class="line"><span>+-------------+---------+</span></span>
+<span class="line"><span>| id          | int     |</span></span>
+<span class="line"><span>| name        | varchar |</span></span>
+<span class="line"><span>| salary      | int     |</span></span>
+<span class="line"><span>| managerId   | int     |</span></span>
+<span class="line"><span>+-------------+---------+</span></span>
+<span class="line"><span>id 是该表的主键（具有唯一值的列）。</span></span>
+<span class="line"><span>该表的每一行都表示雇员的ID、姓名、工资和经理的ID。</span></span></code></pre></div><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select e1.name as &#39;Employee&#39;</span></span>
+<span class="line"><span>from Employee e1</span></span>
+<span class="line"><span>         inner join Employee e2 on e1.managerId = e2.Id</span></span>
+<span class="line"><span>where e1.salary &gt; e2.salary;</span></span></code></pre></div><h2 id="_182-查找重复的电子邮箱" tabindex="-1">182 查找重复的电子邮箱 <a class="header-anchor" href="#_182-查找重复的电子邮箱" aria-label="Permalink to “182 查找重复的电子邮箱”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/duplicate-emails/description/" target="_blank" rel="noreferrer">182 查找重复的电子邮箱</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>Create table If Not Exists Person</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id    int,</span></span>
+<span class="line"><span>    email varchar(255)</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span>Truncate table Person;</span></span>
+<span class="line"><span>insert into Person (id, email)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;a@b.com&#39;);</span></span>
+<span class="line"><span>insert into Person (id, email)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;c@d.com&#39;);</span></span>
+<span class="line"><span>insert into Person (id, email)</span></span>
+<span class="line"><span>values (&#39;3&#39;, &#39;a@b.com&#39;);</span></span></code></pre></div><h3 id="方法一-使用-group-by-和临时表" tabindex="-1">方法一：使用 GROUP BY 和临时表 <a class="header-anchor" href="#方法一-使用-group-by-和临时表" aria-label="Permalink to “方法一：使用 GROUP BY 和临时表”">​</a></h3><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select Email</span></span>
+<span class="line"><span>from (select Email, count(Email) as num</span></span>
+<span class="line"><span>      from Person</span></span>
+<span class="line"><span>      group by Email) as statistics</span></span>
+<span class="line"><span>where num &gt; 1;</span></span></code></pre></div><h3 id="方法二-使用-group-by-和-having-条件" tabindex="-1">方法二：使用 GROUP BY 和 HAVING 条件 <a class="header-anchor" href="#方法二-使用-group-by-和-having-条件" aria-label="Permalink to “方法二：使用 GROUP BY 和 HAVING 条件”">​</a></h3><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select Email</span></span>
+<span class="line"><span>from Person</span></span>
+<span class="line"><span>group by Email</span></span>
+<span class="line"><span>having count(Email) &gt; 1;</span></span></code></pre></div><h2 id="✅-183-从不订购的客户" tabindex="-1">✅ 183 从不订购的客户 <a class="header-anchor" href="#✅-183-从不订购的客户" aria-label="Permalink to “✅ 183 从不订购的客户”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/customers-who-never-order/description/" target="_blank" rel="noreferrer">183 从不订购的客户</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>Create table If Not Exists Customers</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id   int,</span></span>
+<span class="line"><span>    name varchar(255)</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span>Create table If Not Exists Orders</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id         int,</span></span>
+<span class="line"><span>    customerId int</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span>Truncate table Customers;</span></span>
+<span class="line"><span>insert into Customers (id, name)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;Joe&#39;);</span></span>
+<span class="line"><span>insert into Customers (id, name)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;Henry&#39;);</span></span>
+<span class="line"><span>insert into Customers (id, name)</span></span>
+<span class="line"><span>values (&#39;3&#39;, &#39;Sam&#39;);</span></span>
+<span class="line"><span>insert into Customers (id, name)</span></span>
+<span class="line"><span>values (&#39;4&#39;, &#39;Max&#39;);</span></span>
+<span class="line"><span>Truncate table Orders;</span></span>
+<span class="line"><span>insert into Orders (id, customerId)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;3&#39;);</span></span>
+<span class="line"><span>insert into Orders (id, customerId)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;1&#39;);</span></span></code></pre></div><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>-- 实现方法1</span></span>
+<span class="line"><span>select c.name as Customers</span></span>
+<span class="line"><span>from Customers c</span></span>
+<span class="line"><span>         left join Orders o on c.id = o.customerId</span></span>
+<span class="line"><span>where o.id is null;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>-- 实现方法2</span></span>
+<span class="line"><span>select name as &#39;Customers&#39;</span></span>
+<span class="line"><span>from Customers</span></span>
+<span class="line"><span>where id not in</span></span>
+<span class="line"><span>      (select distinct(customerId) from Orders);</span></span></code></pre></div><h2 id="✅-184-部门工资最高的员工" tabindex="-1">✅ 184 部门工资最高的员工 <a class="header-anchor" href="#✅-184-部门工资最高的员工" aria-label="Permalink to “✅ 184 部门工资最高的员工”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/department-highest-salary/description/" target="_blank" rel="noreferrer">184 部门工资最高的员工</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>Create table If Not Exists Employee3</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id           int,</span></span>
+<span class="line"><span>    name         varchar(255),</span></span>
+<span class="line"><span>    salary       int,</span></span>
+<span class="line"><span>    departmentId int</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span>Create table If Not Exists Department</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id   int,</span></span>
+<span class="line"><span>    name varchar(255)</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Truncate table Employee3;</span></span>
+<span class="line"><span>insert into Employee3 (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;Joe&#39;, &#39;70000&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span>insert into Employee3 (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;Jim&#39;, &#39;90000&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span>insert into Employee3 (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;3&#39;, &#39;Henry&#39;, &#39;80000&#39;, &#39;2&#39;);</span></span>
+<span class="line"><span>insert into Employee3 (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;4&#39;, &#39;Sam&#39;, &#39;60000&#39;, &#39;2&#39;);</span></span>
+<span class="line"><span>insert into Employee3 (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;5&#39;, &#39;Max&#39;, &#39;90000&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Truncate table Department;</span></span>
+<span class="line"><span>insert into Department (id, name)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;IT&#39;);</span></span>
+<span class="line"><span>insert into Department (id, name)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;Sales&#39;);</span></span></code></pre></div><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select Department.name as &#39;Department&#39;,</span></span>
+<span class="line"><span>       Employee.name   as &#39;Employee&#39;,</span></span>
+<span class="line"><span>       Salary</span></span>
+<span class="line"><span>from Employee</span></span>
+<span class="line"><span>         join Department</span></span>
+<span class="line"><span>              on Employee.DepartmentId = Department.Id</span></span>
+<span class="line"><span>where (Employee.DepartmentId, Salary) in</span></span>
+<span class="line"><span>      (select DepartmentId, max(Salary)</span></span>
+<span class="line"><span>       from Employee</span></span>
+<span class="line"><span>       group by DepartmentId)</span></span>
+<span class="line"><span>;</span></span></code></pre></div><h2 id="_185-部门工资前三高的所有员工" tabindex="-1">185 部门工资前三高的所有员工 <a class="header-anchor" href="#_185-部门工资前三高的所有员工" aria-label="Permalink to “185 部门工资前三高的所有员工”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/department-top-three-salaries/description/" target="_blank" rel="noreferrer">185 部门工资前三高的所有员工</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>drop table Employee;</span></span>
+<span class="line"><span>Create table If Not Exists Employee</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id           int,</span></span>
+<span class="line"><span>    name         varchar(255),</span></span>
+<span class="line"><span>    salary       int,</span></span>
+<span class="line"><span>    departmentId int</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span>drop table Department;</span></span>
+<span class="line"><span>Create table If Not Exists Department</span></span>
+<span class="line"><span>(</span></span>
+<span class="line"><span>    id   int,</span></span>
+<span class="line"><span>    name varchar(255)</span></span>
+<span class="line"><span>);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Truncate table Employee;</span></span>
+<span class="line"><span>insert into Employee (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;Joe&#39;, &#39;85000&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;Henry&#39;, &#39;80000&#39;, &#39;2&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;3&#39;, &#39;Sam&#39;, &#39;60000&#39;, &#39;2&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;4&#39;, &#39;Max&#39;, &#39;90000&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;5&#39;, &#39;Janet&#39;, &#39;69000&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;6&#39;, &#39;Randy&#39;, &#39;85000&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span>insert into Employee (id, name, salary, departmentId)</span></span>
+<span class="line"><span>values (&#39;7&#39;, &#39;Will&#39;, &#39;70000&#39;, &#39;1&#39;);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Truncate table Department;</span></span>
+<span class="line"><span>insert into Department (id, name)</span></span>
+<span class="line"><span>values (&#39;1&#39;, &#39;IT&#39;);</span></span>
+<span class="line"><span>insert into Department (id, name)</span></span>
+<span class="line"><span>values (&#39;2&#39;, &#39;Sales&#39;);</span></span></code></pre></div><h2 id="_196-删除重复的电子邮箱" tabindex="-1">196 删除重复的电子邮箱 <a class="header-anchor" href="#_196-删除重复的电子邮箱" aria-label="Permalink to “196 删除重复的电子邮箱”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/delete-duplicate-emails/" target="_blank" rel="noreferrer">196 删除重复的电子邮箱</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>delete p1</span></span>
+<span class="line"><span>from Person p1,</span></span>
+<span class="line"><span>     Person p2</span></span>
+<span class="line"><span>where p1.Email = p2.Email</span></span>
+<span class="line"><span>  and p1.Id &gt; p2.Id;</span></span></code></pre></div><h2 id="_197-上升的温度" tabindex="-1">197 上升的温度 <a class="header-anchor" href="#_197-上升的温度" aria-label="Permalink to “197 上升的温度”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/rising-temperature/description/" target="_blank" rel="noreferrer">197 上升的温度</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select a.id</span></span>
+<span class="line"><span>from Weather a,</span></span>
+<span class="line"><span>     Weather b</span></span>
+<span class="line"><span>where datediff(a.recordDate, b.recordDate) = 1</span></span>
+<span class="line"><span>  and a.Temperature &gt; b.Temperature;</span></span></code></pre></div><h2 id="_262-行程和用户" tabindex="-1">262 行程和用户 <a class="header-anchor" href="#_262-行程和用户" aria-label="Permalink to “262 行程和用户”">​</a></h2><h2 id="_511-游戏玩法分析-i" tabindex="-1">511 游戏玩法分析 I <a class="header-anchor" href="#_511-游戏玩法分析-i" aria-label="Permalink to “511 游戏玩法分析 I”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/game-play-analysis-i/" target="_blank" rel="noreferrer">511 游戏玩法分析 I</a></li></ul><h3 id="方法-1-分组并提取最小值" tabindex="-1">方法 1：分组并提取最小值 <a class="header-anchor" href="#方法-1-分组并提取最小值" aria-label="Permalink to “方法 1：分组并提取最小值”">​</a></h3><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select player_id,</span></span>
+<span class="line"><span>       min(event_date) as first_login</span></span>
+<span class="line"><span>from Activity</span></span>
+<span class="line"><span>group by player_id;</span></span></code></pre></div><h3 id="方法-2-窗口函数" tabindex="-1">方法 2：窗口函数 <a class="header-anchor" href="#方法-2-窗口函数" aria-label="Permalink to “方法 2：窗口函数”">​</a></h3><h4 id="rank" tabindex="-1">rank() <a class="header-anchor" href="#rank" aria-label="Permalink to “rank()”">​</a></h4><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select X.player_id,</span></span>
+<span class="line"><span>       X.event_date as first_login</span></span>
+<span class="line"><span>from (select A.player_id,</span></span>
+<span class="line"><span>             A.event_date rank() over (</span></span>
+<span class="line"><span>            partition by A.player_id</span></span>
+<span class="line"><span>            group by A.event_date</span></span>
+<span class="line"><span>        ) as rnk</span></span>
+<span class="line"><span>      from Activity A) X</span></span>
+<span class="line"><span>where X.rnk = 1;</span></span></code></pre></div><h4 id="first-value" tabindex="-1">first_value() <a class="header-anchor" href="#first-value" aria-label="Permalink to “first_value()”">​</a></h4><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>--- 必须使用 distinct</span></span>
+<span class="line"><span>SELECT DISTINCT A.player_id,</span></span>
+<span class="line"><span>                FIRST_VALUE(A.event_date) OVER (</span></span>
+<span class="line"><span>                    PARTITION BY</span></span>
+<span class="line"><span>                        A.player_id</span></span>
+<span class="line"><span>                    ORDER BY</span></span>
+<span class="line"><span>                        A.event_date</span></span>
+<span class="line"><span>                    ) AS first_login</span></span>
+<span class="line"><span>FROM Activity A;</span></span></code></pre></div><h2 id="_512-游戏玩法分析-ii" tabindex="-1">512 游戏玩法分析 II <a class="header-anchor" href="#_512-游戏玩法分析-ii" aria-label="Permalink to “512 游戏玩法分析 II”">​</a></h2><h2 id="_534-游戏玩法分析-iii" tabindex="-1">534 游戏玩法分析 III <a class="header-anchor" href="#_534-游戏玩法分析-iii" aria-label="Permalink to “534 游戏玩法分析 III”">​</a></h2><h2 id="_550-游戏玩法分析-iv" tabindex="-1">550 游戏玩法分析 IV <a class="header-anchor" href="#_550-游戏玩法分析-iv" aria-label="Permalink to “550 游戏玩法分析 IV”">​</a></h2><ul><li><a href="https://leetcode.cn/problems/game-play-analysis-iv/description/" target="_blank" rel="noreferrer">550. 游戏玩法分析 IV</a></li></ul><div class="language-mysql"><button title="Copy Code" class="copy"></button><span class="lang">mysql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>select player_id,</span></span>
+<span class="line"><span>       date_add(min(event_date), interval 1 day) as second_date</span></span>
+<span class="line"><span>from Activity</span></span>
+<span class="line"><span>group by player_id</span></span></code></pre></div><h3 id="在sql中-from后面用逗号写了多张表-这样属于什么连接" tabindex="-1">在sql中，from后面用逗号写了多张表，这样属于什么连接 <a class="header-anchor" href="#在sql中-from后面用逗号写了多张表-这样属于什么连接" aria-label="Permalink to “在sql中，from后面用逗号写了多张表，这样属于什么连接”">​</a></h3><p>在 SQL 中，如果在 <code>FROM</code> 子句中使用逗号分隔多张表，例如：</p><div class="language-sql"><button title="Copy Code" class="copy"></button><span class="lang">sql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">FROM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> table1, table2</span></span></code></pre></div><p>这属于 <strong>隐式连接</strong>（Implicit Join），也称为 <strong>笛卡尔连接</strong>（Cartesian Join）或 <strong>交叉连接</strong>（Cross Join）。它的行为是将两张表的所有行进行组合，生成一个笛卡尔积。</p><hr><p>隐式连接的特点：</p><ol><li><p><strong>没有明确的连接条件</strong>：</p><ul><li>如果没有在 <code>WHERE</code> 子句中指定连接条件，结果将是两张表的笛卡尔积。</li><li>例如，<code>table1</code> 有 3 行，<code>table2</code> 有 4 行，结果将返回 (3 \\times 4 = 12) 行。</li></ul></li><li><p><strong>连接条件需要在 <code>WHERE</code> 子句中指定</strong>：</p><ul><li>如果需要特定的连接逻辑（如内连接），必须在 <code>WHERE</code> 子句中明确写出连接条件。</li><li>例如：<div class="language-sql"><button title="Copy Code" class="copy"></button><span class="lang">sql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">FROM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> table1, table2</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">WHERE</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> table1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">id</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> table2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">table1_id</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span></code></pre></div></li></ul></li><li><p><strong>可读性较差</strong>：</p><ul><li>隐式连接的语法不够直观，尤其是在涉及多张表或复杂连接条件时，容易出错或难以维护。</li></ul></li></ol><hr><p>示例：</p><p>假设有两张表：</p><p><strong><code>table1</code></strong>:</p><table tabindex="0"><thead><tr><th>id</th><th>name</th></tr></thead><tbody><tr><td>1</td><td>Alice</td></tr><tr><td>2</td><td>Bob</td></tr></tbody></table><p><strong><code>table2</code></strong>:</p><table tabindex="0"><thead><tr><th>id</th><th>table1_id</th><th>value</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>100</td></tr><tr><td>2</td><td>2</td><td>200</td></tr><tr><td>3</td><td>1</td><td>300</td></tr></tbody></table><ol><li>隐式连接（无 <code>WHERE</code> 条件）：</li></ol><div class="language-sql"><button title="Copy Code" class="copy"></button><span class="lang">sql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">SELECT</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> *</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">FROM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> table1,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">     table2;</span></span></code></pre></div><p><strong>结果</strong>（笛卡尔积）：</p><table tabindex="0"><thead><tr><th>id</th><th>name</th><th>id</th><th>table1_id</th><th>value</th></tr></thead><tbody><tr><td>1</td><td>Alice</td><td>1</td><td>1</td><td>100</td></tr><tr><td>1</td><td>Alice</td><td>2</td><td>2</td><td>200</td></tr><tr><td>1</td><td>Alice</td><td>3</td><td>1</td><td>300</td></tr><tr><td>2</td><td>Bob</td><td>1</td><td>1</td><td>100</td></tr><tr><td>2</td><td>Bob</td><td>2</td><td>2</td><td>200</td></tr><tr><td>2</td><td>Bob</td><td>3</td><td>1</td><td>300</td></tr></tbody></table><ol start="2"><li>隐式连接（带 <code>WHERE</code> 条件）：</li></ol><div class="language-sql"><button title="Copy Code" class="copy"></button><span class="lang">sql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">SELECT</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> *</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">FROM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> table1,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">     table2</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">WHERE</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> table1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">id</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> table2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">table1_id</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span></code></pre></div><p><strong>结果</strong>（内连接效果）：</p><table tabindex="0"><thead><tr><th>id</th><th>name</th><th>id</th><th>table1_id</th><th>value</th></tr></thead><tbody><tr><td>1</td><td>Alice</td><td>1</td><td>1</td><td>100</td></tr><tr><td>1</td><td>Alice</td><td>3</td><td>1</td><td>300</td></tr><tr><td>2</td><td>Bob</td><td>2</td><td>2</td><td>200</td></tr></tbody></table><hr><p>显式连接 vs 隐式连接：</p><ul><li><p><strong>显式连接</strong>（推荐）：</p><ul><li>使用 <code>JOIN</code> 关键字（如 <code>INNER JOIN</code>、<code>LEFT JOIN</code> 等）。</li><li>连接条件写在 <code>ON</code> 子句中。</li><li>语法清晰，易于维护。</li><li>示例：<div class="language-sql"><button title="Copy Code" class="copy"></button><span class="lang">sql</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">SELECT</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> *</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">FROM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> table1</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">INNER JOIN</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> table2 </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">ON</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> table1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">id</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> table2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">table1_id</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span></code></pre></div></li></ul></li><li><p><strong>隐式连接</strong>（不推荐）：</p><ul><li>使用逗号分隔表。</li><li>连接条件写在 <code>WHERE</code> 子句中。</li><li>可读性差，容易出错。</li></ul></li></ul><hr><p>总结：</p><p>在 <code>FROM</code> 子句中使用逗号分隔多张表属于 <strong>隐式连接</strong>。如果没有指定 <code>WHERE</code> 条件，结果将是笛卡尔积；如果指定了 <code>WHERE</code> 条件，可以实现类似内连接的效果。但出于可读性和可维护性的考虑，建议使用显式连接（<code>JOIN</code>）。</p><h2 id="_569-员工薪水中位数" tabindex="-1">569 员工薪水中位数 <a class="header-anchor" href="#_569-员工薪水中位数" aria-label="Permalink to “569 员工薪水中位数”">​</a></h2><h2 id="_570-至少有5名直接下属的经理" tabindex="-1">570 至少有5名直接下属的经理 <a class="header-anchor" href="#_570-至少有5名直接下属的经理" aria-label="Permalink to “570 至少有5名直接下属的经理”">​</a></h2><h2 id="_571-给定数字的频率查询中位数" tabindex="-1">571 给定数字的频率查询中位数 <a class="header-anchor" href="#_571-给定数字的频率查询中位数" aria-label="Permalink to “571 给定数字的频率查询中位数”">​</a></h2><h2 id="_574-当选者" tabindex="-1">574 当选者 <a class="header-anchor" href="#_574-当选者" aria-label="Permalink to “574 当选者”">​</a></h2><h2 id="_577-员工奖金" tabindex="-1">577 员工奖金 <a class="header-anchor" href="#_577-员工奖金" aria-label="Permalink to “577 员工奖金”">​</a></h2><h2 id="_578-查询回答率最高的问题" tabindex="-1">578 查询回答率最高的问题 <a class="header-anchor" href="#_578-查询回答率最高的问题" aria-label="Permalink to “578 查询回答率最高的问题”">​</a></h2><h2 id="_579-查询员工的累计薪水" tabindex="-1">579 查询员工的累计薪水 <a class="header-anchor" href="#_579-查询员工的累计薪水" aria-label="Permalink to “579 查询员工的累计薪水”">​</a></h2><h2 id="_580-统计各专业学生人数" tabindex="-1">580 统计各专业学生人数 <a class="header-anchor" href="#_580-统计各专业学生人数" aria-label="Permalink to “580 统计各专业学生人数”">​</a></h2><h2 id="_584-寻找用户推荐人" tabindex="-1">584 寻找用户推荐人 <a class="header-anchor" href="#_584-寻找用户推荐人" aria-label="Permalink to “584 寻找用户推荐人”">​</a></h2><h2 id="_585-2016年的投资" tabindex="-1">585 2016年的投资 <a class="header-anchor" href="#_585-2016年的投资" aria-label="Permalink to “585 2016年的投资”">​</a></h2><h2 id="_586-订单最多的客户" tabindex="-1">586 订单最多的客户 <a class="header-anchor" href="#_586-订单最多的客户" aria-label="Permalink to “586 订单最多的客户”">​</a></h2><h2 id="_595-大的国家" tabindex="-1">595 大的国家 <a class="header-anchor" href="#_595-大的国家" aria-label="Permalink to “595 大的国家”">​</a></h2><h2 id="_596-超过-5-名学生的课" tabindex="-1">596 超过 5 名学生的课 <a class="header-anchor" href="#_596-超过-5-名学生的课" aria-label="Permalink to “596 超过 5 名学生的课”">​</a></h2><h2 id="_597-好友申请-i-总体通过率" tabindex="-1">597 好友申请 I：总体通过率 <a class="header-anchor" href="#_597-好友申请-i-总体通过率" aria-label="Permalink to “597 好友申请 I：总体通过率”">​</a></h2><h2 id="_601-体育馆的人流量" tabindex="-1">601 体育馆的人流量 <a class="header-anchor" href="#_601-体育馆的人流量" aria-label="Permalink to “601 体育馆的人流量”">​</a></h2><h2 id="_602-好友申请-ii-谁有最多的好友" tabindex="-1">602 好友申请 II ：谁有最多的好友 <a class="header-anchor" href="#_602-好友申请-ii-谁有最多的好友" aria-label="Permalink to “602 好友申请 II ：谁有最多的好友”">​</a></h2><h2 id="_603-连续空余座位" tabindex="-1">603 连续空余座位 <a class="header-anchor" href="#_603-连续空余座位" aria-label="Permalink to “603 连续空余座位”">​</a></h2><h2 id="_607-销售员" tabindex="-1">607 销售员 <a class="header-anchor" href="#_607-销售员" aria-label="Permalink to “607 销售员”">​</a></h2><h2 id="_608-树节点" tabindex="-1">608 树节点 <a class="header-anchor" href="#_608-树节点" aria-label="Permalink to “608 树节点”">​</a></h2><h2 id="_610-判断三角形" tabindex="-1">610 判断三角形 <a class="header-anchor" href="#_610-判断三角形" aria-label="Permalink to “610 判断三角形”">​</a></h2><h2 id="_612-平面上的最近距离" tabindex="-1">612 平面上的最近距离 <a class="header-anchor" href="#_612-平面上的最近距离" aria-label="Permalink to “612 平面上的最近距离”">​</a></h2><h2 id="_613-直线上的最近距离" tabindex="-1">613 直线上的最近距离 <a class="header-anchor" href="#_613-直线上的最近距离" aria-label="Permalink to “613 直线上的最近距离”">​</a></h2><h2 id="_614-二级关注者" tabindex="-1">614 二级关注者 <a class="header-anchor" href="#_614-二级关注者" aria-label="Permalink to “614 二级关注者”">​</a></h2><h2 id="_615-平均工资-部门与公司比较" tabindex="-1">615 平均工资：部门与公司比较 <a class="header-anchor" href="#_615-平均工资-部门与公司比较" aria-label="Permalink to “615 平均工资：部门与公司比较”">​</a></h2><h2 id="_618-学生地理信息报告" tabindex="-1">618 学生地理信息报告 <a class="header-anchor" href="#_618-学生地理信息报告" aria-label="Permalink to “618 学生地理信息报告”">​</a></h2><h2 id="_619-只出现一次的最大数字" tabindex="-1">619 只出现一次的最大数字 <a class="header-anchor" href="#_619-只出现一次的最大数字" aria-label="Permalink to “619 只出现一次的最大数字”">​</a></h2><h2 id="_620-有趣的电影" tabindex="-1">620 有趣的电影 <a class="header-anchor" href="#_620-有趣的电影" aria-label="Permalink to “620 有趣的电影”">​</a></h2><h2 id="_626-换座位" tabindex="-1">626 换座位 <a class="header-anchor" href="#_626-换座位" aria-label="Permalink to “626 换座位”">​</a></h2><h2 id="_627-变更性别" tabindex="-1">627 变更性别 <a class="header-anchor" href="#_627-变更性别" aria-label="Permalink to “627 变更性别”">​</a></h2><h2 id="_1045-买下所有产品的客户" tabindex="-1">1045 买下所有产品的客户 <a class="header-anchor" href="#_1045-买下所有产品的客户" aria-label="Permalink to “1045 买下所有产品的客户”">​</a></h2><h2 id="_1050-合作过至少三次的演员和导演" tabindex="-1">1050 合作过至少三次的演员和导演 <a class="header-anchor" href="#_1050-合作过至少三次的演员和导演" aria-label="Permalink to “1050 合作过至少三次的演员和导演”">​</a></h2><h2 id="_1068-产品销售分析-i" tabindex="-1">1068 产品销售分析 I <a class="header-anchor" href="#_1068-产品销售分析-i" aria-label="Permalink to “1068 产品销售分析 I”">​</a></h2><h2 id="_1069-产品销售分析-ii" tabindex="-1">1069 产品销售分析 II <a class="header-anchor" href="#_1069-产品销售分析-ii" aria-label="Permalink to “1069 产品销售分析 II”">​</a></h2><h1 id="mac2025-mysql" tabindex="-1">mac2025 mysql <a class="header-anchor" href="#mac2025-mysql" aria-label="Permalink to “mac2025 mysql”">​</a></h1><h2 id="leetcode" tabindex="-1">leetcode <a class="header-anchor" href="#leetcode" aria-label="Permalink to “leetcode”">​</a></h2>`,154)])])}const g=a(l,[["render",p]]);export{k as __pageData,g as default};
