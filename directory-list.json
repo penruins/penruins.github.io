@@ -6,21 +6,16 @@
     "link": "/002-article-recommend"
   },
   {
-    "type": "directory",
-    "name": "AI",
-    "displayName": "AI",
-    "emoji": null,
-    "link": null,
-    "children": [
-      {
-        "type": "file",
-        "name": "artificial-intelligence",
-        "displayName": "Artificial Intelligence",
-        "link": "/AI/artificial-intelligence"
-      }
-    ],
-    "count": 1,
-    "entryLink": "/AI/artificial-intelligence"
+    "type": "file",
+    "name": "artificial-intelligence",
+    "displayName": "Artificial Intelligence",
+    "link": "/artificial-intelligence"
+  },
+  {
+    "type": "file",
+    "name": "tech",
+    "displayName": "Tech",
+    "link": "/tech"
   },
   {
     "type": "directory",
